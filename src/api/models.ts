@@ -431,6 +431,7 @@ export interface Statistics__MonthlySalesResponse {
 export interface Statistics__MonthlySalesResponseData {
   data?: {
     months?: string;
+    totalSales?: number;
   }[];
 }
 
@@ -442,6 +443,7 @@ export interface Statistics__SaleTypePercentResponseData {
   data?: {
     typeId?: number;
     typeName?: string;
+    totalSales?: number;
   }[];
 }
 

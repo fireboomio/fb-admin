@@ -245,6 +245,7 @@ onMounted(() => {
           <template #default="scope">
             <el-image
               :src="scope.row.poster"
+              fit="fill"
               :preview-src-list="[scope.row.poster]"
             />
           </template>

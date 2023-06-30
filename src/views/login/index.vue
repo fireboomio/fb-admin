@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 import { message } from "@/utils/message";
 import { loginRules } from "./utils/rule";
 import { useNav } from "@/layout/hooks/useNav";
-import type { FormInstance } from "element-plus";
+import { ElMessage, type FormInstance } from "element-plus";
 import { $t, transformI18n } from "@/plugins/i18n";
 import { useLayout } from "@/layout/hooks/useLayout";
 import { useUserStoreHook } from "@/store/modules/user";
@@ -43,16 +43,16 @@ const { locale, translationCh, translationEn } = useTranslationLang();
 
 const ruleForm = reactive({
   username: "18856264667",
-  password: "124122"
+  password: ""
 });
 
 // 发送验证码按钮是否禁用
 const disabled = ref(false);
 
 const sendCode = async () => {
-  disabled.value = true;
   await sendVerifyCode({ dest: ruleForm.username }).then(res => {
     console.log(res);
+    disabled.value = true;
   });
 };
 
@@ -62,16 +62,23 @@ const onLogin = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       useUserStoreHook()
-        .loginByUsername({ username: ruleForm.username, password: "admin123" })
+        .loginByUsername({
+          username: ruleForm.username,
+          code: ruleForm.password
+        })
         .then(res => {
-          if (res.success) {
-            console.log(res);
+          console.log(res);
+          if (res.data.data.success) {
             // 获取后端路由
             initRouter().then(() => {
               router.push(getTopMenu(true).path);
               message("登录成功", { type: "success" });
             });
           }
+        })
+        .catch(err => {
+          loading.value = false;
+          ElMessage.error(err);
         });
     } else {
       loading.value = false;

@@ -40,4 +40,6 @@ export type userType = {
   roles?: Array<string>;
   verifyCode?: string;
   currentPage?: number;
+  permissions: Array<string>;
+  avatar: string;
 };

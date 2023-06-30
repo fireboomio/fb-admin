@@ -32,7 +32,7 @@ export function getToken(): DataInfo<number> {
  * 将`accessToken`、`expires`这两条信息放在key值为authorized-token的cookie里（过期自动销毁）
  * 将`username`、`roles`、`refreshToken`、`expires`这四条信息放在key值为`user-info`的sessionStorage里（浏览器关闭自动销毁）
  */
-export function setToken(data: DataInfo<Date>) {
+export function setToken(data: DataInfo<number>) {
   let expires = 0;
   const { accessToken, refreshToken } = data;
   expires = new Date(data.expires).getTime(); // 如果后端直接设置时间戳，将此处代码改为expires = data.expires，然后把上面的DataInfo<Date>改成DataInfo<number>即可

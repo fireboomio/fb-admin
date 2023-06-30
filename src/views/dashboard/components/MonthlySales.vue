@@ -2,7 +2,7 @@
 <template>
   <el-card>
     <template #header>月销售额</template>
-    <div ref="chartElRef" :class="className" class="h-90" />
+    <div ref="chartElRef" :class="className" class="h-96" />
   </el-card>
 </template>
 
@@ -33,6 +33,7 @@ onMounted(async () => {
     operationName: "Statistics/MonthlySales"
   });
   if (!error) {
+    console.log("data-->", data.data);
     chartRef.value.setOption({
       tooltip: {
         trigger: "item"
@@ -52,7 +53,6 @@ onMounted(async () => {
       },
       series: [
         {
-          // @ts-ignore
           data: data!.data!.map(item => item.totalSales) ?? [],
           type: "bar"
         }

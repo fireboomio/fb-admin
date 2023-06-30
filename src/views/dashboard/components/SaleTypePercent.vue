@@ -68,7 +68,6 @@ onMounted(async () => {
           },
           data: data!.data!.map(item => ({
             name: item.typeName,
-            // @ts-ignore
             value: item.totalSales
           }))
         }

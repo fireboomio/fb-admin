@@ -7,33 +7,14 @@ import { MockMethod } from "vite-plugin-mock";
  * common：普通角色
  */
 
-const permissionRouter = {
-  path: "/permission",
-  meta: {
-    title: "menus.permission",
-    icon: "lollipop",
-    rank: 10
-  },
-  children: [
-    {
-      path: "/permission/page/index",
-      name: "PermissionPage",
-      meta: {
-        title: "menus.permissionPage",
-        roles: ["admin", "common"]
-      }
-    },
-    {
-      path: "/permission/button/index",
-      name: "PermissionButton",
-      meta: {
-        title: "menus.permissionButton",
-        roles: ["admin", "common"],
-        auths: ["btn_add", "btn_edit", "btn_delete"]
-      }
-    }
-  ]
-};
+// const permissionRouter = {
+//   path: "/permission",
+//   meta: {
+//     title: "menus.permission",
+//     icon: "lollipop",
+//     rank: 10
+//   }
+// };
 
 export default [
   {
@@ -42,7 +23,7 @@ export default [
     response: () => {
       return {
         success: true,
-        data: [permissionRouter]
+        data: []
       };
     }
   }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import api from "@/api";
+import api, { convertPageQuery } from "@/api";
 import { API } from "../types";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 
 defineOptions({
   name: "PermissionManage"
@@ -10,13 +10,22 @@ defineOptions({
 const loading = ref(false);
 const dataSource = ref<API[]>();
 
+const total = ref(0);
+
 /**
  * 查询
  */
+const queryParams = reactive<PageQuery>({
+  pageNum: 1,
+  pageSize: 10,
+  name: ""
+});
+
 async function handleQuery() {
   loading.value = true;
   const { error, data } = await api.query({
-    operationName: "System/Operation/GetMany"
+    operationName: "System/Operation/GetMany",
+    input: convertPageQuery(queryParams, { containsFields: ["name"] })
   });
   if (!error) {
     dataSource.value = data!.data!;
@@ -45,6 +54,13 @@ onMounted(() => {
         <el-table-column label="是否实时" prop="liveQuery" width="100" />
         <el-table-column label="是否启用" prop="enabled" width="100" />
       </el-table>
+
+      <el-pagination
+        v-if="total > 0"
+        :total="total"
+        :page-count="queryParams.pageNum"
+        :page-size="queryParams.pageSize"
+      />
     </el-card>
   </div>
 </template>
