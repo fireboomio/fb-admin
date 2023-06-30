@@ -33,16 +33,11 @@
           width="300"
         />
         <el-table-column key="name" label="用户名" align="center" prop="name" />
-        <el-table-column
-          label="头像"
-          width="60"
-          align="center"
-          prop="avatarUrl"
-        >
+        <el-table-column label="头像" width="60" align="center" prop="avatar">
           <template #default="scope">
             <el-image
-              :src="scope.row.avatarUrl"
-              :preview-src-list="[scope.row.avatarUrl]"
+              :src="scope.row.avatar"
+              :preview-src-list="[scope.row.avatar]"
             />
           </template>
         </el-table-column>

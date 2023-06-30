@@ -1677,7 +1677,7 @@ export interface System__User__GetListResponse {
 }
 export interface System__User__GetListResponseData {
   data?: {
-    avatarUrl?: string;
+    avatar?: string;
     createdAt?: string;
     id?: string;
     name?: string;
