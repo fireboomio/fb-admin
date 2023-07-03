@@ -12,6 +12,7 @@ import { merge } from "@/utils";
 import { ref, reactive } from "vue";
 import { onMounted } from "vue";
 import { ElForm, ElMessage, ElMessageBox } from "element-plus";
+import { getSubmenu } from '@/api/system'
 
 defineOptions({
   name: "MenuList"
@@ -23,7 +24,9 @@ const loading = ref(false);
 const dialog = reactive<DialogOption>({
   visible: false
 });
-
+const dialogSubmenu = reactive<DialogOption>({
+  visible: false
+});
 const menuList = ref<Menu[]>([]);
 
 const formData = reactive<Required<Omit<Menu, "id" | "parentId">>>({
@@ -54,7 +57,11 @@ async function handleQuery() {
   });
   if (!error) {
     menuList.value = data!.data!;
+    console.log('menuList1', menuList.value);
   }
+  // menuList.value.pop()
+  console.log('menuList2', menuList.value);
+  console.log('data.data' + data.data);
   loading.value = false;
 }
 
@@ -155,7 +162,9 @@ function closeDialog() {
   dialog.visible = false;
   resetForm();
 }
-
+function closeSubmenuDialog() {
+  dialogSubmenu.visible = false;
+}
 /**
  * 重置表单
  */
@@ -172,6 +181,33 @@ function resetForm() {
 onMounted(() => {
   handleQuery();
 });
+
+// function openDialog(menu?: Menu) {
+//   dialog.visible = true;
+//   if (menu) {
+//     dialog.title = "编辑菜单";
+//     editingId.value = menu.id;
+//     merge(formData, menu);
+//   } else {
+//     dialog.title = "新增菜单";
+//   }
+// }
+/**
+ * 查看子菜单
+ */
+function viewSubmenu(menu) {
+  dialogSubmenu.visible = true;
+  console.log(menu);
+  dialogSubmenu.title = "子菜单";
+  // 向后端请求子菜单数据 /operations/System/Menu/GetChildrenMenus
+  getSubmenu(menu).then(res => {
+    console.log(res);
+  })
+  
+}
+/**
+ * 查看子权限
+ */
 </script>
 
 <template>
@@ -202,77 +238,47 @@ onMounted(() => {
       <template #header>
         <el-button type="success" @click="openDialog()">
           <template #icon><i-ep-plus /></template>
-          新增</el-button
-        >
+          新增</el-button>
       </template>
 
-      <el-table
-        v-loading="loading"
-        :data="menuList"
-        highlight-current-row
-        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-        @row-click="onRowClick"
-        row-key="id"
-        default-expand-all
-        border
-      >
+      <el-table v-loading="loading" :data="menuList" highlight-current-row
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @row-click="onRowClick" row-key="id"
+        default-expand-all border>
         <el-table-column label="菜单名称" min-width="200" prop="label" />
 
-        <el-table-column
-          label="菜单路径"
-          align="center"
-          width="150"
-          prop="path"
-        />
+        <el-table-column label="菜单路径" align="center" width="150" prop="path" />
 
         <el-table-column label="排序" align="center" width="100" prop="sort" />
 
         <el-table-column fixed="right" align="center" label="操作" width="220">
           <template #default="scope">
-            <el-button
-              type="primary"
-              link
-              size="small"
-              @click.stop="openDialog(scope.row)"
-            >
+            <el-button type="primary" link size="small" @click.stop="openDialog(scope.row)">
               <i-ep-edit />编辑
             </el-button>
-            <el-button
-              type="primary"
-              link
-              size="small"
-              @click.stop="handleDelete(scope.row.id)"
-              ><i-ep-delete />
+            <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)"><i-ep-delete />
               删除
+            </el-button>
+            <el-button type="primary" link size="small" @click.stop="viewSubmenu(scope.row.id)"
+              v-if="!scope.row.is_bottom">
+              <i-ep-edit />子菜单
+            </el-button>
+            <el-button type=" primary" link size="small" @click.stop="openDialog(scope.row)" v-if="scope.row.is_bottom">
+              <i-ep-edit />子权限
             </el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
 
-    <el-dialog
-      :title="dialog.title"
-      v-model="dialog.visible"
-      @close="closeDialog"
-      destroy-on-close
-      appendToBody
-      width="750px"
-    >
-      <el-form
-        ref="menuFormRef"
-        :model="formData"
-        :rules="rules"
-        label-width="100px"
-      >
+    <el-dialog :title="dialog.title" v-model="dialog.visible" @close="closeDialog" destroy-on-close appendToBody
+      width="750px">
+      <el-form ref="menuFormRef" :model="formData" :rules="rules" label-width="100px">
         <el-form-item label="菜单名称" prop="label">
           <el-input v-model="formData.label" placeholder="请输入菜单名称" />
         </el-form-item>
 
         <el-form-item label="路由路径" prop="path">
-          <el-input
-            v-model="formData.path"
-            placeholder="/system  (目录以/开头)"
-          />
+          <el-input v-model="formData.path" placeholder="/system  (目录以/开头)" />
         </el-form-item>
 
         <el-form-item label="图标" prop="icon">
@@ -281,12 +287,7 @@ onMounted(() => {
         </el-form-item>
 
         <el-form-item label="排序" prop="sort">
-          <el-input-number
-            v-model="formData.sort"
-            style="width: 100px"
-            controls-position="right"
-            :min="0"
-          />
+          <el-input-number v-model="formData.sort" style="width: 100px" controls-position="right" :min="0" />
         </el-form-item>
       </el-form>
 
@@ -296,6 +297,14 @@ onMounted(() => {
           <el-button @click="closeDialog">取 消</el-button>
         </div>
       </template>
+    </el-dialog>
+    <el-dialog :title="dialogSubmenu.title" v-model="dialogSubmenu.visible" @close="closeSubmenuDialog" destroy-on-close
+      appendToBody width="750px">
+      <!-- <el-table :data="tableData" style="width: 100%">
+      <el-table-column prop="date" label="Date" width="180" />
+      <el-table-column prop="name" label="Name" width="180" />
+      <el-table-column prop="address" label="Address" />
+    </el-table> -->
     </el-dialog>
   </div>
 </template>

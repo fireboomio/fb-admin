@@ -252,7 +252,7 @@ onMounted(() => {
         </el-table-column>
         <el-table-column
           label="发布时间"
-          prop="publishedAt"
+          prop="published_at"
           align="center"
           :formatter="
             (row, col, v) => (v ? new Date(v).toLocaleDateString() : '')
