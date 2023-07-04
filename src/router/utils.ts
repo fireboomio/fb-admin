@@ -16,7 +16,6 @@ import {
   storageSession,
   isIncludeAllChildren
 } from "@pureadmin/utils";
-import { getConfig } from "@/config";
 import { menuType } from "@/layout/types";
 import { buildHierarchyTree } from "@/utils/tree";
 import { sessionKey, type DataInfo } from "@/utils/auth";
@@ -27,9 +26,7 @@ const IFrame = () => import("@/layout/frameView.vue");
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 
 // 动态路由
-import { getAsyncRoutes } from "@/api/routes";
-import { getDynamicRoute } from "@/api/system";
-import { log } from "console";
+import { getDynamicRoute, getMenuRoles } from "@/api/system";
 
 function handRank(routeInfo: any) {
   const { name, path, parentId, meta } = routeInfo;
@@ -175,7 +172,6 @@ function handleAsyncRoutes(routeList) {
           .getRoutes()
           .find(n => n.path === "/");
         router.addRoute(flattenRouters);
-        console.log("flattenRouters", flattenRouters);
       }
     });
     usePermissionStoreHook().handleWholeMenus(routeList);
@@ -196,32 +192,42 @@ type childItem = {
   path: string;
   name: string;
   label?: string;
+  roles?: string[];
   meta: {
     title: string;
     showParent?: boolean;
+    roles?: string[];
   };
 };
 
 async function initDynamicRoute() {
-  const routers = await getDynamicRoute().then(res => {
+  const routers = await getDynamicRoute().then(async res => {
     const dynamicRoutes: dynamicRoute[] = res.data.data;
-    dynamicRoutes.forEach(item => {
+    await dynamicRoutes.forEach(async item => {
       item.meta = {
         title: item.label!
       };
+      // 二级以上菜单
       if (item.children.length > 0) {
         item.children.forEach(itemChildren => {
           itemChildren.meta = {
             title: itemChildren.label!,
-            showParent: false
+            showParent: false,
+            roles: itemChildren.roles
           };
         });
       } else {
+        // 一级菜单
+        // 获取一级菜单绑定的角色
+        const menuRoles = await getMenuRoles(item.name).then(res => {
+          return res.data.data;
+        });
         const dr: childItem = {
-          path: item.path + "/index",
+          path: item.path,
           name: item.name,
           meta: {
-            title: item.label
+            title: item.label,
+            roles: menuRoles
           }
         };
         item.children.push(dr);
@@ -229,6 +235,7 @@ async function initDynamicRoute() {
     });
     return dynamicRoutes;
   });
+  console.log("routers-->", routers);
   storageSession().setItem("async-routes", routers);
 }
 

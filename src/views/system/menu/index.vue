@@ -13,6 +13,7 @@ import { ref, reactive } from "vue";
 import { onMounted } from "vue";
 import { ElForm, ElMessage, ElMessageBox } from "element-plus";
 import { getSubmenu, getPerm } from "@/api/system";
+import { Icon } from '@iconify/vue';
 
 defineOptions({
   name: "MenuList"
@@ -211,64 +212,43 @@ function viewPerm(id: number) {
     tableSubPerm.value = res.data.data;
   });
 }
-/**
- * 查看子权限
- */
+
 </script>
 
 <template>
   <div class="app-container">
-    <!-- <div class="search">
-      <el-form ref="queryFormRef" :model="queryParams" :inline="true">
-        <el-form-item label="关键字" prop="keywords">
-          <el-input
-            v-model="queryParams.keywords"
-            placeholder="菜单名称"
-            clearable
-            @keyup.enter="handleQuery"
-          />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleQuery"
-            ><template #icon><i-ep-search /></template>搜索</el-button
-          >
-          <el-button @click="resetQuery">
-            <template #icon><i-ep-refresh /></template>
-            重置</el-button
-          >
-        </el-form-item>
-      </el-form>
-    </div> -->
     <el-card shadow="never">
       <template #header>
         <el-button type="success" @click="openDialog()">
-          <template #icon><i-ep-plus /></template>
+          <template #icon>
+            <Icon icon="ep:plus" />
+          </template>
           新增</el-button>
       </template>
 
       <el-table v-loading="loading" :data="menuList" highlight-current-row
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @row-click="onRowClick" row-key="id"
         default-expand-all border>
-        <el-table-column label="菜单名称" min-width="200" prop="label" />
+        <el-table-column label="菜单名称" width="200" prop="label" />
 
         <el-table-column label="菜单路径" align="center" width="150" prop="path" />
 
         <el-table-column label="排序" align="center" width="100" prop="sort" />
 
-        <el-table-column fixed="right" align="center" label="操作" width="220">
+        <el-table-column fixed="right" align="center" label="操作" min-width="220">
           <template #default="scope">
             <el-button type="primary" link size="small" @click.stop="openDialog(scope.row)">
-              <i-ep-edit />编辑
+              <Icon icon="ep:edit" />编辑
             </el-button>
-            <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)"><i-ep-delete />
-              删除
+            <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
+              <Icon icon="ep:delete" />删除
             </el-button>
             <el-button type="primary" link size="small" @click.stop="viewSubmenu(scope.row.id)"
               v-if="!scope.row.is_bottom">
-              <i-ep-edit />子菜单
+              <Icon icon="ep:edit" />子菜单
             </el-button>
             <el-button type="primary" link size="small" @click.stop="viewPerm(scope.row.id)" v-if="scope.row.is_bottom">
-              <i-ep-edit />子权限
+              <Icon icon="ep:edit" />子权限
             </el-button>
           </template>
         </el-table-column>

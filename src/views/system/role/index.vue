@@ -22,6 +22,7 @@ import { Role } from "../types";
 import RoleBindApi from "./api.bind.vue";
 import RoleBindMenu from "./menu.bind.vue";
 import { ref, reactive, onMounted } from "vue";
+import { Icon } from '@iconify/vue';
 
 defineOptions({
   name: "roleList"
@@ -215,113 +216,62 @@ onMounted(() => {
     <div class="search">
       <el-form ref="queryFormRef" :model="queryParams" :inline="true">
         <el-form-item prop="code" label="编码">
-          <el-input
-            v-model="queryParams.code"
-            placeholder="角色编码"
-            clearable
-            @keyup.enter="handleQuery"
-          />
+          <el-input v-model="queryParams.code" placeholder="角色编码" clearable @keyup.enter="handleQuery" />
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="handleQuery"
-            ><i-ep-search />搜索</el-button
-          >
-          <el-button @click="resetQuery"><i-ep-refresh />重置</el-button>
+          <el-button type="primary" @click="handleQuery">
+            <Icon icon="ep:search" />搜索
+          </el-button>
+          <el-button @click="resetQuery">
+            <Icon icon="ep:refresh" />重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
 
     <el-card shadow="never">
       <template #header>
-        <el-button type="success" @click="openDialog()"
-          ><i-ep-plus />新增</el-button
-        >
-        <el-button
-          type="danger"
-          :disabled="ids.length === 0"
-          @click="handleDelete()"
-          ><i-ep-delete />删除</el-button
-        >
+        <el-button type="success" @click="openDialog()">
+          <Icon icon="ep:plus" />新增
+        </el-button>
+        <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
+          <Icon icon="ep:delete" />删除
+        </el-button>
       </template>
 
-      <el-table
-        ref="dataTableRef"
-        v-loading="loading"
-        :data="roleList"
-        @selection-change="handleSelectionChange"
-        highlight-current-row
-        border
-      >
+      <el-table ref="dataTableRef" v-loading="loading" :data="roleList" @selection-change="handleSelectionChange"
+        highlight-current-row border>
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column label="角色编码" prop="code" min-width="200" />
-        <el-table-column label="角色描述" prop="remark" />
-        <el-table-column fixed="right" label="操作" width="320">
+        <el-table-column label="角色编码" prop="code" width="200" />
+        <el-table-column label="角色描述" prop="remark" width="300" />
+        <el-table-column fixed="right" label="操作">
           <template #default="scope">
-            <el-button
-              type="primary"
-              size="small"
-              link
-              @click="openApiBindDialog(scope.row)"
-            >
-              <i-ep-position />分配权限
+            <el-button type="primary" size="small" link @click="openApiBindDialog(scope.row)">
+              <Icon icon="ep:position" />分配权限
             </el-button>
-            <el-button
-              type="primary"
-              size="small"
-              link
-              @click="openMenuBindDialog(scope.row)"
-            >
-              <i-ep-position />分配菜单
+            <el-button type="primary" size="small" link @click="openMenuBindDialog(scope.row)">
+              <Icon icon="ep:position" />分配菜单
             </el-button>
-            <el-button
-              type="primary"
-              size="small"
-              link
-              @click="openDialog(scope.row)"
-            >
-              <i-ep-edit />编辑
+            <el-button type="primary" size="small" link @click="openDialog(scope.row)">
+              <Icon icon="ep:edit" />编辑
             </el-button>
-            <el-button
-              type="primary"
-              size="small"
-              link
-              @click="handleDelete(scope.row.id)"
-            >
-              <i-ep-delete />删除
+            <el-button type="primary" size="small" link @click="handleDelete(scope.row.id)">
+              <Icon icon="ep:delete" />删除
             </el-button>
           </template>
         </el-table-column>
       </el-table>
 
-      <pagination
-        v-if="total > 0"
-        v-model:total="total"
-        v-model:page="queryParams.pageNum"
-        v-model:limit="queryParams.pageSize"
-        @pagination="handleQuery"
-      />
+      <pagination v-if="total > 0" v-model:total="total" v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize" @pagination="handleQuery" />
     </el-card>
 
     <!-- 角色表单弹窗 -->
-    <el-dialog
-      :title="dialog.title"
-      v-model="dialog.visible"
-      width="500px"
-      @close="closeDialog"
-    >
-      <el-form
-        ref="roleFormRef"
-        :model="formData"
-        :rules="rules"
-        label-width="100px"
-      >
+    <el-dialog :title="dialog.title" v-model="dialog.visible" width="500px" @close="closeDialog">
+      <el-form ref="roleFormRef" :model="formData" :rules="rules" label-width="100px">
         <el-form-item label="角色编码" prop="code">
-          <el-input
-            v-model="formData.code"
-            :readonly="!!editingId"
-            placeholder="请输入角色编码"
-          />
+          <el-input v-model="formData.code" :readonly="!!editingId" placeholder="请输入角色编码" />
         </el-form-item>
 
         <el-form-item label="角色描述" prop="remark">
@@ -338,11 +288,7 @@ onMounted(() => {
     </el-dialog>
 
     <!-- 分配API弹窗  -->
-    <role-bind-api
-      v-model="apiBindVisible"
-      :role="bindingRole"
-      :roles="roleList"
-    />
+    <role-bind-api v-model="apiBindVisible" :role="bindingRole" :roles="roleList" />
     <!-- 分配菜单弹窗  -->
     <role-bind-menu v-model="menuBindVisible" :role="bindingRole" />
   </div>
