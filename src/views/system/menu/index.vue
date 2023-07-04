@@ -12,7 +12,7 @@ import { merge } from "@/utils";
 import { ref, reactive } from "vue";
 import { onMounted } from "vue";
 import { ElForm, ElMessage, ElMessageBox } from "element-plus";
-import { getSubmenu, getPerm } from '@/api/system'
+import { getSubmenu, getPerm } from "@/api/system";
 
 defineOptions({
   name: "MenuList"
@@ -30,9 +30,10 @@ const dialogSubmenu = reactive<DialogOption>({
 
 const dialogPerm = reactive<DialogOption>({
   visible: false
-})
+});
 const menuList = ref<Menu[]>([]);
-const tableSubmenu = ref([])
+const tableSubmenu = ref([]); // 存放子菜单数据
+const tableSubPerm = ref([]); // 存放子权限数据
 const formData = reactive<Required<Omit<Menu, "id" | "parentId">>>({
   label: "",
   level: 1,
@@ -61,7 +62,7 @@ async function handleQuery() {
   });
   if (!error) {
     menuList.value = data!.data!;
-    console.log('menuList1', menuList.value);
+    console.log("menuList1", menuList.value);
   }
   // menuList.value.pop()
   // console.log('menuList2', menuList.value);
@@ -189,38 +190,27 @@ onMounted(() => {
   handleQuery();
 });
 
-// function openDialog(menu?: Menu) {
-//   dialog.visible = true;
-//   if (menu) {
-//     dialog.title = "编辑菜单";
-//     editingId.value = menu.id;
-//     merge(formData, menu);
-//   } else {
-//     dialog.title = "新增菜单";
-//   }
-// }
 /**
  * 查看子菜单
  */
-function viewSubmenu(id) {
+function viewSubmenu(id: number) {
   dialogSubmenu.title = "子菜单";
-  console.log('menuList!!!!!', menuList);
+  console.log("menuList!!!!!", menuList);
   // 向后端请求子菜单数据 /operations/System/Menu/GetChildrenMenus
   getSubmenu(id).then(res => {
     dialogSubmenu.visible = true;
-    tableSubmenu.value = res.data.data
-  })
-
+    tableSubmenu.value = res.data.data;
+  });
 }
 /**
  * 查看子权限
  */
-function viewPerm(id) {
-  dialogPerm.title = "子权限"
+function viewPerm(id: number) {
+  dialogPerm.title = "子权限";
   getPerm(id).then(res => {
-    dialogPerm.visible = true
-    console.log(res)
-  })
+    dialogPerm.visible = true;
+    tableSubPerm.value = res.data.data;
+  });
 }
 /**
  * 查看子权限
@@ -250,36 +240,69 @@ function viewPerm(id) {
         </el-form-item>
       </el-form>
     </div> -->
-
     <el-card shadow="never">
       <template #header>
         <el-button type="success" @click="openDialog()">
           <template #icon><i-ep-plus /></template>
-          新增</el-button>
+          新增</el-button
+        >
       </template>
 
-      <el-table v-loading="loading" :data="menuList" highlight-current-row
-        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @row-click="onRowClick" row-key="id"
-        default-expand-all border>
+      <el-table
+        v-loading="loading"
+        :data="menuList"
+        highlight-current-row
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+        @row-click="onRowClick"
+        row-key="id"
+        default-expand-all
+        border
+      >
         <el-table-column label="菜单名称" min-width="200" prop="label" />
 
-        <el-table-column label="菜单路径" align="center" width="150" prop="path" />
+        <el-table-column
+          label="菜单路径"
+          align="center"
+          width="150"
+          prop="path"
+        />
 
         <el-table-column label="排序" align="center" width="100" prop="sort" />
 
         <el-table-column fixed="right" align="center" label="操作" width="220">
           <template #default="scope">
-            <el-button type="primary" link size="small" @click.stop="openDialog(scope.row)">
+            <el-button
+              type="primary"
+              link
+              size="small"
+              @click.stop="openDialog(scope.row)"
+            >
               <i-ep-edit />编辑
             </el-button>
-            <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)"><i-ep-delete />
+            <el-button
+              type="primary"
+              link
+              size="small"
+              @click.stop="handleDelete(scope.row.id)"
+              ><i-ep-delete />
               删除
             </el-button>
-            <el-button type="primary" link size="small" @click.stop="viewSubmenu(scope.row.id)"
-              v-if="!scope.row.is_bottom">
+            <el-button
+              type="primary"
+              link
+              size="small"
+              @click.stop="viewSubmenu(scope.row.id)"
+              v-if="!scope.row.is_bottom"
+            >
               <i-ep-edit />子菜单
             </el-button>
-            <el-button type=" primary" link size="small" @click.stop="viewPerm(scope.row.id)" v-if="scope.row.is_bottom">
+            <el-button
+              type="primary"
+              link
+              size="small"
+              @click.stop="viewPerm(scope.row.id)"
+              v-if="scope.row.is_bottom"
+            >
               <i-ep-edit />子权限
             </el-button>
           </template>
@@ -287,15 +310,29 @@ function viewPerm(id) {
       </el-table>
     </el-card>
 
-    <el-dialog :title="dialog.title" v-model="dialog.visible" @close="closeDialog" destroy-on-close appendToBody
-      width="750px">
-      <el-form ref="menuFormRef" :model="formData" :rules="rules" label-width="100px">
+    <el-dialog
+      :title="dialog.title"
+      v-model="dialog.visible"
+      @close="closeDialog"
+      destroy-on-close
+      appendToBody
+      width="750px"
+    >
+      <el-form
+        ref="menuFormRef"
+        :model="formData"
+        :rules="rules"
+        label-width="100px"
+      >
         <el-form-item label="菜单名称" prop="label">
           <el-input v-model="formData.label" placeholder="请输入菜单名称" />
         </el-form-item>
 
         <el-form-item label="路由路径" prop="path">
-          <el-input v-model="formData.path" placeholder="/system  (目录以/开头)" />
+          <el-input
+            v-model="formData.path"
+            placeholder="/system  (目录以/开头)"
+          />
         </el-form-item>
 
         <el-form-item label="图标" prop="icon">
@@ -304,7 +341,12 @@ function viewPerm(id) {
         </el-form-item>
 
         <el-form-item label="排序" prop="sort">
-          <el-input-number v-model="formData.sort" style="width: 100px" controls-position="right" :min="0" />
+          <el-input-number
+            v-model="formData.sort"
+            style="width: 100px"
+            controls-position="right"
+            :min="0"
+          />
         </el-form-item>
       </el-form>
 
@@ -317,24 +359,56 @@ function viewPerm(id) {
     </el-dialog>
 
     <!-- 点击子菜单弹出的对话框 -->
-    <el-dialog :title="dialogSubmenu.title" v-model="dialogSubmenu.visible" @close="closeSubmenuDialog" destroy-on-close
-      appendToBody width="750px">
+    <el-dialog
+      :title="dialogSubmenu.title"
+      v-model="dialogSubmenu.visible"
+      @close="closeSubmenuDialog"
+      destroy-on-close
+      appendToBody
+      width="750px"
+    >
       <el-table :data="tableSubmenu" style="width: 100%">
         <el-table-column label="菜单名称" width="180" prop="label" />
         <el-table-column label="菜单路径" width="180" prop="path" />
-        <el-table-column label="排序" width="180" prop="sort" />
-        <!-- <el-table-column label="排序" label="Address" /> -->
+        <el-table-column label="排序" align="center" width="180" prop="sort" />
+        <el-table-column fixed="right" align="center" label="操作">
+          <template #default="scope">
+            <el-button
+              type="primary"
+              link
+              size="small"
+              @click.stop="viewPerm(scope.row.id)"
+            >
+              子权限
+            </el-button>
+          </template> </el-table-column
+        >>
       </el-table>
     </el-dialog>
 
     <!-- 点击子权限弹出的对话框 -->
-    <el-dialog :title="dialogPerm.title" v-model="dialogPerm.visible" @close="closePermDialog" destroy-on-close
-      appendToBody width="750px">
-      <el-table :data="tableSubmenu" style="width: 100%">
-        <el-table-column label="创建时间" width="180" prop="label" />
-        <el-table-column label="是否启用" width="180" prop="path" />
-        <el-table-column label="方法" width="180" prop="sort" />
-        <el-table-column label="路径" width="180" prop="sort" />
+    <el-dialog
+      :title="dialogPerm.title"
+      v-model="dialogPerm.visible"
+      @close="closePermDialog"
+      destroy-on-close
+      appendToBody
+      width="750px"
+    >
+      <el-table :data="tableSubPerm" style="width: 100%">
+        <el-table-column label="创建时间" width="180" prop="createdAt" />
+        <el-table-column label="是否启用" align="center" width="180">
+          <template #default="scope">
+            {{ scope === 0 ? "否" : "是" }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="方法"
+          align="center"
+          width="180"
+          prop="method"
+        />
+        <el-table-column label="路径" width="180" prop="path" />
       </el-table>
     </el-dialog>
   </div>
