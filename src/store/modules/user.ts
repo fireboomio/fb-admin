@@ -10,7 +10,7 @@ import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { type DataInfo, setToken, removeToken, sessionKey } from "@/utils/auth";
 import axios from "axios";
 import { ElMessage } from "element-plus";
-
+// 在本地存储用户信息
 export const useUserStore = defineStore({
   id: "pure-user",
   state: (): userType => ({
@@ -20,7 +20,7 @@ export const useUserStore = defineStore({
     // 页面级别权限
     roles: storageSession().getItem<DataInfo<number>>(sessionKey)?.roles ?? [],
     permissions: [],
-    avatar: ""
+    avatar: ""   // 头像
   }),
   actions: {
     /** 存储用户名 */
