@@ -5,20 +5,9 @@ export default {
 </script>
 <template>
   <!-- 角色绑定菜单弹窗 -->
-  <el-dialog
-    title="绑定菜单"
-    :model-value="modelValue"
-    width="600px"
-    append-to-body
-    @update:model-value="$emit('update:modelValue', $event)"
-    @close="close"
-  >
-    <el-table
-      v-loading="loading"
-      :data="menus"
-      ref="tableRef"
-      @selection-change="handleSelectionChange"
-    >
+  <el-dialog title="绑定菜单" :model-value="modelValue" width="600px" append-to-body
+    @update:model-value="$emit('update:modelValue', $event)" @close="close">
+    <el-table v-loading="loading" :data="menus" ref="tableRef" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="名称" prop="label" />
       <el-table-column label="路径" align="center" prop="path" />
@@ -96,7 +85,10 @@ watchEffect(async () => {
   if (props.modelValue && props.role?.code) {
     loading.value = true;
     const res1 = await api.query({
-      operationName: "System/Menu/GetMany"
+      operationName: "System/Menu/GetMany",
+      input: {
+        in: [1, 2]
+      }
     });
     if (!res1.error) {
       menus.value = res1.data!.data!;
