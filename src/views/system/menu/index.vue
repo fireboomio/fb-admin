@@ -195,7 +195,6 @@ onMounted(() => {
  */
 function viewSubmenu(id: number) {
   dialogSubmenu.title = "子菜单";
-  console.log("menuList!!!!!", menuList);
   // 向后端请求子菜单数据 /operations/System/Menu/GetChildrenMenus
   getSubmenu(id).then(res => {
     dialogSubmenu.visible = true;
@@ -396,7 +395,7 @@ function viewPerm(id: number) {
       width="750px"
     >
       <el-table :data="tableSubPerm" style="width: 100%">
-        <el-table-column label="创建时间" width="180" prop="createdAt" />
+        <el-table-column label="创建时间" width="200" prop="createdAt" />
         <el-table-column label="是否启用" align="center" width="180">
           <template #default="scope">
             {{ scope === 0 ? "否" : "是" }}
@@ -405,10 +404,10 @@ function viewPerm(id: number) {
         <el-table-column
           label="方法"
           align="center"
-          width="180"
+          width="100"
           prop="method"
         />
-        <el-table-column label="路径" width="180" prop="path" />
+        <el-table-column label="路径" width="240" prop="path" />
       </el-table>
     </el-dialog>
   </div>
