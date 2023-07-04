@@ -26,6 +26,10 @@ export const sendPermission = (data?: PermSyncReq) => {
 //   });
 // }
 
-export const getSubmenu = (data) => {
+export const getSubmenu = (data: number) => {
   return http.request("get", `/operations/System/Menu/GetChildrenMenus?pid=${data}`);
+}
+
+export const getPerm = (data: number) => {
+  return http.request("get", `/operations/System/Menu/GetMenuPerms?menuId=${data}`);
 }

@@ -12,7 +12,7 @@ import { merge } from "@/utils";
 import { ref, reactive } from "vue";
 import { onMounted } from "vue";
 import { ElForm, ElMessage, ElMessageBox } from "element-plus";
-import { getSubmenu } from '@/api/system'
+import { getSubmenu, getPerm } from '@/api/system'
 
 defineOptions({
   name: "MenuList"
@@ -27,8 +27,12 @@ const dialog = reactive<DialogOption>({
 const dialogSubmenu = reactive<DialogOption>({
   visible: false
 });
-const menuList = ref<Menu[]>([]);
 
+const dialogPerm = reactive<DialogOption>({
+  visible: false
+})
+const menuList = ref<Menu[]>([]);
+const tableSubmenu = ref([])
 const formData = reactive<Required<Omit<Menu, "id" | "parentId">>>({
   label: "",
   level: 1,
@@ -60,8 +64,8 @@ async function handleQuery() {
     console.log('menuList1', menuList.value);
   }
   // menuList.value.pop()
-  console.log('menuList2', menuList.value);
-  console.log('data.data' + data.data);
+  // console.log('menuList2', menuList.value);
+  // console.log('data.data' + data.data);
   loading.value = false;
 }
 
@@ -165,6 +169,9 @@ function closeDialog() {
 function closeSubmenuDialog() {
   dialogSubmenu.visible = false;
 }
+function closePermDialog() {
+  dialogPerm.visible = false;
+}
 /**
  * 重置表单
  */
@@ -195,15 +202,25 @@ onMounted(() => {
 /**
  * 查看子菜单
  */
-function viewSubmenu(menu) {
-  dialogSubmenu.visible = true;
-  console.log(menu);
+function viewSubmenu(id) {
   dialogSubmenu.title = "子菜单";
+  console.log('menuList!!!!!', menuList);
   // 向后端请求子菜单数据 /operations/System/Menu/GetChildrenMenus
-  getSubmenu(menu).then(res => {
-    console.log(res);
+  getSubmenu(id).then(res => {
+    dialogSubmenu.visible = true;
+    tableSubmenu.value = res.data.data
   })
-  
+
+}
+/**
+ * 查看子权限
+ */
+function viewPerm(id) {
+  dialogPerm.title = "子权限"
+  getPerm(id).then(res => {
+    dialogPerm.visible = true
+    console.log(res)
+  })
 }
 /**
  * 查看子权限
@@ -262,7 +279,7 @@ function viewSubmenu(menu) {
               v-if="!scope.row.is_bottom">
               <i-ep-edit />子菜单
             </el-button>
-            <el-button type=" primary" link size="small" @click.stop="openDialog(scope.row)" v-if="scope.row.is_bottom">
+            <el-button type=" primary" link size="small" @click.stop="viewPerm(scope.row.id)" v-if="scope.row.is_bottom">
               <i-ep-edit />子权限
             </el-button>
           </template>
@@ -298,13 +315,27 @@ function viewSubmenu(menu) {
         </div>
       </template>
     </el-dialog>
+
+    <!-- 点击子菜单弹出的对话框 -->
     <el-dialog :title="dialogSubmenu.title" v-model="dialogSubmenu.visible" @close="closeSubmenuDialog" destroy-on-close
       appendToBody width="750px">
-      <!-- <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
-    </el-table> -->
+      <el-table :data="tableSubmenu" style="width: 100%">
+        <el-table-column label="菜单名称" width="180" prop="label" />
+        <el-table-column label="菜单路径" width="180" prop="path" />
+        <el-table-column label="排序" width="180" prop="sort" />
+        <!-- <el-table-column label="排序" label="Address" /> -->
+      </el-table>
+    </el-dialog>
+
+    <!-- 点击子权限弹出的对话框 -->
+    <el-dialog :title="dialogPerm.title" v-model="dialogPerm.visible" @close="closePermDialog" destroy-on-close
+      appendToBody width="750px">
+      <el-table :data="tableSubmenu" style="width: 100%">
+        <el-table-column label="创建时间" width="180" prop="label" />
+        <el-table-column label="是否启用" width="180" prop="path" />
+        <el-table-column label="方法" width="180" prop="sort" />
+        <el-table-column label="路径" width="180" prop="sort" />
+      </el-table>
     </el-dialog>
   </div>
 </template>
