@@ -2,7 +2,9 @@
 import api, { convertPageQuery } from "@/api";
 import { API } from "../types";
 import { ref, onMounted, reactive } from "vue";
-
+import { ElTable } from 'element-plus'
+import { Perm, sendPermission, PermSyncReq } from '@/api/system'
+import { string } from "vue-types";
 defineOptions({
   name: "PermissionManage"
 });
@@ -29,6 +31,7 @@ async function handleQuery() {
   });
   if (!error) {
     dataSource.value = data!.data!;
+
   }
   loading.value = false;
 }
@@ -36,31 +39,49 @@ async function handleQuery() {
 onMounted(() => {
   handleQuery();
 });
+let multipleSelection = []
+const handleSelectionChange = (val) => {
+  multipleSelection = val
+}
+let dataPush = []
+const pushAllSelect = () => {
+  multipleSelection.forEach((item) => {
+    const obj: Perm = {
+      createdAt: (new Date(item.createTime)).toISOString(),
+      enabled: item.enabled ? 1 : 0,
+      method: item.method,
+      path: item.title,
+    }
+    dataPush.push(obj)
+  })
+  console.log(dataPush);
+  // 发送请求到url:  /operations/System/Perm/CreateMany
+  const perm: PermSyncReq = { data: dataPush }
+  sendPermission(perm).then((res) => {
+    console.log(res);
+  })
+}
 </script>
 
 <template>
   <div class="app-container">
     <el-card shadow="never">
-      <el-table
-        ref="dataTableRef"
-        v-loading="loading"
-        :data="dataSource"
-        highlight-current-row
-        border
-      >
+      <el-table ref="dataTableRef" v-loading="loading" :data="dataSource" @selection-change="handleSelectionChange"
+        highlight-current-row border>
+        <el-table-column label="勾选" type="selection" />
         <el-table-column label="请求路径" prop="title" />
         <el-table-column label="Method" prop="method" width="150" />
         <el-table-column label="请求类型" prop="operationType" />
         <el-table-column label="是否实时" prop="liveQuery" width="100" />
         <el-table-column label="是否启用" prop="enabled" width="100" />
       </el-table>
+      <div style="margin-top: 20px">
+        <el-button @click="clearAll">清除所有选择</el-button>
+        <el-button @click="pushAllSelect">勾选项同步到数据库</el-button>
 
-      <el-pagination
-        v-if="total > 0"
-        :total="total"
-        :page-count="queryParams.pageNum"
-        :page-size="queryParams.pageSize"
-      />
+      </div>
+      <el-pagination v-if="total > 0" :total="total" :page-count="queryParams.pageNum"
+        :page-size="queryParams.pageSize" />
     </el-card>
   </div>
 </template>

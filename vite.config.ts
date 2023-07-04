@@ -44,11 +44,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       host: "0.0.0.0",
       proxy: {
         "/operations": {
-          target: "http://localhost:9991",
+          target: "http://c9nntc.natappfree.cc",
           changeOrigin: true
         },
         "/auth": {
-          target: "http://localhost:9991",
+          target: "http://c9nntc.natappfree.cc",
           changeOrigin: true
         }
       }
