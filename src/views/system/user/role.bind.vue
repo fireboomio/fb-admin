@@ -36,11 +36,11 @@ const tableRef = ref<InstanceType<typeof ElTable>>();
 const emit = defineEmits(["update:modelValue"]);
 const loading = ref(false);
 const roles = ref<Role[]>([]);
-const selections = ref<string[]>([]);
-let originRoles: string[] = [];
+const selections = ref<number[]>([]);
+let originRoles: number[] = [];
 
 function handleSelectionChange(_selections: Role[]) {
-  selections.value = _selections.map(item => item.code!);
+  selections.value = _selections.map(item => item.id!);
 }
 
 function close() {
@@ -58,17 +58,17 @@ async function onSubmit() {
       operationName: "System/User/DisconnectRole",
       input: {
         userId: props.user!.id!,
-        code: originRoleCode
+        roleId: originRoleCode
       }
     });
   }
   // 再添加
-  for (const code of selections.value) {
+  for (const id of selections.value) {
     await api.mutate({
       operationName: "System/User/ConnectRole",
       input: {
         userId: props.user!.id!,
-        code
+        roleId: id
       }
     });
   }
@@ -82,6 +82,7 @@ watchEffect(async () => {
     const res1 = await api.query({
       operationName: "System/Role/GetMany"
     });
+    console.log('res1-->', res1.data.data)
     if (!res1.error) {
       roles.value = res1.data!.data!;
       const { error, data } = await api.query({
@@ -90,13 +91,14 @@ watchEffect(async () => {
           userId: props.user!.id!
         }
       });
-      console.log("data-->", data);
+      console.log("data-->", data.data);
       if (!error) {
-        originRoles = data!.data!.map(item => item.code!) || [];
+        originRoles = data!.data!.map(item => item.id!) || [];
         selections.value = originRoles;
         const selectedRoles = roles.value.filter(item =>
-          originRoles.includes(item.code!)
+          originRoles.includes(item.id!)
         );
+        console.log('selectedRoles-->', selectedRoles)
         for (const role of selectedRoles) {
           tableRef.value!.toggleRowSelection(role, true);
         }

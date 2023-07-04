@@ -206,8 +206,6 @@ export interface main_IntNullableFilter {
   lte?: number;
   notIn?: {}[];
 }
-export interface main_MenuListRelationFilter {}
-export interface main_MenuRelationFilter {}
 export interface main_MenuWhereInput {
   OR?: {}[];
 }
@@ -271,7 +269,6 @@ export interface main_NestedStringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_PostListRelationFilter {}
 export interface main_PostOrderByRelationAggregateInput {
   _count?: string;
 }
@@ -286,7 +283,6 @@ export interface main_PostOrderByWithRelationInput {
 export interface main_PostWhereInput {
   OR?: {}[];
 }
-export interface main_RoleListRelationFilter {}
 export interface main_RoleOrderByRelationAggregateInput {
   _count?: string;
 }
@@ -317,14 +313,12 @@ export interface main_StringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_UserListRelationFilter {}
 export interface main_UserOrderByWithRelationInput {
   avatarUrl?: string;
   createdAt?: string;
   id?: string;
   name?: string;
 }
-export interface main_UserRelationFilter {}
 export interface main_UserWhereInput {
   OR?: {}[];
 }
@@ -588,7 +582,6 @@ export interface main_IntNullableFilter {
   lte?: number;
   notIn?: {}[];
 }
-export interface main_MenuListRelationFilter {}
 export interface main_MenuOrderByRelationAggregateInput {
   _count?: string;
 }
@@ -601,7 +594,6 @@ export interface main_MenuOrderByWithRelationInput {
   path?: string;
   sort?: string;
 }
-export interface main_MenuRelationFilter {}
 export interface main_MenuWhereInput {
   OR?: {}[];
 }
@@ -665,11 +657,9 @@ export interface main_NestedStringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_PostListRelationFilter {}
 export interface main_PostWhereInput {
   OR?: {}[];
 }
-export interface main_RoleListRelationFilter {}
 export interface main_RoleOrderByRelationAggregateInput {
   _count?: string;
 }
@@ -700,8 +690,7 @@ export interface main_StringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_UserListRelationFilter {}
-export interface main_UserRelationFilter {}
+
 export interface main_UserWhereInput {
   OR?: {}[];
 }
@@ -821,8 +810,7 @@ export interface main_IntFilter {
   lte?: number;
   notIn?: {}[];
 }
-export interface main_MenuCreateNestedOneWithoutOther_MenuInput {}
-export interface main_MenuCreateOrConnectWithoutOther_MenuInput {}
+
 export interface main_MenuCreateWithoutOther_MenuInput {
   icon?: string;
   label?: string;
@@ -830,9 +818,6 @@ export interface main_MenuCreateWithoutOther_MenuInput {
   path?: string;
   sort?: number;
 }
-export interface main_MenuUpdateOneWithoutOther_MenuNestedInput {}
-export interface main_MenuUpdateWithoutOther_MenuInput {}
-export interface main_MenuUpsertWithoutOther_MenuInput {}
 export interface main_MenuWhereUniqueInput {
   id: number;
 }
@@ -893,8 +878,7 @@ export interface main_NullableDateTimeFieldUpdateOperationsInput {
 export interface main_NullableStringFieldUpdateOperationsInput {
   set?: string;
 }
-export interface main_PostCreateNestedManyWithoutUserInput {}
-export interface main_PostCreateOrConnectWithoutUserInput {}
+
 export interface main_PostCreateWithoutUserInput {
   content?: string;
   poster?: string;
@@ -904,17 +888,11 @@ export interface main_PostCreateWithoutUserInput {
 export interface main_PostScalarWhereInput {
   OR?: {}[];
 }
-export interface main_PostUpdateManyMutationInput {}
-export interface main_PostUpdateManyWithWhereWithoutUserInput {}
-export interface main_PostUpdateManyWithoutUserNestedInput {}
-export interface main_PostUpdateWithWhereUniqueWithoutUserInput {}
-export interface main_PostUpdateWithoutUserInput {}
-export interface main_PostUpsertWithWhereUniqueWithoutUserInput {}
+
 export interface main_PostWhereUniqueInput {
   id: number;
 }
-export interface main_RoleCreateNestedManyWithoutMenuInput {}
-export interface main_RoleCreateOrConnectWithoutMenuInput {}
+
 export interface main_RoleCreateWithoutMenuInput {
   code?: string;
   remark?: string;
@@ -922,12 +900,7 @@ export interface main_RoleCreateWithoutMenuInput {
 export interface main_RoleScalarWhereInput {
   OR?: {}[];
 }
-export interface main_RoleUpdateManyMutationInput {}
-export interface main_RoleUpdateManyWithWhereWithoutMenuInput {}
-export interface main_RoleUpdateManyWithoutMenuNestedInput {}
-export interface main_RoleUpdateWithWhereUniqueWithoutMenuInput {}
-export interface main_RoleUpdateWithoutMenuInput {}
-export interface main_RoleUpsertWithWhereUniqueWithoutMenuInput {}
+
 export interface main_RoleWhereUniqueInput {
   code?: string;
   id: number;
@@ -959,8 +932,7 @@ export interface main_StringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_UserCreateNestedManyWithoutRoleInput {}
-export interface main_UserCreateOrConnectWithoutRoleInput {}
+
 export interface main_UserCreateWithoutRoleInput {
   avatarUrl?: string;
   createdAt?: string;
@@ -970,12 +942,7 @@ export interface main_UserCreateWithoutRoleInput {
 export interface main_UserScalarWhereInput {
   OR?: {}[];
 }
-export interface main_UserUpdateManyMutationInput {}
-export interface main_UserUpdateManyWithWhereWithoutRoleInput {}
-export interface main_UserUpdateManyWithoutRoleNestedInput {}
-export interface main_UserUpdateWithWhereUniqueWithoutRoleInput {}
-export interface main_UserUpdateWithoutRoleInput {}
-export interface main_UserUpsertWithWhereUniqueWithoutRoleInput {}
+
 export interface main_UserWhereUniqueInput {
   id: string;
 }
@@ -1219,11 +1186,9 @@ export interface main_IntNullableFilter {
   lte?: number;
   notIn?: {}[];
 }
-export interface main_MenuListRelationFilter {}
 export interface main_MenuOrderByRelationAggregateInput {
   _count?: string;
 }
-export interface main_MenuRelationFilter {}
 export interface main_MenuWhereInput {
   OR?: {}[];
 }
@@ -1287,11 +1252,9 @@ export interface main_NestedStringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_PostListRelationFilter {}
 export interface main_PostWhereInput {
   OR?: {}[];
 }
-export interface main_RoleListRelationFilter {}
 export interface main_RoleOrderByWithRelationInput {
   code?: string;
   id?: string;
@@ -1324,11 +1287,9 @@ export interface main_StringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_UserListRelationFilter {}
 export interface main_UserOrderByRelationAggregateInput {
   _count?: string;
 }
-export interface main_UserRelationFilter {}
 export interface main_UserWhereInput {
   OR?: {}[];
 }
@@ -1416,7 +1377,7 @@ export interface System__Role__UpdateOneResponseData {
   };
 }
 export interface System__User__ConnectRoleInput {
-  code: string;
+  roleId: number;
   userId: string;
 }
 export interface InternalSystem__User__ConnectRoleInput {
@@ -1481,7 +1442,7 @@ export interface System__User__CreateOneResponseData {
   };
 }
 export interface System__User__DisconnectRoleInput {
-  code: string;
+  roleId: number;
   userId: string;
 }
 export interface InternalSystem__User__DisconnectRoleInput {
@@ -1551,8 +1512,6 @@ export interface main_IntNullableFilter {
   lte?: number;
   notIn?: {}[];
 }
-export interface main_MenuListRelationFilter {}
-export interface main_MenuRelationFilter {}
 export interface main_MenuWhereInput {
   OR?: {}[];
 }
@@ -1616,14 +1575,12 @@ export interface main_NestedStringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_PostListRelationFilter {}
 export interface main_PostOrderByRelationAggregateInput {
   _count?: string;
 }
 export interface main_PostWhereInput {
   OR?: {}[];
 }
-export interface main_RoleListRelationFilter {}
 export interface main_RoleOrderByRelationAggregateInput {
   _count?: string;
 }
@@ -1654,14 +1611,12 @@ export interface main_StringNullableFilter {
   notIn?: {}[];
   startsWith?: string;
 }
-export interface main_UserListRelationFilter {}
 export interface main_UserOrderByWithRelationInput {
   avatarUrl?: string;
   createdAt?: string;
   id?: string;
   name?: string;
 }
-export interface main_UserRelationFilter {}
 export interface main_UserWhereInput {
   OR?: {}[];
 }
@@ -1719,6 +1674,7 @@ export interface System__User__GetUserRoleResponse {
 }
 export interface System__User__GetUserRoleResponseData {
   data?: {
+    id?: number;
     code?: string;
     remark?: string;
   }[];

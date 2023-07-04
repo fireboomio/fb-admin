@@ -61,66 +61,46 @@ const onLogin = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      // initRouter().then(() => {
-      //   router.push(getTopMenu(true).path);
-      //   message("登录成功", { type: "success" });
-      // });
-        useUserStoreHook()
-          .loginByUsername({
-            username: ruleForm.username,
-            code: ruleForm.password
-          })
-          .then(res => {
-            console.log(res);
-            if (res.data.data.success) {
-              // 获取后端路由
-              initRouter().then(() => {
-                router.push(getTopMenu(true).path);
-                message("登录成功", { type: "success" });
-              });
-            }
-          })
-          .catch(err => {
-            loading.value = false;
-            ElMessage.error(err);
-          });
-      } else {
-        loading.value = false;
-        return fields;
-      }
-      });
-    };
-    // if (valid) {
-    //   useUserStoreHook()
-    //     .loginByUsername({ username: ruleForm.username, password: "admin123" })
-    //     .then(res => {
-    //       if (res.success) {
-    //         // 获取后端路由
-    //         initRouter().then(() => {
-    //           router.push(getTopMenu(true).path);
-    //           message("登录成功", { type: "success" });
-    //         });
-    //       }
-    //     });
-    // } else {
-    //   loading.value = false;
-    //   return fields;
-    // }
-
-    /** 使用公共函数，避免`removeEventListener`失效 */
-    function onkeypress({ code }: KeyboardEvent) {
-      if (code === "Enter") {
-        onLogin(ruleFormRef.value);
-      }
+      useUserStoreHook()
+        .loginByUsername({
+          username: ruleForm.username,
+          code: ruleForm.password,
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.data.success) {
+            // 获取后端路由
+            initRouter().then(() => {
+              router.push(getTopMenu(true).path);
+              message("登录成功", { type: "success" });
+            });
+          }
+        })
+        .catch(err => {
+          loading.value = false;
+          ElMessage.error(err);
+        });
+    } else {
+      loading.value = false;
+      return fields;
     }
+  });
+};
 
-    onMounted(() => {
-      window.document.addEventListener("keypress", onkeypress);
-    });
+/** 使用公共函数，避免`removeEventListener`失效 */
+function onkeypress({ code }: KeyboardEvent) {
+  if (code === "Enter") {
+    onLogin(ruleFormRef.value);
+  }
+}
 
-    // onBeforeUnmount(() => {
-    //   window.document.removeEventListener("keypress", onkeypress);
-    // });
+onMounted(() => {
+  window.document.addEventListener("keypress", onkeypress);
+});
+
+onBeforeUnmount(() => {
+  window.document.removeEventListener("keypress", onkeypress);
+});
 </script>
 
 <template>
