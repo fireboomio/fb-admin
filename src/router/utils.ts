@@ -28,6 +28,8 @@ const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 
 // 动态路由
 import { getAsyncRoutes } from "@/api/routes";
+import { getDynamicRoute } from "@/api/system";
+import { log } from "console";
 
 function handRank(routeInfo: any) {
   const { name, path, parentId, meta } = routeInfo;
@@ -154,51 +156,91 @@ function handleAsyncRoutes(routeList) {
   if (routeList.length === 0) {
     usePermissionStoreHook().handleWholeMenus(routeList);
   } else {
-    formatFlatteningRoutes(addAsyncRoutes(routeList)).map(
-      (v: RouteRecordRaw) => {
-        // 防止重复添加路由
-        if (
-          router.options.routes[0].children.findIndex(
-            value => value.path === v.path
-          ) !== -1
-        ) {
-          return;
-        } else {
-          // 切记将路由push到routes后还需要使用addRoute，这样路由才能正常跳转
-          router.options.routes[0].children.push(v);
-          // 最终路由进行升序
-          ascending(router.options.routes[0].children);
-          if (!router.hasRoute(v?.name)) router.addRoute(v);
-          const flattenRouters: any = router
-            .getRoutes()
-            .find(n => n.path === "/");
-          router.addRoute(flattenRouters);
-        }
+    const mapData = addAsyncRoutes(routeList);
+    formatFlatteningRoutes(mapData).map((v: RouteRecordRaw) => {
+      // 防止重复添加路由
+      if (
+        router.options.routes[0].children.findIndex(
+          value => value.path === v.path
+        ) !== -1
+      ) {
+        return;
+      } else {
+        // 切记将路由push到routes后还需要使用addRoute，这样路由才能正常跳转
+        router.options.routes[0].children.push(v);
+        // 最终路由进行升序
+        ascending(router.options.routes[0].children);
+        if (!router.hasRoute(v?.name)) router.addRoute(v);
+        const flattenRouters: any = router
+          .getRoutes()
+          .find(n => n.path === "/");
+        router.addRoute(flattenRouters);
+        console.log("flattenRouters", flattenRouters);
       }
-    );
+    });
     usePermissionStoreHook().handleWholeMenus(routeList);
   }
   addPathMatch();
 }
+type dynamicRoute = {
+  path: string;
+  name?: string;
+  meta: {
+    title: string;
+  };
+  label?: string;
+  children: childItem[];
+};
+
+type childItem = {
+  path: string;
+  name: string;
+  label?: string;
+  meta: {
+    title: string;
+    showParent?: boolean;
+  };
+};
+
+async function initDynamicRoute() {
+  const routers = await getDynamicRoute().then(res => {
+    const dynamicRoutes: dynamicRoute[] = res.data.data;
+    dynamicRoutes.forEach(item => {
+      item.meta = {
+        title: item.label!
+      };
+      if (item.children.length > 0) {
+        item.children.forEach(itemChildren => {
+          itemChildren.meta = {
+            title: itemChildren.label!,
+            showParent: false
+          };
+        });
+      } else {
+        const dr: childItem = {
+          path: item.path + "/index",
+          name: item.name,
+          meta: {
+            title: item.label
+          }
+        };
+        item.children.push(dr);
+      }
+    });
+    return dynamicRoutes;
+  });
+  storageSession().setItem("async-routes", routers);
+}
 
 /** 初始化路由（`new Promise` 写法防止在异步请求中造成无限循环）*/
 function initRouter() {
-  if (getConfig()?.CachingAsyncRoutes) {
-    // 开启动态路由缓存本地sessionStorage
-    const key = "async-routes";
-    const asyncRouteList = storageSession().getItem(key) as any;
-    if (asyncRouteList && asyncRouteList?.length > 0) {
-      return new Promise(resolve => {
-        handleAsyncRoutes(asyncRouteList);
-        resolve(router);
-      });
-    }
-  } else {
+  initDynamicRoute();
+  const key = "async-routes";
+  const asyncRouteList = storageSession().getItem(key) as any;
+  if (asyncRouteList && asyncRouteList?.length > 0) {
     return new Promise(resolve => {
-      getAsyncRoutes().then(({ data }) => {
-        handleAsyncRoutes(cloneDeep(data));
-        resolve(router);
-      });
+      handleAsyncRoutes(asyncRouteList);
+      resolve(router);
     });
   }
 }

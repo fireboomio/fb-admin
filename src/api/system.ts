@@ -33,3 +33,16 @@ export const getSubmenu = (data: number) => {
 export const getPerm = (data: number) => {
   return http.request("get", `/operations/System/Menu/GetMenuPerms?menuId=${data}`);
 }
+
+export const getPagePerm = (data: number) => {
+  return http.request("get", `/operations/System/Perm/GetMany?menuId=${data}`)
+}
+
+export const getMenuRoles = (data: string) => {
+  return http.request("get", `/operations/System/Role/GetMenuRoles?title=${data}`)
+}
+
+// 获取动态路由api
+export const getDynamicRoute = () => {
+  return http.request("get", `/operations/System/GetMenus`)
+}
