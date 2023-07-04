@@ -1,27 +1,10 @@
 <template>
   <!-- 绑定角色弹窗 -->
-  <el-dialog
-    title="绑定角色"
-    :model-value="modelValue"
-    width="600px"
-    append-to-body
-    @update:model-value="$emit('update:modelValue', $event)"
-    @close="close"
-  >
-    <el-table
-      v-loading="loading"
-      :data="roles"
-      ref="tableRef"
-      @selection-change="handleSelectionChange"
-    >
+  <el-dialog title="绑定角色" :model-value="modelValue" width="600px" append-to-body
+    @update:model-value="$emit('update:modelValue', $event)" @close="close">
+    <el-table v-loading="loading" :data="roles" ref="tableRef" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column
-        key="code"
-        label="Code"
-        align="center"
-        prop="code"
-        width="200"
-      />
+      <el-table-column key="code" label="Code" align="center" prop="code" width="200" />
       <el-table-column key="remark" label="描述" align="center" prop="remark" />
     </el-table>
     <template #footer>
@@ -107,8 +90,9 @@ watchEffect(async () => {
           userId: props.user!.id!
         }
       });
+      console.log("data-->", data);
       if (!error) {
-        originRoles = data!.data!.Role?.map(item => item.code!) || [];
+        originRoles = data!.data!.map(item => item.code!) || [];
         selections.value = originRoles;
         const selectedRoles = roles.value.filter(item =>
           originRoles.includes(item.code!)

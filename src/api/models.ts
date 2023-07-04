@@ -1719,11 +1719,9 @@ export interface System__User__GetUserRoleResponse {
 }
 export interface System__User__GetUserRoleResponseData {
   data?: {
-    Role?: {
-      code?: string;
-      remark?: string;
-    }[];
-  };
+    code?: string;
+    remark?: string;
+  }[];
 }
 export interface InternalUser__MeInput {
   equals?: string;
