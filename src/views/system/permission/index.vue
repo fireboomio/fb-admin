@@ -4,9 +4,8 @@ import { API } from "../types";
 import { ref, onMounted, reactive } from "vue";
 import { ElTable } from 'element-plus'
 import { Perm, sendPermission, PermSyncReq } from '@/api/system'
-import { string } from "vue-types";
 defineOptions({
-  name: "PermissionManage"
+  name: "PermManage"
 });
 
 const loading = ref(false);
