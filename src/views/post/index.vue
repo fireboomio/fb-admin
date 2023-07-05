@@ -10,7 +10,7 @@ import api, { convertPageQuery } from "@/api";
 import { Post__CreateOneInput, Post__GetListResponse } from "@/api/models";
 import { merge } from "@/utils";
 import WangEditor from "@/components/WangEditor/index.vue";
-import { FormItemRule, ElForm, ElMessage, ElMessageBox } from "element-plus";
+import { FormItemRule, ElForm, ElMessage, ElMessageBox, ElPagination } from "element-plus";
 import type { Arrayable } from "element-plus/es/utils";
 import { ref, reactive, onMounted } from "vue";
 
@@ -204,17 +204,11 @@ onMounted(() => {
     <div class="search">
       <el-form ref="queryFormRef" :model="queryParams" :inline="true">
         <el-form-item label="标题" prop="title">
-          <el-input
-            v-model="queryParams.title"
-            placeholder="标题"
-            clearable
-            @keyup.enter="handleQuery"
-          />
+          <el-input v-model="queryParams.title" placeholder="标题" clearable @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleQuery()">
-            <i-ep-search />搜索</el-button
-          >
+            <i-ep-search />搜索</el-button>
           <el-button @click="resetQuery()"><i-ep-refresh />重置</el-button>
         </el-form-item>
       </el-form>
@@ -222,102 +216,47 @@ onMounted(() => {
 
     <el-card shadow="never">
       <template #header>
-        <el-button type="success" @click="openDialog()"
-          ><i-ep-plus />新增</el-button
-        >
-        <el-button
-          type="danger"
-          :disabled="ids.length === 0"
-          @click="handleDelete()"
-          ><i-ep-delete />删除</el-button
-        >
+        <el-button type="success" @click="openDialog()"><i-ep-plus />新增</el-button>
+        <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()"><i-ep-delete />删除</el-button>
       </template>
-      <el-table
-        highlight-current-row
-        :data="dataSource"
-        v-loading="loading"
-        @selection-change="handleSelectionChange"
-        border
-      >
+      <el-table highlight-current-row :data="dataSource" v-loading="loading" @selection-change="handleSelectionChange"
+        border>
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="标题" prop="title" width="200" ellipsis />
         <el-table-column label="封面" prop="poster" width="200">
           <template #default="scope">
-            <el-image
-              :src="scope.row.poster"
-              fit="fill"
-              :preview-src-list="[scope.row.poster]"
-            />
+            <el-image :src="scope.row.poster" fit="fill" :preview-src-list="[scope.row.poster]" />
           </template>
         </el-table-column>
-        <el-table-column
-          label="发布时间"
-          prop="published_at"
-          align="center"
-          :formatter="
-            (row, col, v) => (v ? new Date(v).toLocaleDateString() : '')
-          "
-        />
+        <el-table-column label="发布时间" prop="published_at" align="center" :formatter="(row, col, v) => (v ? new Date(v).toLocaleDateString() : '')
+          " />
         <el-table-column fixed="right" label="操作" align="center" width="220">
           <template #default="scope">
-            <el-button
-              type="primary"
-              link
-              size="small"
-              @click.stop="openDialog(scope.row.id)"
-              ><i-ep-edit />编辑</el-button
-            >
-            <el-button
-              type="primary"
-              link
-              size="small"
-              @click.stop="handleDelete(scope.row.id)"
-              ><i-ep-delete />删除</el-button
-            >
+            <el-button type="primary" link size="small" @click.stop="openDialog(scope.row.id)"><i-ep-edit />编辑</el-button>
+            <el-button type="primary" link size="small"
+              @click.stop="handleDelete(scope.row.id)"><i-ep-delete />删除</el-button>
           </template>
         </el-table-column>
       </el-table>
 
-      <pagination
-        v-if="total > 0"
-        v-model:total="total"
-        v-model:page="queryParams.pageNum"
-        v-model:limit="queryParams.pageSize"
-        @pagination="handleQuery"
-      />
+      <el-pagination v-if="total > 0" v-model:total="total" v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize" @pagination="handleQuery" />
     </el-card>
 
-    <el-dialog
-      :title="dialog.title"
-      v-model="dialog.visible"
-      width="900px"
-      @close="closeDialog"
-    >
-      <el-form
-        ref="dataFormRef"
-        :model="formData"
-        :rules="rules"
-        label-width="80px"
-      >
+    <el-dialog :title="dialog.title" v-model="dialog.visible" width="900px" @close="closeDialog">
+      <el-form ref="dataFormRef" :model="formData" :rules="rules" label-width="80px">
         <el-form-item label="标题" prop="title">
           <el-input v-model="formData.title" placeholder="请输入文章标题" />
         </el-form-item>
         <el-form-item label="封面" prop="poster">
-          <el-input
-            v-model="formData.poster"
-            placeholder="请输入封面图片地址"
-          />
+          <el-input v-model="formData.poster" placeholder="请输入封面图片地址" />
         </el-form-item>
         <el-form-item label="内容" prop="content">
           <WangEditor v-model="formData.content" />
           <!-- <el-input type="textarea" :rows="5" v-model="formData.content" placeholder="请输入文章内容" /> -->
         </el-form-item>
         <el-form-item label="发布时间" prop="publishedAt">
-          <el-date-picker
-            v-model="formData.publishedAt"
-            type="datetime"
-            placeholder="请选择发布时间"
-          />
+          <el-date-picker v-model="formData.publishedAt" type="datetime" placeholder="请选择发布时间" />
         </el-form-item>
       </el-form>
       <template #footer>

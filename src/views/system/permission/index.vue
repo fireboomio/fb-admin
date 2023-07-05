@@ -7,7 +7,7 @@ import { Perm, sendPermission, PermSyncReq, getBindAPI } from '@/api/system'
 const dataTableRef = ref<InstanceType<typeof ElTable>>();
 
 defineOptions({
-  name: "PermissionManage"
+  name: "PermManage"
 });
 
 const loading = ref(false);

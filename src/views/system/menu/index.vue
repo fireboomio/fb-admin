@@ -16,7 +16,7 @@ import { getSubmenu, getPerm } from "@/api/system";
 import { Icon } from '@iconify/vue';
 
 defineOptions({
-  name: "MenuList"
+  name: "MenuManage"
 });
 
 const menuFormRef = ref(ElForm);

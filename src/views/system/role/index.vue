@@ -16,7 +16,8 @@ import {
   ElMessage,
   ElMessageBox,
   ElTree,
-  FormRules
+  FormRules,
+  ElPagination
 } from "element-plus";
 import { Role } from "../types";
 import RoleBindApi from "./api.bind.vue";
@@ -25,7 +26,7 @@ import { ref, reactive, onMounted } from "vue";
 import { Icon } from '@iconify/vue';
 
 defineOptions({
-  name: "roleList"
+  name: "RoleManage"
 });
 
 const queryFormRef = ref(ElForm);
@@ -263,7 +264,7 @@ onMounted(() => {
         </el-table-column>
       </el-table>
 
-      <pagination v-if="total > 0" v-model:total="total" v-model:page="queryParams.pageNum"
+      <el-pagination v-if="total > 0" v-model:total="total" v-model:page="queryParams.pageNum"
         v-model:limit="queryParams.pageSize" @pagination="handleQuery" />
     </el-card>
 

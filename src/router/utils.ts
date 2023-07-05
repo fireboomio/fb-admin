@@ -174,6 +174,7 @@ function handleAsyncRoutes(routeList) {
         const flattenRouters: any = router
           .getRoutes()
           .find(n => n.path === "/");
+
         router.addRoute(flattenRouters);
       }
     });

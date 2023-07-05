@@ -36,8 +36,8 @@
         </el-table-column>
       </el-table>
 
-      <el-pagination v-if="total > 0" :total="total" :page-count="queryParams.pageNum"
-        :page-size="queryParams.pageSize" />
+      <el-pagination :total="total" :page-count="queryParams.pageNum" :page-size="queryParams.pageSize"
+        @pagination="handleQuery" />
     </el-card>
     <role-bind v-model="bindVisible" :user="bindingUser" />
   </div>
@@ -45,13 +45,13 @@
 
 <script setup lang="ts">
 defineOptions({
-  name: "UserList"
+  name: "UserManage"
 });
 
 import { User } from "../types";
 import api, { convertPageQuery } from "@/api";
 import { ref, reactive, onMounted } from "vue";
-import { ElForm } from "element-plus";
+import { ElForm, ElPagination } from "element-plus";
 import RoleBind from /* @vite-ignore */ "./role.bind.vue";
 import { Icon } from '@iconify/vue';
 
@@ -79,7 +79,7 @@ async function handleQuery() {
   });
   if (!error) {
     userList.value = data!.data!;
-    total.value = data!.total!;
+    total.value = data!.data!.length;
   }
   loading.value = false;
 }
