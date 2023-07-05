@@ -22,7 +22,6 @@ import { sessionKey, type DataInfo } from "@/utils/auth";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { usePermissionStoreHook } from "@/store/modules/permission";
 const IFrame = () => import("@/layout/frameView.vue");
-// https://cn.vitejs.dev/guide/features.html#glob-import
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 
 // 动态路由
@@ -235,7 +234,6 @@ async function initDynamicRoute() {
     });
     return dynamicRoutes;
   });
-  console.log("routers-->", routers);
   storageSession().setItem("async-routes", routers);
 }
 

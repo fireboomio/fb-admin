@@ -20,7 +20,7 @@ export const useUserStore = defineStore({
     // 页面级别权限
     roles: storageSession().getItem<DataInfo<number>>(sessionKey)?.roles ?? [],
     permissions: [],
-    avatar: ""   // 头像
+    avatar: storageSession().getItem<DataInfo<number>>(sessionKey)?.avatar ?? "" // 头像
   }),
   actions: {
     /** 存储用户名 */
@@ -61,7 +61,8 @@ export const useUserStore = defineStore({
                 expires: userInfo.data.data.token.data.expires_in,
                 refreshToken: userInfo.data.data.token.data.refresh_token,
                 username: userInfo.data.data.token.data.username,
-                roles: userInfo.data.data.user.roles
+                roles: userInfo.data.data.user.roles,
+                avatar: userInfo.data.data.user.avatar
               };
               setToken(dataInfo);
             } else {
