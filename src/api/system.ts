@@ -39,6 +39,10 @@ export const getMenuRoles = (data: string) => {
   );
 };
 
+export const getMenuPerms = (data: string) => {
+  return http.request("get", `/operations/System/Perm/GetMany?name=${data}`);
+};
+
 // 获取动态路由api
 export const getDynamicRoute = () => {
   return http.request("get", `/operations/System/GetMenus`);

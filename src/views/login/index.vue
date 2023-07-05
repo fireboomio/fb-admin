@@ -70,10 +70,15 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           console.log(res);
           if (res.data.data.success) {
             // 获取后端路由
-            initRouter().then(() => {
-              router.push(getTopMenu(true).path);
-              message("登录成功", { type: "success" });
-            });
+            initRouter()
+              .then(() => {
+                router.push(getTopMenu(true).path);
+                message("登录成功", { type: "success" });
+              })
+              .catch(err => {
+                loading.value = false;
+                ElMessage.error(err);
+              });
           }
         })
         .catch(err => {

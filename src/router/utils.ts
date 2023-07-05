@@ -21,14 +21,15 @@ import { buildHierarchyTree } from "@/utils/tree";
 import { sessionKey, type DataInfo } from "@/utils/auth";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { usePermissionStoreHook } from "@/store/modules/permission";
-const IFrame = () => import("@/layout/frameView.vue");
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 
 // 动态路由
-import { getDynamicRoute, getMenuRoles } from "@/api/system";
+import { getDynamicRoute, getMenuPerms, getMenuRoles } from "@/api/system";
 
 function handRank(routeInfo: any) {
   const { name, path, parentId, meta } = routeInfo;
+  if (name && name !== "Home") return true;
+
   return isAllEmpty(parentId)
     ? isAllEmpty(meta?.rank) ||
       (meta?.rank === 0 && name !== "Home" && path !== "/")
@@ -41,7 +42,10 @@ function handRank(routeInfo: any) {
 function ascending(arr: any[]) {
   arr.forEach((v, index) => {
     // 当rank不存在时，根据顺序自动创建，首页路由永远在第一位
-    if (handRank(v)) v.meta.rank = index + 2;
+    // console.log(index, v, handRank(v));
+    if (handRank(v)) {
+      v.meta.rank = index + 2;
+    }
   });
   return arr.sort(
     (a: { meta: { rank: number } }, b: { meta: { rank: number } }) => {
@@ -182,6 +186,7 @@ type dynamicRoute = {
   name?: string;
   meta: {
     title: string;
+    backstage: boolean;
   };
   label?: string;
   children: childItem[];
@@ -196,53 +201,67 @@ type childItem = {
     title: string;
     showParent?: boolean;
     roles?: string[];
+    auths?: string[];
+    backstage: boolean;
   };
 };
 
-async function initDynamicRoute() {
-  const routers = await getDynamicRoute().then(async res => {
+/** 初始化路由（`new Promise` 写法防止在异步请求中造成无限循环）*/
+async function initRouter() {
+  // const key = "async-routes";
+  const asyncRouteList = await getDynamicRoute().then(res => {
     const dynamicRoutes: dynamicRoute[] = res.data.data;
-    await dynamicRoutes.forEach(async item => {
-      item.meta = {
-        title: item.label!
+    dynamicRoutes.forEach(async item => {
+      const meta = {
+        title: item.label!,
+        backstage: true
       };
+      item.meta = meta;
       // 二级以上菜单
       if (item.children.length > 0) {
-        item.children.forEach(itemChildren => {
+        item.children.forEach(async itemChildren => {
+          // 获取菜单下的权限
+          const perms = await getMenuPerms(itemChildren.name).then(res => {
+            return res.data.data;
+          });
           itemChildren.meta = {
             title: itemChildren.label!,
-            showParent: false,
-            roles: itemChildren.roles
+            roles: itemChildren.roles,
+            auths: perms,
+            backstage: true
           };
         });
       } else {
         // 一级菜单
         // 获取一级菜单绑定的角色
-        const menuRoles = await getMenuRoles(item.name).then(res => {
-          return res.data.data;
+        let menuRoles: string[], perms: string[];
+        await getMenuRoles(item.name).then(res => {
+          menuRoles = res.data.data;
+        });
+        // 获取菜单下的权限
+        await getMenuPerms(item.name).then(res => {
+          perms = res.data.data;
         });
         const dr: childItem = {
           path: item.path,
           name: item.name,
           meta: {
             title: item.label,
-            roles: menuRoles
+            roles: menuRoles,
+            auths: perms,
+            backstage: true
           }
         };
         item.children.push(dr);
       }
     });
+
+    // storageSession().setItem(key, dynamicRoutes);
     return dynamicRoutes;
   });
-  storageSession().setItem("async-routes", routers);
-}
 
-/** 初始化路由（`new Promise` 写法防止在异步请求中造成无限循环）*/
-function initRouter() {
-  initDynamicRoute();
-  const key = "async-routes";
-  const asyncRouteList = storageSession().getItem(key) as any;
   if (asyncRouteList && asyncRouteList?.length > 0) {
+    console.log("asyncRouteList-->", asyncRouteList);
     return new Promise(resolve => {
       handleAsyncRoutes(asyncRouteList);
       resolve(router);
@@ -335,6 +354,9 @@ function addAsyncRoutes(arrRoutes: Array<RouteRecordRaw>) {
   const modulesRoutesKeys = Object.keys(modulesRoutes);
   arrRoutes.forEach((v: RouteRecordRaw) => {
     // 将backstage属性加入meta，标识此路由为后端返回路由
+    if (!v.meta) {
+      v.meta = { title: "" };
+    }
     v.meta.backstage = true;
     // 父级的redirect属性取值：如果子级存在且父级的redirect属性不存在，默认取第一个子级的path；如果子级存在且父级的redirect属性存在，取存在的redirect属性，会覆盖默认值
     if (v?.children && v.children.length && !v.redirect)
@@ -342,15 +364,11 @@ function addAsyncRoutes(arrRoutes: Array<RouteRecordRaw>) {
     // 父级的name属性取值：如果子级存在且父级的name属性不存在，默认取第一个子级的name；如果子级存在且父级的name属性存在，取存在的name属性，会覆盖默认值（注意：测试中发现父级的name不能和子级name重复，如果重复会造成重定向无效（跳转404），所以这里给父级的name起名的时候后面会自动加上`Parent`，避免重复）
     if (v?.children && v.children.length && !v.name)
       v.name = (v.children[0].name as string) + "Parent";
-    if (v.meta?.frameSrc) {
-      v.component = IFrame;
-    } else {
-      // 对后端传component组件路径和不传做兼容（如果后端传component组件路径，那么path可以随便写，如果不传，component组件路径会跟path保持一致）
-      const index = v?.component
-        ? modulesRoutesKeys.findIndex(ev => ev.includes(v.component as any))
-        : modulesRoutesKeys.findIndex(ev => ev.includes(v.path));
-      v.component = modulesRoutes[modulesRoutesKeys[index]];
-    }
+    const index = v?.component
+      ? modulesRoutesKeys.findIndex(ev => ev.includes(v.component as any))
+      : modulesRoutesKeys.findIndex(ev => ev.includes(v.path));
+    v.component = modulesRoutes[modulesRoutesKeys[index]];
+
     if (v?.children && v.children.length) {
       addAsyncRoutes(v.children);
     }

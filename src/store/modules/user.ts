@@ -65,6 +65,7 @@ export const useUserStore = defineStore({
                 avatar: userInfo.data.data.user.avatar
               };
               setToken(dataInfo);
+              resolve(res);
             } else {
               ElMessage.info(res.data.data.msg);
             }
