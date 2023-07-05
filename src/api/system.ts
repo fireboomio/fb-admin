@@ -47,3 +47,8 @@ export const getMenuPerms = (data: string) => {
 export const getDynamicRoute = () => {
   return http.request("get", `/operations/System/GetMenus`);
 };
+
+
+export const getBindAPI = () => {
+  return http.request("get", "/operations/System/Perm/GetBindPerms");
+}

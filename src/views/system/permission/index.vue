@@ -1,47 +1,58 @@
 <script setup lang="ts">
 import api, { convertPageQuery } from "@/api";
 import { API } from "../types";
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, watchEffect } from "vue";
 import { ElTable } from 'element-plus'
-import { Perm, sendPermission, PermSyncReq } from '@/api/system'
-import { string } from "vue-types";
+import { Perm, sendPermission, PermSyncReq, getBindAPI } from '@/api/system'
+const dataTableRef = ref<InstanceType<typeof ElTable>>();
+
 defineOptions({
   name: "PermissionManage"
 });
 
 const loading = ref(false);
-const dataSource = ref<API[]>();
+// const dataSource = ref<API[]>();
+let dataSource = [];
 
 const total = ref(0);
-
-/**
- * 查询
- */
-const queryParams = reactive<PageQuery>({
-  pageNum: 1,
-  pageSize: 10,
-  name: ""
-});
-
+const selections = ref<string[]>([]);
 async function handleQuery() {
   loading.value = true;
   const { error, data } = await api.query({
     operationName: "System/Operation/GetMany",
-    input: convertPageQuery(queryParams, { containsFields: ["name"] })
   });
   if (!error) {
-    dataSource.value = data!.data!;
+    dataSource = data!.data!;
+    initTable();
+    getBindAPI().then(res => {
+      const originPerms = res.data.data.map(item => item.path) ?? []
+      selections.value = originPerms
+      const selectedPerms = dataSource.filter(item => {
+        return originPerms.includes(item.title)
+      })
+      console.log('selectedPerms---->', selectedPerms);
 
+      for (const perm of selectedPerms) {
+        dataTableRef.value!.toggleRowSelection(perm, true)
+      }
+
+    })
   }
+
   loading.value = false;
 }
 
 onMounted(() => {
   handleQuery();
+
 });
+
 let multipleSelection = []
 const handleSelectionChange = (val) => {
   multipleSelection = val
+  selections.value = val.map(item => {
+    item.title
+  })
 }
 let dataPush = []
 const pushAllSelect = () => {
@@ -55,33 +66,49 @@ const pushAllSelect = () => {
     dataPush.push(obj)
   })
   console.log(dataPush);
-  // 发送请求到url:  /operations/System/Perm/CreateMany
+  // 发送请求到api:  /operations/System/Perm/CreateMany
   const perm: PermSyncReq = { data: dataPush }
   sendPermission(perm).then((res) => {
     console.log(res);
   })
+}
+
+let tableData = ref<any[]>();
+const page = ref<number>(1);
+const size = ref<number>(10);
+
+const initTable = () => {
+  tableData.value = dataSource.slice(
+    (page.value - 1) * size.value,
+    page.value * size.value
+  );
+  total.value = dataSource.length
+  return tableData.value
+}
+const getRowKey = (val) => {
+  return val.title
 }
 </script>
 
 <template>
   <div class="app-container">
     <el-card shadow="never">
-      <el-table ref="dataTableRef" v-loading="loading" :data="dataSource" @selection-change="handleSelectionChange"
-        highlight-current-row border>
-        <el-table-column label="勾选" type="selection" />
-        <el-table-column label="请求路径" prop="title" />
+      <el-table ref="dataTableRef" v-loading="loading" :data="initTable()" @selection-change="handleSelectionChange"
+        :row-key="getRowKey" highlight-current-row border>
+        <el-table-column label="勾选" type="selection" :reserve-selection="true" />
+        <el-table-column label="请求路径" prop="title" width="250" />
         <el-table-column label="Method" prop="method" width="150" />
         <el-table-column label="请求类型" prop="operationType" />
         <el-table-column label="是否实时" prop="liveQuery" width="100" />
         <el-table-column label="是否启用" prop="enabled" width="100" />
       </el-table>
+      <!-- 实现分页功能 -->
+      <el-pagination small background layout="prev, pager, next" v-model:current-page="page" :total="total" :size="10"
+        class="mt-4" />
       <div style="margin-top: 20px">
-        <el-button @click="clearAll">清除所有选择</el-button>
         <el-button @click="pushAllSelect">勾选项同步到数据库</el-button>
-
       </div>
-      <el-pagination v-if="total > 0" :total="total" :page-count="queryParams.pageNum"
-        :page-size="queryParams.pageSize" />
+
     </el-card>
   </div>
 </template>

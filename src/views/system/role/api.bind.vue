@@ -5,20 +5,9 @@ export default {
 </script>
 <template>
   <!-- 角色绑定API弹窗 -->
-  <el-dialog
-    title="绑定权限"
-    :model-value="modelValue"
-    width="600px"
-    append-to-body
-    @update:model-value="$emit('update:modelValue', $event)"
-    @close="close"
-  >
-    <el-table
-      v-loading="loading"
-      :data="apis"
-      ref="tableRef"
-      @selection-change="handleSelectionChange"
-    >
+  <el-dialog title="绑定权限" :model-value="modelValue" width="600px" append-to-body
+    @update:model-value="$emit('update:modelValue', $event)" @close="close">
+    <el-table v-loading="loading" :data="apis" ref="tableRef" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="路径" prop="title" />
       <el-table-column label="Method" align="center" prop="method" />
@@ -61,6 +50,8 @@ let originApis: number[] = [];
 
 function handleSelectionChange(_selections: API[]) {
   selections.value = _selections.map(item => +item.id!);
+  console.log(selections.value);
+
 }
 
 function close() {
