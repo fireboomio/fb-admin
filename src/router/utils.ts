@@ -182,87 +182,12 @@ function handleAsyncRoutes(routeList) {
   }
   addPathMatch();
 }
-type dynamicRoute = {
-  path: string;
-  name?: string;
-  meta: {
-    title: string;
-    backstage: boolean;
-  };
-  label?: string;
-  children: childItem[];
-};
-
-type childItem = {
-  path: string;
-  name: string;
-  label?: string;
-  roles?: string[];
-  meta: {
-    title: string;
-    showParent?: boolean;
-    roles?: string[];
-    auths?: string[];
-    backstage: boolean;
-  };
-};
 
 /** 初始化路由（`new Promise` 写法防止在异步请求中造成无限循环）*/
 async function initRouter() {
-  // const key = "async-routes";
-  const asyncRouteList = await getDynamicRoute().then(res => {
-    const dynamicRoutes: dynamicRoute[] = res.data.data;
-    dynamicRoutes.forEach(async item => {
-      const meta = {
-        title: item.label!,
-        backstage: true
-      };
-      item.meta = meta;
-      // 二级以上菜单
-      if (item.children.length > 0) {
-        item.children.forEach(async itemChildren => {
-          // 获取菜单下的权限
-          const perms = await getMenuPerms(itemChildren.name).then(res => {
-            return res.data.data;
-          });
-          itemChildren.meta = {
-            title: itemChildren.label!,
-            roles: itemChildren.roles,
-            auths: perms,
-            backstage: true
-          };
-        });
-      } else {
-        // 一级菜单
-        // 获取一级菜单绑定的角色
-        let menuRoles: string[], perms: string[];
-        await getMenuRoles(item.name).then(res => {
-          menuRoles = res.data.data;
-        });
-        // 获取菜单下的权限
-        await getMenuPerms(item.name).then(res => {
-          perms = res.data.data;
-        });
-        const dr: childItem = {
-          path: item.path,
-          name: item.name,
-          meta: {
-            title: item.label,
-            roles: menuRoles,
-            auths: perms,
-            backstage: true
-          }
-        };
-        item.children.push(dr);
-      }
-    });
-
-    // storageSession().setItem(key, dynamicRoutes);
-    return dynamicRoutes;
-  });
+  const asyncRouteList = await getDynamicRoute().then(res => res);
 
   if (asyncRouteList && asyncRouteList?.length > 0) {
-    console.log("asyncRouteList-->", asyncRouteList);
     return new Promise(resolve => {
       handleAsyncRoutes(asyncRouteList);
       resolve(router);

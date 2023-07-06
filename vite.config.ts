@@ -50,6 +50,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         "/auth": {
           target: "http://localhost:9991",
           changeOrigin: true
+        },
+        "/proxy": {
+          target: "http://localhost:9991",
+          changeOrigin: true
         }
       }
     },

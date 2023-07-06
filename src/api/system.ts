@@ -45,10 +45,9 @@ export const getMenuPerms = (data: string) => {
 
 // 获取动态路由api
 export const getDynamicRoute = () => {
-  return http.request("get", `/operations/System/GetMenus`);
+  return http.request<[]>("get", `/proxy/asyncRoutes/route`);
 };
-
 
 export const getBindAPI = () => {
   return http.request("get", "/operations/System/Perm/GetBindPerms");
-}
+};
