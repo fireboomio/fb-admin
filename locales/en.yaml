@@ -36,9 +36,22 @@ status:
   hsLoad: Loading...
 login:
   username: Username
-  password: captcha
+  password: password
   login: Login
+  verifyCode: VerifyCode
+  loginBySms: login by sms
+  phoneLogin: Phone Login
   sendCode: Send code
+  back: Back
+  getVerifyCode: Get VerifyCode
+  smsVerifyCode: SMS VerifyCode
   usernameReg: Please enter username
-  passwordReg: Please enter captcha
-  passwordRuleReg: The captcha format should be any combination of 6 digits
+  passwordReg: Please enter password
+  passwordRuleReg: The password format should start with a letter, be between 6 and 18 in length, and can only contain letters, numbers, and underscores
+  captchaRuleReg: The captcha format should be any combination of 6 digits
+  verifyCodeReg: Please enter verify code
+  verifyCodeCorrectReg: Please enter correct verify code
+  verifyCodeSixReg: Please enter a 6-digit verify code
+  phoneReg: Please enter the phone
+  phoneCorrectReg: Please enter the correct phone number format
+  loginSuccess: Login Success

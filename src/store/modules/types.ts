@@ -42,4 +42,5 @@ export type userType = {
   currentPage?: number;
   permissions: Array<string>;
   avatar: string;
+  loginType: string;
 };

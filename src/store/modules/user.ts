@@ -10,6 +10,7 @@ import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { type DataInfo, setToken, removeToken, sessionKey } from "@/utils/auth";
 import axios from "axios";
 import { ElMessage } from "element-plus";
+import { da } from "element-plus/es/locale";
 // 在本地存储用户信息
 export const useUserStore = defineStore({
   id: "pure-user",
@@ -20,7 +21,10 @@ export const useUserStore = defineStore({
     // 页面级别权限
     roles: storageSession().getItem<DataInfo<number>>(sessionKey)?.roles ?? [],
     permissions: [],
-    avatar: storageSession().getItem<DataInfo<number>>(sessionKey)?.avatar ?? "" // 头像
+    avatar:
+      storageSession().getItem<DataInfo<number>>(sessionKey)?.avatar ?? "", // 头像
+    // 判断登录页面显示哪个组件（password：登录（默认）、sms：手机登录)
+    loginType: "password"
   }),
   actions: {
     /** 存储用户名 */
@@ -39,12 +43,20 @@ export const useUserStore = defineStore({
     SET_USERAVATAR(avatar: string) {
       this.avatar = avatar;
     },
+    /** 存储登录页面显示哪个组件 */
+    SET_LOGINTYPE(value: string) {
+      this.loginType = value;
+    },
     /** 登入 */
     async loginByUsername(data) {
       const phone = data.username;
+      const username = data.username;
       return new Promise<LoginResult>((resolve, reject) => {
+        console.log("data-->", data);
         getLogin(data)
           .then(async res => {
+            console.log("token-->", res.data.data);
+
             // 获取到token
             if (res.data.data.success) {
               // 获取用户信息
@@ -53,7 +65,8 @@ export const useUserStore = defineStore({
                   Authorization: "Bearer " + res.data.data.data.access_token
                 },
                 params: {
-                  phone
+                  phone,
+                  username
                 }
               });
               const dataInfo: DataInfo<number> = {

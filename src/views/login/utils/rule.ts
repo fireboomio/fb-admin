@@ -1,9 +1,45 @@
 import { reactive } from "vue";
 import type { FormRules } from "element-plus";
 import { $t, transformI18n } from "@/plugins/i18n";
+import { isPhone } from "@pureadmin/utils";
 
-/** 密码正则（密码格式应为8-18位数字、字母、符号的任意两种组合） */
-export const REGEXP_PWD = /^\d{6}$/;
+/** 密码正则（以字母开头，长度在6~18之间，只能包含字母、数字和下划线） */
+export const REGEXP_PWD = /^[a-zA-Z]\w{5,17}$/;
+
+/** 6位数字验证码正则 */
+export const REGEXP_SIX = /^\d{6}$/;
+
+/** 手机登录校验 */
+const phoneRules = reactive<FormRules>({
+  phone: [
+    {
+      validator: (rule, value, callback) => {
+        if (value === "") {
+          callback(new Error(transformI18n($t("login.phoneReg"))));
+        } else if (!isPhone(value)) {
+          callback(new Error(transformI18n($t("login.phoneCorrectReg"))));
+        } else {
+          callback();
+        }
+      },
+      trigger: "blur"
+    }
+  ],
+  verifyCode: [
+    {
+      validator: (rule, value, callback) => {
+        if (value === "") {
+          callback(new Error(transformI18n($t("login.verifyCodeReg"))));
+        } else if (!REGEXP_SIX.test(value)) {
+          callback(new Error(transformI18n($t("login.verifyCodeSixReg"))));
+        } else {
+          callback();
+        }
+      },
+      trigger: "blur"
+    }
+  ]
+});
 
 /** 登录校验 */
 const loginRules = reactive(<FormRules>{
@@ -23,4 +59,4 @@ const loginRules = reactive(<FormRules>{
   ]
 });
 
-export { loginRules };
+export { loginRules, phoneRules };

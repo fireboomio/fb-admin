@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import Motion from "./utils/motion";
+import phone from "./phone.vue";
 import { useRouter } from "vue-router";
 import { message } from "@/utils/message";
 import { loginRules } from "./utils/rule";
@@ -12,7 +13,7 @@ import { useUserStoreHook } from "@/store/modules/user";
 import { initRouter, getTopMenu } from "@/router/utils";
 import { bg, avatar, illustration } from "./utils/static";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { ref, reactive, toRaw, onMounted, onBeforeUnmount } from "vue";
+import { ref, reactive, toRaw, onMounted, onBeforeUnmount, computed } from "vue";
 import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
 import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
 
@@ -22,8 +23,6 @@ import globalization from "@/assets/svg/globalization.svg?component";
 import Lock from "@iconify-icons/ri/lock-fill";
 import Check from "@iconify-icons/ep/check";
 import User from "@iconify-icons/ri/user-3-fill";
-
-import { sendVerifyCode } from "@/api/user";
 
 defineOptions({
   name: "Login"
@@ -41,24 +40,15 @@ dataThemeChange();
 const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
 const { locale, translationCh, translationEn } = useTranslationLang();
 
+const loginType = computed(() => {
+  return useUserStoreHook().loginType;
+});
+
 const ruleForm = reactive({
-  username: "18856264667",
+  username: "",
   password: ""
 });
-const ruleFormByPassword = reactive({
-  username: "admin",
-  password: "admin123",
-  // verifyCode: ""
-});
-// 发送验证码按钮是否禁用
-const disabled = ref(false);
 
-const sendCode = async () => {
-  await sendVerifyCode({ dest: ruleForm.username }).then(res => {
-    console.log(res);
-    disabled.value = true;
-  });
-};
 
 const onLogin = async (formEl: FormInstance | undefined) => {
   loading.value = true;
@@ -68,7 +58,8 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       useUserStoreHook()
         .loginByUsername({
           username: ruleForm.username,
-          code: ruleForm.password
+          password: ruleForm.password,
+          loginType: loginType.value
         })
         .then(res => {
           console.log(res);
@@ -147,7 +138,7 @@ onBeforeUnmount(() => {
             <h2 class="outline-none">{{ title }}</h2>
           </Motion>
 
-          <el-form ref="ruleFormRef" :model="ruleForm" :rules="loginRules" size="large">
+          <el-form ref="ruleFormRef" :model="ruleForm" :rules="loginRules" size="large" v-if="loginType === 'password'">
             <Motion :delay="100">
               <el-form-item :rules="[
                 {
@@ -163,11 +154,8 @@ onBeforeUnmount(() => {
 
             <Motion :delay="150">
               <el-form-item prop="password">
-                <el-input clearable v-model="ruleForm.password" :placeholder="t('login.password')"
-                  :prefix-icon="useRenderIcon(Lock)" style="width: 70%" />
-                <el-button type="primary" style="width: 25%; margin-left: 5%" :disabled="disabled" @click="sendCode">
-                  {{ t("login.sendCode") }}
-                </el-button>
+                <el-input clearable v-model="ruleForm.password" :placeholder="t('login.password')" show-password
+                  :prefix-icon="useRenderIcon(Lock)" />
               </el-form-item>
             </Motion>
 
@@ -177,7 +165,19 @@ onBeforeUnmount(() => {
                 {{ t("login.login") }}
               </el-button>
             </Motion>
+
+            <Motion :delay="300">
+              <div class="w-full h-[20px] flex justify-between items-center mt-4">
+                <el-button class="w-full mt-4" size="default" @click="useUserStoreHook().SET_LOGINTYPE('sms')">
+                  {{ t("login.loginBySms") }}
+                </el-button>
+              </div>
+            </Motion>
           </el-form>
+
+
+          <!-- 手机号登录 -->
+          <phone v-if="loginType === 'sms'" />
         </div>
       </div>
     </div>
