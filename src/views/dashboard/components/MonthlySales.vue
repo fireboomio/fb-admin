@@ -33,7 +33,6 @@ onMounted(async () => {
     operationName: "Statistics/MonthlySales"
   });
   if (!error) {
-    console.log("data-->", data.data);
     chartRef.value.setOption({
       tooltip: {
         trigger: "item"

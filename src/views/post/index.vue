@@ -13,6 +13,7 @@ import WangEditor from "@/components/WangEditor/index.vue";
 import { FormItemRule, ElForm, ElMessage, ElMessageBox, ElPagination } from "element-plus";
 import type { Arrayable } from "element-plus/es/utils";
 import { ref, reactive, onMounted } from "vue";
+import { Icon } from '@iconify/vue';
 
 const queryFormRef = ref(ElForm);
 const dataFormRef = ref(ElForm);
@@ -208,16 +209,23 @@ onMounted(() => {
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleQuery()">
-            <i-ep-search />搜索</el-button>
-          <el-button @click="resetQuery()"><i-ep-refresh />重置</el-button>
+            <Icon icon="ep:search" />搜索
+          </el-button>
+          <el-button @click="resetQuery()">
+            <Icon icon="ep:refresh" />重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
 
     <el-card shadow="never">
       <template #header>
-        <el-button type="success" @click="openDialog()"><i-ep-plus />新增</el-button>
-        <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()"><i-ep-delete />删除</el-button>
+        <el-button type="success" @click="openDialog()">
+          <Icon icon="ep:plus" />新增
+        </el-button>
+        <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
+          <Icon icon="ep:delete" />删除
+        </el-button>
       </template>
       <el-table highlight-current-row :data="dataSource" v-loading="loading" @selection-change="handleSelectionChange"
         border>
@@ -232,9 +240,12 @@ onMounted(() => {
           " />
         <el-table-column fixed="right" label="操作" align="center" width="220">
           <template #default="scope">
-            <el-button type="primary" link size="small" @click.stop="openDialog(scope.row.id)"><i-ep-edit />编辑</el-button>
-            <el-button type="primary" link size="small"
-              @click.stop="handleDelete(scope.row.id)"><i-ep-delete />删除</el-button>
+            <el-button type="primary" link size="small" @click.stop="openDialog(scope.row.id)">
+              <Icon icon="ep:edit" />编辑
+            </el-button>
+            <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
+              <Icon icon="ep:delete" />删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
