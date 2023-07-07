@@ -220,12 +220,18 @@ onMounted(() => {
 
     <el-card shadow="never">
       <template #header>
-        <el-button type="success" @click="openDialog()">
-          <Icon icon="ep:plus" />新增
-        </el-button>
-        <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
-          <Icon icon="ep:delete" />删除
-        </el-button>
+        <Auth value="/Post/CreateOne">
+          <el-button type="success" @click="openDialog()">
+            <Icon icon="ep:plus" />新增
+          </el-button>
+        </Auth>
+
+        <Auth value="/Post/DeleteOne">
+          <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
+            <Icon icon="ep:delete" />删除
+          </el-button>
+        </Auth>
+
       </template>
       <el-table highlight-current-row :data="dataSource" v-loading="loading" @selection-change="handleSelectionChange"
         border>

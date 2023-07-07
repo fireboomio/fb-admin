@@ -50,8 +50,6 @@ let originApis: number[] = [];
 
 function handleSelectionChange(_selections: API[]) {
   selections.value = _selections.map(item => +item.id!);
-  console.log(selections.value);
-
 }
 
 function close() {

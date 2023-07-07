@@ -14,7 +14,8 @@ import { onMounted } from "vue";
 import { ElForm, ElMessage, ElMessageBox } from "element-plus";
 import { getSubmenu, getPerm } from "@/api/system";
 import { Icon } from '@iconify/vue';
-
+import { useUserStoreHook } from "@/store/modules/user";
+const store = useUserStoreHook();
 defineOptions({
   name: "MenuManage"
 });
@@ -63,11 +64,7 @@ async function handleQuery() {
   });
   if (!error) {
     menuList.value = data!.data!;
-    console.log("menuList1", menuList.value);
   }
-  // menuList.value.pop()
-  // console.log('menuList2', menuList.value);
-  // console.log('data.data' + data.data);
   loading.value = false;
 }
 
@@ -189,6 +186,9 @@ function resetForm() {
 
 onMounted(() => {
   handleQuery();
+  // 打印一下vuex中的permissions数据
+  console.log(store.permissions);
+
 });
 
 /**

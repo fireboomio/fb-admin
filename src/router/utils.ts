@@ -21,8 +21,9 @@ import { buildHierarchyTree } from "@/utils/tree";
 import { sessionKey, type DataInfo } from "@/utils/auth";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { usePermissionStoreHook } from "@/store/modules/permission";
+import { useUserStoreHook } from "@/store/modules/user"
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
-
+const store = useUserStoreHook();
 // 动态路由
 import { getDynamicRoute, getMenuPerms, getMenuRoles } from "@/api/system";
 
@@ -327,13 +328,15 @@ function getHistoryMode(routerHistory): RouterHistory {
 
 /** 获取当前页面按钮级别的权限 */
 function getAuths(): Array<string> {
-  return router.currentRoute.value.meta.auths as Array<string>;
+  // return router.currentRoute.value.meta.auths as Array<string>;
+  // 从store中获取权限permissions
+  return store.permissions;
+
 }
 
 /** 是否有按钮级别的权限 */
 function hasAuth(value: string | Array<string>): boolean {
   if (!value) return false;
-  /** 从当前路由的`meta`字段里获取按钮级别的所有自定义`code`值 */
   const metaAuths = getAuths();
   if (!metaAuths) return false;
   const isAuths = isString(value)

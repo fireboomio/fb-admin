@@ -82,7 +82,6 @@ watchEffect(async () => {
     const res1 = await api.query({
       operationName: "System/Role/GetMany"
     });
-    console.log('res1-->', res1.data.data)
     if (!res1.error) {
       roles.value = res1.data!.data!;
       const { error, data } = await api.query({
@@ -91,14 +90,12 @@ watchEffect(async () => {
           userId: props.user!.id!
         }
       });
-      console.log("data-->", data.data);
       if (!error) {
         originRoles = data!.data!.map(item => item.id!) || [];
         selections.value = originRoles;
         const selectedRoles = roles.value.filter(item =>
           originRoles.includes(item.id!)
         );
-        console.log('selectedRoles-->', selectedRoles)
         for (const role of selectedRoles) {
           tableRef.value!.toggleRowSelection(role, true);
         }

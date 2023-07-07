@@ -23,6 +23,7 @@ async function handleQuery() {
   });
   if (!error) {
     dataSource = data!.data!;
+    total.value = dataSource.length
     initTable();
     getBindAPI().then(res => {
       const originPerms = res.data.data.map(item => item.path) ?? []
@@ -30,8 +31,6 @@ async function handleQuery() {
       const selectedPerms = dataSource.filter(item => {
         return originPerms.includes(item.title)
       })
-      console.log('selectedPerms---->', selectedPerms);
-
       for (const perm of selectedPerms) {
         dataTableRef.value!.toggleRowSelection(perm, true)
       }
@@ -78,12 +77,11 @@ const page = ref<number>(1);
 const size = ref<number>(10);
 
 const initTable = () => {
-  tableData.value = dataSource.slice(
+  return dataSource.slice(
     (page.value - 1) * size.value,
     page.value * size.value
   );
-  total.value = dataSource.length
-  return tableData.value
+
 }
 const getRowKey = (val) => {
   return val.title
