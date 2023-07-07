@@ -24,7 +24,7 @@ import RoleBindApi from "./api.bind.vue";
 import RoleBindMenu from "./menu.bind.vue";
 import { ref, reactive, onMounted } from "vue";
 import { Icon } from '@iconify/vue';
-import { hasAuth, getAuths } from "@/router/utils";
+import { getRolePerms } from "@/api/system";
 
 defineOptions({
   name: "RoleManage"
@@ -210,7 +210,6 @@ function openMenuBindDialog(role: Role) {
 
 onMounted(() => {
   handleQuery();
-  console.log(hasAuth(['/System/Role/AddOne']))
 });
 
 </script>
@@ -236,14 +235,18 @@ onMounted(() => {
 
     <el-card shadow="never">
       <template #header>
-        <el-button type="success" v-if="hasAuth('/System/Role/AddOne')" @click="openDialog()">
-          <Icon icon="ep:plus" />新增
-        </el-button>
+        <Auth value="'/System/Role/AddOne'">
+          <el-button type="success" @click="openDialog()">
+            <Icon icon="ep:plus" />新增
+          </el-button>
+        </Auth>
 
-        <el-button type="danger" v-if="hasAuth('/System/Role/DeleteOne')" :disabled="ids.length === 0"
-          @click="handleDelete()">
-          <Icon icon="ep:delete" />删除
-        </el-button>
+        <Auth value="'/System/Role/DeleteOne'">
+          <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
+            <Icon icon="ep:delete" />删除
+          </el-button>
+        </Auth>
+
       </template>
 
       <el-table ref="dataTableRef" v-loading="loading" :data="roleList" @selection-change="handleSelectionChange"
@@ -253,7 +256,8 @@ onMounted(() => {
         <el-table-column label="角色描述" prop="remark" width="300" />
         <el-table-column fixed="right" label="操作">
           <template #default="scope">
-            <el-button type="primary" v-if="hasAuth('/System/Role/DeleteOne')" size="small" link @click="openApiBindDialog(scope.row)">
+
+            <el-button type="primary" size="small" link @click="openApiBindDialog(scope.row)">
               <Icon icon="ep:position" />分配权限
             </el-button>
             <el-button type="primary" size="small" link @click="openMenuBindDialog(scope.row)">
@@ -262,9 +266,11 @@ onMounted(() => {
             <el-button type="primary" size="small" link @click="openDialog(scope.row)">
               <Icon icon="ep:edit" />编辑
             </el-button>
-            <el-button type="primary" size="small" link @click="handleDelete(scope.row.id)">
-              <Icon icon="ep:delete" />删除
-            </el-button>
+            <Auth value="'/System/Role/DeleteMany'">
+              <el-button type="primary" size="small" link @click="handleDelete(scope.row.id)">
+                <Icon icon="ep:delete" />删除
+              </el-button>
+            </Auth>
           </template>
         </el-table-column>
       </el-table>
@@ -287,8 +293,12 @@ onMounted(() => {
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="handleSubmit">确 定</el-button>
-          <el-button @click="closeDialog">取 消</el-button>
+          <Auth value="/System/Role/UpdateOne">
+            <el-button type="primary" @click="handleSubmit">确 定</el-button>
+          </Auth>
+          <Auth value="/System/Role/UpdateOne">
+            <el-button @click="closeDialog">取 消</el-button>
+          </Auth>
         </div>
       </template>
     </el-dialog>

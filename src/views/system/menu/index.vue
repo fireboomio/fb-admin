@@ -14,8 +14,7 @@ import { onMounted } from "vue";
 import { ElForm, ElMessage, ElMessageBox } from "element-plus";
 import { getSubmenu, getPerm } from "@/api/system";
 import { Icon } from '@iconify/vue';
-import { useUserStoreHook } from "@/store/modules/user";
-const store = useUserStoreHook();
+
 defineOptions({
   name: "MenuManage"
 });
@@ -186,9 +185,6 @@ function resetForm() {
 
 onMounted(() => {
   handleQuery();
-  // 打印一下vuex中的permissions数据
-  console.log(store.permissions);
-
 });
 
 /**
@@ -219,11 +215,14 @@ function viewPerm(id: number) {
   <div class="app-container">
     <el-card shadow="never">
       <template #header>
-        <el-button type="success" @click="openDialog()">
-          <template #icon>
-            <Icon icon="ep:plus" />
-          </template>
-          新增</el-button>
+        <Auth value="/System/Menu/">
+          <el-button type="success" @click="openDialog()">
+            <template #icon>
+              <Icon icon="ep:plus" />
+            </template>
+            新增</el-button>
+        </Auth>
+
       </template>
 
       <el-table v-loading="loading" :data="menuList" highlight-current-row
@@ -237,19 +236,29 @@ function viewPerm(id: number) {
 
         <el-table-column fixed="right" align="center" label="操作" min-width="220">
           <template #default="scope">
-            <el-button type="primary" link size="small" @click.stop="openDialog(scope.row)">
-              <Icon icon="ep:edit" />编辑
-            </el-button>
-            <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
-              <Icon icon="ep:delete" />删除
-            </el-button>
-            <el-button type="primary" link size="small" @click.stop="viewSubmenu(scope.row.id)"
-              v-if="!scope.row.is_bottom">
-              <Icon icon="ep:edit" />子菜单
-            </el-button>
-            <el-button type="primary" link size="small" @click.stop="viewPerm(scope.row.id)" v-if="scope.row.is_bottom">
-              <Icon icon="ep:edit" />子权限
-            </el-button>
+            <Auth value="/System/Menu/">
+              <el-button type="primary" link size="small" @click.stop="openDialog(scope.row)">
+                <Icon icon="ep:edit" />编辑
+              </el-button>
+            </Auth>
+            <Auth value="/System/Menu/DeleteOne">
+              <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
+                <Icon icon="ep:delete" />删除
+              </el-button>
+            </Auth>
+
+            <Auth value="/System/Menu/GetChildrenMenus">
+              <el-button type="primary" link size="small" @click.stop="viewSubmenu(scope.row.id)"
+                v-if="!scope.row.is_bottom">
+                <Icon icon="ep:edit" />子菜单
+              </el-button>
+            </Auth>
+            <Auth value="/System/Menu/GetMenuPerms">
+              <el-button type="primary" link size="small" @click.stop="viewPerm(scope.row.id)" v-if="scope.row.is_bottom">
+                <Icon icon="ep:edit" />子权限
+              </el-button>
+            </Auth>
+
           </template>
         </el-table-column>
       </el-table>
@@ -278,8 +287,13 @@ function viewPerm(id: number) {
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="closeDialog">取 消</el-button>
+          <Auth value="/System/Menu/UpdateOne">
+            <el-button type="primary" @click="submitForm">确 定</el-button>
+          </Auth>
+          <Auth value="/System/Menu/UpdateOne">
+            <el-button @click="closeDialog">取 消</el-button>
+          </Auth>
+
         </div>
       </template>
     </el-dialog>
@@ -293,6 +307,7 @@ function viewPerm(id: number) {
         <el-table-column label="排序" align="center" width="160" prop="sort" />
         <el-table-column fixed="right" align="center" label="操作">
           <template #default="scope">
+            <Auth value="System/Menu/GetMenuPerms"></Auth>
             <el-button type="primary" link size="small" @click.stop="viewPerm(scope.row.id)">
               子权限
             </el-button>

@@ -208,12 +208,16 @@ onMounted(() => {
           <el-input v-model="queryParams.title" placeholder="标题" clearable @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleQuery()">
-            <Icon icon="ep:search" />搜索
-          </el-button>
-          <el-button @click="resetQuery()">
-            <Icon icon="ep:refresh" />重置
-          </el-button>
+          <Auth value="/Post/GetList">
+            <el-button type="primary" @click="handleQuery()">
+              <Icon icon="ep:search" />搜索
+            </el-button>
+          </Auth>
+          <Auth value="/Post/DeleteList">
+            <el-button @click="resetQuery()">
+              <Icon icon="ep:refresh" />重置
+            </el-button>
+          </Auth>
         </el-form-item>
       </el-form>
     </div>
@@ -246,9 +250,11 @@ onMounted(() => {
           " />
         <el-table-column fixed="right" label="操作" align="center" width="220">
           <template #default="scope">
-            <el-button type="primary" link size="small" @click.stop="openDialog(scope.row.id)">
-              <Icon icon="ep:edit" />编辑
-            </el-button>
+            <Auth value="/Post/GetOne">
+              <el-button type="primary" link size="small" @click.stop="openDialog(scope.row.id)">
+                <Icon icon="ep:edit" />编辑
+              </el-button>
+            </Auth>
             <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
               <Icon icon="ep:delete" />删除
             </el-button>
@@ -278,8 +284,12 @@ onMounted(() => {
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="handleSubmit">确 定</el-button>
-          <el-button @click="closeDialog">取 消</el-button>
+          <Auth value="/Post/UpdateOne">
+            <el-button type="primary" @click="handleSubmit">确 定</el-button>
+          </Auth>
+          <Auth value="/Post/UpdateOne">
+            <el-button @click="closeDialog">取 消</el-button>
+          </Auth>
         </div>
       </template>
     </el-dialog>

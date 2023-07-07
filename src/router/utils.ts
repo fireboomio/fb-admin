@@ -44,7 +44,6 @@ function handRank(routeInfo: any) {
 function ascending(arr: any[]) {
   arr.forEach((v, index) => {
     // 当rank不存在时，根据顺序自动创建，首页路由永远在第一位
-    // console.log(index, v, handRank(v));
     if (handRank(v)) {
       v.meta.rank = index + 2;
     }
@@ -190,7 +189,6 @@ async function initRouter() {
   // 获取角色权限
   const roles = useUserStoreHook().roles;
   getRolePerms(roles).then(res => {
-    console.log("perms-->", res);
     useUserStoreHook().SET_PERMISSIONS(res);
   });
   const asyncRouteList = await getDynamicRoute().then(res => res);
@@ -335,7 +333,6 @@ function getHistoryMode(routerHistory): RouterHistory {
 
 /** 获取当前页面按钮级别的权限 */
 function getAuths(): Array<string> {
-  // return router.currentRoute.value.meta.auths as Array<string>;
   // 从store中获取权限permissions
   return store.permissions;
 
@@ -344,11 +341,11 @@ function getAuths(): Array<string> {
 /** 是否有按钮级别的权限 */
 function hasAuth(value: string | Array<string>): boolean {
   if (!value) return false;
-  const metaAuths = getAuths();
-  if (!metaAuths) return false;
+  const auths = getAuths();
+  if (!auths) return false;
   const isAuths = isString(value)
-    ? metaAuths.includes(value)
-    : isIncludeAllChildren(value, metaAuths);
+    ? auths.includes(value)
+    : isIncludeAllChildren(value, auths);
   return isAuths ? true : false;
 }
 

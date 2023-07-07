@@ -27,7 +27,9 @@ import api from "@/api";
 import { ElTable, ElMessage } from "element-plus";
 import { PropType, ref, watchEffect } from "vue";
 import type { Role, API } from "../types";
-
+import { useUserStoreHook } from "@/store/modules/user";
+import { getRolePerms } from "@/api/system";
+const store = useUserStoreHook()
 const props = defineProps({
   modelValue: {
     type: Boolean,
@@ -70,6 +72,10 @@ async function onSubmit() {
     }
   });
   if (!error) {
+    const roles = store.roles;
+    getRolePerms(roles).then(res => {
+      store.SET_PERMISSIONS(res);
+    });
     ElMessage.success("绑定成功");
     close();
   } else {

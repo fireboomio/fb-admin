@@ -54,8 +54,6 @@ export const useUserStore = defineStore({
         getLogin(data)
           .then(async res => {
             // 获取到token
-            console.log("login data-->", res.data.data);
-
             if (res.data.data.success) {
               // 获取用户信息
               const userInfo = await axios.get("/operations/Casdoor/GetUser", {
@@ -67,8 +65,6 @@ export const useUserStore = defineStore({
                   name
                 }
               });
-              console.log("userinfo-->", userInfo.data.data);
-
               const dataInfo: DataInfo<number> = {
                 accessToken: userInfo.data.data.token.data.access_token,
                 expires: userInfo.data.data.token.data.expires_in,
