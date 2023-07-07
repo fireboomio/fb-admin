@@ -30,7 +30,6 @@ async function handleQuery() {
       const selectedPerms = dataSource.filter(item => {
         return originPerms.includes(item.title)
       })
-      console.log('selectedPerms---->', selectedPerms);
 
       for (const perm of selectedPerms) {
         dataTableRef.value!.toggleRowSelection(perm, true)
@@ -58,6 +57,7 @@ let dataPush = []
 const pushAllSelect = () => {
   multipleSelection.forEach((item) => {
     const obj: Perm = {
+      id: item.id,
       createdAt: (new Date(item.createTime)).toISOString(),
       enabled: item.enabled ? 1 : 0,
       method: item.method,
@@ -65,7 +65,7 @@ const pushAllSelect = () => {
     }
     dataPush.push(obj)
   })
-  console.log(dataPush);
+
   // 发送请求到api:  /operations/System/Perm/CreateMany
   const perm: PermSyncReq = { data: dataPush }
   sendPermission(perm).then((res) => {

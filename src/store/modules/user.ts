@@ -10,7 +10,6 @@ import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { type DataInfo, setToken, removeToken, sessionKey } from "@/utils/auth";
 import axios from "axios";
 import { ElMessage } from "element-plus";
-import { da } from "element-plus/es/locale";
 // 在本地存储用户信息
 export const useUserStore = defineStore({
   id: "pure-user",
@@ -50,14 +49,13 @@ export const useUserStore = defineStore({
     /** 登入 */
     async loginByUsername(data) {
       const phone = data.username;
-      const username = data.username;
+      const name = data.username;
       return new Promise<LoginResult>((resolve, reject) => {
-        console.log("data-->", data);
         getLogin(data)
           .then(async res => {
-            console.log("token-->", res.data.data);
-
             // 获取到token
+            console.log("login data-->", res.data.data);
+
             if (res.data.data.success) {
               // 获取用户信息
               const userInfo = await axios.get("/operations/Casdoor/GetUser", {
@@ -66,9 +64,11 @@ export const useUserStore = defineStore({
                 },
                 params: {
                   phone,
-                  username
+                  name
                 }
               });
+              console.log("userinfo-->", userInfo.data.data);
+
               const dataInfo: DataInfo<number> = {
                 accessToken: userInfo.data.data.token.data.access_token,
                 expires: userInfo.data.data.token.data.expires_in,

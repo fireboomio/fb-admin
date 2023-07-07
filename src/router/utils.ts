@@ -24,7 +24,8 @@ import { usePermissionStoreHook } from "@/store/modules/permission";
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 
 // 动态路由
-import { getDynamicRoute, getMenuPerms, getMenuRoles } from "@/api/system";
+import { getDynamicRoute, getRolePerms } from "@/api/system";
+import { useUserStoreHook } from "@/store/modules/user";
 
 function handRank(routeInfo: any) {
   const { name, path, parentId, meta } = routeInfo;
@@ -185,6 +186,12 @@ function handleAsyncRoutes(routeList) {
 
 /** 初始化路由（`new Promise` 写法防止在异步请求中造成无限循环）*/
 async function initRouter() {
+  // 获取角色权限
+  const roles = useUserStoreHook().roles;
+  getRolePerms(roles).then(res => {
+    console.log("perms-->", res);
+    useUserStoreHook().SET_PERMISSIONS(res);
+  });
   const asyncRouteList = await getDynamicRoute().then(res => res);
 
   if (asyncRouteList && asyncRouteList?.length > 0) {
