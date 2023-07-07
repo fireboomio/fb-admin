@@ -289,8 +289,8 @@ function viewPerm(id: number) {
       appendToBody width="750px">
       <el-table :data="tableSubmenu" style="width: 100%">
         <el-table-column label="菜单名称" width="180" prop="label" />
-        <el-table-column label="菜单路径" width="180" prop="path" />
-        <el-table-column label="排序" align="center" width="180" prop="sort" />
+        <el-table-column label="菜单路径" width="200" prop="path" />
+        <el-table-column label="排序" align="center" width="160" prop="sort" />
         <el-table-column fixed="right" align="center" label="操作">
           <template #default="scope">
             <el-button type="primary" link size="small" @click.stop="viewPerm(scope.row.id)">

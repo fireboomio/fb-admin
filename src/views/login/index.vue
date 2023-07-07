@@ -45,8 +45,8 @@ const loginType = computed(() => {
 });
 
 const ruleForm = reactive({
-  username: "",
-  password: ""
+  username: "zql",
+  password: "abc1234"
 });
 
 
@@ -62,7 +62,6 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           loginType: loginType.value
         })
         .then(res => {
-          console.log(res);
           if (res.data.data.success) {
             // 获取后端路由
             initRouter().then(() => {

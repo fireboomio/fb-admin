@@ -1,6 +1,7 @@
 import { http } from "@/utils/http";
 
 export type Perm = {
+  id: number;
   createdAt: string;
   enabled: number;
   method: string;
@@ -46,6 +47,13 @@ export const getMenuPerms = (data: string) => {
 // 获取动态路由api
 export const getDynamicRoute = () => {
   return http.request<[]>("get", `/proxy/asyncRoutes/route`);
+};
+
+// 根据角色获取权限列表
+export const getRolePerms = (data: string[]) => {
+  return http.request<string[]>("post", `/proxy/rolePerm/perm`, {
+    data
+  });
 };
 
 export const getBindAPI = () => {
