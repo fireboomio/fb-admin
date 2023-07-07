@@ -27,10 +27,11 @@ const __APP_INFO__ = {
 };
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
-  const { VITE_CDN, VITE_PORT, VITE_COMPRESSION, VITE_PUBLIC_PATH } =
-    warpperEnv(loadEnv(mode, root));
+  const { VITE_CDN, VITE_PORT, VITE_COMPRESSION } = warpperEnv(
+    loadEnv(mode, root)
+  );
   return {
-    base: VITE_PUBLIC_PATH,
+    base: "/fireboom-admin-web/",
     root,
     resolve: {
       alias
