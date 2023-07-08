@@ -25,6 +25,7 @@ import RoleBindMenu from "./menu.bind.vue";
 import { ref, reactive, onMounted } from "vue";
 import { Icon } from '@iconify/vue';
 import { hasAuth, getAuths } from "@/router/utils";
+import { useUserStoreHook } from "@/store/modules/user";
 
 defineOptions({
   name: "RoleManage"
@@ -210,7 +211,7 @@ function openMenuBindDialog(role: Role) {
 
 onMounted(() => {
   handleQuery();
-  console.log(hasAuth(['/System/Role/AddOne']))
+  console.log(useUserStoreHook().permissions);
 });
 
 </script>
@@ -253,7 +254,8 @@ onMounted(() => {
         <el-table-column label="角色描述" prop="remark" width="300" />
         <el-table-column fixed="right" label="操作">
           <template #default="scope">
-            <el-button type="primary" v-if="hasAuth('/System/Role/DeleteOne')" size="small" link @click="openApiBindDialog(scope.row)">
+            <el-button type="primary" v-if="hasAuth('/System/Role/BindRoleApis')" size="small" link
+              @click="openApiBindDialog(scope.row)">
               <Icon icon="ep:position" />分配权限
             </el-button>
             <el-button type="primary" size="small" link @click="openMenuBindDialog(scope.row)">

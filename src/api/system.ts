@@ -51,7 +51,7 @@ export const getDynamicRoute = () => {
 
 // 根据角色获取权限列表
 export const getRolePerms = (data: string[]) => {
-  return http.request<string[]>("post", `/proxy/rolePerm/perm`, {
+  return http.request<string[]>("post", `/proxy/userPerm/perm`, {
     data
   });
 };
