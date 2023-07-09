@@ -1,0 +1,12 @@
+query GetManyMenu($in: [Int] = [1]) {
+  data: main_findManymenu(where: {level: {in: $in}}) {
+    id
+    parentId
+    label
+    path
+    icon
+    sort
+    level
+    is_bottom
+  }
+}

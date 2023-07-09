@@ -1,0 +1,20 @@
+query MyQuery {
+  open_GetAllApis {
+    content
+    createTime
+    deleteTime
+    enabled
+    id
+    illegal
+    isPublic
+    liveQuery
+    operationType
+    method
+    remark
+    restUrl
+    roleType
+    roles
+    title
+    updateTime
+  }
+}

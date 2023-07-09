@@ -1,0 +1,5 @@
+query MyQuery($id: Int!) {
+  data:main_findFirstrole(where: {id: {equals: $id}}) {
+    code
+  }
+}

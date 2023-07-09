@@ -1,0 +1,16 @@
+query MyQuery($roleId: Int!, $menuId: Int @internal) {
+  data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: "[]._join.main_findFirstmenu") {
+    menu_id @export(as: "menuId")
+    _join {
+      main_findFirstmenu(where: {id: {equals: $menuId}}) {
+        icon
+        id
+        label
+        level
+        parentId
+        path
+        sort
+      }
+    }
+  }
+}

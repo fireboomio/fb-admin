@@ -1,0 +1,356 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Casdoor API",
+        "description": "Documentation of Casdoor API",
+        "version": "1.0.0",
+        "contact": {
+            "email": "admin@casbin.org"
+        }
+    },
+    "basePath": "/",
+    "paths": {
+        "/api/add-user": {
+            "post": {
+                "tags": [
+                    "api"
+                ],
+                "description": "add user",
+                "operationId": "ApiController.AddUser",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "name",
+                        "description": "名称",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "displayName",
+                        "description": "昵称",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password",
+                        "description": "密码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "phone",
+                        "description": "电话号码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "countryCode",
+                        "description": "国际区号（默认CN）",
+                        "enum": ["CN", "US", "JP"],
+                        "default": "CN",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\"成功\"",
+                        "schema": {
+                            "$ref": "#/definitions/controllersResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get-user": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "description": "获取用户信息",
+                "operationId": "ApiController.GetUserByToken",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "\"成功\"",
+                        "schema": {
+                            "$ref": "#/definitions/userTokenResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "api"
+                ],
+                "description": "login",
+                "operationId": "ApiController.Login",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "username",
+                        "description": "号码",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "organization",
+                        "description": "组织",
+                        "required": true,
+                        "enum": ["builtIn"],
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "countryCode",
+                        "description": "国际区号（默认CN）",
+                        "enum": ["CN", "US", "JP"],
+                        "default": "CN",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "code",
+                        "description": "验证码",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password",
+                        "description": "密码",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "type",
+                        "description": "类型：token",
+                        "required": true,
+                        "enum": ["token"],
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "loginType",
+                        "description": "登录类型",
+                        "required": true,
+                        "enum": ["sms", "password"],
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "application",
+                        "description": "应用名称",
+                        "required": true,
+                        "enum": ["fireboom_builtIn"],
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\"成功\"",
+                        "schema": {
+                            "$ref": "#/definitions/userResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/send-verification-code": {
+            "post": {
+                "tags": [
+                    "api"
+                ],
+                "description": "\"发送验证码\"",
+                "operationId": "ApiController.SendVerificationCode",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "dest",
+                        "description": "发送手机号",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "countryCode",
+                        "description": "国际区号（默认CN）",
+                        "enum": [
+                            "CN",
+                            "US",
+                            "JP"
+                        ],
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\"成功\"",
+                        "schema": {
+                            "$ref": "#/definitions/controllersResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/update-provider": {
+            "post": {
+                "tags": [
+                    "api"
+                ],
+                "description": "update provider",
+                "operationId": "ApiController.UpdateProvider",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "clientId",
+                        "description": "clientId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "clientSecret",
+                        "description": "clientSecret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "signName",
+                        "description": "签名",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "templateCode",
+                        "description": "模板代码",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\"成功\"",
+                        "schema": {
+                            "$ref": "#/definitions/controllersResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllersResponse": {
+            "title": "Response",
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string"
+                },
+                "data2": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "sub": {
+                    "type": "string"
+                }
+            }
+        },
+        "userResponse": {
+            "title": "Response",
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "access_token" : {
+                            "type": "string"
+                        },
+                        "refresh_token" : {
+                            "type": "string"
+                        }
+                    }
+                },
+               "success": {
+                   "type": "boolean"
+               },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        },
+        "userTokenResponse": {
+            "title": "Response",
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "access_token" : {
+                            "type": "string"
+                        },
+                        "refresh_token" : {
+                            "type": "string"
+                        },
+                        "username": {
+                            "type": "string"
+                        },
+                        "expires_in": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        },
+        "objectModel": {
+            "title": "Model",
+            "type": "object",
+            "properties": {
+                "createdTime": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "isEnabled": {
+                    "type": "boolean"
+                },
+                "modelText": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

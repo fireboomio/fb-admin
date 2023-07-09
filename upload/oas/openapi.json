@@ -1,0 +1,276 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Fireboom open-api doc",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9123"
+    }
+  ],
+  "paths": {
+    "/api/v1/role/all": {
+      "get": {
+        "operationId": "getAllRoles",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string"
+                      },
+                      "remark": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/role/apis": {
+      "get": {
+        "operationId": "getRoleBindApis",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "roleType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "requireMatchAny",
+              "enum": ["requireMatchAll", "requireMatchAny", "denyMatchAll", "denyMatchAny"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "content": {
+                        "description": "内容",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "type": "string"
+                      },
+                      "deleteTime": {
+                        "type": "string"
+                      },
+                      "enabled": {
+                        "description": "开关 true开 false关",
+                        "type": "boolean"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "illegal": {
+                        "description": "是否非法 true 非法 false 合法",
+                        "type": "boolean"
+                      },
+                      "isPublic": {
+                        "description": "状态 true 公有 false 私有",
+                        "type": "boolean"
+                      },
+                      "liveQuery": {
+                        "description": "是否实时 true 是 false 否",
+                        "type": "boolean"
+                      },
+                      "method": {
+                        "description": "方法类型 GET、POST、PUT、DELETE",
+                        "type": "string"
+                      },
+                      "operationType": {
+                        "description": "请求类型 queries,mutations,subscriptions",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "说明",
+                        "type": "string"
+                      },
+                      "restUrl": {
+                        "description": "方法类型 GET、POST、PUT、DELETE",
+                        "type": "string"
+                      },
+                      "roleType": {
+                        "type": "string"
+                      },
+                      "roles": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "description": "路径",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/operateApi/opened": {
+      "get": {
+        "operationId": "getAllApis",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "content": {
+                        "description": "内容",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "type": "string"
+                      },
+                      "deleteTime": {
+                        "type": "string"
+                      },
+                      "enabled": {
+                        "description": "开关 true开 false关",
+                        "type": "boolean"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "illegal": {
+                        "description": "是否非法 true 非法 false 合法",
+                        "type": "boolean"
+                      },
+                      "isPublic": {
+                        "description": "状态 true 公有 false 私有",
+                        "type": "boolean"
+                      },
+                      "liveQuery": {
+                        "description": "是否实时 true 是 false 否",
+                        "type": "boolean"
+                      },
+                      "method": {
+                        "description": "方法类型 GET、POST、PUT、DELETE",
+                        "type": "string"
+                      },
+                      "operationType": {
+                        "description": "请求类型 queries,mutations,subscriptions",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "说明",
+                        "type": "string"
+                      },
+                      "restUrl": {
+                        "description": "方法类型 GET、POST、PUT、DELETE",
+                        "type": "string"
+                      },
+                      "roleType": {
+                        "type": "string"
+                      },
+                      "roles": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "description": "路径",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/role/bindApi": {
+      "post": {
+        "operationId": "bindRoleApis",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["roleCode", "apis", "allRoles"],
+                "type": "object",
+                "properties": {
+                  "roleType": {
+                    "type": "string",
+                    "default": "requireMatchAny",
+                    "enum": ["requireMatchAll", "requireMatchAny", "denyMatchAll", "denyMatchAny"]
+                  },
+                  "roleCode": {
+                    "type": "string"
+                  },
+                  "apis": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "allRoles": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

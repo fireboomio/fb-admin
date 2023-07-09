@@ -1,0 +1,5 @@
+mutation DeleteManyPost($ids: [Int]!) {
+  data: main_deleteManypost(where: {id: {in: $ids}}) {
+    count
+  }
+}

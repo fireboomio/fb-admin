@@ -1,0 +1,5 @@
+query MyQuery($code: String = "") {
+  data: system_getRoleBindApis(code: $code) @transform(get: "[].title") {
+    title
+  }
+}

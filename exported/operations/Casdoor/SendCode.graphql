@@ -1,0 +1,8 @@
+mutation MyQuery($dest: String!) {
+  data: casdoor_ApiControllerSendVerificationCode(
+    POSTApiSend_verification_codeInput: {dest: $dest, countryCode: CN}
+  ) {
+    status
+    msg
+  }
+}

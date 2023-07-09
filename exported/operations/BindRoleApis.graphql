@@ -1,0 +1,10 @@
+mutation MyQuery($allRoles: [String]!, $apis: [Float]!, $roleCode: String!, $roleType: String) {
+  open_BindRoleApis(
+    allRoles: $allRoles
+    apis: $apis
+    roleCode: $roleCode
+    roleType: $roleType
+  ) {
+    count
+  }
+}

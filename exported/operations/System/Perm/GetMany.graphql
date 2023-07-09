@@ -1,0 +1,15 @@
+query MyQuery($name: String!, $menuId: Int @internal, $permId: BigInt @internal) {
+  data: main_findFirstmenu(where: {name: {equals: $name}}) @transform(get: "_join") {
+    id @export(as: "menuId")
+    _join @transform(get: "main_findManymenu_permission") {
+      main_findManymenu_permission(where: {menu_id: {equals: $menuId}}) @transform(get: "[]._join.main_findFirstpermission.path") {
+        perm_id @export(as: "permId")
+        _join {
+          main_findFirstpermission(where: {id: {equals: $permId}, enabled: {equals: 1}}) {
+            path
+          }
+        }
+      }
+    }
+  }
+}

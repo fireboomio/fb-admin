@@ -1,0 +1,16 @@
+mutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $userId: Int!, $author_id: Int!) {
+  data: main_createOnepost(data: {title: $title, poster: $poster, published_at: $publishedAt, author_id: $userId, content: $content}) {
+    id
+    title
+    poster
+    published_at
+    author_id @export(as: "author_id")
+    user: _join {
+      main_findFirstuser(where: {id: {equals: $author_id}}) {
+        name
+        avatar
+        id
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+query GetRoleBindApiIds($code: String!) {
+  data: system_getRoleBindApis(code: $code) @transform(get: "[].id") {
+    id
+  }
+}

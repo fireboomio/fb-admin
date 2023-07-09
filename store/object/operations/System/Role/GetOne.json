@@ -1,0 +1,12 @@
+{
+  "authenticationQueriesRequired": false,
+  "authenticationMutationsRequired": false,
+  "authenticationSubscriptionsRequired": false,
+  "enabled": false,
+  "authenticationRequired": false,
+  "cachingEnabled": false,
+  "cachingMaxAge": 600,
+  "cachingStaleWhileRevalidate": 30,
+  "liveQueryEnabled": false,
+  "liveQueryPollingIntervalSeconds": 3
+}

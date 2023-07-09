@@ -1,0 +1,19 @@
+query MyQuery($phone: String!, $userId: Int @internal, $roleId: Int @internal) {
+  data: main_findFirstuser(where: {phone: {equals: $phone}}) {
+    name
+    id @export(as: "userId")
+    avatar
+    roles: _join @transform(get: "main_findManyrole_user") {
+      main_findManyrole_user(where: {user_id: {equals: $userId}}) @transform(get: "[]._join.main_findFirstrole") {
+        role_id @export(as: "roleId")
+        _join {
+          main_findFirstrole(where: {id: {equals: $roleId}}) {
+            code
+            id
+            remark
+          }
+        }
+      }
+    }
+  }
+}

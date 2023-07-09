@@ -1,0 +1,9 @@
+query MyQuery($code: String!, $roleType: String = "") {
+  open_GetRoleBindApis(code: $code, roleType: $roleType) {
+    content
+    createTime
+    enabled
+    id
+    deleteTime
+  }
+}

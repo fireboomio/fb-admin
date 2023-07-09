@@ -1,0 +1,86 @@
+[
+	{
+		"config": {
+			"apiNameSpace": "system",
+			"baseURL": "http://localhost:9123",
+			"filePath": "openapi.json",
+			"headers": []
+		},
+		"createTime": "2023-06-21 07:13:33Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 1997240328585216,
+		"name": "system",
+		"sourceType": 2,
+		"updateTime": ""
+	},
+	{
+		"config": {
+			"apiNameSpace": "casdoor",
+			"baseURL": "http://localhost:10021",
+			"filePath": "casdoor.json",
+			"headers": [
+				{
+					"key": "Authorization",
+					"kind": "2",
+					"val": "Authorization"
+				}
+			],
+			"statusCodeUnions": false
+		},
+		"createTime": "2023-06-21 07:21:58Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 1997273423544320,
+		"name": "casdoor",
+		"sourceType": 2,
+		"updateTime": "2023-06-29 07:24:22Z"
+	},
+	{
+		"id": 1546177283227648,
+		"name": "statistics",
+		"sourceType": 4,
+		"config": {
+			"apiNamespace": "statistics",
+			"serverName": "statistics"
+		},
+		"enabled": true,
+		"createTime": "2023-06-25 15:22:17Z",
+		"updateTime": "2023-07-07 07:00:33Z",
+		"deleteTime": ""
+	},
+	{
+		"config": {
+			"apiNamespace": "main",
+			"appendType": "1",
+			"databaseUrl": {
+				"key": "",
+				"kind": "0",
+				"val": "mysql://root:285637zq@101.33.197.216:3306/main"
+			},
+			"dbName": "main",
+			"dbType": "MySQL",
+			"host": "101.33.197.216",
+			"password": {
+				"key": "",
+				"kind": "0",
+				"val": "285637zq"
+			},
+			"port": "3306",
+			"replaceJSONTypeFieldConfiguration": null,
+			"schemaExtension": "",
+			"userName": {
+				"key": "",
+				"kind": "0",
+				"val": "root"
+			}
+		},
+		"createTime": "2023-06-30 06:00:02Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 2047912069758976,
+		"name": "main",
+		"sourceType": 1,
+		"updateTime": "2023-06-30 06:00:05Z"
+	}
+]
