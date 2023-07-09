@@ -17,6 +17,7 @@ type (
 	getRolePermsOut generated.System__Perm__GetRolePermsResponseData
 )
 
+// 根据前端数据格式需求自定义 proxy 钩子返回用户的权限
 func perms(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) (*base.ClientResponse, error) {
 	var perms []string
 	var roles []string

@@ -39,6 +39,7 @@ func init() {
 	plugins.AddProxyHook(route, nil)
 }
 
+// 根据前端数据格式需求自定义 proxy 钩子返回用户的动态路由
 func route(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) (*base.ClientResponse, error) {
 	var dynamicRoutes []DynamicRoute
 

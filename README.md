@@ -64,21 +64,46 @@ curl -fsSL https://www.fireboom.io/update.sh | bash
 
 ## 钩子服务
 
-下面以`ts`语言钩子为例，如果是`golang`语言则将`custom-ts`改为`custom-go`
-
 ```shell
 # 依赖安装
-./custom-ts/scripts/install.sh
+./custom-go/scripts/install.sh
 
 # 开发时运行
-./custom-ts/scripts/run-dev.sh
+./custom-go/scripts/run-dev.sh
 
 # 生产时运行
 # 先打包（如果没有该文件则跳过 build）
-./custom-ts/scripts/run-build.sh
-./custom-ts/scripts/run-prod.sh
+./custom-go/scripts/run-build.sh
+./custom-go/scripts/run-prod.sh
 ```
 
-# 文档
+# 飞布后台管理项目介绍
 
-更多文档请访问我们的[文档中心](https://ansons-organization.gitbook.io/)
+本项目为飞步后台管理项目，是学习了解进而玩转飞布的最佳实践。采用 Mysql 数据库，开发使用 Golang 语言。
+
+采用飞布快速开发后端增删改查接口，也可以自定义数据操作完成复杂任务的开发，大大缩减了项目交付的时间，让后端开发人员从增删改查中解放出来，更注重于业务层面。
+
+前端项目请移步：https://github.com/Echoidf/fireboom-admin-web.git
+
+## 功能简介
+
+1. 登录认证
+
+   我们的演示服务基于 **Casdoor** 进行了精简，自研部署了一套符合 OIDC 协议的登录认证服务，将其作为 **OpenAPI数据源**注册到飞步，支持手机短信登录和密码登录
+
+2. 数据增删改查
+
+   利用飞步控制台**图形化界面**快速开发增删改查接口，并且可以自动生成 swagger 文档【飞布内部集成】
+
+   支持MySQL 、MongoDB、SQL Server等多种数据源，点击这里查看[支持的数据源](https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/shu-ju-yuan)
+
+3. 自定义数据源
+
+   飞步拥有良好的扩展能力，当图形化界面无法支持您的需求时，可以自定义数据源和Schema进行操作，可以参考本项目中 statistics 数据源，可以执行原生 SQL 语句对数据进行任意操作、组合和包装。
+
+4. 自定义 Proxy 钩子
+
+   使用 Proxy 钩子可以定义自定义接口，编写的 Proxy 文件位于`custom-go/proxys/` 目录下，注册的接口名称根据目录和文件名生成。例如本项目中`custom-go/proxys/asyncRoutes/route.go`，则生成的接口名为`proxy/asyncRoutes/route`。
+
+
+

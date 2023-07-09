@@ -25,5 +25,6 @@ log/*
 natapp/*
 
 store/object/global_system_config.json
+store/list/FbDataSource
 
 template/*
