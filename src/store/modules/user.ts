@@ -7,7 +7,13 @@ import { storageSession } from "@pureadmin/utils";
 import { LoginResult, getLogin, refreshTokenApi } from "@/api/user";
 import { RefreshTokenResult } from "@/api/user";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
-import { type DataInfo, setToken, removeToken, sessionKey } from "@/utils/auth";
+import {
+  type DataInfo,
+  setToken,
+  removeToken,
+  sessionKey,
+  formatToken
+} from "@/utils/auth";
 import axios from "axios";
 import { ElMessage } from "element-plus";
 // 在本地存储用户信息
@@ -58,7 +64,7 @@ export const useUserStore = defineStore({
               // 获取用户信息
               const userInfo = await axios.get("/operations/Casdoor/GetUser", {
                 headers: {
-                  Authorization: "Bearer " + res.data.data.data.access_token
+                  Authorization: formatToken(res.data.data.data.access_token)
                 },
                 params: {
                   phone,
@@ -100,7 +106,7 @@ export const useUserStore = defineStore({
         refreshTokenApi(data)
           .then(res => {
             if (res) {
-              setToken(res.data);
+              setToken(res.data.data);
               resolve(res);
             }
           })

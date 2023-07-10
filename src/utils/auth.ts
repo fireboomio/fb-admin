@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { storageSession } from "@pureadmin/utils";
 import { useUserStoreHook } from "@/store/modules/user";
+import { da } from "element-plus/es/locale";
 
 export interface DataInfo<T> {
   /** token */
@@ -35,15 +36,15 @@ export function getToken(): DataInfo<number> {
  * 将`username`、`roles`、`refreshToken`、`expires`这四条信息放在key值为`user-info`的sessionStorage里（浏览器关闭自动销毁）
  */
 export function setToken(data: DataInfo<number>) {
-  let expires = 0;
   const { accessToken, refreshToken } = data;
-  expires = new Date(data.expires).getTime(); // 如果后端直接设置时间戳，将此处代码改为expires = data.expires，然后把上面的DataInfo<Date>改成DataInfo<number>即可
+
+  const d = new Date();
+  d.setSeconds(d.getSeconds() + data.expires);
+  const expires = d.getTime();
   const cookieString = JSON.stringify({ accessToken, expires });
 
   expires > 0
-    ? Cookies.set(TokenKey, cookieString, {
-        expires: (expires - Date.now()) / 86400000
-      })
+    ? Cookies.set(TokenKey, cookieString, { expires })
     : Cookies.set(TokenKey, cookieString);
 
   function setSessionKey(
