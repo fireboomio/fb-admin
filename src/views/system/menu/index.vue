@@ -215,7 +215,7 @@ function viewPerm(id: number) {
   <div class="app-container">
     <el-card shadow="never">
       <template #header>
-        <Auth value="/System/Menu/">
+        <Auth value="/System/Menu/CreateOne">
           <el-button type="success" @click="openDialog()">
             <template #icon>
               <Icon icon="ep:plus" />

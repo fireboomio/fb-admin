@@ -258,7 +258,7 @@ onMounted(() => {
         <el-table-column label="角色描述" prop="remark" width="300" />
         <el-table-column fixed="right" label="操作">
           <template #default="scope">
-            <Auth value="'/System/Role/BindRoleApis'">
+            <Auth value="/System/Role/BindRoleApis">
               <el-button type="primary" size="small" link @click="openApiBindDialog(scope.row)">
                 <Icon icon="ep:position" />分配权限
               </el-button>
@@ -266,10 +266,12 @@ onMounted(() => {
             <el-button type="primary" size="small" link @click="openMenuBindDialog(scope.row)">
               <Icon icon="ep:position" />分配菜单
             </el-button>
-            <el-button type="primary" size="small" link @click="openDialog(scope.row)">
-              <Icon icon="ep:edit" />编辑
-            </el-button>
-            <Auth value="'/System/Role/DeleteMany'">
+            <Auth value="/System/Role/UpdateOne">
+              <el-button type="primary" size="small" link @click="openDialog(scope.row)">
+                <Icon icon="ep:edit" />编辑
+              </el-button>
+            </Auth>
+            <Auth value="/System/Role/DeleteMany">
               <el-button type="primary" size="small" link @click="handleDelete(scope.row.id)">
                 <Icon icon="ep:delete" />删除
               </el-button>
@@ -296,12 +298,8 @@ onMounted(() => {
 
       <template #footer>
         <div class="dialog-footer">
-          <Auth value="/System/Role/UpdateOne">
-            <el-button type="primary" @click="handleSubmit">确 定</el-button>
-          </Auth>
-          <Auth value="/System/Role/UpdateOne">
-            <el-button @click="closeDialog">取 消</el-button>
-          </Auth>
+          <el-button type="primary" @click="handleSubmit">确 定</el-button>
+          <el-button @click="closeDialog">取 消</el-button>
         </div>
       </template>
     </el-dialog>
