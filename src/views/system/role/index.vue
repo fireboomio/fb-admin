@@ -24,7 +24,8 @@ import RoleBindApi from "./api.bind.vue";
 import RoleBindMenu from "./menu.bind.vue";
 import { ref, reactive, onMounted } from "vue";
 import { Icon } from '@iconify/vue';
-import { getRolePerms } from "@/api/system";
+import { hasAuth, getAuths } from "@/router/utils";
+import { useUserStoreHook } from "@/store/modules/user";
 
 defineOptions({
   name: "RoleManage"
@@ -210,6 +211,7 @@ function openMenuBindDialog(role: Role) {
 
 onMounted(() => {
   handleQuery();
+  console.log(useUserStoreHook().permissions);
 });
 
 </script>
@@ -256,21 +258,24 @@ onMounted(() => {
         <el-table-column label="角色描述" prop="remark" width="300" />
         <el-table-column fixed="right" label="操作">
           <template #default="scope">
-
-            <el-button type="primary" size="small" link @click="openApiBindDialog(scope.row)">
-              <Icon icon="ep:position" />分配权限
-            </el-button>
-            <el-button type="primary" size="small" link @click="openMenuBindDialog(scope.row)">
-              <Icon icon="ep:position" />分配菜单
-            </el-button>
-            <el-button type="primary" size="small" link @click="openDialog(scope.row)">
-              <Icon icon="ep:edit" />编辑
-            </el-button>
-            <Auth value="'/System/Role/DeleteMany'">
-              <el-button type="primary" size="small" link @click="handleDelete(scope.row.id)">
-                <Icon icon="ep:delete" />删除
+            <<<<<<< HEAD <el-button type="primary" size="small" link @click="openApiBindDialog(scope.row)">
+              =======
+              <el-button type="primary" v-if="hasAuth('/System/Role/BindRoleApis')" size="small" link
+                @click="openApiBindDialog(scope.row)">
+                >>>>>>> eec63021bc0855a6fa47625b1ae09dc126957c56
+                <Icon icon="ep:position" />分配权限
               </el-button>
-            </Auth>
+              <el-button type="primary" size="small" link @click="openMenuBindDialog(scope.row)">
+                <Icon icon="ep:position" />分配菜单
+              </el-button>
+              <el-button type="primary" size="small" link @click="openDialog(scope.row)">
+                <Icon icon="ep:edit" />编辑
+              </el-button>
+              <Auth value="'/System/Role/DeleteMany'">
+                <el-button type="primary" size="small" link @click="handleDelete(scope.row.id)">
+                  <Icon icon="ep:delete" />删除
+                </el-button>
+              </Auth>
           </template>
         </el-table-column>
       </el-table>

@@ -31,7 +31,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     loadEnv(mode, root)
   );
   return {
-    base: "/fireboom-admin-web/",
+    base: "./",
     root,
     resolve: {
       alias
@@ -45,15 +45,15 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       host: "0.0.0.0",
       proxy: {
         "/operations": {
-          target: "http://3pfxvj.natappfree.cc",
+          target: "http://192.168.211.209:9991",
           changeOrigin: true
         },
         "/auth": {
-          target: "http://3pfxvj.natappfree.cc",
+          target: "http://192.168.211.209:9991",
           changeOrigin: true
         },
         "/proxy": {
-          target: "http://3pfxvj.natappfree.cc",
+          target: "http://192.168.211.209:9991",
           changeOrigin: true
         }
       }

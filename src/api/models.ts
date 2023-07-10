@@ -334,11 +334,7 @@ export interface Post__GetListResponse {
 }
 export interface Post__GetListResponseData {
   data?: {
-    User?: {
-      avatarUrl?: string;
-      name?: string;
-    };
-    authorId?: string;
+    author?: string;
     content?: string;
     id?: number;
     poster?: string;
@@ -363,12 +359,7 @@ export interface Post__GetOneResponse {
 }
 export interface Post__GetOneResponseData {
   data?: {
-    User?: {
-      avatarUrl?: string;
-      id?: string;
-      name?: string;
-    };
-    authorId?: string;
+    author?: string;
     content?: string;
     id?: number;
     poster?: string;
