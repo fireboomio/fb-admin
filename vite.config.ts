@@ -31,7 +31,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     loadEnv(mode, root)
   );
   return {
-    base: "/fireboom-admin-web/",
+    base: "./",
     root,
     resolve: {
       alias

@@ -14,6 +14,8 @@ import { FormItemRule, ElForm, ElMessage, ElMessageBox, ElPagination } from "ele
 import type { Arrayable } from "element-plus/es/utils";
 import { ref, reactive, onMounted } from "vue";
 import { Icon } from '@iconify/vue';
+import { createOne } from "@/api/post";
+import { useUserStoreHook } from "@/store/modules/user";
 
 const queryFormRef = ref(ElForm);
 const dataFormRef = ref(ElForm);
@@ -131,18 +133,15 @@ function handleSubmit() {
         }
         loading.value = false;
       } else {
-        const { error } = await api.mutate({
-          operationName: "Post/CreateOne",
-          input: {
-            ...formData
+        const username = useUserStoreHook().username;
+        createOne(formData.title, username, formData.content, formData.poster, formData.publishedAt).then(res => {
+          if (res.data.data.id) {
+            ElMessage.success("新增成功");
+            closeDialog();
+            handleQuery();
           }
+          loading.value = false;
         });
-        if (!error) {
-          ElMessage.success("新增成功");
-          closeDialog();
-          handleQuery();
-        }
-        loading.value = false;
       }
     }
   });
@@ -242,6 +241,7 @@ onMounted(() => {
             <el-image :src="scope.row.poster" fit="fill" :preview-src-list="[scope.row.poster]" />
           </template>
         </el-table-column>
+        <el-table-column label="作者" prop="author" width="200" ellipsis align="center" />
         <el-table-column label="发布时间" prop="published_at" align="center" :formatter="(row, col, v) => (v ? new Date(v).toLocaleDateString() : '')
           " />
         <el-table-column fixed="right" label="操作" align="center" width="220">
