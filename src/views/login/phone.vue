@@ -18,7 +18,7 @@ const { t } = useI18n();
 const loading = ref(false);
 const router = useRouter();
 const ruleForm = reactive({
-  phone: "",
+  phone: "18856264667",
   verifyCode: ""
 });
 const loginType = computed(() => {

@@ -236,7 +236,7 @@ function viewPerm(id: number) {
 
         <el-table-column fixed="right" align="center" label="操作" min-width="220">
           <template #default="scope">
-            <Auth value="/System/Menu/">
+            <Auth value="/System/Menu/UpdateOne">
               <el-button type="primary" link size="small" @click.stop="openDialog(scope.row)">
                 <Icon icon="ep:edit" />编辑
               </el-button>
