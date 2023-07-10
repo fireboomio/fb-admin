@@ -1,7 +1,10 @@
+<script lang="ts">
+export default { name: "IconSelect" };
+</script>
 <script setup lang="ts">
 import { ref, onMounted, toRef } from "vue";
 import { onClickOutside } from "@vueuse/core";
-
+import SvgIcon from "@/components/SvgIcon/index.vue";
 const props = defineProps({
   modelValue: {
     type: String,

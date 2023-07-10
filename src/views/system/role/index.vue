@@ -237,13 +237,13 @@ onMounted(() => {
 
     <el-card shadow="never">
       <template #header>
-        <Auth value="'/System/Role/AddOne'">
+        <Auth value="/System/Role/AddOne">
           <el-button type="success" @click="openDialog()">
             <Icon icon="ep:plus" />新增
           </el-button>
         </Auth>
 
-        <Auth value="'/System/Role/DeleteOne'">
+        <Auth value="/System/Role/DeleteOne">
           <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
             <Icon icon="ep:delete" />删除
           </el-button>
