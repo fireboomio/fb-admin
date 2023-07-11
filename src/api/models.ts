@@ -1025,8 +1025,8 @@ export interface System__Role__BindRoleApisResponseData {
   };
 }
 export interface System__Role__ConnectOneMenuInput {
-  id?: number;
-  menuId?: number;
+  role_id?: number;
+  menu_id?: number;
 }
 export interface InternalSystem__Role__ConnectOneMenuInput {
   id?: number;
@@ -1085,16 +1085,8 @@ export interface System__Role__DeleteOneResponseData {
   };
 }
 export interface System__Role__DisconnectOneMenuInput {
-  roleId: number;
-  menuId: number;
-}
-export interface InternalSystem__Role__DisconnectOneMenuInput {
-  id: number;
-  menuId: number;
-}
-export interface InjectedSystem__Role__DisconnectOneMenuInput {
-  id: number;
-  menuId: number;
+  role_id: number;
+  menu_id: number;
 }
 
 export interface System__Role__DisconnectOneMenuResponse {
