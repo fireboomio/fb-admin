@@ -41,9 +41,6 @@ https://github.com/Echoidf/fireboon-admin-server
 ├── locales   # 国际化文件存放处
 │   │   ├── en.yaml      # 英文配置
 │   │   ├── zh-CN.yaml   # 中文配置
-├── mock      # mock 模拟后台数据
-│   │   ├── asyncRoutes.ts  # 模拟后台返回动态路由
-│   │   ├── ...
 ├── node_modules  # 模块依赖
 ├── public  # 静态资源
 │   │   ├── favicon.ico        # favicon
