@@ -103,9 +103,13 @@ https://github.com/Echoidf/fireboon-admin-server
 ```
 # 管理系统登录方式
 两种登录方式可供选择：
+
 1）密码登录
+
 2）手机验证码登录
+
 **登录流程：**
+
 初次登录的时候，前端调用后端的登录接口，发送验证信息，后端收到请求并进行验证，验证成功，就给前端返回一个token和用户信息，前端拿到这些信息，将其存储到Pinia中，从Pinia中取出token值放入到浏览器Cookies中，取出用户信息存储到SessionStorage中。
 
 # 状态持久化——Pinia
