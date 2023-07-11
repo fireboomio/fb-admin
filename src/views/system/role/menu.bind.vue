@@ -61,7 +61,7 @@ async function onSubmit() {
     await api.mutate({
       operationName: "System/Role/DisconnectOneMenu",
       input: {
-        id: props.role!.id!,
+        roleId: props.role!.id!,
         menuId
       }
     });

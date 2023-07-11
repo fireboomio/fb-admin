@@ -1,7 +1,11 @@
+import { formatToken, getToken } from "@/utils/auth";
 import { createClient } from "./client";
 
 export default createClient({
-  baseURL: ""
+  baseURL: "",
+  extraHeaders: {
+    Authorization: formatToken(getToken().accessToken)
+  }
 });
 
 function isNotEmpty(arg: any) {

@@ -1085,7 +1085,7 @@ export interface System__Role__DeleteOneResponseData {
   };
 }
 export interface System__Role__DisconnectOneMenuInput {
-  id: number;
+  roleId: number;
   menuId: number;
 }
 export interface InternalSystem__Role__DisconnectOneMenuInput {
