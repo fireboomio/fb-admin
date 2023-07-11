@@ -117,7 +117,7 @@ Pinia是Vue的存储库，允许跨组件/跨页面共享状态数据，与 Vuex
 详情请参考文档[Pinia中文文档](https://pinia.web3doc.top/introduction.html)
 # 二、权限设置
 ## 菜单权限
-通过返回路由的`roles`配置项，赋予该菜单权限
+通过返回路由的`roles`配置项，查询用户的动态权限，并将其存储在Pinia中
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/29078601/1688980708164-1290fca5-2a2c-47a8-9a44-f1f7f5bb9cc7.png#averageHue=%23232120&clientId=u80b370e8-7558-4&from=paste&height=248&id=u057f572d&originHeight=310&originWidth=644&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=35176&status=done&style=none&taskId=u538ff28e-6b27-4c21-94a1-1cff12c99d0&title=&width=515.2)
 ## 按钮权限
 通过hasAuth函数，进行权限组件的封装
