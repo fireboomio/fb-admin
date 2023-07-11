@@ -1,5 +1,5 @@
-mutation MyQuery($ids: [Int]) {
-  data:main_deleteManyrole(where: {id: {in: $ids}}) {
-    count
-  }
+mutation MyQuery ($ids: [Int]) @rbac(requireMatchAny: [admin]) {
+	data: main_deleteManyrole(where: {id:{in:$ids}}) {
+		count
+	}
 }

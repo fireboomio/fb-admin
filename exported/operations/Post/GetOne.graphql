@@ -1,17 +1,10 @@
-query GetOnePost($id: Int!, $author_id: Int!) {
+query GetOnePost($id: Int!) {
   data: main_findFirstpost(where: {id: {equals: $id}}) {
     id
     title
     poster
     published_at
-    author_id @export(as: "author_id")
-    user: _join @transform(get: "main_findFirstuser") {
-      main_findFirstuser(where: {id: {equals: $author_id}}) {
-        name
-        avatar
-        id
-      }
-    }
+    author
     content
   }
 }

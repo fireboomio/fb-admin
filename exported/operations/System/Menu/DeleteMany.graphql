@@ -1,5 +1,5 @@
-mutation DeleteManyMenu($ids: [Int]!) {
-  data: main_deleteManymenu(where: {id: {in: $ids}}) {
-    count
-  }
+mutation DeleteManyMenu ($ids: [Int]!) @rbac(requireMatchAny: [admin]) {
+	data: main_deleteManymenu(where: {id:{in:$ids}}) {
+		count
+	}
 }

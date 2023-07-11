@@ -1,5 +1,5 @@
-mutation MyQuery($menu_id: Int!, $role_id: Int!) {
-  main_createOnemenu_role(data: {menu_id: $menu_id, role_id: $role_id}) {
-    id
-  }
+mutation MyQuery ($menu_id: Int!, $role_id: Int!) @rbac(requireMatchAny: [admin]) {
+	main_createOnemenu_role(data: {menu_id:$menu_id,role_id:$role_id}) {
+		id
+	}
 }

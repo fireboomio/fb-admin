@@ -1,7 +1,5 @@
-mutation MyQuery($avatarUrl: String, $name: String!, $created_at: DateTime @injectCurrentDateTime(format: ISO8601), $phone: String!) @internalOperation {
-  data: main_createOneuser(
-    data: {name: $name, avatar: $avatarUrl, created_at: $created_at, phone: $phone}
-  ) {
-    id
-  }
+mutation MyQuery ($avatarUrl: String, $name: String!, $created_at: DateTime, $phone: String!) @rbac(requireMatchAny: [admin]) {
+	data: main_createOneuser(data: {name:$name,avatar:$avatarUrl,created_at:$created_at,phone:$phone,user_id:""}) {
+		id
+	}
 }

@@ -1,0 +1,36 @@
+[
+	{
+		"id": 2109222934085632,
+		"point": "http://localhost:9991/auth/cookie/authorize/casdoor?redirect_uri=",
+		"name": "casdoor",
+		"authSupplier": "openid",
+		"switchState": [
+			"tokenBased"
+		],
+		"config": {
+			"id": "casdoor",
+			"clientId": {
+				"key": "",
+				"kind": "0",
+				"val": "casdoor"
+			},
+			"clientSecret": {
+				"key": "",
+				"kind": "0",
+				"val": ""
+			},
+			"issuer": "http://127.0.0.1:10021/",
+			"discoveryURL": "",
+			"jwks": 0,
+			"jwksJSON": "",
+			"jwksURL": "http://127.0.0.1:10021//.well-known/jwks.json",
+			"userInfoEndpoint": "http://127.0.0.1:10021/api/userinfo",
+			"userInfoCacheTtlSeconds": 0,
+			"AuthorizationEndpoint": "http://127.0.0.1:10021/login/oauth/authorize",
+			"tokenEndpoint": "http://127.0.0.1:10021/api/login/oauth/access_token"
+		},
+		"createTime": "2023-07-11 01:52:12Z",
+		"updateTime": "",
+		"deleteTime": ""
+	}
+]

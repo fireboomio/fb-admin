@@ -1,6 +1,8 @@
 package server
 
 import (
+	"custom-go/auth"
+
 	"custom-go/generated"
 
 	hooks_System__Role__ConnectOneMenu "custom-go/hooks/System/Role/ConnectOneMenu"
@@ -23,7 +25,9 @@ func init() {
 				WsTransport:   plugins.WsTransportHooks{},
 			},
 
-			Authentication: plugins.AuthenticationConfiguration{},
+			Authentication: plugins.AuthenticationConfiguration{
+				MutatingPostAuthentication: auth.MutatingPostAuthentication,
+			},
 
 			Queries: base.OperationHooks{},
 

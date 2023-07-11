@@ -313,7 +313,7 @@
                             "type": "string"
                         },
                         "expires_in": {
-                            "type": "string"
+                            "type": "integer"
                         }
                     }
                 },

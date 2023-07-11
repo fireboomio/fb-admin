@@ -1,13 +1,11 @@
-mutation CreateOneMenu($label: String!, $path: String!, $icon: String, $level: Int = 10, $sort: Int = 10) {
-  data: main_createOnemenu(
-    data: {label: $label, path: $path, icon: $icon, level: $level, sort: $sort}
-  ) {
-    id
-    parentId
-    label
-    path
-    icon
-    sort
-    level
-  }
+mutation CreateOneMenu ($label: String!, $path: String!, $icon: String, $level: Int = 10, $sort: Int = 10) @rbac(requireMatchAny: [admin]) {
+	data: main_createOnemenu(data: {label:$label,path:$path,icon:$icon,level:$level,sort:$sort}) {
+		id
+		parentId
+		label
+		path
+		icon
+		sort
+		level
+	}
 }

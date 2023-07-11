@@ -1,7 +1,5 @@
-mutation MyQuery($roleId: Int!, $userId: Int = 10) {
-  data: main_deleteOnerole_user(
-    where: {role_id_user_id: {role_id: $roleId, user_id: $userId}}
-  ) {
-    id
-  }
+mutation MyQuery ($roleId: Int!, $userId: Int = 10) @rbac(requireMatchAny: [admin]) {
+	data: main_deleteOnerole_user(where: {role_id_user_id:{role_id:$roleId,user_id:$userId}}) {
+		id
+	}
 }

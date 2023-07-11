@@ -1,17 +1,15 @@
-query GetPostList($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput, $author_id: Int!) {
-  data: main_findManypost(skip: $skip, take: $take, where: {AND: $query}, orderBy: {title: asc}) {
+query GetPostList($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput) {
+  data: main_findManypost(
+    skip: $skip
+    take: $take
+    where: {AND: $query}
+    orderBy: {title: asc}
+  ) {
     id
     title
     poster
     published_at
-    author_id @export(as: "author_id")
-    user: _join {
-      main_findFirstuser(where: {id: {equals: $author_id}}) {
-        name
-        avatar
-        id
-      }
-    }
+    author
     content
   }
   total: main_aggregatepost(where: {AND: $query}) @transform(get: "_count.id") {
@@ -19,4 +17,4 @@ query GetPostList($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput, 
       id
     }
   }
-}
+} 

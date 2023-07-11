@@ -1,17 +1,13 @@
-mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String!, $author_id: Int!) {
-  data: main_updateOnepost(data: {title: {set: $title}, poster: {set: $poster}, published_at: {set: $publishedAt}, content: {set: $content}}, where: {id: $id}) {
+mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String!) {
+  data: main_updateOnepost(
+    data: {title: {set: $title}, poster: {set: $poster}, published_at: {set: $publishedAt}, content: {set: $content}}
+    where: {id: $id}
+  ) {
     id
     title
     poster
     published_at
-    author_id @export(as: "author_id")
-    user: _join {
-      main_findFirstuser(where: {id: {equals: $author_id}}) {
-        name
-        avatar
-        id
-      }
-    }
+    author
     content
   }
 }
