@@ -2,7 +2,7 @@
   <!-- <svg aria-hidden="true" class="svg-icon" :style="'width:' + size + ';height:' + size">
     <use :xlink:href="`../../assets/icons/${props.iconClass}/.svg`" :fill="color" />
   </svg> -->
-  <img :src="'../../../public/icons/' + props.iconClass + '.svg'" :style="'width:' + size + ';height:' + size" />
+  <img :src="'../../../public/static/icons/' + props.iconClass + '.svg'" :style="'width:' + size + ';height:' + size" />
 </template>
 
 <script lang="ts">

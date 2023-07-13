@@ -65,7 +65,7 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover select-none">
           <!-- <img :src="userAvatar" :style="avatarsStyle" /> -->
-          <Avatar :username="username" :src="userAvatar" size="40" color="#fff" background-color="#ccc"
+          <Avatar :username="username" :src="userAvatar" :size="40" color="#fff" background-color="#ccc"
             style="vertical-align: middle;" :inline="true"></Avatar>
           <!-- <p v-if="username" class="dark:text-white">{{ username }}</p> -->
         </span>

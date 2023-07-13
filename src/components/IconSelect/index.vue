@@ -27,9 +27,9 @@ const iconSelectorRef = ref(null);
  * icon 加载
  */
 function loadIcons() {
-  const icons = import.meta.glob("../../../public/icons/*.svg");
+  const icons = import.meta.glob("../../../public/static/icons/*.svg");
   for (const icon in icons) {
-    const iconName = icon.split("public/icons/")[1].split(".svg")[0];
+    const iconName = icon.split("public/static/icons/")[1].split(".svg")[0];
     iconNames.push(iconName);
   }
   filterIconNames.value = iconNames;
