@@ -95,7 +95,6 @@ function resetQuery() {
 function handleSelectionChange(selection: any) {
   ids.value = selection.map((item: any) => item.id);
 }
-
 /**
  * 打开角色表单弹窗
  */
@@ -114,9 +113,10 @@ function openDialog(role?: Role) {
  * 角色表单提交
  */
 async function handleSubmit() {
-  loading.value = true;
+  // loading.value = true;
   roleFormRef.value.validate(async (valid: any) => {
     if (valid) {
+      loading.value = true
       if (editingId.value) {
         const { error } = await api.mutate({
           operationName: "System/Role/UpdateOne",
@@ -131,17 +131,24 @@ async function handleSubmit() {
           resetQuery();
         }
       } else {
-        const { error } = await api.mutate({
-          operationName: "System/Role/AddOne",
-          input: {
-            ...formData
+        // 重复性校验
+        const verify = roleList.value.some(item => formData.code === item.code)
+        if (verify) {
+          ElMessage.warning("该角色已存在，请勿重复添加");
+        } else {
+          const { error } = await api.mutate({
+            operationName: "System/Role/AddOne",
+            input: {
+              ...formData
+            }
+          });
+          if (!error) {
+            ElMessage.success("新增成功");
+            closeDialog();
+            resetQuery();
           }
-        });
-        if (!error) {
-          ElMessage.success("新增成功");
-          closeDialog();
-          resetQuery();
         }
+
       }
       loading.value = false;
     }
@@ -211,9 +218,7 @@ function openMenuBindDialog(role: Role) {
 
 onMounted(() => {
   handleQuery();
-  console.log(useUserStoreHook().permissions);
 });
-
 </script>
 
 <template>
@@ -279,9 +284,11 @@ onMounted(() => {
           </template>
         </el-table-column>
       </el-table>
-
-      <el-pagination v-if="total > 0" v-model:total="total" v-model:page="queryParams.pageNum"
-        v-model:limit="queryParams.pageSize" @pagination="handleQuery" />
+      <!-- 分页功能 -->
+      <!-- <el-pagination small background layout="prev, pager, next" v-model:current-page="queryParams.pageNum" :total="total" -->
+      <!-- :size="queryParams.pageSize" class="mt-4" /> -->
+      <el-pagination v-if="total > 0" v-model:total="total" v-model:current-page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize" @current-change="handleQuery" />
     </el-card>
 
     <!-- 角色表单弹窗 -->

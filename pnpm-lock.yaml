@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@pureadmin/descriptions':
     specifier: ^1.1.1
@@ -70,6 +74,9 @@ dependencies:
   vue:
     specifier: ^3.3.4
     version: 3.3.4
+  vue-avatar:
+    specifier: ^2.3.3
+    version: registry.npmmirror.com/vue-avatar@2.3.3
   vue-i18n:
     specifier: ^9.2.2
     version: 9.2.2(vue@3.3.4)
@@ -10068,6 +10075,13 @@ packages:
     name: value-or-promise
     version: 1.0.11
     engines: {node: '>=12'}
+    dev: false
+
+  registry.npmmirror.com/vue-avatar@2.3.3:
+    resolution: {integrity: sha512-Z57ILRTkFIAuCH9JiFBxX74C5zua5ub/jRDM/KZ+QKXNfscvmUOgWBs3kA2+wrpZMowIvfLHIT0gvQu1z+zpLg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-avatar/-/vue-avatar-2.3.3.tgz}
+    name: vue-avatar
+    version: 2.3.3
+    engines: {node: '>= 4.0.0', npm: '>= 3.0.0'}
     dev: false
 
   registry.npmmirror.com/web-encoding@1.1.5:

@@ -37,7 +37,6 @@ export function getToken(): DataInfo<number> {
  */
 export function setToken(data: DataInfo<number>) {
   const { accessToken, refreshToken } = data;
-
   const d = new Date();
   d.setSeconds(d.getSeconds() + data.expires);
   const expires = d.getTime();
@@ -64,7 +63,7 @@ export function setToken(data: DataInfo<number>) {
     });
   }
 
-  if (data.username && data.roles && data.avatar) {
+  if (data.username && data.roles) {
     const { username, roles, avatar } = data;
     setSessionKey(username, roles, avatar);
   } else {

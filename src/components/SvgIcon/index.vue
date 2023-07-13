@@ -1,7 +1,8 @@
 <template>
-  <svg aria-hidden="true" class="svg-icon" :style="'width:' + size + ';height:' + size">
-    <use :xlink:href="symbolId" :fill="color" />
-  </svg>
+  <!-- <svg aria-hidden="true" class="svg-icon" :style="'width:' + size + ';height:' + size">
+    <use :xlink:href="`../../assets/icons/${props.iconClass}/.svg`" :fill="color" />
+  </svg> -->
+  <img :src="'../../../public/icons/' + props.iconClass + '.svg'" :style="'width:' + size + ';height:' + size" />
 </template>
 
 <script lang="ts">
@@ -9,8 +10,7 @@ export default { name: "SvgIcon" };
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
+import { computed, onMounted } from 'vue';
 const props = defineProps({
   prefix: {
     type: String,
@@ -28,8 +28,7 @@ const props = defineProps({
     default: '1em'
   }
 });
-
-const symbolId = computed(() => `#${props.prefix}-${props.iconClass}`);
+// const symbolId = computed(() => `../../assets/icons/${props.iconClass}/.svg`);
 </script>
 
 <style scoped>

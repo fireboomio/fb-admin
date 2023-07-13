@@ -71,6 +71,8 @@ export const useUserStore = defineStore({
                   name
                 }
               });
+              console.log("userInfo-->", userInfo.data.data);
+
               const dataInfo: DataInfo<number> = {
                 accessToken: userInfo.data.data.token.data.access_token,
                 expires: userInfo.data.data.token.data.expires_in,

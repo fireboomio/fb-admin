@@ -107,6 +107,7 @@ declare module "vue" {
     ElDescriptionsItem: typeof import("element-plus")["ElDescriptionsItem"];
     ElResult: typeof import("element-plus")["ElResult"];
     ElSelectV2: typeof import("element-plus")["ElSelectV2"];
+    Avatar: typeof import("vue-avatar")["Avatar"];
   }
 
   interface ComponentCustomProperties {
@@ -121,4 +122,4 @@ declare module "vue" {
   }
 }
 
-export {};
+export { };

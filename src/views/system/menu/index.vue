@@ -87,6 +87,7 @@ function openDialog(menu?: Menu) {
     editingId.value = menu.id;
     merge(formData, menu);
   } else {
+    editingId.value = 0;
     dialog.title = "新增菜单";
   }
 }
@@ -111,19 +112,27 @@ function submitForm() {
           handleQuery();
         }
       } else {
-        const { error } = await api.mutate({
-          operationName: "System/Menu/CreateOne",
-          input: {
-            ...formData
+        const verify = menuList.value.some(item => {
+          return formData.label === item.label || formData.path === item.path
+        })
+        if (verify) {
+          ElMessage.error("新增失败，列表中已存在!")
+        } else {
+          const { error } = await api.mutate({
+            operationName: "System/Menu/CreateOne",
+            input: {
+              ...formData
+            }
+          });
+          if (!error) {
+            ElMessage.success("新增成功");
+            closeDialog();
+            handleQuery();
           }
-        });
-        if (!error) {
-          ElMessage.success("新增成功");
-          closeDialog();
-          handleQuery();
         }
+        loading.value = false;
       }
-      loading.value = false;
+
     }
   });
 }
