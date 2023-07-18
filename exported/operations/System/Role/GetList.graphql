@@ -1,17 +1,12 @@
-query GetRoleList($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) {
-  data: main_findManyrole(
-    skip: $skip
-    take: $take
-  orderBy: $orderBy
-    where: {AND: $query}) {
-    
-    id
-    code
-    remark
-  }
-  total: main_aggregaterole(where: {AND: $query}) @transform(get: "_count.id") {
-    _count {
-      id
-    }
-  }
+query GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) @rbac(requireMatchAny: [admin]) {
+	data: main_findManyrole(skip: $skip, take: $take, orderBy: $orderBy, where: {AND:$query}) {
+		id
+		code
+		remark
+	}
+	total: main_aggregaterole(where: {AND:$query}) @transform(get: "_count.id") {
+		_count {
+			id
+		}
+	}
 }

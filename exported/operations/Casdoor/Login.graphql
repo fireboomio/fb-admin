@@ -1,10 +1,13 @@
-mutation Login($code: String = "", $username: String!, $loginType: casdoor_POSTApiLoginInput_loginType!, $password: String = "") {
-  data: casdoor_ApiControllerLogin(POSTApiLoginInput: {username: $username, organization: builtIn, code: $code, type: token, application: fireboom_builtIn, loginType: $loginType, password: $password}) {
+mutation Login($code: String = "", $password: String = "", $countryCode: String = "CN", $loginType: String = "", $phone: String = "", $username: String = "") {
+  casdoor_apiLogin(
+    POSTApiLoginInput: {code: $code, password: $password, loginType: $loginType, username: $username, phone: $phone, countryCode: $countryCode}
+  ) {
+    msg
     success
     data {
-      access_token
-      refresh_token
+      accessToken
+      expireIn
+      refreshToken
     }
-    msg
   }
-}
+} 

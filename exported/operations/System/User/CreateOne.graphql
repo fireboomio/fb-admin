@@ -1,5 +1,6 @@
-mutation MyQuery ($avatarUrl: String, $name: String!, $created_at: DateTime, $phone: String!) @rbac(requireMatchAny: [admin]) {
-	data: main_createOneuser(data: {name:$name,avatar:$avatarUrl,created_at:$created_at,phone:$phone,user_id:""}) {
-		id
+mutation MyQuery ($countryCode: String = "CN", $name: String!, $password: String = "", $passwordType: String = "plain", $phone: String!) @rbac(requireMatchAny: [admin,user,eeee]) {
+	data: casdoor_apiAddUser(POSTApiAdd_userInput: {phone:$phone,name:$name,password:$password,passwordType:$passwordType,countryCode:$countryCode}) {
+		msg
+		status
 	}
 }

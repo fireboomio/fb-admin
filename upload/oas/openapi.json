@@ -271,6 +271,54 @@
           }
         }
       }
+    },
+    "/api/v1/role/unbindApi": {
+      "post": {
+        "operationId": "unBindRoleApis",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["roleCode", "apis"],
+                "type": "object",
+                "properties": {
+                  "roleType": {
+                    "type": "string",
+                    "default": "requireMatchAny",
+                    "enum": ["requireMatchAll", "requireMatchAny", "denyMatchAll", "denyMatchAny"]
+                  },
+                  "roleCode": {
+                    "type": "string"
+                  },
+                  "apis": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

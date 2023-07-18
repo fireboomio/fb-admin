@@ -1,4 +1,4 @@
-query MyQuery ($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput]) @rbac(requireMatchAny: [admin]) {
+query MyQuery ($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput]) @rbac(requireMatchAny: [admin,user]) {
 	data: main_findManyuser(skip: $skip, take: $take, where: {AND:$query}, orderBy: $orderBy) {
 		id
 		name

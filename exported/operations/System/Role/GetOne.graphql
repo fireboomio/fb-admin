@@ -1,5 +1,5 @@
-query MyQuery($id: Int!) {
-  data:main_findFirstrole(where: {id: {equals: $id}}) {
-    code
-  }
+query MyQuery ($id: Int!) @rbac(requireMatchAny: [admin,user,eeee]) {
+	data: main_findFirstrole(where: {id:{equals:$id}}) {
+		code
+	}
 }

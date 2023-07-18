@@ -1,5 +1,5 @@
-mutation MyQuery ($userId: Int!, $roleId: Int!) @rbac(requireMatchAny: [admin]) {
-	data: main_createOnerole_user(data: {role_id:$roleId,user_id:$userId}) {
-		id
-	}
+mutation MyQuery($userId: Int!, $roleId: Int!) {
+  data: main_createOnerole_user(data: {role_id: $roleId, user_id: $userId}) {
+    id
+  }
 }

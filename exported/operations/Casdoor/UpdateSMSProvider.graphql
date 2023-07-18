@@ -1,9 +1,7 @@
 mutation MyQuery($clientId: String!, $clientSecret: String!, $signName: String!, $templateCode: String!) @rbac(requireMatchAny: [admin, user]) {
-  casdoor_ApiControllerUpdateProvider(
+  casdoor_apiUpdateProvider(
     POSTApiUpdate_providerInput: {clientId: $clientId, clientSecret: $clientSecret, signName: $signName, templateCode: $templateCode}
   ) {
-    data
-    data2
     msg
   }
 }

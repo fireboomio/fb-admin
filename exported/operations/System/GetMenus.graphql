@@ -1,30 +1,18 @@
-query MyQuery($pid: Int @internal, $name: String @internal, $menuId: Int @internal, $roleId: Int @internal) {
-  data: main_findManymenu(where: {level: {equals: 1}}) {
-    id @export(as: "pid")
-    path
-    label
-    name
-    children: _join @transform(get: "main_findManymenu") {
-      main_findManymenu(where: {parentId: {equals: $pid}}) {
-        path
-        name @export(as: "name")
-        label
-        roles: _join @transform(get: "main_findFirstmenu") {
-          main_findFirstmenu(where: {name: {equals: $name}}) @transform(get: "_join.main_findManymenu_role") {
-            id @export(as: "menuId")
-            _join {
-              main_findManymenu_role(where: {menu_id: {equals: $menuId}}) @transform(get: "[]._join.main_findFirstrole.code") {
-                role_id @export(as: "roleId")
-                _join {
-                  main_findFirstrole(where: {id: {equals: $roleId}}) {
-                    code
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+query MyQuery ($pid: Int) @rbac(requireMatchAny: [admin]) {
+	data: main_findManymenu(where: {level:{equals:1}}, orderBy: {sort:asc}) {
+		id @export(as: "pid")
+		path
+		label
+		name
+		sort
+		children: _join @transform(get: "main_findManymenu") {
+			main_findManymenu(where: {parentId:{equals:$pid}}, orderBy: {sort:asc}) {
+				id
+				path
+				name
+				label
+				sort
+			}
+		}
+	}
 }

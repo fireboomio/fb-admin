@@ -1,4 +1,4 @@
-mutation MyQuery ($remark: String, $id: Int!) @rbac(requireMatchAny: [admin]) {
+mutation MyQuery ($remark: String, $id: Int!) @rbac(requireMatchAny: [admin,user,eeee]) {
 	data: main_updateOnerole(data: {remark:{set:$remark}}, where: {id:$id}) {
 		code
 		id

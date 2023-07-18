@@ -3,6 +3,7 @@ module custom-go
 go 1.19
 
 require (
+	github.com/artisancloud/openai v0.1.1
 	github.com/buger/jsonparser v1.1.1
 	github.com/graphql-go/graphql v0.8.0
 	github.com/joho/godotenv v1.5.1
@@ -17,10 +18,12 @@ require (
 )
 
 require (
+	github.com/artisancloud/httphelper v0.1.7 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

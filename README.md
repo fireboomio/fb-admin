@@ -89,6 +89,10 @@ curl -fsSL https://www.fireboom.io/update.sh | bash
 
 我们的演示服务基于 **Casdoor** 进行了精简，自研部署了一套符合 OIDC 协议的登录认证服务，将其作为 **OpenAPI数据源**注册到飞步，支持手机短信登录和密码登录
 
+>OIDC 是一种用于身份验证和授权的开放式协议。它建立在OAuth 2.0基础上，并为第三方应用程序提供了一种方便的方法来验证用户身份并获取用户信息，例如名称、邮件地址等。OIDC还支持单点登录（SSO），以便用户只需在一个地方登录，就可以访问多个应用程序。
+
+可能刚入门的同学对OIDC并不了解，在传统的单体服务架构中，我们对接口的安全控制只需要使用JWT进行签发token，在后端对需要安全拦截的接口进行token认证就可以了，在Java SpringBoot项目中可以很方便地使用一些框架或者类库（如Shiro/SpringSecurity等）实现这一点。但是在分布式架构中，我们的服务可能还要接入第三方服务商，比如使用微信、QQ登录，此时token认证商是三方的服务，这个时候就有可能需要我们提供token认证的方法给三方服务。`cert`通常代表着公私钥对中的私钥，用于对JWT进行签名，验证Token时使用公钥进行解密和验证。那么我们是需要把公钥暴露给三方服务的。在飞布控制台我们可以去按照一定的规范添加身份验证商。详细请见角色和权限控制。
+
 ## 数据增删改查
 
 利用飞步控制台**图形化界面**快速开发增删改查接口，并且可以自动生成 swagger 文档【飞布内部集成】
@@ -133,7 +137,9 @@ GraphqlServers: []plugins.GraphQLServerConfig{
 
 ## 自定义 Proxy 钩子
 
-使用 Proxy 钩子可以定义自定义接口，编写的 Proxy 文件位于`custom-go/proxys/` 目录下，注册的接口名称根据目录和文件名生成。例如本项目中`custom-go/proxys/asyncRoutes/route.go`，则生成的接口名为`proxy/asyncRoutes/route`。
+使用 Proxy 钩子可以定义自定义接口，编写的 Proxy 文件位于`custom-go/proxys/` 目录下，注册的接口名称根据目录和文件名生成。例如本项目中`custom-go/proxys/login.go`，则生成的接口名为`proxy/login`。
+
+更多可以参考项目案例：https://github.com/fireboomio/simple-firetalk/blob/master/custom-go%2Fproxys%2FpayNotify%2FaliPay.go
 
 ## 角色和权限控制
 
@@ -142,6 +148,8 @@ GraphqlServers: []plugins.GraphQLServerConfig{
   用户登录时返回动态路由、用户信息、用户权限等数据，前端根据这些数据动态地生成菜单，保存用户数据。比如用户admin具有管理员和普通用户两种角色（注意：用户是可以拥有多种角色的），登录后根据用户角色查询所具有的权限列表，返回给前端，前端使用directive指令判断用户权限是否存在，从而决定是否显示操作对应的按钮或链接等。
 
 - 身份验证：
+
+  参考官方文档：https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/yan-zheng-he-shou-quan/shen-fen-yan-zheng
 
   根据 casdoor 提供的路由信息在飞布控制台添加并配置身份验证
 
@@ -207,7 +215,7 @@ GraphqlServers: []plugins.GraphQLServerConfig{
 
   其中`roles`和`roleType`控制了API访问所需要的角色，`requireMatchAny` 表示只要匹配任意一种角色就可以。
 
-  飞布底层支持有相关的几个接口：
+  **飞布底层支持有相关的几个接口：**
 
   | API                       | 说明                            | 参数                     |
   | ------------------------- | ------------------------------- | ------------------------ |

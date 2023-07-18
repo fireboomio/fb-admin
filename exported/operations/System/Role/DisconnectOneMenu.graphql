@@ -1,5 +1,0 @@
-mutation MyQuery ($role_id: Int!, $menu_id: Int!) @rbac(requireMatchAny: [admin]) {
-	data: main_deleteOnemenu_role(where: {role_id_menu_id:{role_id:$role_id,menu_id:$menu_id}}) {
-		id
-	}
-}

@@ -1,5 +1,5 @@
-query GetManyMenu($in: [Int] = [1]) {
-  data: main_findManymenu(where: {level: {in: $in}}) {
+query GetManyMenu {
+  data: main_findManymenu {
     id
     parentId
     label
@@ -8,5 +8,9 @@ query GetManyMenu($in: [Int] = [1]) {
     sort
     level
     is_bottom
+    menu_type
+    perms
+    api_id
+    create_time
   }
 }

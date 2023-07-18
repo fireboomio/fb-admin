@@ -1,6 +1,6 @@
 [
 	{
-		"id": 2109222934085632,
+		"id": 2143503392571392,
 		"point": "http://localhost:9991/auth/cookie/authorize/casdoor?redirect_uri=",
 		"name": "casdoor",
 		"authSupplier": "openid",
@@ -19,18 +19,18 @@
 				"kind": "0",
 				"val": ""
 			},
-			"issuer": "http://127.0.0.1:10021/",
+			"issuer": "http://127.0.0.1:9825",
 			"discoveryURL": "",
 			"jwks": 0,
 			"jwksJSON": "",
-			"jwksURL": "http://127.0.0.1:10021//.well-known/jwks.json",
-			"userInfoEndpoint": "http://127.0.0.1:10021/api/userinfo",
+			"jwksURL": "http://127.0.0.1:9825/.well-known/jwks.json",
+			"userInfoEndpoint": "http://127.0.0.1:9825/api/userinfo",
 			"userInfoCacheTtlSeconds": 0,
-			"AuthorizationEndpoint": "http://127.0.0.1:10021/login/oauth/authorize",
-			"tokenEndpoint": "http://127.0.0.1:10021/api/login/oauth/access_token"
+			"AuthorizationEndpoint": "",
+			"tokenEndpoint": ""
 		},
-		"createTime": "2023-07-11 01:52:12Z",
-		"updateTime": "",
+		"createTime": "2023-07-17 03:10:10Z",
+		"updateTime": "2023-07-17 14:49:34Z",
 		"deleteTime": ""
 	}
 ]

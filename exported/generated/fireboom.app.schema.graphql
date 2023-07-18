@@ -1,0 +1,4069 @@
+type Query {
+  system_getRoleBindApis(code: String!, roleType: system_Query_getRoleBindApis_roleType): [system_QueryGetRoleBindApis]
+  system_getAllApis: [system_QueryGetAllApis]
+  system_getAllRoles: [system_QueryGetAllRoles]
+  statistics_GetMonthlySales: [statistics_GetMonthlySales]
+  statistics_GetSaleTypePercent: [statistics_GetSaleTypePercent]
+  statistics_GetSalesTop10: [statistics_GetSalesTop10]
+  statistics_GetVisitTrending: [statistics_GetVisitTrending]
+  main_findFirstmenu(where: main_menuWhereInput, orderBy: [main_menuOrderByWithRelationInput], cursor: main_menuWhereUniqueInput, take: Int, skip: Int, distinct: [main_MenuScalarFieldEnum]): main_menu
+  main_findFirstmenuOrThrow(where: main_menuWhereInput, orderBy: [main_menuOrderByWithRelationInput], cursor: main_menuWhereUniqueInput, take: Int, skip: Int, distinct: [main_MenuScalarFieldEnum]): main_menu
+  main_findManymenu(where: main_menuWhereInput, orderBy: [main_menuOrderByWithRelationInput], cursor: main_menuWhereUniqueInput, take: Int, skip: Int, distinct: [main_MenuScalarFieldEnum]): [main_menu]!
+  main_aggregatemenu(where: main_menuWhereInput, orderBy: [main_menuOrderByWithRelationInput], cursor: main_menuWhereUniqueInput, take: Int, skip: Int): main_AggregateMenu!
+  main_groupBymenu(where: main_menuWhereInput, orderBy: [main_menuOrderByWithAggregationInput], by: [main_MenuScalarFieldEnum]!, having: main_menuScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_MenuGroupByOutputType]!
+  main_findUniquemenu(where: main_menuWhereUniqueInput!): main_menu
+  main_findUniquemenuOrThrow(where: main_menuWhereUniqueInput!): main_menu
+  main_findFirstmenu_permission(where: main_menu_permissionWhereInput, orderBy: [main_menu_permissionOrderByWithRelationInput], cursor: main_menu_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [main_Menu_permissionScalarFieldEnum]): main_menu_permission
+  main_findFirstmenu_permissionOrThrow(where: main_menu_permissionWhereInput, orderBy: [main_menu_permissionOrderByWithRelationInput], cursor: main_menu_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [main_Menu_permissionScalarFieldEnum]): main_menu_permission
+  main_findManymenu_permission(where: main_menu_permissionWhereInput, orderBy: [main_menu_permissionOrderByWithRelationInput], cursor: main_menu_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [main_Menu_permissionScalarFieldEnum]): [main_menu_permission]!
+  main_aggregatemenu_permission(where: main_menu_permissionWhereInput, orderBy: [main_menu_permissionOrderByWithRelationInput], cursor: main_menu_permissionWhereUniqueInput, take: Int, skip: Int): main_AggregateMenu_permission!
+  main_groupBymenu_permission(where: main_menu_permissionWhereInput, orderBy: [main_menu_permissionOrderByWithAggregationInput], by: [main_Menu_permissionScalarFieldEnum]!, having: main_menu_permissionScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_Menu_permissionGroupByOutputType]!
+  main_findUniquemenu_permission(where: main_menu_permissionWhereUniqueInput!): main_menu_permission
+  main_findUniquemenu_permissionOrThrow(where: main_menu_permissionWhereUniqueInput!): main_menu_permission
+  main_findFirstmenu_role(where: main_menu_roleWhereInput, orderBy: [main_menu_roleOrderByWithRelationInput], cursor: main_menu_roleWhereUniqueInput, take: Int, skip: Int, distinct: [main_Menu_roleScalarFieldEnum]): main_menu_role
+  main_findFirstmenu_roleOrThrow(where: main_menu_roleWhereInput, orderBy: [main_menu_roleOrderByWithRelationInput], cursor: main_menu_roleWhereUniqueInput, take: Int, skip: Int, distinct: [main_Menu_roleScalarFieldEnum]): main_menu_role
+  main_findManymenu_role(where: main_menu_roleWhereInput, orderBy: [main_menu_roleOrderByWithRelationInput], cursor: main_menu_roleWhereUniqueInput, take: Int, skip: Int, distinct: [main_Menu_roleScalarFieldEnum]): [main_menu_role]!
+  main_aggregatemenu_role(where: main_menu_roleWhereInput, orderBy: [main_menu_roleOrderByWithRelationInput], cursor: main_menu_roleWhereUniqueInput, take: Int, skip: Int): main_AggregateMenu_role!
+  main_groupBymenu_role(where: main_menu_roleWhereInput, orderBy: [main_menu_roleOrderByWithAggregationInput], by: [main_Menu_roleScalarFieldEnum]!, having: main_menu_roleScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_Menu_roleGroupByOutputType]!
+  main_findUniquemenu_role(where: main_menu_roleWhereUniqueInput!): main_menu_role
+  main_findUniquemenu_roleOrThrow(where: main_menu_roleWhereUniqueInput!): main_menu_role
+  main_findFirstpermission(where: main_permissionWhereInput, orderBy: [main_permissionOrderByWithRelationInput], cursor: main_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [main_PermissionScalarFieldEnum]): main_permission
+  main_findFirstpermissionOrThrow(where: main_permissionWhereInput, orderBy: [main_permissionOrderByWithRelationInput], cursor: main_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [main_PermissionScalarFieldEnum]): main_permission
+  main_findManypermission(where: main_permissionWhereInput, orderBy: [main_permissionOrderByWithRelationInput], cursor: main_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [main_PermissionScalarFieldEnum]): [main_permission]!
+  main_aggregatepermission(where: main_permissionWhereInput, orderBy: [main_permissionOrderByWithRelationInput], cursor: main_permissionWhereUniqueInput, take: Int, skip: Int): main_AggregatePermission!
+  main_groupBypermission(where: main_permissionWhereInput, orderBy: [main_permissionOrderByWithAggregationInput], by: [main_PermissionScalarFieldEnum]!, having: main_permissionScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_PermissionGroupByOutputType]!
+  main_findUniquepermission(where: main_permissionWhereUniqueInput!): main_permission
+  main_findUniquepermissionOrThrow(where: main_permissionWhereUniqueInput!): main_permission
+  main_findFirstpost(where: main_postWhereInput, orderBy: [main_postOrderByWithRelationInput], cursor: main_postWhereUniqueInput, take: Int, skip: Int, distinct: [main_PostScalarFieldEnum]): main_post
+  main_findFirstpostOrThrow(where: main_postWhereInput, orderBy: [main_postOrderByWithRelationInput], cursor: main_postWhereUniqueInput, take: Int, skip: Int, distinct: [main_PostScalarFieldEnum]): main_post
+  main_findManypost(where: main_postWhereInput, orderBy: [main_postOrderByWithRelationInput], cursor: main_postWhereUniqueInput, take: Int, skip: Int, distinct: [main_PostScalarFieldEnum]): [main_post]!
+  main_aggregatepost(where: main_postWhereInput, orderBy: [main_postOrderByWithRelationInput], cursor: main_postWhereUniqueInput, take: Int, skip: Int): main_AggregatePost!
+  main_groupBypost(where: main_postWhereInput, orderBy: [main_postOrderByWithAggregationInput], by: [main_PostScalarFieldEnum]!, having: main_postScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_PostGroupByOutputType]!
+  main_findUniquepost(where: main_postWhereUniqueInput!): main_post
+  main_findUniquepostOrThrow(where: main_postWhereUniqueInput!): main_post
+  main_findFirstprovider(where: main_providerWhereInput, orderBy: [main_providerOrderByWithRelationInput], cursor: main_providerWhereUniqueInput, take: Int, skip: Int, distinct: [main_ProviderScalarFieldEnum]): main_provider
+  main_findFirstproviderOrThrow(where: main_providerWhereInput, orderBy: [main_providerOrderByWithRelationInput], cursor: main_providerWhereUniqueInput, take: Int, skip: Int, distinct: [main_ProviderScalarFieldEnum]): main_provider
+  main_findManyprovider(where: main_providerWhereInput, orderBy: [main_providerOrderByWithRelationInput], cursor: main_providerWhereUniqueInput, take: Int, skip: Int, distinct: [main_ProviderScalarFieldEnum]): [main_provider]!
+  main_aggregateprovider(where: main_providerWhereInput, orderBy: [main_providerOrderByWithRelationInput], cursor: main_providerWhereUniqueInput, take: Int, skip: Int): main_AggregateProvider!
+  main_groupByprovider(where: main_providerWhereInput, orderBy: [main_providerOrderByWithAggregationInput], by: [main_ProviderScalarFieldEnum]!, having: main_providerScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_ProviderGroupByOutputType]!
+  main_findUniqueprovider(where: main_providerWhereUniqueInput!): main_provider
+  main_findUniqueproviderOrThrow(where: main_providerWhereUniqueInput!): main_provider
+  main_findFirstrole(where: main_roleWhereInput, orderBy: [main_roleOrderByWithRelationInput], cursor: main_roleWhereUniqueInput, take: Int, skip: Int, distinct: [main_RoleScalarFieldEnum]): main_role
+  main_findFirstroleOrThrow(where: main_roleWhereInput, orderBy: [main_roleOrderByWithRelationInput], cursor: main_roleWhereUniqueInput, take: Int, skip: Int, distinct: [main_RoleScalarFieldEnum]): main_role
+  main_findManyrole(where: main_roleWhereInput, orderBy: [main_roleOrderByWithRelationInput], cursor: main_roleWhereUniqueInput, take: Int, skip: Int, distinct: [main_RoleScalarFieldEnum]): [main_role]!
+  main_aggregaterole(where: main_roleWhereInput, orderBy: [main_roleOrderByWithRelationInput], cursor: main_roleWhereUniqueInput, take: Int, skip: Int): main_AggregateRole!
+  main_groupByrole(where: main_roleWhereInput, orderBy: [main_roleOrderByWithAggregationInput], by: [main_RoleScalarFieldEnum]!, having: main_roleScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_RoleGroupByOutputType]!
+  main_findUniquerole(where: main_roleWhereUniqueInput!): main_role
+  main_findUniqueroleOrThrow(where: main_roleWhereUniqueInput!): main_role
+  main_findFirstrole_user(where: main_role_userWhereInput, orderBy: [main_role_userOrderByWithRelationInput], cursor: main_role_userWhereUniqueInput, take: Int, skip: Int, distinct: [main_Role_userScalarFieldEnum]): main_role_user
+  main_findFirstrole_userOrThrow(where: main_role_userWhereInput, orderBy: [main_role_userOrderByWithRelationInput], cursor: main_role_userWhereUniqueInput, take: Int, skip: Int, distinct: [main_Role_userScalarFieldEnum]): main_role_user
+  main_findManyrole_user(where: main_role_userWhereInput, orderBy: [main_role_userOrderByWithRelationInput], cursor: main_role_userWhereUniqueInput, take: Int, skip: Int, distinct: [main_Role_userScalarFieldEnum]): [main_role_user]!
+  main_aggregaterole_user(where: main_role_userWhereInput, orderBy: [main_role_userOrderByWithRelationInput], cursor: main_role_userWhereUniqueInput, take: Int, skip: Int): main_AggregateRole_user!
+  main_groupByrole_user(where: main_role_userWhereInput, orderBy: [main_role_userOrderByWithAggregationInput], by: [main_Role_userScalarFieldEnum]!, having: main_role_userScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_Role_userGroupByOutputType]!
+  main_findUniquerole_user(where: main_role_userWhereUniqueInput!): main_role_user
+  main_findUniquerole_userOrThrow(where: main_role_userWhereUniqueInput!): main_role_user
+  main_findFirstsalelog(where: main_salelogWhereInput, orderBy: [main_salelogOrderByWithRelationInput], cursor: main_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [main_SalelogScalarFieldEnum]): main_salelog
+  main_findFirstsalelogOrThrow(where: main_salelogWhereInput, orderBy: [main_salelogOrderByWithRelationInput], cursor: main_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [main_SalelogScalarFieldEnum]): main_salelog
+  main_findManysalelog(where: main_salelogWhereInput, orderBy: [main_salelogOrderByWithRelationInput], cursor: main_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [main_SalelogScalarFieldEnum]): [main_salelog]!
+  main_aggregatesalelog(where: main_salelogWhereInput, orderBy: [main_salelogOrderByWithRelationInput], cursor: main_salelogWhereUniqueInput, take: Int, skip: Int): main_AggregateSalelog!
+  main_groupBysalelog(where: main_salelogWhereInput, orderBy: [main_salelogOrderByWithAggregationInput], by: [main_SalelogScalarFieldEnum]!, having: main_salelogScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_SalelogGroupByOutputType]!
+  main_findUniquesalelog(where: main_salelogWhereUniqueInput!): main_salelog
+  main_findUniquesalelogOrThrow(where: main_salelogWhereUniqueInput!): main_salelog
+  main_findFirstsaletype(where: main_saletypeWhereInput, orderBy: [main_saletypeOrderByWithRelationInput], cursor: main_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [main_SaletypeScalarFieldEnum]): main_saletype
+  main_findFirstsaletypeOrThrow(where: main_saletypeWhereInput, orderBy: [main_saletypeOrderByWithRelationInput], cursor: main_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [main_SaletypeScalarFieldEnum]): main_saletype
+  main_findManysaletype(where: main_saletypeWhereInput, orderBy: [main_saletypeOrderByWithRelationInput], cursor: main_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [main_SaletypeScalarFieldEnum]): [main_saletype]!
+  main_aggregatesaletype(where: main_saletypeWhereInput, orderBy: [main_saletypeOrderByWithRelationInput], cursor: main_saletypeWhereUniqueInput, take: Int, skip: Int): main_AggregateSaletype!
+  main_groupBysaletype(where: main_saletypeWhereInput, orderBy: [main_saletypeOrderByWithAggregationInput], by: [main_SaletypeScalarFieldEnum]!, having: main_saletypeScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_SaletypeGroupByOutputType]!
+  main_findUniquesaletype(where: main_saletypeWhereUniqueInput!): main_saletype
+  main_findUniquesaletypeOrThrow(where: main_saletypeWhereUniqueInput!): main_saletype
+  main_findFirstuser(where: main_userWhereInput, orderBy: [main_userOrderByWithRelationInput], cursor: main_userWhereUniqueInput, take: Int, skip: Int, distinct: [main_UserScalarFieldEnum]): main_user
+  main_findFirstuserOrThrow(where: main_userWhereInput, orderBy: [main_userOrderByWithRelationInput], cursor: main_userWhereUniqueInput, take: Int, skip: Int, distinct: [main_UserScalarFieldEnum]): main_user
+  main_findManyuser(where: main_userWhereInput, orderBy: [main_userOrderByWithRelationInput], cursor: main_userWhereUniqueInput, take: Int, skip: Int, distinct: [main_UserScalarFieldEnum]): [main_user]!
+  main_aggregateuser(where: main_userWhereInput, orderBy: [main_userOrderByWithRelationInput], cursor: main_userWhereUniqueInput, take: Int, skip: Int): main_AggregateUser!
+  main_groupByuser(where: main_userWhereInput, orderBy: [main_userOrderByWithAggregationInput], by: [main_UserScalarFieldEnum]!, having: main_userScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_UserGroupByOutputType]!
+  main_findUniqueuser(where: main_userWhereUniqueInput!): main_user
+  main_findUniqueuserOrThrow(where: main_userWhereUniqueInput!): main_user
+  main_findFirstverification_record(where: main_verification_recordWhereInput, orderBy: [main_verification_recordOrderByWithRelationInput], cursor: main_verification_recordWhereUniqueInput, take: Int, skip: Int, distinct: [main_Verification_recordScalarFieldEnum]): main_verification_record
+  main_findFirstverification_recordOrThrow(where: main_verification_recordWhereInput, orderBy: [main_verification_recordOrderByWithRelationInput], cursor: main_verification_recordWhereUniqueInput, take: Int, skip: Int, distinct: [main_Verification_recordScalarFieldEnum]): main_verification_record
+  main_findManyverification_record(where: main_verification_recordWhereInput, orderBy: [main_verification_recordOrderByWithRelationInput], cursor: main_verification_recordWhereUniqueInput, take: Int, skip: Int, distinct: [main_Verification_recordScalarFieldEnum]): [main_verification_record]!
+  main_aggregateverification_record(where: main_verification_recordWhereInput, orderBy: [main_verification_recordOrderByWithRelationInput], cursor: main_verification_recordWhereUniqueInput, take: Int, skip: Int): main_AggregateVerification_record!
+  main_groupByverification_record(where: main_verification_recordWhereInput, orderBy: [main_verification_recordOrderByWithAggregationInput], by: [main_Verification_recordScalarFieldEnum]!, having: main_verification_recordScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_Verification_recordGroupByOutputType]!
+  main_findUniqueverification_record(where: main_verification_recordWhereUniqueInput!): main_verification_record
+  main_findUniqueverification_recordOrThrow(where: main_verification_recordWhereUniqueInput!): main_verification_record
+  main_findFirstvisitlog(where: main_visitlogWhereInput, orderBy: [main_visitlogOrderByWithRelationInput], cursor: main_visitlogWhereUniqueInput, take: Int, skip: Int, distinct: [main_VisitlogScalarFieldEnum]): main_visitlog
+  main_findFirstvisitlogOrThrow(where: main_visitlogWhereInput, orderBy: [main_visitlogOrderByWithRelationInput], cursor: main_visitlogWhereUniqueInput, take: Int, skip: Int, distinct: [main_VisitlogScalarFieldEnum]): main_visitlog
+  main_findManyvisitlog(where: main_visitlogWhereInput, orderBy: [main_visitlogOrderByWithRelationInput], cursor: main_visitlogWhereUniqueInput, take: Int, skip: Int, distinct: [main_VisitlogScalarFieldEnum]): [main_visitlog]!
+  main_aggregatevisitlog(where: main_visitlogWhereInput, orderBy: [main_visitlogOrderByWithRelationInput], cursor: main_visitlogWhereUniqueInput, take: Int, skip: Int): main_AggregateVisitlog!
+  main_groupByvisitlog(where: main_visitlogWhereInput, orderBy: [main_visitlogOrderByWithAggregationInput], by: [main_VisitlogScalarFieldEnum]!, having: main_visitlogScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_VisitlogGroupByOutputType]!
+  main_findUniquevisitlog(where: main_visitlogWhereUniqueInput!): main_visitlog
+  main_findUniquevisitlogOrThrow(where: main_visitlogWhereUniqueInput!): main_visitlog
+  casdoor_apiUserInfo: casdoor_objectUserinfo
+}
+
+type Mutation {
+  system_bindRoleApis(POSTApiV1RoleBindApiInput: system_POSTApiV1RoleBindApiInput): system_MutationBindRoleApis
+  system_unBindRoleApis(POSTApiV1RoleUnbindApiInput: system_POSTApiV1RoleUnbindApiInput): system_MutationUnBindRoleApis
+  main_createOnemenu(data: main_menuCreateInput!): main_menu
+  main_upsertOnemenu(where: main_menuWhereUniqueInput!, create: main_menuCreateInput!, update: main_menuUpdateInput!): main_menu
+  main_createManymenu(data: [main_menuCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnemenu(where: main_menuWhereUniqueInput!): main_menu
+  main_updateOnemenu(data: main_menuUpdateInput!, where: main_menuWhereUniqueInput!): main_menu
+  main_updateManymenu(data: main_menuUpdateManyMutationInput!, where: main_menuWhereInput): main_AffectedRowsOutput
+  main_deleteManymenu(where: main_menuWhereInput): main_AffectedRowsOutput
+  main_createOnemenu_permission(data: main_menu_permissionCreateInput!): main_menu_permission
+  main_upsertOnemenu_permission(where: main_menu_permissionWhereUniqueInput!, create: main_menu_permissionCreateInput!, update: main_menu_permissionUpdateInput!): main_menu_permission
+  main_createManymenu_permission(data: [main_menu_permissionCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnemenu_permission(where: main_menu_permissionWhereUniqueInput!): main_menu_permission
+  main_updateOnemenu_permission(data: main_menu_permissionUpdateInput!, where: main_menu_permissionWhereUniqueInput!): main_menu_permission
+  main_updateManymenu_permission(data: main_menu_permissionUpdateManyMutationInput!, where: main_menu_permissionWhereInput): main_AffectedRowsOutput
+  main_deleteManymenu_permission(where: main_menu_permissionWhereInput): main_AffectedRowsOutput
+  main_createOnemenu_role(data: main_menu_roleCreateInput!): main_menu_role
+  main_upsertOnemenu_role(where: main_menu_roleWhereUniqueInput!, create: main_menu_roleCreateInput!, update: main_menu_roleUpdateInput!): main_menu_role
+  main_createManymenu_role(data: [main_menu_roleCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnemenu_role(where: main_menu_roleWhereUniqueInput!): main_menu_role
+  main_updateOnemenu_role(data: main_menu_roleUpdateInput!, where: main_menu_roleWhereUniqueInput!): main_menu_role
+  main_updateManymenu_role(data: main_menu_roleUpdateManyMutationInput!, where: main_menu_roleWhereInput): main_AffectedRowsOutput
+  main_deleteManymenu_role(where: main_menu_roleWhereInput): main_AffectedRowsOutput
+  main_createOnepermission(data: main_permissionCreateInput!): main_permission
+  main_upsertOnepermission(where: main_permissionWhereUniqueInput!, create: main_permissionCreateInput!, update: main_permissionUpdateInput!): main_permission
+  main_createManypermission(data: [main_permissionCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnepermission(where: main_permissionWhereUniqueInput!): main_permission
+  main_updateOnepermission(data: main_permissionUpdateInput!, where: main_permissionWhereUniqueInput!): main_permission
+  main_updateManypermission(data: main_permissionUpdateManyMutationInput!, where: main_permissionWhereInput): main_AffectedRowsOutput
+  main_deleteManypermission(where: main_permissionWhereInput): main_AffectedRowsOutput
+  main_createOnepost(data: main_postCreateInput!): main_post
+  main_upsertOnepost(where: main_postWhereUniqueInput!, create: main_postCreateInput!, update: main_postUpdateInput!): main_post
+  main_createManypost(data: [main_postCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnepost(where: main_postWhereUniqueInput!): main_post
+  main_updateOnepost(data: main_postUpdateInput!, where: main_postWhereUniqueInput!): main_post
+  main_updateManypost(data: main_postUpdateManyMutationInput!, where: main_postWhereInput): main_AffectedRowsOutput
+  main_deleteManypost(where: main_postWhereInput): main_AffectedRowsOutput
+  main_createOneprovider(data: main_providerCreateInput!): main_provider
+  main_upsertOneprovider(where: main_providerWhereUniqueInput!, create: main_providerCreateInput!, update: main_providerUpdateInput!): main_provider
+  main_createManyprovider(data: [main_providerCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOneprovider(where: main_providerWhereUniqueInput!): main_provider
+  main_updateOneprovider(data: main_providerUpdateInput!, where: main_providerWhereUniqueInput!): main_provider
+  main_updateManyprovider(data: main_providerUpdateManyMutationInput!, where: main_providerWhereInput): main_AffectedRowsOutput
+  main_deleteManyprovider(where: main_providerWhereInput): main_AffectedRowsOutput
+  main_createOnerole(data: main_roleCreateInput!): main_role
+  main_upsertOnerole(where: main_roleWhereUniqueInput!, create: main_roleCreateInput!, update: main_roleUpdateInput!): main_role
+  main_createManyrole(data: [main_roleCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnerole(where: main_roleWhereUniqueInput!): main_role
+  main_updateOnerole(data: main_roleUpdateInput!, where: main_roleWhereUniqueInput!): main_role
+  main_updateManyrole(data: main_roleUpdateManyMutationInput!, where: main_roleWhereInput): main_AffectedRowsOutput
+  main_deleteManyrole(where: main_roleWhereInput): main_AffectedRowsOutput
+  main_createOnerole_user(data: main_role_userCreateInput!): main_role_user
+  main_upsertOnerole_user(where: main_role_userWhereUniqueInput!, create: main_role_userCreateInput!, update: main_role_userUpdateInput!): main_role_user
+  main_createManyrole_user(data: [main_role_userCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnerole_user(where: main_role_userWhereUniqueInput!): main_role_user
+  main_updateOnerole_user(data: main_role_userUpdateInput!, where: main_role_userWhereUniqueInput!): main_role_user
+  main_updateManyrole_user(data: main_role_userUpdateManyMutationInput!, where: main_role_userWhereInput): main_AffectedRowsOutput
+  main_deleteManyrole_user(where: main_role_userWhereInput): main_AffectedRowsOutput
+  main_createOnesalelog(data: main_salelogCreateInput!): main_salelog
+  main_upsertOnesalelog(where: main_salelogWhereUniqueInput!, create: main_salelogCreateInput!, update: main_salelogUpdateInput!): main_salelog
+  main_createManysalelog(data: [main_salelogCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnesalelog(where: main_salelogWhereUniqueInput!): main_salelog
+  main_updateOnesalelog(data: main_salelogUpdateInput!, where: main_salelogWhereUniqueInput!): main_salelog
+  main_updateManysalelog(data: main_salelogUpdateManyMutationInput!, where: main_salelogWhereInput): main_AffectedRowsOutput
+  main_deleteManysalelog(where: main_salelogWhereInput): main_AffectedRowsOutput
+  main_createOnesaletype(data: main_saletypeCreateInput!): main_saletype
+  main_upsertOnesaletype(where: main_saletypeWhereUniqueInput!, create: main_saletypeCreateInput!, update: main_saletypeUpdateInput!): main_saletype
+  main_createManysaletype(data: [main_saletypeCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnesaletype(where: main_saletypeWhereUniqueInput!): main_saletype
+  main_updateOnesaletype(data: main_saletypeUpdateInput!, where: main_saletypeWhereUniqueInput!): main_saletype
+  main_updateManysaletype(data: main_saletypeUpdateManyMutationInput!, where: main_saletypeWhereInput): main_AffectedRowsOutput
+  main_deleteManysaletype(where: main_saletypeWhereInput): main_AffectedRowsOutput
+  main_createOneuser(data: main_userCreateInput!): main_user
+  main_upsertOneuser(where: main_userWhereUniqueInput!, create: main_userCreateInput!, update: main_userUpdateInput!): main_user
+  main_createManyuser(data: [main_userCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOneuser(where: main_userWhereUniqueInput!): main_user
+  main_updateOneuser(data: main_userUpdateInput!, where: main_userWhereUniqueInput!): main_user
+  main_updateManyuser(data: main_userUpdateManyMutationInput!, where: main_userWhereInput): main_AffectedRowsOutput
+  main_deleteManyuser(where: main_userWhereInput): main_AffectedRowsOutput
+  main_createOneverification_record(data: main_verification_recordCreateInput!): main_verification_record
+  main_upsertOneverification_record(where: main_verification_recordWhereUniqueInput!, create: main_verification_recordCreateInput!, update: main_verification_recordUpdateInput!): main_verification_record
+  main_createManyverification_record(data: [main_verification_recordCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOneverification_record(where: main_verification_recordWhereUniqueInput!): main_verification_record
+  main_updateOneverification_record(data: main_verification_recordUpdateInput!, where: main_verification_recordWhereUniqueInput!): main_verification_record
+  main_updateManyverification_record(data: main_verification_recordUpdateManyMutationInput!, where: main_verification_recordWhereInput): main_AffectedRowsOutput
+  main_deleteManyverification_record(where: main_verification_recordWhereInput): main_AffectedRowsOutput
+  main_createOnevisitlog(data: main_visitlogCreateInput!): main_visitlog
+  main_upsertOnevisitlog(where: main_visitlogWhereUniqueInput!, create: main_visitlogCreateInput!, update: main_visitlogUpdateInput!): main_visitlog
+  main_createManyvisitlog(data: [main_visitlogCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnevisitlog(where: main_visitlogWhereUniqueInput!): main_visitlog
+  main_updateOnevisitlog(data: main_visitlogUpdateInput!, where: main_visitlogWhereUniqueInput!): main_visitlog
+  main_updateManyvisitlog(data: main_visitlogUpdateManyMutationInput!, where: main_visitlogWhereInput): main_AffectedRowsOutput
+  main_deleteManyvisitlog(where: main_visitlogWhereInput): main_AffectedRowsOutput
+  main_executeRaw(query: String!, parameters: main_Json): main_Json
+  main_queryRaw(query: String!, parameters: main_Json): main_Json
+  casdoor_apiRefreshToken(POSTApiRefresh_tokenInput: casdoor_POSTApiRefresh_tokenInput): casdoor_apiUserResponse
+  casdoor_apiSendVerificationCode(POSTApiSend_verification_codeInput: casdoor_POSTApiSend_verification_codeInput): casdoor_objectResponse
+  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
+  casdoor_apiAddUser(POSTApiAdd_userInput: casdoor_POSTApiAdd_userInput): casdoor_objectResponse
+  casdoor_apiLogin(POSTApiLoginInput: casdoor_POSTApiLoginInput): casdoor_apiUserResponse
+}
+
+type system_QueryGetRoleBindApis {
+  enabled: Boolean
+  id: Int
+  method: String
+  title: String
+  updateTime: String
+  deleteTime: String
+  liveQuery: Boolean
+  operationType: String
+  roles: String
+  createTime: String
+  remark: String
+  restUrl: String
+  content: String
+  isPublic: Boolean
+  roleType: String
+  illegal: Boolean
+  _join: Query!
+}
+
+enum system_Query_getRoleBindApis_roleType {
+  requireMatchAll
+  requireMatchAny
+  denyMatchAll
+  denyMatchAny
+}
+
+type system_QueryGetAllApis {
+  roleType: String
+  createTime: String
+  liveQuery: Boolean
+  operationType: String
+  remark: String
+  title: String
+  deleteTime: String
+  illegal: Boolean
+  restUrl: String
+  roles: String
+  id: Int
+  enabled: Boolean
+  isPublic: Boolean
+  method: String
+  updateTime: String
+  content: String
+  _join: Query!
+}
+
+type system_MutationBindRoleApis {
+  count: Int
+  _join: Query!
+}
+
+input system_POSTApiV1RoleBindApiInput {
+  roleCode: String!
+  apis: [Int]!
+  allRoles: [String]!
+  roleType: system_POSTApiV1RoleBindApiInput_roleType
+}
+
+enum system_POSTApiV1RoleBindApiInput_roleType {
+  requireMatchAll
+  requireMatchAny
+  denyMatchAll
+  denyMatchAny
+}
+
+type system_MutationUnBindRoleApis {
+  count: Int
+  _join: Query!
+}
+
+input system_POSTApiV1RoleUnbindApiInput {
+  roleType: system_POSTApiV1RoleUnbindApiInput_roleType
+  roleCode: String!
+  apis: [Int]!
+}
+
+enum system_POSTApiV1RoleUnbindApiInput_roleType {
+  requireMatchAll
+  requireMatchAny
+  denyMatchAll
+  denyMatchAny
+}
+
+type system_QueryGetAllRoles {
+  code: String
+  remark: String
+  _join: Query!
+}
+
+type statistics_GetVisitTrending {
+  count: Int
+  days: String
+  _join: Query!
+}
+
+type statistics_GetMonthlySales {
+  months: String
+  totalSales: Float
+  _join: Query!
+}
+
+type statistics_GetSalesTop10 {
+  shopName: String
+  totalSales: Float
+  _join: Query!
+}
+
+type statistics_GetSaleTypePercent {
+  totalSales: Float
+  typeId: Int
+  typeName: String
+  _join: Query!
+}
+
+
+
+input main_NestedIntFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: main_NestedIntFilter
+}
+
+input main_IntFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: main_NestedIntFilter
+}
+
+input main_NestedIntNullableFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: main_NestedIntNullableFilter
+}
+
+input main_IntNullableFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: main_NestedIntNullableFilter
+}
+
+input main_NestedStringFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: main_NestedStringFilter
+}
+
+input main_StringFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: main_NestedStringFilter
+}
+
+input main_NestedStringNullableFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: main_NestedStringNullableFilter
+}
+
+input main_StringNullableFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: main_NestedStringNullableFilter
+}
+
+input main_NestedDateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: main_NestedDateTimeNullableFilter
+}
+
+input main_DateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: main_NestedDateTimeNullableFilter
+}
+
+input main_menuWhereInput {
+  AND: main_menuWhereInput
+  OR: [main_menuWhereInput]
+  NOT: main_menuWhereInput
+  id: main_IntFilter
+  parentId: main_IntNullableFilter
+  label: main_StringFilter
+  path: main_StringNullableFilter
+  icon: main_StringNullableFilter
+  sort: main_IntFilter
+  level: main_IntFilter
+  name: main_StringNullableFilter
+  is_bottom: main_IntFilter
+  create_time: main_DateTimeNullableFilter
+  perms: main_StringNullableFilter
+  menu_type: main_StringNullableFilter
+  api_id: main_StringNullableFilter
+}
+
+enum main_SortOrder {
+  asc
+  desc
+}
+
+input main_menuOrderByWithRelationInput {
+  id: main_SortOrder
+  parentId: main_SortOrder
+  label: main_SortOrder
+  path: main_SortOrder
+  icon: main_SortOrder
+  sort: main_SortOrder
+  level: main_SortOrder
+  name: main_SortOrder
+  is_bottom: main_SortOrder
+  create_time: main_SortOrder
+  perms: main_SortOrder
+  menu_type: main_SortOrder
+  api_id: main_SortOrder
+}
+
+input main_menuWhereUniqueInput {
+  id: Int
+}
+
+enum main_MenuScalarFieldEnum {
+  id
+  parentId
+  label
+  path
+  icon
+  sort
+  level
+  name
+  is_bottom
+  create_time
+  perms
+  menu_type
+  api_id
+}
+
+type main_menu {
+  id: Int!
+  parentId: Int
+  label: String!
+  path: String
+  icon: String
+  sort: Int!
+  level: Int!
+  name: String
+  is_bottom: Int!
+  create_time: DateTime
+  perms: String
+  menu_type: String
+  api_id: String
+  _join: Query!
+}
+
+type main_MenuCountAggregateOutputType {
+  id: Int!
+  parentId: Int!
+  label: Int!
+  path: Int!
+  icon: Int!
+  sort: Int!
+  level: Int!
+  name: Int!
+  is_bottom: Int!
+  create_time: Int!
+  perms: Int!
+  menu_type: Int!
+  api_id: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_MenuAvgAggregateOutputType {
+  id: Float
+  parentId: Float
+  sort: Float
+  level: Float
+  is_bottom: Float
+  _join: Query!
+}
+
+type main_MenuSumAggregateOutputType {
+  id: Int
+  parentId: Int
+  sort: Int
+  level: Int
+  is_bottom: Int
+  _join: Query!
+}
+
+type main_MenuMinAggregateOutputType {
+  id: Int
+  parentId: Int
+  label: String
+  path: String
+  icon: String
+  sort: Int
+  level: Int
+  name: String
+  is_bottom: Int
+  create_time: DateTime
+  perms: String
+  menu_type: String
+  api_id: String
+  _join: Query!
+}
+
+type main_MenuMaxAggregateOutputType {
+  id: Int
+  parentId: Int
+  label: String
+  path: String
+  icon: String
+  sort: Int
+  level: Int
+  name: String
+  is_bottom: Int
+  create_time: DateTime
+  perms: String
+  menu_type: String
+  api_id: String
+  _join: Query!
+}
+
+type main_AggregateMenu {
+  _count: main_MenuCountAggregateOutputType
+  _avg: main_MenuAvgAggregateOutputType
+  _sum: main_MenuSumAggregateOutputType
+  _min: main_MenuMinAggregateOutputType
+  _max: main_MenuMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_menuCountOrderByAggregateInput {
+  id: main_SortOrder
+  parentId: main_SortOrder
+  label: main_SortOrder
+  path: main_SortOrder
+  icon: main_SortOrder
+  sort: main_SortOrder
+  level: main_SortOrder
+  name: main_SortOrder
+  is_bottom: main_SortOrder
+  create_time: main_SortOrder
+  perms: main_SortOrder
+  menu_type: main_SortOrder
+  api_id: main_SortOrder
+}
+
+input main_menuAvgOrderByAggregateInput {
+  id: main_SortOrder
+  parentId: main_SortOrder
+  sort: main_SortOrder
+  level: main_SortOrder
+  is_bottom: main_SortOrder
+}
+
+input main_menuMaxOrderByAggregateInput {
+  id: main_SortOrder
+  parentId: main_SortOrder
+  label: main_SortOrder
+  path: main_SortOrder
+  icon: main_SortOrder
+  sort: main_SortOrder
+  level: main_SortOrder
+  name: main_SortOrder
+  is_bottom: main_SortOrder
+  create_time: main_SortOrder
+  perms: main_SortOrder
+  menu_type: main_SortOrder
+  api_id: main_SortOrder
+}
+
+input main_menuMinOrderByAggregateInput {
+  id: main_SortOrder
+  parentId: main_SortOrder
+  label: main_SortOrder
+  path: main_SortOrder
+  icon: main_SortOrder
+  sort: main_SortOrder
+  level: main_SortOrder
+  name: main_SortOrder
+  is_bottom: main_SortOrder
+  create_time: main_SortOrder
+  perms: main_SortOrder
+  menu_type: main_SortOrder
+  api_id: main_SortOrder
+}
+
+input main_menuSumOrderByAggregateInput {
+  id: main_SortOrder
+  parentId: main_SortOrder
+  sort: main_SortOrder
+  level: main_SortOrder
+  is_bottom: main_SortOrder
+}
+
+input main_menuOrderByWithAggregationInput {
+  id: main_SortOrder
+  parentId: main_SortOrder
+  label: main_SortOrder
+  path: main_SortOrder
+  icon: main_SortOrder
+  sort: main_SortOrder
+  level: main_SortOrder
+  name: main_SortOrder
+  is_bottom: main_SortOrder
+  create_time: main_SortOrder
+  perms: main_SortOrder
+  menu_type: main_SortOrder
+  api_id: main_SortOrder
+  _count: main_menuCountOrderByAggregateInput
+  _avg: main_menuAvgOrderByAggregateInput
+  _max: main_menuMaxOrderByAggregateInput
+  _min: main_menuMinOrderByAggregateInput
+  _sum: main_menuSumOrderByAggregateInput
+}
+
+input main_NestedFloatFilter {
+  equals: Float
+  in: [Float]
+  notIn: [Float]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: main_NestedFloatFilter
+}
+
+input main_NestedIntWithAggregatesFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: main_NestedIntWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _avg: main_NestedFloatFilter
+  _sum: main_NestedIntFilter
+  _min: main_NestedIntFilter
+  _max: main_NestedIntFilter
+}
+
+input main_IntWithAggregatesFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: main_NestedIntWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _avg: main_NestedFloatFilter
+  _sum: main_NestedIntFilter
+  _min: main_NestedIntFilter
+  _max: main_NestedIntFilter
+}
+
+input main_NestedFloatNullableFilter {
+  equals: Float
+  in: [Float]
+  notIn: [Float]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: main_NestedFloatNullableFilter
+}
+
+input main_NestedIntNullableWithAggregatesFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: main_NestedIntNullableWithAggregatesFilter
+  _count: main_NestedIntNullableFilter
+  _avg: main_NestedFloatNullableFilter
+  _sum: main_NestedIntNullableFilter
+  _min: main_NestedIntNullableFilter
+  _max: main_NestedIntNullableFilter
+}
+
+input main_IntNullableWithAggregatesFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: main_NestedIntNullableWithAggregatesFilter
+  _count: main_NestedIntNullableFilter
+  _avg: main_NestedFloatNullableFilter
+  _sum: main_NestedIntNullableFilter
+  _min: main_NestedIntNullableFilter
+  _max: main_NestedIntNullableFilter
+}
+
+input main_NestedStringWithAggregatesFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: main_NestedStringWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _min: main_NestedStringFilter
+  _max: main_NestedStringFilter
+}
+
+input main_StringWithAggregatesFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: main_NestedStringWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _min: main_NestedStringFilter
+  _max: main_NestedStringFilter
+}
+
+input main_NestedStringNullableWithAggregatesFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: main_NestedStringNullableWithAggregatesFilter
+  _count: main_NestedIntNullableFilter
+  _min: main_NestedStringNullableFilter
+  _max: main_NestedStringNullableFilter
+}
+
+input main_StringNullableWithAggregatesFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: main_NestedStringNullableWithAggregatesFilter
+  _count: main_NestedIntNullableFilter
+  _min: main_NestedStringNullableFilter
+  _max: main_NestedStringNullableFilter
+}
+
+input main_NestedDateTimeNullableWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: main_NestedDateTimeNullableWithAggregatesFilter
+  _count: main_NestedIntNullableFilter
+  _min: main_NestedDateTimeNullableFilter
+  _max: main_NestedDateTimeNullableFilter
+}
+
+input main_DateTimeNullableWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: main_NestedDateTimeNullableWithAggregatesFilter
+  _count: main_NestedIntNullableFilter
+  _min: main_NestedDateTimeNullableFilter
+  _max: main_NestedDateTimeNullableFilter
+}
+
+input main_menuScalarWhereWithAggregatesInput {
+  AND: main_menuScalarWhereWithAggregatesInput
+  OR: [main_menuScalarWhereWithAggregatesInput]
+  NOT: main_menuScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  parentId: main_IntNullableWithAggregatesFilter
+  label: main_StringWithAggregatesFilter
+  path: main_StringNullableWithAggregatesFilter
+  icon: main_StringNullableWithAggregatesFilter
+  sort: main_IntWithAggregatesFilter
+  level: main_IntWithAggregatesFilter
+  name: main_StringNullableWithAggregatesFilter
+  is_bottom: main_IntWithAggregatesFilter
+  create_time: main_DateTimeNullableWithAggregatesFilter
+  perms: main_StringNullableWithAggregatesFilter
+  menu_type: main_StringNullableWithAggregatesFilter
+  api_id: main_StringNullableWithAggregatesFilter
+}
+
+type main_MenuGroupByOutputType {
+  id: Int!
+  parentId: Int
+  label: String!
+  path: String
+  icon: String
+  sort: Int!
+  level: Int!
+  name: String
+  is_bottom: Int!
+  create_time: DateTime
+  perms: String
+  menu_type: String
+  api_id: String
+  _count: main_MenuCountAggregateOutputType
+  _avg: main_MenuAvgAggregateOutputType
+  _sum: main_MenuSumAggregateOutputType
+  _min: main_MenuMinAggregateOutputType
+  _max: main_MenuMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_NestedBigIntFilter {
+  equals: BigInt
+  in: [BigInt]
+  notIn: [BigInt]
+  lt: BigInt
+  lte: BigInt
+  gt: BigInt
+  gte: BigInt
+  not: main_NestedBigIntFilter
+}
+
+input main_BigIntFilter {
+  equals: BigInt
+  in: [BigInt]
+  notIn: [BigInt]
+  lt: BigInt
+  lte: BigInt
+  gt: BigInt
+  gte: BigInt
+  not: main_NestedBigIntFilter
+}
+
+input main_menu_permissionWhereInput {
+  AND: main_menu_permissionWhereInput
+  OR: [main_menu_permissionWhereInput]
+  NOT: main_menu_permissionWhereInput
+  id: main_BigIntFilter
+  menu_id: main_IntFilter
+  perm_id: main_BigIntFilter
+}
+
+input main_menu_permissionOrderByWithRelationInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  perm_id: main_SortOrder
+}
+
+input main_menu_permissionWhereUniqueInput {
+  id: BigInt
+  perm_id: BigInt
+}
+
+enum main_Menu_permissionScalarFieldEnum {
+  id
+  menu_id
+  perm_id
+}
+
+type main_menu_permission {
+  id: BigInt!
+  menu_id: Int!
+  perm_id: BigInt!
+  _join: Query!
+}
+
+type main_Menu_permissionCountAggregateOutputType {
+  id: Int!
+  menu_id: Int!
+  perm_id: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_Menu_permissionAvgAggregateOutputType {
+  id: Float
+  menu_id: Float
+  perm_id: Float
+  _join: Query!
+}
+
+type main_Menu_permissionSumAggregateOutputType {
+  id: BigInt
+  menu_id: Int
+  perm_id: BigInt
+  _join: Query!
+}
+
+type main_Menu_permissionMinAggregateOutputType {
+  id: BigInt
+  menu_id: Int
+  perm_id: BigInt
+  _join: Query!
+}
+
+type main_Menu_permissionMaxAggregateOutputType {
+  id: BigInt
+  menu_id: Int
+  perm_id: BigInt
+  _join: Query!
+}
+
+type main_AggregateMenu_permission {
+  _count: main_Menu_permissionCountAggregateOutputType
+  _avg: main_Menu_permissionAvgAggregateOutputType
+  _sum: main_Menu_permissionSumAggregateOutputType
+  _min: main_Menu_permissionMinAggregateOutputType
+  _max: main_Menu_permissionMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_menu_permissionCountOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  perm_id: main_SortOrder
+}
+
+input main_menu_permissionAvgOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  perm_id: main_SortOrder
+}
+
+input main_menu_permissionMaxOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  perm_id: main_SortOrder
+}
+
+input main_menu_permissionMinOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  perm_id: main_SortOrder
+}
+
+input main_menu_permissionSumOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  perm_id: main_SortOrder
+}
+
+input main_menu_permissionOrderByWithAggregationInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  perm_id: main_SortOrder
+  _count: main_menu_permissionCountOrderByAggregateInput
+  _avg: main_menu_permissionAvgOrderByAggregateInput
+  _max: main_menu_permissionMaxOrderByAggregateInput
+  _min: main_menu_permissionMinOrderByAggregateInput
+  _sum: main_menu_permissionSumOrderByAggregateInput
+}
+
+input main_NestedBigIntWithAggregatesFilter {
+  equals: BigInt
+  in: [BigInt]
+  notIn: [BigInt]
+  lt: BigInt
+  lte: BigInt
+  gt: BigInt
+  gte: BigInt
+  not: main_NestedBigIntWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _avg: main_NestedFloatFilter
+  _sum: main_NestedBigIntFilter
+  _min: main_NestedBigIntFilter
+  _max: main_NestedBigIntFilter
+}
+
+input main_BigIntWithAggregatesFilter {
+  equals: BigInt
+  in: [BigInt]
+  notIn: [BigInt]
+  lt: BigInt
+  lte: BigInt
+  gt: BigInt
+  gte: BigInt
+  not: main_NestedBigIntWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _avg: main_NestedFloatFilter
+  _sum: main_NestedBigIntFilter
+  _min: main_NestedBigIntFilter
+  _max: main_NestedBigIntFilter
+}
+
+input main_menu_permissionScalarWhereWithAggregatesInput {
+  AND: main_menu_permissionScalarWhereWithAggregatesInput
+  OR: [main_menu_permissionScalarWhereWithAggregatesInput]
+  NOT: main_menu_permissionScalarWhereWithAggregatesInput
+  id: main_BigIntWithAggregatesFilter
+  menu_id: main_IntWithAggregatesFilter
+  perm_id: main_BigIntWithAggregatesFilter
+}
+
+type main_Menu_permissionGroupByOutputType {
+  id: BigInt!
+  menu_id: Int!
+  perm_id: BigInt!
+  _count: main_Menu_permissionCountAggregateOutputType
+  _avg: main_Menu_permissionAvgAggregateOutputType
+  _sum: main_Menu_permissionSumAggregateOutputType
+  _min: main_Menu_permissionMinAggregateOutputType
+  _max: main_Menu_permissionMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_menu_roleWhereInput {
+  AND: main_menu_roleWhereInput
+  OR: [main_menu_roleWhereInput]
+  NOT: main_menu_roleWhereInput
+  id: main_IntFilter
+  menu_id: main_IntFilter
+  role_id: main_IntFilter
+}
+
+input main_menu_roleOrderByWithRelationInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  role_id: main_SortOrder
+}
+
+input main_menu_roleRole_idMenu_idCompoundUniqueInput {
+  role_id: Int!
+  menu_id: Int!
+}
+
+input main_menu_roleWhereUniqueInput {
+  id: Int
+  role_id_menu_id: main_menu_roleRole_idMenu_idCompoundUniqueInput
+}
+
+enum main_Menu_roleScalarFieldEnum {
+  id
+  menu_id
+  role_id
+}
+
+type main_menu_role {
+  id: Int!
+  menu_id: Int!
+  role_id: Int!
+  _join: Query!
+}
+
+type main_Menu_roleCountAggregateOutputType {
+  id: Int!
+  menu_id: Int!
+  role_id: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_Menu_roleAvgAggregateOutputType {
+  id: Float
+  menu_id: Float
+  role_id: Float
+  _join: Query!
+}
+
+type main_Menu_roleSumAggregateOutputType {
+  id: Int
+  menu_id: Int
+  role_id: Int
+  _join: Query!
+}
+
+type main_Menu_roleMinAggregateOutputType {
+  id: Int
+  menu_id: Int
+  role_id: Int
+  _join: Query!
+}
+
+type main_Menu_roleMaxAggregateOutputType {
+  id: Int
+  menu_id: Int
+  role_id: Int
+  _join: Query!
+}
+
+type main_AggregateMenu_role {
+  _count: main_Menu_roleCountAggregateOutputType
+  _avg: main_Menu_roleAvgAggregateOutputType
+  _sum: main_Menu_roleSumAggregateOutputType
+  _min: main_Menu_roleMinAggregateOutputType
+  _max: main_Menu_roleMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_menu_roleCountOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  role_id: main_SortOrder
+}
+
+input main_menu_roleAvgOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  role_id: main_SortOrder
+}
+
+input main_menu_roleMaxOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  role_id: main_SortOrder
+}
+
+input main_menu_roleMinOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  role_id: main_SortOrder
+}
+
+input main_menu_roleSumOrderByAggregateInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  role_id: main_SortOrder
+}
+
+input main_menu_roleOrderByWithAggregationInput {
+  id: main_SortOrder
+  menu_id: main_SortOrder
+  role_id: main_SortOrder
+  _count: main_menu_roleCountOrderByAggregateInput
+  _avg: main_menu_roleAvgOrderByAggregateInput
+  _max: main_menu_roleMaxOrderByAggregateInput
+  _min: main_menu_roleMinOrderByAggregateInput
+  _sum: main_menu_roleSumOrderByAggregateInput
+}
+
+input main_menu_roleScalarWhereWithAggregatesInput {
+  AND: main_menu_roleScalarWhereWithAggregatesInput
+  OR: [main_menu_roleScalarWhereWithAggregatesInput]
+  NOT: main_menu_roleScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  menu_id: main_IntWithAggregatesFilter
+  role_id: main_IntWithAggregatesFilter
+}
+
+type main_Menu_roleGroupByOutputType {
+  id: Int!
+  menu_id: Int!
+  role_id: Int!
+  _count: main_Menu_roleCountAggregateOutputType
+  _avg: main_Menu_roleAvgAggregateOutputType
+  _sum: main_Menu_roleSumAggregateOutputType
+  _min: main_Menu_roleMinAggregateOutputType
+  _max: main_Menu_roleMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_permissionWhereInput {
+  AND: main_permissionWhereInput
+  OR: [main_permissionWhereInput]
+  NOT: main_permissionWhereInput
+  id: main_BigIntFilter
+  createdAt: main_DateTimeNullableFilter
+  updatedAt: main_DateTimeNullableFilter
+  method: main_StringFilter
+  path: main_StringFilter
+  enabled: main_IntFilter
+}
+
+input main_permissionOrderByWithRelationInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  method: main_SortOrder
+  path: main_SortOrder
+  enabled: main_SortOrder
+}
+
+input main_permissionWhereUniqueInput {
+  id: BigInt
+  path: String
+}
+
+enum main_PermissionScalarFieldEnum {
+  id
+  createdAt
+  updatedAt
+  method
+  path
+  enabled
+}
+
+type main_permission {
+  id: BigInt!
+  createdAt: DateTime
+  updatedAt: DateTime
+  method: String!
+  path: String!
+  enabled: Int!
+  _join: Query!
+}
+
+type main_PermissionCountAggregateOutputType {
+  id: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  method: Int!
+  path: Int!
+  enabled: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_PermissionAvgAggregateOutputType {
+  id: Float
+  enabled: Float
+  _join: Query!
+}
+
+type main_PermissionSumAggregateOutputType {
+  id: BigInt
+  enabled: Int
+  _join: Query!
+}
+
+type main_PermissionMinAggregateOutputType {
+  id: BigInt
+  createdAt: DateTime
+  updatedAt: DateTime
+  method: String
+  path: String
+  enabled: Int
+  _join: Query!
+}
+
+type main_PermissionMaxAggregateOutputType {
+  id: BigInt
+  createdAt: DateTime
+  updatedAt: DateTime
+  method: String
+  path: String
+  enabled: Int
+  _join: Query!
+}
+
+type main_AggregatePermission {
+  _count: main_PermissionCountAggregateOutputType
+  _avg: main_PermissionAvgAggregateOutputType
+  _sum: main_PermissionSumAggregateOutputType
+  _min: main_PermissionMinAggregateOutputType
+  _max: main_PermissionMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_permissionCountOrderByAggregateInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  method: main_SortOrder
+  path: main_SortOrder
+  enabled: main_SortOrder
+}
+
+input main_permissionAvgOrderByAggregateInput {
+  id: main_SortOrder
+  enabled: main_SortOrder
+}
+
+input main_permissionMaxOrderByAggregateInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  method: main_SortOrder
+  path: main_SortOrder
+  enabled: main_SortOrder
+}
+
+input main_permissionMinOrderByAggregateInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  method: main_SortOrder
+  path: main_SortOrder
+  enabled: main_SortOrder
+}
+
+input main_permissionSumOrderByAggregateInput {
+  id: main_SortOrder
+  enabled: main_SortOrder
+}
+
+input main_permissionOrderByWithAggregationInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  method: main_SortOrder
+  path: main_SortOrder
+  enabled: main_SortOrder
+  _count: main_permissionCountOrderByAggregateInput
+  _avg: main_permissionAvgOrderByAggregateInput
+  _max: main_permissionMaxOrderByAggregateInput
+  _min: main_permissionMinOrderByAggregateInput
+  _sum: main_permissionSumOrderByAggregateInput
+}
+
+input main_permissionScalarWhereWithAggregatesInput {
+  AND: main_permissionScalarWhereWithAggregatesInput
+  OR: [main_permissionScalarWhereWithAggregatesInput]
+  NOT: main_permissionScalarWhereWithAggregatesInput
+  id: main_BigIntWithAggregatesFilter
+  createdAt: main_DateTimeNullableWithAggregatesFilter
+  updatedAt: main_DateTimeNullableWithAggregatesFilter
+  method: main_StringWithAggregatesFilter
+  path: main_StringWithAggregatesFilter
+  enabled: main_IntWithAggregatesFilter
+}
+
+type main_PermissionGroupByOutputType {
+  id: BigInt!
+  createdAt: DateTime
+  updatedAt: DateTime
+  method: String!
+  path: String!
+  enabled: Int!
+  _count: main_PermissionCountAggregateOutputType
+  _avg: main_PermissionAvgAggregateOutputType
+  _sum: main_PermissionSumAggregateOutputType
+  _min: main_PermissionMinAggregateOutputType
+  _max: main_PermissionMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_postWhereInput {
+  AND: main_postWhereInput
+  OR: [main_postWhereInput]
+  NOT: main_postWhereInput
+  id: main_IntFilter
+  title: main_StringFilter
+  poster: main_StringNullableFilter
+  published_at: main_DateTimeNullableFilter
+  author: main_StringFilter
+  content: main_StringNullableFilter
+}
+
+input main_postOrderByWithRelationInput {
+  id: main_SortOrder
+  title: main_SortOrder
+  poster: main_SortOrder
+  published_at: main_SortOrder
+  author: main_SortOrder
+  content: main_SortOrder
+}
+
+input main_postWhereUniqueInput {
+  id: Int
+}
+
+enum main_PostScalarFieldEnum {
+  id
+  title
+  poster
+  published_at
+  author
+  content
+}
+
+type main_post {
+  id: Int!
+  title: String!
+  poster: String
+  published_at: DateTime
+  author: String!
+  content: String
+  _join: Query!
+}
+
+type main_PostCountAggregateOutputType {
+  id: Int!
+  title: Int!
+  poster: Int!
+  published_at: Int!
+  author: Int!
+  content: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_PostAvgAggregateOutputType {
+  id: Float
+  _join: Query!
+}
+
+type main_PostSumAggregateOutputType {
+  id: Int
+  _join: Query!
+}
+
+type main_PostMinAggregateOutputType {
+  id: Int
+  title: String
+  poster: String
+  published_at: DateTime
+  author: String
+  content: String
+  _join: Query!
+}
+
+type main_PostMaxAggregateOutputType {
+  id: Int
+  title: String
+  poster: String
+  published_at: DateTime
+  author: String
+  content: String
+  _join: Query!
+}
+
+type main_AggregatePost {
+  _count: main_PostCountAggregateOutputType
+  _avg: main_PostAvgAggregateOutputType
+  _sum: main_PostSumAggregateOutputType
+  _min: main_PostMinAggregateOutputType
+  _max: main_PostMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_postCountOrderByAggregateInput {
+  id: main_SortOrder
+  title: main_SortOrder
+  poster: main_SortOrder
+  published_at: main_SortOrder
+  author: main_SortOrder
+  content: main_SortOrder
+}
+
+input main_postAvgOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_postMaxOrderByAggregateInput {
+  id: main_SortOrder
+  title: main_SortOrder
+  poster: main_SortOrder
+  published_at: main_SortOrder
+  author: main_SortOrder
+  content: main_SortOrder
+}
+
+input main_postMinOrderByAggregateInput {
+  id: main_SortOrder
+  title: main_SortOrder
+  poster: main_SortOrder
+  published_at: main_SortOrder
+  author: main_SortOrder
+  content: main_SortOrder
+}
+
+input main_postSumOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_postOrderByWithAggregationInput {
+  id: main_SortOrder
+  title: main_SortOrder
+  poster: main_SortOrder
+  published_at: main_SortOrder
+  author: main_SortOrder
+  content: main_SortOrder
+  _count: main_postCountOrderByAggregateInput
+  _avg: main_postAvgOrderByAggregateInput
+  _max: main_postMaxOrderByAggregateInput
+  _min: main_postMinOrderByAggregateInput
+  _sum: main_postSumOrderByAggregateInput
+}
+
+input main_postScalarWhereWithAggregatesInput {
+  AND: main_postScalarWhereWithAggregatesInput
+  OR: [main_postScalarWhereWithAggregatesInput]
+  NOT: main_postScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  title: main_StringWithAggregatesFilter
+  poster: main_StringNullableWithAggregatesFilter
+  published_at: main_DateTimeNullableWithAggregatesFilter
+  author: main_StringWithAggregatesFilter
+  content: main_StringNullableWithAggregatesFilter
+}
+
+type main_PostGroupByOutputType {
+  id: Int!
+  title: String!
+  poster: String
+  published_at: DateTime
+  author: String!
+  content: String
+  _count: main_PostCountAggregateOutputType
+  _avg: main_PostAvgAggregateOutputType
+  _sum: main_PostSumAggregateOutputType
+  _min: main_PostMinAggregateOutputType
+  _max: main_PostMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_providerWhereInput {
+  AND: main_providerWhereInput
+  OR: [main_providerWhereInput]
+  NOT: main_providerWhereInput
+  owner: main_StringFilter
+  name: main_StringFilter
+  created_time: main_StringNullableFilter
+  type: main_StringNullableFilter
+  client_id: main_StringNullableFilter
+  client_secret: main_StringNullableFilter
+  sign_name: main_StringNullableFilter
+  template_code: main_StringNullableFilter
+}
+
+input main_providerOrderByWithRelationInput {
+  owner: main_SortOrder
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  client_id: main_SortOrder
+  client_secret: main_SortOrder
+  sign_name: main_SortOrder
+  template_code: main_SortOrder
+}
+
+input main_providerOwnerNameCompoundUniqueInput {
+  owner: String!
+  name: String!
+}
+
+input main_providerWhereUniqueInput {
+  name: String
+  owner_name: main_providerOwnerNameCompoundUniqueInput
+}
+
+enum main_ProviderScalarFieldEnum {
+  owner
+  name
+  created_time
+  type
+  client_id
+  client_secret
+  sign_name
+  template_code
+}
+
+type main_provider {
+  owner: String!
+  name: String!
+  created_time: String
+  type: String
+  client_id: String
+  client_secret: String
+  sign_name: String
+  template_code: String
+  _join: Query!
+}
+
+type main_ProviderCountAggregateOutputType {
+  owner: Int!
+  name: Int!
+  created_time: Int!
+  type: Int!
+  client_id: Int!
+  client_secret: Int!
+  sign_name: Int!
+  template_code: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_ProviderMinAggregateOutputType {
+  owner: String
+  name: String
+  created_time: String
+  type: String
+  client_id: String
+  client_secret: String
+  sign_name: String
+  template_code: String
+  _join: Query!
+}
+
+type main_ProviderMaxAggregateOutputType {
+  owner: String
+  name: String
+  created_time: String
+  type: String
+  client_id: String
+  client_secret: String
+  sign_name: String
+  template_code: String
+  _join: Query!
+}
+
+type main_AggregateProvider {
+  _count: main_ProviderCountAggregateOutputType
+  _min: main_ProviderMinAggregateOutputType
+  _max: main_ProviderMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_providerCountOrderByAggregateInput {
+  owner: main_SortOrder
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  client_id: main_SortOrder
+  client_secret: main_SortOrder
+  sign_name: main_SortOrder
+  template_code: main_SortOrder
+}
+
+input main_providerMaxOrderByAggregateInput {
+  owner: main_SortOrder
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  client_id: main_SortOrder
+  client_secret: main_SortOrder
+  sign_name: main_SortOrder
+  template_code: main_SortOrder
+}
+
+input main_providerMinOrderByAggregateInput {
+  owner: main_SortOrder
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  client_id: main_SortOrder
+  client_secret: main_SortOrder
+  sign_name: main_SortOrder
+  template_code: main_SortOrder
+}
+
+input main_providerOrderByWithAggregationInput {
+  owner: main_SortOrder
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  client_id: main_SortOrder
+  client_secret: main_SortOrder
+  sign_name: main_SortOrder
+  template_code: main_SortOrder
+  _count: main_providerCountOrderByAggregateInput
+  _max: main_providerMaxOrderByAggregateInput
+  _min: main_providerMinOrderByAggregateInput
+}
+
+input main_providerScalarWhereWithAggregatesInput {
+  AND: main_providerScalarWhereWithAggregatesInput
+  OR: [main_providerScalarWhereWithAggregatesInput]
+  NOT: main_providerScalarWhereWithAggregatesInput
+  owner: main_StringWithAggregatesFilter
+  name: main_StringWithAggregatesFilter
+  created_time: main_StringNullableWithAggregatesFilter
+  type: main_StringNullableWithAggregatesFilter
+  client_id: main_StringNullableWithAggregatesFilter
+  client_secret: main_StringNullableWithAggregatesFilter
+  sign_name: main_StringNullableWithAggregatesFilter
+  template_code: main_StringNullableWithAggregatesFilter
+}
+
+type main_ProviderGroupByOutputType {
+  owner: String!
+  name: String!
+  created_time: String
+  type: String
+  client_id: String
+  client_secret: String
+  sign_name: String
+  template_code: String
+  _count: main_ProviderCountAggregateOutputType
+  _min: main_ProviderMinAggregateOutputType
+  _max: main_ProviderMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_roleWhereInput {
+  AND: main_roleWhereInput
+  OR: [main_roleWhereInput]
+  NOT: main_roleWhereInput
+  id: main_IntFilter
+  code: main_StringFilter
+  remark: main_StringFilter
+}
+
+input main_roleOrderByWithRelationInput {
+  id: main_SortOrder
+  code: main_SortOrder
+  remark: main_SortOrder
+}
+
+input main_roleWhereUniqueInput {
+  id: Int
+  code: String
+}
+
+enum main_RoleScalarFieldEnum {
+  id
+  code
+  remark
+}
+
+type main_role {
+  id: Int!
+  code: String!
+  remark: String!
+  _join: Query!
+}
+
+type main_RoleCountAggregateOutputType {
+  id: Int!
+  code: Int!
+  remark: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_RoleAvgAggregateOutputType {
+  id: Float
+  _join: Query!
+}
+
+type main_RoleSumAggregateOutputType {
+  id: Int
+  _join: Query!
+}
+
+type main_RoleMinAggregateOutputType {
+  id: Int
+  code: String
+  remark: String
+  _join: Query!
+}
+
+type main_RoleMaxAggregateOutputType {
+  id: Int
+  code: String
+  remark: String
+  _join: Query!
+}
+
+type main_AggregateRole {
+  _count: main_RoleCountAggregateOutputType
+  _avg: main_RoleAvgAggregateOutputType
+  _sum: main_RoleSumAggregateOutputType
+  _min: main_RoleMinAggregateOutputType
+  _max: main_RoleMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_roleCountOrderByAggregateInput {
+  id: main_SortOrder
+  code: main_SortOrder
+  remark: main_SortOrder
+}
+
+input main_roleAvgOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_roleMaxOrderByAggregateInput {
+  id: main_SortOrder
+  code: main_SortOrder
+  remark: main_SortOrder
+}
+
+input main_roleMinOrderByAggregateInput {
+  id: main_SortOrder
+  code: main_SortOrder
+  remark: main_SortOrder
+}
+
+input main_roleSumOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_roleOrderByWithAggregationInput {
+  id: main_SortOrder
+  code: main_SortOrder
+  remark: main_SortOrder
+  _count: main_roleCountOrderByAggregateInput
+  _avg: main_roleAvgOrderByAggregateInput
+  _max: main_roleMaxOrderByAggregateInput
+  _min: main_roleMinOrderByAggregateInput
+  _sum: main_roleSumOrderByAggregateInput
+}
+
+input main_roleScalarWhereWithAggregatesInput {
+  AND: main_roleScalarWhereWithAggregatesInput
+  OR: [main_roleScalarWhereWithAggregatesInput]
+  NOT: main_roleScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  code: main_StringWithAggregatesFilter
+  remark: main_StringWithAggregatesFilter
+}
+
+type main_RoleGroupByOutputType {
+  id: Int!
+  code: String!
+  remark: String!
+  _count: main_RoleCountAggregateOutputType
+  _avg: main_RoleAvgAggregateOutputType
+  _sum: main_RoleSumAggregateOutputType
+  _min: main_RoleMinAggregateOutputType
+  _max: main_RoleMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_role_userWhereInput {
+  AND: main_role_userWhereInput
+  OR: [main_role_userWhereInput]
+  NOT: main_role_userWhereInput
+  id: main_IntFilter
+  role_id: main_IntFilter
+  user_id: main_IntFilter
+}
+
+input main_role_userOrderByWithRelationInput {
+  id: main_SortOrder
+  role_id: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_role_userRole_idUser_idCompoundUniqueInput {
+  role_id: Int!
+  user_id: Int!
+}
+
+input main_role_userWhereUniqueInput {
+  id: Int
+  role_id_user_id: main_role_userRole_idUser_idCompoundUniqueInput
+}
+
+enum main_Role_userScalarFieldEnum {
+  id
+  role_id
+  user_id
+}
+
+type main_role_user {
+  id: Int!
+  role_id: Int!
+  user_id: Int!
+  _join: Query!
+}
+
+type main_Role_userCountAggregateOutputType {
+  id: Int!
+  role_id: Int!
+  user_id: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_Role_userAvgAggregateOutputType {
+  id: Float
+  role_id: Float
+  user_id: Float
+  _join: Query!
+}
+
+type main_Role_userSumAggregateOutputType {
+  id: Int
+  role_id: Int
+  user_id: Int
+  _join: Query!
+}
+
+type main_Role_userMinAggregateOutputType {
+  id: Int
+  role_id: Int
+  user_id: Int
+  _join: Query!
+}
+
+type main_Role_userMaxAggregateOutputType {
+  id: Int
+  role_id: Int
+  user_id: Int
+  _join: Query!
+}
+
+type main_AggregateRole_user {
+  _count: main_Role_userCountAggregateOutputType
+  _avg: main_Role_userAvgAggregateOutputType
+  _sum: main_Role_userSumAggregateOutputType
+  _min: main_Role_userMinAggregateOutputType
+  _max: main_Role_userMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_role_userCountOrderByAggregateInput {
+  id: main_SortOrder
+  role_id: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_role_userAvgOrderByAggregateInput {
+  id: main_SortOrder
+  role_id: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_role_userMaxOrderByAggregateInput {
+  id: main_SortOrder
+  role_id: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_role_userMinOrderByAggregateInput {
+  id: main_SortOrder
+  role_id: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_role_userSumOrderByAggregateInput {
+  id: main_SortOrder
+  role_id: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_role_userOrderByWithAggregationInput {
+  id: main_SortOrder
+  role_id: main_SortOrder
+  user_id: main_SortOrder
+  _count: main_role_userCountOrderByAggregateInput
+  _avg: main_role_userAvgOrderByAggregateInput
+  _max: main_role_userMaxOrderByAggregateInput
+  _min: main_role_userMinOrderByAggregateInput
+  _sum: main_role_userSumOrderByAggregateInput
+}
+
+input main_role_userScalarWhereWithAggregatesInput {
+  AND: main_role_userScalarWhereWithAggregatesInput
+  OR: [main_role_userScalarWhereWithAggregatesInput]
+  NOT: main_role_userScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  role_id: main_IntWithAggregatesFilter
+  user_id: main_IntWithAggregatesFilter
+}
+
+type main_Role_userGroupByOutputType {
+  id: Int!
+  role_id: Int!
+  user_id: Int!
+  _count: main_Role_userCountAggregateOutputType
+  _avg: main_Role_userAvgAggregateOutputType
+  _sum: main_Role_userSumAggregateOutputType
+  _min: main_Role_userMinAggregateOutputType
+  _max: main_Role_userMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: main_NestedDateTimeFilter
+}
+
+input main_DateTimeFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: main_NestedDateTimeFilter
+}
+
+input main_FloatFilter {
+  equals: Float
+  in: [Float]
+  notIn: [Float]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: main_NestedFloatFilter
+}
+
+input main_SalelogListRelationFilter {
+  every: main_salelogWhereInput
+  some: main_salelogWhereInput
+  none: main_salelogWhereInput
+}
+
+input main_saletypeWhereInput {
+  AND: main_saletypeWhereInput
+  OR: [main_saletypeWhereInput]
+  NOT: main_saletypeWhereInput
+  id: main_IntFilter
+  name: main_StringFilter
+  createdAt: main_StringFilter
+  salelog: main_SalelogListRelationFilter
+}
+
+input main_SaletypeRelationFilter {
+  is: main_saletypeWhereInput
+  isNot: main_saletypeWhereInput
+}
+
+input main_salelogWhereInput {
+  AND: main_salelogWhereInput
+  OR: [main_salelogWhereInput]
+  NOT: main_salelogWhereInput
+  id: main_IntFilter
+  shopName: main_StringFilter
+  day: main_DateTimeFilter
+  sales: main_FloatFilter
+  typeId: main_IntFilter
+  saletype: main_SaletypeRelationFilter
+}
+
+input main_salelogOrderByRelationAggregateInput {
+  _count: main_SortOrder
+}
+
+input main_saletypeOrderByWithRelationInput {
+  id: main_SortOrder
+  name: main_SortOrder
+  createdAt: main_SortOrder
+  salelog: main_salelogOrderByRelationAggregateInput
+}
+
+input main_salelogOrderByWithRelationInput {
+  id: main_SortOrder
+  shopName: main_SortOrder
+  day: main_SortOrder
+  sales: main_SortOrder
+  typeId: main_SortOrder
+  saletype: main_saletypeOrderByWithRelationInput
+}
+
+input main_salelogWhereUniqueInput {
+  id: Int
+}
+
+enum main_SalelogScalarFieldEnum {
+  id
+  shopName
+  day
+  sales
+  typeId
+}
+
+type main_SaletypeCountOutputType {
+  salelog: Int!
+  _join: Query!
+}
+
+type main_saletype {
+  id: Int!
+  name: String!
+  createdAt: String!
+  salelog(where: main_salelogWhereInput, orderBy: [main_salelogOrderByWithRelationInput], cursor: main_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [main_SalelogScalarFieldEnum]): [main_salelog]
+  _count: main_SaletypeCountOutputType!
+  _join: Query!
+}
+
+type main_salelog {
+  id: Int!
+  shopName: String!
+  day: DateTime!
+  sales: Float!
+  typeId: Int!
+  saletype: main_saletype!
+  _join: Query!
+}
+
+type main_SalelogCountAggregateOutputType {
+  id: Int!
+  shopName: Int!
+  day: Int!
+  sales: Int!
+  typeId: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_SalelogAvgAggregateOutputType {
+  id: Float
+  sales: Float
+  typeId: Float
+  _join: Query!
+}
+
+type main_SalelogSumAggregateOutputType {
+  id: Int
+  sales: Float
+  typeId: Int
+  _join: Query!
+}
+
+type main_SalelogMinAggregateOutputType {
+  id: Int
+  shopName: String
+  day: DateTime
+  sales: Float
+  typeId: Int
+  _join: Query!
+}
+
+type main_SalelogMaxAggregateOutputType {
+  id: Int
+  shopName: String
+  day: DateTime
+  sales: Float
+  typeId: Int
+  _join: Query!
+}
+
+type main_AggregateSalelog {
+  _count: main_SalelogCountAggregateOutputType
+  _avg: main_SalelogAvgAggregateOutputType
+  _sum: main_SalelogSumAggregateOutputType
+  _min: main_SalelogMinAggregateOutputType
+  _max: main_SalelogMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_salelogCountOrderByAggregateInput {
+  id: main_SortOrder
+  shopName: main_SortOrder
+  day: main_SortOrder
+  sales: main_SortOrder
+  typeId: main_SortOrder
+}
+
+input main_salelogAvgOrderByAggregateInput {
+  id: main_SortOrder
+  sales: main_SortOrder
+  typeId: main_SortOrder
+}
+
+input main_salelogMaxOrderByAggregateInput {
+  id: main_SortOrder
+  shopName: main_SortOrder
+  day: main_SortOrder
+  sales: main_SortOrder
+  typeId: main_SortOrder
+}
+
+input main_salelogMinOrderByAggregateInput {
+  id: main_SortOrder
+  shopName: main_SortOrder
+  day: main_SortOrder
+  sales: main_SortOrder
+  typeId: main_SortOrder
+}
+
+input main_salelogSumOrderByAggregateInput {
+  id: main_SortOrder
+  sales: main_SortOrder
+  typeId: main_SortOrder
+}
+
+input main_salelogOrderByWithAggregationInput {
+  id: main_SortOrder
+  shopName: main_SortOrder
+  day: main_SortOrder
+  sales: main_SortOrder
+  typeId: main_SortOrder
+  _count: main_salelogCountOrderByAggregateInput
+  _avg: main_salelogAvgOrderByAggregateInput
+  _max: main_salelogMaxOrderByAggregateInput
+  _min: main_salelogMinOrderByAggregateInput
+  _sum: main_salelogSumOrderByAggregateInput
+}
+
+input main_NestedDateTimeWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: main_NestedDateTimeWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _min: main_NestedDateTimeFilter
+  _max: main_NestedDateTimeFilter
+}
+
+input main_DateTimeWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: main_NestedDateTimeWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _min: main_NestedDateTimeFilter
+  _max: main_NestedDateTimeFilter
+}
+
+input main_NestedFloatWithAggregatesFilter {
+  equals: Float
+  in: [Float]
+  notIn: [Float]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: main_NestedFloatWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _avg: main_NestedFloatFilter
+  _sum: main_NestedFloatFilter
+  _min: main_NestedFloatFilter
+  _max: main_NestedFloatFilter
+}
+
+input main_FloatWithAggregatesFilter {
+  equals: Float
+  in: [Float]
+  notIn: [Float]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: main_NestedFloatWithAggregatesFilter
+  _count: main_NestedIntFilter
+  _avg: main_NestedFloatFilter
+  _sum: main_NestedFloatFilter
+  _min: main_NestedFloatFilter
+  _max: main_NestedFloatFilter
+}
+
+input main_salelogScalarWhereWithAggregatesInput {
+  AND: main_salelogScalarWhereWithAggregatesInput
+  OR: [main_salelogScalarWhereWithAggregatesInput]
+  NOT: main_salelogScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  shopName: main_StringWithAggregatesFilter
+  day: main_DateTimeWithAggregatesFilter
+  sales: main_FloatWithAggregatesFilter
+  typeId: main_IntWithAggregatesFilter
+}
+
+type main_SalelogGroupByOutputType {
+  id: Int!
+  shopName: String!
+  day: DateTime!
+  sales: Float!
+  typeId: Int!
+  _count: main_SalelogCountAggregateOutputType
+  _avg: main_SalelogAvgAggregateOutputType
+  _sum: main_SalelogSumAggregateOutputType
+  _min: main_SalelogMinAggregateOutputType
+  _max: main_SalelogMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_saletypeWhereUniqueInput {
+  id: Int
+}
+
+enum main_SaletypeScalarFieldEnum {
+  id
+  name
+  createdAt
+}
+
+type main_SaletypeCountAggregateOutputType {
+  id: Int!
+  name: Int!
+  createdAt: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_SaletypeAvgAggregateOutputType {
+  id: Float
+  _join: Query!
+}
+
+type main_SaletypeSumAggregateOutputType {
+  id: Int
+  _join: Query!
+}
+
+type main_SaletypeMinAggregateOutputType {
+  id: Int
+  name: String
+  createdAt: String
+  _join: Query!
+}
+
+type main_SaletypeMaxAggregateOutputType {
+  id: Int
+  name: String
+  createdAt: String
+  _join: Query!
+}
+
+type main_AggregateSaletype {
+  _count: main_SaletypeCountAggregateOutputType
+  _avg: main_SaletypeAvgAggregateOutputType
+  _sum: main_SaletypeSumAggregateOutputType
+  _min: main_SaletypeMinAggregateOutputType
+  _max: main_SaletypeMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_saletypeCountOrderByAggregateInput {
+  id: main_SortOrder
+  name: main_SortOrder
+  createdAt: main_SortOrder
+}
+
+input main_saletypeAvgOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_saletypeMaxOrderByAggregateInput {
+  id: main_SortOrder
+  name: main_SortOrder
+  createdAt: main_SortOrder
+}
+
+input main_saletypeMinOrderByAggregateInput {
+  id: main_SortOrder
+  name: main_SortOrder
+  createdAt: main_SortOrder
+}
+
+input main_saletypeSumOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_saletypeOrderByWithAggregationInput {
+  id: main_SortOrder
+  name: main_SortOrder
+  createdAt: main_SortOrder
+  _count: main_saletypeCountOrderByAggregateInput
+  _avg: main_saletypeAvgOrderByAggregateInput
+  _max: main_saletypeMaxOrderByAggregateInput
+  _min: main_saletypeMinOrderByAggregateInput
+  _sum: main_saletypeSumOrderByAggregateInput
+}
+
+input main_saletypeScalarWhereWithAggregatesInput {
+  AND: main_saletypeScalarWhereWithAggregatesInput
+  OR: [main_saletypeScalarWhereWithAggregatesInput]
+  NOT: main_saletypeScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  name: main_StringWithAggregatesFilter
+  createdAt: main_StringWithAggregatesFilter
+}
+
+type main_SaletypeGroupByOutputType {
+  id: Int!
+  name: String!
+  createdAt: String!
+  _count: main_SaletypeCountAggregateOutputType
+  _avg: main_SaletypeAvgAggregateOutputType
+  _sum: main_SaletypeSumAggregateOutputType
+  _min: main_SaletypeMinAggregateOutputType
+  _max: main_SaletypeMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_userWhereInput {
+  AND: main_userWhereInput
+  OR: [main_userWhereInput]
+  NOT: main_userWhereInput
+  id: main_IntFilter
+  created_at: main_DateTimeNullableFilter
+  name: main_StringFilter
+  avatar: main_StringNullableFilter
+  phone: main_StringNullableFilter
+  password_salt: main_StringNullableFilter
+  password: main_StringNullableFilter
+  country_code: main_StringNullableFilter
+  password_type: main_StringNullableFilter
+  user_id: main_StringNullableFilter
+}
+
+input main_userOrderByWithRelationInput {
+  id: main_SortOrder
+  created_at: main_SortOrder
+  name: main_SortOrder
+  avatar: main_SortOrder
+  phone: main_SortOrder
+  password_salt: main_SortOrder
+  password: main_SortOrder
+  country_code: main_SortOrder
+  password_type: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_userWhereUniqueInput {
+  id: Int
+}
+
+enum main_UserScalarFieldEnum {
+  id
+  created_at
+  name
+  avatar
+  phone
+  password_salt
+  password
+  country_code
+  password_type
+  user_id
+}
+
+type main_user {
+  id: Int!
+  created_at: DateTime
+  name: String!
+  avatar: String
+  phone: String
+  password_salt: String
+  password: String
+  country_code: String
+  password_type: String
+  user_id: String
+  _join: Query!
+}
+
+type main_UserCountAggregateOutputType {
+  id: Int!
+  created_at: Int!
+  name: Int!
+  avatar: Int!
+  phone: Int!
+  password_salt: Int!
+  password: Int!
+  country_code: Int!
+  password_type: Int!
+  user_id: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_UserAvgAggregateOutputType {
+  id: Float
+  _join: Query!
+}
+
+type main_UserSumAggregateOutputType {
+  id: Int
+  _join: Query!
+}
+
+type main_UserMinAggregateOutputType {
+  id: Int
+  created_at: DateTime
+  name: String
+  avatar: String
+  phone: String
+  password_salt: String
+  password: String
+  country_code: String
+  password_type: String
+  user_id: String
+  _join: Query!
+}
+
+type main_UserMaxAggregateOutputType {
+  id: Int
+  created_at: DateTime
+  name: String
+  avatar: String
+  phone: String
+  password_salt: String
+  password: String
+  country_code: String
+  password_type: String
+  user_id: String
+  _join: Query!
+}
+
+type main_AggregateUser {
+  _count: main_UserCountAggregateOutputType
+  _avg: main_UserAvgAggregateOutputType
+  _sum: main_UserSumAggregateOutputType
+  _min: main_UserMinAggregateOutputType
+  _max: main_UserMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_userCountOrderByAggregateInput {
+  id: main_SortOrder
+  created_at: main_SortOrder
+  name: main_SortOrder
+  avatar: main_SortOrder
+  phone: main_SortOrder
+  password_salt: main_SortOrder
+  password: main_SortOrder
+  country_code: main_SortOrder
+  password_type: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_userAvgOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_userMaxOrderByAggregateInput {
+  id: main_SortOrder
+  created_at: main_SortOrder
+  name: main_SortOrder
+  avatar: main_SortOrder
+  phone: main_SortOrder
+  password_salt: main_SortOrder
+  password: main_SortOrder
+  country_code: main_SortOrder
+  password_type: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_userMinOrderByAggregateInput {
+  id: main_SortOrder
+  created_at: main_SortOrder
+  name: main_SortOrder
+  avatar: main_SortOrder
+  phone: main_SortOrder
+  password_salt: main_SortOrder
+  password: main_SortOrder
+  country_code: main_SortOrder
+  password_type: main_SortOrder
+  user_id: main_SortOrder
+}
+
+input main_userSumOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_userOrderByWithAggregationInput {
+  id: main_SortOrder
+  created_at: main_SortOrder
+  name: main_SortOrder
+  avatar: main_SortOrder
+  phone: main_SortOrder
+  password_salt: main_SortOrder
+  password: main_SortOrder
+  country_code: main_SortOrder
+  password_type: main_SortOrder
+  user_id: main_SortOrder
+  _count: main_userCountOrderByAggregateInput
+  _avg: main_userAvgOrderByAggregateInput
+  _max: main_userMaxOrderByAggregateInput
+  _min: main_userMinOrderByAggregateInput
+  _sum: main_userSumOrderByAggregateInput
+}
+
+input main_userScalarWhereWithAggregatesInput {
+  AND: main_userScalarWhereWithAggregatesInput
+  OR: [main_userScalarWhereWithAggregatesInput]
+  NOT: main_userScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  created_at: main_DateTimeNullableWithAggregatesFilter
+  name: main_StringWithAggregatesFilter
+  avatar: main_StringNullableWithAggregatesFilter
+  phone: main_StringNullableWithAggregatesFilter
+  password_salt: main_StringNullableWithAggregatesFilter
+  password: main_StringNullableWithAggregatesFilter
+  country_code: main_StringNullableWithAggregatesFilter
+  password_type: main_StringNullableWithAggregatesFilter
+  user_id: main_StringNullableWithAggregatesFilter
+}
+
+type main_UserGroupByOutputType {
+  id: Int!
+  created_at: DateTime
+  name: String!
+  avatar: String
+  phone: String
+  password_salt: String
+  password: String
+  country_code: String
+  password_type: String
+  user_id: String
+  _count: main_UserCountAggregateOutputType
+  _avg: main_UserAvgAggregateOutputType
+  _sum: main_UserSumAggregateOutputType
+  _min: main_UserMinAggregateOutputType
+  _max: main_UserMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_NestedBoolNullableFilter {
+  equals: Boolean
+  not: main_NestedBoolNullableFilter
+}
+
+input main_BoolNullableFilter {
+  equals: Boolean
+  not: main_NestedBoolNullableFilter
+}
+
+input main_verification_recordWhereInput {
+  AND: main_verification_recordWhereInput
+  OR: [main_verification_recordWhereInput]
+  NOT: main_verification_recordWhereInput
+  name: main_StringFilter
+  created_time: main_StringNullableFilter
+  type: main_StringNullableFilter
+  user: main_StringFilter
+  provider: main_StringFilter
+  receiver: main_StringFilter
+  code: main_StringFilter
+  time: main_BigIntFilter
+  is_used: main_BoolNullableFilter
+}
+
+input main_verification_recordOrderByWithRelationInput {
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  user: main_SortOrder
+  provider: main_SortOrder
+  receiver: main_SortOrder
+  code: main_SortOrder
+  time: main_SortOrder
+  is_used: main_SortOrder
+}
+
+input main_verification_recordWhereUniqueInput {
+  name: String
+}
+
+enum main_Verification_recordScalarFieldEnum {
+  name
+  created_time
+  type
+  user
+  provider
+  receiver
+  code
+  time
+  is_used
+}
+
+type main_verification_record {
+  name: String!
+  created_time: String
+  type: String
+  user: String!
+  provider: String!
+  receiver: String!
+  code: String!
+  time: BigInt!
+  is_used: Boolean
+  _join: Query!
+}
+
+type main_Verification_recordCountAggregateOutputType {
+  name: Int!
+  created_time: Int!
+  type: Int!
+  user: Int!
+  provider: Int!
+  receiver: Int!
+  code: Int!
+  time: Int!
+  is_used: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_Verification_recordAvgAggregateOutputType {
+  time: Float
+  _join: Query!
+}
+
+type main_Verification_recordSumAggregateOutputType {
+  time: BigInt
+  _join: Query!
+}
+
+type main_Verification_recordMinAggregateOutputType {
+  name: String
+  created_time: String
+  type: String
+  user: String
+  provider: String
+  receiver: String
+  code: String
+  time: BigInt
+  is_used: Boolean
+  _join: Query!
+}
+
+type main_Verification_recordMaxAggregateOutputType {
+  name: String
+  created_time: String
+  type: String
+  user: String
+  provider: String
+  receiver: String
+  code: String
+  time: BigInt
+  is_used: Boolean
+  _join: Query!
+}
+
+type main_AggregateVerification_record {
+  _count: main_Verification_recordCountAggregateOutputType
+  _avg: main_Verification_recordAvgAggregateOutputType
+  _sum: main_Verification_recordSumAggregateOutputType
+  _min: main_Verification_recordMinAggregateOutputType
+  _max: main_Verification_recordMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_verification_recordCountOrderByAggregateInput {
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  user: main_SortOrder
+  provider: main_SortOrder
+  receiver: main_SortOrder
+  code: main_SortOrder
+  time: main_SortOrder
+  is_used: main_SortOrder
+}
+
+input main_verification_recordAvgOrderByAggregateInput {
+  time: main_SortOrder
+}
+
+input main_verification_recordMaxOrderByAggregateInput {
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  user: main_SortOrder
+  provider: main_SortOrder
+  receiver: main_SortOrder
+  code: main_SortOrder
+  time: main_SortOrder
+  is_used: main_SortOrder
+}
+
+input main_verification_recordMinOrderByAggregateInput {
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  user: main_SortOrder
+  provider: main_SortOrder
+  receiver: main_SortOrder
+  code: main_SortOrder
+  time: main_SortOrder
+  is_used: main_SortOrder
+}
+
+input main_verification_recordSumOrderByAggregateInput {
+  time: main_SortOrder
+}
+
+input main_verification_recordOrderByWithAggregationInput {
+  name: main_SortOrder
+  created_time: main_SortOrder
+  type: main_SortOrder
+  user: main_SortOrder
+  provider: main_SortOrder
+  receiver: main_SortOrder
+  code: main_SortOrder
+  time: main_SortOrder
+  is_used: main_SortOrder
+  _count: main_verification_recordCountOrderByAggregateInput
+  _avg: main_verification_recordAvgOrderByAggregateInput
+  _max: main_verification_recordMaxOrderByAggregateInput
+  _min: main_verification_recordMinOrderByAggregateInput
+  _sum: main_verification_recordSumOrderByAggregateInput
+}
+
+input main_NestedBoolNullableWithAggregatesFilter {
+  equals: Boolean
+  not: main_NestedBoolNullableWithAggregatesFilter
+  _count: main_NestedIntNullableFilter
+  _min: main_NestedBoolNullableFilter
+  _max: main_NestedBoolNullableFilter
+}
+
+input main_BoolNullableWithAggregatesFilter {
+  equals: Boolean
+  not: main_NestedBoolNullableWithAggregatesFilter
+  _count: main_NestedIntNullableFilter
+  _min: main_NestedBoolNullableFilter
+  _max: main_NestedBoolNullableFilter
+}
+
+input main_verification_recordScalarWhereWithAggregatesInput {
+  AND: main_verification_recordScalarWhereWithAggregatesInput
+  OR: [main_verification_recordScalarWhereWithAggregatesInput]
+  NOT: main_verification_recordScalarWhereWithAggregatesInput
+  name: main_StringWithAggregatesFilter
+  created_time: main_StringNullableWithAggregatesFilter
+  type: main_StringNullableWithAggregatesFilter
+  user: main_StringWithAggregatesFilter
+  provider: main_StringWithAggregatesFilter
+  receiver: main_StringWithAggregatesFilter
+  code: main_StringWithAggregatesFilter
+  time: main_BigIntWithAggregatesFilter
+  is_used: main_BoolNullableWithAggregatesFilter
+}
+
+type main_Verification_recordGroupByOutputType {
+  name: String!
+  created_time: String
+  type: String
+  user: String!
+  provider: String!
+  receiver: String!
+  code: String!
+  time: BigInt!
+  is_used: Boolean
+  _count: main_Verification_recordCountAggregateOutputType
+  _avg: main_Verification_recordAvgAggregateOutputType
+  _sum: main_Verification_recordSumAggregateOutputType
+  _min: main_Verification_recordMinAggregateOutputType
+  _max: main_Verification_recordMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_visitlogWhereInput {
+  AND: main_visitlogWhereInput
+  OR: [main_visitlogWhereInput]
+  NOT: main_visitlogWhereInput
+  id: main_IntFilter
+  ip: main_StringFilter
+  ua: main_StringFilter
+  visitedAt: main_StringFilter
+}
+
+input main_visitlogOrderByWithRelationInput {
+  id: main_SortOrder
+  ip: main_SortOrder
+  ua: main_SortOrder
+  visitedAt: main_SortOrder
+}
+
+input main_visitlogWhereUniqueInput {
+  id: Int
+}
+
+enum main_VisitlogScalarFieldEnum {
+  id
+  ip
+  ua
+  visitedAt
+}
+
+type main_visitlog {
+  id: Int!
+  ip: String!
+  ua: String!
+  visitedAt: String!
+  _join: Query!
+}
+
+type main_VisitlogCountAggregateOutputType {
+  id: Int!
+  ip: Int!
+  ua: Int!
+  visitedAt: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_VisitlogAvgAggregateOutputType {
+  id: Float
+  _join: Query!
+}
+
+type main_VisitlogSumAggregateOutputType {
+  id: Int
+  _join: Query!
+}
+
+type main_VisitlogMinAggregateOutputType {
+  id: Int
+  ip: String
+  ua: String
+  visitedAt: String
+  _join: Query!
+}
+
+type main_VisitlogMaxAggregateOutputType {
+  id: Int
+  ip: String
+  ua: String
+  visitedAt: String
+  _join: Query!
+}
+
+type main_AggregateVisitlog {
+  _count: main_VisitlogCountAggregateOutputType
+  _avg: main_VisitlogAvgAggregateOutputType
+  _sum: main_VisitlogSumAggregateOutputType
+  _min: main_VisitlogMinAggregateOutputType
+  _max: main_VisitlogMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_visitlogCountOrderByAggregateInput {
+  id: main_SortOrder
+  ip: main_SortOrder
+  ua: main_SortOrder
+  visitedAt: main_SortOrder
+}
+
+input main_visitlogAvgOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_visitlogMaxOrderByAggregateInput {
+  id: main_SortOrder
+  ip: main_SortOrder
+  ua: main_SortOrder
+  visitedAt: main_SortOrder
+}
+
+input main_visitlogMinOrderByAggregateInput {
+  id: main_SortOrder
+  ip: main_SortOrder
+  ua: main_SortOrder
+  visitedAt: main_SortOrder
+}
+
+input main_visitlogSumOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_visitlogOrderByWithAggregationInput {
+  id: main_SortOrder
+  ip: main_SortOrder
+  ua: main_SortOrder
+  visitedAt: main_SortOrder
+  _count: main_visitlogCountOrderByAggregateInput
+  _avg: main_visitlogAvgOrderByAggregateInput
+  _max: main_visitlogMaxOrderByAggregateInput
+  _min: main_visitlogMinOrderByAggregateInput
+  _sum: main_visitlogSumOrderByAggregateInput
+}
+
+input main_visitlogScalarWhereWithAggregatesInput {
+  AND: main_visitlogScalarWhereWithAggregatesInput
+  OR: [main_visitlogScalarWhereWithAggregatesInput]
+  NOT: main_visitlogScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  ip: main_StringWithAggregatesFilter
+  ua: main_StringWithAggregatesFilter
+  visitedAt: main_StringWithAggregatesFilter
+}
+
+type main_VisitlogGroupByOutputType {
+  id: Int!
+  ip: String!
+  ua: String!
+  visitedAt: String!
+  _count: main_VisitlogCountAggregateOutputType
+  _avg: main_VisitlogAvgAggregateOutputType
+  _sum: main_VisitlogSumAggregateOutputType
+  _min: main_VisitlogMinAggregateOutputType
+  _max: main_VisitlogMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_menuCreateInput {
+  parentId: Int
+  label: String!
+  path: String
+  icon: String
+  sort: Int!
+  level: Int!
+  name: String
+  is_bottom: Int
+  create_time: DateTime
+  perms: String
+  menu_type: String
+  api_id: String
+}
+
+input main_NullableIntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input main_StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input main_NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input main_IntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input main_NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input main_menuUpdateInput {
+  parentId: main_NullableIntFieldUpdateOperationsInput
+  label: main_StringFieldUpdateOperationsInput
+  path: main_NullableStringFieldUpdateOperationsInput
+  icon: main_NullableStringFieldUpdateOperationsInput
+  sort: main_IntFieldUpdateOperationsInput
+  level: main_IntFieldUpdateOperationsInput
+  name: main_NullableStringFieldUpdateOperationsInput
+  is_bottom: main_IntFieldUpdateOperationsInput
+  create_time: main_NullableDateTimeFieldUpdateOperationsInput
+  perms: main_NullableStringFieldUpdateOperationsInput
+  menu_type: main_NullableStringFieldUpdateOperationsInput
+  api_id: main_NullableStringFieldUpdateOperationsInput
+}
+
+input main_menuCreateManyInput {
+  id: Int
+  parentId: Int
+  label: String!
+  path: String
+  icon: String
+  sort: Int!
+  level: Int!
+  name: String
+  is_bottom: Int
+  create_time: DateTime
+  perms: String
+  menu_type: String
+  api_id: String
+}
+
+type main_AffectedRowsOutput {
+  count: Int!
+  _join: Query!
+}
+
+input main_menuUpdateManyMutationInput {
+  parentId: main_NullableIntFieldUpdateOperationsInput
+  label: main_StringFieldUpdateOperationsInput
+  path: main_NullableStringFieldUpdateOperationsInput
+  icon: main_NullableStringFieldUpdateOperationsInput
+  sort: main_IntFieldUpdateOperationsInput
+  level: main_IntFieldUpdateOperationsInput
+  name: main_NullableStringFieldUpdateOperationsInput
+  is_bottom: main_IntFieldUpdateOperationsInput
+  create_time: main_NullableDateTimeFieldUpdateOperationsInput
+  perms: main_NullableStringFieldUpdateOperationsInput
+  menu_type: main_NullableStringFieldUpdateOperationsInput
+  api_id: main_NullableStringFieldUpdateOperationsInput
+}
+
+input main_menu_permissionCreateInput {
+  id: BigInt
+  menu_id: Int!
+  perm_id: BigInt!
+}
+
+input main_BigIntFieldUpdateOperationsInput {
+  set: BigInt
+  increment: BigInt
+  decrement: BigInt
+  multiply: BigInt
+  divide: BigInt
+}
+
+input main_menu_permissionUpdateInput {
+  id: main_BigIntFieldUpdateOperationsInput
+  menu_id: main_IntFieldUpdateOperationsInput
+  perm_id: main_BigIntFieldUpdateOperationsInput
+}
+
+input main_menu_permissionCreateManyInput {
+  id: BigInt
+  menu_id: Int!
+  perm_id: BigInt!
+}
+
+input main_menu_permissionUpdateManyMutationInput {
+  id: main_BigIntFieldUpdateOperationsInput
+  menu_id: main_IntFieldUpdateOperationsInput
+  perm_id: main_BigIntFieldUpdateOperationsInput
+}
+
+input main_menu_roleCreateInput {
+  menu_id: Int!
+  role_id: Int!
+}
+
+input main_menu_roleUpdateInput {
+  menu_id: main_IntFieldUpdateOperationsInput
+  role_id: main_IntFieldUpdateOperationsInput
+}
+
+input main_menu_roleCreateManyInput {
+  id: Int
+  menu_id: Int!
+  role_id: Int!
+}
+
+input main_menu_roleUpdateManyMutationInput {
+  menu_id: main_IntFieldUpdateOperationsInput
+  role_id: main_IntFieldUpdateOperationsInput
+}
+
+input main_permissionCreateInput {
+  id: BigInt!
+  createdAt: DateTime
+  updatedAt: DateTime
+  method: String!
+  path: String!
+  enabled: Int
+}
+
+input main_permissionUpdateInput {
+  id: main_BigIntFieldUpdateOperationsInput
+  createdAt: main_NullableDateTimeFieldUpdateOperationsInput
+  updatedAt: main_NullableDateTimeFieldUpdateOperationsInput
+  method: main_StringFieldUpdateOperationsInput
+  path: main_StringFieldUpdateOperationsInput
+  enabled: main_IntFieldUpdateOperationsInput
+}
+
+input main_permissionCreateManyInput {
+  id: BigInt!
+  createdAt: DateTime
+  updatedAt: DateTime
+  method: String!
+  path: String!
+  enabled: Int
+}
+
+input main_permissionUpdateManyMutationInput {
+  id: main_BigIntFieldUpdateOperationsInput
+  createdAt: main_NullableDateTimeFieldUpdateOperationsInput
+  updatedAt: main_NullableDateTimeFieldUpdateOperationsInput
+  method: main_StringFieldUpdateOperationsInput
+  path: main_StringFieldUpdateOperationsInput
+  enabled: main_IntFieldUpdateOperationsInput
+}
+
+input main_postCreateInput {
+  title: String!
+  poster: String
+  published_at: DateTime
+  author: String!
+  content: String
+}
+
+input main_postUpdateInput {
+  title: main_StringFieldUpdateOperationsInput
+  poster: main_NullableStringFieldUpdateOperationsInput
+  published_at: main_NullableDateTimeFieldUpdateOperationsInput
+  author: main_StringFieldUpdateOperationsInput
+  content: main_NullableStringFieldUpdateOperationsInput
+}
+
+input main_postCreateManyInput {
+  id: Int
+  title: String!
+  poster: String
+  published_at: DateTime
+  author: String!
+  content: String
+}
+
+input main_postUpdateManyMutationInput {
+  title: main_StringFieldUpdateOperationsInput
+  poster: main_NullableStringFieldUpdateOperationsInput
+  published_at: main_NullableDateTimeFieldUpdateOperationsInput
+  author: main_StringFieldUpdateOperationsInput
+  content: main_NullableStringFieldUpdateOperationsInput
+}
+
+input main_providerCreateInput {
+  owner: String!
+  name: String!
+  created_time: String
+  type: String
+  client_id: String
+  client_secret: String
+  sign_name: String
+  template_code: String
+}
+
+input main_providerUpdateInput {
+  owner: main_StringFieldUpdateOperationsInput
+  name: main_StringFieldUpdateOperationsInput
+  created_time: main_NullableStringFieldUpdateOperationsInput
+  type: main_NullableStringFieldUpdateOperationsInput
+  client_id: main_NullableStringFieldUpdateOperationsInput
+  client_secret: main_NullableStringFieldUpdateOperationsInput
+  sign_name: main_NullableStringFieldUpdateOperationsInput
+  template_code: main_NullableStringFieldUpdateOperationsInput
+}
+
+input main_providerCreateManyInput {
+  owner: String!
+  name: String!
+  created_time: String
+  type: String
+  client_id: String
+  client_secret: String
+  sign_name: String
+  template_code: String
+}
+
+input main_providerUpdateManyMutationInput {
+  owner: main_StringFieldUpdateOperationsInput
+  name: main_StringFieldUpdateOperationsInput
+  created_time: main_NullableStringFieldUpdateOperationsInput
+  type: main_NullableStringFieldUpdateOperationsInput
+  client_id: main_NullableStringFieldUpdateOperationsInput
+  client_secret: main_NullableStringFieldUpdateOperationsInput
+  sign_name: main_NullableStringFieldUpdateOperationsInput
+  template_code: main_NullableStringFieldUpdateOperationsInput
+}
+
+input main_roleCreateInput {
+  code: String!
+  remark: String!
+}
+
+input main_roleUpdateInput {
+  code: main_StringFieldUpdateOperationsInput
+  remark: main_StringFieldUpdateOperationsInput
+}
+
+input main_roleCreateManyInput {
+  id: Int
+  code: String!
+  remark: String!
+}
+
+input main_roleUpdateManyMutationInput {
+  code: main_StringFieldUpdateOperationsInput
+  remark: main_StringFieldUpdateOperationsInput
+}
+
+input main_role_userCreateInput {
+  role_id: Int!
+  user_id: Int!
+}
+
+input main_role_userUpdateInput {
+  role_id: main_IntFieldUpdateOperationsInput
+  user_id: main_IntFieldUpdateOperationsInput
+}
+
+input main_role_userCreateManyInput {
+  id: Int
+  role_id: Int!
+  user_id: Int!
+}
+
+input main_role_userUpdateManyMutationInput {
+  role_id: main_IntFieldUpdateOperationsInput
+  user_id: main_IntFieldUpdateOperationsInput
+}
+
+input main_saletypeCreateWithoutSalelogInput {
+  name: String!
+  createdAt: String!
+}
+
+input main_saletypeCreateOrConnectWithoutSalelogInput {
+  where: main_saletypeWhereUniqueInput!
+  create: main_saletypeCreateWithoutSalelogInput!
+}
+
+input main_saletypeCreateNestedOneWithoutSalelogInput {
+  create: main_saletypeCreateWithoutSalelogInput
+  connectOrCreate: main_saletypeCreateOrConnectWithoutSalelogInput
+  connect: main_saletypeWhereUniqueInput
+}
+
+input main_salelogCreateInput {
+  shopName: String!
+  day: DateTime!
+  sales: Float!
+  saletype: main_saletypeCreateNestedOneWithoutSalelogInput!
+}
+
+input main_DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input main_FloatFieldUpdateOperationsInput {
+  set: Float
+  increment: Float
+  decrement: Float
+  multiply: Float
+  divide: Float
+}
+
+input main_saletypeUpdateWithoutSalelogInput {
+  name: main_StringFieldUpdateOperationsInput
+  createdAt: main_StringFieldUpdateOperationsInput
+}
+
+input main_saletypeUpsertWithoutSalelogInput {
+  update: main_saletypeUpdateWithoutSalelogInput!
+  create: main_saletypeCreateWithoutSalelogInput!
+}
+
+input main_saletypeUpdateOneRequiredWithoutSalelogNestedInput {
+  create: main_saletypeCreateWithoutSalelogInput
+  connectOrCreate: main_saletypeCreateOrConnectWithoutSalelogInput
+  upsert: main_saletypeUpsertWithoutSalelogInput
+  connect: main_saletypeWhereUniqueInput
+  update: main_saletypeUpdateWithoutSalelogInput
+}
+
+input main_salelogUpdateInput {
+  shopName: main_StringFieldUpdateOperationsInput
+  day: main_DateTimeFieldUpdateOperationsInput
+  sales: main_FloatFieldUpdateOperationsInput
+  saletype: main_saletypeUpdateOneRequiredWithoutSalelogNestedInput
+}
+
+input main_salelogCreateManyInput {
+  id: Int
+  shopName: String!
+  day: DateTime!
+  sales: Float!
+  typeId: Int!
+}
+
+input main_salelogUpdateManyMutationInput {
+  shopName: main_StringFieldUpdateOperationsInput
+  day: main_DateTimeFieldUpdateOperationsInput
+  sales: main_FloatFieldUpdateOperationsInput
+}
+
+input main_salelogCreateWithoutSaletypeInput {
+  shopName: String!
+  day: DateTime!
+  sales: Float!
+}
+
+input main_salelogCreateOrConnectWithoutSaletypeInput {
+  where: main_salelogWhereUniqueInput!
+  create: main_salelogCreateWithoutSaletypeInput!
+}
+
+input main_salelogCreateManySaletypeInput {
+  id: Int
+  shopName: String!
+  day: DateTime!
+  sales: Float!
+}
+
+input main_salelogCreateManySaletypeInputEnvelope {
+  data: [main_salelogCreateManySaletypeInput]!
+  skipDuplicates: Boolean
+}
+
+input main_salelogCreateNestedManyWithoutSaletypeInput {
+  create: main_salelogCreateWithoutSaletypeInput
+  connectOrCreate: main_salelogCreateOrConnectWithoutSaletypeInput
+  createMany: main_salelogCreateManySaletypeInputEnvelope
+  connect: main_salelogWhereUniqueInput
+}
+
+input main_saletypeCreateInput {
+  name: String!
+  createdAt: String!
+  salelog: main_salelogCreateNestedManyWithoutSaletypeInput
+}
+
+input main_salelogUpdateWithoutSaletypeInput {
+  shopName: main_StringFieldUpdateOperationsInput
+  day: main_DateTimeFieldUpdateOperationsInput
+  sales: main_FloatFieldUpdateOperationsInput
+}
+
+input main_salelogUpsertWithWhereUniqueWithoutSaletypeInput {
+  where: main_salelogWhereUniqueInput!
+  update: main_salelogUpdateWithoutSaletypeInput!
+  create: main_salelogCreateWithoutSaletypeInput!
+}
+
+input main_salelogUpdateWithWhereUniqueWithoutSaletypeInput {
+  where: main_salelogWhereUniqueInput!
+  data: main_salelogUpdateWithoutSaletypeInput!
+}
+
+input main_salelogScalarWhereInput {
+  AND: main_salelogScalarWhereInput
+  OR: [main_salelogScalarWhereInput]
+  NOT: main_salelogScalarWhereInput
+  id: main_IntFilter
+  shopName: main_StringFilter
+  day: main_DateTimeFilter
+  sales: main_FloatFilter
+  typeId: main_IntFilter
+}
+
+input main_salelogUpdateManyWithWhereWithoutSaletypeInput {
+  where: main_salelogScalarWhereInput!
+  data: main_salelogUpdateManyMutationInput!
+}
+
+input main_salelogUpdateManyWithoutSaletypeNestedInput {
+  create: main_salelogCreateWithoutSaletypeInput
+  connectOrCreate: main_salelogCreateOrConnectWithoutSaletypeInput
+  upsert: main_salelogUpsertWithWhereUniqueWithoutSaletypeInput
+  createMany: main_salelogCreateManySaletypeInputEnvelope
+  set: main_salelogWhereUniqueInput
+  disconnect: main_salelogWhereUniqueInput
+  delete: main_salelogWhereUniqueInput
+  connect: main_salelogWhereUniqueInput
+  update: main_salelogUpdateWithWhereUniqueWithoutSaletypeInput
+  updateMany: main_salelogUpdateManyWithWhereWithoutSaletypeInput
+  deleteMany: main_salelogScalarWhereInput
+}
+
+input main_saletypeUpdateInput {
+  name: main_StringFieldUpdateOperationsInput
+  createdAt: main_StringFieldUpdateOperationsInput
+  salelog: main_salelogUpdateManyWithoutSaletypeNestedInput
+}
+
+input main_saletypeCreateManyInput {
+  id: Int
+  name: String!
+  createdAt: String!
+}
+
+input main_saletypeUpdateManyMutationInput {
+  name: main_StringFieldUpdateOperationsInput
+  createdAt: main_StringFieldUpdateOperationsInput
+}
+
+input main_userCreateInput {
+  created_at: DateTime
+  name: String!
+  avatar: String
+  phone: String
+  password_salt: String
+  password: String
+  country_code: String
+  password_type: String
+  user_id: String
+}
+
+input main_userUpdateInput {
+  created_at: main_NullableDateTimeFieldUpdateOperationsInput
+  name: main_StringFieldUpdateOperationsInput
+  avatar: main_NullableStringFieldUpdateOperationsInput
+  phone: main_NullableStringFieldUpdateOperationsInput
+  password_salt: main_NullableStringFieldUpdateOperationsInput
+  password: main_NullableStringFieldUpdateOperationsInput
+  country_code: main_NullableStringFieldUpdateOperationsInput
+  password_type: main_NullableStringFieldUpdateOperationsInput
+  user_id: main_NullableStringFieldUpdateOperationsInput
+}
+
+input main_userCreateManyInput {
+  id: Int
+  created_at: DateTime
+  name: String!
+  avatar: String
+  phone: String
+  password_salt: String
+  password: String
+  country_code: String
+  password_type: String
+  user_id: String
+}
+
+input main_userUpdateManyMutationInput {
+  created_at: main_NullableDateTimeFieldUpdateOperationsInput
+  name: main_StringFieldUpdateOperationsInput
+  avatar: main_NullableStringFieldUpdateOperationsInput
+  phone: main_NullableStringFieldUpdateOperationsInput
+  password_salt: main_NullableStringFieldUpdateOperationsInput
+  password: main_NullableStringFieldUpdateOperationsInput
+  country_code: main_NullableStringFieldUpdateOperationsInput
+  password_type: main_NullableStringFieldUpdateOperationsInput
+  user_id: main_NullableStringFieldUpdateOperationsInput
+}
+
+input main_verification_recordCreateInput {
+  name: String!
+  created_time: String
+  type: String
+  user: String!
+  provider: String!
+  receiver: String!
+  code: String!
+  time: BigInt!
+  is_used: Boolean
+}
+
+input main_NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input main_verification_recordUpdateInput {
+  name: main_StringFieldUpdateOperationsInput
+  created_time: main_NullableStringFieldUpdateOperationsInput
+  type: main_NullableStringFieldUpdateOperationsInput
+  user: main_StringFieldUpdateOperationsInput
+  provider: main_StringFieldUpdateOperationsInput
+  receiver: main_StringFieldUpdateOperationsInput
+  code: main_StringFieldUpdateOperationsInput
+  time: main_BigIntFieldUpdateOperationsInput
+  is_used: main_NullableBoolFieldUpdateOperationsInput
+}
+
+input main_verification_recordCreateManyInput {
+  name: String!
+  created_time: String
+  type: String
+  user: String!
+  provider: String!
+  receiver: String!
+  code: String!
+  time: BigInt!
+  is_used: Boolean
+}
+
+input main_verification_recordUpdateManyMutationInput {
+  name: main_StringFieldUpdateOperationsInput
+  created_time: main_NullableStringFieldUpdateOperationsInput
+  type: main_NullableStringFieldUpdateOperationsInput
+  user: main_StringFieldUpdateOperationsInput
+  provider: main_StringFieldUpdateOperationsInput
+  receiver: main_StringFieldUpdateOperationsInput
+  code: main_StringFieldUpdateOperationsInput
+  time: main_BigIntFieldUpdateOperationsInput
+  is_used: main_NullableBoolFieldUpdateOperationsInput
+}
+
+input main_visitlogCreateInput {
+  ip: String!
+  ua: String!
+  visitedAt: String!
+}
+
+input main_visitlogUpdateInput {
+  ip: main_StringFieldUpdateOperationsInput
+  ua: main_StringFieldUpdateOperationsInput
+  visitedAt: main_StringFieldUpdateOperationsInput
+}
+
+input main_visitlogCreateManyInput {
+  id: Int
+  ip: String!
+  ua: String!
+  visitedAt: String!
+}
+
+input main_visitlogUpdateManyMutationInput {
+  ip: main_StringFieldUpdateOperationsInput
+  ua: main_StringFieldUpdateOperationsInput
+  visitedAt: main_StringFieldUpdateOperationsInput
+}
+
+scalar DateTime
+
+scalar main_Json
+
+scalar UUID
+
+scalar BigInt
+
+scalar main_Decimal
+
+scalar main_Bytes
+
+type casdoor_apiUserResponse {
+  data: casdoor_objectTokenRes
+  msg: String
+  success: Boolean
+  _join: Query!
+}
+
+type casdoor_objectTokenRes {
+  expireIn: Int
+  refreshToken: String
+  accessToken: String
+  _join: Query!
+}
+
+input casdoor_POSTApiRefresh_tokenInput {
+  
+  """refresh-token"""
+  refresh_token: String!
+}
+
+type casdoor_objectResponse {
+  msg: String
+  status: Int
+  _join: Query!
+}
+
+input casdoor_POSTApiSend_verification_codeInput {
+  dest: String!
+  countryCode: String
+}
+
+input casdoor_POSTApiUpdate_providerInput {
+  clientId: String!
+  clientSecret: String!
+  signName: String!
+  templateCode: String!
+}
+
+type casdoor_objectUserinfo {
+  phone: String
+  preferred_username: String
+  _join: Query!
+}
+
+input casdoor_POSTApiAdd_userInput {
+  password: String!
+  passwordType: String
+  phone: String!
+  countryCode: String
+  name: String!
+}
+
+input casdoor_POSTApiLoginInput {
+  countryCode: String
+  code: String!
+  password: String!
+  loginType: String!
+  username: String!
+  phone: String!
+}
+
+directive @rbac(
+  
+  """the user must match all roles"""
+  requireMatchAll: [WG_ROLE]
+  
+  """the user must match at least one of the roles"""
+  requireMatchAny: [WG_ROLE]
+  
+  """the user must not match all of the roles"""
+  denyMatchAll: [WG_ROLE]
+  
+  """the user must not match any of the roles"""
+  denyMatchAny: [WG_ROLE]
+) on QUERY | MUTATION | SUBSCRIPTION
+
+enum WG_ROLE {
+  admin
+  user
+  eeee
+  aaaa
+  aa
+}
+
+directive @fromClaim(name: Claim) on VARIABLE_DEFINITION
+
+enum Claim {
+  USERID
+  EMAIL
+  EMAIL_VERIFIED
+  NAME
+  NICKNAME
+  LOCATION
+  PROVIDER
+  
+  """ROLES is string array, Please use in [in, notIn]."""
+  ROLES
+}
+
+directive @hooksVariable on VARIABLE_DEFINITION
+
+directive @jsonSchema(
+  
+  """
+  The value of both of these keywords MUST be a string.
+  
+  Both of these keywords can be used to decorate a user interface with
+  information about the data produced by this user interface.  A title
+  will preferably be short, whereas a description will provide
+  explanation about the purpose of the instance described by this
+  schema.
+  """
+  title: String
+  
+  """
+  The value of both of these keywords MUST be a string.
+  
+  Both of these keywords can be used to decorate a user interface with
+  information about the data produced by this user interface.  A title
+  will preferably be short, whereas a description will provide
+  explanation about the purpose of the instance described by this
+  schema.
+  """
+  description: String
+  
+  """
+  The value of "multipleOf" MUST be a number, strictly greater than 0.
+  
+  A numeric instance is valid only if division by this keyword's value
+  results in an integer.
+  """
+  multipleOf: Int
+  
+  """
+  The value of "maximum" MUST be a number, representing an inclusive
+  upper limit for a numeric instance.
+  
+  If the instance is a number, then this keyword validates only if the
+  instance is less than or exactly equal to "maximum".
+  """
+  maximum: Int
+  
+  """
+  The value of "exclusiveMaximum" MUST be number, representing an
+  exclusive upper limit for a numeric instance.
+  
+  If the instance is a number, then the instance is valid only if it
+  has a value strictly less than (not equal to) "exclusiveMaximum".
+  """
+  exclusiveMaximum: Int
+  
+  """
+  The value of "minimum" MUST be a number, representing an inclusive
+  lower limit for a numeric instance.
+  
+  If the instance is a number, then this keyword validates only if the
+  instance is greater than or exactly equal to "minimum".
+  """
+  minimum: Int
+  
+  """
+  The value of "exclusiveMinimum" MUST be number, representing an
+  exclusive lower limit for a numeric instance.
+  
+  If the instance is a number, then the instance is valid only if it
+  has a value strictly greater than (not equal to) "exclusiveMinimum".
+  """
+  exclusiveMinimum: Int
+  
+  """
+  The value of this keyword MUST be a non-negative integer.
+  
+  A string instance is valid against this keyword if its length is less
+  than, or equal to, the value of this keyword.
+  
+  The length of a string instance is defined as the number of its
+  characters as defined by RFC 7159 [RFC7159].
+  """
+  maxLength: Int
+  
+  """
+  The value of this keyword MUST be a non-negative integer.
+  
+  A string instance is valid against this keyword if its length is
+  greater than, or equal to, the value of this keyword.
+  
+  The length of a string instance is defined as the number of its
+  characters as defined by RFC 7159 [RFC7159].
+  
+  Omitting this keyword has the same behavior as a value of 0.
+  """
+  minLength: Int
+  
+  """
+  The value of this keyword MUST be a string.  This string SHOULD be a
+  valid regular expression, according to the ECMA 262 regular
+  expression dialect.
+  
+  A string instance is considered valid if the regular expression
+  matches the instance successfully.  Recall: regular expressions are
+  not implicitly anchored.
+  """
+  pattern: String
+  
+  """
+  The value of this keyword MUST be a non-negative integer.
+  
+  An array instance is valid against "maxItems" if its size is less
+  than, or equal to, the value of this keyword.
+  """
+  maxItems: Int
+  
+  """
+  The value of this keyword MUST be a non-negative integer.
+  
+  An array instance is valid against "minItems" if its size is greater
+  than, or equal to, the value of this keyword.
+  
+  Omitting this keyword has the same behavior as a value of 0.
+  """
+  minItems: Int
+  
+  """
+  The value of this keyword MUST be a boolean.
+  
+  If this keyword has boolean value false, the instance validates
+  successfully.  If it has boolean value true, the instance validates
+  successfully if all of its elements are unique.
+  
+  Omitting this keyword has the same behavior as a value of false.
+  """
+  uniqueItems: Boolean
+  commonPattern: COMMON_REGEX_PATTERN
+) on VARIABLE_DEFINITION
+
+enum COMMON_REGEX_PATTERN {
+  EMAIL
+  DOMAIN
+}
+
+"""
+The directive @injectCurrentDateTime injects a DateTime string of the current date and time into the variable.
+This variable MUST be a string compatible scalar. 
+
+The default format, is: ISO 8601
+If no format is chosen, the default format is used.
+Custom formats are allowed by specifying a format conforming to the Golang specification for specifying a date time format.
+"""
+directive @injectCurrentDateTime(
+  format: WunderGraphDateTimeFormat = ISO8601
+  
+  """customFormat must conform to the Golang specification for specifying a date time format"""
+  customFormat: String
+) on VARIABLE_DEFINITION
+
+enum WunderGraphDateTimeFormat {
+  
+  """2006-01-02T15:04:05-0700"""
+  ISO8601
+  
+  """Mon Jan _2 15:04:05 2006"""
+  ANSIC
+  
+  """Mon Jan _2 15:04:05 MST 2006"""
+  UnixDate
+  
+  """Mon Jan 02 15:04:05 -0700 2006"""
+  RubyDate
+  
+  """02 Jan 06 15:04 MST"""
+  RFC822
+  
+  """02 Jan 06 15:04 -0700"""
+  RFC822Z
+  
+  """Monday, 02-Jan-06 15:04:05 MST"""
+  RFC850
+  
+  """Mon, 02 Jan 2006 15:04:05 MST"""
+  RFC1123
+  
+  """Mon, 02 Jan 2006 15:04:05 -0700"""
+  RFC1123Z
+  
+  """2006-01-02T15:04:05Z07:00"""
+  RFC3339
+  
+  """2006-01-02T15:04:05.999999999Z07:00"""
+  RFC3339Nano
+  
+  """3:04PM"""
+  Kitchen
+  
+  """Jan _2 15:04:05"""
+  Stamp
+  
+  """Jan _2 15:04:05.000"""
+  StampMilli
+  
+  """Jan _2 15:04:05.000000"""
+  StampMicro
+  
+  """Jan _2 15:04:05.000000000"""
+  StampNano
+}
+
+"""
+The directive @injectGeneratedUUID injects a generated UUID into the variable.
+This variable MUST be a string.
+At the same time, it removes the variable from the input definition,
+disallowing the user to supply it.
+
+This means, the UUID is 100% generated server-side and can be considered untempered.
+"""
+directive @injectGeneratedUUID on VARIABLE_DEFINITION
+
+"""The directive @injectFromHeader injects a http.header into the variable."""
+directive @injectFromHeader(name: String!) on VARIABLE_DEFINITION
+
+"""
+The @internalOperation Directive marks an Operation as internal.
+By doing so, the Operation is no longer accessible from the public API.
+It can only be accessed by internal services, like hooks.
+"""
+directive @internalOperation on QUERY | MUTATION | SUBSCRIPTION
+
+"""The directive @injectEnvironmentVariable allows you to inject an environment variable into the variable definition."""
+directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
+
+"""
+The @export directive instructs the Execution Planner to export the field during the execution into the variable of the 'as' argument.
+As the execution is depth first, a field can only be used after it has been exported.
+Additionally, a field can only be used after using the '_join' field or on a different data source.
+It's not possible to export a field and use it in for the same data source.
+
+Note that the @export directive only works on fields that return a single value.
+It's not possible to export a list or object field.
+"""
+directive @export(
+  
+  """The argument 'as' is the name of the variable to export the field to."""
+  as: String!
+) on FIELD
+
+"""
+The directive @internal marks a variable definition as internal so that clients can't access it.
+The field is also not visible in the public API.
+It's only being used as an internal variable to export fields into.
+"""
+directive @internal on VARIABLE_DEFINITION
+
+"""
+The @transform directive allows to apply transformations to the response.
+By applying the directive, the shape of the response can be altered,
+which will also modify the JSON-Schema of the response.
+That is, you will keep full type safety and code-generation for transformed fields.
+"""
+directive @transform(
+  
+  """
+  Using the 'get' transformation allows you to extract a nested field using a JSON path.
+  This is useful to unnest data, e.g. when using the '_join' field, which adds an extra layer of nesting.
+  
+  Example:
+  
+  query GetName {
+  name: me @transform(get: "info.name") {
+      info {
+          name
+      }
+  }
+  }
+  
+  Before the transformation, the resolve looks like this:
+  
+  {
+  "name": {
+      "info": {
+          "name": "John Doe"
+      }
+  }
+  }
+  
+  With the transformation applied, the response will be reshaped like this:
+  
+  {
+  "name": "John Doe"
+  }
+  """
+  get: String
+) on FIELD

@@ -1,12 +1,11 @@
-query GetOneMenu($id: Int!) {
-  data: main_findFirstmenu(where: {id: {equals: $id}}) {
-    
-    id
-    parentId
-    label
-    path
-    icon
-    sort
-    level
-  }
+query GetOneMenu ($id: Int!) @rbac(requireMatchAny: [admin,user,eeee]) {
+	data: main_findFirstmenu(where: {id:{equals:$id}}) {
+		id
+		parentId
+		label
+		path
+		icon
+		sort
+		level
+	}
 }

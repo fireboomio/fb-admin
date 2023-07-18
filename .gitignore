@@ -8,10 +8,9 @@
 fireboom
 
 # generated
-generated/
-.graphqlconfig
+generated/.graphqlconfig
 .process/
-
+dx
 # hook
 node_modules
 yarn.lock

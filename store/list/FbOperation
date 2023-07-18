@@ -1,6 +1,6 @@
 [
 	{
-		"content": "mutation Login($code: String = \"\", $username: String!, $loginType: casdoor_POSTApiLoginInput_loginType!, $password: String = \"\") {\n  data: casdoor_ApiControllerLogin(\n    POSTApiLoginInput: {username: $username, organization: builtIn, code: $code, type: token, application: fireboom_builtIn, loginType: $loginType, password: $password}\n  ) {\n    success\n    data {\n      access_token\n      refresh_token\n    }\n    msg\n  }\n}",
+		"content": "mutation Login($code: String = \"\", $password: String = \"\", $countryCode: String = \"CN\", $loginType: String = \"\", $phone: String = \"\", $username: String = \"\") {\n  casdoor_apiLogin(\n    POSTApiLoginInput: {code: $code, password: $password, loginType: $loginType, username: $username, phone: $phone, countryCode: $countryCode}\n  ) {\n    msg\n    success\n    data {\n      accessToken\n      expireIn\n      refreshToken\n    }\n  }\n} ",
 		"createTime": "2023-06-21 07:29:59Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -15,10 +15,10 @@
 		"roleType": "requireMatchAny",
 		"roles": "[\"admin\"]",
 		"title": "/Casdoor/Login",
-		"updateTime": "2023-07-07 07:43:27Z"
+		"updateTime": "2023-07-14 01:29:40Z"
 	},
 	{
-		"content": "mutation MyQuery($clientId: String!, $clientSecret: String!, $signName: String!, $templateCode: String!) @rbac(requireMatchAny: [admin, user]) {\n  casdoor_ApiControllerUpdateProvider(\n    POSTApiUpdate_providerInput: {clientId: $clientId, clientSecret: $clientSecret, signName: $signName, templateCode: $templateCode}\n  ) {\n    data\n    data2\n    msg\n  }\n}",
+		"content": "mutation MyQuery($clientId: String!, $clientSecret: String!, $signName: String!, $templateCode: String!) @rbac(requireMatchAny: [admin, user]) {\n  casdoor_apiUpdateProvider(\n    POSTApiUpdate_providerInput: {clientId: $clientId, clientSecret: $clientSecret, signName: $signName, templateCode: $templateCode}\n  ) {\n    msg\n  }\n}",
 		"createTime": "2023-06-21 07:31:33Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -33,10 +33,10 @@
 		"roleType": "requireMatchAny",
 		"roles": "[\"admin\",\"user\"]",
 		"title": "/Casdoor/UpdateSMSProvider",
-		"updateTime": "2023-07-07 07:43:27Z"
+		"updateTime": "2023-07-18 04:28:03Z"
 	},
 	{
-		"content": "mutation QueryRaw($query: String!) {\n  main_queryRaw(query: $query)\n}",
+		"content": "mutation QueryRaw ($query: String!) {\n\tmain_queryRaw(query: $query)\n}\n",
 		"createTime": "2023-06-25 05:44:48Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -49,27 +49,9 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[\"admin\",\"user\"]",
 		"title": "/Statistics/QueryRaw",
-		"updateTime": "2023-07-07 07:43:27Z"
-	},
-	{
-		"content": "query GetRoleBindApis($code: String!) {\n  data: system_getRoleBindApis(code: $code) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n} ",
-		"createTime": "2023-03-28 10:10:29Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 1516639650775040,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
-		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
-		"title": "/System/Role/GetRoleBindApis",
-		"updateTime": "2023-07-07 07:43:27Z"
+		"updateTime": "2023-07-17 03:28:51Z"
 	},
 	{
 		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) {\n  system_bindRoleApis(\n    POSTApiV1RoleBindApiInput: {apis: $apis, allRoles: $allRoles, roleCode: $roleCode}\n  ) {\n    count\n  }\n}",
@@ -126,7 +108,7 @@
 		"updateTime": "2023-07-11 01:49:24Z"
 	},
 	{
-		"content": "mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String!) {\n  data: main_updateOnepost(\n    data: {title: {set: $title}, poster: {set: $poster}, published_at: {set: $publishedAt}, content: {set: $content}}\n    where: {id: $id}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n  }\n}\n",
+		"content": "mutation UpdateOnePost ($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String!) @rbac(requireMatchAny: [user,admin,eeee]) {\n\tdata: main_updateOnepost(data: {title:{set:$title},poster:{set:$poster},published_at:{set:$publishedAt},content:{set:$content}}, where: {id:$id}) {\n\t\tid\n\t\ttitle\n\t\tposter\n\t\tpublished_at\n\t\tauthor\n\t\tcontent\n\t}\n}\n",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -139,12 +121,12 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"user\",\"admin\"]",
+		"roles": "[\"user\",\"admin\",\"eeee\"]",
 		"title": "/Post/UpdateOne",
-		"updateTime": "2023-07-11 04:26:32Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"content": "query GetOnePost($id: Int!) {\n  data: main_findFirstpost(where: {id: {equals: $id}}) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n  }\n}",
+		"content": "query GetOnePost ($id: Int!) @rbac(requireMatchAny: [user,admin,eeee]) {\n\tdata: main_findFirstpost(where: {id:{equals:$id}}) {\n\t\tid\n\t\ttitle\n\t\tposter\n\t\tpublished_at\n\t\tauthor\n\t\tcontent\n\t}\n}\n",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -157,12 +139,12 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"user\"]",
+		"roles": "[\"user\",\"admin\",\"eeee\"]",
 		"title": "/Post/GetOne",
-		"updateTime": "2023-07-11 04:26:19Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"content": "query GetPostList($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput) {\n  data: main_findManypost(\n    skip: $skip\n    take: $take\n    where: {AND: $query}\n    orderBy: {title: asc}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n  }\n  total: main_aggregatepost(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n} ",
+		"content": "query GetPostList ($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput) @rbac(requireMatchAny: [user,admin,eeee]) {\n\tdata: main_findManypost(skip: $skip, take: $take, where: {AND:$query}, orderBy: {title:asc}) {\n\t\tid\n\t\ttitle\n\t\tposter\n\t\tpublished_at\n\t\tauthor\n\t\tcontent\n\t}\n\ttotal: main_aggregatepost(where: {AND:$query}) @transform(get: \"_count.id\") {\n\t\t_count {\n\t\t\tid\n\t\t}\n\t}\n}\n",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -175,12 +157,12 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"user\"]",
+		"roles": "[\"user\",\"admin\",\"eeee\"]",
 		"title": "/Post/GetList",
-		"updateTime": "2023-07-11 04:26:08Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"content": "mutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,admin]) {\n\tdata: main_deleteManypost(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n",
+		"content": "mutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,admin,eeee]) {\n\tdata: main_deleteManypost(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -193,66 +175,48 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"user\",\"admin\"]",
+		"roles": "[\"user\",\"admin\",\"eeee\"]",
 		"title": "/Post/DeleteMany",
-		"updateTime": "2023-07-11 01:49:24Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"id": 1522169491947520,
-		"method": "POST",
-		"restUrl": "",
-		"operationType": "mutations",
-		"isPublic": true,
-		"remark": "",
-		"illegal": false,
-		"liveQuery": false,
-		"title": "/System/User/CreateOne",
-		"content": "mutation MyQuery ($avatarUrl: String, $name: String!, $created_at: DateTime, $phone: String!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_createOneuser(data: {name:$name,avatar:$avatarUrl,created_at:$created_at,phone:$phone,user_id:\"\"}) {\n\t\tid\n\t}\n}\n",
-		"enabled": true,
+		"content": "mutation MyQuery ($countryCode: String = \"CN\", $name: String!, $password: String = \"\", $passwordType: String = \"plain\", $phone: String!) @rbac(requireMatchAny: [admin,user,eeee]) {\n\tdata: casdoor_apiAddUser(POSTApiAdd_userInput: {phone:$phone,name:$name,password:$password,passwordType:$passwordType,countryCode:$countryCode}) {\n\t\tmsg\n\t\tstatus\n\t}\n}\n",
 		"createTime": "2023-03-29 09:36:47Z",
-		"updateTime": "2023-07-11 04:26:57Z",
 		"deleteTime": "",
+		"enabled": true,
+		"id": 1522169491947520,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "POST",
+		"operationType": "mutations",
+		"remark": "",
+		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]"
+		"roles": "[\"admin\",\"user\",\"eeee\"]",
+		"title": "/System/User/CreateOne",
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"content": "query MyQuery($id: Int!) @internalOperation {\n  data: main_findFirstuser(where: {id: {equals: $id}}) {\n    id\n  }\n}",
+		"content": "query MyQuery ($name: String, $phone: String, $userId: Int, $roleId: Int) @rbac(requireMatchAny: [admin,user,eeee]) {\n\tdata: main_findFirstuser(where: {OR:[{name:{equals:$name}},{phone:{equals:$phone}}]}) {\n\t\tid @export(as: \"userId\")\n\t\tavatar\n\t\troles: _join @transform(get: \"main_findManyrole_user\") {\n\t\t\tmain_findManyrole_user(where: {user_id:{equals:$userId}}) @transform(get: \"[]._join.main_findFirstrole.code\") {\n\t\t\t\trole_id @export(as: \"roleId\")\n\t\t\t\t_join {\n\t\t\t\t\tmain_findFirstrole(where: {id:{equals:$roleId}}) {\n\t\t\t\t\t\tcode\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tname\n\t}\n}\n",
 		"createTime": "2023-03-29 09:36:58Z",
 		"deleteTime": "",
 		"enabled": true,
 		"id": 1522170168147968,
 		"illegal": false,
-		"isPublic": false,
-		"liveQuery": false,
-		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "",
-		"roles": "",
-		"title": "/System/User/GetOne",
-		"updateTime": "2023-06-30 06:53:36Z"
-	},
-	{
-		"content": "query MyQuery($phone: String!, $userId: Int @internal, $roleId: Int @internal) {\n  data: main_findFirstuser(where: {phone: {equals: $phone}}) {\n    name\n    id @export(as: \"userId\")\n    avatar\n    roles: _join @transform(get: \"main_findManyrole_user\") {\n      main_findManyrole_user(where: {user_id: {equals: $userId}}) @transform(get: \"[]._join.main_findFirstrole\") {\n        role_id @export(as: \"roleId\")\n        _join {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n            id\n            remark\n          }\n        }\n      }\n    }\n  }\n}",
-		"createTime": "2023-03-29 09:45:28Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 1522203582332928,
-		"illegal": false,
 		"isPublic": true,
 		"liveQuery": false,
 		"method": "GET",
 		"operationType": "queries",
 		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
-		"title": "/User/Me",
-		"updateTime": "2023-07-07 05:04:10Z"
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\",\"user\",\"eeee\"]",
+		"title": "/System/User/GetOne",
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"content": "query MyQuery {\n  data: main_aggregateuser {\n    count: _count {\n      id\n    }\n  }\n}",
+		"content": "query MyQuery @rbac(requireMatchAny: [admin]) {\n\tdata: main_aggregateuser {\n\t\tcount: _count {\n\t\t\tid\n\t\t}\n\t}\n}\n",
 		"createTime": "2023-03-30 06:40:18Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -265,27 +229,27 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[]",
+		"roles": "[\"admin\"]",
 		"title": "/System/User/CountUsers",
-		"updateTime": "2023-06-30 07:41:05Z"
+		"updateTime": "2023-07-16 13:08:40Z"
 	},
 	{
-		"content": "query MyQuery {\n  data: statistics_GetMonthlySales {\n    months\n    totalSales\n  }\n} ",
+		"content": "query MyQuery {\n\tdata: statistics_GetMonthlySales {\n\t\tmonths\n\t\ttotalSales\n\t}\n}\n",
 		"createTime": "2023-04-02 15:23:41Z",
 		"deleteTime": "",
 		"enabled": true,
 		"id": 1546182777700352,
-		"illegal": false,
+		"illegal": true,
 		"isPublic": true,
 		"liveQuery": false,
 		"method": "GET",
 		"operationType": "queries",
 		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\"]",
 		"title": "/Statistics/MonthlySales",
-		"updateTime": "2023-06-28 06:28:05Z"
+		"updateTime": "2023-07-17 08:34:33Z"
 	},
 	{
 		"content": "query MyQuery {\n  data: statistics_GetSalesTop10 {\n    shopName\n    totalSales\n  }\n}",
@@ -321,7 +285,7 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/Statistics/VisitTrending",
-		"updateTime": "2023-06-28 08:52:13Z"
+		"updateTime": "2023-07-17 03:29:06Z"
 	},
 	{
 		"content": "query MyQuery {\n  data: statistics_GetSaleTypePercent {\n    typeId\n    typeName\n    totalSales\n  }\n}",
@@ -339,10 +303,10 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/Statistics/SaleTypePercent",
-		"updateTime": "2023-06-27 01:36:06Z"
+		"updateTime": "2023-07-17 03:31:22Z"
 	},
 	{
-		"content": "query MyQuery ($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput]) @rbac(requireMatchAny: [admin]) {\n\tdata: main_findManyuser(skip: $skip, take: $take, where: {AND:$query}, orderBy: $orderBy) {\n\t\tid\n\t\tname\n\t\tavatar\n\t\tcreatedAt: created_at\n\t}\n}\n",
+		"content": "query MyQuery ($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput]) @rbac(requireMatchAny: [admin,user]) {\n\tdata: main_findManyuser(skip: $skip, take: $take, where: {AND:$query}, orderBy: $orderBy) {\n\t\tid\n\t\tname\n\t\tavatar\n\t\tcreatedAt: created_at\n\t}\n}\n",
 		"createTime": "2023-04-03 08:02:11Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -355,9 +319,9 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[\"admin\",\"user\"]",
 		"title": "/System/User/GetList",
-		"updateTime": "2023-07-11 01:49:46Z"
+		"updateTime": "2023-07-18 09:49:23Z"
 	},
 	{
 		"content": "query MyQuery {\n  data: main_findManyrole {\n    code\n    remark\n    id\n  }\n}",
@@ -378,7 +342,7 @@
 		"updateTime": "2023-07-04 06:20:05Z"
 	},
 	{
-		"content": "mutation MyQuery ($roleId: Int!, $userId: Int = 10) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteOnerole_user(where: {role_id_user_id:{role_id:$roleId,user_id:$userId}}) {\n\t\tid\n\t}\n}\n",
+		"content": "mutation MyQuery($roleId: Int!, $userId: Int = 10) {\n  data: main_deleteOnerole_user(\n    where: {role_id_user_id: {role_id: $roleId, user_id: $userId}}\n  ) {\n    id\n  }\n}",
 		"createTime": "2023-04-03 10:04:05Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -393,10 +357,10 @@
 		"roleType": "requireMatchAny",
 		"roles": "[\"admin\"]",
 		"title": "/System/User/DisconnectRole",
-		"updateTime": "2023-07-11 01:49:24Z"
+		"updateTime": "2023-07-15 08:38:12Z"
 	},
 	{
-		"content": "mutation MyQuery ($userId: Int!, $roleId: Int!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_createOnerole_user(data: {role_id:$roleId,user_id:$userId}) {\n\t\tid\n\t}\n}\n",
+		"content": "mutation MyQuery($userId: Int!, $roleId: Int!) {\n  data: main_createOnerole_user(data: {role_id: $roleId, user_id: $userId}) {\n    id\n  }\n}",
 		"createTime": "2023-04-03 10:07:39Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -411,7 +375,7 @@
 		"roleType": "requireMatchAny",
 		"roles": "[\"admin\"]",
 		"title": "/System/User/ConnectRole",
-		"updateTime": "2023-07-11 01:49:24Z"
+		"updateTime": "2023-07-15 08:38:22Z"
 	},
 	{
 		"content": "query MyQuery($userId: Int!, $roleId: Int @internal) {\n  data: main_findManyrole_user(where: {user_id: {equals: $userId}}) @transform(get: \"[].data\") {\n    role_id @export(as: \"roleId\")\n    data: _join @transform(get: \"main_findFirstrole\") {\n      main_findFirstrole(where: {id: {equals: $roleId}}) {\n        remark\n        code\n        id\n      }\n    }\n  }\n}",
@@ -432,7 +396,7 @@
 		"updateTime": "2023-07-04 06:05:39Z"
 	},
 	{
-		"content": "mutation MyQuery ($code: String!, $remark: String!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_createOnerole(data: {code:$code,remark:$remark}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n}\n",
+		"content": "mutation MyQuery ($code: String!, $remark: String!) @rbac(requireMatchAny: [admin,user,eeee]) {\n\tdata: main_createOnerole(data: {code:$code,remark:$remark}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n}\n",
 		"createTime": "2023-04-04 01:18:27Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -445,17 +409,17 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[\"admin\",\"user\",\"eeee\"]",
 		"title": "/System/Role/AddOne",
-		"updateTime": "2023-07-11 01:49:24Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"content": "mutation MyQuery ($code: String!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteOnerole(where: {code:$code}) {\n\t\tid\n\t}\n}\n",
+		"content": "mutation MyQuery ($code: String!) @rbac(requireMatchAny: [admin,user,eeee]) {\n\tdata: main_deleteOnerole(where: {code:$code}) {\n\t\tid\n\t}\n}\n",
 		"createTime": "2023-04-04 01:18:31Z",
 		"deleteTime": "",
 		"enabled": true,
 		"id": 1554184073641984,
-		"illegal": true,
+		"illegal": false,
 		"isPublic": true,
 		"liveQuery": false,
 		"method": "POST",
@@ -463,12 +427,12 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[\"admin\",\"user\",\"eeee\"]",
 		"title": "/System/Role/DeleteOne",
-		"updateTime": "2023-07-11 01:49:24Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"content": "mutation MyQuery ($remark: String, $id: Int!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_updateOnerole(data: {remark:{set:$remark}}, where: {id:$id}) {\n\t\tcode\n\t\tid\n\t\tremark\n\t}\n}\n",
+		"content": "mutation MyQuery ($remark: String, $id: Int!) @rbac(requireMatchAny: [admin,user,eeee]) {\n\tdata: main_updateOnerole(data: {remark:{set:$remark}}, where: {id:$id}) {\n\t\tcode\n\t\tid\n\t\tremark\n\t}\n}\n",
 		"createTime": "2023-04-04 01:19:50Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -481,12 +445,12 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[\"admin\",\"user\",\"eeee\"]",
 		"title": "/System/Role/UpdateOne",
-		"updateTime": "2023-07-11 01:49:24Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
-		"content": "mutation MyQuery ($ids: [Int]) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteManyrole(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n",
+		"content": "mutation MyQuery ($ids: [Int]) {\n\tdata: main_deleteManyrole(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n",
 		"createTime": "2023-04-04 01:56:47Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -501,28 +465,28 @@
 		"roleType": "requireMatchAny",
 		"roles": "[\"admin\"]",
 		"title": "/System/Role/DeleteMany",
-		"updateTime": "2023-07-11 01:49:24Z"
+		"updateTime": "2023-07-16 13:41:01Z"
 	},
 	{
-		"content": "query GetRoleList($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) {\n  data: main_findManyrole(\n    skip: $skip\n    take: $take\n  orderBy: $orderBy\n    where: {AND: $query}) {\n    \n    id\n    code\n    remark\n  }\n  total: main_aggregaterole(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n}",
-		"createTime": "2023-04-04 02:37:20Z",
-		"deleteTime": "",
-		"enabled": true,
 		"id": 1554494005051392,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
 		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
+		"operationType": "queries",
+		"isPublic": true,
+		"remark": "",
+		"illegal": false,
+		"liveQuery": false,
 		"title": "/System/Role/GetList",
-		"updateTime": "2023-06-30 06:46:19Z"
+		"content": "query GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) @rbac(requireMatchAny: [admin]) {\n\tdata: main_findManyrole(skip: $skip, take: $take, orderBy: $orderBy, where: {AND:$query}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n\ttotal: main_aggregaterole(where: {AND:$query}) @transform(get: \"_count.id\") {\n\t\t_count {\n\t\t\tid\n\t\t}\n\t}\n}\n",
+		"enabled": true,
+		"createTime": "2023-04-04 02:37:20Z",
+		"updateTime": "2023-07-18 09:49:23Z",
+		"deleteTime": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\"]"
 	},
 	{
-		"content": "mutation CreateOneMenu ($label: String!, $path: String!, $icon: String, $level: Int = 10, $sort: Int = 10) @rbac(requireMatchAny: [admin]) {\n\tdata: main_createOnemenu(data: {label:$label,path:$path,icon:$icon,level:$level,sort:$sort}) {\n\t\tid\n\t\tparentId\n\t\tlabel\n\t\tpath\n\t\ticon\n\t\tsort\n\t\tlevel\n\t}\n}\n",
+		"content": "mutation CreateOneMenu ($label: String!, $path: String!, $icon: String, $level: Int!, $sort: Int!, $parentId: Int, $menuType: String!, $perms: String = \"\") @rbac(requireMatchAny: [admin,user]) {\n\tdata: main_createOnemenu(data: {label:$label,path:$path,icon:$icon,level:$level,sort:$sort,parentId:$parentId,menu_type:$menuType,perms:$perms}) {\n\t\tid\n\t}\n}\n",
 		"createTime": "2023-04-04 03:10:50Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -535,12 +499,12 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[\"admin\",\"user\"]",
 		"title": "/System/Menu/CreateOne",
-		"updateTime": "2023-07-11 01:49:25Z"
+		"updateTime": "2023-07-18 07:40:18Z"
 	},
 	{
-		"content": "mutation DeleteOneMenu ($id: Int!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteOnemenu(where: {id:$id}) {\n\t\tid\n\t}\n}\n",
+		"content": "mutation DeleteOneMenu($id: Int!) {\n  data: main_deleteOnemenu(where: {id: $id}) {\n    id\n  }\n}",
 		"createTime": "2023-04-04 03:10:50Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -555,10 +519,10 @@
 		"roleType": "requireMatchAny",
 		"roles": "[\"admin\"]",
 		"title": "/System/Menu/DeleteOne",
-		"updateTime": "2023-07-11 01:49:25Z"
+		"updateTime": "2023-07-16 10:56:20Z"
 	},
 	{
-		"content": "mutation UpdateOneMenu ($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int) @rbac(requireMatchAny: [admin]) {\n\tdata: main_updateOnemenu(data: {label:{set:$label},path:{set:$path},icon:{set:$icon},sort:{set:$sort},level:{set:$level}}, where: {id:$id}) {\n\t\tid\n\t\tparentId\n\t\tlabel\n\t\tpath\n\t\ticon\n\t\tsort\n\t\tlevel\n\t}\n}\n",
+		"content": "mutation UpdateOneMenu ($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int) @rbac(requireMatchAny: [admin,user,eeee]) {\n\tdata: main_updateOnemenu(data: {label:{set:$label},path:{set:$path},icon:{set:$icon},sort:{set:$sort},level:{set:$level}}, where: {id:$id}) {\n\t\tid\n\t\tparentId\n\t\tlabel\n\t\tpath\n\t\ticon\n\t\tsort\n\t\tlevel\n\t}\n}\n",
 		"createTime": "2023-04-04 03:10:50Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -571,9 +535,9 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[\"admin\",\"user\",\"eeee\"]",
 		"title": "/System/Menu/UpdateOne",
-		"updateTime": "2023-07-11 01:49:25Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
 		"content": "query GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_menuOrderByWithRelationInput], $query: main_menuWhereInput) {\n  data: main_findManymenu(\n    skip: $skip\n    take: $take\n  orderBy: $orderBy\n    where: {AND: $query}) {\n    \n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n  }\n  total: main_aggregatemenu(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n}",
@@ -594,7 +558,7 @@
 		"updateTime": "2023-06-30 06:08:22Z"
 	},
 	{
-		"content": "query GetOneMenu($id: Int!) {\n  data: main_findFirstmenu(where: {id: {equals: $id}}) {\n    \n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n  }\n}",
+		"content": "query GetOneMenu ($id: Int!) @rbac(requireMatchAny: [admin,user,eeee]) {\n\tdata: main_findFirstmenu(where: {id:{equals:$id}}) {\n\t\tid\n\t\tparentId\n\t\tlabel\n\t\tpath\n\t\ticon\n\t\tsort\n\t\tlevel\n\t}\n}\n",
 		"createTime": "2023-04-04 03:10:50Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -606,10 +570,10 @@
 		"operationType": "queries",
 		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\",\"user\",\"eeee\"]",
 		"title": "/System/Menu/GetOne",
-		"updateTime": "2023-06-30 06:08:54Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
 		"content": "mutation DeleteManyMenu ($ids: [Int]!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteManymenu(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n",
@@ -630,7 +594,7 @@
 		"updateTime": "2023-07-11 01:49:25Z"
 	},
 	{
-		"content": "query GetManyMenu($in: [Int] = [1]) {\n  data: main_findManymenu(where: {level: {in: $in}}) {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n    is_bottom\n  }\n}",
+		"content": "query GetManyMenu {\n  data: main_findManymenu {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n    is_bottom\n    menu_type\n    perms\n    api_id\n    create_time\n  }\n}",
 		"createTime": "2023-04-04 03:10:50Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -645,7 +609,7 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/System/Menu/GetMany",
-		"updateTime": "2023-07-04 01:27:34Z"
+		"updateTime": "2023-07-17 05:46:30Z"
 	},
 	{
 		"content": "query MyQuery {\n  data: system_getAllApis {\n    createTime\n    id\n    liveQuery\n    method\n    operationType\n    title\n    enabled\n  }\n}",
@@ -666,61 +630,7 @@
 		"updateTime": "2023-07-04 09:08:36Z"
 	},
 	{
-		"content": "mutation MyQuery ($role_id: Int!, $menu_id: Int!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteOnemenu_role(where: {role_id_menu_id:{role_id:$role_id,menu_id:$menu_id}}) {\n\t\tid\n\t}\n}\n",
-		"createTime": "2023-04-04 09:25:17Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 1556098083979264,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
-		"method": "POST",
-		"operationType": "mutations",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
-		"title": "/System/Role/DisconnectOneMenu",
-		"updateTime": "2023-07-11 01:49:25Z"
-	},
-	{
-		"content": "mutation MyQuery ($menu_id: Int!, $role_id: Int!) @rbac(requireMatchAny: [admin]) {\n\tmain_createOnemenu_role(data: {menu_id:$menu_id,role_id:$role_id}) {\n\t\tid\n\t}\n}\n",
-		"createTime": "2023-04-04 09:50:09Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 1556195864608768,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
-		"method": "POST",
-		"operationType": "mutations",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
-		"title": "/System/Role/ConnectOneMenu",
-		"updateTime": "2023-07-11 01:49:25Z"
-	},
-	{
-		"content": "query MyQuery($roleId: Int!, $menuId: Int @internal) {\n  data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[]._join.main_findFirstmenu\") {\n    menu_id @export(as: \"menuId\")\n    _join {\n      main_findFirstmenu(where: {id: {equals: $menuId}}) {\n        icon\n        id\n        label\n        level\n        parentId\n        path\n        sort\n      }\n    }\n  }\n}",
-		"createTime": "2023-04-04 09:59:52Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 1556234083631104,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
-		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "",
-		"roles": "",
-		"title": "/System/Role/GetBindMenus",
-		"updateTime": "2023-07-04 01:37:04Z"
-	},
-	{
-		"content": "mutation MyQuery($dest: String!) {\n  data: casdoor_ApiControllerSendVerificationCode(\n    POSTApiSend_verification_codeInput: {dest: $dest, countryCode: CN}\n  ) {\n    status\n    msg\n  }\n}",
+		"content": "mutation MyQuery($dest: String!, $countryCode: String = \"CN\") {\n  data: casdoor_apiSendVerificationCode(\n    POSTApiSend_verification_codeInput: {dest: $dest, countryCode: $countryCode}\n  ) {\n    msg\n  }\n}",
 		"createTime": "2023-06-25 06:38:26Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -735,25 +645,7 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/Casdoor/SendCode",
-		"updateTime": "2023-06-25 07:13:42Z"
-	},
-	{
-		"content": "query MyQuery($name: String = \"\", $phone: String = \"\", $userId: Int @internal, $roleId: Int @internal) {\n  token: casdoor_ApiControllerGetUserByToken {\n    data {\n      access_token\n      refresh_token\n      username\n      expires_in\n    }\n    success\n    msg\n  }\n  user: main_findFirstuser(\n    where: {OR: [{name: {equals: $name}}, {phone: {equals: $phone}}]}\n  ) {\n    id @export(as: \"userId\")\n    avatar\n    roles: _join @transform(get: \"data\") {\n      data: main_findManyrole_user(where: {user_id: {equals: $userId}}) @transform(get: \"[]._join.main_findFirstrole.code\") {\n        role_id @export(as: \"roleId\")\n        _join {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n  }\n}",
-		"createTime": "2023-06-29 02:45:24Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 2041484411142144,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
-		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "",
-		"roles": "",
-		"title": "/Casdoor/GetUser",
-		"updateTime": "2023-07-06 09:17:26Z"
+		"updateTime": "2023-07-14 01:30:11Z"
 	},
 	{
 		"content": "mutation MyQuery ($data: [main_permissionCreateManyInput]!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_createManypermission(skipDuplicates: true, data: $data) {\n\t\tcount\n\t}\n}\n",
@@ -774,24 +666,6 @@
 		"updateTime": "2023-07-11 01:49:25Z"
 	},
 	{
-		"content": "query MyQuery($name: String!, $userId: Int @internal, $roleId: Int @internal, $menuId: Int @internal) {\n  data: main_findFirstuser(where: {name: {equals: $name}}) @transform(get: \"_join.main_findFirstrole_user.menus\") {\n    id @export(as: \"userId\")\n    _join {\n      main_findFirstrole_user(where: {user_id: {equals: $userId}}) {\n        role_id @export(as: \"roleId\")\n        menus: _join @transform(get: \"main_findManymenu_role.[]._join.main_findFirstmenu\") {\n          main_findManymenu_role(where: {role_id: {equals: $roleId}}) {\n            menu_id @export(as: \"menuId\")\n            _join {\n              main_findFirstmenu(where: {id: {equals: $menuId}}) {\n                id\n                title: label\n                level\n                path\n                name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-		"createTime": "2023-07-03 02:02:15Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 2063963951726592,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
-		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "",
-		"roles": "",
-		"title": "/System/Menu/GetUserMenus",
-		"updateTime": "2023-07-04 00:57:57Z"
-	},
-	{
 		"content": "query MyQuery($pid: Int!) {\n  data: main_findManymenu(where: {parentId: {equals: $pid}}) {\n    id\n    label\n    level\n    name\n    path\n    sort\n  }\n}",
 		"createTime": "2023-07-03 05:30:11Z",
 		"deleteTime": "",
@@ -805,9 +679,9 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[]",
+		"roles": "[\"admin\"]",
 		"title": "/System/Menu/GetChildrenMenus",
-		"updateTime": "2023-07-07 07:43:28Z"
+		"updateTime": "2023-07-16 08:32:37Z"
 	},
 	{
 		"content": "query MyQuery($menuId: Int!, $permId: BigInt @internal) {\n  data: main_findManymenu_permission(where: {menu_id: {equals: $menuId}}) @transform(get: \"[]._join.main_findFirstpermission\") {\n    perm_id @export(as: \"permId\")\n    _join {\n      main_findFirstpermission(where: {id: {equals: $permId}}) {\n        createdAt\n        enabled\n        id\n        method\n        path\n      }\n    }\n  }\n}",
@@ -846,25 +720,7 @@
 		"updateTime": "2023-07-07 04:05:39Z"
 	},
 	{
-		"content": "query MyQuery($title: String!, $menuId: Int @internal, $roleId: Int @internal) {\n  data: main_findFirstmenu(where: {name: {equals: $title}}) @transform(get: \"_join.main_findManymenu_role\") {\n    id @export(as: \"menuId\")\n    _join {\n      main_findManymenu_role(where: {menu_id: {equals: $menuId}}) @transform(get: \"[]._join.main_findFirstrole.code\") {\n        role_id @export(as: \"roleId\")\n        _join {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n  }\n}",
-		"createTime": "2023-07-04 04:31:12Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 2070212003758080,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
-		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "",
-		"roles": "",
-		"title": "/System/Role/GetMenuRoles",
-		"updateTime": "2023-07-04 04:38:37Z"
-	},
-	{
-		"content": "query MyQuery($pid: Int @internal, $name: String @internal, $menuId: Int @internal, $roleId: Int @internal) {\n  data: main_findManymenu(where: {level: {equals: 1}}) {\n    id @export(as: \"pid\")\n    path\n    label\n    name\n    children: _join @transform(get: \"main_findManymenu\") {\n      main_findManymenu(where: {parentId: {equals: $pid}}) {\n        path\n        name @export(as: \"name\")\n        label\n        roles: _join @transform(get: \"main_findFirstmenu\") {\n          main_findFirstmenu(where: {name: {equals: $name}}) @transform(get: \"_join.main_findManymenu_role\") {\n            id @export(as: \"menuId\")\n            _join {\n              main_findManymenu_role(where: {menu_id: {equals: $menuId}}) @transform(get: \"[]._join.main_findFirstrole.code\") {\n                role_id @export(as: \"roleId\")\n                _join {\n                  main_findFirstrole(where: {id: {equals: $roleId}}) {\n                    code\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+		"content": "query MyQuery ($pid: Int) @rbac(requireMatchAny: [admin]) {\n\tdata: main_findManymenu(where: {level:{equals:1}}, orderBy: {sort:asc}) {\n\t\tid @export(as: \"pid\")\n\t\tpath\n\t\tlabel\n\t\tname\n\t\tsort\n\t\tchildren: _join @transform(get: \"main_findManymenu\") {\n\t\t\tmain_findManymenu(where: {parentId:{equals:$pid}}, orderBy: {sort:asc}) {\n\t\t\t\tid\n\t\t\t\tpath\n\t\t\t\tname\n\t\t\t\tlabel\n\t\t\t\tsort\n\t\t\t}\n\t\t}\n\t}\n}\n",
 		"createTime": "2023-07-04 05:02:57Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -876,13 +732,13 @@
 		"operationType": "queries",
 		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\"]",
 		"title": "/System/GetMenus",
-		"updateTime": "2023-07-04 12:19:16Z"
+		"updateTime": "2023-07-16 13:06:36Z"
 	},
 	{
-		"content": "query MyQuery($id: Int!) {\n  data:main_findFirstrole(where: {id: {equals: $id}}) {\n    code\n  }\n}",
+		"content": "query MyQuery ($id: Int!) @rbac(requireMatchAny: [admin,user,eeee]) {\n\tdata: main_findFirstrole(where: {id:{equals:$id}}) {\n\t\tcode\n\t}\n}\n",
 		"createTime": "2023-07-04 05:37:28Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -894,10 +750,10 @@
 		"operationType": "queries",
 		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\",\"user\",\"eeee\"]",
 		"title": "/System/Role/GetOne",
-		"updateTime": "2023-07-06 12:11:22Z"
+		"updateTime": "2023-07-18 06:11:15Z"
 	},
 	{
 		"content": "query MyQuery {\n  data: main_findManypermission {\n    createdAt\n    enabled\n    method\n    path\n  }\n}",
@@ -918,7 +774,7 @@
 		"updateTime": "2023-07-05 07:17:00Z"
 	},
 	{
-		"content": "query MyQuery($code: String = \"\") {\n  data: system_getRoleBindApis(code: $code) @transform(get: \"[].title\") {\n    title\n  }\n}",
+		"content": "query MyQuery($code: [String]!, $roleId: Int @internal, $menuId: Int @internal) {\n  data: main_findManyrole(where: {code: {in: $code}}) {\n    id @export(as: \"roleId\")\n    _join {\n     data:  main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[]._join.main_findFirstmenu.perms\") {\n        menu_id @export(as: \"menuId\")\n        _join {\n          main_findFirstmenu(where: {id: {equals: $menuId}}) {\n            perms\n          }\n        }\n      }\n    }\n  }\n}",
 		"createTime": "2023-07-06 08:48:26Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -933,28 +789,10 @@
 		"roleType": "requireMatchAny",
 		"roles": "[\"admin\"]",
 		"title": "/System/Perm/GetRolePerms",
-		"updateTime": "2023-07-07 07:43:28Z"
+		"updateTime": "2023-07-18 06:16:09Z"
 	},
 	{
-		"content": "query GetRoleBindApiIds($code: String!) {\n  data: system_getRoleBindApis(code: $code) @transform(get: \"[].id\") {\n    id\n  }\n}",
-		"createTime": "2023-07-06 13:38:26Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 2083688409726976,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
-		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
-		"restUrl": "",
-		"roleType": "",
-		"roles": "",
-		"title": "/System/Role/GetRoleBindApiIds",
-		"updateTime": "2023-07-06 13:45:58Z"
-	},
-	{
-		"content": "query MyQuery($userId: String!, $id: Int @internal, $roleId: Int @internal) {\n  data: main_findFirstuser(where: {user_id: {equals: $userId}}) @transform(get: \"_join.main_findManyrole_user\") {\n    id @export(as: \"id\")\n    _join {\n      main_findManyrole_user(where: {user_id: {equals: $id}}) @transform(get: \"[]._join\") {\n        role_id @export(as: \"roleId\")\n        _join @transform(get: \"main_findFirstrole.code\") {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n  }\n}",
+		"content": "query MyQuery($userId: String!, $id: Int @internal, $roleId: Int @internal) {\n  data: main_findFirstuser(where: {user_id: {equals: $userId}}) @transform(get: \"_join.main_findManyrole_user\") {\n    id @export(as: \"id\")\n    _join {\n      main_findManyrole_user(where: {user_id: {equals: $id}}) @transform(get: \"[]._join\") {\n        role_id @export(as: \"roleId\")\n        _join @transform(get: \"main_findFirstrole.code\") {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n  }\n} ",
 		"createTime": "2023-07-11 02:34:27Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -969,6 +807,114 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/Casdoor/GetRolesById",
-		"updateTime": "2023-07-11 02:35:51Z"
+		"updateTime": "2023-07-11 07:53:12Z"
+	},
+	{
+		"content": "query MyQuery($roleId: Int!) {\n  data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[].menu_id\") {\n    menu_id\n  }\n}",
+		"createTime": "2023-07-17 04:30:49Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 2143820475138048,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/System/Role/GetRoleMenuId",
+		"updateTime": "2023-07-17 05:37:41Z"
+	},
+	{
+		"content": "query MyQuery($level: Int, $pid: Int) {\n  data: main_findManymenu(where: {OR: [{level: {equals: $level}}, {parentId: {equals: $pid}}]}) {\n    id\n    label\n    is_bottom\n  }\n}",
+		"createTime": "2023-07-17 04:50:33Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 2143898110918656,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/System/Menu/GetMenuByLevelOrPid",
+		"updateTime": "2023-07-17 05:04:57Z"
+	},
+	{
+		"content": "mutation MyQuery($data: [main_menu_roleCreateManyInput]!) {\n  data: main_createManymenu_role(data: $data) {\n    count\n  }\n}",
+		"createTime": "2023-07-17 09:21:03Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 2144961756004352,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "POST",
+		"operationType": "mutations",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/System/Role/BindMenus",
+		"updateTime": "2023-07-17 12:28:52Z"
+	},
+	{
+		"content": "query MyQuery($menuIds: [Int]!) {\n  data: main_findManymenu(where: {id: {in: $menuIds}}) @transform(get: \"[].api_id\") {\n    api_id\n  }\n}",
+		"createTime": "2023-07-17 11:21:42Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 2145436175368192,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/System/Menu/GetApisByMenus",
+		"updateTime": "2023-07-17 11:22:51Z"
+	},
+	{
+		"content": "mutation MyQuery($roleId: Int!, $menuIds: [Int]!) {\n  main_deleteManymenu_role(\n    where: {role_id: {equals: $roleId}, menu_id: {in: $menuIds}}\n  ) {\n    count\n  }\n}",
+		"createTime": "2023-07-17 12:57:29Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 2145812813840384,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "POST",
+		"operationType": "mutations",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/System/Role/UnBindMenus",
+		"updateTime": "2023-07-17 13:26:37Z"
+	},
+	{
+		"content": "mutation MyQuery($apis: [Int]!, $roleCode: String!) {\n  system_unBindRoleApis(\n    POSTApiV1RoleUnbindApiInput: {roleCode: $roleCode, apis: $apis}\n  ) {\n    count\n  }\n}",
+		"createTime": "2023-07-18 01:00:08Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 2148654364557312,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "POST",
+		"operationType": "mutations",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/System/Role/UnBindRoleApis",
+		"updateTime": "2023-07-18 08:48:07Z"
 	}
 ]

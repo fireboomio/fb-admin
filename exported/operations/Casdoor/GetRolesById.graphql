@@ -12,4 +12,4 @@ query MyQuery($userId: String!, $id: Int @internal, $roleId: Int @internal) {
       }
     }
   }
-}
+} 
