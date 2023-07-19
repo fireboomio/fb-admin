@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import api, { convertPageQuery } from "@/api";
-import { API } from "../types";
-import { ref, onMounted, reactive, watchEffect } from "vue";
+import api from "@/api";
+import { ref, onMounted } from "vue";
 import { ElTable } from 'element-plus'
-import { Perm, sendPermission, PermSyncReq, getBindAPI } from '@/api/system'
+import { Perm, sendPermission, PermSyncReq } from '@/api/system'
+import axios from "axios";
 const dataTableRef = ref<InstanceType<typeof ElTable>>();
 
 defineOptions({
@@ -11,7 +11,6 @@ defineOptions({
 });
 
 const loading = ref(false);
-// const dataSource = ref<API[]>();
 let dataSource = [];
 
 const total = ref(0);
@@ -25,8 +24,8 @@ async function handleQuery() {
     dataSource = data!.data!;
     total.value = dataSource.length
     initTable();
-    getBindAPI().then(res => {
-      const originPerms = res.data.data.map(item => item.path) ?? []
+    axios.get("/operations/System/Perm/GetBindPerms").then(res => {
+      const originPerms = res.data.data.data.map(item => item.path) ?? []
       selections.value = originPerms
       const selectedPerms = dataSource.filter(item => {
         return originPerms.includes(item.title)
@@ -34,7 +33,6 @@ async function handleQuery() {
       for (const perm of selectedPerms) {
         dataTableRef.value!.toggleRowSelection(perm, true)
       }
-
     })
   }
 
@@ -73,7 +71,6 @@ const pushAllSelect = () => {
   })
 }
 
-let tableData = ref<any[]>();
 const page = ref<number>(1);
 const size = ref<number>(10);
 

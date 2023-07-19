@@ -38,14 +38,12 @@ import {
   FontIcon
 } from "./components/ReIcon";
 import Avatar from "vue-avatar/src";
-app.component("Avatar", Avatar);
 app.component("IconifyIconOffline", IconifyIconOffline);
 app.component("IconifyIconOnline", IconifyIconOnline);
 app.component("FontIcon", FontIcon);
-
+app.component("Avatar", Avatar);
 // 全局注册按钮级别权限组件
 import { Auth } from "@/components/ReAuth";
-import { avatar } from "./views/login/utils/static";
 app.component("Auth", Auth);
 
 getServerConfig(app).then(async config => {

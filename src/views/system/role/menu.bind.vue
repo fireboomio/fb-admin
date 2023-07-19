@@ -61,8 +61,8 @@ async function onSubmit() {
     await api.mutate({
       operationName: "System/Role/DisconnectOneMenu",
       input: {
-        role_id: props.role!.id!,
-        menu_id: menuId
+        id: props.role!.id!,
+        menuId
       }
     });
   }
@@ -71,8 +71,8 @@ async function onSubmit() {
     await api.mutate({
       operationName: "System/Role/ConnectOneMenu",
       input: {
-        role_id: props.role!.id!,
-        menu_id: menuId
+        id: props.role!.id!,
+        menuId
       }
     });
   }

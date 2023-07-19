@@ -21,12 +21,10 @@ import { buildHierarchyTree } from "@/utils/tree";
 import { sessionKey, type DataInfo } from "@/utils/auth";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { usePermissionStoreHook } from "@/store/modules/permission";
-import { useUserStoreHook } from "@/store/modules/user"
+import { useUserStoreHook } from "@/store/modules/user";
+
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 const store = useUserStoreHook();
-// 动态路由
-import { getDynamicRoute, getRolePerms } from "@/api/system";
-import { useUserStoreHook } from "@/store/modules/user";
 
 function handRank(routeInfo: any) {
   const { name, path, parentId, meta } = routeInfo;
@@ -148,55 +146,6 @@ function addPathMatch() {
       path: "/:pathMatch(.*)",
       name: "pathMatch",
       redirect: "/error/404"
-    });
-  }
-}
-
-/** 处理动态路由（后端返回的路由） */
-function handleAsyncRoutes(routeList) {
-  if (routeList.length === 0) {
-    usePermissionStoreHook().handleWholeMenus(routeList);
-  } else {
-    const mapData = addAsyncRoutes(routeList);
-    formatFlatteningRoutes(mapData).map((v: RouteRecordRaw) => {
-      // 防止重复添加路由
-      if (
-        router.options.routes[0].children.findIndex(
-          value => value.path === v.path
-        ) !== -1
-      ) {
-        return;
-      } else {
-        // 切记将路由push到routes后还需要使用addRoute，这样路由才能正常跳转
-        router.options.routes[0].children.push(v);
-        // 最终路由进行升序
-        ascending(router.options.routes[0].children);
-        if (!router.hasRoute(v?.name)) router.addRoute(v);
-        const flattenRouters: any = router
-          .getRoutes()
-          .find(n => n.path === "/");
-
-        router.addRoute(flattenRouters);
-      }
-    });
-    usePermissionStoreHook().handleWholeMenus(routeList);
-  }
-  addPathMatch();
-}
-
-/** 初始化路由（`new Promise` 写法防止在异步请求中造成无限循环）*/
-async function initRouter() {
-  // 获取角色权限
-  const roles = useUserStoreHook().roles;
-  getRolePerms(roles).then(res => {
-    useUserStoreHook().SET_PERMISSIONS(res);
-  });
-  const asyncRouteList = await getDynamicRoute().then(res => res);
-
-  if (asyncRouteList && asyncRouteList?.length > 0) {
-    return new Promise(resolve => {
-      handleAsyncRoutes(asyncRouteList);
-      resolve(router);
     });
   }
 }
@@ -335,7 +284,6 @@ function getHistoryMode(routerHistory): RouterHistory {
 function getAuths(): Array<string> {
   // 从store中获取权限permissions
   return store.permissions;
-
 }
 
 /** 是否有按钮级别的权限 */
@@ -361,7 +309,6 @@ export {
   getAuths,
   ascending,
   filterTree,
-  initRouter,
   getTopMenu,
   addPathMatch,
   isOneOfArray,

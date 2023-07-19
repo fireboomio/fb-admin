@@ -1,13 +1,3 @@
-<script lang="ts">
-export default {
-  name: "role",
-  components: {
-    RoleBindApi,
-    RoleBindMenu
-  }
-};
-</script>
-
 <script setup lang="ts">
 import api, { convertPageQuery } from "@/api";
 import { merge } from "@/utils";
@@ -22,10 +12,11 @@ import {
 import { Role } from "../types";
 import RoleBindApi from "./api.bind.vue";
 import RoleBindMenu from "./menu.bind.vue";
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, nextTick } from "vue";
 import { Icon } from '@iconify/vue';
 import { hasAuth, getAuths } from "@/router/utils";
 import { useUserStoreHook } from "@/store/modules/user";
+import { deleteRoles, roleMenuTreeselect, updateRolePermAdd, updateRolePermRemove } from "@/api/system";
 
 defineOptions({
   name: "RoleManage"
@@ -34,11 +25,21 @@ defineOptions({
 const queryFormRef = ref(ElForm);
 const roleFormRef = ref(ElForm);
 const menuRef = ref(ElTree);
-
+const menuOptions = ref([]);
 const loading = ref(false);
 const ids = ref<number[]>([]);
 const total = ref(0);
-
+// const rules = {
+//         roleName: [
+//           { required: true, message: "角色名称不能为空", trigger: "blur" }
+//         ],
+//         roleKey: [
+//           { required: true, message: "权限字符不能为空", trigger: "blur" }
+//         ],
+//         roleSort: [
+//           { required: true, message: "角色顺序不能为空", trigger: "blur" }
+//         ]
+//       }
 const queryParams = reactive<PageQuery>({
   pageNum: 1,
   pageSize: 10
@@ -49,21 +50,42 @@ const roleList = ref<Role[]>([]);
 const dialog = reactive<DialogOption>({
   visible: false
 });
-
-const formData = reactive<Required<Omit<Role, "id">>>({
+let checkedKeys = [];
+let newCheckedKeys = [];
+let allKeys = [];
+// const formData = reactive<Required<Omit<Role, "id">>>({
+//   code: "",
+//   remark: ""
+// });
+const formData = reactive({
   code: "",
-  remark: ""
-});
+  remark: "",
+  menuCheckStrictly: false
+})
 const editingId = ref<number>();
 
 const rules = reactive<FormRules>({
-  code: [{ required: true, message: "请输入角色编码", trigger: "blur" }]
+  code: [{ required: true, message: "请输入角色编码", trigger: ['blur', 'change'] },
+  {
+    validator: function (rule, value, callback) {
+      if (! /^[a-zA-Z][a-zA-Z0-9_]*$/.test(value)) {
+        callback(new Error('角色只能以字母开头, 并且只能包含字母、数字、_'));
+      } else {
+        callback();
+      }
+    }
+  }]
 });
 
 const apiBindVisible = ref(false);
 const menuBindVisible = ref(false);
 const bindingRole = ref<Role>();
-
+const menuExpand = ref(false);
+const menuNodeAll = ref(false);
+const menu = ref(null)
+defineExpose({
+  menu,
+});
 /**
  * 查询
  */
@@ -95,6 +117,7 @@ function resetQuery() {
 function handleSelectionChange(selection: any) {
   ids.value = selection.map((item: any) => item.id);
 }
+
 /**
  * 打开角色表单弹窗
  */
@@ -104,7 +127,9 @@ function openDialog(role?: Role) {
     dialog.title = "修改角色";
     merge(formData, role);
     editingId.value = role.id;
+    getRoleMenuTreeselect(role.id)
   } else {
+    editingId.value = 0;
     dialog.title = "新增角色";
   }
 }
@@ -112,29 +137,55 @@ function openDialog(role?: Role) {
 /**
  * 角色表单提交
  */
-async function handleSubmit() {
-  // loading.value = true;
+async function handleSubmit(code) {
+  loading.value = true;
   roleFormRef.value.validate(async (valid: any) => {
     if (valid) {
-      loading.value = true
       if (editingId.value) {
-        const { error } = await api.mutate({
-          operationName: "System/Role/UpdateOne",
-          input: {
-            id: editingId.value,
-            remark: formData.remark
+        // 判断是权限是增加、减少、没有改变
+        const menuIdsAdd = [];
+        const menuIdsRemove = [];
+        newCheckedKeys.forEach(item => {
+          if (!checkedKeys.includes(item)) {
+            menuIdsAdd.push(item)
           }
-        });
-        if (!error) {
+        })
+        checkedKeys.forEach(item => {
+          if (!newCheckedKeys.includes(item)) {
+            menuIdsRemove.push(item)
+          }
+        })
+        // 发送增加权限的请求
+        if (menuIdsAdd.length) {
+          updateRolePermAdd(code, editingId.value, menuIdsAdd);
+        }
+        // 发送减少权限的请求
+        if (menuIdsRemove.length) {
+          updateRolePermRemove(code, editingId.value, menuIdsRemove);
+        }
+        // const { error } = await api.mutate({
+        //   operationName: "System/Role/UpdateOne",
+        //   input: {
+        //     id: editingId.value,
+        //     remark: formData.remark
+        //   }
+        // });
+        console.log(menuIdsAdd);
+        console.log(menuIdsRemove);
+
+        if (!menuIdsAdd.length && !menuIdsRemove.length) {
+          ElMessage.warning("您没有做任何修改");
+          closeDialog();
+        } else {
           ElMessage.success("修改成功");
           closeDialog();
           resetQuery();
         }
       } else {
-        // 重复性校验
-        const verify = roleList.value.some(item => formData.code === item.code)
+        // 角色重复性校验
+        const verify = roleList.value.some(item => item.code === formData.code);
         if (verify) {
-          ElMessage.warning("该角色已存在，请勿重复添加");
+          ElMessage.warning("该角色已存在,请勿重复添加");
         } else {
           const { error } = await api.mutate({
             operationName: "System/Role/AddOne",
@@ -148,11 +199,10 @@ async function handleSubmit() {
             resetQuery();
           }
         }
-
       }
-      loading.value = false;
     }
   });
+  loading.value = false;
 }
 
 /**
@@ -178,27 +228,23 @@ function resetForm() {
  * 删除
  */
 function handleDelete(roleId?: number) {
-  const roleIds = roleId ? [roleId] : ids;
+  const roleIds = roleId ? [roleId] : ids.value;
   if (!roleIds) {
     ElMessage.warning("请勾选删除项");
     return;
   }
-
   ElMessageBox.confirm("确认删除已选中的数据项?", "警告", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
     type: "warning"
   }).then(async () => {
     loading.value = true;
-    const { error } = await api.mutate({
-      operationName: "System/Role/DeleteMany",
-      // @ts-ignore
-      input: { ids: roleIds }
-    });
-    if (!error) {
-      ElMessage.success("删除成功");
-      resetQuery();
-    }
+    deleteRoles(roleIds).then(res => {
+      if (res) {
+        ElMessage.success("删除成功");
+        resetQuery();
+      }
+    })
     loading.value = false;
   });
 }
@@ -219,6 +265,52 @@ function openMenuBindDialog(role: Role) {
 onMounted(() => {
   handleQuery();
 });
+
+
+/** 根据角色ID查询菜单树结构 */
+function getRoleMenuTreeselect(roleId: number) {
+  return roleMenuTreeselect(roleId).then(response => {
+    menuOptions.value = response.data.menus;
+    checkedKeys = response.data.checkedKeys;
+    allKeys = response.data.allKeys;
+    nextTick(() => {
+      response.data.checkedKeys.forEach(item => {
+        menu.value.setChecked(item, true);
+      });
+    })
+    return response;
+  });
+}
+
+// 树权限（展开/折叠）
+function handleCheckedTreeExpand(value) {
+  let treeList = menuOptions.value;
+  for (let i = 0; i < treeList.length; ++i) {
+    menu.value.store.nodesMap[treeList[i].id].expanded = value;
+  }
+}
+
+// 树权限（全选/全不选）
+function handleCheckedTreeNodeAll(value) {
+  menu.value.setCheckedNodes(value ? menuOptions.value : [])
+  if (value) {
+    newCheckedKeys = allKeys;
+  } else {
+    newCheckedKeys = []
+  }
+}
+// 树权限（父子联动）
+function handleCheckedTreeConnect(event) {
+  formData.menuCheckStrictly = event;
+}
+function currentChecked(nodeObj, SelectedObj) {
+  // console.log(SelectedObj)
+  // console.log(SelectedObj.checkedKeys)   // 这是选中的节点的key数组
+  // console.log(SelectedObj.checkedNodes)  // 这是选中的节点数组  
+  newCheckedKeys = SelectedObj.checkedKeys;
+  console.log(checkedKeys);
+
+}
 </script>
 
 <template>
@@ -242,13 +334,13 @@ onMounted(() => {
 
     <el-card shadow="never">
       <template #header>
-        <Auth value="/System/Role/AddOne">
+        <Auth value="system:role:add">
           <el-button type="success" @click="openDialog()">
             <Icon icon="ep:plus" />新增
           </el-button>
         </Auth>
 
-        <Auth value="/System/Role/DeleteOne">
+        <Auth value="system:role:remove">
           <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
             <Icon icon="ep:delete" />删除
           </el-button>
@@ -261,22 +353,14 @@ onMounted(() => {
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="角色编码" prop="code" width="200" />
         <el-table-column label="角色描述" prop="remark" width="300" />
-        <el-table-column fixed="right" label="操作">
+        <el-table-column fixed="right" label="操作" align="center">
           <template #default="scope">
-            <Auth value="/System/Role/BindRoleApis">
-              <el-button type="primary" size="small" link @click="openApiBindDialog(scope.row)">
-                <Icon icon="ep:position" />分配权限
-              </el-button>
-            </Auth>
-            <el-button type="primary" size="small" link @click="openMenuBindDialog(scope.row)">
-              <Icon icon="ep:position" />分配菜单
-            </el-button>
-            <Auth value="/System/Role/UpdateOne">
+            <Auth value="system:role:edit">
               <el-button type="primary" size="small" link @click="openDialog(scope.row)">
                 <Icon icon="ep:edit" />编辑
               </el-button>
             </Auth>
-            <Auth value="/System/Role/DeleteMany">
+            <Auth value="system:role:remove">
               <el-button type="primary" size="small" link @click="handleDelete(scope.row.id)">
                 <Icon icon="ep:delete" />删除
               </el-button>
@@ -284,11 +368,9 @@ onMounted(() => {
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页功能 -->
-      <!-- <el-pagination small background layout="prev, pager, next" v-model:current-page="queryParams.pageNum" :total="total" -->
-      <!-- :size="queryParams.pageSize" class="mt-4" /> -->
-      <el-pagination v-if="total > 0" v-model:total="total" v-model:current-page="queryParams.pageNum"
-        v-model:limit="queryParams.pageSize" @current-change="handleQuery" />
+
+      <el-pagination v-if="total > 0" v-model:total="total" v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize" @pagination="handleQuery" />
     </el-card>
 
     <!-- 角色表单弹窗 -->
@@ -305,10 +387,19 @@ onMounted(() => {
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="handleSubmit">确 定</el-button>
+          <el-button type="primary" @click="handleSubmit(formData.code)">确 定</el-button>
           <el-button @click="closeDialog">取 消</el-button>
         </div>
       </template>
+      <el-form ref="form" :model="formData" :rules="rules" label-width="100px">
+        <el-form-item label="菜单权限" v-if="dialog.title !== '新增角色'">
+          <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event)">展开/折叠</el-checkbox>
+          <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event)">全选/全不选</el-checkbox>
+          <el-checkbox v-model="formData.menuCheckStrictly" @change="handleCheckedTreeConnect($event)">父子联动</el-checkbox>
+          <el-tree class="tree-border" :data="menuOptions" show-checkbox ref="menu" node-key="id"
+            :check-strictly="!formData.menuCheckStrictly" empty-text="加载中，请稍候" @check="currentChecked"></el-tree>
+        </el-form-item>
+      </el-form>
     </el-dialog>
 
     <!-- 分配API弹窗  -->

@@ -58,6 +58,7 @@
     "vue-types": "^5.0.4"
   },
   "devDependencies": {
+    "@riophae/vue-treeselect": "0.4.0",
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
     "@iconify-icons/ep": "^1.2.11",

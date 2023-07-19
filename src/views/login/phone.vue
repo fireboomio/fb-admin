@@ -9,7 +9,6 @@ import { ElMessage, type FormInstance } from "element-plus";
 import { $t, transformI18n } from "@/plugins/i18n";
 import { useVerifyCode } from "./utils/verifyCode";
 import { useUserStoreHook } from "@/store/modules/user";
-import { initRouter, getTopMenu } from "@/router/utils";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import Iphone from "@iconify-icons/ep/iphone";
 import { sendVerifyCode } from "@/api/user";
@@ -36,18 +35,16 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       setTimeout(() => {
         useUserStoreHook()
           .loginByUsername({
-            username: ruleForm.phone,
+            phone: ruleForm.phone,
             code: ruleForm.verifyCode,
             loginType: loginType.value
           })
           .then(res => {
             console.log(res);
-            if (res.data.data.success) {
-              // 获取后端路由
-              initRouter().then(() => {
-                router.replace(getTopMenu(true).path);
-                message("登录成功", { type: "success" });
-              });
+            
+            if (res.success) {
+              router.push("/");
+              message("登录成功", { type: "success" });
             }
           })
           .catch(err => {

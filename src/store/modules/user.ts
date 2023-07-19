@@ -7,14 +7,7 @@ import { storageSession } from "@pureadmin/utils";
 import { LoginResult, getLogin, refreshTokenApi } from "@/api/user";
 import { RefreshTokenResult } from "@/api/user";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
-import {
-  type DataInfo,
-  setToken,
-  removeToken,
-  sessionKey,
-  formatToken
-} from "@/utils/auth";
-import axios from "axios";
+import { type DataInfo, setToken, removeToken, sessionKey } from "@/utils/auth";
 import { ElMessage } from "element-plus";
 // 在本地存储用户信息
 export const useUserStore = defineStore({
@@ -25,7 +18,8 @@ export const useUserStore = defineStore({
       storageSession().getItem<DataInfo<number>>(sessionKey)?.username ?? "",
     // 页面级别权限
     roles: storageSession().getItem<DataInfo<number>>(sessionKey)?.roles ?? [],
-    permissions: [],
+    permissions:
+      storageSession().getItem<DataInfo<number>>(sessionKey)?.permissions ?? [],
     avatar:
       storageSession().getItem<DataInfo<number>>(sessionKey)?.avatar ?? "", // 头像
     // 判断登录页面显示哪个组件（password：登录（默认）、sms：手机登录)
@@ -54,35 +48,24 @@ export const useUserStore = defineStore({
     },
     /** 登入 */
     async loginByUsername(data) {
-      const phone = data.username;
-      const name = data.username;
       return new Promise<LoginResult>((resolve, reject) => {
         getLogin(data)
           .then(async res => {
             // 获取到token
-            if (res.data.data.success) {
-              // 获取用户信息
-              const userInfo = await axios.get("/operations/Casdoor/GetUser", {
-                headers: {
-                  Authorization: formatToken(res.data.data.data.access_token)
-                },
-                params: {
-                  phone,
-                  name
-                }
-              });
+            if (res.data.success) {
               const dataInfo: DataInfo<number> = {
-                accessToken: userInfo.data.data.token.data.access_token,
-                expires: userInfo.data.data.token.data.expires_in,
-                refreshToken: userInfo.data.data.token.data.refresh_token,
-                username: userInfo.data.data.token.data.username,
-                roles: userInfo.data.data.user.roles,
-                avatar: userInfo.data.data.user.avatar
+                accessToken: res.data.data.accessToken,
+                expires: res.data.data.expireIn,
+                refreshToken: res.data.data.refreshToken,
+                username: res.data.username,
+                roles: res.data.roles,
+                avatar: res.data.avatar,
+                permissions: res.data.perms
               };
               setToken(dataInfo);
-              resolve(res);
+              resolve(res.data);
             } else {
-              ElMessage.info(res.data.data.msg);
+              ElMessage.info(res.data.msg);
             }
           })
           .catch(error => {

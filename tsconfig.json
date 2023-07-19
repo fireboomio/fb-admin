@@ -35,7 +35,8 @@
       "vite/client",
       "element-plus/global",
       "@pureadmin/table/volar",
-      "@pureadmin/descriptions/volar"
+      "@pureadmin/descriptions/volar",
+      "vite-svg-loader"
     ]
   },
   "include": [

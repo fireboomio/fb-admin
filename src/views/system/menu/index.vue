@@ -1,20 +1,18 @@
-<script lang="ts">
-export default {
-  name: "cmenu"
-};
-</script>
-
 <script setup lang="ts">
 import IconSelect from "@/components/IconSelect/index.vue";
 import { Menu } from "../types";
 import api from "@/api";
 import { merge } from "@/utils";
-import { ref, reactive } from "vue";
+import { ref, reactive, nextTick } from "vue";
 import { onMounted } from "vue";
 import { ElForm, ElMessage, ElMessageBox } from "element-plus";
 import { getSubmenu, getPerm } from "@/api/system";
 import { Icon } from '@iconify/vue';
-
+import { debug } from "console";
+import { handleTree, is } from "@pureadmin/utils";
+import { parseTime } from "@/utils/date";
+import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 defineOptions({
   name: "MenuManage"
 });
@@ -22,6 +20,8 @@ defineOptions({
 const menuFormRef = ref(ElForm);
 
 const loading = ref(false);
+const isExpandAll = ref(false);
+const refreshTable = ref(true);
 const dialog = reactive<DialogOption>({
   visible: false
 });
@@ -35,16 +35,20 @@ const dialogPerm = reactive<DialogOption>({
 const menuList = ref<Menu[]>([]);
 const tableSubmenu = ref([]); // 存放子菜单数据
 const tableSubPerm = ref([]); // 存放子权限数据
-const formData = reactive<Required<Omit<Menu, "id" | "parentId">>>({
+// <Required<Omit<Menu, "id" | "parentId">>>
+const formData = reactive({
   label: "",
   level: 1,
   path: "",
   icon: "",
-  sort: 1
+  sort: 1,
+  parentId: 0,
+  menuType: "M",
 });
 const editingId = ref<number>();
 
 const rules = reactive({
+  parentId: [{ required: true, trigger: "blur" }],
   label: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
   path: [{ required: true, message: "请输入菜单路径", trigger: "blur" }]
 });
@@ -62,7 +66,8 @@ async function handleQuery() {
     operationName: "System/Menu/GetMany"
   });
   if (!error) {
-    menuList.value = data!.data!;
+    menuList.value = handleTree(data!.data!, "id");
+    // menuList.value = data!.data!;
   }
   loading.value = false;
 }
@@ -80,17 +85,37 @@ function onRowClick(row: Menu) {
  * 打开表单弹窗
  *
  */
-function openDialog(menu?: Menu) {
+
+//  增加
+function openDialogAdd(menu?: Menu) {
   dialog.visible = true;
-  if (menu) {
-    dialog.title = "编辑菜单";
-    editingId.value = menu.id;
-    merge(formData, menu);
-  } else {
-    editingId.value = 0;
-    dialog.title = "新增菜单";
+  dialog.title = "新增菜单";
+  if (!menu) { // 一级菜单
+    formData.level = 1;
+    formData.parentId = 0;
+  } else {     // 二级菜单
+    formData.level = menu.level + 1;
+    formData.parentId = menu.id
   }
 }
+function openDialogUpdate(menu?: Menu) {
+  dialog.visible = true;
+  dialog.title = "修改菜单";
+  editingId.value = menu.id;
+  merge(formData, menu);
+}
+// function openDialog(menu?: Menu) {
+//   dialog.visible = true;
+//   if (msg === "修改") {
+//     dialog.title = "修改菜单";
+//     editingId.value = menu.id;
+//     merge(formData, menu);
+//   } else {
+//     dialog.title = "新增菜单";
+//     formData.level = menu.level + 1;
+//     formData.parentId = menu.id;
+//   }
+// }
 
 /**
  * 菜单提交
@@ -112,12 +137,12 @@ function submitForm() {
           handleQuery();
         }
       } else {
-        const verify = menuList.value.some(item => {
-          return formData.label === item.label || formData.path === item.path
-        })
+        // 判断新增的菜单是否重复
+        const verify = menuList.value.some((item) => item.label === formData.label)
         if (verify) {
-          ElMessage.error("新增失败，列表中已存在!")
+          ElMessage.warning("该菜单已存在, 请勿重复添加");
         } else {
+
           const { error } = await api.mutate({
             operationName: "System/Menu/CreateOne",
             input: {
@@ -130,9 +155,8 @@ function submitForm() {
             handleQuery();
           }
         }
-        loading.value = false;
       }
-
+      loading.value = false;
     }
   });
 }
@@ -196,17 +220,7 @@ onMounted(() => {
   handleQuery();
 });
 
-/**
- * 查看子菜单
- */
-function viewSubmenu(id: number) {
-  dialogSubmenu.title = "子菜单";
-  // 向后端请求子菜单数据 /operations/System/Menu/GetChildrenMenus
-  getSubmenu(id).then(res => {
-    dialogSubmenu.visible = true;
-    tableSubmenu.value = res.data.data;
-  });
-}
+
 /**
  * 查看子权限
  */
@@ -214,76 +228,96 @@ function viewPerm(id: number) {
   dialogPerm.title = "子权限";
   getPerm(id).then(res => {
     dialogPerm.visible = true;
-    tableSubPerm.value = res.data.data;
+    tableSubPerm.value = res.data.data.data;
   });
 }
 
+/** 展开/折叠操作 */
+function toggleExpandAll() {
+  refreshTable.value = false;
+  isExpandAll.value = !isExpandAll.value;
+  console.log(isExpandAll.value);
+
+  nextTick(() => {
+    refreshTable.value = true;
+  });
+}
 </script>
 
 <template>
   <div class="app-container">
     <el-card shadow="never">
       <template #header>
-        <Auth value="/System/Menu/CreateOne">
-          <el-button type="success" @click="openDialog()">
+        <Auth value="system:menu:add">
+          <el-button type="success" @click="openDialogAdd()">
             <template #icon>
               <Icon icon="ep:plus" />
             </template>
             新增</el-button>
         </Auth>
-
+        <el-button type="info" @click="toggleExpandAll">
+          <Icon icon="ep:sort" />展开/折叠
+        </el-button>
       </template>
 
-      <el-table v-loading="loading" :data="menuList" highlight-current-row
-        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @row-click="onRowClick" row-key="id"
-        default-expand-all border>
-        <el-table-column label="菜单名称" width="200" prop="label" />
 
-        <el-table-column label="菜单路径" align="center" width="150" prop="path" />
-
-        <el-table-column label="排序" align="center" width="100" prop="sort" />
-
-        <el-table-column fixed="right" align="center" label="操作" min-width="220">
+      <el-table v-if="refreshTable" v-loading="loading" :data="menuList" row-key="id" :default-expand-all="isExpandAll"
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
+        <el-table-column prop="label" label="菜单名称" :show-overflow-tooltip="true" width="160"></el-table-column>
+        <el-table-column prop="icon" label="图标" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="sort" label="排序" width="60" align="center"></el-table-column>
+        <!-- <el-table-column prop="level" label="层级" width="60" align="center"></el-table-column> -->
+        <el-table-column prop="perms" label="权限标识" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column prop="path" label="组件路径" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column label="创建时间" align="center" prop="create_time">
           <template #default="scope">
-            <Auth value="/System/Menu/UpdateOne">
-              <el-button type="primary" link size="small" @click.stop="openDialog(scope.row)">
-                <Icon icon="ep:edit" />编辑
+            <span v-if="scope.row.create_time">{{ parseTime(scope.row.create_time, "{y}-{m}-{d} {h}:{i}:{s}") }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="300">
+          <template #default="scope">
+            <Auth value="system:menu:edit">
+              <el-button size="small" type="text" icon="el-icon-edit" @click.stop="openDialogUpdate(scope.row)">
+                <Icon icon="ep:edit" />修改
               </el-button>
             </Auth>
-            <Auth value="/System/Menu/DeleteOne">
-              <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
+            <Auth value="system:menu:add">
+              <el-button size="small" type="text" icon="el-icon-plus" @click.stop="openDialogAdd(scope.row)">
+                <Icon icon="ep:plus" />新增
+              </el-button>
+            </Auth>
+            <Auth value="system:menu:edit">
+              <el-button size="small" type="text" icon="el-icon-delete" @click="handleDelete(scope.row.id)">
                 <Icon icon="ep:delete" />删除
               </el-button>
             </Auth>
-
-            <Auth value="/System/Menu/GetChildrenMenus">
-              <el-button type="primary" link size="small" @click.stop="viewSubmenu(scope.row.id)"
-                v-if="!scope.row.is_bottom">
-                <Icon icon="ep:edit" />子菜单
-              </el-button>
-            </Auth>
-            <Auth value="/System/Menu/GetMenuPerms">
-              <el-button type="primary" link size="small" @click.stop="viewPerm(scope.row.id)" v-if="scope.row.is_bottom">
-                <Icon icon="ep:edit" />子权限
-              </el-button>
-            </Auth>
-
           </template>
         </el-table-column>
       </el-table>
     </el-card>
 
+
+
+    <!--@@@@@ openDialog @@@@@-->
     <el-dialog :title="dialog.title" v-model="dialog.visible" @close="closeDialog" destroy-on-close appendToBody
       width="750px">
       <el-form ref="menuFormRef" :model="formData" :rules="rules" label-width="100px">
         <el-form-item label="菜单名称" prop="label">
           <el-input v-model="formData.label" placeholder="请输入菜单名称" />
         </el-form-item>
-
         <el-form-item label="路由路径" prop="path">
           <el-input v-model="formData.path" placeholder="/system  (目录以/开头)" />
         </el-form-item>
-
+        <el-col :span="24">
+          <el-form-item label="菜单类型" prop="menuType">
+            <el-radio-group v-model="formData.menuType">
+              <el-radio label="M">目录</el-radio>
+              <el-radio label="C">菜单</el-radio>
+              <el-radio label="F">按钮</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-col>
         <el-form-item label="图标" prop="icon">
           <!-- 图标选择器 -->
           <icon-select v-model="formData.icon" />
@@ -296,47 +330,16 @@ function viewPerm(id: number) {
 
       <template #footer>
         <div class="dialog-footer">
-          <Auth value="/System/Menu/UpdateOne">
+          <Auth value="system:menu:edit">
             <el-button type="primary" @click="submitForm">确 定</el-button>
           </Auth>
-          <Auth value="/System/Menu/UpdateOne">
+          <Auth value="system:menu:edit">
             <el-button @click="closeDialog">取 消</el-button>
           </Auth>
-
         </div>
       </template>
     </el-dialog>
 
-    <!-- 点击子菜单弹出的对话框 -->
-    <el-dialog :title="dialogSubmenu.title" v-model="dialogSubmenu.visible" @close="closeSubmenuDialog" destroy-on-close
-      appendToBody width="750px">
-      <el-table :data="tableSubmenu" style="width: 100%">
-        <el-table-column label="菜单名称" width="180" prop="label" />
-        <el-table-column label="菜单路径" width="200" prop="path" />
-        <el-table-column label="排序" align="center" width="160" prop="sort" />
-        <el-table-column fixed="right" align="center" label="操作">
-          <template #default="scope">
-            <Auth value="System/Menu/GetMenuPerms"></Auth>
-            <el-button type="primary" link size="small" @click.stop="viewPerm(scope.row.id)">
-              子权限
-            </el-button>
-          </template> </el-table-column>>
-      </el-table>
-    </el-dialog>
 
-    <!-- 点击子权限弹出的对话框 -->
-    <el-dialog :title="dialogPerm.title" v-model="dialogPerm.visible" @close="closePermDialog" destroy-on-close
-      appendToBody width="750px">
-      <el-table :data="tableSubPerm" style="width: 100%">
-        <el-table-column label="创建时间" width="200" prop="createdAt" />
-        <el-table-column label="是否启用" align="center" width="180">
-          <template #default="scope">
-            {{ scope === 0 ? "否" : "是" }}
-          </template>
-        </el-table-column>
-        <el-table-column label="方法" align="center" width="100" prop="method" />
-        <el-table-column label="路径" width="240" prop="path" />
-      </el-table>
-    </el-dialog>
   </div>
 </template>

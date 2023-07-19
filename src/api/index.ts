@@ -5,7 +5,7 @@ export default createClient({
   baseURL: "",
   extraHeaders: {
     Authorization: formatToken(getToken().accessToken)
-  }
+  },
 });
 
 function isNotEmpty(arg: any) {

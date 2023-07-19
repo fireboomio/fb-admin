@@ -135,7 +135,7 @@ function handleSubmit() {
       } else {
         const username = useUserStoreHook().username;
         createOne(formData.title, username, formData.content, formData.poster, formData.publishedAt).then(res => {
-          if (res.data.data.id) {
+          if (res.data.data.data.id) {
             ElMessage.success("新增成功");
             closeDialog();
             handleQuery();
@@ -207,29 +207,27 @@ onMounted(() => {
           <el-input v-model="queryParams.title" placeholder="标题" clearable @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item>
-          <Auth value="/Post/GetList">
+          <Auth value="post:query">
             <el-button type="primary" @click="handleQuery()">
               <Icon icon="ep:search" />搜索
             </el-button>
           </Auth>
-          <Auth value="/Post/DeleteList">
-            <el-button @click="resetQuery()">
-              <Icon icon="ep:refresh" />重置
-            </el-button>
-          </Auth>
+          <el-button @click="resetQuery()">
+            <Icon icon="ep:refresh" />重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
 
     <el-card shadow="never">
       <template #header>
-        <Auth value="/Post/CreateOne">
+        <Auth value="post:edit">
           <el-button type="success" @click="openDialog()">
             <Icon icon="ep:plus" />新增
           </el-button>
         </Auth>
 
-        <Auth value="/Post/DeleteOne">
+        <Auth value="post:remove">
           <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
             <Icon icon="ep:delete" />删除
           </el-button>
@@ -250,14 +248,16 @@ onMounted(() => {
           " />
         <el-table-column fixed="right" label="操作" align="center" width="220">
           <template #default="scope">
-            <Auth value="/Post/GetOne">
+            <Auth value="post:edit">
               <el-button type="primary" link size="small" @click.stop="openDialog(scope.row.id)">
                 <Icon icon="ep:edit" />编辑
               </el-button>
             </Auth>
-            <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
-              <Icon icon="ep:delete" />删除
-            </el-button>
+            <Auth value="post:remove">
+              <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
+                <Icon icon="ep:delete" />删除
+              </el-button>
+            </Auth>
           </template>
         </el-table-column>
       </el-table>
@@ -284,12 +284,10 @@ onMounted(() => {
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <Auth value="/Post/UpdateOne">
+          <Auth value="post:edit">
             <el-button type="primary" @click="handleSubmit">确 定</el-button>
           </Auth>
-          <Auth value="/Post/UpdateOne">
-            <el-button @click="closeDialog">取 消</el-button>
-          </Auth>
+          <el-button @click="closeDialog">取 消</el-button>
         </div>
       </template>
     </el-dialog>

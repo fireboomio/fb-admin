@@ -7,12 +7,12 @@
             @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item>
-          <Auth value="/System/User/GetList">
+          <Auth value="system:user:query">
             <el-button type="primary" @click="handleQuery">
               <Icon icon="ep:search" />搜索
             </el-button>
           </Auth>
-          <Auth value="/System/User/GetList">
+          <Auth value="system:user:query">
             <el-button @click="resetQuery">
               <Icon icon="ep:refresh" />
               重置
@@ -29,12 +29,12 @@
         <el-table-column key="name" label="用户名" align="center" prop="name" width="200" />
         <el-table-column label="头像" width="80" align="center" prop="avatar">
           <template #default="scope">
-            <!-- <el-image v-if="scope.row.avatar" :src="scope.row.avatar" :preview-src-list="[scope.row.avatar]"
-              :preview-teleported="true" /> -->
-            <Avatar :username="scope.row.name" :src="scope.row.avatar" color="#fff" background-color="#ccc"
-              style="vertical-align: middle;" :inline="true">
+            <!-- <el-image :src="scope.row.avatar" :preview-src-list="[scope.row.avatar]" /> -->
+            <Avatar :username="scope.row.name" :src="scope.row.avatar" background-color="#ccc" color="#fff"
+              style=" vertical-align: middle;" :inline="true">
             </Avatar>
           </template>
+
         </el-table-column>
         <el-table-column label="创建时间" align="center" prop="createdAt" width="180" :formatter="(row, col, v) => (v ? new Date(v).toLocaleDateString() : '')
           " />
@@ -45,9 +45,9 @@
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
-      <el-pagination v-if="total > 0" v-model:total="total" v-model:current-page="queryParams.pageNum"
-        v-model:limit="queryParams.pageSize" @current-change="handleQuery" />
+
+      <el-pagination :total="total" :page-count="queryParams.pageNum" :page-size="queryParams.pageSize"
+        @pagination="handleQuery" />
     </el-card>
     <role-bind v-model="bindVisible" :user="bindingUser" />
   </div>
@@ -88,15 +88,7 @@ async function handleQuery() {
     input: convertPageQuery(queryParams, { containsFields: ["name"] })
   });
   if (!error) {
-    // userList.value = data!.data!;
-    // data!.data!.forEach(item => {
-    //   if (item.avatar == '') {
-    //     item.avatar = "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-    //   }
-    // })
     userList.value = data!.data!;
-    console.log(userList.value);
-
     total.value = data!.data!.length;
   }
   loading.value = false;

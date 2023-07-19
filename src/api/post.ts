@@ -1,4 +1,4 @@
-import { http } from "@/utils/http";
+import axios from "@/utils/http";
 
 // 新增文章
 export const createOne = (
@@ -8,7 +8,7 @@ export const createOne = (
   poster?: string,
   publishedAt?: string
 ) => {
-  return http.request("post", `/operations/Post/CreateOne`, {
+  return axios.post<any>(`/operations/Post/CreateOne`, {
     data: {
       username,
       content,

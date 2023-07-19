@@ -27,9 +27,9 @@ const iconSelectorRef = ref(null);
  * icon 加载
  */
 function loadIcons() {
-  const icons = import.meta.glob("../../../public/static/icons/*.svg");
+  const icons = import.meta.glob("/public/icons/*.svg");
   for (const icon in icons) {
-    const iconName = icon.split("public/static/icons/")[1].split(".svg")[0];
+    const iconName = icon.split("/public/icons/")[1].split(".svg")[0];
     iconNames.push(iconName);
   }
   filterIconNames.value = iconNames;
@@ -90,7 +90,7 @@ onMounted(() => {
       <el-scrollbar height="300px">
         <ul class="icon-list">
           <li class="icon-item" v-for="(iconName, index) in filterIconNames" :key="index" @click="handleSelect(iconName)">
-            <el-tooltip :content="iconName" placement="bottom" effect="dark">
+            <el-tooltip :content="iconName" placement="bottom" effect="light">
               <svg-icon color="var(--el-text-color-regular)" :icon-class="iconName" />
             </el-tooltip>
           </li>
