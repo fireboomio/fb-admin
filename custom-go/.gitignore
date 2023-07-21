@@ -1,2 +1,4 @@
 generated/
-server/fireboom_server.g
+server/fireboom_server.go
+helix.html
+pkg
