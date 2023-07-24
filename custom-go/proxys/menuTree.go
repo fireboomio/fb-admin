@@ -101,6 +101,12 @@ func tree(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) 
 				menu.Children = children
 				menuRes = append(menuRes, menu)
 			}
+			if menuItem.Is_bottom == 1 && menuItem.ParentId == 0 {
+				menuRes = append(menuRes, Menu{
+					Id:    menuItem.Id,
+					Label: menuItem.Label,
+				})
+			}
 		}
 
 		resp.Menus = menuRes

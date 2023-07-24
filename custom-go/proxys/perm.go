@@ -28,9 +28,7 @@ func perms(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody)
 	}
 
 	// 查询用户所属角色（可能是多个角色）的权限集合
-	perm, err := plugins.ExecuteInternalRequestQueries[getRolePermsIn, getRolePermsOut](hook.InternalClient, generated.System__Perm__GetRolePerms, getRolePermsIn{
-		Code: roles,
-	})
+	perm, err := plugins.ExecuteInternalRequestQueries[getRolePermsIn, getRolePermsOut](hook.InternalClient, generated.System__Perm__GetRolePerms, getRolePermsIn{Code: roles})
 	if err != nil {
 		return nil, err
 	}

@@ -1,22 +1,26 @@
 package server
 
 import (
+	"custom-go/global"
+
 	"custom-go/auth"
 
-	"custom-go/customize"
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
 	"custom-go/pkg/types"
+
+	"custom-go/customize"
 	_ "custom-go/proxys"
-	_ "custom-go/proxys/openai"
 )
 
 func init() {
 	types.WdgHooksAndServerConfig = types.WunderGraphHooksAndServerConfig{
 		Hooks: types.HooksConfiguration{
 			Global: plugins.GlobalConfiguration{
-				HttpTransport: plugins.HttpTransportHooks{},
-				WsTransport:   plugins.WsTransportHooks{},
+				HttpTransport: plugins.HttpTransportHooks{
+					BeforeOriginRequest: global.BeforeOriginRequest,
+				},
+				WsTransport: plugins.WsTransportHooks{},
 			},
 
 			Authentication: plugins.AuthenticationConfiguration{
