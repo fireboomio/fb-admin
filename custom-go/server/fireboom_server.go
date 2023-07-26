@@ -19,6 +19,8 @@ func init() {
 			Global: plugins.GlobalConfiguration{
 				HttpTransport: plugins.HttpTransportHooks{
 					BeforeOriginRequest: global.BeforeOriginRequest,
+
+					OnOriginResponse: global.OnOriginResponse,
 				},
 				WsTransport: plugins.WsTransportHooks{},
 			},
