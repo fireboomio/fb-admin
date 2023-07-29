@@ -24,7 +24,7 @@
 		},
 		"enabled": true,
 		"createTime": "2023-06-25 15:22:17Z",
-		"updateTime": "2023-07-21 10:26:18Z",
+		"updateTime": "2023-07-28 10:25:33Z",
 		"deleteTime": ""
 	},
 	{
@@ -34,23 +34,23 @@
 			"databaseUrl": {
 				"key": "",
 				"kind": "0",
-				"val": "mysql://root:285637zq@127.0.0.1:3306/main"
+				"val": "mysql://${username}:${password}@${host}:${port}/main"
 			},
 			"dbName": "main",
 			"dbType": "MySQL",
-			"host": "127.0.0.1",
+			"host": ${host},
 			"password": {
 				"key": "",
 				"kind": "0",
-				"val": "285637zq"
+				"val": "${password}"
 			},
-			"port": "3306",
+			"port": ${port},
 			"replaceJSONTypeFieldConfiguration": null,
 			"schemaExtension": "",
 			"userName": {
 				"key": "",
 				"kind": "0",
-				"val": "root"
+				"val": ${username}
 			}
 		},
 		"createTime": "2023-06-30 06:00:02Z",
@@ -59,7 +59,7 @@
 		"id": 2047912069758976,
 		"name": "main",
 		"sourceType": 1,
-		"updateTime": "2023-07-17 03:04:08Z"
+		"updateTime": "2023-07-24 09:58:55Z"
 	},
 	{
 		"config": {
