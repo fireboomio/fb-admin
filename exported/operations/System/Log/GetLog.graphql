@@ -1,0 +1,12 @@
+query MyQuery($skip: Int = 5, $take: Int = 10, $orderBy: [main_apilogOrderByWithRelationInput]) {
+  data: main_findManyapilog(skip: $skip, take: $take, orderBy: $orderBy) {
+    id
+    method
+    ip
+    path
+    updatedAt
+    ua
+    userName
+    userId
+  }
+}

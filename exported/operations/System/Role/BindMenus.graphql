@@ -1,0 +1,5 @@
+mutation MyQuery($data: [main_menu_roleCreateManyInput]!) {
+  data: main_createManymenu_role(data: $data) {
+    count
+  }
+}

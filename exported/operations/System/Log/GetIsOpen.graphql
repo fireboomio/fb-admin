@@ -1,0 +1,6 @@
+query MyQuery @rbac(requireMatchAny: [admin]) {
+  main_findFirstdic(where: {id: {equals: 1}}) {
+    id
+    isOpen
+  }
+}
