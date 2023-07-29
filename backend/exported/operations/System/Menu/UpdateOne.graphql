@@ -1,0 +1,11 @@
+mutation UpdateOneMenu ($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int) @rbac(requireMatchAny: [eeee,admin]) {
+	data: main_updateOnemenu(data: {label:{set:$label},path:{set:$path},icon:{set:$icon},sort:{set:$sort},level:{set:$level}}, where: {id:$id}) {
+		id
+		parentId
+		label
+		path
+		icon
+		sort
+		level
+	}
+}

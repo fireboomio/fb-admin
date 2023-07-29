@@ -1,0 +1,5 @@
+mutation DeleteOneMenu($id: Int!) @rbac(requireMatchAny: [admin]) {
+  data: main_deleteOnemenu(where: {id: $id}) {
+    id
+  }
+}

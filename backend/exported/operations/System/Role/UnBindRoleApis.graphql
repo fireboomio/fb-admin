@@ -1,0 +1,7 @@
+mutation MyQuery($apis: [Int]!, $roleCode: String!) {
+  system_unBindRoleApis(
+    POSTApiV1RoleUnbindApiInput: {roleCode: $roleCode, apis: $apis}
+  ) {
+    count
+  }
+}

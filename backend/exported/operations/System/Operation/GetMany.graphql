@@ -1,0 +1,11 @@
+query MyQuery {
+  data: system_getAllApis {
+    createTime
+    id
+    liveQuery
+    method
+    operationType
+    title
+    enabled
+  }
+}

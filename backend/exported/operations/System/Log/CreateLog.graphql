@@ -1,0 +1,14 @@
+mutation MyQuery($ip: String = "", $method: String = "", $path: String = "", $updatedAt: DateTime = "", $code: String = "", $ua: String = "", $userId: String = "", $userName: String = "") {
+  main_createOneapilog(
+    data: {updatedAt: $updatedAt, ip: $ip, method: $method, path: $path, code: $code, ua: $ua, userId: $userId, userName: $userName}
+  ) {
+    ip
+    method
+    path
+    id
+    updatedAt
+    ua
+    userId
+    userName
+  }
+} 

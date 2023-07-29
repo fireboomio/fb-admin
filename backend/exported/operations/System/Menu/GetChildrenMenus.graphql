@@ -1,0 +1,10 @@
+query MyQuery($pid: Int!) @rbac(requireMatchAny: [admin]) {
+  data: main_findManymenu(where: {parentId: {equals: $pid}}) {
+    id
+    label
+    level
+    name
+    path
+    sort
+  }
+}
