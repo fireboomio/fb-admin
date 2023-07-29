@@ -4,6 +4,7 @@ import (
 	"custom-go/generated"
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
+	"custom-go/pkg/utils"
 	"net/http"
 	"strings"
 	"sync"
@@ -22,7 +23,7 @@ var Mq = make(chan string)
 var Wg = new(sync.WaitGroup)
 
 func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) (*base.ClientRequest, error) {
-
+	hook.Logger().Info()
 	result, _ := plugins.ExecuteInternalRequestQueries[getIsOpenI, getIsOpenO](hook.InternalClient, generated.System__Log__GetIsOpen, getIsOpenI{})
 
 	if result.Main_findFirstdic.IsOpen {
@@ -36,14 +37,22 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 			//获取请求的是哪个api
 			api := body.Request.RequestURI
 			path := strings.Split(api, "?")[0]
-
-			_, err := plugins.ExecuteInternalRequestMutations[createLogI, createLogO](hook.InternalClient, generated.System__Log__CreateLog, createLogI{
+			bearerToken := body.Request.Headers["Authorization"]
+			token := strings.Split(bearerToken, " ")[1]
+			parseToken, err := utils.ParseToken(token)
+			var userId string
+			if parseToken.User.UserId == "" {
+				userId = " "
+			}
+			_, err = plugins.ExecuteInternalRequestMutations[createLogI, createLogO](hook.InternalClient, generated.System__Log__CreateLog, createLogI{
 				Code:      code,
 				UpdatedAt: GetCurrentTime(),
 				Ip:        body.Request.Headers["X-Real-Ip"],
 				Method:    body.Request.Method,
 				Path:      path,
 				Ua:        body.Request.Headers["User-Agent"],
+				UserName:  parseToken.User.Name,
+				UserId:    userId,
 			})
 
 			if err != nil {
