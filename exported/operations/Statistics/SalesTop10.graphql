@@ -1,6 +1,0 @@
-query MyQuery {
-  data: statistics_GetSalesTop10 {
-    shopName
-    totalSales
-  }
-}

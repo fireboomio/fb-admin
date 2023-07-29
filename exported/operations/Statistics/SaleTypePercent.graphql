@@ -1,7 +1,0 @@
-query MyQuery {
-  data: statistics_GetSaleTypePercent {
-    typeId
-    typeName
-    totalSales
-  }
-}

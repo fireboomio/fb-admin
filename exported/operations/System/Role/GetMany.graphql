@@ -1,7 +1,0 @@
-query MyQuery {
-  data: main_findManyrole {
-    code
-    remark
-    id
-  }
-}

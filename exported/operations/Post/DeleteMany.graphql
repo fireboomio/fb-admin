@@ -1,5 +1,0 @@
-mutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,eeee,admin]) {
-	data: main_deleteManypost(where: {id:{in:$ids}}) {
-		count
-	}
-}

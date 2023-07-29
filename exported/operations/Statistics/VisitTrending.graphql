@@ -1,6 +1,0 @@
-query MyQuery {
-  data: statistics_GetVisitTrending {
-    count
-    days
-  }
-} 

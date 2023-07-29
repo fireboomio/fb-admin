@@ -1,7 +1,0 @@
-query MyQuery {
-  logNum: main_aggregateapilog {
-    _count {
-      id
-    }
-  }
-}

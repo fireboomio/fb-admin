@@ -1,7 +1,0 @@
-mutation CreateOneMenu($label: String!, $path: String!, $icon: String, $level: Int!, $sort: Int!, $parentId: Int, $menuType: String!, $perms: String = "", $apiId: String = "", $create_time: DateTime! @injectCurrentDateTime(format: ISO8601)) @rbac(requireMatchAny: [admin]) {
-  data: main_createOnemenu(
-    data: {label: $label, path: $path, icon: $icon, level: $level, sort: $sort, parentId: $parentId, menu_type: $menuType, perms: $perms, api_id: $apiId, create_time: $create_time}
-  ) {
-    id
-  }
-}

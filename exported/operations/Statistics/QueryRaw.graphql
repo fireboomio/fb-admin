@@ -1,3 +1,0 @@
-mutation QueryRaw ($query: String!) {
-	main_queryRaw(query: $query)
-}

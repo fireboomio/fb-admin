@@ -1,8 +1,0 @@
-query MyQuery {
-  data: main_findManypermission {
-    createdAt
-    enabled
-    method
-    path
-  }
-}

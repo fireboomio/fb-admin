@@ -1,5 +1,0 @@
-mutation MyQuery ($ids: [Int]) {
-	data: main_deleteManyrole(where: {id:{in:$ids}}) {
-		count
-	}
-}
