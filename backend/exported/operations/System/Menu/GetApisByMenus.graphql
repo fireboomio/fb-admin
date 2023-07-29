@@ -1,0 +1,5 @@
+query MyQuery($menuIds: [Int]!) @rbac(requireMatchAny: [admin]) {
+  data: main_findManymenu(where: {id: {in: $menuIds}}) @transform(get: "[].api_id") {
+    api_id
+  }
+}

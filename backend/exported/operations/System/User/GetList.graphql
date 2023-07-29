@@ -1,0 +1,27 @@
+query MyQuery($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput], $userId: Int @internal, $roleId: Int @internal) @rbac(requireMatchAny: [user, admin]) {
+  data: main_findManyuser(
+    skip: $skip
+    take: $take
+    where: {AND: $query}
+    orderBy: $orderBy
+  ) {
+    id @export(as: "userId")
+    name
+    avatar
+    createdAt: created_at
+    _join {
+      main_findManyrole_user(where: {user_id: {equals: $userId}}) {
+        role_id @export(as: "roleId")
+        user_id
+        _join {
+          main_findManyrole(where: {id: {equals: $roleId}}) {
+            id
+            remark
+            code
+          }
+        }
+      }
+    }
+    phone
+  }
+}

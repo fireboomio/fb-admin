@@ -1,0 +1,21 @@
+query GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_menuOrderByWithRelationInput], $query: main_menuWhereInput) @rbac(requireMatchAny: [admin]) {
+  data: main_findManymenu(
+    skip: $skip
+    take: $take
+    orderBy: $orderBy
+    where: {AND: $query}
+  ) {
+    id
+    parentId
+    label
+    path
+    icon
+    sort
+    level
+  }
+  total: main_aggregatemenu(where: {AND: $query}) @transform(get: "_count.id") {
+    _count {
+      id
+    }
+  }
+} 

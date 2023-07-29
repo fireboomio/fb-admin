@@ -1,0 +1,7 @@
+mutation MyQuery ($countryCode: String = "CN", $name: String!, $password: String = "", $passwordType: String = "plain", $phone: String!) @rbac(requireMatchAny: [user,eeee,admin]) {
+	data: casdoor_apiAddUser(POSTApiAdd_userInput: {phone:$phone,name:$name,password:$password,passwordType:$passwordType,countryCode:$countryCode}) {
+		msg
+		status
+	}
+}
+ 

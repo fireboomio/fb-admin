@@ -1,0 +1,7 @@
+query MyQuery($level: Int, $pid: Int) {
+  data: main_findManymenu(where: {OR: [{level: {equals: $level}}, {parentId: {equals: $pid}}]}) {
+    id
+    label
+    is_bottom
+  }
+}

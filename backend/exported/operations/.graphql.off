@@ -1,0 +1,12 @@
+query MyQuery {
+  main_findManymenu(where: {}) {
+    id
+    api_id
+    icon
+    label
+    name
+    path
+    perms
+    sort
+  }
+}

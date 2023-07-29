@@ -1,0 +1,11 @@
+mutation MyQuery($create_role: String = "", $message: String = "", $target_role: String = "", $updatedAt: DateTime = "") @internalOperation @rbac(requireMatchAny: [admin]) {
+  main_createOnesub(
+    data: {updatedAt: $updatedAt, message: $message, create_role: $create_role, target_role: $target_role}
+  ) {
+    id
+    message
+    target_role
+    updatedAt
+    create_role
+  }
+}
