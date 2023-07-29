@@ -1,4 +1,4 @@
-query GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) @rbac(requireMatchAny: [admin]) {
+query GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) @rbac(requireMatchAny: [user,admin]) {
 	data: main_findManyrole(skip: $skip, take: $take, orderBy: $orderBy, where: {AND:$query}) {
 		id
 		code

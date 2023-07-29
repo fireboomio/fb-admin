@@ -1,4 +1,4 @@
-query GetOnePost ($id: Int!) @rbac(requireMatchAny: [user,admin,eeee]) {
+query GetOnePost ($id: Int!) @rbac(requireMatchAny: [user,eeee,admin]) {
 	data: main_findFirstpost(where: {id:{equals:$id}}) {
 		id
 		title

@@ -1,4 +1,4 @@
-query GetPostList ($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput) @rbac(requireMatchAny: [user,admin,eeee]) {
+query GetPostList ($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput) @rbac(requireMatchAny: [eeee,admin]) {
 	data: main_findManypost(skip: $skip, take: $take, where: {AND:$query}, orderBy: {title:asc}) {
 		id
 		title

@@ -1,4 +1,4 @@
-query GetManyMenu {
+query GetManyMenu @rbac(requireMatchAny: [admin]) {
   data: main_findManymenu {
     id
     parentId

@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/buger/jsonparser v1.1.1
+	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/graphql-go/graphql v0.8.0
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.10.2
@@ -14,6 +15,7 @@ require (
 	github.com/wundergraph/graphql-go-tools v1.62.3
 	golang.org/x/exp v0.0.0-20230203172020-98cc5a0785f9
 	google.golang.org/protobuf v1.28.1
+	gopkg.in/square/go-jose.v2 v2.6.0
 )
 
 require (

@@ -4,4 +4,4 @@ mutation MyQuery($roleId: Int!, $userId: Int = 10) {
   ) {
     id
   }
-}
+} 
