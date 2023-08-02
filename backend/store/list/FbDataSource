@@ -34,17 +34,17 @@
 			"databaseUrl": {
 				"key": "",
 				"kind": "0",
-				"val": "url"
+				"val": url
 			},
 			"dbName": "main",
 			"dbType": "MySQL",
-			"host": "host,
+			"host": "localhost",
 			"password": {
 				"key": "",
 				"kind": "0",
-				"val": "pwd"
+				"val": pwd
 			},
-			"port": "port",
+			"port": port,
 			"replaceJSONTypeFieldConfiguration": null,
 			"schemaExtension": "",
 			"userName": {
