@@ -34,17 +34,17 @@
 			"databaseUrl": {
 				"key": "",
 				"kind": "0",
-				"val": "mysql://${username}:${password}@${host}:${port}/main"
+				"val": "url"
 			},
 			"dbName": "main",
 			"dbType": "MySQL",
-			"host": "${host},
+			"host": "host,
 			"password": {
 				"key": "",
 				"kind": "0",
-				"val": ${password}
+				"val": "pwd"
 			},
-			"port": ${port},
+			"port": "port",
 			"replaceJSONTypeFieldConfiguration": null,
 			"schemaExtension": "",
 			"userName": {
