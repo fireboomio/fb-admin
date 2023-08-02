@@ -32,33 +32,36 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 
 			//上一个客户端连接的地址
 			defer Wg.Done()
-			code := <-Mq
 
 			//获取请求的是哪个api
 			api := body.Request.RequestURI
 			path := strings.Split(api, "?")[0]
 			bearerToken := body.Request.Headers["Authorization"]
-			token := strings.Split(bearerToken, " ")[1]
-			//解析token
-			parseToken, err := utils.ParseToken(token)
-			var userId string
-			if parseToken.User.UserId == "" {
-				userId = " "
-			}
-			_, err = plugins.ExecuteInternalRequestMutations[createLogI, createLogO](hook.InternalClient, generated.System__Log__CreateLog, createLogI{
-				Code:      code,
-				UpdatedAt: GetCurrentTime(),
-				Ip:        body.Request.Headers["X-Real-Ip"],
-				Method:    body.Request.Method,
-				Path:      path,
-				Ua:        body.Request.Headers["User-Agent"],
-				UserName:  parseToken.User.Name,
-				UserId:    userId,
-			})
+			if bearerToken != "" {
+				token := strings.Split(bearerToken, " ")[1]
+				//解析token
+				parseToken, err := utils.ParseToken(token)
+				var userId string
+				if parseToken.User.UserId == "" {
+					userId = " "
+				}
+				code := <-Mq
+				_, err = plugins.ExecuteInternalRequestMutations[createLogI, createLogO](hook.InternalClient, generated.System__Log__CreateLog, createLogI{
+					Code:      code,
+					UpdatedAt: GetCurrentTime(),
+					Ip:        body.Request.Headers["X-Real-Ip"],
+					Method:    body.Request.Method,
+					Path:      path,
+					Ua:        body.Request.Headers["User-Agent"],
+					UserName:  parseToken.User.Name,
+					UserId:    userId,
+				})
 
-			if err != nil {
-				hook.Logger().Errorf(err.Error())
+				if err != nil {
+					hook.Logger().Errorf(err.Error())
+				}
 			}
+
 		}()
 
 	}

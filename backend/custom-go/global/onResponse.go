@@ -9,7 +9,9 @@ import (
 func OnOriginResponse(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) (*base.ClientResponse, error) {
 	Wg.Add(1)
 	go func() {
-		Mq <- strconv.Itoa(body.Response.StatusCode)
+		if strconv.Itoa(body.Response.StatusCode) != "" {
+			Mq <- strconv.Itoa(body.Response.StatusCode)
+		}
 		Wg.Done()
 		Wg.Wait()
 	}()
