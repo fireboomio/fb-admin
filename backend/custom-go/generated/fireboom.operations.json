@@ -1,0 +1,542 @@
+{
+"graphql_operation_files": [
+{
+"operation_name": "Casdoor__GetRolesById",
+"api_mount_path": "Casdoor/GetRolesById",
+"file_path": "Casdoor/GetRolesById.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Casdoor__GetSMSProvider",
+"api_mount_path": "Casdoor/GetSMSProvider",
+"file_path": "Casdoor/GetSMSProvider.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Casdoor__Login",
+"api_mount_path": "Casdoor/Login",
+"file_path": "Casdoor/Login.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Casdoor__RefreshToken",
+"api_mount_path": "Casdoor/RefreshToken",
+"file_path": "Casdoor/RefreshToken.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Casdoor__SendCode",
+"api_mount_path": "Casdoor/SendCode",
+"file_path": "Casdoor/SendCode.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Casdoor__UpdateSMSProvider",
+"api_mount_path": "Casdoor/UpdateSMSProvider",
+"file_path": "Casdoor/UpdateSMSProvider.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Post__CreateOne",
+"api_mount_path": "Post/CreateOne",
+"file_path": "Post/CreateOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Post__DeleteMany",
+"api_mount_path": "Post/DeleteMany",
+"file_path": "Post/DeleteMany.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Post__DeleteOne",
+"api_mount_path": "Post/DeleteOne",
+"file_path": "Post/DeleteOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Post__GetLikeList",
+"api_mount_path": "Post/GetLikeList",
+"file_path": "Post/GetLikeList.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Post__GetList",
+"api_mount_path": "Post/GetList",
+"file_path": "Post/GetList.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Post__GetOne",
+"api_mount_path": "Post/GetOne",
+"file_path": "Post/GetOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Post__UpdateOne",
+"api_mount_path": "Post/UpdateOne",
+"file_path": "Post/UpdateOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Statistics__MonthlySales",
+"api_mount_path": "Statistics/MonthlySales",
+"file_path": "Statistics/MonthlySales.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Statistics__QueryRaw",
+"api_mount_path": "Statistics/QueryRaw",
+"file_path": "Statistics/QueryRaw.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Statistics__SaleTypePercent",
+"api_mount_path": "Statistics/SaleTypePercent",
+"file_path": "Statistics/SaleTypePercent.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Statistics__SalesTop10",
+"api_mount_path": "Statistics/SalesTop10",
+"file_path": "Statistics/SalesTop10.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "Statistics__VisitTrending",
+"api_mount_path": "Statistics/VisitTrending",
+"file_path": "Statistics/VisitTrending.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__GetMenus",
+"api_mount_path": "System/GetMenus",
+"file_path": "System/GetMenus.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Log__ChangeOpen",
+"api_mount_path": "System/Log/ChangeOpen",
+"file_path": "System/Log/ChangeOpen.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Log__CreateLog",
+"api_mount_path": "System/Log/CreateLog",
+"file_path": "System/Log/CreateLog.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Log__DeleteLog",
+"api_mount_path": "System/Log/DeleteLog",
+"file_path": "System/Log/DeleteLog.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Log__GetAllLog",
+"api_mount_path": "System/Log/GetAllLog",
+"file_path": "System/Log/GetAllLog.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Log__GetIsOpen",
+"api_mount_path": "System/Log/GetIsOpen",
+"file_path": "System/Log/GetIsOpen.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Log__GetLikeLog",
+"api_mount_path": "System/Log/GetLikeLog",
+"file_path": "System/Log/GetLikeLog.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Log__GetLog",
+"api_mount_path": "System/Log/GetLog",
+"file_path": "System/Log/GetLog.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__CreateOne",
+"api_mount_path": "System/Menu/CreateOne",
+"file_path": "System/Menu/CreateOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__DeleteMany",
+"api_mount_path": "System/Menu/DeleteMany",
+"file_path": "System/Menu/DeleteMany.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__DeleteOne",
+"api_mount_path": "System/Menu/DeleteOne",
+"file_path": "System/Menu/DeleteOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__GetApiList",
+"api_mount_path": "System/Menu/GetApiList",
+"file_path": "System/Menu/GetApiList.graphql",
+"content": "query System__Menu__GetApiList @rbac(requireMatchAny: [admin]) {data: system_getAllApis {path: title id}}",
+"origin_content": "query MyQuery @rbac(requireMatchAny: [admin]) {\n  data: system_getAllApis {\n    path: title\n    id\n  }\n}"
+},
+{
+"operation_name": "System__Menu__GetApisByMenus",
+"api_mount_path": "System/Menu/GetApisByMenus",
+"file_path": "System/Menu/GetApisByMenus.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__GetChildrenMenus",
+"api_mount_path": "System/Menu/GetChildrenMenus",
+"file_path": "System/Menu/GetChildrenMenus.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__GetList",
+"api_mount_path": "System/Menu/GetList",
+"file_path": "System/Menu/GetList.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__GetMany",
+"api_mount_path": "System/Menu/GetMany",
+"file_path": "System/Menu/GetMany.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__GetMenuByLevelOrPid",
+"api_mount_path": "System/Menu/GetMenuByLevelOrPid",
+"file_path": "System/Menu/GetMenuByLevelOrPid.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__GetOne",
+"api_mount_path": "System/Menu/GetOne",
+"file_path": "System/Menu/GetOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Menu__UpdateOne",
+"api_mount_path": "System/Menu/UpdateOne",
+"file_path": "System/Menu/UpdateOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Operation__GetMany",
+"api_mount_path": "System/Operation/GetMany",
+"file_path": "System/Operation/GetMany.graphql",
+"content": "query System__Operation__GetMany {data: system_getAllApis {createTime id liveQuery method operationType title enabled}}",
+"origin_content": "query MyQuery {\n  data: system_getAllApis {\n    createTime\n    id\n    liveQuery\n    method\n    operationType\n    title\n    enabled\n  }\n}"
+},
+{
+"operation_name": "System__Perm__CreateMany",
+"api_mount_path": "System/Perm/CreateMany",
+"file_path": "System/Perm/CreateMany.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Perm__GetBindPerms",
+"api_mount_path": "System/Perm/GetBindPerms",
+"file_path": "System/Perm/GetBindPerms.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Perm__GetRolePerms",
+"api_mount_path": "System/Perm/GetRolePerms",
+"file_path": "System/Perm/GetRolePerms.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__AddOne",
+"api_mount_path": "System/Role/AddOne",
+"file_path": "System/Role/AddOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__BindMenus",
+"api_mount_path": "System/Role/BindMenus",
+"file_path": "System/Role/BindMenus.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__BindRoleApis",
+"api_mount_path": "System/Role/BindRoleApis",
+"file_path": "System/Role/BindRoleApis.graphql",
+"content": "mutation System__Role__BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!){system_bindRoleApis(POSTApiV1RoleBindApiInput: {apis: $apis,allRoles: $allRoles,roleCode: $roleCode}){count}}",
+"origin_content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) {\n  system_bindRoleApis(POSTApiV1RoleBindApiInput: {apis: $apis, allRoles: $allRoles, roleCode: $roleCode}) {\n    count\n  }\n}\n"
+},
+{
+"operation_name": "System__Role__DeleteMany",
+"api_mount_path": "System/Role/DeleteMany",
+"file_path": "System/Role/DeleteMany.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__DeleteOne",
+"api_mount_path": "System/Role/DeleteOne",
+"file_path": "System/Role/DeleteOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__GetList",
+"api_mount_path": "System/Role/GetList",
+"file_path": "System/Role/GetList.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__GetMany",
+"api_mount_path": "System/Role/GetMany",
+"file_path": "System/Role/GetMany.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__GetOne",
+"api_mount_path": "System/Role/GetOne",
+"file_path": "System/Role/GetOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__GetRoleMenuId",
+"api_mount_path": "System/Role/GetRoleMenuId",
+"file_path": "System/Role/GetRoleMenuId.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__UnBindMenus",
+"api_mount_path": "System/Role/UnBindMenus",
+"file_path": "System/Role/UnBindMenus.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Role__UnBindRoleApis",
+"api_mount_path": "System/Role/UnBindRoleApis",
+"file_path": "System/Role/UnBindRoleApis.graphql",
+"content": "mutation System__Role__UnBindRoleApis($apis: [Int]!, $roleCode: String!){system_unBindRoleApis(POSTApiV1RoleUnbindApiInput: {roleCode: $roleCode,apis: $apis}){count}}",
+"origin_content": "mutation MyQuery($apis: [Int]!, $roleCode: String!) {\n  system_unBindRoleApis(\n    POSTApiV1RoleUnbindApiInput: {roleCode: $roleCode, apis: $apis}\n  ) {\n    count\n  }\n}"
+},
+{
+"operation_name": "System__Role__UpdateOne",
+"api_mount_path": "System/Role/UpdateOne",
+"file_path": "System/Role/UpdateOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Sub__CreateSub",
+"api_mount_path": "System/Sub/CreateSub",
+"file_path": "System/Sub/CreateSub.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__Sub__SSE",
+"api_mount_path": "System/Sub/SSE",
+"file_path": "System/Sub/SSE.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__ConnectRole",
+"api_mount_path": "System/User/ConnectRole",
+"file_path": "System/User/ConnectRole.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__CountUsers",
+"api_mount_path": "System/User/CountUsers",
+"file_path": "System/User/CountUsers.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__CreateOne",
+"api_mount_path": "System/User/CreateOne",
+"file_path": "System/User/CreateOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__DeleteOne",
+"api_mount_path": "System/User/DeleteOne",
+"file_path": "System/User/DeleteOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__DisconnectRole",
+"api_mount_path": "System/User/DisconnectRole",
+"file_path": "System/User/DisconnectRole.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__GetAllList",
+"api_mount_path": "System/User/GetAllList",
+"file_path": "System/User/GetAllList.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__GetLikeUser",
+"api_mount_path": "System/User/GetLikeUser",
+"file_path": "System/User/GetLikeUser.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__GetList",
+"api_mount_path": "System/User/GetList",
+"file_path": "System/User/GetList.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__GetOne",
+"api_mount_path": "System/User/GetOne",
+"file_path": "System/User/GetOne.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__GetRoleUsers",
+"api_mount_path": "System/User/GetRoleUsers",
+"file_path": "System/User/GetRoleUsers.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__GetUserRole",
+"api_mount_path": "System/User/GetUserRole",
+"file_path": "System/User/GetUserRole.graphql",
+"content": "",
+"origin_content": ""
+},
+{
+"operation_name": "System__User__UpdateOne",
+"api_mount_path": "System/User/UpdateOne",
+"file_path": "System/User/UpdateOne.graphql",
+"content": "",
+"origin_content": ""
+}
+],
+"typescript_operation_files": null,
+"invalid": [
+"Casdoor/GetRolesById",
+"Casdoor/GetSMSProvider",
+"Casdoor/Login",
+"Casdoor/RefreshToken",
+"Casdoor/SendCode",
+"Casdoor/UpdateSMSProvider",
+"Post/CreateOne",
+"Post/DeleteMany",
+"Post/DeleteOne",
+"Post/GetLikeList",
+"Post/GetList",
+"Post/GetOne",
+"Post/UpdateOne",
+"Statistics/MonthlySales",
+"Statistics/QueryRaw",
+"Statistics/SaleTypePercent",
+"Statistics/SalesTop10",
+"Statistics/VisitTrending",
+"System/GetMenus",
+"System/Log/ChangeOpen",
+"System/Log/CreateLog",
+"System/Log/DeleteLog",
+"System/Log/GetAllLog",
+"System/Log/GetIsOpen",
+"System/Log/GetLikeLog",
+"System/Log/GetLog",
+"System/Menu/CreateOne",
+"System/Menu/DeleteMany",
+"System/Menu/DeleteOne",
+"System/Menu/GetApisByMenus",
+"System/Menu/GetChildrenMenus",
+"System/Menu/GetList",
+"System/Menu/GetMany",
+"System/Menu/GetMenuByLevelOrPid",
+"System/Menu/GetOne",
+"System/Menu/UpdateOne",
+"System/Perm/CreateMany",
+"System/Perm/GetBindPerms",
+"System/Perm/GetRolePerms",
+"System/Role/AddOne",
+"System/Role/BindMenus",
+"System/Role/DeleteMany",
+"System/Role/DeleteOne",
+"System/Role/GetList",
+"System/Role/GetMany",
+"System/Role/GetOne",
+"System/Role/GetRoleMenuId",
+"System/Role/UnBindMenus",
+"System/Role/UpdateOne",
+"System/Sub/CreateSub",
+"System/Sub/SSE",
+"System/User/ConnectRole",
+"System/User/CountUsers",
+"System/User/CreateOne",
+"System/User/DeleteOne",
+"System/User/DisconnectRole",
+"System/User/GetAllList",
+"System/User/GetLikeUser",
+"System/User/GetList",
+"System/User/GetOne",
+"System/User/GetRoleUsers",
+"System/User/GetUserRole",
+"System/User/UpdateOne"
+],
+"info": [
+"operation names must be alphanumeric only, skipping file: .graphql.off"
+]
+}
