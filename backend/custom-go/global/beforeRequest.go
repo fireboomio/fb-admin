@@ -37,6 +37,7 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 			api := body.Request.RequestURI
 			path := strings.Split(api, "?")[0]
 			bearerToken := body.Request.Headers["Authorization"]
+			//判断是否携带token
 			if bearerToken != "" {
 				token := strings.Split(bearerToken, " ")[1]
 				//解析token
