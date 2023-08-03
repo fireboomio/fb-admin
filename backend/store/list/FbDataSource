@@ -34,17 +34,17 @@
 			"databaseUrl": {
 				"key": "",
 				"kind": "0",
-				"val": "mysql://root:285637zq@192.168.211.209:3306/main"
+				"val": "mysql://root:1qaz2wsx@localhost:3309/main"
 			},
 			"dbName": "main",
 			"dbType": "MySQL",
-			"host": "192.168.211.209",
+			"host": "localhost",
 			"password": {
 				"key": "",
 				"kind": "0",
-				"val": "285637zq"
+				"val": "1qaz2wsx"
 			},
-			"port": "3306",
+			"port": "3309",
 			"replaceJSONTypeFieldConfiguration": null,
 			"schemaExtension": "",
 			"userName": {
