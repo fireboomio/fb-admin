@@ -28,39 +28,39 @@
 		"deleteTime": ""
 	},
 	{
-		"config": {
-			"apiNamespace": "main",
-			"appendType": "1",
-			"databaseUrl": {
-				"key": "",
-				"kind": "0",
-				"val": "mysql://root:1qaz2wsx@localhost:3309/main"
-			},
-			"dbName": "main",
-			"dbType": "MySQL",
-			"host": "localhost",
-			"password": {
-				"key": "",
-				"kind": "0",
-				"val": "1qaz2wsx"
-			},
-			"port": "3309",
-			"replaceJSONTypeFieldConfiguration": null,
-			"schemaExtension": "",
-			"userName": {
-				"key": "",
-				"kind": "0",
-				"val": "root"
-			}
-		},
-		"createTime": "2023-06-30 06:00:02Z",
-		"deleteTime": "",
-		"enabled": true,
-		"id": 2047912069758976,
-		"name": "main",
-		"sourceType": 1,
-		"updateTime": "2023-07-17 03:04:08Z"
-	},
+    "config": {
+    "apiNamespace": "main",
+    "appendType": "1",
+    "databaseUrl": {
+    "key": "",
+    "kind": "0",
+    "val": "mysql://root:1qaz2wsx@localhost:3309/main"
+    },
+    "dbName": "main",
+    "dbType": "MySQL",
+    "host": "localhost",
+    "password": {
+    "key": "",
+    "kind": "0",
+    "val": "1qaz2wsx"
+    },
+    "port": "3309",
+    "replaceJSONTypeFieldConfiguration": null,
+    "schemaExtension": "",
+    "userName": {
+    "key": "",
+    "kind": "0",
+    "val": "root"
+    }
+    },
+    "createTime": "2023-06-30 06:00:02Z",
+    "deleteTime": "",
+    "enabled": true,
+    "id": 2047912069758976,
+    "name": "main",
+    "sourceType": 1,
+    "updateTime": "2023-07-17 03:04:08Z"
+    },
 	{
 		"config": {
 			"apiNameSpace": "casdoor",
