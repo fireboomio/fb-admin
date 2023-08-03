@@ -1959,14 +1959,14 @@
         "parameters": [
           {
             "in": "query",
-            "name": "take",
+            "name": "skip",
             "schema": {
               "type": "integer"
             }
           },
           {
             "in": "query",
-            "name": "skip",
+            "name": "take",
             "schema": {
               "type": "integer"
             }
@@ -3573,6 +3573,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
             "name": "id",
             "schema": {
               "type": "integer"
@@ -3595,13 +3602,6 @@
           {
             "in": "query",
             "name": "name",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "path",
             "schema": {
               "type": "string"
             }
@@ -4326,20 +4326,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "skip",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "take",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
             "name": "orderBy",
             "schema": {
               "items": {
@@ -4353,6 +4339,20 @@
             "name": "query",
             "schema": {
               "$ref": "#/components/schemas/main_menuWhereInput"
+            }
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "take",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -6594,6 +6594,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "name",
             "schema": {
               "type": "string"
@@ -6604,13 +6611,6 @@
             "name": "phone",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "id",
-            "schema": {
-              "type": "integer"
             }
           }
         ],
@@ -6758,13 +6758,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "userId",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
             "name": "orderBy",
             "schema": {
               "items": {
@@ -6799,6 +6792,13 @@
             "in": "query",
             "name": "take",
             "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "userId",
             "schema": {
               "type": "integer"
             }
@@ -6949,20 +6949,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "roleId",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "userId",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
             "name": "name",
             "schema": {
               "type": "string"
@@ -6973,6 +6959,20 @@
             "name": "phone",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "roleId",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "userId",
+            "schema": {
+              "type": "integer"
             }
           }
         ],

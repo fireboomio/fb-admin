@@ -30,7 +30,7 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 		go func() {
 			Wg.Add(1)
 
-			//上一个客户端连接的地址
+			//客户端连接的地址
 			defer Wg.Done()
 
 			//查看请求的api
