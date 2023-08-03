@@ -1,9 +1,14 @@
-mutation CreateOnePost ($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!) @rbac(requireMatchAny: [user,admin]) {
-	data: main_createOnepost(data: {title:$title,poster:$poster,published_at:$publishedAt,author:$username,content:$content}) {
-		id
-		title
-		poster
-		published_at
-		author
-	}
+mutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!, $userId: Int !, $cateId: Int !) @rbac(requireMatchAny: [user, admin]) {
+  data: main_createOnepost(
+    data: {title: $title, poster: $poster, published_at: $publishedAt, author: $username, content: $content, user: {connect: {id: $userId}}, Category: {connect: {id: $cateId}}}
+  ) {
+    id
+    title
+    poster
+    published_at
+    author
+    Category {
+      id
+    }
+  }
 }

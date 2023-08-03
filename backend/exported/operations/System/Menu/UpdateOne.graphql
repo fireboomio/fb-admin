@@ -1,4 +1,4 @@
-mutation UpdateOneMenu ($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int) @rbac(requireMatchAny: [eeee,admin]) {
+mutation UpdateOneMenu ($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int) @rbac(requireMatchAny: [eeee,admin,b1a23,a231,abc1]) {
 	data: main_updateOnemenu(data: {label:{set:$label},path:{set:$path},icon:{set:$icon},sort:{set:$sort},level:{set:$level}}, where: {id:$id}) {
 		id
 		parentId

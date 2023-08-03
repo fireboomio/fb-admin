@@ -1,5 +1,5 @@
 mutation MyQuery($equals: [Int]) {
-  main_deleteManyapilog(where: {id: {in: $equals}}) {
+  main_deleteManyapilog(where: {id: {in: $equals}}){
     count
   }
 }

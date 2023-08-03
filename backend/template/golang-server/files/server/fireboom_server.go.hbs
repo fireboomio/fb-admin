@@ -1,0 +1,131 @@
+package server
+
+import (
+    "github.com/joho/godotenv"
+{{#each hooksConfig as |hookConf hookType|}}
+    {{~#equal hookType "Authentication"}}
+        {{#if (isNotEmpty hookConf.tsPathMap)}}
+    "custom-go/auth"
+        {{/if}}
+    {{/equal}}
+    {{~#equal hookType "Global"}}
+        {{#if (isAnyTrue (isNotEmpty hookConf.httpTransport.beforeOriginRequest.tsPath) (isNotEmpty hookConf.httpTransport.onOriginRequest.tsPath) (isNotEmpty hookConf.httpTransport.onOriginResponse.tsPath) (isNotEmpty hookConf.wsTransport.onConnectionInit.tsPath))}}
+    "custom-go/global"
+        {{/if}}
+    {{/equal}}
+    {{~#if (equalAny hookType "Queries,Mutations,Subscriptions")}}
+        {{#if (isAbsent onceMap 'custom-go/generated' (isNotEmpty hookConf))}}
+    "custom-go/generated"
+        {{/if}}
+        {{#each hookConf as |operationConf operationName|}}
+    hooks_{{replaceSpecial operationName "__"}} "custom-go/hooks/{{operationName}}"
+        {{/each}}
+    {{/if}}
+{{/each}}
+	"custom-go/pkg/base"
+	"custom-go/pkg/plugins"
+	"custom-go/pkg/types"
+{{#each s3Providers}}
+    {{#each uploadProfiles}}
+    {{#if (isAnyTrue hooks.preUpload hooks.postUpload)}}
+    {{#if (isAbsent onceMap 'custom-go/generated' (isNotEmpty metadataJSONSchema))}}
+    "custom-go/generated"
+    {{/if}}
+    {{fmtSprintf 'uploads_%s_%s' name @key}} "{{fmtSprintf 'custom-go/uploads/%s/%s' name @key}}"
+    {{/if}}
+    {{/each}}
+{{/each}}
+{{#each dataSources~}}
+    {{#if (isAbsent onceMap 'custom-go/customize' isCustomized)}}
+    "custom-go/customize"
+    {{/if}}
+{{/each}}
+{{#each proxyDirectories}}
+    _ "custom-go/proxys{{#unless (equalAny this "")}}/{{this}}{{/unless}}"
+{{/each}}
+)
+
+const nodeEnvFilepath = "{{nodeEnvFilepath}}"
+
+func init() {
+    _ = godotenv.Overload(nodeEnvFilepath)
+
+    types.WdgHooksAndServerConfig = types.WunderGraphHooksAndServerConfig{
+    	Hooks: types.HooksConfiguration{
+        {{#each hooksConfig as |hookConf hookType|}}
+            {{#equal hookType "Global"}}
+            Global: plugins.GlobalConfiguration{
+                HttpTransport: plugins.HttpTransportHooks{
+                {{#with (getMaxLength maxLengthMap hookType hookConf.httpTransport)}}
+                {{~#each hookConf.httpTransport as |hook hookName|}}
+                    {{#if (isNotEmpty hook.tsPath)}}{{upperFirst hookName}}: {{fixSpace hookName this.name}}global.{{upperFirst hookName}},{{/if}}
+                {{/each~}}
+                {{/with}}
+                },
+                WsTransport: plugins.WsTransportHooks{
+                {{#with hookConf.wsTransport.onConnectionInit}}
+                    {{#if (isNotEmpty tsPath)}}
+                    OnConnectionInit: global.OnConnectionInit,
+                    {{/if}}
+                {{/with}}
+                },
+            },
+            {{/equal}}
+            {{#equal hookType "Authentication"}}
+            Authentication: plugins.AuthenticationConfiguration{
+            {{#with (getMaxLength maxLengthMap hookType hookConf.tsPathMap)}}
+            {{#each hookConf.tsPathMap as |tsPath hookName|}}
+                {{upperFirst hookName}}: {{fixSpace hookName this.name}}auth.{{upperFirst hookName}},
+            {{/each~}}
+            {{/with}}
+            },
+            {{/equal}}
+            {{#if (equalAny hookType "Queries,Mutations,Subscriptions")}}
+            {{hookType}}: base.OperationHooks{
+            {{#each hookConf as |operationConf operationName|}}
+                "{{operationName}}": {
+                {{#with (getMaxLength maxLengthMap (fmtSprintf '%s_%s' hookType operationName) operationConf.tsPathMap)}}
+                {{#each operationConf.tsPathMap as |tsPath hookName|}}
+                    {{upperFirst hookName}}: {{fixSpace hookName this.name}}plugins.ConvertBodyFunc[generated.{{replaceSpecial operationName "__"}}InternalInput, generated.{{replaceSpecial operationName "__"}}ResponseData](hooks_{{replaceSpecial operationName "__"}}.{{upperFirst hookName}}),
+                {{/each~}}
+                {{/with}}
+                },
+            {{/each}}
+            },
+            {{/if}}
+        {{/each}}
+    		Uploads: map[string]plugins.UploadHooks{
+        {{#each s3Providers}}
+            {{#if uploadProfiles}}
+                "{{name}}": {
+                {{#each uploadProfiles}}
+                    {{#if (isAnyTrue hooks.preUpload hooks.postUpload)}}
+                    {{#with (getMaxLength maxLengthMap (fmtSprintf 'Uploads_%s_%s' name @key) hooks)}}
+                    "{{@key}}": {
+                    {{#if hooks.preUpload}}
+                        PreUpload: {{fixSpace 'PreUpload' this.name}}plugins.ConvertUploadFunc[{{#if metadataJSONSchema}}generated.{{upperFirst (fmtSprintf '%s_%sProfileMeta' ../name @key)}}{{else}}any{{/if}}]({{fmtSprintf 'uploads_%s_%s' ../name @key}}.PreUpload),
+                    {{/if~}}
+                    {{#if hooks.postUpload}}
+                        PostUpload: {{fixSpace 'PostUpload' this.name}}plugins.ConvertUploadFunc[{{#if metadataJSONSchema}}generated.{{upperFirst (fmtSprintf '%s_%sProfileMeta' ../name @key)}}{{else}}any{{/if}}]({{fmtSprintf 'uploads_%s_%s' ../name @key}}.PostUpload),
+                    {{/if}}
+                    },
+                    {{~/with}}
+                    {{/if}}
+                {{/each}}
+                },
+            {{/if~}}
+        {{/each}}
+    		},
+    	},
+    	GraphqlServers: []plugins.GraphQLServerConfig{
+            {{#each dataSources}}{{#if isCustomized~}}
+            {
+                ApiNamespace:          "{{apiNameSpace}}",
+                ServerName:            "{{apiNameSpace}}",
+                EnableGraphQLEndpoint: true,
+                Schema:                customize.{{upperFirst apiNameSpace}}_schema,
+            },
+            {{~/if}}{{/each}}
+    	},
+    }
+}

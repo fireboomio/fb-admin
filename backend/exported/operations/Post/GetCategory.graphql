@@ -1,0 +1,14 @@
+query MyQuery($take: Int = 10, $skip: Int = 10) {
+  main_findManyCategory(skip: $skip, take: $take) {
+    id
+    name
+    post {
+      author
+      content
+      id
+      published_at
+      poster
+      title
+    }
+  }
+}

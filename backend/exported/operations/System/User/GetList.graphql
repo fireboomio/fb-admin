@@ -1,4 +1,4 @@
-query MyQuery($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput], $userId: Int @internal, $roleId: Int @internal) @rbac(requireMatchAny: [user, admin]) {
+query MyQuery($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput], $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, admin, b1a23, a231, abc1]) {
   data: main_findManyuser(
     skip: $skip
     take: $take
@@ -23,5 +23,6 @@ query MyQuery($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $order
       }
     }
     phone
+    user_id
   }
 }

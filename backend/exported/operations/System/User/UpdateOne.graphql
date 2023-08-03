@@ -1,10 +1,11 @@
-mutation MyQuery($id: Int = 10, $country_code: String = "", $name: String = "", $phone: String = "", $password: String = "", $avatar: String = "") {
-  main_updateOneuser(
-    data: {country_code: {set: $country_code}, name: {set: $name}, phone: {set: $phone}, password: {set: $password}, avatar: {set: $avatar}}
-    where: {id: $id}
+mutation MyQuery($name: String = "", $password: String = "", $passwordType: String = "", $phone: String = "", $userId: String!, $set: String = "", $id: Int = 10) {
+  casdoor_apiUpdateUser(
+    POSTApiUpdate_userInput: {userId: $userId, name: $name, password: $password, passwordType: $passwordType, phone: $phone}
   ) {
+    msg
+    status
+  }
+  main_updateOneuser(data: {avatar: {set: $set}}, where: {id: $id}) {
     avatar
-    name
-    phone
   }
 }

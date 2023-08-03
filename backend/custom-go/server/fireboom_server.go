@@ -2,6 +2,7 @@ package server
 
 import (
 	"custom-go/global"
+	"github.com/joho/godotenv"
 
 	"custom-go/auth"
 
@@ -13,7 +14,11 @@ import (
 	_ "custom-go/proxys"
 )
 
+const nodeEnvFilepath = "../.env"
+
 func init() {
+	_ = godotenv.Overload(nodeEnvFilepath)
+
 	types.WdgHooksAndServerConfig = types.WunderGraphHooksAndServerConfig{
 		Hooks: types.HooksConfiguration{
 			Global: plugins.GlobalConfiguration{

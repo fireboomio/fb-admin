@@ -1,10 +1,17 @@
-mutation UpdateOnePost ($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String!) @rbac(requireMatchAny: [user,eeee,admin]) {
-	data: main_updateOnepost(data: {title:{set:$title},poster:{set:$poster},published_at:{set:$publishedAt},content:{set:$content}}, where: {id:$id}) {
-		id
-		title
-		poster
-		published_at
-		author
-		content
-	}
+mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $content: String!, $author: String = "", $cate: Int, $userId: Int = 10) @rbac(requireMatchAny: [user, eeee, admin, abc, abc32]) {
+  data: main_updateOnepost(
+    data: {title: {set: $title}, poster: {set: $poster}, content: {set: $content}, Category: {connect: {id: $cate}}, author: {set: $author}, user: {connect: {id: $userId}}}
+    where: {id: $id}
+  ) {
+    id
+    title
+    poster
+    published_at
+    author
+    content
+    user {
+      id
+      name
+    }
+  }
 }

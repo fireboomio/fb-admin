@@ -3,5 +3,6 @@ mutation MyQuery($clientId: String!, $clientSecret: String!, $signName: String!,
     POSTApiUpdate_providerInput: {clientId: $clientId, clientSecret: $clientSecret, signName: $signName, templateCode: $templateCode}
   ) {
     msg
+    status
   }
 }

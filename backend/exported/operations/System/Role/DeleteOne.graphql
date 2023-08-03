@@ -1,4 +1,4 @@
-mutation MyQuery ($code: String!) @rbac(requireMatchAny: [admin,user,eeee]) {
+mutation MyQuery ($code: String!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {
 	data: main_deleteOnerole(where: {code:$code}) {
 		id
 	}
