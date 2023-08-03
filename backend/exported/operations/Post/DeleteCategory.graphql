@@ -1,0 +1,6 @@
+mutation MyQuery($id: Int = 10) {
+  main_deleteOneCategory(where: {id: $id}) {
+    id
+    name
+  }
+}

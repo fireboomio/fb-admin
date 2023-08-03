@@ -1,16 +1,16 @@
-query MyQuery($name: String = "", $phone: String = "", $id: Int = 10, $userId: Int @internal, $roleId: Int@internal) {
+query MyQuery($name: String = "", $phone: String = "", $id: Int = 10, $userId: Int @internal, $roleId: Int @internal) {
   main_findManyuser(
     where: {name: {contains: $name, endsWith: ""}, phone: {endsWith: "", contains: $phone}}
   ) {
     id @export(as: "userId")
     name
     phone
-    created_at
+    createdAt: created_at
     avatar
-   user_role: _join {
-      main_findManyrole_user(where: {user_id: {equals: $userId}}) {
+    user_role: _join {
+      data:main_findManyrole_user(where: {user_id: {equals: $userId}}) {
         role_id @export(as: "roleId")
-       role: _join {
+        role: _join {
           main_findManyrole(where: {id: {equals: $roleId}}) {
             code
             id
@@ -24,6 +24,7 @@ query MyQuery($name: String = "", $phone: String = "", $id: Int = 10, $userId: I
     id
     name
     phone
-    created_at
+   createdAt: created_at
+    avatar
   }
 }

@@ -1,0 +1,13 @@
+query MyQuery($equals: String!) @rbac(requireMatchAny: [admin]) {
+  main_findManyCategory(where: {name: {equals: $equals}}) {
+    post {
+      author
+      cate
+      content
+      poster
+      id
+      title
+      published_at
+    }
+  }
+}

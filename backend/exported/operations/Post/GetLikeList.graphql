@@ -1,6 +1,6 @@
 query MyQuery($author: String = "", $content: String = "", $title: String = "", $id: Int = 10) {
   main_findManypost(
-    where: {author: {contains: $author, endsWith: ""}, content: {contains: $content, endsWith: ""}, title: {contains: $title}}
+    where: {author: {contains: $author, endsWith: ""}, content: {contains: $content, endsWith: ""}, title: {contains: $title, endsWith: ""}}
   ) {
     author
     content
@@ -8,6 +8,10 @@ query MyQuery($author: String = "", $content: String = "", $title: String = "", 
     published_at
     title
     poster
+    Category {
+      name
+      id
+    }
   }
   main_findUniquepost(where: {id: $id}) {
     author
@@ -16,5 +20,9 @@ query MyQuery($author: String = "", $content: String = "", $title: String = "", 
     published_at
     title
     poster
+    Category {
+      id
+      name
+    }
   }
 }

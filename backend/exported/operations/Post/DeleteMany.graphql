@@ -1,4 +1,4 @@
-mutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,eeee,admin]) {
+mutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {
 	data: main_deleteManypost(where: {id:{in:$ids}}) {
 		count
 	}

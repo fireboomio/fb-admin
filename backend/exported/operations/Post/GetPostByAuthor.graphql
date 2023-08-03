@@ -1,0 +1,12 @@
+query MyQuery($id: Int = 10) {
+  main_findManyuser(where: {id: {equals: $id}}) {
+    post {
+      cate
+      content
+      id
+      poster
+      published_at
+      title
+    }
+  }
+} 

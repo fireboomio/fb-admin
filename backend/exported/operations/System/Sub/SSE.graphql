@@ -1,8 +1,10 @@
-query MyQuery($roles: [String]!) {
-  data: main_findManysub(distinct: id, where: {target_role: {in: $roles}}) {
+query MyQuery($roles: String!) {
+  data: main_findManysub(where: {target_role: {equals: $roles}}) {
     message
     updatedAt
     target_role
     create_role
+    id
+    type
   }
 }

@@ -8,6 +8,7 @@ query MyQuery($ip: String = "", $method: String = "", $path: String = "", $id: I
     path
     ua
     updatedAt
+    userName
   }
   main_findUniqueapilog(where: {id: $id}) {
     id
@@ -16,5 +17,6 @@ query MyQuery($ip: String = "", $method: String = "", $path: String = "", $id: I
     path
     ua
     updatedAt
+    userName
   }
 }

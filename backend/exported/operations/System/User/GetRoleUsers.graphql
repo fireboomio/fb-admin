@@ -1,4 +1,4 @@
-query MyQuery($roleId: Int @internal, $userId: Int @internal, $code: String !) {
+query MyQuery($roleId: Int @internal, $userId: Int @internal, $code: String!) {
   main_findManyrole(where: {code: {equals: $code}}) {
     id @export(as: "roleId")
     remark
@@ -11,6 +11,8 @@ query MyQuery($roleId: Int @internal, $userId: Int @internal, $code: String !) {
           main_findManyuser(where: {id: {equals: $userId}}) {
             id
             name
+            avatar
+            created_at
           }
         }
       }

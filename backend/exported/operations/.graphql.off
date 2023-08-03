@@ -1,12 +1,3 @@
-query MyQuery {
-  main_findManymenu(where: {}) {
-    id
-    api_id
-    icon
-    label
-    name
-    path
-    perms
-    sort
-  }
+query MyQuery($id: Int = 10, $country_code: String = "", $name: String = "", $phone: String = "", $password: String = "", $avatar: String = "", $code: String = "", $loginType: String = "", $password1: String = "", $phone1: String = "", $username: String = "", $countryCode: String = "") @rbac(requireMatchAny: [admin, b1a23, a231, abc1]) {
+  __typename ## Placeholder value
 }

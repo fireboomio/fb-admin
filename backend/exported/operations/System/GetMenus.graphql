@@ -16,3 +16,4 @@ query MyQuery ($pid: Int) @rbac(requireMatchAny: [admin]) {
 		}
 	}
 }
+ 
