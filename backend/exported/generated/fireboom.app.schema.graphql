@@ -252,65 +252,12 @@ type Mutation {
   main_deleteManyvisitlog(where: main_visitlogWhereInput): main_AffectedRowsOutput
   main_executeRaw(query: String!, parameters: main_Json): main_Json
   main_queryRaw(query: String!, parameters: main_Json): main_Json
+  casdoor_apiSendVerificationCode(POSTApiSend_verification_codeInput: casdoor_POSTApiSend_verification_codeInput): casdoor_objectResponse
+  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
   casdoor_apiAddUser(POSTApiAdd_userInput: casdoor_POSTApiAdd_userInput): casdoor_objectResponse
   casdoor_apiUpdateUser(POSTApiUpdate_userInput: casdoor_POSTApiUpdate_userInput): casdoor_objectResponse
   casdoor_apiLogin(POSTApiLoginInput: casdoor_POSTApiLoginInput): casdoor_apiUserResponse
   casdoor_apiRefreshToken(POSTApiRefresh_tokenInput: casdoor_POSTApiRefresh_tokenInput): casdoor_apiUserResponse
-  casdoor_apiSendVerificationCode(POSTApiSend_verification_codeInput: casdoor_POSTApiSend_verification_codeInput): casdoor_objectResponse
-  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
-}
-
-type system_QueryGetAllRoles {
-  remark: String
-  code: String
-  _join: Query!
-}
-
-type system_QueryGetRoleBindApis {
-  content: String
-  illegal: Boolean
-  operationType: String
-  roleType: String
-  title: String
-  createTime: String
-  id: Int
-  method: String
-  deleteTime: String
-  isPublic: Boolean
-  liveQuery: Boolean
-  updateTime: String
-  enabled: Boolean
-  remark: String
-  restUrl: String
-  roles: String
-  _join: Query!
-}
-
-enum system_Query_getRoleBindApis_roleType {
-  requireMatchAll
-  requireMatchAny
-  denyMatchAll
-  denyMatchAny
-}
-
-type system_QueryGetAllApis {
-  title: String
-  id: Int
-  restUrl: String
-  isPublic: Boolean
-  method: String
-  roles: String
-  enabled: Boolean
-  illegal: Boolean
-  operationType: String
-  remark: String
-  deleteTime: String
-  liveQuery: Boolean
-  roleType: String
-  updateTime: String
-  content: String
-  createTime: String
-  _join: Query!
 }
 
 type system_MutationBindRoleApis {
@@ -319,10 +266,10 @@ type system_MutationBindRoleApis {
 }
 
 input system_POSTApiV1RoleBindApiInput {
+  allRoles: [String]!
   roleType: system_POSTApiV1RoleBindApiInput_roleType
   roleCode: String!
   apis: [Int]!
-  allRoles: [String]!
 }
 
 enum system_POSTApiV1RoleBindApiInput_roleType {
@@ -338,9 +285,9 @@ type system_MutationUnBindRoleApis {
 }
 
 input system_POSTApiV1RoleUnbindApiInput {
-  roleCode: String!
   apis: [Int]!
   roleType: system_POSTApiV1RoleUnbindApiInput_roleType
+  roleCode: String!
 }
 
 enum system_POSTApiV1RoleUnbindApiInput_roleType {
@@ -350,14 +297,61 @@ enum system_POSTApiV1RoleUnbindApiInput_roleType {
   denyMatchAny
 }
 
-type statistics_GetSalesTop10 {
-  shopName: String
-  totalSales: Float
+type system_QueryGetAllRoles {
+  remark: String
+  code: String
   _join: Query!
 }
 
-type statistics_GetMonthlySales {
-  months: String
+type system_QueryGetRoleBindApis {
+  illegal: Boolean
+  operationType: String
+  createTime: String
+  deleteTime: String
+  content: String
+  roleType: String
+  roles: String
+  title: String
+  method: String
+  remark: String
+  restUrl: String
+  updateTime: String
+  enabled: Boolean
+  id: Int
+  isPublic: Boolean
+  liveQuery: Boolean
+  _join: Query!
+}
+
+enum system_Query_getRoleBindApis_roleType {
+  requireMatchAll
+  requireMatchAny
+  denyMatchAll
+  denyMatchAny
+}
+
+type system_QueryGetAllApis {
+  illegal: Boolean
+  liveQuery: Boolean
+  restUrl: String
+  isPublic: Boolean
+  remark: String
+  roleType: String
+  roles: String
+  title: String
+  createTime: String
+  operationType: String
+  content: String
+  deleteTime: String
+  enabled: Boolean
+  id: Int
+  method: String
+  updateTime: String
+  _join: Query!
+}
+
+type statistics_GetSalesTop10 {
+  shopName: String
   totalSales: Float
   _join: Query!
 }
@@ -372,6 +366,12 @@ type statistics_GetSaleTypePercent {
 type statistics_GetVisitTrending {
   count: Int
   days: String
+  _join: Query!
+}
+
+type statistics_GetMonthlySales {
+  months: String
+  totalSales: Float
   _join: Query!
 }
 
@@ -4984,24 +4984,36 @@ scalar main_Decimal
 
 scalar main_Bytes
 
-type casdoor_objectUserinfo {
-  phone: String
-  preferred_username: String
-  _join: Query!
-}
-
 type casdoor_objectResponse {
   msg: String
   status: Int
   _join: Query!
 }
 
+input casdoor_POSTApiSend_verification_codeInput {
+  dest: String!
+  countryCode: String
+}
+
+input casdoor_POSTApiUpdate_providerInput {
+  templateCode: String!
+  clientId: String!
+  clientSecret: String!
+  signName: String!
+}
+
+type casdoor_objectUserinfo {
+  phone: String
+  preferred_username: String
+  _join: Query!
+}
+
 input casdoor_POSTApiAdd_userInput {
-  name: String!
   password: String!
   passwordType: String
   phone: String!
   countryCode: String
+  name: String!
 }
 
 input casdoor_POSTApiUpdate_userInput {
@@ -5021,37 +5033,25 @@ type casdoor_apiUserResponse {
 }
 
 type casdoor_objectTokenRes {
+  expireIn: Int
   refreshToken: String
   accessToken: String
-  expireIn: Int
   _join: Query!
 }
 
 input casdoor_POSTApiLoginInput {
+  password: String!
+  loginType: String!
   username: String!
   phone: String!
   countryCode: String
   code: String!
-  password: String!
-  loginType: String!
 }
 
 input casdoor_POSTApiRefresh_tokenInput {
   
   """refresh-token"""
   refresh_token: String!
-}
-
-input casdoor_POSTApiSend_verification_codeInput {
-  dest: String!
-  countryCode: String
-}
-
-input casdoor_POSTApiUpdate_providerInput {
-  signName: String!
-  templateCode: String!
-  clientId: String!
-  clientSecret: String!
 }
 
 directive @rbac(

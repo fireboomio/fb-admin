@@ -2060,6 +2060,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "title",
             "schema": {
               "type": "string"
@@ -2077,13 +2084,6 @@
             "name": "content",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "id",
-            "schema": {
-              "type": "integer"
             }
           }
         ],
@@ -3573,6 +3573,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "ip",
             "schema": {
               "type": "string"
@@ -3597,13 +3604,6 @@
             "name": "path",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "id",
-            "schema": {
-              "type": "integer"
             }
           }
         ],
@@ -3719,6 +3719,16 @@
         "parameters": [
           {
             "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/main_apilogOrderByWithRelationInput"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "query",
             "name": "skip",
             "schema": {
               "type": "integer"
@@ -3729,16 +3739,6 @@
             "name": "take",
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "orderBy",
-            "schema": {
-              "items": {
-                "$ref": "#/components/schemas/main_apilogOrderByWithRelationInput"
-              },
-              "type": "array"
             }
           }
         ],
@@ -6949,6 +6949,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "roleId",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "userId",
             "schema": {
               "type": "integer"
@@ -6966,13 +6973,6 @@
             "name": "phone",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "roleId",
-            "schema": {
-              "type": "integer"
             }
           }
         ],

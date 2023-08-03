@@ -4,3 +4,4 @@ query MyQuery {
 		totalSales
 	}
 }
+ 

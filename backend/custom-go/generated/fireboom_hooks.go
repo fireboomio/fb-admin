@@ -18,6 +18,8 @@ type (
 	Post__GetLikeListBody                 = *base.OperationBody[Post__GetLikeListInternalInput, Post__GetLikeListResponseData]
 	Post__GetListBody                     = *base.OperationBody[Post__GetListInternalInput, Post__GetListResponseData]
 	Post__GetOneBody                      = *base.OperationBody[Post__GetOneInternalInput, Post__GetOneResponseData]
+	Post__GetPostByAuthorBody             = *base.OperationBody[Post__GetPostByAuthorInternalInput, Post__GetPostByAuthorResponseData]
+	Post__GetPostByCateBody               = *base.OperationBody[Post__GetPostByCateInternalInput, Post__GetPostByCateResponseData]
 	Post__UpdateCategoryBody              = *base.OperationBody[Post__UpdateCategoryInternalInput, Post__UpdateCategoryResponseData]
 	Post__UpdateOneBody                   = *base.OperationBody[Post__UpdateOneInternalInput, Post__UpdateOneResponseData]
 	Statistics__MonthlySalesBody          = *base.OperationBody[Statistics__MonthlySalesInternalInput, Statistics__MonthlySalesResponseData]
@@ -84,6 +86,8 @@ const (
 	Post__GetLikeList                 base.OperationQueryPath = "Post/GetLikeList"
 	Post__GetList                     base.OperationQueryPath = "Post/GetList"
 	Post__GetOne                      base.OperationQueryPath = "Post/GetOne"
+	Post__GetPostByAuthor             base.OperationQueryPath = "Post/GetPostByAuthor"
+	Post__GetPostByCate               base.OperationQueryPath = "Post/GetPostByCate"
 	Statistics__MonthlySales          base.OperationQueryPath = "Statistics/MonthlySales"
 	Statistics__SaleTypePercent       base.OperationQueryPath = "Statistics/SaleTypePercent"
 	Statistics__SalesTop10            base.OperationQueryPath = "Statistics/SalesTop10"

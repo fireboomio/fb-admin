@@ -54,7 +54,7 @@
 "api_mount_path": "Post/CreateOne",
 "file_path": "Post/CreateOne.graphql",
 "content": "mutation Post__CreateOne($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!, $userId: Int!, $cateId: Int!)@rbac(requireMatchAny: [user,admin]) {data: main_createOnepost(data: {title: $title,poster: $poster,published_at: $publishedAt,author: $username,content: $content,user: {connect: {id: $userId}},Category: {connect: {id: $cateId}}}){id title poster published_at author Category {id}}}",
-"origin_content": "mutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!, $userId: Int !, $cateId: Int !) @rbac(requireMatchAny: [user, admin]) {\n  data: main_createOnepost(\n    data: {title: $title, poster: $poster, published_at: $publishedAt, author: $username, content: $content, user: {connect: {id: $userId}}, Category: {connect: {id: $cateId}}}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    Category {\n      id\n    }\n  }\n} "
+"origin_content": "mutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!, $userId: Int !, $cateId: Int !) @rbac(requireMatchAny: [user, admin]) {\n  data: main_createOnepost(\n    data: {title: $title, poster: $poster, published_at: $publishedAt, author: $username, content: $content, user: {connect: {id: $userId}}, Category: {connect: {id: $cateId}}}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    Category {\n      id\n    }\n  }\n}"
 },
 {
 "operation_name": "Post__DeleteCategory",
@@ -81,8 +81,8 @@
 "operation_name": "Post__GetCategory",
 "api_mount_path": "Post/GetCategory",
 "file_path": "Post/GetCategory.graphql",
-"content": "query Post__GetCategory {main_findManyCategory {id name post {author content id published_at poster title}}}",
-"origin_content": "query MyQuery {\n  main_findManyCategory {\n    id\n    name\n    post {\n      author\n      content\n      id\n      published_at\n      poster\n      title\n    }\n  }\n}"
+"content": "query Post__GetCategory($take: Int = 10, $skip: Int = 10){main_findManyCategory(skip: $skip, take: $take){id name post {author content id published_at poster title}}}",
+"origin_content": "query MyQuery($take: Int = 10, $skip: Int = 10) {\n  main_findManyCategory(skip: $skip, take: $take) {\n    id\n    name\n    post {\n      author\n      content\n      id\n      published_at\n      poster\n      title\n    }\n  }\n}"
 },
 {
 "operation_name": "Post__GetLikeList",
@@ -117,7 +117,7 @@
 "api_mount_path": "Post/GetPostByCate",
 "file_path": "Post/GetPostByCate.graphql",
 "content": "query Post__GetPostByCate($equals: String!)@rbac(requireMatchAny: [admin]) {main_findManyCategory(where: {name: {equals: $equals}}){post {author cate content poster id title published_at}}}",
-"origin_content": "query MyQuery($equals: String!) @rbac(requireMatchAny: [admin]) {\n  main_findManyCategory(where: {name: {equals: $equals}}) {\n    post {\n      author\n      cate\n      content\n      poster\n      id\n      title\n      published_at\n    }\n  }\n} "
+"origin_content": "query MyQuery($equals: String!) @rbac(requireMatchAny: [admin]) {\n  main_findManyCategory(where: {name: {equals: $equals}}) {\n    post {\n      author\n      cate\n      content\n      poster\n      id\n      title\n      published_at\n    }\n  }\n}"
 },
 {
 "operation_name": "Post__UpdateCategory",
@@ -131,7 +131,7 @@
 "api_mount_path": "Post/UpdateOne",
 "file_path": "Post/UpdateOne.graphql",
 "content": "mutation Post__UpdateOne($id: Int!, $title: String, $poster: String, $content: String!, $author: String = \"\", $cate: Int, $userId: Int = 10)@rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {data: main_updateOnepost(data: {title: {set: $title},poster: {set: $poster},content: {set: $content},Category: {connect: {id: $cate}},author: {set: $author},user: {connect: {id: $userId}}}, where: {id: $id}){id title poster published_at author content user {id name}}}",
-"origin_content": "mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $content: String!, $author: String = \"\", $cate: Int, $userId: Int = 10) @rbac(requireMatchAny: [user, eeee, admin, abc, abc32]) {\n  data: main_updateOnepost(\n    data: {title: {set: $title}, poster: {set: $poster}, content: {set: $content}, Category: {connect: {id: $cate}}, author: {set: $author}, user: {connect: {id: $userId}}}\n    where: {id: $id}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    user {\n      id\n      name\n    }\n  }\n} "
+"origin_content": "mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $content: String!, $author: String = \"\", $cate: Int, $userId: Int = 10) @rbac(requireMatchAny: [user, eeee, admin, abc, abc32]) {\n  data: main_updateOnepost(\n    data: {title: {set: $title}, poster: {set: $poster}, content: {set: $content}, Category: {connect: {id: $cate}}, author: {set: $author}, user: {connect: {id: $userId}}}\n    where: {id: $id}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    user {\n      id\n      name\n    }\n  }\n}"
 },
 {
 "operation_name": "Statistics__MonthlySales",

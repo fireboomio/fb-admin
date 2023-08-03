@@ -59,6 +59,62 @@
         }
       }
     },
+    "/api/update-user": {
+      "post": {
+        "description": "update user",
+        "parameters": [
+          {
+            "description": "名称",
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "密码",
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "密码类型",
+            "name": "passwordType",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "电话号码",
+            "name": "phone",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "国际区号（默认CN）",
+            "name": "countryCode",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "description": "用户id",
+            "name": "userId",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/objectResponse"
+            }
+          }
+        }
+      }
+    },
     "/api/login": {
       "post": {
         "description": "login",

@@ -1,173 +1,107 @@
-2023-07-29 08:15:11Z INFO Web server started on "http://localhost:9123"
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Log/GetLog meet err=error normalizing operation: external: field: main_findManyapilog not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Log/GetLog.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Casdoor/GetSMSProvider meet err=error normalizing operation: external: field: main_findManyprovider not defined on type: Query, locations: [], path: [query,main_findManyprovider], operationFilePath: Casdoor/GetSMSProvider.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Statistics/VisitTrending meet err=error normalizing operation: external: field: statistics_GetVisitTrending not defined on type: Query, locations: [], path: [query,data], operationFilePath: Statistics/VisitTrending.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/UnBindMenus meet err=error normalizing operation: external: field: main_deleteManymenu_role not defined on type: Mutation, locations: [], path: [mutation,main_deleteManymenu_role], operationFilePath: System/Role/UnBindMenus.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Statistics/MonthlySales meet err=error normalizing operation: external: field: statistics_GetMonthlySales not defined on type: Query, locations: [], path: [query,data], operationFilePath: Statistics/MonthlySales.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/GetApisByMenus meet err=error normalizing operation: external: field: main_findManymenu not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Menu/GetApisByMenus.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Sub/SSE meet err=error normalizing operation: external: field: main_findManysub not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Sub/SSE.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/DeleteOne meet err=error normalizing operation: external: field: main_deleteOnemenu not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Menu/DeleteOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/GetChildrenMenus meet err=error normalizing operation: external: field: main_findManymenu not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Menu/GetChildrenMenus.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/BindMenus meet err=error normalizing operation: external: field: main_createManymenu_role not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Role/BindMenus.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Log/DeleteLog meet err=error normalizing operation: external: field: main_deleteManyapilog not defined on type: Mutation, locations: [], path: [mutation,main_deleteManyapilog], operationFilePath: System/Log/DeleteLog.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/GetMenus meet err=error normalizing operation: external: field: main_findManymenu not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/GetMenus.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Log/CreateLog meet err=error normalizing operation: external: field: main_createOneapilog not defined on type: Mutation, locations: [], path: [mutation,main_createOneapilog], operationFilePath: System/Log/CreateLog.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Log/GetAllLog meet err=error normalizing operation: external: field: main_aggregateapilog not defined on type: Query, locations: [], path: [query,logNum], operationFilePath: System/Log/GetAllLog.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/GetList meet err=error normalizing operation: external: field: main_findManyuser not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/User/GetList.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/GetOne meet err=error normalizing operation: external: field: main_findFirstuser not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/User/GetOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Casdoor/SendCode meet err=error normalizing operation: external: field: casdoor_apiSendVerificationCode not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: Casdoor/SendCode.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Statistics/SaleTypePercent meet err=error normalizing operation: external: field: statistics_GetSaleTypePercent not defined on type: Query, locations: [], path: [query,data], operationFilePath: Statistics/SaleTypePercent.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Log/ChangeOpen meet err=error normalizing operation: external: field: main_updateOnedic not defined on type: Mutation, locations: [], path: [mutation,main_updateOnedic], operationFilePath: System/Log/ChangeOpen.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/DeleteOne meet err=error normalizing operation: external: field: main_deleteOneuser not defined on type: Mutation, locations: [], path: [mutation,main_deleteOneuser], operationFilePath: System/User/DeleteOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Casdoor/UpdateSMSProvider meet err=error normalizing operation: external: field: casdoor_apiUpdateProvider not defined on type: Mutation, locations: [], path: [mutation,casdoor_apiUpdateProvider], operationFilePath: Casdoor/UpdateSMSProvider.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Statistics/QueryRaw meet err=error normalizing operation: external: field: main_queryRaw not defined on type: Mutation, locations: [], path: [mutation,main_queryRaw], operationFilePath: Statistics/QueryRaw.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Statistics/SalesTop10 meet err=error normalizing operation: external: field: statistics_GetSalesTop10 not defined on type: Query, locations: [], path: [query,data], operationFilePath: Statistics/SalesTop10.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/GetMenuByLevelOrPid meet err=error normalizing operation: external: field: main_findManymenu not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Menu/GetMenuByLevelOrPid.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/UpdateOne meet err=error normalizing operation: external: field: main_updateOnemenu not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Menu/UpdateOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Post/GetList meet err=error normalizing operation: external: field: main_findManypost not defined on type: Query, locations: [], path: [query,data], operationFilePath: Post/GetList.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/GetRoleMenuId meet err=error normalizing operation: external: field: main_findManymenu_role not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Role/GetRoleMenuId.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/ConnectRole meet err=error normalizing operation: external: field: main_createOnerole_user not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/User/ConnectRole.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/DisconnectRole meet err=error normalizing operation: external: field: main_deleteOnerole_user not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/User/DisconnectRole.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/GetAllList meet err=error normalizing operation: external: field: main_aggregateuser not defined on type: Query, locations: [], path: [query,main_aggregateuser], operationFilePath: System/User/GetAllList.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Post/CreateOne meet err=error normalizing operation: external: field: main_createOnepost not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: Post/CreateOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/CreateOne meet err=error normalizing operation: external: field: main_createOnemenu not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Menu/CreateOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/DeleteMany meet err=error normalizing operation: external: field: main_deleteManymenu not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Menu/DeleteMany.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/CountUsers meet err=error normalizing operation: external: field: main_aggregateuser not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/User/CountUsers.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/GetLikeUser meet err=error normalizing operation: external: field: main_findManyuser not defined on type: Query, locations: [], path: [query,main_findManyuser], operationFilePath: System/User/GetLikeUser.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/GetUserRole meet err=error normalizing operation: external: field: main_findManyrole_user not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/User/GetUserRole.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Post/DeleteMany meet err=error normalizing operation: external: field: main_deleteManypost not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: Post/DeleteMany.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Post/UpdateOne meet err=error normalizing operation: external: field: main_updateOnepost not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: Post/UpdateOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Perm/GetBindPerms meet err=error normalizing operation: external: field: main_findManypermission not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Perm/GetBindPerms.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/DeleteOne meet err=error normalizing operation: external: field: main_deleteOnerole not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Role/DeleteOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Post/GetLikeList meet err=error normalizing operation: external: field: main_findManypost not defined on type: Query, locations: [], path: [query,main_findManypost], operationFilePath: Post/GetLikeList.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/UpdateOne meet err=error normalizing operation: external: field: main_updateOnerole not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Role/UpdateOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Sub/CreateSub meet err=error normalizing operation: external: field: main_createOnesub not defined on type: Mutation, locations: [], path: [mutation,main_createOnesub], operationFilePath: System/Sub/CreateSub.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/GetRoleUsers meet err=error normalizing operation: external: field: main_findManyrole not defined on type: Query, locations: [], path: [query,main_findManyrole], operationFilePath: System/User/GetRoleUsers.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/UpdateOne meet err=error normalizing operation: external: field: main_updateOneuser not defined on type: Mutation, locations: [], path: [mutation,main_updateOneuser], operationFilePath: System/User/UpdateOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Perm/GetRolePerms meet err=error normalizing operation: external: field: main_findManyrole not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Perm/GetRolePerms.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/GetMany meet err=error normalizing operation: external: field: main_findManymenu not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Menu/GetMany.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/AddOne meet err=error normalizing operation: external: field: main_createOnerole not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Role/AddOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/DeleteMany meet err=error normalizing operation: external: field: main_deleteManyrole not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Role/DeleteMany.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/GetList meet err=error normalizing operation: external: field: main_findManyrole not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Role/GetList.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Log/GetIsOpen meet err=error normalizing operation: external: field: main_findFirstdic not defined on type: Query, locations: [], path: [query,main_findFirstdic], operationFilePath: System/Log/GetIsOpen.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Post/DeleteOne meet err=error normalizing operation: external: field: main_deleteOnepost not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: Post/DeleteOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Post/GetOne meet err=error normalizing operation: external: field: main_findFirstpost not defined on type: Query, locations: [], path: [query,data], operationFilePath: Post/GetOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Casdoor/GetRolesById meet err=error normalizing operation: external: field: main_findFirstuser not defined on type: Query, locations: [], path: [query,data], operationFilePath: Casdoor/GetRolesById.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/User/CreateOne meet err=error normalizing operation: external: field: casdoor_apiAddUser not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/User/CreateOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/GetList meet err=error normalizing operation: external: field: main_findManymenu not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Menu/GetList.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/GetMany meet err=error normalizing operation: external: field: main_findManyrole not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Role/GetMany.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Role/GetOne meet err=error normalizing operation: external: field: main_findFirstrole not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Role/GetOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Menu/GetOne meet err=error normalizing operation: external: field: main_findFirstmenu not defined on type: Query, locations: [], path: [query,data], operationFilePath: System/Menu/GetOne.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Casdoor/RefreshToken meet err=error normalizing operation: external: field: casdoor_apiRefreshToken not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: Casdoor/RefreshToken.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Log/GetLikeLog meet err=error normalizing operation: external: field: main_findManyapilog not defined on type: Query, locations: [], path: [query,main_findManyapilog], operationFilePath: System/Log/GetLikeLog.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process System/Perm/CreateMany meet err=error normalizing operation: external: field: main_createManypermission not defined on type: Mutation, locations: [], path: [mutation,data], operationFilePath: System/Perm/CreateMany.graphql
-2023-07-29 08:15:11Z WARN genOperations fail question=process Casdoor/Login meet err=error normalizing operation: external: field: casdoor_apiLogin not defined on type: Mutation, locations: [], path: [mutation,casdoor_apiLogin], operationFilePath: Casdoor/Login.graphql
-2023-07-29 08:15:11Z DEBUG @fireboom/node http.Client.Transport {"enableDebugMode": true}
-2023-07-29 08:15:11Z DEBUG @fireboom/node configureCache {"primaryHost": "localhost:9991", "deploymentID": "", "cacheKind": "IN_MEMORY_CACHE", "cacheSize": 128000000}
-2023-07-29 08:15:11Z DEBUG @fireboom/node create sub router
-2023-07-29 08:15:11Z DEBUG @fireboom/node configuring API {"numOfOperations": 4}
-2023-07-29 08:15:11Z ERROR @fireboom/node loading jwks from URL failed {"error": "Get \"http://127.0.0.1:9825/.well-known/jwks.json\": dial tcp 127.0.0.1:9825: connect: connection refused", "URL": "http://127.0.0.1:9825/.well-known/jwks.json"}
-2023-07-29 08:15:11Z ERROR @fireboom/node registerS3UploadClient {"provider": "tengxunyun", "error": "The access key Id format you provided is invalid."}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetApiList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Operation/GetMany", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/BindRoleApis", "mock": false, "authRequired": false}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UnBindRoleApis", "mock": false, "authRequired": false}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Casdoor/GetRolesById", "Endpoint": "/operations/Casdoor/GetRolesById", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Casdoor/GetSMSProvider", "Endpoint": "/operations/Casdoor/GetSMSProvider", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Casdoor/Login", "Endpoint": "/operations/Casdoor/Login", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Casdoor/RefreshToken", "Endpoint": "/operations/Casdoor/RefreshToken", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Casdoor/SendCode", "Endpoint": "/operations/Casdoor/SendCode", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Casdoor/UpdateSMSProvider", "Endpoint": "/operations/Casdoor/UpdateSMSProvider", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Post/CreateOne", "Endpoint": "/operations/Post/CreateOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Post/DeleteMany", "Endpoint": "/operations/Post/DeleteMany", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Post/DeleteOne", "Endpoint": "/operations/Post/DeleteOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Post/GetLikeList", "Endpoint": "/operations/Post/GetLikeList", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Post/GetList", "Endpoint": "/operations/Post/GetList", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Post/GetOne", "Endpoint": "/operations/Post/GetOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Post/UpdateOne", "Endpoint": "/operations/Post/UpdateOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Statistics/MonthlySales", "Endpoint": "/operations/Statistics/MonthlySales", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Statistics/QueryRaw", "Endpoint": "/operations/Statistics/QueryRaw", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Statistics/SaleTypePercent", "Endpoint": "/operations/Statistics/SaleTypePercent", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Statistics/SalesTop10", "Endpoint": "/operations/Statistics/SalesTop10", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "Statistics/VisitTrending", "Endpoint": "/operations/Statistics/VisitTrending", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/GetMenus", "Endpoint": "/operations/System/GetMenus", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Log/ChangeOpen", "Endpoint": "/operations/System/Log/ChangeOpen", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Log/CreateLog", "Endpoint": "/operations/System/Log/CreateLog", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Log/DeleteLog", "Endpoint": "/operations/System/Log/DeleteLog", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Log/GetAllLog", "Endpoint": "/operations/System/Log/GetAllLog", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Log/GetIsOpen", "Endpoint": "/operations/System/Log/GetIsOpen", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Log/GetLikeLog", "Endpoint": "/operations/System/Log/GetLikeLog", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Log/GetLog", "Endpoint": "/operations/System/Log/GetLog", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/CreateOne", "Endpoint": "/operations/System/Menu/CreateOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/DeleteMany", "Endpoint": "/operations/System/Menu/DeleteMany", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/DeleteOne", "Endpoint": "/operations/System/Menu/DeleteOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/GetApisByMenus", "Endpoint": "/operations/System/Menu/GetApisByMenus", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/GetChildrenMenus", "Endpoint": "/operations/System/Menu/GetChildrenMenus", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/GetList", "Endpoint": "/operations/System/Menu/GetList", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/GetMany", "Endpoint": "/operations/System/Menu/GetMany", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/GetMenuByLevelOrPid", "Endpoint": "/operations/System/Menu/GetMenuByLevelOrPid", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/GetOne", "Endpoint": "/operations/System/Menu/GetOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Menu/UpdateOne", "Endpoint": "/operations/System/Menu/UpdateOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Perm/CreateMany", "Endpoint": "/operations/System/Perm/CreateMany", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Perm/GetBindPerms", "Endpoint": "/operations/System/Perm/GetBindPerms", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Perm/GetRolePerms", "Endpoint": "/operations/System/Perm/GetRolePerms", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/AddOne", "Endpoint": "/operations/System/Role/AddOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/BindMenus", "Endpoint": "/operations/System/Role/BindMenus", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/DeleteMany", "Endpoint": "/operations/System/Role/DeleteMany", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/DeleteOne", "Endpoint": "/operations/System/Role/DeleteOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/GetList", "Endpoint": "/operations/System/Role/GetList", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/GetMany", "Endpoint": "/operations/System/Role/GetMany", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/GetOne", "Endpoint": "/operations/System/Role/GetOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/GetRoleMenuId", "Endpoint": "/operations/System/Role/GetRoleMenuId", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/UnBindMenus", "Endpoint": "/operations/System/Role/UnBindMenus", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Role/UpdateOne", "Endpoint": "/operations/System/Role/UpdateOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Sub/CreateSub", "Endpoint": "/operations/System/Sub/CreateSub", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/Sub/SSE", "Endpoint": "/operations/System/Sub/SSE", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/ConnectRole", "Endpoint": "/operations/System/User/ConnectRole", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/CountUsers", "Endpoint": "/operations/System/User/CountUsers", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/CreateOne", "Endpoint": "/operations/System/User/CreateOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/DeleteOne", "Endpoint": "/operations/System/User/DeleteOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/DisconnectRole", "Endpoint": "/operations/System/User/DisconnectRole", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/GetAllList", "Endpoint": "/operations/System/User/GetAllList", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/GetLikeUser", "Endpoint": "/operations/System/User/GetLikeUser", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/GetList", "Endpoint": "/operations/System/User/GetList", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/GetOne", "Endpoint": "/operations/System/User/GetOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/GetRoleUsers", "Endpoint": "/operations/System/User/GetRoleUsers", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/GetUserRole", "Endpoint": "/operations/System/User/GetUserRole", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z WARN @fireboom/node EndpointUnavailableHandler {"Operation": "System/User/UpdateOne", "Endpoint": "/operations/System/User/UpdateOne", "Help": "This operation is invalid. Please, check the logs"}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/bindmenu"}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/login"}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/menuTree"}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/perm"}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/unBindMenu"}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered GraphQLHandler {"method": "POST", "path": "/graphql"}
-2023-07-29 08:15:11Z DEBUG @fireboom/node registered GraphQLPlaygroundHandler {"method": "GET", "path": "/graphql"}
-2023-07-29 08:15:11Z DEBUG @fireboom/node configuring API {"numOfOperations": 4}
-2023-07-29 08:15:11Z DEBUG @fireboom/node configuring CORS {"allowedOrigins": ["*"]}
-2023-07-29 08:15:11Z DEBUG @fireboom/node public node url {"publicNodeUrl": "http://localhost:9991"}
-2023-07-29 08:15:11Z INFO @fireboom/node listening on {"addr": "[::1]:9991"}
-2023-07-29 08:15:11Z INFO @fireboom/node listening on {"addr": "127.0.0.1:9991"}
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/dataSource 200 <nil> 1.887084ms
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/setting/system 200 <nil> 432.209µs
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/storageBucket 200 <nil> 2.0365ms
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/auth 200 <nil> 1.8075ms
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/operateApi 200 <nil> 39.758167ms
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/sdk 200 <nil> 1.608291ms
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/hook/option 200 <nil> 2.201667ms
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/operateApi 200 <nil> 42.247209ms
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/home 200 <nil> 4.036625ms
-2023-07-29 08:15:30Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Ffireboom.oss-cn-hangzhou.aliyuncs.com%2Ffb-service-discovery.json 200 <nil> 103.845625ms
-2023-07-29 08:15:35Z INFO ::1 GET /api/v1/storageBucket 200 <nil> 253.083µs
-2023-07-29 08:15:35Z INFO ::1 GET /api/v1/auth 200 <nil> 252.25µs
-2023-07-29 08:15:35Z INFO ::1 GET /api/v1/dataSource 200 <nil> 476.666µs
-2023-07-29 08:15:35Z INFO ::1 GET /api/v1/setting/system 200 <nil> 97.958µs
-2023-07-29 08:15:35Z INFO ::1 GET /api/v1/operateApi 200 <nil> 33.743791ms
-2023-07-29 08:15:35Z INFO ::1 GET /api/v1/hook/option 200 <nil> 134.875µs
-2023-07-29 08:15:35Z INFO ::1 GET /api/v1/sdk 200 <nil> 1.265042ms
-2023-07-29 08:15:35Z INFO ::1 GET /api/v1/home 200 <nil> 7.411834ms
-2023-07-29 08:15:36Z INFO ::1 GET /api/v1/operateApi 200 <nil> 24.307334ms
-2023-07-29 08:15:36Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Ffireboom.oss-cn-hangzhou.aliyuncs.com%2Ffb-service-discovery.json 200 <nil> 101.293125ms
-2023-07-29 08:15:36Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Fcode.100ai.com.cn%2Ffireboomio%2Ffiles%2Fraw%2Fbranch%2Fmain%2Fnews.json 200 <nil> 85.832333ms
-2023-07-29 08:15:36Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Fcode.100ai.com.cn%2Ffireboomio%2Ffiles%2Fraw%2Fbranch%2Fmain%2Fnews.json 200 <nil> 5.181440042s
-2023-07-29 08:17:19Z INFO ::1 GET /api/v1/sdk 200 <nil> 595.667µs
-2023-07-29 08:18:01Z INFO Received interrupt signal interrupt
+2023-08-03 10:48:39Z INFO Web server started on "http://localhost:9123"
+2023-08-03 10:48:40Z DEBUG @fireboom/node http.Client.Transport {"enableDebugMode": true}
+2023-08-03 10:48:40Z DEBUG @fireboom/node configureCache {"primaryHost": "localhost:9991", "deploymentID": "", "cacheKind": "IN_MEMORY_CACHE", "cacheSize": 128000000}
+2023-08-03 10:48:40Z DEBUG @fireboom/node create sub router
+2023-08-03 10:48:40Z DEBUG @fireboom/node configuring API {"numOfOperations": 74}
+2023-08-03 10:48:41Z ERROR @fireboom/node registerS3UploadClient {"storage": "tengxunyun", "error": "The access key Id format you provided is invalid."}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Casdoor/GetRolesById", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Casdoor/GetSMSProvider", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/Login", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/RefreshToken", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/SendCode", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/UpdateSMSProvider", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/CreateCategory", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/CreateOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteCategory", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteMany", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetCategory", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetLikeList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetPostByAuthor", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetPostByCate", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/UpdateCategory", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/UpdateOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/MonthlySales", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Statistics/QueryRaw", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/SaleTypePercent", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/SalesTop10", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/VisitTrending", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/GetMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/ChangeOpen", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/CreateLog", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/DeleteLog", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetAllLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetIsOpen", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetLikeLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/CreateOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/DeleteMany", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/DeleteOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetApiList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetApisByMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetChildrenMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetMany", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetMenuByLevelOrPid", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/UpdateOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Operation/GetMany", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Perm/CreateMany", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Perm/GetBindPerms", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Perm/GetRolePerms", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/AddOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/BindMenus", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/BindRoleApis", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/DeleteMany", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/DeleteOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetMany", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetRoleMenuId", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UnBindMenus", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UnBindRoleApis", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UpdateOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Sub/SSE", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/ConnectRole", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/CountUsers", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/CreateOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/DeleteOne", "mock": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/DisconnectRole", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetAllList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetLikeUser", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetRoleUsers", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetUserByUserId", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetUserRole", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/UpdateOne", "mock": false, "authRequired": false}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/bindmenu"}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/login"}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/menuTree"}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/perm"}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/unBindMenu"}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered GraphQLHandler {"method": "POST", "path": "/graphql"}
+2023-08-03 10:48:41Z DEBUG @fireboom/node registered GraphQLPlaygroundHandler {"method": "GET", "path": "/graphql"}
+2023-08-03 10:48:41Z DEBUG @fireboom/node configuring API {"numOfOperations": 74}
+2023-08-03 10:48:41Z DEBUG @fireboom/node configuring CORS {"allowedOrigins": ["*"]}
+2023-08-03 10:48:41Z DEBUG @fireboom/node public node url {"publicNodeUrl": "http://localhost:9991"}
+2023-08-03 10:48:41Z INFO @fireboom/node listening on {"addr": "[::1]:9991"}
+2023-08-03 10:48:41Z INFO @fireboom/node listening on {"addr": "127.0.0.1:9991"}
+2023-08-03 10:48:47Z INFO ::1 GET /api/v1/sdk 200 <nil> 1.803ms
+2023-08-03 10:48:48Z INFO ::1 GET /api/v1/storageBucket 200 <nil> 298.167µs
+2023-08-03 10:48:48Z INFO ::1 GET /api/v1/setting/system 200 <nil> 216.583µs
+2023-08-03 10:48:48Z INFO ::1 GET /api/v1/dataSource 200 <nil> 391.583µs
+2023-08-03 10:48:48Z INFO ::1 GET /api/v1/auth 200 <nil> 576µs
+2023-08-03 10:48:48Z INFO ::1 GET /api/v1/operateApi 200 <nil> 6.993625ms
+2023-08-03 10:48:48Z INFO ::1 GET /api/v1/hook/option 200 <nil> 144.708µs
+2023-08-03 10:48:49Z INFO ::1 GET /api/v1/sdk 200 <nil> 48.322709ms
+2023-08-03 10:48:49Z INFO ::1 GET /api/v1/home 200 <nil> 69.239083ms
+2023-08-03 10:48:49Z INFO ::1 GET /api/v1/operateApi 200 <nil> 25.703ms
+2023-08-03 10:48:49Z INFO ::1 GET /api/v1/operateApi 200 <nil> 10.214959ms
+2023-08-03 10:48:49Z INFO ::1 GET /api/v1/operateApi 200 <nil> 4.727416ms
+2023-08-03 10:48:49Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Ffireboom.oss-cn-hangzhou.aliyuncs.com%2Ffb-service-discovery.json 200 <nil> 174.7015ms
+2023-08-03 10:48:49Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Fcode.100ai.com.cn%2Ffireboomio%2Ffiles%2Fraw%2Fbranch%2Fmain%2Fnews.json 200 <nil> 86.964416ms
+2023-08-03 10:49:30Z INFO ::1 GET /api/v1/sdk 200 <nil> 2.8165ms
+2023-08-03 10:50:56Z INFO Received interrupt signal interrupt

@@ -311,6 +311,47 @@ type Post__GetOneResponseData_data_user struct {
 	Id   int64  `json:"id"`
 	Name string `json:"name"`
 }
+type Post__GetPostByAuthorInput struct {
+	Id int64 `json:"id,omitempty"`
+}
+type Post__GetPostByAuthorInternalInput struct {
+	Id int64 `json:"id,omitempty"`
+}
+type Post__GetPostByAuthorResponseData struct {
+	Main_findManyuser []Post__GetPostByAuthorResponseData_main_findManyuser `json:"main_findManyuser"`
+}
+type Post__GetPostByAuthorResponseData_main_findManyuser struct {
+	Post []Post__GetPostByAuthorResponseData_main_findManyuser_post `json:"post,omitempty"`
+}
+type Post__GetPostByAuthorResponseData_main_findManyuser_post struct {
+	Cate         int64  `json:"cate,omitempty"`
+	Content      string `json:"content,omitempty"`
+	Id           int64  `json:"id"`
+	Poster       string `json:"poster,omitempty"`
+	Published_at string `json:"published_at,omitempty"`
+	Title        string `json:"title"`
+}
+type Post__GetPostByCateInput struct {
+	Equals string `json:"equals"`
+}
+type Post__GetPostByCateInternalInput struct {
+	Equals string `json:"equals"`
+}
+type Post__GetPostByCateResponseData struct {
+	Main_findManyCategory []Post__GetPostByCateResponseData_main_findManyCategory `json:"main_findManyCategory"`
+}
+type Post__GetPostByCateResponseData_main_findManyCategory struct {
+	Post []Post__GetPostByCateResponseData_main_findManyCategory_post `json:"post,omitempty"`
+}
+type Post__GetPostByCateResponseData_main_findManyCategory_post struct {
+	Author       string `json:"author"`
+	Cate         int64  `json:"cate,omitempty"`
+	Content      string `json:"content,omitempty"`
+	Id           int64  `json:"id"`
+	Poster       string `json:"poster,omitempty"`
+	Published_at string `json:"published_at,omitempty"`
+	Title        string `json:"title"`
+}
 type Post__UpdateCategoryInput struct {
 	Id   int64  `json:"id,omitempty"`
 	Name string `json:"name,omitempty"`
@@ -1279,8 +1320,10 @@ type System__User__GetRoleUsersResponseData_main_findManyrole__join_main_findMan
 	Main_findManyuser []System__User__GetRoleUsersResponseData_main_findManyrole__join_main_findManyrole_user__join_main_findManyuser `json:"main_findManyuser"`
 }
 type System__User__GetRoleUsersResponseData_main_findManyrole__join_main_findManyrole_user__join_main_findManyuser struct {
-	Id   int64  `json:"id"`
-	Name string `json:"name"`
+	Avatar     string `json:"avatar,omitempty"`
+	Created_at string `json:"created_at,omitempty"`
+	Id         int64  `json:"id"`
+	Name       string `json:"name"`
 }
 type System__User__GetUserByUserIdInput struct {
 	UserId string `json:"userId,omitempty"`
