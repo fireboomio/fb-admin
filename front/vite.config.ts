@@ -45,20 +45,20 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       host: "0.0.0.0",
       proxy: {
         "/operations": {
-          target: "http://w4xf8p.natappfree.cc",
+          target: "http://localhost:9991",
           changeOrigin: true
         },
         // http://localhost:9991
         "/auth": {
-          target: "http://w4xf8p.natappfree.cc",
+          target: "http://localhost:9991",
           changeOrigin: true
         },
         "/proxy": {
-          target: "http://w4xf8p.natappfree.cc",
+          target: "http://localhost:9991",
           changeOrigin: true
         },
         "/s3": {
-          target: "http://w4xf8p.natappfree.cc",
+          target: "http://localhost:9991",
           changeOrigin: true
         },
       }
