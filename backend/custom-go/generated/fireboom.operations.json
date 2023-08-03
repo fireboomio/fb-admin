@@ -1,0 +1,526 @@
+{
+"graphql_operation_files": [
+{
+"operation_name": "Casdoor__GetRolesById",
+"api_mount_path": "Casdoor/GetRolesById",
+"file_path": "Casdoor/GetRolesById.graphql",
+"content": "query Casdoor__GetRolesById($userId: String!, $id: Int @internal, $roleId: Int @internal ){data: main_findFirstuser(where: {user_id: {equals: $userId}})@transform(get: \"_join.main_findManyrole_user\") {id @export(as: \"id\") _join {main_findManyrole_user(where: {user_id: {equals: $id}})@transform(get: \"[]._join\") {role_id @export(as: \"roleId\") _join @transform(get: \"main_findFirstrole.code\") {main_findFirstrole(where: {id: {equals: $roleId}}){code}}}}}}",
+"origin_content": "query MyQuery($userId: String!, $id: Int @internal, $roleId: Int @internal) {\n  data: main_findFirstuser(where: {user_id: {equals: $userId}}) @transform(get: \"_join.main_findManyrole_user\") {\n    id @export(as: \"id\")\n    _join {\n      main_findManyrole_user(where: {user_id: {equals: $id}}) @transform(get: \"[]._join\") {\n        role_id @export(as: \"roleId\")\n        _join @transform(get: \"main_findFirstrole.code\") {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n  }\n} "
+},
+{
+"operation_name": "Casdoor__GetSMSProvider",
+"api_mount_path": "Casdoor/GetSMSProvider",
+"file_path": "Casdoor/GetSMSProvider.graphql",
+"content": "query Casdoor__GetSMSProvider @rbac(requireMatchAny: [admin]) {main_findManyprovider {client_id client_secret created_time name owner sign_name template_code type}}",
+"origin_content": "query MyQuery @rbac(requireMatchAny: [admin]) {\n  main_findManyprovider {\n    client_id\n    client_secret\n    created_time\n    name\n    owner\n    sign_name\n    template_code\n    type\n  }\n}"
+},
+{
+"operation_name": "Casdoor__Login",
+"api_mount_path": "Casdoor/Login",
+"file_path": "Casdoor/Login.graphql",
+"content": "mutation Casdoor__Login($code: String = \"\", $password: String = \"\", $countryCode: String = \"CN\", $loginType: String = \"\", $phone: String = \"\", $username: String = \"\"){casdoor_apiLogin(POSTApiLoginInput: {code: $code,password: $password,loginType: $loginType,username: $username,phone: $phone,countryCode: $countryCode}){msg success data {accessToken expireIn refreshToken}}}",
+"origin_content": "mutation Login($code: String = \"\", $password: String = \"\", $countryCode: String = \"CN\", $loginType: String = \"\", $phone: String = \"\", $username: String = \"\") {\n  casdoor_apiLogin(\n    POSTApiLoginInput: {code: $code, password: $password, loginType: $loginType, username: $username, phone: $phone, countryCode: $countryCode}\n  ) {\n    msg\n    success\n    data {\n      accessToken\n      expireIn\n      refreshToken\n    }\n  }\n} "
+},
+{
+"operation_name": "Casdoor__RefreshToken",
+"api_mount_path": "Casdoor/RefreshToken",
+"file_path": "Casdoor/RefreshToken.graphql",
+"content": "mutation Casdoor__RefreshToken($refreshToken: String!){data: casdoor_apiRefreshToken(POSTApiRefresh_tokenInput: {refresh_token: $refreshToken}){msg success data {refreshToken accessToken expireIn}}}",
+"origin_content": "mutation MyQuery($refreshToken: String!) {\n  data: casdoor_apiRefreshToken(\n    POSTApiRefresh_tokenInput: {refresh_token: $refreshToken}\n  ) {\n    msg\n    success\n    data {\n      refreshToken\n      accessToken\n      expireIn\n    }\n  }\n}"
+},
+{
+"operation_name": "Casdoor__SendCode",
+"api_mount_path": "Casdoor/SendCode",
+"file_path": "Casdoor/SendCode.graphql",
+"content": "mutation Casdoor__SendCode($dest: String!, $countryCode: String = \"CN\"){data: casdoor_apiSendVerificationCode(POSTApiSend_verification_codeInput: {dest: $dest,countryCode: $countryCode}){msg}}",
+"origin_content": "mutation MyQuery($dest: String!, $countryCode: String = \"CN\") {\n  data: casdoor_apiSendVerificationCode(\n    POSTApiSend_verification_codeInput: {dest: $dest, countryCode: $countryCode}\n  ) {\n    msg\n  }\n}"
+},
+{
+"operation_name": "Casdoor__UpdateSMSProvider",
+"api_mount_path": "Casdoor/UpdateSMSProvider",
+"file_path": "Casdoor/UpdateSMSProvider.graphql",
+"content": "mutation Casdoor__UpdateSMSProvider($clientId: String!, $clientSecret: String!, $signName: String!, $templateCode: String!)@rbac(requireMatchAny: [admin,user]) {casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: {clientId: $clientId,clientSecret: $clientSecret,signName: $signName,templateCode: $templateCode}){msg status}}",
+"origin_content": "mutation MyQuery($clientId: String!, $clientSecret: String!, $signName: String!, $templateCode: String!) @rbac(requireMatchAny: [admin, user]) {\n  casdoor_apiUpdateProvider(\n    POSTApiUpdate_providerInput: {clientId: $clientId, clientSecret: $clientSecret, signName: $signName, templateCode: $templateCode}\n  ) {\n    msg\n    status\n  }\n}"
+},
+{
+"operation_name": "Post__CreateCategory",
+"api_mount_path": "Post/CreateCategory",
+"file_path": "Post/CreateCategory.graphql",
+"content": "mutation Post__CreateCategory($name: String = \"\"){main_createOneCategory(data: {name: $name}){id name}}",
+"origin_content": "mutation MyQuery($name: String = \"\",) {\n  main_createOneCategory(data: {name: $name}) {\n    id\n    name\n  }\n}"
+},
+{
+"operation_name": "Post__CreateOne",
+"api_mount_path": "Post/CreateOne",
+"file_path": "Post/CreateOne.graphql",
+"content": "mutation Post__CreateOne($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!, $userId: Int!, $cateId: Int!)@rbac(requireMatchAny: [user,admin]) {data: main_createOnepost(data: {title: $title,poster: $poster,published_at: $publishedAt,author: $username,content: $content,user: {connect: {id: $userId}},Category: {connect: {id: $cateId}}}){id title poster published_at author Category {id}}}",
+"origin_content": "mutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!, $userId: Int !, $cateId: Int !) @rbac(requireMatchAny: [user, admin]) {\n  data: main_createOnepost(\n    data: {title: $title, poster: $poster, published_at: $publishedAt, author: $username, content: $content, user: {connect: {id: $userId}}, Category: {connect: {id: $cateId}}}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    Category {\n      id\n    }\n  }\n} "
+},
+{
+"operation_name": "Post__DeleteCategory",
+"api_mount_path": "Post/DeleteCategory",
+"file_path": "Post/DeleteCategory.graphql",
+"content": "mutation Post__DeleteCategory($id: Int = 10){main_deleteOneCategory(where: {id: $id}){id name}}",
+"origin_content": "mutation MyQuery($id: Int = 10) {\n  main_deleteOneCategory(where: {id: $id}) {\n    id\n    name\n  }\n}"
+},
+{
+"operation_name": "Post__DeleteMany",
+"api_mount_path": "Post/DeleteMany",
+"file_path": "Post/DeleteMany.graphql",
+"content": "mutation Post__DeleteMany($ids: [Int]!)@rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {data: main_deleteManypost(where: {id: {in: $ids}}){count}}",
+"origin_content": "mutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {\n\tdata: main_deleteManypost(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n"
+},
+{
+"operation_name": "Post__DeleteOne",
+"api_mount_path": "Post/DeleteOne",
+"file_path": "Post/DeleteOne.graphql",
+"content": "mutation Post__DeleteOne($id: Int!)@rbac(requireMatchAny: [user,admin]) {data: main_deleteOnepost(where: {id: $id}){id}}",
+"origin_content": "mutation DeleteOnePost ($id: Int!) @rbac(requireMatchAny: [user,admin]) {\n\tdata: main_deleteOnepost(where: {id:$id}) {\n\t\tid\n\t}\n}\n"
+},
+{
+"operation_name": "Post__GetCategory",
+"api_mount_path": "Post/GetCategory",
+"file_path": "Post/GetCategory.graphql",
+"content": "query Post__GetCategory {main_findManyCategory {id name post {author content id published_at poster title}}}",
+"origin_content": "query MyQuery {\n  main_findManyCategory {\n    id\n    name\n    post {\n      author\n      content\n      id\n      published_at\n      poster\n      title\n    }\n  }\n}"
+},
+{
+"operation_name": "Post__GetLikeList",
+"api_mount_path": "Post/GetLikeList",
+"file_path": "Post/GetLikeList.graphql",
+"content": "query Post__GetLikeList($author: String = \"\", $content: String = \"\", $title: String = \"\", $id: Int = 10){main_findManypost(where: {author: {contains: $author,endsWith: \"\"},content: {contains: $content,endsWith: \"\"},title: {contains: $title,endsWith: \"\"}}){author content id published_at title poster Category {name id}} main_findUniquepost(where: {id: $id}){author content id published_at title poster Category {id name}}}",
+"origin_content": "query MyQuery($author: String = \"\", $content: String = \"\", $title: String = \"\", $id: Int = 10) {\n  main_findManypost(\n    where: {author: {contains: $author, endsWith: \"\"}, content: {contains: $content, endsWith: \"\"}, title: {contains: $title, endsWith: \"\"}}\n  ) {\n    author\n    content\n    id\n    published_at\n    title\n    poster\n    Category {\n      name\n      id\n    }\n  }\n  main_findUniquepost(where: {id: $id}) {\n    author\n    content\n    id\n    published_at\n    title\n    poster\n    Category {\n      id\n      name\n    }\n  }\n}"
+},
+{
+"operation_name": "Post__GetList",
+"api_mount_path": "Post/GetList",
+"file_path": "Post/GetList.graphql",
+"content": "query Post__GetList($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput)@rbac(requireMatchAny: [eeee,admin,abc,abc32]) {data: main_findManypost(skip: $skip, take: $take, where: {AND: $query}, orderBy: {title: asc}){id title poster published_at author content Category {id name}} total: main_aggregatepost(where: {AND: $query})@transform(get: \"_count.id\") {_count {id}}}",
+"origin_content": "query GetPostList($take: Int = 10, $skip: Int = 0, $query: main_postWhereInput) @rbac(requireMatchAny: [eeee, admin, abc, abc32]) {\n  data: main_findManypost(\n    skip: $skip\n    take: $take\n    where: {AND: $query}\n    orderBy: {title: asc}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    Category {\n      id\n      name\n    }\n  }\n  total: main_aggregatepost(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n}"
+},
+{
+"operation_name": "Post__GetOne",
+"api_mount_path": "Post/GetOne",
+"file_path": "Post/GetOne.graphql",
+"content": "query Post__GetOne($id: Int!)@rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {data: main_findFirstpost(where: {id: {equals: $id}}){id title poster published_at author content Category {id name} user {id name}}}",
+"origin_content": "query GetOnePost($id: Int!) @rbac(requireMatchAny: [user, eeee, admin, abc, abc32]) {\n  data: main_findFirstpost(where: {id: {equals: $id}}) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    Category {\n      id\n      name\n    }\n    user {\n      id\n      name\n    }\n  }\n}"
+},
+{
+"operation_name": "Post__GetPostByAuthor",
+"api_mount_path": "Post/GetPostByAuthor",
+"file_path": "Post/GetPostByAuthor.graphql",
+"content": "query Post__GetPostByAuthor($id: Int = 10){main_findManyuser(where: {id: {equals: $id}}){post {cate content id poster published_at title}}}",
+"origin_content": "query MyQuery($id: Int = 10) {\n  main_findManyuser(where: {id: {equals: $id}}) {\n    post {\n      cate\n      content\n      id\n      poster\n      published_at\n      title\n    }\n  }\n} "
+},
+{
+"operation_name": "Post__GetPostByCate",
+"api_mount_path": "Post/GetPostByCate",
+"file_path": "Post/GetPostByCate.graphql",
+"content": "query Post__GetPostByCate($equals: String!)@rbac(requireMatchAny: [admin]) {main_findManyCategory(where: {name: {equals: $equals}}){post {author cate content poster id title published_at}}}",
+"origin_content": "query MyQuery($equals: String!) @rbac(requireMatchAny: [admin]) {\n  main_findManyCategory(where: {name: {equals: $equals}}) {\n    post {\n      author\n      cate\n      content\n      poster\n      id\n      title\n      published_at\n    }\n  }\n} "
+},
+{
+"operation_name": "Post__UpdateCategory",
+"api_mount_path": "Post/UpdateCategory",
+"file_path": "Post/UpdateCategory.graphql",
+"content": "mutation Post__UpdateCategory($id: Int = 10, $name: String = \"\"){main_updateOneCategory(data: {name: {set: $name}}, where: {id: $id}){id name}}",
+"origin_content": "mutation MyQuery($id: Int = 10, $name: String = \"\") {\n  main_updateOneCategory(data: {name: {set: $name}}, where: {id: $id}) {\n    id\n    name\n  }\n}"
+},
+{
+"operation_name": "Post__UpdateOne",
+"api_mount_path": "Post/UpdateOne",
+"file_path": "Post/UpdateOne.graphql",
+"content": "mutation Post__UpdateOne($id: Int!, $title: String, $poster: String, $content: String!, $author: String = \"\", $cate: Int, $userId: Int = 10)@rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {data: main_updateOnepost(data: {title: {set: $title},poster: {set: $poster},content: {set: $content},Category: {connect: {id: $cate}},author: {set: $author},user: {connect: {id: $userId}}}, where: {id: $id}){id title poster published_at author content user {id name}}}",
+"origin_content": "mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $content: String!, $author: String = \"\", $cate: Int, $userId: Int = 10) @rbac(requireMatchAny: [user, eeee, admin, abc, abc32]) {\n  data: main_updateOnepost(\n    data: {title: {set: $title}, poster: {set: $poster}, content: {set: $content}, Category: {connect: {id: $cate}}, author: {set: $author}, user: {connect: {id: $userId}}}\n    where: {id: $id}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    user {\n      id\n      name\n    }\n  }\n} "
+},
+{
+"operation_name": "Statistics__MonthlySales",
+"api_mount_path": "Statistics/MonthlySales",
+"file_path": "Statistics/MonthlySales.graphql",
+"content": "query Statistics__MonthlySales {data: statistics_GetMonthlySales {months totalSales}}",
+"origin_content": "query MyQuery {\n\tdata: statistics_GetMonthlySales {\n\t\tmonths\n\t\ttotalSales\n\t}\n}\n "
+},
+{
+"operation_name": "Statistics__QueryRaw",
+"api_mount_path": "Statistics/QueryRaw",
+"file_path": "Statistics/QueryRaw.graphql",
+"content": "mutation Statistics__QueryRaw($query: String!){main_queryRaw(query: $query)}",
+"origin_content": "mutation QueryRaw ($query: String!) {\n\tmain_queryRaw(query: $query)\n}\n"
+},
+{
+"operation_name": "Statistics__SaleTypePercent",
+"api_mount_path": "Statistics/SaleTypePercent",
+"file_path": "Statistics/SaleTypePercent.graphql",
+"content": "query Statistics__SaleTypePercent {data: statistics_GetSaleTypePercent {typeId typeName totalSales}}",
+"origin_content": "query MyQuery {\n  data: statistics_GetSaleTypePercent {\n    typeId\n    typeName\n    totalSales\n  }\n}"
+},
+{
+"operation_name": "Statistics__SalesTop10",
+"api_mount_path": "Statistics/SalesTop10",
+"file_path": "Statistics/SalesTop10.graphql",
+"content": "query Statistics__SalesTop10 {data: statistics_GetSalesTop10 {shopName totalSales}}",
+"origin_content": "query MyQuery {\n  data: statistics_GetSalesTop10 {\n    shopName\n    totalSales\n  }\n}"
+},
+{
+"operation_name": "Statistics__VisitTrending",
+"api_mount_path": "Statistics/VisitTrending",
+"file_path": "Statistics/VisitTrending.graphql",
+"content": "query Statistics__VisitTrending {data: statistics_GetVisitTrending {count days}}",
+"origin_content": "query MyQuery {\n  data: statistics_GetVisitTrending {\n    count\n    days\n  }\n} "
+},
+{
+"operation_name": "System__GetMenus",
+"api_mount_path": "System/GetMenus",
+"file_path": "System/GetMenus.graphql",
+"content": "query System__GetMenus($pid: Int)@rbac(requireMatchAny: [admin]) {data: main_findManymenu(where: {level: {equals: 1}}, orderBy: {sort: asc}){id @export(as: \"pid\") path label name sort children: _join @transform(get: \"main_findManymenu\") {main_findManymenu(where: {parentId: {equals: $pid}}, orderBy: {sort: asc}){id path name label sort}}}}",
+"origin_content": "query MyQuery ($pid: Int) @rbac(requireMatchAny: [admin]) {\n\tdata: main_findManymenu(where: {level:{equals:1}}, orderBy: {sort:asc}) {\n\t\tid @export(as: \"pid\")\n\t\tpath\n\t\tlabel\n\t\tname\n\t\tsort\n\t\tchildren: _join @transform(get: \"main_findManymenu\") {\n\t\t\tmain_findManymenu(where: {parentId:{equals:$pid}}, orderBy: {sort:asc}) {\n\t\t\t\tid\n\t\t\t\tpath\n\t\t\t\tname\n\t\t\t\tlabel\n\t\t\t\tsort\n\t\t\t}\n\t\t}\n\t}\n}\n "
+},
+{
+"operation_name": "System__Log__ChangeOpen",
+"api_mount_path": "System/Log/ChangeOpen",
+"file_path": "System/Log/ChangeOpen.graphql",
+"content": "mutation System__Log__ChangeOpen($set: Boolean = false)@rbac(requireMatchAny: [admin,user]) {main_updateOnedic(where: {id: 1}, data: {isOpen: {set: $set}}){id isOpen}}",
+"origin_content": "mutation MyQuery($set: Boolean = false) @rbac(requireMatchAny: [admin, user]) {\n  main_updateOnedic(where: {id: 1}, data: {isOpen: {set: $set}}) {\n    id\n    isOpen\n  }\n}"
+},
+{
+"operation_name": "System__Log__CreateLog",
+"api_mount_path": "System/Log/CreateLog",
+"file_path": "System/Log/CreateLog.graphql",
+"content": "mutation System__Log__CreateLog($ip: String = \"\", $method: String = \"\", $path: String = \"\", $updatedAt: DateTime = \"\", $code: String = \"\", $ua: String = \"\", $userId: String = \"\", $userName: String = \"\"){main_createOneapilog(data: {updatedAt: $updatedAt,ip: $ip,method: $method,path: $path,code: $code,ua: $ua,userId: $userId,userName: $userName}){ip method path id updatedAt ua userId userName}}",
+"origin_content": "mutation MyQuery($ip: String = \"\", $method: String = \"\", $path: String = \"\", $updatedAt: DateTime = \"\", $code: String = \"\", $ua: String = \"\", $userId: String = \"\", $userName: String = \"\") {\n  main_createOneapilog(\n    data: {updatedAt: $updatedAt, ip: $ip, method: $method, path: $path, code: $code, ua: $ua, userId: $userId, userName: $userName}\n  ) {\n    ip\n    method\n    path\n    id\n    updatedAt\n    ua\n    userId\n    userName\n  }\n} "
+},
+{
+"operation_name": "System__Log__DeleteLog",
+"api_mount_path": "System/Log/DeleteLog",
+"file_path": "System/Log/DeleteLog.graphql",
+"content": "mutation System__Log__DeleteLog($equals: [Int]){main_deleteManyapilog(where: {id: {in: $equals}}){count}}",
+"origin_content": "mutation MyQuery($equals: [Int]) {\n  main_deleteManyapilog(where: {id: {in: $equals}}){\n    count\n  }\n}"
+},
+{
+"operation_name": "System__Log__GetAllLog",
+"api_mount_path": "System/Log/GetAllLog",
+"file_path": "System/Log/GetAllLog.graphql",
+"content": "query System__Log__GetAllLog {logNum: main_aggregateapilog {_count {id}}}",
+"origin_content": "query MyQuery {\n  logNum: main_aggregateapilog {\n    _count {\n      id\n    }\n  }\n}"
+},
+{
+"operation_name": "System__Log__GetIsOpen",
+"api_mount_path": "System/Log/GetIsOpen",
+"file_path": "System/Log/GetIsOpen.graphql",
+"content": "query System__Log__GetIsOpen @rbac(requireMatchAny: [admin]) {main_findFirstdic(where: {id: {equals: 1}}){id isOpen}}",
+"origin_content": "query MyQuery @rbac(requireMatchAny: [admin]) {\n  main_findFirstdic(where: {id: {equals: 1}}) {\n    id\n    isOpen\n  }\n}"
+},
+{
+"operation_name": "System__Log__GetLikeLog",
+"api_mount_path": "System/Log/GetLikeLog",
+"file_path": "System/Log/GetLikeLog.graphql",
+"content": "query System__Log__GetLikeLog($ip: String = \"\", $method: String = \"\", $path: String = \"\", $id: Int = 10, $name: String = \"\"){main_findManyapilog(where: {method: {contains: $method},path: {contains: $path},updatedAt: {},ip: {contains: $ip},userName: {contains: $name}}){id method ip path ua updatedAt userName} main_findUniqueapilog(where: {id: $id}){id ip method path ua updatedAt userName}}",
+"origin_content": "query MyQuery($ip: String = \"\", $method: String = \"\", $path: String = \"\", $id: Int = 10, $name: String = \"\") {\n  main_findManyapilog(\n    where: {method: {contains: $method}, path: {contains: $path}, updatedAt: {}, ip: {contains: $ip}, userName: {contains: $name}}\n  ) {\n    id\n    method\n    ip\n    path\n    ua\n    updatedAt\n    userName\n  }\n  main_findUniqueapilog(where: {id: $id}) {\n    id\n    ip\n    method\n    path\n    ua\n    updatedAt\n    userName\n  }\n}"
+},
+{
+"operation_name": "System__Log__GetLog",
+"api_mount_path": "System/Log/GetLog",
+"file_path": "System/Log/GetLog.graphql",
+"content": "query System__Log__GetLog($skip: Int = 5, $take: Int = 10, $orderBy: [main_apilogOrderByWithRelationInput]){data: main_findManyapilog(skip: $skip, take: $take, orderBy: $orderBy){id method ip path updatedAt ua userName userId}}",
+"origin_content": "query MyQuery($skip: Int = 5, $take: Int = 10, $orderBy: [main_apilogOrderByWithRelationInput]) {\n  data: main_findManyapilog(skip: $skip, take: $take, orderBy: $orderBy) {\n    id\n    method\n    ip\n    path\n    updatedAt\n    ua\n    userName\n    userId\n  }\n}"
+},
+{
+"operation_name": "System__Menu__CreateOne",
+"api_mount_path": "System/Menu/CreateOne",
+"file_path": "System/Menu/CreateOne.graphql",
+"content": "mutation System__Menu__CreateOne($label: String!, $path: String!, $icon: String, $level: Int!, $sort: Int!, $parentId: Int, $menuType: String!, $perms: String = \"\", $apiId: String = \"\", $create_time: DateTime!)@rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {data: main_createOnemenu(data: {label: $label,path: $path,icon: $icon,level: $level,sort: $sort,parentId: $parentId,menu_type: $menuType,perms: $perms,api_id: $apiId,create_time: $create_time}){id}}",
+"origin_content": "mutation CreateOneMenu ($label: String!, $path: String!, $icon: String, $level: Int!, $sort: Int!, $parentId: Int, $menuType: String!, $perms: String = \"\", $apiId: String = \"\", $create_time: DateTime!) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {\n\tdata: main_createOnemenu(data: {label:$label,path:$path,icon:$icon,level:$level,sort:$sort,parentId:$parentId,menu_type:$menuType,perms:$perms,api_id:$apiId,create_time:$create_time}) {\n\t\tid\n\t}\n}\n"
+},
+{
+"operation_name": "System__Menu__DeleteMany",
+"api_mount_path": "System/Menu/DeleteMany",
+"file_path": "System/Menu/DeleteMany.graphql",
+"content": "mutation System__Menu__DeleteMany($ids: [Int]!)@rbac(requireMatchAny: [admin]) {data: main_deleteManymenu(where: {id: {in: $ids}}){count}}",
+"origin_content": "mutation DeleteManyMenu ($ids: [Int]!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteManymenu(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n"
+},
+{
+"operation_name": "System__Menu__DeleteOne",
+"api_mount_path": "System/Menu/DeleteOne",
+"file_path": "System/Menu/DeleteOne.graphql",
+"content": "mutation System__Menu__DeleteOne($id: Int!)@rbac(requireMatchAny: [admin]) {data: main_deleteOnemenu(where: {id: $id}){id}}",
+"origin_content": "mutation DeleteOneMenu($id: Int!) @rbac(requireMatchAny: [admin]) {\n  data: main_deleteOnemenu(where: {id: $id}) {\n    id\n  }\n}"
+},
+{
+"operation_name": "System__Menu__GetApiList",
+"api_mount_path": "System/Menu/GetApiList",
+"file_path": "System/Menu/GetApiList.graphql",
+"content": "query System__Menu__GetApiList @rbac(requireMatchAny: [admin]) {data: system_getAllApis {path: title id}}",
+"origin_content": "query MyQuery @rbac(requireMatchAny: [admin]) {\n  data: system_getAllApis {\n    path: title\n    id\n  }\n}"
+},
+{
+"operation_name": "System__Menu__GetApisByMenus",
+"api_mount_path": "System/Menu/GetApisByMenus",
+"file_path": "System/Menu/GetApisByMenus.graphql",
+"content": "query System__Menu__GetApisByMenus($menuIds: [Int]!)@rbac(requireMatchAny: [admin]) {data: main_findManymenu(where: {id: {in: $menuIds}})@transform(get: \"[].api_id\") {api_id}}",
+"origin_content": "query MyQuery($menuIds: [Int]!) @rbac(requireMatchAny: [admin]) {\n  data: main_findManymenu(where: {id: {in: $menuIds}}) @transform(get: \"[].api_id\") {\n    api_id\n  }\n}"
+},
+{
+"operation_name": "System__Menu__GetChildrenMenus",
+"api_mount_path": "System/Menu/GetChildrenMenus",
+"file_path": "System/Menu/GetChildrenMenus.graphql",
+"content": "query System__Menu__GetChildrenMenus($pid: Int!)@rbac(requireMatchAny: [admin]) {data: main_findManymenu(where: {parentId: {equals: $pid}}){id label level name path sort}}",
+"origin_content": "query MyQuery($pid: Int!) @rbac(requireMatchAny: [admin]) {\n  data: main_findManymenu(where: {parentId: {equals: $pid}}) {\n    id\n    label\n    level\n    name\n    path\n    sort\n  }\n}"
+},
+{
+"operation_name": "System__Menu__GetList",
+"api_mount_path": "System/Menu/GetList",
+"file_path": "System/Menu/GetList.graphql",
+"content": "query System__Menu__GetList($take: Int = 10, $skip: Int = 0, $orderBy: [main_menuOrderByWithRelationInput], $query: main_menuWhereInput)@rbac(requireMatchAny: [admin]) {data: main_findManymenu(skip: $skip, take: $take, orderBy: $orderBy, where: {AND: $query}){id parentId label path icon sort level} total: main_aggregatemenu(where: {AND: $query})@transform(get: \"_count.id\") {_count {id}}}",
+"origin_content": "query GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_menuOrderByWithRelationInput], $query: main_menuWhereInput) @rbac(requireMatchAny: [admin]) {\n  data: main_findManymenu(\n    skip: $skip\n    take: $take\n    orderBy: $orderBy\n    where: {AND: $query}\n  ) {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n  }\n  total: main_aggregatemenu(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n} "
+},
+{
+"operation_name": "System__Menu__GetMany",
+"api_mount_path": "System/Menu/GetMany",
+"file_path": "System/Menu/GetMany.graphql",
+"content": "query System__Menu__GetMany @rbac(requireMatchAny: [admin]) {data: main_findManymenu {id parentId label path icon sort level is_bottom menu_type perms api_id create_time}}",
+"origin_content": "query GetManyMenu @rbac(requireMatchAny: [admin]) {\n  data: main_findManymenu {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n    is_bottom\n    menu_type\n    perms\n    api_id\n    create_time\n  }\n}"
+},
+{
+"operation_name": "System__Menu__GetMenuByLevelOrPid",
+"api_mount_path": "System/Menu/GetMenuByLevelOrPid",
+"file_path": "System/Menu/GetMenuByLevelOrPid.graphql",
+"content": "query System__Menu__GetMenuByLevelOrPid($level: Int, $pid: Int){data: main_findManymenu(where: {OR: [{level: {equals: $level}},{parentId: {equals: $pid}}]}){id label is_bottom}}",
+"origin_content": "query MyQuery($level: Int, $pid: Int) {\n  data: main_findManymenu(where: {OR: [{level: {equals: $level}}, {parentId: {equals: $pid}}]}) {\n    id\n    label\n    is_bottom\n  }\n}"
+},
+{
+"operation_name": "System__Menu__GetOne",
+"api_mount_path": "System/Menu/GetOne",
+"file_path": "System/Menu/GetOne.graphql",
+"content": "query System__Menu__GetOne($id: Int!)@rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {data: main_findFirstmenu(where: {id: {equals: $id}}){id parentId label path icon sort level}}",
+"origin_content": "query GetOneMenu ($id: Int!) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {\n\tdata: main_findFirstmenu(where: {id:{equals:$id}}) {\n\t\tid\n\t\tparentId\n\t\tlabel\n\t\tpath\n\t\ticon\n\t\tsort\n\t\tlevel\n\t}\n}\n"
+},
+{
+"operation_name": "System__Menu__UpdateOne",
+"api_mount_path": "System/Menu/UpdateOne",
+"file_path": "System/Menu/UpdateOne.graphql",
+"content": "mutation System__Menu__UpdateOne($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int)@rbac(requireMatchAny: [eeee,admin,b1a23,a231,abc1]) {data: main_updateOnemenu(data: {label: {set: $label},path: {set: $path},icon: {set: $icon},sort: {set: $sort},level: {set: $level}}, where: {id: $id}){id parentId label path icon sort level}}",
+"origin_content": "mutation UpdateOneMenu ($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int) @rbac(requireMatchAny: [eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_updateOnemenu(data: {label:{set:$label},path:{set:$path},icon:{set:$icon},sort:{set:$sort},level:{set:$level}}, where: {id:$id}) {\n\t\tid\n\t\tparentId\n\t\tlabel\n\t\tpath\n\t\ticon\n\t\tsort\n\t\tlevel\n\t}\n}\n"
+},
+{
+"operation_name": "System__Operation__GetMany",
+"api_mount_path": "System/Operation/GetMany",
+"file_path": "System/Operation/GetMany.graphql",
+"content": "query System__Operation__GetMany {data: system_getAllApis {createTime id liveQuery method operationType title enabled}}",
+"origin_content": "query MyQuery {\n  data: system_getAllApis {\n    createTime\n    id\n    liveQuery\n    method\n    operationType\n    title\n    enabled\n  }\n}"
+},
+{
+"operation_name": "System__Perm__CreateMany",
+"api_mount_path": "System/Perm/CreateMany",
+"file_path": "System/Perm/CreateMany.graphql",
+"content": "mutation System__Perm__CreateMany($data: [main_permissionCreateManyInput]!)@rbac(requireMatchAny: [admin]) {data: main_createManypermission(skipDuplicates: true, data: $data){count}}",
+"origin_content": "mutation MyQuery ($data: [main_permissionCreateManyInput]!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_createManypermission(skipDuplicates: true, data: $data) {\n\t\tcount\n\t}\n}\n"
+},
+{
+"operation_name": "System__Perm__GetBindPerms",
+"api_mount_path": "System/Perm/GetBindPerms",
+"file_path": "System/Perm/GetBindPerms.graphql",
+"content": "query System__Perm__GetBindPerms {data: main_findManypermission {createdAt enabled method path}}",
+"origin_content": "query MyQuery {\n  data: main_findManypermission {\n    createdAt\n    enabled\n    method\n    path\n  }\n}"
+},
+{
+"operation_name": "System__Perm__GetRolePerms",
+"api_mount_path": "System/Perm/GetRolePerms",
+"file_path": "System/Perm/GetRolePerms.graphql",
+"content": "query System__Perm__GetRolePerms($code: [String]!, $roleId: Int @internal, $menuId: Int @internal ){data: main_findManyrole(where: {code: {in: $code}}){id @export(as: \"roleId\") _join {data: main_findManymenu_role(where: {role_id: {equals: $roleId}})@transform(get: \"[]._join.main_findFirstmenu.perms\") {menu_id @export(as: \"menuId\") _join {main_findFirstmenu(where: {id: {equals: $menuId}}){perms}}}}}}",
+"origin_content": "query MyQuery($code: [String]!, $roleId: Int @internal, $menuId: Int @internal) {\n  data: main_findManyrole(where: {code: {in: $code}}) {\n    id @export(as: \"roleId\")\n    _join {\n      data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[]._join.main_findFirstmenu.perms\") {\n        menu_id @export(as: \"menuId\")\n        _join {\n          main_findFirstmenu(where: {id: {equals: $menuId}}) {\n            perms\n          }\n        }\n      }\n    }\n  }\n} "
+},
+{
+"operation_name": "System__Role__AddOne",
+"api_mount_path": "System/Role/AddOne",
+"file_path": "System/Role/AddOne.graphql",
+"content": "mutation System__Role__AddOne($code: String!, $remark: String!)@rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {data: main_createOnerole(data: {code: $code,remark: $remark}){id code remark}}",
+"origin_content": "mutation MyQuery ($code: String!, $remark: String!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_createOnerole(data: {code:$code,remark:$remark}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n}\n"
+},
+{
+"operation_name": "System__Role__BindMenus",
+"api_mount_path": "System/Role/BindMenus",
+"file_path": "System/Role/BindMenus.graphql",
+"content": "mutation System__Role__BindMenus($data: [main_menu_roleCreateManyInput]!){data: main_createManymenu_role(data: $data){count}}",
+"origin_content": "mutation MyQuery($data: [main_menu_roleCreateManyInput]!) {\n  data: main_createManymenu_role(data: $data) {\n    count\n  }\n}"
+},
+{
+"operation_name": "System__Role__BindRoleApis",
+"api_mount_path": "System/Role/BindRoleApis",
+"file_path": "System/Role/BindRoleApis.graphql",
+"content": "mutation System__Role__BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!){system_bindRoleApis(POSTApiV1RoleBindApiInput: {apis: $apis,allRoles: $allRoles,roleCode: $roleCode}){count}}",
+"origin_content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) {\n  system_bindRoleApis(POSTApiV1RoleBindApiInput: {apis: $apis, allRoles: $allRoles, roleCode: $roleCode}) {\n    count\n  }\n}\n"
+},
+{
+"operation_name": "System__Role__DeleteMany",
+"api_mount_path": "System/Role/DeleteMany",
+"file_path": "System/Role/DeleteMany.graphql",
+"content": "mutation System__Role__DeleteMany($ids: [Int]){data: main_deleteManyrole(where: {id: {in: $ids}}){count}}",
+"origin_content": "mutation MyQuery ($ids: [Int]) {\n\tdata: main_deleteManyrole(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n"
+},
+{
+"operation_name": "System__Role__DeleteOne",
+"api_mount_path": "System/Role/DeleteOne",
+"file_path": "System/Role/DeleteOne.graphql",
+"content": "mutation System__Role__DeleteOne($code: String!)@rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {data: main_deleteOnerole(where: {code: $code}){id}}",
+"origin_content": "mutation MyQuery ($code: String!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_deleteOnerole(where: {code:$code}) {\n\t\tid\n\t}\n}\n"
+},
+{
+"operation_name": "System__Role__GetList",
+"api_mount_path": "System/Role/GetList",
+"file_path": "System/Role/GetList.graphql",
+"content": "query System__Role__GetList($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput)@rbac(requireMatchAny: [user,admin,b1a23,a231,abc1]) {data: main_findManyrole(skip: $skip, take: $take, orderBy: $orderBy, where: {AND: $query}){id code remark} total: main_aggregaterole(where: {AND: $query})@transform(get: \"_count.id\") {_count {id}}}",
+"origin_content": "query GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) @rbac(requireMatchAny: [user,admin,b1a23,a231,abc1]) {\n\tdata: main_findManyrole(skip: $skip, take: $take, orderBy: $orderBy, where: {AND:$query}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n\ttotal: main_aggregaterole(where: {AND:$query}) @transform(get: \"_count.id\") {\n\t\t_count {\n\t\t\tid\n\t\t}\n\t}\n}\n"
+},
+{
+"operation_name": "System__Role__GetMany",
+"api_mount_path": "System/Role/GetMany",
+"file_path": "System/Role/GetMany.graphql",
+"content": "query System__Role__GetMany {data: main_findManyrole {code remark id}}",
+"origin_content": "query MyQuery {\n  data: main_findManyrole {\n    code\n    remark\n    id\n  }\n}"
+},
+{
+"operation_name": "System__Role__GetOne",
+"api_mount_path": "System/Role/GetOne",
+"file_path": "System/Role/GetOne.graphql",
+"content": "query System__Role__GetOne($id: Int!)@rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {data: main_findFirstrole(where: {id: {equals: $id}}){code}}",
+"origin_content": "query MyQuery ($id: Int!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_findFirstrole(where: {id:{equals:$id}}) {\n\t\tcode\n\t}\n}\n"
+},
+{
+"operation_name": "System__Role__GetRoleMenuId",
+"api_mount_path": "System/Role/GetRoleMenuId",
+"file_path": "System/Role/GetRoleMenuId.graphql",
+"content": "query System__Role__GetRoleMenuId($roleId: Int!){data: main_findManymenu_role(where: {role_id: {equals: $roleId}})@transform(get: \"[].menu_id\") {menu_id}}",
+"origin_content": "query MyQuery($roleId: Int!) {\n  data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[].menu_id\") {\n    menu_id\n  }\n}"
+},
+{
+"operation_name": "System__Role__UnBindMenus",
+"api_mount_path": "System/Role/UnBindMenus",
+"file_path": "System/Role/UnBindMenus.graphql",
+"content": "mutation System__Role__UnBindMenus($roleId: Int!, $menuIds: [Int]!){main_deleteManymenu_role(where: {role_id: {equals: $roleId},menu_id: {in: $menuIds}}){count}}",
+"origin_content": "mutation MyQuery($roleId: Int!, $menuIds: [Int]!) {\n  main_deleteManymenu_role(\n    where: {role_id: {equals: $roleId}, menu_id: {in: $menuIds}}\n  ) {\n    count\n  }\n}"
+},
+{
+"operation_name": "System__Role__UnBindRoleApis",
+"api_mount_path": "System/Role/UnBindRoleApis",
+"file_path": "System/Role/UnBindRoleApis.graphql",
+"content": "mutation System__Role__UnBindRoleApis($apis: [Int]!, $roleCode: String!){system_unBindRoleApis(POSTApiV1RoleUnbindApiInput: {roleCode: $roleCode,apis: $apis}){count}}",
+"origin_content": "mutation MyQuery($apis: [Int]!, $roleCode: String!) {\n  system_unBindRoleApis(\n    POSTApiV1RoleUnbindApiInput: {roleCode: $roleCode, apis: $apis}\n  ) {\n    count\n  }\n}"
+},
+{
+"operation_name": "System__Role__UpdateOne",
+"api_mount_path": "System/Role/UpdateOne",
+"file_path": "System/Role/UpdateOne.graphql",
+"content": "mutation System__Role__UpdateOne($remark: String, $id: Int!)@rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {data: main_updateOnerole(data: {remark: {set: $remark}}, where: {id: $id}){code id remark}}",
+"origin_content": "mutation MyQuery ($remark: String, $id: Int!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_updateOnerole(data: {remark:{set:$remark}}, where: {id:$id}) {\n\t\tcode\n\t\tid\n\t\tremark\n\t}\n}\n"
+},
+{
+"operation_name": "System__Sub__CreateSub",
+"api_mount_path": "System/Sub/CreateSub",
+"file_path": "System/Sub/CreateSub.graphql",
+"content": "mutation System__Sub__CreateSub($create_role: String = \"\", $message: String = \"\", $target_role: String = \"\", $updatedAt: DateTime = \"\", $type: String = \"\")@internalOperation @rbac(requireMatchAny: [admin]) {main_createOnesub(data: {updatedAt: $updatedAt,message: $message,create_role: $create_role,target_role: $target_role,type: $type}){id message target_role updatedAt create_role}}",
+"origin_content": "mutation MyQuery($create_role: String = \"\", $message: String = \"\", $target_role: String = \"\", $updatedAt: DateTime = \"\", $type: String = \"\") @internalOperation @rbac(requireMatchAny: [admin]) {\n  main_createOnesub(\n    data: {updatedAt: $updatedAt, message: $message, create_role: $create_role, target_role: $target_role, type: $type}\n  ) {\n    id\n    message\n    target_role\n    updatedAt\n    create_role\n  }\n}"
+},
+{
+"operation_name": "System__Sub__SSE",
+"api_mount_path": "System/Sub/SSE",
+"file_path": "System/Sub/SSE.graphql",
+"content": "query System__Sub__SSE($roles: String!){data: main_findManysub(where: {target_role: {equals: $roles}}){message updatedAt target_role create_role id type}}",
+"origin_content": "query MyQuery($roles: String!) {\n  data: main_findManysub(where: {target_role: {equals: $roles}}) {\n    message\n    updatedAt\n    target_role\n    create_role\n    id\n    type\n  }\n}"
+},
+{
+"operation_name": "System__User__ConnectRole",
+"api_mount_path": "System/User/ConnectRole",
+"file_path": "System/User/ConnectRole.graphql",
+"content": "mutation System__User__ConnectRole($userId: Int!, $roleId: Int!){data: main_createOnerole_user(data: {role_id: $roleId,user_id: $userId}){id}}",
+"origin_content": "mutation MyQuery($userId: Int!, $roleId: Int!) {\n  data: main_createOnerole_user(data: {role_id: $roleId, user_id: $userId}) {\n    id\n  }\n}"
+},
+{
+"operation_name": "System__User__CountUsers",
+"api_mount_path": "System/User/CountUsers",
+"file_path": "System/User/CountUsers.graphql",
+"content": "query System__User__CountUsers @rbac(requireMatchAny: [admin]) {data: main_aggregateuser {count: _count {id}}}",
+"origin_content": "query MyQuery @rbac(requireMatchAny: [admin]) {\n\tdata: main_aggregateuser {\n\t\tcount: _count {\n\t\t\tid\n\t\t}\n\t}\n}\n"
+},
+{
+"operation_name": "System__User__CreateOne",
+"api_mount_path": "System/User/CreateOne",
+"file_path": "System/User/CreateOne.graphql",
+"content": "mutation System__User__CreateOne($countryCode: String = \"CN\", $name: String!, $password: String = \"\", $passwordType: String = \"plain\", $phone: String!)@rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {data: casdoor_apiAddUser(POSTApiAdd_userInput: {phone: $phone,name: $name,password: $password,passwordType: $passwordType,countryCode: $countryCode}){msg status}}",
+"origin_content": "mutation MyQuery ($countryCode: String = \"CN\", $name: String!, $password: String = \"\", $passwordType: String = \"plain\", $phone: String!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: casdoor_apiAddUser(POSTApiAdd_userInput: {phone:$phone,name:$name,password:$password,passwordType:$passwordType,countryCode:$countryCode}) {\n\t\tmsg\n\t\tstatus\n\t}\n}\n"
+},
+{
+"operation_name": "System__User__DeleteOne",
+"api_mount_path": "System/User/DeleteOne",
+"file_path": "System/User/DeleteOne.graphql",
+"content": "mutation System__User__DeleteOne($id: Int = 10)@rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {main_deleteOneuser(where: {id: $id}){id name password password_salt password_type phone user_id}}",
+"origin_content": "mutation MyQuery ($id: Int = 10) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {\n\tmain_deleteOneuser(where: {id:$id}) {\n\t\tid\n\t\tname\n\t\tpassword\n\t\tpassword_salt\n\t\tpassword_type\n\t\tphone\n\t\tuser_id\n\t}\n}\n"
+},
+{
+"operation_name": "System__User__DisconnectRole",
+"api_mount_path": "System/User/DisconnectRole",
+"file_path": "System/User/DisconnectRole.graphql",
+"content": "mutation System__User__DisconnectRole($roleId: Int!, $userId: Int = 10){data: main_deleteOnerole_user(where: {role_id_user_id: {role_id: $roleId,user_id: $userId}}){id}}",
+"origin_content": "mutation MyQuery($roleId: Int!, $userId: Int = 10) {\n  data: main_deleteOnerole_user(\n    where: {role_id_user_id: {role_id: $roleId, user_id: $userId}}\n  ) {\n    id\n  }\n} "
+},
+{
+"operation_name": "System__User__GetAllList",
+"api_mount_path": "System/User/GetAllList",
+"file_path": "System/User/GetAllList.graphql",
+"content": "query System__User__GetAllList @rbac(requireMatchAny: [admin]) {main_aggregateuser {_count {id}}}",
+"origin_content": "query MyQuery() @rbac(requireMatchAny: [admin]) {\n  main_aggregateuser {\n    _count {\n      id\n    \n    }\n  }\n}"
+},
+{
+"operation_name": "System__User__GetLikeUser",
+"api_mount_path": "System/User/GetLikeUser",
+"file_path": "System/User/GetLikeUser.graphql",
+"content": "query System__User__GetLikeUser($name: String = \"\", $phone: String = \"\", $id: Int = 10, $userId: Int @internal, $roleId: Int @internal ){main_findManyuser(where: {name: {contains: $name,endsWith: \"\"},phone: {endsWith: \"\",contains: $phone}}){id @export(as: \"userId\") name phone createdAt: created_at avatar user_role: _join {data: main_findManyrole_user(where: {user_id: {equals: $userId}}){role_id @export(as: \"roleId\") role: _join {main_findManyrole(where: {id: {equals: $roleId}}){code id remark}}}}} main_findUniqueuser(where: {id: $id}){id name phone createdAt: created_at avatar}}",
+"origin_content": "query MyQuery($name: String = \"\", $phone: String = \"\", $id: Int = 10, $userId: Int @internal, $roleId: Int @internal) {\n  main_findManyuser(\n    where: {name: {contains: $name, endsWith: \"\"}, phone: {endsWith: \"\", contains: $phone}}\n  ) {\n    id @export(as: \"userId\")\n    name\n    phone\n    createdAt: created_at\n    avatar\n    user_role: _join {\n      data:main_findManyrole_user(where: {user_id: {equals: $userId}}) {\n        role_id @export(as: \"roleId\")\n        role: _join {\n          main_findManyrole(where: {id: {equals: $roleId}}) {\n            code\n            id\n            remark\n          }\n        }\n      }\n    }\n  }\n  main_findUniqueuser(where: {id: $id}) {\n    id\n    name\n    phone\n   createdAt: created_at\n    avatar\n  }\n}"
+},
+{
+"operation_name": "System__User__GetList",
+"api_mount_path": "System/User/GetList",
+"file_path": "System/User/GetList.graphql",
+"content": "query System__User__GetList($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput], $userId: Int, $roleId: Int)@rbac(requireMatchAny: [user,admin,b1a23,a231,abc1]) {data: main_findManyuser(skip: $skip, take: $take, where: {AND: $query}, orderBy: $orderBy){id @export(as: \"userId\") name avatar createdAt: created_at _join {main_findManyrole_user(where: {user_id: {equals: $userId}}){role_id @export(as: \"roleId\") user_id _join {main_findManyrole(where: {id: {equals: $roleId}}){id remark code}}}} phone user_id}}",
+"origin_content": "query MyQuery($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput], $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, admin, b1a23, a231, abc1]) {\n  data: main_findManyuser(\n    skip: $skip\n    take: $take\n    where: {AND: $query}\n    orderBy: $orderBy\n  ) {\n    id @export(as: \"userId\")\n    name\n    avatar\n    createdAt: created_at\n    _join {\n      main_findManyrole_user(where: {user_id: {equals: $userId}}) {\n        role_id @export(as: \"roleId\")\n        user_id\n        _join {\n          main_findManyrole(where: {id: {equals: $roleId}}) {\n            id\n            remark\n            code\n          }\n        }\n      }\n    }\n    phone\n    user_id\n  }\n}"
+},
+{
+"operation_name": "System__User__GetOne",
+"api_mount_path": "System/User/GetOne",
+"file_path": "System/User/GetOne.graphql",
+"content": "query System__User__GetOne($name: String, $phone: String, $userId: Int, $roleId: Int)@rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {data: main_findFirstuser(where: {OR: [{name: {equals: $name}},{phone: {equals: $phone}}]}){id @export(as: \"userId\") avatar roles: _join @transform(get: \"main_findManyrole_user\") {main_findManyrole_user(where: {user_id: {equals: $userId}})@transform(get: \"[]._join.main_findFirstrole.code\") {role_id @export(as: \"roleId\") _join {main_findFirstrole(where: {id: {equals: $roleId}}){code}}}}name phone user_id}}",
+"origin_content": "query MyQuery($name: String, $phone: String, $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, eeee, admin, b1a23, a231, abc1]) {\n  data: main_findFirstuser(\n    where: {OR: [{name: {equals: $name}}, {phone: {equals: $phone}}]}\n  ) {\n    id @export(as: \"userId\")\n    avatar\n    roles: _join @transform(get: \"main_findManyrole_user\") {\n      main_findManyrole_user(where: {user_id: {equals: $userId}}) @transform(get: \"[]._join.main_findFirstrole.code\") {\n        role_id @export(as: \"roleId\")\n        _join {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n    name\n    phone\n    user_id\n  }\n}"
+},
+{
+"operation_name": "System__User__GetRoleUsers",
+"api_mount_path": "System/User/GetRoleUsers",
+"file_path": "System/User/GetRoleUsers.graphql",
+"content": "query System__User__GetRoleUsers($roleId: Int @internal, $userId: Int @internal, $code: String!){main_findManyrole(where: {code: {equals: $code}}){id @export(as: \"roleId\") remark code _join {main_findManyrole_user(where: {role_id: {equals: $roleId}}){role_id user_id @export(as: \"userId\") _join {main_findManyuser(where: {id: {equals: $userId}}){id name avatar created_at}}}}}}",
+"origin_content": "query MyQuery($roleId: Int @internal, $userId: Int @internal, $code: String!) {\n  main_findManyrole(where: {code: {equals: $code}}) {\n    id @export(as: \"roleId\")\n    remark\n    code\n    _join {\n      main_findManyrole_user(where: {role_id: {equals: $roleId}}) {\n        role_id\n        user_id @export(as: \"userId\")\n        _join {\n          main_findManyuser(where: {id: {equals: $userId}}) {\n            id\n            name\n            avatar\n            created_at\n          }\n        }\n      }\n    }\n  }\n}"
+},
+{
+"operation_name": "System__User__GetUserByUserId",
+"api_mount_path": "System/User/GetUserByUserId",
+"file_path": "System/User/GetUserByUserId.graphql",
+"content": "query System__User__GetUserByUserId($userId: String = \"\")@rbac(requireMatchAny: [admin,user]) {main_findManyuser(where: {user_id: {equals: $userId}}){id name phone avatar user_id}}",
+"origin_content": "query MyQuery($userId: String = \"\") @rbac(requireMatchAny: [admin, user]) {\n  main_findManyuser(where: {user_id: {equals: $userId}}) {\n    id\n    name\n    phone\n    avatar\n    user_id\n  }\n}"
+},
+{
+"operation_name": "System__User__GetUserRole",
+"api_mount_path": "System/User/GetUserRole",
+"file_path": "System/User/GetUserRole.graphql",
+"content": "query System__User__GetUserRole($userId: Int!, $roleId: Int @internal ){data: main_findManyrole_user(where: {user_id: {equals: $userId}})@transform(get: \"[].data\") {role_id @export(as: \"roleId\") data: _join @transform(get: \"main_findFirstrole\") {main_findFirstrole(where: {id: {equals: $roleId}}){remark code id}}}}",
+"origin_content": "query MyQuery($userId: Int!, $roleId: Int @internal) {\n  data: main_findManyrole_user(where: {user_id: {equals: $userId}}) @transform(get: \"[].data\") {\n    role_id @export(as: \"roleId\")\n    data: _join @transform(get: \"main_findFirstrole\") {\n      main_findFirstrole(where: {id: {equals: $roleId}}) {\n        remark\n        code\n        id\n      }\n    }\n  }\n}"
+},
+{
+"operation_name": "System__User__UpdateOne",
+"api_mount_path": "System/User/UpdateOne",
+"file_path": "System/User/UpdateOne.graphql",
+"content": "mutation System__User__UpdateOne($name: String = \"\", $password: String = \"\", $passwordType: String = \"\", $phone: String = \"\", $userId: String!, $set: String = \"\", $id: Int = 10){casdoor_apiUpdateUser(POSTApiUpdate_userInput: {userId: $userId,name: $name,password: $password,passwordType: $passwordType,phone: $phone}){msg status} main_updateOneuser(data: {avatar: {set: $set}}, where: {id: $id}){avatar}}",
+"origin_content": "mutation MyQuery($name: String = \"\", $password: String = \"\", $passwordType: String = \"\", $phone: String = \"\", $userId: String!, $set: String = \"\", $id: Int = 10) {\n  casdoor_apiUpdateUser(\n    POSTApiUpdate_userInput: {userId: $userId, name: $name, password: $password, passwordType: $passwordType, phone: $phone}\n  ) {\n    msg\n    status\n  }\n  main_updateOneuser(data: {avatar: {set: $set}}, where: {id: $id}) {\n    avatar\n  }\n}"
+}
+],
+"typescript_operation_files": null,
+"info": [
+"operation names must be alphanumeric only, skipping file: .graphql.off"
+]
+}
