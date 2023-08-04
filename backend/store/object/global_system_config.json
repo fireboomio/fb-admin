@@ -1,8 +1,8 @@
 {
   "system": {
-    "apiPublicAddr": "http://localhost:9991",
+    "apiPublicAddr": "http://47.101.68.119:9991",
     "apiInternalAddr": "http://localhost:9991",
-    "apiListenHost": "localhost",
+    "apiListenHost": "0.0.0.0",
     "apiListenPort": "9991",
     "hooksServerURL": "http://localhost:9992",
     "hooksServerLanguage": "go",
