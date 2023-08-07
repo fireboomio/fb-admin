@@ -1,0 +1,8 @@
+query MyQuery() @rbac(requireMatchAny: [admin]) {
+  main_aggregateuser {
+    _count {
+      id
+    
+    }
+  }
+}

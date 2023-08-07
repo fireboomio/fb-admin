@@ -2,7 +2,7 @@
 	{
 		"id": 2161412424138752,
 		"name": "tengxunyun",
-		"enabled": false,
+		"enabled": true,
 		"config": {
 			"name": "tengxunyun",
 			"endPoint": "cos.ap-nanjing.myqcloud.com/",
@@ -22,7 +22,7 @@
 			"uploadProfiles": null
 		},
 		"createTime": "",
-		"updateTime": "2023-08-03 10:02:58Z",
+		"updateTime": "2023-07-24 09:31:32Z",
 		"deleteTime": ""
 	}
 ]

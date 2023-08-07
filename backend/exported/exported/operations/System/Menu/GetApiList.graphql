@@ -1,0 +1,6 @@
+query MyQuery @rbac(requireMatchAny: [admin]) {
+  data: system_getAllApis {
+    path: title
+    id
+  }
+}

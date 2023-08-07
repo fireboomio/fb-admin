@@ -81,7 +81,7 @@
             "description": "密码类型",
             "name": "passwordType",
             "in": "formData",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {

@@ -1,0 +1,6 @@
+mutation MyQuery($set: Boolean = false) @rbac(requireMatchAny: [admin, user]) {
+  main_updateOnedic(where: {id: 1}, data: {isOpen: {set: $set}}) {
+    id
+    isOpen
+  }
+}

@@ -1,0 +1,13 @@
+mutation Login($code: String = "", $password: String = "", $countryCode: String = "CN", $loginType: String = "", $phone: String = "", $username: String = "") {
+  casdoor_apiLogin(
+    POSTApiLoginInput: {code: $code, password: $password, loginType: $loginType, username: $username, phone: $phone, countryCode: $countryCode}
+  ) {
+    msg
+    success
+    data {
+      accessToken
+      expireIn
+      refreshToken
+    }
+  }
+} 

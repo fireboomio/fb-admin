@@ -8,5 +8,5 @@
   "cachingMaxAge": 600,
   "cachingStaleWhileRevalidate": 30,
   "liveQueryEnabled": true,
-  "liveQueryPollingIntervalSeconds": 5
+  "liveQueryPollingIntervalSeconds": 60
 }

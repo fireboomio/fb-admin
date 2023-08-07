@@ -30,14 +30,13 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 		go func() {
 			Wg.Add(1)
 
-			//客户端连接的地址
+			//上一个客户端连接的地址
 			defer Wg.Done()
 
-			//查看请求的api
+			//获取请求的是哪个api
 			api := body.Request.RequestURI
 			path := strings.Split(api, "?")[0]
 			bearerToken := body.Request.Headers["Authorization"]
-			//判断是否携带token
 			if bearerToken != "" {
 				token := strings.Split(bearerToken, " ")[1]
 				//解析token
