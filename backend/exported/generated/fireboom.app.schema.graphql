@@ -6,7 +6,6 @@ type Query {
   statistics_GetSaleTypePercent: [statistics_GetSaleTypePercent]
   statistics_GetSalesTop10: [statistics_GetSalesTop10]
   statistics_GetVisitTrending: [statistics_GetVisitTrending]
-  casdoor_apiUserInfo: casdoor_objectUserinfo
   main_findFirstadmin_apilog(where: main_admin_apilogWhereInput, orderBy: [main_admin_apilogOrderByWithRelationInput], cursor: main_admin_apilogWhereUniqueInput, take: Int, skip: Int, distinct: [main_Admin_apilogScalarFieldEnum]): main_admin_apilog
   main_findFirstadmin_apilogOrThrow(where: main_admin_apilogWhereInput, orderBy: [main_admin_apilogOrderByWithRelationInput], cursor: main_admin_apilogWhereUniqueInput, take: Int, skip: Int, distinct: [main_Admin_apilogScalarFieldEnum]): main_admin_apilog
   main_findManyadmin_apilog(where: main_admin_apilogWhereInput, orderBy: [main_admin_apilogOrderByWithRelationInput], cursor: main_admin_apilogWhereUniqueInput, take: Int, skip: Int, distinct: [main_Admin_apilogScalarFieldEnum]): [main_admin_apilog]!
@@ -119,17 +118,12 @@ type Query {
   main_groupByverification_record(where: main_verification_recordWhereInput, orderBy: [main_verification_recordOrderByWithAggregationInput], by: [main_Verification_recordScalarFieldEnum]!, having: main_verification_recordScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_Verification_recordGroupByOutputType]!
   main_findUniqueverification_record(where: main_verification_recordWhereUniqueInput!): main_verification_record
   main_findUniqueverification_recordOrThrow(where: main_verification_recordWhereUniqueInput!): main_verification_record
+  casdoor_apiUserInfo: casdoor_objectUserinfo
 }
 
 type Mutation {
   system_bindRoleApis(POSTApiV1RoleBindApiInput: system_POSTApiV1RoleBindApiInput): system_MutationBindRoleApis
   system_unBindRoleApis(POSTApiV1RoleUnbindApiInput: system_POSTApiV1RoleUnbindApiInput): system_MutationUnBindRoleApis
-  casdoor_apiRefreshToken(POSTApiRefresh_tokenInput: casdoor_POSTApiRefresh_tokenInput): casdoor_apiUserResponse
-  casdoor_apiSendVerificationCode(POSTApiSend_verification_codeInput: casdoor_POSTApiSend_verification_codeInput): casdoor_objectResponse
-  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
-  casdoor_apiAddUser(POSTApiAdd_userInput: casdoor_POSTApiAdd_userInput): casdoor_objectResponse
-  casdoor_apiUpdateUser(POSTApiUpdate_userInput: casdoor_POSTApiUpdate_userInput): casdoor_objectResponse
-  casdoor_apiLogin(POSTApiLoginInput: casdoor_POSTApiLoginInput): casdoor_apiUserResponse
   main_createOneadmin_apilog(data: main_admin_apilogCreateInput!): main_admin_apilog
   main_upsertOneadmin_apilog(where: main_admin_apilogWhereUniqueInput!, create: main_admin_apilogCreateInput!, update: main_admin_apilogUpdateInput!): main_admin_apilog
   main_createManyadmin_apilog(data: [main_admin_apilogCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
@@ -244,31 +238,37 @@ type Mutation {
   main_deleteManyverification_record(where: main_verification_recordWhereInput): main_AffectedRowsOutput
   main_executeRaw(query: String!, parameters: main_Json): main_Json
   main_queryRaw(query: String!, parameters: main_Json): main_Json
+  casdoor_apiAddUser(POSTApiAdd_userInput: casdoor_POSTApiAdd_userInput): casdoor_objectResponse
+  casdoor_apiUpdateUser(POSTApiUpdate_userInput: casdoor_POSTApiUpdate_userInput): casdoor_objectResponse
+  casdoor_apiLogin(POSTApiLoginInput: casdoor_POSTApiLoginInput): casdoor_apiUserResponse
+  casdoor_apiRefreshToken(POSTApiRefresh_tokenInput: casdoor_POSTApiRefresh_tokenInput): casdoor_apiUserResponse
+  casdoor_apiSendVerificationCode(POSTApiSend_verification_codeInput: casdoor_POSTApiSend_verification_codeInput): casdoor_objectResponse
+  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
 }
 
 type system_QueryGetAllRoles {
-  remark: String
   code: String
+  remark: String
   _join: Query!
 }
 
 type system_QueryGetRoleBindApis {
-  roleType: String
+  content: String
+  deleteTime: String
+  method: String
+  restUrl: String
+  roles: String
   title: String
+  liveQuery: Boolean
+  operationType: String
   updateTime: String
   enabled: Boolean
   illegal: Boolean
-  method: String
+  isPublic: Boolean
   remark: String
-  operationType: String
-  restUrl: String
-  content: String
   createTime: String
   id: Int
-  roles: String
-  deleteTime: String
-  isPublic: Boolean
-  liveQuery: Boolean
+  roleType: String
   _join: Query!
 }
 
@@ -280,22 +280,22 @@ enum system_Query_getRoleBindApis_roleType {
 }
 
 type system_QueryGetAllApis {
-  updateTime: String
-  restUrl: String
-  illegal: Boolean
-  liveQuery: Boolean
-  enabled: Boolean
+  roles: String
   id: Int
   isPublic: Boolean
-  method: String
+  liveQuery: Boolean
   operationType: String
+  restUrl: String
+  illegal: Boolean
   roleType: String
   content: String
-  createTime: String
-  roles: String
-  title: String
   deleteTime: String
+  enabled: Boolean
+  method: String
+  createTime: String
   remark: String
+  title: String
+  updateTime: String
   _join: Query!
 }
 
@@ -305,10 +305,10 @@ type system_MutationBindRoleApis {
 }
 
 input system_POSTApiV1RoleBindApiInput {
-  allRoles: [String]!
   roleType: system_POSTApiV1RoleBindApiInput_roleType
   roleCode: String!
   apis: [Int]!
+  allRoles: [String]!
 }
 
 enum system_POSTApiV1RoleBindApiInput_roleType {
@@ -324,9 +324,9 @@ type system_MutationUnBindRoleApis {
 }
 
 input system_POSTApiV1RoleUnbindApiInput {
-  apis: [Int]!
   roleType: system_POSTApiV1RoleUnbindApiInput_roleType
   roleCode: String!
+  apis: [Int]!
 }
 
 enum system_POSTApiV1RoleUnbindApiInput_roleType {
@@ -334,6 +334,12 @@ enum system_POSTApiV1RoleUnbindApiInput_roleType {
   requireMatchAny
   denyMatchAll
   denyMatchAny
+}
+
+type statistics_GetVisitTrending {
+  count: Int
+  days: String
+  _join: Query!
 }
 
 type statistics_GetMonthlySales {
@@ -349,86 +355,10 @@ type statistics_GetSaleTypePercent {
   _join: Query!
 }
 
-type statistics_GetVisitTrending {
-  count: Int
-  days: String
-  _join: Query!
-}
-
 type statistics_GetSalesTop10 {
   shopName: String
   totalSales: Float
   _join: Query!
-}
-
-type casdoor_apiUserResponse {
-  data: casdoor_objectTokenRes
-  msg: String
-  success: Boolean
-  _join: Query!
-}
-
-type casdoor_objectTokenRes {
-  refreshToken: String
-  accessToken: String
-  expireIn: Int
-  _join: Query!
-}
-
-input casdoor_POSTApiRefresh_tokenInput {
-  
-  """refresh-token"""
-  refresh_token: String!
-}
-
-type casdoor_objectResponse {
-  msg: String
-  status: Int
-  _join: Query!
-}
-
-input casdoor_POSTApiSend_verification_codeInput {
-  dest: String!
-  countryCode: String
-}
-
-input casdoor_POSTApiUpdate_providerInput {
-  signName: String!
-  templateCode: String!
-  clientId: String!
-  clientSecret: String!
-}
-
-type casdoor_objectUserinfo {
-  preferred_username: String
-  phone: String
-  _join: Query!
-}
-
-input casdoor_POSTApiAdd_userInput {
-  phone: String!
-  countryCode: String
-  name: String!
-  password: String!
-  passwordType: String
-}
-
-input casdoor_POSTApiUpdate_userInput {
-  password: String!
-  passwordType: String
-  phone: String!
-  countryCode: String
-  userId: String!
-  name: String!
-}
-
-input casdoor_POSTApiLoginInput {
-  code: String!
-  password: String!
-  loginType: String!
-  username: String!
-  phone: String!
-  countryCode: String
 }
 
 
@@ -4836,6 +4766,76 @@ scalar BigInt
 scalar main_Decimal
 
 scalar main_Bytes
+
+type casdoor_objectUserinfo {
+  phone: String
+  preferred_username: String
+  _join: Query!
+}
+
+type casdoor_objectResponse {
+  msg: String
+  status: Int
+  _join: Query!
+}
+
+input casdoor_POSTApiAdd_userInput {
+  phone: String!
+  countryCode: String
+  name: String!
+  password: String!
+  passwordType: String
+}
+
+input casdoor_POSTApiUpdate_userInput {
+  userId: String!
+  name: String!
+  password: String!
+  passwordType: String
+  phone: String!
+  countryCode: String
+}
+
+type casdoor_apiUserResponse {
+  data: casdoor_objectTokenRes
+  msg: String
+  success: Boolean
+  _join: Query!
+}
+
+type casdoor_objectTokenRes {
+  refreshToken: String
+  accessToken: String
+  expireIn: Int
+  _join: Query!
+}
+
+input casdoor_POSTApiLoginInput {
+  username: String!
+  phone: String!
+  countryCode: String
+  code: String!
+  password: String!
+  loginType: String!
+}
+
+input casdoor_POSTApiRefresh_tokenInput {
+  
+  """refresh-token"""
+  refresh_token: String!
+}
+
+input casdoor_POSTApiSend_verification_codeInput {
+  dest: String!
+  countryCode: String
+}
+
+input casdoor_POSTApiUpdate_providerInput {
+  templateCode: String!
+  clientId: String!
+  clientSecret: String!
+  signName: String!
+}
 
 directive @rbac(
   

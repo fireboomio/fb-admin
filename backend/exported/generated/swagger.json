@@ -2060,13 +2060,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "title",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "name": "author",
             "schema": {
               "type": "string"
@@ -2084,6 +2077,13 @@
             "name": "id",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -3657,6 +3657,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
             "name": "path",
             "schema": {
               "type": "string"
@@ -3679,13 +3686,6 @@
           {
             "in": "query",
             "name": "method",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "name",
             "schema": {
               "type": "string"
             }
@@ -3803,6 +3803,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "take",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "orderBy",
             "schema": {
               "items": {
@@ -3814,13 +3821,6 @@
           {
             "in": "query",
             "name": "skip",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "take",
             "schema": {
               "type": "integer"
             }
@@ -4406,13 +4406,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "skip",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
             "name": "take",
             "schema": {
               "type": "integer"
@@ -4433,6 +4426,13 @@
             "name": "query",
             "schema": {
               "$ref": "#/components/schemas/main_admin_menuWhereInput"
+            }
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -5649,16 +5649,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "orderBy",
-            "schema": {
-              "items": {
-                "$ref": "#/components/schemas/main_roleOrderByWithRelationInput"
-              },
-              "type": "array"
-            }
-          },
-          {
-            "in": "query",
             "name": "query",
             "schema": {
               "$ref": "#/components/schemas/main_roleWhereInput"
@@ -5676,6 +5666,16 @@
             "name": "take",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/main_roleOrderByWithRelationInput"
+              },
+              "type": "array"
             }
           }
         ],
@@ -6863,6 +6863,14 @@
         "parameters": [
           {
             "in": "query",
+            "name": "skip",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "take",
             "required": true,
             "schema": {
@@ -6896,14 +6904,6 @@
           {
             "in": "query",
             "name": "roleId",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "skip",
-            "required": true,
             "schema": {
               "type": "integer"
             }
@@ -7054,20 +7054,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "userId",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "name": "phone",
             "schema": {
               "type": "string"
@@ -7078,6 +7064,20 @@
             "name": "roleId",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "userId",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -7601,6 +7601,71 @@
         "summary": "POST /operations/System/User/UpdateOne",
         "tags": [
           "System"
+        ]
+      }
+    },
+    "/s3/tengxunyun/upload": {
+      "post": {
+        "description": "上传文件到tengxunyun",
+        "operationId": "/s3/tengxunyun/upload",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "directory",
+            "schema": {
+              "description": "上传文件目录",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "items": {
+                      "format": "binary",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "file"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "fileKey": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [],
+        "summary": "POST /s3/tengxunyun/upload",
+        "tags": [
+          "FileUpload"
         ]
       }
     }
