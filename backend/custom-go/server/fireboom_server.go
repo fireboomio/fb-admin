@@ -6,11 +6,10 @@ import (
 
 	"custom-go/auth"
 
+	"custom-go/customize"
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
 	"custom-go/pkg/types"
-
-	"custom-go/customize"
 	_ "custom-go/proxys"
 )
 
