@@ -19,7 +19,7 @@ type (
 	getIsOpenO generated.System__Log__GetIsOpenResponseData
 )
 
-var Mq = make(chan string)
+var Mq = make(chan string, 0)
 var Wg = new(sync.WaitGroup)
 
 func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) (*base.ClientRequest, error) {
@@ -27,16 +27,14 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 	result, _ := plugins.ExecuteInternalRequestQueries[getIsOpenI, getIsOpenO](hook.InternalClient, generated.System__Log__GetIsOpen, getIsOpenI{})
 
 	if result.Main_findFirstdic.IsOpen {
+		Wg.Add(2)
 		go func() {
-			Wg.Add(1)
-
-			//上一个客户端连接的地址
 			defer Wg.Done()
-
 			//获取请求的是哪个api
 			api := body.Request.RequestURI
 			path := strings.Split(api, "?")[0]
 			bearerToken := body.Request.Headers["Authorization"]
+			code := <-Mq
 			if bearerToken != "" {
 				token := strings.Split(bearerToken, " ")[1]
 				//解析token
@@ -45,7 +43,7 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 				if parseToken.User.UserId == "" {
 					userId = " "
 				}
-				code := <-Mq
+				code = <-Mq
 				_, err = plugins.ExecuteInternalRequestMutations[createLogI, createLogO](hook.InternalClient, generated.System__Log__CreateLog, createLogI{
 					Code:      code,
 					UpdatedAt: GetCurrentTime(),
