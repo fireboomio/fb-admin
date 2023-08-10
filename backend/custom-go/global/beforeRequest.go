@@ -5,7 +5,6 @@ import (
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
 	"custom-go/pkg/utils"
-	"net/http"
 	"strings"
 	"sync"
 	"time"
@@ -64,10 +63,10 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 
 	}
 
-	statusCode := http.StatusOK
-
-	body.Response = &base.ClientResponse{}
-	body.Response.StatusCode = statusCode
+	//statusCode := http.StatusOK
+	//
+	//body.Response = &base.ClientResponse{}
+	//body.Response.StatusCode = statusCode
 
 	return body.Request, nil
 }

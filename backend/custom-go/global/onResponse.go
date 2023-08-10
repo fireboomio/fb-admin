@@ -19,7 +19,8 @@ func OnOriginResponse(hook *base.HttpTransportHookRequest, body *plugins.HttpTra
 
 			hook.Logger().Info("qwertyuiopcvbnm")
 		}()
+		Wg.Wait()
 	}
-	Wg.Wait()
+
 	return body.Response, nil
 }
