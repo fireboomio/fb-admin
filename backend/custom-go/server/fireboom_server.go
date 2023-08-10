@@ -1,7 +1,6 @@
 package server
 
 import (
-	"custom-go/global"
 	"github.com/joho/godotenv"
 
 	"custom-go/auth"
@@ -22,12 +21,8 @@ func init() {
 	types.WdgHooksAndServerConfig = types.WunderGraphHooksAndServerConfig{
 		Hooks: types.HooksConfiguration{
 			Global: plugins.GlobalConfiguration{
-				HttpTransport: plugins.HttpTransportHooks{
-					BeforeOriginRequest: global.BeforeOriginRequest,
-
-					OnOriginResponse: global.OnOriginResponse,
-				},
-				WsTransport: plugins.WsTransportHooks{},
+				HttpTransport: plugins.HttpTransportHooks{},
+				WsTransport:   plugins.WsTransportHooks{},
 			},
 
 			Authentication: plugins.AuthenticationConfiguration{

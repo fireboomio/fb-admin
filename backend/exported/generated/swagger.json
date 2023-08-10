@@ -1959,14 +1959,14 @@
         "parameters": [
           {
             "in": "query",
-            "name": "take",
+            "name": "skip",
             "schema": {
               "type": "integer"
             }
           },
           {
             "in": "query",
-            "name": "skip",
+            "name": "take",
             "schema": {
               "type": "integer"
             }
@@ -2215,13 +2215,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "query",
-            "schema": {
-              "$ref": "#/components/schemas/main_admin_postWhereInput"
-            }
-          },
-          {
-            "in": "query",
             "name": "skip",
             "schema": {
               "type": "integer"
@@ -2232,6 +2225,13 @@
             "name": "take",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "$ref": "#/components/schemas/main_admin_postWhereInput"
             }
           }
         ],
@@ -2976,7 +2976,7 @@
     },
     "/operations/Statistics/SalesTop10": {
       "get": {
-        "description": "```graphql\nquery MyQuery {\n  data: statistics_GetSalesTop10 {\n    shopName\n    totalSales\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery {\n  data: statistics_GetSalesTop10 {\n    shopName\n    totalSales\n  }\n} \n```",
         "operationId": "/operations/Statistics/SalesTop10",
         "responses": {
           "200": {
@@ -3657,20 +3657,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "name",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "name": "id",
             "schema": {
               "type": "integer"
@@ -3686,6 +3672,20 @@
           {
             "in": "query",
             "name": "method",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "path",
             "schema": {
               "type": "string"
             }
@@ -3803,13 +3803,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "take",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
             "name": "orderBy",
             "schema": {
               "items": {
@@ -3821,6 +3814,13 @@
           {
             "in": "query",
             "name": "skip",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "take",
             "schema": {
               "type": "integer"
             }
@@ -4406,13 +4406,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "take",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
             "name": "orderBy",
             "schema": {
               "items": {
@@ -4431,6 +4424,13 @@
           {
             "in": "query",
             "name": "skip",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "take",
             "schema": {
               "type": "integer"
             }
@@ -4636,14 +4636,14 @@
         "parameters": [
           {
             "in": "query",
-            "name": "level",
+            "name": "pid",
             "schema": {
               "type": "integer"
             }
           },
           {
             "in": "query",
-            "name": "pid",
+            "name": "level",
             "schema": {
               "type": "integer"
             }
@@ -5649,6 +5649,16 @@
         "parameters": [
           {
             "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/main_roleOrderByWithRelationInput"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "query",
             "name": "query",
             "schema": {
               "$ref": "#/components/schemas/main_roleWhereInput"
@@ -5666,16 +5676,6 @@
             "name": "take",
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "orderBy",
-            "schema": {
-              "items": {
-                "$ref": "#/components/schemas/main_roleOrderByWithRelationInput"
-              },
-              "type": "array"
             }
           }
         ],
@@ -6863,6 +6863,20 @@
         "parameters": [
           {
             "in": "query",
+            "name": "query",
+            "schema": {
+              "$ref": "#/components/schemas/main_userWhereInput"
+            }
+          },
+          {
+            "in": "query",
+            "name": "roleId",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "skip",
             "required": true,
             "schema": {
@@ -6892,20 +6906,6 @@
                 "$ref": "#/components/schemas/main_userOrderByWithRelationInput"
               },
               "type": "array"
-            }
-          },
-          {
-            "in": "query",
-            "name": "query",
-            "schema": {
-              "$ref": "#/components/schemas/main_userWhereInput"
-            }
-          },
-          {
-            "in": "query",
-            "name": "roleId",
-            "schema": {
-              "type": "integer"
             }
           }
         ],

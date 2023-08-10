@@ -234,12 +234,12 @@
 		"updateTime": "2023-07-30 06:48:52Z"
 	},
 	{
-		"content": "query MyQuery {\n  data: statistics_GetSalesTop10 {\n    shopName\n    totalSales\n  }\n}",
+		"content": "query MyQuery {\n  data: statistics_GetSalesTop10 {\n    shopName\n    totalSales\n  }\n} ",
 		"createTime": "2023-04-02 15:24:39Z",
 		"deleteTime": "",
 		"enabled": true,
 		"id": 1546186559717376,
-		"illegal": true,
+		"illegal": false,
 		"isPublic": true,
 		"liveQuery": false,
 		"method": "GET",
@@ -249,7 +249,7 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/Statistics/SalesTop10",
-		"updateTime": "2023-06-27 01:36:09Z"
+		"updateTime": "2023-08-10 09:16:34Z"
 	},
 	{
 		"content": "query MyQuery {\n  data: statistics_GetVisitTrending {\n    count\n    days\n  }\n} ",
@@ -1350,21 +1350,21 @@
 		"updateTime": "2023-08-04 10:01:52Z"
 	},
 	{
-		"id": 2247115106156544,
-		"method": "POST",
-		"restUrl": "",
-		"operationType": "mutations",
-		"isPublic": true,
-		"remark": "",
-		"illegal": false,
-		"liveQuery": false,
-		"title": "/System/Log/DeleteLog",
 		"content": "mutation MyQuery($equals: [Int] = 10) @rbac(requireMatchAny: [admin, user]) {\n  main_deleteManyadmin_apilog(where: {id: {in: $equals}}) {\n    count\n  }\n}",
-		"enabled": true,
 		"createTime": "2023-08-04 10:20:00Z",
-		"updateTime": "2023-08-04 10:23:04Z",
 		"deleteTime": "",
+		"enabled": true,
+		"id": 2247115106156544,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "POST",
+		"operationType": "mutations",
+		"remark": "",
+		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\",\"user\"]"
+		"roles": "[\"admin\",\"user\"]",
+		"title": "/System/Log/DeleteLog",
+		"updateTime": "2023-08-04 10:23:04Z"
 	}
 ]

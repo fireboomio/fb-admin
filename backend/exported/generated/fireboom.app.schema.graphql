@@ -238,12 +238,12 @@ type Mutation {
   main_deleteManyverification_record(where: main_verification_recordWhereInput): main_AffectedRowsOutput
   main_executeRaw(query: String!, parameters: main_Json): main_Json
   main_queryRaw(query: String!, parameters: main_Json): main_Json
+  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
   casdoor_apiAddUser(POSTApiAdd_userInput: casdoor_POSTApiAdd_userInput): casdoor_objectResponse
   casdoor_apiUpdateUser(POSTApiUpdate_userInput: casdoor_POSTApiUpdate_userInput): casdoor_objectResponse
   casdoor_apiLogin(POSTApiLoginInput: casdoor_POSTApiLoginInput): casdoor_apiUserResponse
   casdoor_apiRefreshToken(POSTApiRefresh_tokenInput: casdoor_POSTApiRefresh_tokenInput): casdoor_apiUserResponse
   casdoor_apiSendVerificationCode(POSTApiSend_verification_codeInput: casdoor_POSTApiSend_verification_codeInput): casdoor_objectResponse
-  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
 }
 
 type system_QueryGetAllRoles {
@@ -253,22 +253,22 @@ type system_QueryGetAllRoles {
 }
 
 type system_QueryGetRoleBindApis {
-  content: String
-  deleteTime: String
-  method: String
-  restUrl: String
-  roles: String
+  createTime: String
+  enabled: Boolean
+  roleType: String
   title: String
   liveQuery: Boolean
   operationType: String
-  updateTime: String
-  enabled: Boolean
+  remark: String
+  restUrl: String
+  method: String
+  roles: String
+  content: String
+  id: Int
   illegal: Boolean
   isPublic: Boolean
-  remark: String
-  createTime: String
-  id: Int
-  roleType: String
+  deleteTime: String
+  updateTime: String
   _join: Query!
 }
 
@@ -280,22 +280,22 @@ enum system_Query_getRoleBindApis_roleType {
 }
 
 type system_QueryGetAllApis {
-  roles: String
   id: Int
+  illegal: Boolean
+  title: String
+  createTime: String
+  deleteTime: String
   isPublic: Boolean
   liveQuery: Boolean
-  operationType: String
-  restUrl: String
-  illegal: Boolean
-  roleType: String
-  content: String
-  deleteTime: String
-  enabled: Boolean
-  method: String
-  createTime: String
   remark: String
-  title: String
+  restUrl: String
+  content: String
+  enabled: Boolean
+  operationType: String
   updateTime: String
+  method: String
+  roleType: String
+  roles: String
   _join: Query!
 }
 
@@ -305,10 +305,10 @@ type system_MutationBindRoleApis {
 }
 
 input system_POSTApiV1RoleBindApiInput {
+  allRoles: [String]!
   roleType: system_POSTApiV1RoleBindApiInput_roleType
   roleCode: String!
   apis: [Int]!
-  allRoles: [String]!
 }
 
 enum system_POSTApiV1RoleBindApiInput_roleType {
@@ -342,8 +342,8 @@ type statistics_GetVisitTrending {
   _join: Query!
 }
 
-type statistics_GetMonthlySales {
-  months: String
+type statistics_GetSalesTop10 {
+  shopName: String
   totalSales: Float
   _join: Query!
 }
@@ -355,8 +355,8 @@ type statistics_GetSaleTypePercent {
   _join: Query!
 }
 
-type statistics_GetSalesTop10 {
-  shopName: String
+type statistics_GetMonthlySales {
+  months: String
   totalSales: Float
   _join: Query!
 }
@@ -4767,33 +4767,40 @@ scalar main_Decimal
 
 scalar main_Bytes
 
-type casdoor_objectUserinfo {
-  phone: String
-  preferred_username: String
-  _join: Query!
-}
-
 type casdoor_objectResponse {
   msg: String
   status: Int
   _join: Query!
 }
 
+input casdoor_POSTApiUpdate_providerInput {
+  clientId: String!
+  clientSecret: String!
+  signName: String!
+  templateCode: String!
+}
+
+type casdoor_objectUserinfo {
+  phone: String
+  preferred_username: String
+  _join: Query!
+}
+
 input casdoor_POSTApiAdd_userInput {
+  passwordType: String
   phone: String!
   countryCode: String
   name: String!
   password: String!
-  passwordType: String
 }
 
 input casdoor_POSTApiUpdate_userInput {
+  phone: String!
+  countryCode: String
   userId: String!
   name: String!
   password: String!
   passwordType: String
-  phone: String!
-  countryCode: String
 }
 
 type casdoor_apiUserResponse {
@@ -4804,19 +4811,19 @@ type casdoor_apiUserResponse {
 }
 
 type casdoor_objectTokenRes {
-  refreshToken: String
   accessToken: String
   expireIn: Int
+  refreshToken: String
   _join: Query!
 }
 
 input casdoor_POSTApiLoginInput {
+  password: String!
+  loginType: String!
   username: String!
   phone: String!
   countryCode: String
   code: String!
-  password: String!
-  loginType: String!
 }
 
 input casdoor_POSTApiRefresh_tokenInput {
@@ -4826,15 +4833,8 @@ input casdoor_POSTApiRefresh_tokenInput {
 }
 
 input casdoor_POSTApiSend_verification_codeInput {
-  dest: String!
   countryCode: String
-}
-
-input casdoor_POSTApiUpdate_providerInput {
-  templateCode: String!
-  clientId: String!
-  clientSecret: String!
-  signName: String!
+  dest: String!
 }
 
 directive @rbac(
