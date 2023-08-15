@@ -1,5 +1,5 @@
 mutation MyQuery($set: Boolean = false) @rbac(requireMatchAny: [admin, user]) {
-  main_updateOnedic(where: {id: 1}, data: {isOpen: {set: $set}}) {
+  data:main_updateOneadmin_dic(where: {id: 1}, data: {isOpen: {set: $set}}) {
     id
     isOpen
   }

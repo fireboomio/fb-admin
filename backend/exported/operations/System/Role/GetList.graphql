@@ -1,10 +1,10 @@
-query GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) @rbac(requireMatchAny: [user,admin,b1a23,a231,abc1]) {
-	data: main_findManyrole(skip: $skip, take: $take, orderBy: $orderBy, where: {AND:$query}) {
+query GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_admin_roleOrderByWithRelationInput], $query: main_admin_roleWhereInput) @rbac(requireMatchAny: [user,admin,b1a23,a231,abc1]) {
+	data: main_findManyadmin_role(skip: $skip, take: $take, orderBy: $orderBy, where: {AND:$query}) {
 		id
 		code
 		remark
 	}
-	total: main_aggregaterole(where: {AND:$query}) @transform(get: "_count.id") {
+	total: main_aggregateadmin_role(where: {AND:$query}) @transform(get: "_count.id") {
 		_count {
 			id
 		}

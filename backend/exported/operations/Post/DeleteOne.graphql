@@ -1,5 +1,5 @@
 mutation DeleteOnePost ($id: Int!) @rbac(requireMatchAny: [user,admin]) {
-	data: main_deleteOneadmin_post(where: {id:$id}) {
+	data: main_deleteOnecase_post(where: {id:$id}) {
 		id
 	}
 }

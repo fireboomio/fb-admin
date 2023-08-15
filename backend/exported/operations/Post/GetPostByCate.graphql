@@ -1,6 +1,6 @@
 query MyQuery($equals: String!) @rbac(requireMatchAny: [admin]) {
-  main_findManyadmin_category(where: {name: {equals: $equals}}) {
-    admin_post {
+  data: main_findManycase_category(where: {name: {equals: $equals}}) @transform(get: "[].case_post") {
+    case_post {
       author
       cate
       content

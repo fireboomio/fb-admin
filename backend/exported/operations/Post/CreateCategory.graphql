@@ -1,5 +1,5 @@
 mutation MyQuery($name: String = "",) {
-  main_createOneadmin_category(data: {name: $name}) {
+  data:main_createOnecase_category(data: {name: $name}) {
     id
     name
   }

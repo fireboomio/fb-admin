@@ -1,5 +1,5 @@
 query MyQuery($name: String = "", $phone: String = "", $id: Int = 10, $userId: Int @internal, $roleId: Int @internal) {
-  main_findManyuser(
+  data:main_findManyadmin_user(
     where: {name: {contains: $name, endsWith: ""}, phone: {endsWith: "", contains: $phone}}
   ) {
     id @export(as: "userId")
@@ -8,10 +8,10 @@ query MyQuery($name: String = "", $phone: String = "", $id: Int = 10, $userId: I
     createdAt: created_at
     avatar
     user_role: _join {
-      data:main_findManyrole_user(where: {user_id: {equals: $userId}}) {
+      data:main_findManyadmin_role_user(where: {user_id: {equals: $userId}}) {
         role_id @export(as: "roleId")
         role: _join {
-          main_findManyrole(where: {id: {equals: $roleId}}) {
+          main_findManyadmin_role(where: {id: {equals: $roleId}}) {
             code
             id
             remark
@@ -20,7 +20,7 @@ query MyQuery($name: String = "", $phone: String = "", $id: Int = 10, $userId: I
       }
     }
   }
-  main_findUniqueuser(where: {id: $id}) {
+  data1:main_findUniqueadmin_user(where: {id: $id}) {
     id
     name
     phone

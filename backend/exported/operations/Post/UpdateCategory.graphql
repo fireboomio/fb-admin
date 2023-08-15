@@ -1,6 +1,12 @@
-mutation MyQuery($id: Int = 10, $name: String = "") {
-  main_updateOneadmin_category(data: {name: {set: $name}}, where: {id: $id}) {
-    id
-    name
+query MyQuery($id: Int = 10) {
+  data:main_findManyadmin_user(where: {id: {equals: $id}}) {
+    case_post {
+      cate
+      content
+      id
+      poster
+      published_at
+      title
+    }
   }
-}
+} 

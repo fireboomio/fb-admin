@@ -1,5 +1,5 @@
 query MyQuery($equals: String = "") {
-  main_findManyuser(where: {name: {equals: $equals}}) {
+  data:main_findManyadmin_user(where: {name: {equals: $equals}}) {
     avatar
     country_code
     created_at

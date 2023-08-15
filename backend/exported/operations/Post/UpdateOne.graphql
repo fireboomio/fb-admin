@@ -1,18 +1,12 @@
-mutation MyQuery($id: Int! , $userId: Int!, $title: String = "", $poster: String = "", $content: String !, $author: String = "", $cate: Int!) {
-  main_updateOneadmin_post(
-    data: {user: {connect: {id: $userId}}, author: {set: $author}, content: {set: $content}, title: {set: $title}, poster: {set: $poster}, admin_category: {connect: {id: $cate}}}
-    where: {id: $id}
-  ) {
-    auth
-    author
-    cate
-    content
-    id
-    poster
-    title
-    user {
-      name
+query MyQuery($id: Int = 10) {
+  data:main_findManyadmin_user(where: {id: {equals: $id}}) {
+    case_post {
+      cate
+      content
       id
+      poster
+      published_at
+      title
     }
   }
-}
+} 

@@ -34,7 +34,7 @@ var Statistics_schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 					}
 
 					jsonVal, err := plugins.ExecuteInternalRequestMutations[queryRawIn, queryRawOut](grc.InternalClient, queryRawPath,
-						queryRawIn{Query: "SELECT date(visitedAt) days, COUNT(id) count from admin_visitlog where visitedAt BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY days;"})
+						queryRawIn{Query: "SELECT date(visitedAt) days, COUNT(id) count from case_visitlog where visitedAt BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY days;"})
 					if err != nil {
 						return
 					}
@@ -57,7 +57,7 @@ var Statistics_schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 					}
 
 					jsonVal, err := plugins.ExecuteInternalRequestMutations[queryRawIn, queryRawOut](grc.InternalClient, queryRawPath,
-						queryRawIn{Query: "SELECT date(day) months, SUM(sales) totalSales from admin_salelog where day BETWEEN '2019-10-01' AND '2020-09-30' GROUP BY months;"})
+						queryRawIn{Query: "SELECT date(day) months, SUM(sales) totalSales from case_salelog where day BETWEEN '2019-10-01' AND '2020-09-30' GROUP BY months;"})
 					if err != nil {
 						return
 					}
@@ -80,7 +80,7 @@ var Statistics_schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 					}
 
 					jsonVal, err := plugins.ExecuteInternalRequestMutations[queryRawIn, queryRawOut](grc.InternalClient, queryRawPath,
-						queryRawIn{Query: "SELECT shopName, SUM(sales) totalSales from admin_salelog GROUP BY shopName ORDER BY totalSales DESC;"})
+						queryRawIn{Query: "SELECT shopName, SUM(sales) totalSales from case_salelog GROUP BY shopName ORDER BY totalSales DESC;"})
 					if err != nil {
 						return
 					}
@@ -105,7 +105,7 @@ var Statistics_schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 					}
 
 					jsonVal, err := plugins.ExecuteInternalRequestMutations[queryRawIn, queryRawOut](grc.InternalClient, queryRawPath,
-						queryRawIn{Query: "SELECT admin_saletype.id typeId, admin_saletype.name typeName,SUM(sales) totalSales from admin_salelog, admin_saletype WHERE admin_salelog.typeId = admin_saletype.id GROUP BY admin_salelog.typeId ORDER BY totalSales DESC;"})
+						queryRawIn{Query: "SELECT case_saletype.id typeId, case_saletype.name typeName,SUM(sales) totalSales from case_salelog, case_saletype WHERE case_salelog.typeId = case_saletype.id GROUP BY case_salelog.typeId ORDER BY totalSales DESC;"})
 					if err != nil {
 						return
 					}

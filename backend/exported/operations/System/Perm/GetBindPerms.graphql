@@ -1,5 +1,5 @@
 query MyQuery {
-  data: main_findManypermission {
+  data: main_findManyadmin_permission {
     createdAt
     enabled
     method

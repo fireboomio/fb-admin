@@ -1,5 +1,5 @@
 mutation MyQuery($roleId: Int!, $menuIds: [Int]!) {
-  main_deleteManymenu_role(
+  main_deleteManyadmin_menu_role(
     where: {role_id: {equals: $roleId}, menu_id: {in: $menuIds}}
   ) {
     count

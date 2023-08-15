@@ -1,5 +1,5 @@
 query GetManyMenu @rbac(requireMatchAny: [admin]) {
-  data: main_findManyadmin_menu {
+  data: main_findManycase_menu {
     id
     parentId
     label

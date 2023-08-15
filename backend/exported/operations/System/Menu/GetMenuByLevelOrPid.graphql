@@ -1,5 +1,5 @@
 query MyQuery($level: Int, $pid: Int) {
-  data: main_findManyadmin_menu(where: {OR: [{level: {equals: $level}}, {parentId: {equals: $pid}}]}) {
+  data: main_findManycase_menu(where: {OR: [{level: {equals: $level}}, {parentId: {equals: $pid}}]}) {
     id
     label
     is_bottom

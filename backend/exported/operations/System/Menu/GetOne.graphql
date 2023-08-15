@@ -1,5 +1,5 @@
 query GetOneMenu ($id: Int!) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {
-	data: main_findFirstadmin_menu(where: {id:{equals:$id}}) {
+	data: main_findFirstcase_menu(where: {id:{equals:$id}}) {
 		id
 		parentId
 		label

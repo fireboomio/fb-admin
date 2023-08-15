@@ -1,5 +1,5 @@
 mutation MyQuery ($id: Int = 10) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {
-	main_deleteOneuser(where: {id:$id}) {
+	main_deleteOneadmin_user(where: {id:$id}) {
 		id
 		name
 		password

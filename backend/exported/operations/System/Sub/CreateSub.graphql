@@ -1,5 +1,5 @@
 mutation MyQuery($create_role: String = "", $message: String = "", $target_role: String = "", $updatedAt: DateTime = "", $type: String = "") @internalOperation @rbac(requireMatchAny: [admin]) {
-  main_createOneadmin_sub(
+  main_createOnecase_sub(
     data: {updatedAt: $updatedAt, message: $message, create_role: $create_role, target_role: $target_role, type: $type}
   ) {
     id

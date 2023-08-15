@@ -1,5 +1,5 @@
 query MyQuery($roles: String!) {
-  data: main_findManyadmin_sub(where: {target_role: {equals: $roles}}) {
+  data: main_findManycase_sub(where: {target_role: {equals: $roles}}) {
     message
     updatedAt
     target_role

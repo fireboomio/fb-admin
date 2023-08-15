@@ -1,5 +1,5 @@
 mutation MyQuery($id: Int!) @rbac(requireMatchAny: [admin]) {
-  main_deleteOneadmin_apilog(where: {id: $id}) {
+  data:main_deleteOneadmin_apilog(where: {id: $id}) {
     id
   }
 }

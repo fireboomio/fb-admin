@@ -1,12 +1,12 @@
 query MyQuery ($pid: Int) @rbac(requireMatchAny: [admin]) {
-	data: main_findManyadmin_menu(where: {level:{equals:1}}, orderBy: {sort:asc}) {
+	data: main_findManycase_menu(where: {level:{equals:1}}, orderBy: {sort:asc}) {
 		id @export(as: "pid")
 		path
 		label
 		name
 		sort
-		children: _join @transform(get: "main_findManyadmin_menu") {
-			main_findManyadmin_menu(where: {parentId:{equals:$pid}}, orderBy: {sort:asc}) {
+		children: _join @transform(get: "main_findManycase_menu") {
+			main_findManycase_menu(where: {parentId:{equals:$pid}}, orderBy: {sort:asc}) {
 				id
 				path
 				name

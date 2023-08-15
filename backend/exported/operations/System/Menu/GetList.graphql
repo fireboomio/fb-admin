@@ -1,5 +1,5 @@
-query GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_admin_menuOrderByWithRelationInput], $query: main_admin_menuWhereInput) @rbac(requireMatchAny: [admin]) {
-  data: main_findManyadmin_menu(
+query GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_case_menuOrderByWithRelationInput], $query: main_case_menuWhereInput) @rbac(requireMatchAny: [admin]) {
+  data: main_findManycase_menu(
     skip: $skip
     take: $take
     orderBy: $orderBy
@@ -13,7 +13,7 @@ query GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_admin_menuOrd
     sort
     level
   }
-  total: main_aggregateadmin_menu(where: {AND: $query}) @transform(get: "_count.id") {
+  total: main_aggregatecase_menu(where: {AND: $query}) @transform(get: "_count.id") {
     _count {
       id
     }

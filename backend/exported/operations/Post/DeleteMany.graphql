@@ -1,5 +1,5 @@
 mutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {
-	data: main_deleteManyadmin_post(where: {id:{in:$ids}}) {
+	data: main_deleteManycase_post(where: {id:{in:$ids}}) {
 		count
 	}
 }

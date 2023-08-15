@@ -1,5 +1,5 @@
-mutation DeleteOneMenu($id: Int!) @rbac(requireMatchAny: [admin]) {
-  data: main_deleteOneadmin_menu(where: {id: $id}) {
-    id
+query MyQuery($menuIds: [Int]!) @rbac(requireMatchAny: [admin]) {
+  data: main_findManycase_menu(where: {id: {in: $menuIds}}) @transform(get: "[].api_id") {
+    api_id
   }
 }

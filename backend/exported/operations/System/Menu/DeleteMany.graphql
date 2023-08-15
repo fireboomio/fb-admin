@@ -1,5 +1,5 @@
 mutation DeleteManyMenu ($ids: [Int]!) @rbac(requireMatchAny: [admin]) {
-	data: main_deleteManyadmin_menu(where: {id:{in:$ids}}) {
+	data: main_deleteManycase_menu(where: {id:{in:$ids}}) {
 		count
 	}
 }

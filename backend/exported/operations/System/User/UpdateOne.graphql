@@ -1,11 +1,11 @@
 mutation MyQuery($avatar: String = "", $id: Int = 10, $password: String!, $phone: String = "", $name: String = "", $userId: String!) {
-  casdoor_apiUpdateUser(
+  casdoor:casdoor_apiUpdateUser(
     POSTApiUpdate_userInput: {password: $password, name: $name, phone: $phone, userId: $userId}
   ) {
     msg
     status
   }
-  main_updateOneuser(
+  data:main_updateOneadmin_user(
     data: {avatar: {set: $avatar}, name: {set: $name}, phone: {set: $phone}}
     where: {id: $id}
   ) {

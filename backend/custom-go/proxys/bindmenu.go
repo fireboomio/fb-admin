@@ -41,9 +41,9 @@ func bindMenu(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBo
 
 	// 原入参 - roleCode  roleId  menuIds
 	// 目标入参 - []{Menu_id int64  Role_id int64}
-	var target []*generated.Main_menu_roleCreateManyInput
+	var target []*generated.Main_admin_menu_roleCreateManyInput
 	for _, menuId := range req.MenuIds {
-		target = append(target, &generated.Main_menu_roleCreateManyInput{
+		target = append(target, &generated.Main_admin_menu_roleCreateManyInput{
 			Menu_id: menuId,
 			Role_id: req.RoleId,
 		})

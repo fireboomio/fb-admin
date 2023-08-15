@@ -1,5 +1,5 @@
 mutation MyQuery($id: Int = 10) {
-  main_deleteOneadmin_category(where: {id: $id}) {
+  data:main_deleteOnecase_category(where: {id: $id}) {
     id
     name
   }

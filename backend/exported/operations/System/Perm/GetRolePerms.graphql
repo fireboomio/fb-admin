@@ -1,11 +1,11 @@
 query MyQuery($code: [String]!, $roleId: Int @internal, $menuId: Int @internal) {
-  data: main_findManyrole(where: {code: {in: $code}}) {
+  data: main_findManyadmin_role(where: {code: {in: $code}}) {
     id @export(as: "roleId")
     _join {
-      data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: "[]._join.main_findFirstadmin_menu.perms") {
+      data: main_findManyadmin_menu_role(where: {role_id: {equals: $roleId}}) @transform(get: "[]._join.main_findFirstcase_menu.perms") {
         menu_id @export(as: "menuId")
         _join {
-          main_findFirstadmin_menu(where: {id: {equals: $menuId}}) {
+          main_findFirstcase_menu(where: {id: {equals: $menuId}}) {
             perms
           }
         }

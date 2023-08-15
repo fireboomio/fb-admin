@@ -1,27 +1,38 @@
 {
   "components": {
     "schemas": {
-      "main_Admin_categoryRelationFilter": {
+      "main_Admin_userRelationFilter": {
         "properties": {
           "is": {
-            "$ref": "#/components/schemas/main_admin_categoryWhereInput"
+            "$ref": "#/components/schemas/main_admin_userWhereInput"
           },
           "isNot": {
-            "$ref": "#/components/schemas/main_admin_categoryWhereInput"
+            "$ref": "#/components/schemas/main_admin_userWhereInput"
           }
         },
         "type": "object"
       },
-      "main_Admin_postListRelationFilter": {
+      "main_Case_categoryRelationFilter": {
+        "properties": {
+          "is": {
+            "$ref": "#/components/schemas/main_case_categoryWhereInput"
+          },
+          "isNot": {
+            "$ref": "#/components/schemas/main_case_categoryWhereInput"
+          }
+        },
+        "type": "object"
+      },
+      "main_Case_postListRelationFilter": {
         "properties": {
           "every": {
-            "$ref": "#/components/schemas/main_admin_postWhereInput"
+            "$ref": "#/components/schemas/main_case_postWhereInput"
           },
           "none": {
-            "$ref": "#/components/schemas/main_admin_postWhereInput"
+            "$ref": "#/components/schemas/main_case_postWhereInput"
           },
           "some": {
-            "$ref": "#/components/schemas/main_admin_postWhereInput"
+            "$ref": "#/components/schemas/main_case_postWhereInput"
           }
         },
         "type": "object"
@@ -412,17 +423,6 @@
         },
         "type": "object"
       },
-      "main_UserRelationFilter": {
-        "properties": {
-          "is": {
-            "$ref": "#/components/schemas/main_userWhereInput"
-          },
-          "isNot": {
-            "$ref": "#/components/schemas/main_userWhereInput"
-          }
-        },
-        "type": "object"
-      },
       "main_admin_apilogOrderByWithRelationInput": {
         "properties": {
           "code": {
@@ -516,258 +516,7 @@
         },
         "type": "object"
       },
-      "main_admin_categoryWhereInput": {
-        "properties": {
-          "AND": {
-            "$ref": "#/components/schemas/main_admin_categoryWhereInput"
-          },
-          "NOT": {
-            "$ref": "#/components/schemas/main_admin_categoryWhereInput"
-          },
-          "OR": {
-            "items": {
-              "$ref": "#/components/schemas/main_admin_categoryWhereInput"
-            },
-            "type": "array"
-          },
-          "admin_post": {
-            "$ref": "#/components/schemas/main_Admin_postListRelationFilter"
-          },
-          "id": {
-            "$ref": "#/components/schemas/main_IntFilter"
-          },
-          "name": {
-            "$ref": "#/components/schemas/main_StringFilter"
-          }
-        },
-        "type": "object"
-      },
-      "main_admin_menuOrderByWithRelationInput": {
-        "properties": {
-          "api_id": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "create_time": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "icon": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "id": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "is_bottom": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "label": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "level": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "menu_type": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "name": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "parentId": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "path": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "perms": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          },
-          "sort": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "main_admin_menuWhereInput": {
-        "properties": {
-          "AND": {
-            "$ref": "#/components/schemas/main_admin_menuWhereInput"
-          },
-          "NOT": {
-            "$ref": "#/components/schemas/main_admin_menuWhereInput"
-          },
-          "OR": {
-            "items": {
-              "$ref": "#/components/schemas/main_admin_menuWhereInput"
-            },
-            "type": "array"
-          },
-          "api_id": {
-            "$ref": "#/components/schemas/main_StringNullableFilter"
-          },
-          "create_time": {
-            "$ref": "#/components/schemas/main_DateTimeNullableFilter"
-          },
-          "icon": {
-            "$ref": "#/components/schemas/main_StringNullableFilter"
-          },
-          "id": {
-            "$ref": "#/components/schemas/main_IntFilter"
-          },
-          "is_bottom": {
-            "$ref": "#/components/schemas/main_IntFilter"
-          },
-          "label": {
-            "$ref": "#/components/schemas/main_StringFilter"
-          },
-          "level": {
-            "$ref": "#/components/schemas/main_IntFilter"
-          },
-          "menu_type": {
-            "$ref": "#/components/schemas/main_StringNullableFilter"
-          },
-          "name": {
-            "$ref": "#/components/schemas/main_StringNullableFilter"
-          },
-          "parentId": {
-            "$ref": "#/components/schemas/main_IntNullableFilter"
-          },
-          "path": {
-            "$ref": "#/components/schemas/main_StringNullableFilter"
-          },
-          "perms": {
-            "$ref": "#/components/schemas/main_StringNullableFilter"
-          },
-          "sort": {
-            "$ref": "#/components/schemas/main_IntFilter"
-          }
-        },
-        "type": "object"
-      },
-      "main_admin_postOrderByRelationAggregateInput": {
-        "properties": {
-          "_count": {
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "title": "main_SortOrder",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "main_admin_postWhereInput": {
-        "properties": {
-          "AND": {
-            "$ref": "#/components/schemas/main_admin_postWhereInput"
-          },
-          "NOT": {
-            "$ref": "#/components/schemas/main_admin_postWhereInput"
-          },
-          "OR": {
-            "items": {
-              "$ref": "#/components/schemas/main_admin_postWhereInput"
-            },
-            "type": "array"
-          },
-          "admin_category": {
-            "$ref": "#/components/schemas/main_Admin_categoryRelationFilter"
-          },
-          "auth": {
-            "$ref": "#/components/schemas/main_IntNullableFilter"
-          },
-          "author": {
-            "$ref": "#/components/schemas/main_StringFilter"
-          },
-          "cate": {
-            "$ref": "#/components/schemas/main_IntNullableFilter"
-          },
-          "content": {
-            "$ref": "#/components/schemas/main_StringNullableFilter"
-          },
-          "id": {
-            "$ref": "#/components/schemas/main_IntFilter"
-          },
-          "poster": {
-            "$ref": "#/components/schemas/main_StringNullableFilter"
-          },
-          "published_at": {
-            "$ref": "#/components/schemas/main_DateTimeNullableFilter"
-          },
-          "title": {
-            "$ref": "#/components/schemas/main_StringFilter"
-          },
-          "user": {
-            "$ref": "#/components/schemas/main_UserRelationFilter"
-          }
-        },
-        "type": "object"
-      },
-      "main_menu_roleCreateManyInput": {
+      "main_admin_menu_roleCreateManyInput": {
         "properties": {
           "id": {
             "type": "integer"
@@ -781,7 +530,7 @@
         },
         "type": "object"
       },
-      "main_permissionCreateManyInput": {
+      "main_admin_permissionCreateManyInput": {
         "properties": {
           "createdAt": {
             "type": "string"
@@ -804,7 +553,7 @@
         },
         "type": "object"
       },
-      "main_roleOrderByWithRelationInput": {
+      "main_admin_roleOrderByWithRelationInput": {
         "properties": {
           "code": {
             "enum": [
@@ -833,17 +582,17 @@
         },
         "type": "object"
       },
-      "main_roleWhereInput": {
+      "main_admin_roleWhereInput": {
         "properties": {
           "AND": {
-            "$ref": "#/components/schemas/main_roleWhereInput"
+            "$ref": "#/components/schemas/main_admin_roleWhereInput"
           },
           "NOT": {
-            "$ref": "#/components/schemas/main_roleWhereInput"
+            "$ref": "#/components/schemas/main_admin_roleWhereInput"
           },
           "OR": {
             "items": {
-              "$ref": "#/components/schemas/main_roleWhereInput"
+              "$ref": "#/components/schemas/main_admin_roleWhereInput"
             },
             "type": "array"
           },
@@ -859,11 +608,8 @@
         },
         "type": "object"
       },
-      "main_userOrderByWithRelationInput": {
+      "main_admin_userOrderByWithRelationInput": {
         "properties": {
-          "admin_post": {
-            "$ref": "#/components/schemas/main_admin_postOrderByRelationAggregateInput"
-          },
           "avatar": {
             "enum": [
               "asc",
@@ -871,6 +617,9 @@
             ],
             "title": "main_SortOrder",
             "type": "string"
+          },
+          "case_post": {
+            "$ref": "#/components/schemas/main_case_postOrderByRelationAggregateInput"
           },
           "country_code": {
             "enum": [
@@ -947,25 +696,25 @@
         },
         "type": "object"
       },
-      "main_userWhereInput": {
+      "main_admin_userWhereInput": {
         "properties": {
           "AND": {
-            "$ref": "#/components/schemas/main_userWhereInput"
+            "$ref": "#/components/schemas/main_admin_userWhereInput"
           },
           "NOT": {
-            "$ref": "#/components/schemas/main_userWhereInput"
+            "$ref": "#/components/schemas/main_admin_userWhereInput"
           },
           "OR": {
             "items": {
-              "$ref": "#/components/schemas/main_userWhereInput"
+              "$ref": "#/components/schemas/main_admin_userWhereInput"
             },
             "type": "array"
           },
-          "admin_post": {
-            "$ref": "#/components/schemas/main_Admin_postListRelationFilter"
-          },
           "avatar": {
             "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "case_post": {
+            "$ref": "#/components/schemas/main_Case_postListRelationFilter"
           },
           "country_code": {
             "$ref": "#/components/schemas/main_StringNullableFilter"
@@ -993,6 +742,257 @@
           },
           "user_id": {
             "$ref": "#/components/schemas/main_StringNullableFilter"
+          }
+        },
+        "type": "object"
+      },
+      "main_case_categoryWhereInput": {
+        "properties": {
+          "AND": {
+            "$ref": "#/components/schemas/main_case_categoryWhereInput"
+          },
+          "NOT": {
+            "$ref": "#/components/schemas/main_case_categoryWhereInput"
+          },
+          "OR": {
+            "items": {
+              "$ref": "#/components/schemas/main_case_categoryWhereInput"
+            },
+            "type": "array"
+          },
+          "case_post": {
+            "$ref": "#/components/schemas/main_Case_postListRelationFilter"
+          },
+          "id": {
+            "$ref": "#/components/schemas/main_IntFilter"
+          },
+          "name": {
+            "$ref": "#/components/schemas/main_StringFilter"
+          }
+        },
+        "type": "object"
+      },
+      "main_case_menuOrderByWithRelationInput": {
+        "properties": {
+          "api_id": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "create_time": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "icon": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "id": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "is_bottom": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "label": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "menu_type": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "name": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "parentId": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "path": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "perms": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          },
+          "sort": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "main_case_menuWhereInput": {
+        "properties": {
+          "AND": {
+            "$ref": "#/components/schemas/main_case_menuWhereInput"
+          },
+          "NOT": {
+            "$ref": "#/components/schemas/main_case_menuWhereInput"
+          },
+          "OR": {
+            "items": {
+              "$ref": "#/components/schemas/main_case_menuWhereInput"
+            },
+            "type": "array"
+          },
+          "api_id": {
+            "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "create_time": {
+            "$ref": "#/components/schemas/main_DateTimeNullableFilter"
+          },
+          "icon": {
+            "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "id": {
+            "$ref": "#/components/schemas/main_IntFilter"
+          },
+          "is_bottom": {
+            "$ref": "#/components/schemas/main_IntFilter"
+          },
+          "label": {
+            "$ref": "#/components/schemas/main_StringFilter"
+          },
+          "level": {
+            "$ref": "#/components/schemas/main_IntFilter"
+          },
+          "menu_type": {
+            "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "name": {
+            "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "parentId": {
+            "$ref": "#/components/schemas/main_IntNullableFilter"
+          },
+          "path": {
+            "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "perms": {
+            "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/main_IntFilter"
+          }
+        },
+        "type": "object"
+      },
+      "main_case_postOrderByRelationAggregateInput": {
+        "properties": {
+          "_count": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "title": "main_SortOrder",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "main_case_postWhereInput": {
+        "properties": {
+          "AND": {
+            "$ref": "#/components/schemas/main_case_postWhereInput"
+          },
+          "NOT": {
+            "$ref": "#/components/schemas/main_case_postWhereInput"
+          },
+          "OR": {
+            "items": {
+              "$ref": "#/components/schemas/main_case_postWhereInput"
+            },
+            "type": "array"
+          },
+          "admin_user": {
+            "$ref": "#/components/schemas/main_Admin_userRelationFilter"
+          },
+          "auth": {
+            "$ref": "#/components/schemas/main_IntNullableFilter"
+          },
+          "author": {
+            "$ref": "#/components/schemas/main_StringFilter"
+          },
+          "case_category": {
+            "$ref": "#/components/schemas/main_Case_categoryRelationFilter"
+          },
+          "cate": {
+            "$ref": "#/components/schemas/main_IntNullableFilter"
+          },
+          "content": {
+            "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "id": {
+            "$ref": "#/components/schemas/main_IntFilter"
+          },
+          "poster": {
+            "$ref": "#/components/schemas/main_StringNullableFilter"
+          },
+          "published_at": {
+            "$ref": "#/components/schemas/main_DateTimeNullableFilter"
+          },
+          "title": {
+            "$ref": "#/components/schemas/main_StringFilter"
           }
         },
         "type": "object"
@@ -1091,7 +1091,7 @@
     },
     "/operations/Casdoor/GetRolesById": {
       "get": {
-        "description": "```graphql\nquery MyQuery($userId: String!, $id: Int @internal, $roleId: Int @internal) {\n  data: main_findFirstuser(where: {user_id: {equals: $userId}}) @transform(get: \"_join.main_findManyrole_user\") {\n    id @export(as: \"id\")\n    _join {\n      main_findManyrole_user(where: {user_id: {equals: $id}}) @transform(get: \"[]._join\") {\n        role_id @export(as: \"roleId\")\n        _join @transform(get: \"main_findFirstrole.code\") {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n  }\n} \n```",
+        "description": "```graphql\nquery MyQuery($userId: String!, $id: Int @internal, $roleId: Int @internal) {\n  data: main_findFirstadmin_user(where: {user_id: {equals: $userId}}) @transform(get: \"_join.main_findManyadmin_role_user\") {\n    id @export(as: \"id\")\n    _join {\n      main_findManyadmin_role_user(where: {user_id: {equals: $id}}) @transform(get: \"[]._join\") {\n        role_id @export(as: \"roleId\")\n        _join @transform(get: \"main_findFirstadmin_role.code\") {\n          main_findFirstadmin_role(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n  }\n} \n```",
         "operationId": "/operations/Casdoor/GetRolesById",
         "parameters": [
           {
@@ -1140,7 +1140,7 @@
     },
     "/operations/Casdoor/GetSMSProvider": {
       "get": {
-        "description": "```graphql\nquery MyQuery @rbac(requireMatchAny: [admin]) {\n  main_findManyprovider {\n    client_id\n    client_secret\n    created_time\n    name\n    owner\n    sign_name\n    template_code\n    type\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery @rbac(requireMatchAny: [admin]) {\n  data:main_findManyadmin_provider {\n    client_id\n    client_secret\n    created_time\n    name\n    owner\n    sign_name\n    template_code\n    type\n  }\n}\n```",
         "operationId": "/operations/Casdoor/GetSMSProvider",
         "responses": {
           "200": {
@@ -1150,7 +1150,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_findManyprovider": {
+                        "data": {
                           "items": {
                             "properties": {
                               "client_id": {
@@ -1188,7 +1188,7 @@
                         }
                       },
                       "required": [
-                        "main_findManyprovider"
+                        "data"
                       ],
                       "type": "object"
                     }
@@ -1544,7 +1544,7 @@
     },
     "/operations/Post/CreateCategory": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($name: String = \"\",) {\n  main_createOneadmin_category(data: {name: $name}) {\n    id\n    name\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($name: String = \"\",) {\n  data:main_createOnecase_category(data: {name: $name}) {\n    id\n    name\n  }\n}\n```",
         "operationId": "/operations/Post/CreateCategory",
         "requestBody": {
           "content": {
@@ -1568,7 +1568,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_createOneadmin_category": {
+                        "data": {
                           "properties": {
                             "id": {
                               "type": "integer"
@@ -1606,7 +1606,7 @@
     },
     "/operations/Post/CreateOne": {
       "post": {
-        "description": "```graphql\nmutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!, $userId: Int !, $cateId: Int !) @rbac(requireMatchAny: [user, admin]) {\n  data: main_createOneadmin_post(\n    data: {title: $title, poster: $poster, published_at: $publishedAt, author: $username, content: $content, user: {connect: {id: $userId}}, admin_category: {connect: {id: $cateId}}}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    admin_category {\n      id\n    }\n  }\n}\n```",
+        "description": "```graphql\nmutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $username: String!, $userId: Int !, $cateId: Int !) @rbac(requireMatchAny: [user, admin]) {\n  data: main_createOnecase_post(\n    data: {title: $title, poster: $poster, published_at: $publishedAt, author: $username, content: $content, admin_user: {connect: {id: $userId}}, case_category: {connect: {id: $cateId}}}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    case_category {\n      id\n    }\n  }\n}\n```",
         "operationId": "/operations/Post/CreateOne",
         "requestBody": {
           "content": {
@@ -1656,7 +1656,10 @@
                       "properties": {
                         "data": {
                           "properties": {
-                            "admin_category": {
+                            "author": {
+                              "type": "string"
+                            },
+                            "case_category": {
                               "properties": {
                                 "id": {
                                   "type": "integer"
@@ -1666,9 +1669,6 @@
                                 "id"
                               ],
                               "type": "object"
-                            },
-                            "author": {
-                              "type": "string"
                             },
                             "id": {
                               "type": "integer"
@@ -1731,7 +1731,7 @@
     },
     "/operations/Post/DeleteCategory": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($id: Int = 10) {\n  main_deleteOneadmin_category(where: {id: $id}) {\n    id\n    name\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($id: Int = 10) {\n  data:main_deleteOnecase_category(where: {id: $id}) {\n    id\n    name\n  }\n}\n```",
         "operationId": "/operations/Post/DeleteCategory",
         "requestBody": {
           "content": {
@@ -1755,7 +1755,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_deleteOneadmin_category": {
+                        "data": {
                           "properties": {
                             "id": {
                               "type": "integer"
@@ -1793,7 +1793,7 @@
     },
     "/operations/Post/DeleteMany": {
       "post": {
-        "description": "```graphql\nmutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {\n\tdata: main_deleteManyadmin_post(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n\n```",
+        "description": "```graphql\nmutation DeleteManyPost ($ids: [Int]!) @rbac(requireMatchAny: [user,eeee,admin,abc,abc32]) {\n\tdata: main_deleteManycase_post(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n\n```",
         "operationId": "/operations/Post/DeleteMany",
         "requestBody": {
           "content": {
@@ -1875,7 +1875,7 @@
     },
     "/operations/Post/DeleteOne": {
       "post": {
-        "description": "```graphql\nmutation DeleteOnePost ($id: Int!) @rbac(requireMatchAny: [user,admin]) {\n\tdata: main_deleteOneadmin_post(where: {id:$id}) {\n\t\tid\n\t}\n}\n\n```",
+        "description": "```graphql\nmutation DeleteOnePost ($id: Int!) @rbac(requireMatchAny: [user,admin]) {\n\tdata: main_deleteOnecase_post(where: {id:$id}) {\n\t\tid\n\t}\n}\n\n```",
         "operationId": "/operations/Post/DeleteOne",
         "requestBody": {
           "content": {
@@ -1954,7 +1954,7 @@
     },
     "/operations/Post/GetCategory": {
       "get": {
-        "description": "```graphql\nquery MyQuery($take: Int = 10, $skip: Int = 0) {\n  main_findManyadmin_category(skip: $skip, take: $take) {\n    id\n    name\n    admin_post {\n      author\n      content\n      id\n      published_at\n      poster\n      title\n    }\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($take: Int = 10, $skip: Int = 0) {\n  data:main_findManycase_category(skip: $skip, take: $take) {\n    id\n    name\n    case_post {\n      author\n      content\n      id\n      published_at\n      poster\n      title\n    }\n  }\n}\n```",
         "operationId": "/operations/Post/GetCategory",
         "parameters": [
           {
@@ -1980,10 +1980,10 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_findManyadmin_category": {
+                        "data": {
                           "items": {
                             "properties": {
-                              "admin_post": {
+                              "case_post": {
                                 "items": {
                                   "properties": {
                                     "author": {
@@ -2031,7 +2031,7 @@
                         }
                       },
                       "required": [
-                        "main_findManyadmin_category"
+                        "data"
                       ],
                       "type": "object"
                     }
@@ -2055,7 +2055,7 @@
     },
     "/operations/Post/GetLikeList": {
       "get": {
-        "description": "```graphql\nquery MyQuery($author: String = \"\", $content: String = \"\", $title: String = \"\", $id: Int ) {\n  main_findManyadmin_post(\n    where: {author: {contains: $author, endsWith: \"\"}, content: {contains: $content, endsWith: \"\"}, title: {contains: $title, endsWith: \"\"}}\n  ) {\n    author\n    content\n    id\n    published_at\n    title\n    poster\n    admin_category {\n      name\n      id\n    }\n  }\n  main_findUniqueadmin_post(where: {id: $id}) {\n    author\n    content\n    id\n    published_at\n    title\n    poster\n    admin_category {\n      id\n      name\n    }\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($author: String = \"\", $content: String = \"\", $title: String = \"\", $id: Int ) {\n  data:main_findManycase_post(\n    where: {author: {contains: $author, endsWith: \"\"}, content: {contains: $content, endsWith: \"\"}, title: {contains: $title, endsWith: \"\"}}\n  ) {\n    author\n    content\n    id\n    published_at\n    title\n    poster\n    case_category {\n      name\n      id\n    }\n  }\n  data1:main_findUniquecase_post(where: {id: $id}) {\n    author\n    content\n    id\n    published_at\n    title\n    poster\n    case_category {\n      id\n      name\n    }\n  }\n}\n```",
         "operationId": "/operations/Post/GetLikeList",
         "parameters": [
           {
@@ -2095,10 +2095,13 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_findManyadmin_post": {
+                        "data": {
                           "items": {
                             "properties": {
-                              "admin_category": {
+                              "author": {
+                                "type": "string"
+                              },
+                              "case_category": {
                                 "properties": {
                                   "id": {
                                     "type": "integer"
@@ -2112,9 +2115,6 @@
                                   "id"
                                 ],
                                 "type": "object"
-                              },
-                              "author": {
-                                "type": "string"
                               },
                               "content": {
                                 "type": "string"
@@ -2141,9 +2141,12 @@
                           },
                           "type": "array"
                         },
-                        "main_findUniqueadmin_post": {
+                        "data1": {
                           "properties": {
-                            "admin_category": {
+                            "author": {
+                              "type": "string"
+                            },
+                            "case_category": {
                               "properties": {
                                 "id": {
                                   "type": "integer"
@@ -2157,9 +2160,6 @@
                                 "name"
                               ],
                               "type": "object"
-                            },
-                            "author": {
-                              "type": "string"
                             },
                             "content": {
                               "type": "string"
@@ -2186,7 +2186,7 @@
                         }
                       },
                       "required": [
-                        "main_findManyadmin_post"
+                        "data"
                       ],
                       "type": "object"
                     }
@@ -2210,9 +2210,16 @@
     },
     "/operations/Post/GetList": {
       "get": {
-        "description": "```graphql\nquery GetPostList($take: Int = 10, $skip: Int = 0, $query: main_admin_postWhereInput) @rbac(requireMatchAny: [eeee, admin, abc, abc32]) {\n  data: main_findManyadmin_post(\n    skip: $skip\n    take: $take\n    where: {AND: $query}\n    orderBy: {title: asc}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    admin_category {\n      id\n      name\n    }\n  }\n  total: main_aggregateadmin_post(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n}\n```",
+        "description": "```graphql\nquery GetPostList($take: Int = 10, $skip: Int = 0, $query: main_case_postWhereInput) @rbac(requireMatchAny: [eeee, admin, abc, abc32]) {\n  data: main_findManycase_post(\n    skip: $skip\n    take: $take\n    where: {AND: $query}\n    orderBy: {title: asc}\n  ) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    case_category {\n      id\n      name\n    }\n  }\n  total: main_aggregatecase_post(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n}\n```",
         "operationId": "/operations/Post/GetList",
         "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "$ref": "#/components/schemas/main_case_postWhereInput"
+            }
+          },
           {
             "in": "query",
             "name": "skip",
@@ -2225,13 +2232,6 @@
             "name": "take",
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "query",
-            "schema": {
-              "$ref": "#/components/schemas/main_admin_postWhereInput"
             }
           }
         ],
@@ -2246,7 +2246,10 @@
                         "data": {
                           "items": {
                             "properties": {
-                              "admin_category": {
+                              "author": {
+                                "type": "string"
+                              },
+                              "case_category": {
                                 "properties": {
                                   "id": {
                                     "type": "integer"
@@ -2260,9 +2263,6 @@
                                   "name"
                                 ],
                                 "type": "object"
-                              },
-                              "author": {
-                                "type": "string"
                               },
                               "content": {
                                 "type": "string"
@@ -2336,7 +2336,7 @@
     },
     "/operations/Post/GetOne": {
       "get": {
-        "description": "```graphql\nquery GetOnePost($id: Int!) @rbac(requireMatchAny: [user, eeee, admin, abc, abc32]) {\n  data: main_findFirstadmin_post(where: {id: {equals: $id}}) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    admin_category {\n      id\n      name\n    }\n    user {\n      id\n      name\n    }\n  }\n}\n```",
+        "description": "```graphql\nquery GetOnePost($id: Int!) @rbac(requireMatchAny: [user, eeee, admin, abc, abc32]) {\n  data: main_findFirstcase_post(where: {id: {equals: $id}}) {\n    id\n    title\n    poster\n    published_at\n    author\n    content\n    case_category {\n      id\n      name\n    }\n    admin_user {\n      id\n      name\n    }\n  }\n}\n```",
         "operationId": "/operations/Post/GetOne",
         "parameters": [
           {
@@ -2358,7 +2358,7 @@
                       "properties": {
                         "data": {
                           "properties": {
-                            "admin_category": {
+                            "admin_user": {
                               "properties": {
                                 "id": {
                                   "type": "integer"
@@ -2376,6 +2376,21 @@
                             "author": {
                               "type": "string"
                             },
+                            "case_category": {
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "type": "object"
+                            },
                             "content": {
                               "type": "string"
                             },
@@ -2390,21 +2405,6 @@
                             },
                             "title": {
                               "type": "string"
-                            },
-                            "user": {
-                              "properties": {
-                                "id": {
-                                  "type": "integer"
-                                },
-                                "name": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "name"
-                              ],
-                              "type": "object"
                             }
                           },
                           "required": [
@@ -2454,18 +2454,26 @@
       }
     },
     "/operations/Post/GetPostByAuthor": {
-      "get": {
-        "description": "```graphql\nquery MyQuery($id: Int = 10) {\n  main_findManyuser(where: {id: {equals: $id}}) {\n    admin_post {\n      cate\n      content\n      id\n      poster\n      published_at\n      title\n    }\n  }\n} \n```",
+      "post": {
+        "description": "```graphql\nmutation MyQuery($id: Int = 10, $name: String = \"\") {\n data:main_updateOnecase_category(data: {name: {set: $name}}, where: {id: $id}) {\n    id\n    name\n  }\n}\n```",
         "operationId": "/operations/Post/GetPostByAuthor",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "id",
-            "schema": {
-              "type": "integer"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "content": {
@@ -2474,48 +2482,22 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_findManyuser": {
-                          "items": {
-                            "properties": {
-                              "admin_post": {
-                                "items": {
-                                  "properties": {
-                                    "cate": {
-                                      "type": "integer"
-                                    },
-                                    "content": {
-                                      "type": "string"
-                                    },
-                                    "id": {
-                                      "type": "integer"
-                                    },
-                                    "poster": {
-                                      "type": "string"
-                                    },
-                                    "published_at": {
-                                      "type": "string"
-                                    },
-                                    "title": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "title"
-                                  ],
-                                  "type": "object"
-                                },
-                                "type": "array"
-                              }
+                        "data": {
+                          "properties": {
+                            "id": {
+                              "type": "integer"
                             },
-                            "type": "object"
+                            "name": {
+                              "type": "string"
+                            }
                           },
-                          "type": "array"
+                          "required": [
+                            "id",
+                            "name"
+                          ],
+                          "type": "object"
                         }
                       },
-                      "required": [
-                        "main_findManyuser"
-                      ],
                       "type": "object"
                     }
                   },
@@ -2530,7 +2512,7 @@
           }
         },
         "security": [],
-        "summary": "GET /operations/Post/GetPostByAuthor",
+        "summary": "POST /operations/Post/GetPostByAuthor",
         "tags": [
           "Post"
         ]
@@ -2538,7 +2520,7 @@
     },
     "/operations/Post/GetPostByCate": {
       "get": {
-        "description": "```graphql\nquery MyQuery($equals: String!) @rbac(requireMatchAny: [admin]) {\n  main_findManyadmin_category(where: {name: {equals: $equals}}) {\n    admin_post {\n      author\n      cate\n      content\n      poster\n      id\n      title\n      published_at\n    }\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($equals: String!) @rbac(requireMatchAny: [admin]) {\n  data: main_findManycase_category(where: {name: {equals: $equals}}) @transform(get: \"[].case_post\") {\n    case_post {\n      author\n      cate\n      content\n      poster\n      id\n      title\n      published_at\n    }\n  }\n}\n```",
         "operationId": "/operations/Post/GetPostByCate",
         "parameters": [
           {
@@ -2558,52 +2540,41 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_findManyadmin_category": {
+                        "data": {
                           "items": {
                             "properties": {
-                              "admin_post": {
-                                "items": {
-                                  "properties": {
-                                    "author": {
-                                      "type": "string"
-                                    },
-                                    "cate": {
-                                      "type": "integer"
-                                    },
-                                    "content": {
-                                      "type": "string"
-                                    },
-                                    "id": {
-                                      "type": "integer"
-                                    },
-                                    "poster": {
-                                      "type": "string"
-                                    },
-                                    "published_at": {
-                                      "type": "string"
-                                    },
-                                    "title": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "author",
-                                    "id",
-                                    "title"
-                                  ],
-                                  "type": "object"
-                                },
-                                "type": "array"
+                              "author": {
+                                "type": "string"
+                              },
+                              "cate": {
+                                "type": "integer"
+                              },
+                              "content": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "integer"
+                              },
+                              "poster": {
+                                "type": "string"
+                              },
+                              "published_at": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
                               }
                             },
+                            "required": [
+                              "author",
+                              "id",
+                              "title"
+                            ],
                             "type": "object"
                           },
                           "type": "array"
                         }
                       },
-                      "required": [
-                        "main_findManyadmin_category"
-                      ],
                       "type": "object"
                     }
                   },
@@ -2643,26 +2614,18 @@
       }
     },
     "/operations/Post/UpdateCategory": {
-      "post": {
-        "description": "```graphql\nmutation MyQuery($id: Int = 10, $name: String = \"\") {\n  main_updateOneadmin_category(data: {name: {set: $name}}, where: {id: $id}) {\n    id\n    name\n  }\n}\n```",
+      "get": {
+        "description": "```graphql\nquery MyQuery($id: Int = 10) {\n  data:main_findManyadmin_user(where: {id: {equals: $id}}) {\n    case_post {\n      cate\n      content\n      id\n      poster\n      published_at\n      title\n    }\n  }\n} \n```",
         "operationId": "/operations/Post/UpdateCategory",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "id": {
-                    "type": "integer"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -2671,22 +2634,48 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_updateOneadmin_category": {
-                          "properties": {
-                            "id": {
-                              "type": "integer"
+                        "data": {
+                          "items": {
+                            "properties": {
+                              "case_post": {
+                                "items": {
+                                  "properties": {
+                                    "cate": {
+                                      "type": "integer"
+                                    },
+                                    "content": {
+                                      "type": "string"
+                                    },
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "poster": {
+                                      "type": "string"
+                                    },
+                                    "published_at": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "title"
+                                  ],
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
                             },
-                            "name": {
-                              "type": "string"
-                            }
+                            "type": "object"
                           },
-                          "required": [
-                            "id",
-                            "name"
-                          ],
-                          "type": "object"
+                          "type": "array"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     }
                   },
@@ -2701,54 +2690,25 @@
           }
         },
         "security": [],
-        "summary": "POST /operations/Post/UpdateCategory",
+        "summary": "GET /operations/Post/UpdateCategory",
         "tags": [
           "Post"
         ]
       }
     },
     "/operations/Post/UpdateOne": {
-      "post": {
-        "description": "```graphql\nmutation MyQuery($id: Int! , $userId: Int!, $title: String = \"\", $poster: String = \"\", $content: String !, $author: String = \"\", $cate: Int!) {\n  main_updateOneadmin_post(\n    data: {user: {connect: {id: $userId}}, author: {set: $author}, content: {set: $content}, title: {set: $title}, poster: {set: $poster}, admin_category: {connect: {id: $cate}}}\n    where: {id: $id}\n  ) {\n    auth\n    author\n    cate\n    content\n    id\n    poster\n    title\n    user {\n      name\n      id\n    }\n  }\n}\n```",
+      "get": {
+        "description": "```graphql\nquery MyQuery($id: Int = 10) {\n  data:main_findManyadmin_user(where: {id: {equals: $id}}) {\n    case_post {\n      cate\n      content\n      id\n      poster\n      published_at\n      title\n    }\n  }\n} \n```",
         "operationId": "/operations/Post/UpdateOne",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "author": {
-                    "type": "string"
-                  },
-                  "cate": {
-                    "type": "integer"
-                  },
-                  "content": {
-                    "type": "string"
-                  },
-                  "id": {
-                    "type": "integer"
-                  },
-                  "poster": {
-                    "type": "string"
-                  },
-                  "title": {
-                    "type": "string"
-                  },
-                  "userId": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "id",
-                  "userId",
-                  "content",
-                  "cate"
-                ],
-                "type": "object"
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -2757,53 +2717,48 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_updateOneadmin_post": {
-                          "properties": {
-                            "auth": {
-                              "type": "integer"
-                            },
-                            "author": {
-                              "type": "string"
-                            },
-                            "cate": {
-                              "type": "integer"
-                            },
-                            "content": {
-                              "type": "string"
-                            },
-                            "id": {
-                              "type": "integer"
-                            },
-                            "poster": {
-                              "type": "string"
-                            },
-                            "title": {
-                              "type": "string"
-                            },
-                            "user": {
-                              "properties": {
-                                "id": {
-                                  "type": "integer"
+                        "data": {
+                          "items": {
+                            "properties": {
+                              "case_post": {
+                                "items": {
+                                  "properties": {
+                                    "cate": {
+                                      "type": "integer"
+                                    },
+                                    "content": {
+                                      "type": "string"
+                                    },
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "poster": {
+                                      "type": "string"
+                                    },
+                                    "published_at": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "title"
+                                  ],
+                                  "type": "object"
                                 },
-                                "name": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "name",
-                                "id"
-                              ],
-                              "type": "object"
-                            }
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
                           },
-                          "required": [
-                            "author",
-                            "id",
-                            "title"
-                          ],
-                          "type": "object"
+                          "type": "array"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     }
                   },
@@ -2818,7 +2773,7 @@
           }
         },
         "security": [],
-        "summary": "POST /operations/Post/UpdateOne",
+        "summary": "GET /operations/Post/UpdateOne",
         "tags": [
           "Post"
         ]
@@ -3023,7 +2978,7 @@
     },
     "/operations/Statistics/VisitTrending": {
       "get": {
-        "description": "```graphql\nquery MyQuery {\n  data: statistics_GetVisitTrending {\n    count\n    days\n  }\n} \n```",
+        "description": "```graphql\nquery MyQuery {\n  data: statistics_GetVisitTrending {\n    count\n    days\n  }\n}\n```",
         "operationId": "/operations/Statistics/VisitTrending",
         "responses": {
           "200": {
@@ -3070,7 +3025,7 @@
     },
     "/operations/System/GetMenus": {
       "get": {
-        "description": "```graphql\nquery MyQuery ($pid: Int) @rbac(requireMatchAny: [admin]) {\n\tdata: main_findManyadmin_menu(where: {level:{equals:1}}, orderBy: {sort:asc}) {\n\t\tid @export(as: \"pid\")\n\t\tpath\n\t\tlabel\n\t\tname\n\t\tsort\n\t\tchildren: _join @transform(get: \"main_findManyadmin_menu\") {\n\t\t\tmain_findManyadmin_menu(where: {parentId:{equals:$pid}}, orderBy: {sort:asc}) {\n\t\t\t\tid\n\t\t\t\tpath\n\t\t\t\tname\n\t\t\t\tlabel\n\t\t\t\tsort\n\t\t\t}\n\t\t}\n\t}\n}\n \n```",
+        "description": "```graphql\nquery MyQuery ($pid: Int) @rbac(requireMatchAny: [admin]) {\n\tdata: main_findManycase_menu(where: {level:{equals:1}}, orderBy: {sort:asc}) {\n\t\tid @export(as: \"pid\")\n\t\tpath\n\t\tlabel\n\t\tname\n\t\tsort\n\t\tchildren: _join @transform(get: \"main_findManycase_menu\") {\n\t\t\tmain_findManycase_menu(where: {parentId:{equals:$pid}}, orderBy: {sort:asc}) {\n\t\t\t\tid\n\t\t\t\tpath\n\t\t\t\tname\n\t\t\t\tlabel\n\t\t\t\tsort\n\t\t\t}\n\t\t}\n\t}\n}\n \n```",
         "operationId": "/operations/System/GetMenus",
         "parameters": [
           {
@@ -3189,7 +3144,7 @@
     },
     "/operations/System/Log/ChangeOpen": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($set: Boolean = false) @rbac(requireMatchAny: [admin, user]) {\n  main_updateOnedic(where: {id: 1}, data: {isOpen: {set: $set}}) {\n    id\n    isOpen\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($set: Boolean = false) @rbac(requireMatchAny: [admin, user]) {\n  data:main_updateOneadmin_dic(where: {id: 1}, data: {isOpen: {set: $set}}) {\n    id\n    isOpen\n  }\n}\n```",
         "operationId": "/operations/System/Log/ChangeOpen",
         "requestBody": {
           "content": {
@@ -3213,7 +3168,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_updateOnedic": {
+                        "data": {
                           "properties": {
                             "id": {
                               "type": "integer"
@@ -3269,7 +3224,7 @@
     },
     "/operations/System/Log/CreateLog": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($ip: String = \"\", $method: String = \"\", $path: String = \"\", $updatedAt: DateTime = \"\", $code: String = \"\", $ua: String = \"\", $userId: String = \"\", $userName: String = \"\") {\n  main_createOneadmin_apilog(\n    data: {updatedAt: $updatedAt, ip: $ip, method: $method, path: $path, code: $code, ua: $ua, userId: $userId, userName: $userName}\n  ) {\n    ip\n    method\n    path\n    id\n    updatedAt\n    ua\n    userId\n    userName\n  }\n} \n```",
+        "description": "```graphql\nmutation MyQuery($ip: String = \"\", $method: String = \"\", $path: String = \"\", $updatedAt: DateTime = \"\", $code: String = \"\", $ua: String = \"\", $userId: String = \"\", $userName: String = \"\") {\n  data:main_createOneadmin_apilog(\n    data: {updatedAt: $updatedAt, ip: $ip, method: $method, path: $path, code: $code, ua: $ua, userId: $userId, userName: $userName}\n  ) {\n    ip\n    method\n    path\n    id\n    updatedAt\n    ua\n    userId\n    userName\n  }\n} \n```",
         "operationId": "/operations/System/Log/CreateLog",
         "requestBody": {
           "content": {
@@ -3314,7 +3269,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_createOneadmin_apilog": {
+                        "data": {
                           "properties": {
                             "id": {
                               "type": "integer"
@@ -3455,7 +3410,7 @@
     },
     "/operations/System/Log/DeleteOne": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($id: Int!) @rbac(requireMatchAny: [admin]) {\n  main_deleteOneadmin_apilog(where: {id: $id}) {\n    id\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($id: Int!) @rbac(requireMatchAny: [admin]) {\n  data:main_deleteOneadmin_apilog(where: {id: $id}) {\n    id\n  }\n}\n```",
         "operationId": "/operations/System/Log/DeleteOne",
         "requestBody": {
           "content": {
@@ -3482,7 +3437,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_deleteOneadmin_apilog": {
+                        "data": {
                           "properties": {
                             "id": {
                               "type": "integer"
@@ -3584,84 +3539,11 @@
         ]
       }
     },
-    "/operations/System/Log/GetIsOpen": {
-      "get": {
-        "description": "```graphql\nquery MyQuery @rbac(requireMatchAny: [admin]) {\n  main_findFirstdic(where: {id: {equals: 1}}) {\n    id\n    isOpen\n  }\n}\n```",
-        "operationId": "/operations/System/Log/GetIsOpen",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "main_findFirstdic": {
-                          "properties": {
-                            "id": {
-                              "type": "integer"
-                            },
-                            "isOpen": {
-                              "type": "boolean"
-                            }
-                          },
-                          "required": [
-                            "id",
-                            "isOpen"
-                          ],
-                          "type": "object"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        },
-        "security": [
-          {
-            "JWT": [
-              "admin",
-              "user",
-              "eeee",
-              "aaaa",
-              "aa",
-              "editer",
-              "admin1",
-              "ac",
-              "b1a23",
-              "a231",
-              "abc",
-              "abc1",
-              "abc32"
-            ]
-          }
-        ],
-        "summary": "GET /operations/System/Log/GetIsOpen",
-        "tags": [
-          "System"
-        ]
-      }
-    },
     "/operations/System/Log/GetLikeLog": {
       "get": {
         "description": "```graphql\nquery MyQuery($ip: String = \"\", $method: String = \"\", $path: String = \"\", $id: Int = 10, $name: String = \"\") {\n  main_findManyadmin_apilog(\n    where: {method: {contains: $method}, path: {contains: $path}, updatedAt: {}, ip: {contains: $ip}, userName: {contains: $name}}\n  ) {\n    id\n    method\n    ip\n    path\n    ua\n    updatedAt\n    userName\n  }\n  main_findUniqueadmin_apilog(where: {id: $id}) {\n    id\n    ip\n    method\n    path\n    ua\n    updatedAt\n    userName\n  }\n}\n```",
         "operationId": "/operations/System/Log/GetLikeLog",
         "parameters": [
-          {
-            "in": "query",
-            "name": "id",
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "in": "query",
             "name": "ip",
@@ -3688,6 +3570,13 @@
             "name": "path",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -3902,7 +3791,7 @@
     },
     "/operations/System/Menu/CreateOne": {
       "post": {
-        "description": "```graphql\nmutation CreateOneMenu($label: String!, $path: String!, $icon: String, $level: Int!, $sort: Int!, $parentId: Int, $menuType: String!, $perms: String = \"\", $apiId: String = \"\", $create_time: DateTime! @injectCurrentDateTime(format: ISO8601)) @rbac(requireMatchAny: [admin, b1a23, a231, abc1]) {\n  data: main_createOneadmin_menu(\n    data: {label: $label, path: $path, icon: $icon, level: $level, sort: $sort, parentId: $parentId, menu_type: $menuType, perms: $perms, api_id: $apiId, create_time: $create_time}\n  ) {\n    id\n  }\n}\n```",
+        "description": "```graphql\nmutation CreateOneMenu($label: String!, $path: String!, $icon: String, $level: Int!, $sort: Int!, $parentId: Int, $menuType: String!, $perms: String = \"\", $apiId: String = \"\", $create_time: DateTime! @injectCurrentDateTime(format: ISO8601)) @rbac(requireMatchAny: [admin, b1a23, a231, abc1]) {\n  data: main_createOnecase_menu(\n    data: {label: $label, path: $path, icon: $icon, level: $level, sort: $sort, parentId: $parentId, menu_type: $menuType, perms: $perms, api_id: $apiId, create_time: $create_time}\n  ) {\n    id\n  }\n}\n```",
         "operationId": "/operations/System/Menu/CreateOne",
         "requestBody": {
           "content": {
@@ -4009,7 +3898,7 @@
     },
     "/operations/System/Menu/DeleteMany": {
       "post": {
-        "description": "```graphql\nmutation DeleteManyMenu ($ids: [Int]!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteManyadmin_menu(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n\n```",
+        "description": "```graphql\nmutation DeleteManyMenu ($ids: [Int]!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_deleteManycase_menu(where: {id:{in:$ids}}) {\n\t\tcount\n\t}\n}\n\n```",
         "operationId": "/operations/System/Menu/DeleteMany",
         "requestBody": {
           "content": {
@@ -4090,26 +3979,22 @@
       }
     },
     "/operations/System/Menu/DeleteOne": {
-      "post": {
-        "description": "```graphql\nmutation DeleteOneMenu($id: Int!) @rbac(requireMatchAny: [admin]) {\n  data: main_deleteOneadmin_menu(where: {id: $id}) {\n    id\n  }\n}\n```",
+      "get": {
+        "description": "```graphql\nquery MyQuery($menuIds: [Int]!) @rbac(requireMatchAny: [admin]) {\n  data: main_findManycase_menu(where: {id: {in: $menuIds}}) @transform(get: \"[].api_id\") {\n    api_id\n  }\n}\n```",
         "operationId": "/operations/System/Menu/DeleteOne",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "id": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "id"
-                ],
-                "type": "object"
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "menuIds",
+            "required": true,
+            "schema": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4119,15 +4004,10 @@
                     "data": {
                       "properties": {
                         "data": {
-                          "properties": {
-                            "id": {
-                              "type": "integer"
-                            }
+                          "items": {
+                            "type": "string"
                           },
-                          "required": [
-                            "id"
-                          ],
-                          "type": "object"
+                          "type": "array"
                         }
                       },
                       "type": "object"
@@ -4162,7 +4042,7 @@
             ]
           }
         ],
-        "summary": "POST /operations/System/Menu/DeleteOne",
+        "summary": "GET /operations/System/Menu/DeleteOne",
         "tags": [
           "System"
         ]
@@ -4235,7 +4115,7 @@
     },
     "/operations/System/Menu/GetApisByMenus": {
       "get": {
-        "description": "```graphql\nquery MyQuery($menuIds: [Int]!) @rbac(requireMatchAny: [admin]) {\n  data: main_findManyadmin_menu(where: {id: {in: $menuIds}}) @transform(get: \"[].api_id\") {\n    api_id\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($menuIds: [Int]!) @rbac(requireMatchAny: [admin]) {\n  data: main_findManycase_menu(where: {id: {in: $menuIds}}) @transform(get: \"[].api_id\") {\n    api_id\n  }\n} \n```",
         "operationId": "/operations/System/Menu/GetApisByMenus",
         "parameters": [
           {
@@ -4305,7 +4185,7 @@
     },
     "/operations/System/Menu/GetChildrenMenus": {
       "get": {
-        "description": "```graphql\nquery MyQuery($pid: Int!) @rbac(requireMatchAny: [admin]) {\n  data: main_findManyadmin_menu(where: {parentId: {equals: $pid}}) {\n    id\n    label\n    level\n    name\n    path\n    sort\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($pid: Int!) @rbac(requireMatchAny: [admin]) {\n  data: main_findManycase_menu(where: {parentId: {equals: $pid}}) {\n    id\n    label\n    level\n    name\n    path\n    sort\n  }\n}\n```",
         "operationId": "/operations/System/Menu/GetChildrenMenus",
         "parameters": [
           {
@@ -4401,26 +4281,9 @@
     },
     "/operations/System/Menu/GetList": {
       "get": {
-        "description": "```graphql\nquery GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_admin_menuOrderByWithRelationInput], $query: main_admin_menuWhereInput) @rbac(requireMatchAny: [admin]) {\n  data: main_findManyadmin_menu(\n    skip: $skip\n    take: $take\n    orderBy: $orderBy\n    where: {AND: $query}\n  ) {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n  }\n  total: main_aggregateadmin_menu(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n} \n```",
+        "description": "```graphql\nquery GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_case_menuOrderByWithRelationInput], $query: main_case_menuWhereInput) @rbac(requireMatchAny: [admin]) {\n  data: main_findManycase_menu(\n    skip: $skip\n    take: $take\n    orderBy: $orderBy\n    where: {AND: $query}\n  ) {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n  }\n  total: main_aggregatecase_menu(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n} \n```",
         "operationId": "/operations/System/Menu/GetList",
         "parameters": [
-          {
-            "in": "query",
-            "name": "orderBy",
-            "schema": {
-              "items": {
-                "$ref": "#/components/schemas/main_admin_menuOrderByWithRelationInput"
-              },
-              "type": "array"
-            }
-          },
-          {
-            "in": "query",
-            "name": "query",
-            "schema": {
-              "$ref": "#/components/schemas/main_admin_menuWhereInput"
-            }
-          },
           {
             "in": "query",
             "name": "skip",
@@ -4433,6 +4296,23 @@
             "name": "take",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/main_case_menuOrderByWithRelationInput"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "$ref": "#/components/schemas/main_case_menuWhereInput"
             }
           }
         ],
@@ -4526,7 +4406,7 @@
     },
     "/operations/System/Menu/GetMany": {
       "get": {
-        "description": "```graphql\nquery GetManyMenu @rbac(requireMatchAny: [admin]) {\n  data: main_findManyadmin_menu {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n    is_bottom\n    menu_type\n    perms\n    api_id\n    create_time\n  }\n}\n```",
+        "description": "```graphql\nquery GetManyMenu @rbac(requireMatchAny: [admin]) {\n  data: main_findManycase_menu {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n    is_bottom\n    menu_type\n    perms\n    api_id\n    create_time\n  }\n}\n```",
         "operationId": "/operations/System/Menu/GetMany",
         "responses": {
           "200": {
@@ -4631,19 +4511,19 @@
     },
     "/operations/System/Menu/GetMenuByLevelOrPid": {
       "get": {
-        "description": "```graphql\nquery MyQuery($level: Int, $pid: Int) {\n  data: main_findManyadmin_menu(where: {OR: [{level: {equals: $level}}, {parentId: {equals: $pid}}]}) {\n    id\n    label\n    is_bottom\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($level: Int, $pid: Int) {\n  data: main_findManycase_menu(where: {OR: [{level: {equals: $level}}, {parentId: {equals: $pid}}]}) {\n    id\n    label\n    is_bottom\n  }\n}\n```",
         "operationId": "/operations/System/Menu/GetMenuByLevelOrPid",
         "parameters": [
           {
             "in": "query",
-            "name": "pid",
+            "name": "level",
             "schema": {
               "type": "integer"
             }
           },
           {
             "in": "query",
-            "name": "level",
+            "name": "pid",
             "schema": {
               "type": "integer"
             }
@@ -4705,7 +4585,7 @@
     },
     "/operations/System/Menu/GetOne": {
       "get": {
-        "description": "```graphql\nquery GetOneMenu ($id: Int!) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {\n\tdata: main_findFirstadmin_menu(where: {id:{equals:$id}}) {\n\t\tid\n\t\tparentId\n\t\tlabel\n\t\tpath\n\t\ticon\n\t\tsort\n\t\tlevel\n\t}\n}\n\n```",
+        "description": "```graphql\nquery GetOneMenu ($id: Int!) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {\n\tdata: main_findFirstcase_menu(where: {id:{equals:$id}}) {\n\t\tid\n\t\tparentId\n\t\tlabel\n\t\tpath\n\t\ticon\n\t\tsort\n\t\tlevel\n\t}\n}\n\n```",
         "operationId": "/operations/System/Menu/GetOne",
         "parameters": [
           {
@@ -4798,7 +4678,7 @@
     },
     "/operations/System/Menu/UpdateOne": {
       "post": {
-        "description": "```graphql\nmutation UpdateOneMenu($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int, $parentId: Int ) @rbac(requireMatchAny: [eeee, admin, b1a23, a231, abc1]) {\n  data: main_updateOneadmin_menu(\n    data: {label: {set: $label}, path: {set: $path}, icon: {set: $icon}, sort: {set: $sort}, level: {set: $level}, parentId: {set: $parentId}}\n    where: {id: $id}\n  ) {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n  }\n}\n```",
+        "description": "```graphql\nmutation UpdateOneMenu($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int, $parentId: Int ) @rbac(requireMatchAny: [eeee, admin, b1a23, a231, abc1]) {\n  data: main_updateOnecase_menu(\n    data: {label: {set: $label}, path: {set: $path}, icon: {set: $icon}, sort: {set: $sort}, level: {set: $level}, parentId: {set: $parentId}}\n    where: {id: $id}\n  ) {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n  }\n}\n```",
         "operationId": "/operations/System/Menu/UpdateOne",
         "requestBody": {
           "content": {
@@ -4915,9 +4795,44 @@
       }
     },
     "/operations/System/Operation/GetMany": {
-      "get": {
-        "description": "```graphql\nquery MyQuery {\n  data: system_getAllApis {\n    createTime\n    id\n    liveQuery\n    method\n    operationType\n    title\n    enabled\n  }\n}\n```",
+      "post": {
+        "description": "```graphql\nmutation UpdateOneMenu($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int, $parentId: Int ) @rbac(requireMatchAny: [eeee, admin, b1a23, a231, abc1]) {\n  data: main_updateOnecase_menu(\n    data: {label: {set: $label}, path: {set: $path}, icon: {set: $icon}, sort: {set: $sort}, level: {set: $level}, parentId: {set: $parentId}}\n    where: {id: $id}\n  ) {\n    id\n    parentId\n    label\n    path\n    icon\n    sort\n    level\n  }\n}\n```",
         "operationId": "/operations/System/Operation/GetMany",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "integer"
+                  },
+                  "parentId": {
+                    "type": "integer"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "sort": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "content": {
@@ -4927,33 +4842,36 @@
                     "data": {
                       "properties": {
                         "data": {
-                          "items": {
-                            "properties": {
-                              "createTime": {
-                                "type": "string"
-                              },
-                              "enabled": {
-                                "type": "boolean"
-                              },
-                              "id": {
-                                "type": "integer"
-                              },
-                              "liveQuery": {
-                                "type": "boolean"
-                              },
-                              "method": {
-                                "type": "string"
-                              },
-                              "operationType": {
-                                "type": "string"
-                              },
-                              "title": {
-                                "type": "string"
-                              }
+                          "properties": {
+                            "icon": {
+                              "type": "string"
                             },
-                            "type": "object"
+                            "id": {
+                              "type": "integer"
+                            },
+                            "label": {
+                              "type": "string"
+                            },
+                            "level": {
+                              "type": "integer"
+                            },
+                            "parentId": {
+                              "type": "integer"
+                            },
+                            "path": {
+                              "type": "string"
+                            },
+                            "sort": {
+                              "type": "integer"
+                            }
                           },
-                          "type": "array"
+                          "required": [
+                            "id",
+                            "label",
+                            "sort",
+                            "level"
+                          ],
+                          "type": "object"
                         }
                       },
                       "type": "object"
@@ -4969,8 +4887,26 @@
             "description": "Bad Request"
           }
         },
-        "security": [],
-        "summary": "GET /operations/System/Operation/GetMany",
+        "security": [
+          {
+            "JWT": [
+              "admin",
+              "user",
+              "eeee",
+              "aaaa",
+              "aa",
+              "editer",
+              "admin1",
+              "ac",
+              "b1a23",
+              "a231",
+              "abc",
+              "abc1",
+              "abc32"
+            ]
+          }
+        ],
+        "summary": "POST /operations/System/Operation/GetMany",
         "tags": [
           "System"
         ]
@@ -4978,14 +4914,14 @@
     },
     "/operations/System/Perm/CreateMany": {
       "post": {
-        "description": "```graphql\nmutation MyQuery ($data: [main_permissionCreateManyInput]!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_createManypermission(skipDuplicates: true, data: $data) {\n\t\tcount\n\t}\n}\n\n```",
+        "description": "```graphql\nmutation MyQuery ($data: [main_admin_permissionCreateManyInput]!) @rbac(requireMatchAny: [admin]) {\n\tdata: main_createManyadmin_permission(skipDuplicates: true, data: $data) {\n\t\tcount\n\t}\n}\n\n```",
         "operationId": "/operations/System/Perm/CreateMany",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "definitions": {
-                  "main_permissionCreateManyInput": {
+                  "main_admin_permissionCreateManyInput": {
                     "properties": {
                       "createdAt": {
                         "type": [
@@ -5024,7 +4960,7 @@
                 "properties": {
                   "data": {
                     "items": {
-                      "$ref": "#/components/schemas/main_permissionCreateManyInput"
+                      "$ref": "#/components/schemas/main_admin_permissionCreateManyInput"
                     },
                     "type": "array"
                   }
@@ -5097,7 +5033,7 @@
     },
     "/operations/System/Perm/GetBindPerms": {
       "get": {
-        "description": "```graphql\nquery MyQuery {\n  data: main_findManypermission {\n    createdAt\n    enabled\n    method\n    path\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery {\n  data: main_findManyadmin_permission {\n    createdAt\n    enabled\n    method\n    path\n  }\n}\n```",
         "operationId": "/operations/System/Perm/GetBindPerms",
         "responses": {
           "200": {
@@ -5158,7 +5094,7 @@
     },
     "/operations/System/Perm/GetRolePerms": {
       "get": {
-        "description": "```graphql\nquery MyQuery($code: [String]!, $roleId: Int @internal, $menuId: Int @internal) {\n  data: main_findManyrole(where: {code: {in: $code}}) {\n    id @export(as: \"roleId\")\n    _join {\n      data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[]._join.main_findFirstadmin_menu.perms\") {\n        menu_id @export(as: \"menuId\")\n        _join {\n          main_findFirstadmin_menu(where: {id: {equals: $menuId}}) {\n            perms\n          }\n        }\n      }\n    }\n  }\n} \n```",
+        "description": "```graphql\nquery MyQuery($code: [String]!, $roleId: Int @internal, $menuId: Int @internal) {\n  data: main_findManyadmin_role(where: {code: {in: $code}}) {\n    id @export(as: \"roleId\")\n    _join {\n      data: main_findManyadmin_menu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[]._join.main_findFirstcase_menu.perms\") {\n        menu_id @export(as: \"menuId\")\n        _join {\n          main_findFirstcase_menu(where: {id: {equals: $menuId}}) {\n            perms\n          }\n        }\n      }\n    }\n  }\n} \n```",
         "operationId": "/operations/System/Perm/GetRolePerms",
         "parameters": [
           {
@@ -5233,7 +5169,7 @@
     },
     "/operations/System/Role/AddOne": {
       "post": {
-        "description": "```graphql\nmutation MyQuery ($code: String!, $remark: String!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_createOnerole(data: {code:$code,remark:$remark}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n}\n\n```",
+        "description": "```graphql\nmutation MyQuery ($code: String!, $remark: String!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_createOneadmin_role(data: {code:$code,remark:$remark}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n}\n\n```",
         "operationId": "/operations/System/Role/AddOne",
         "requestBody": {
           "content": {
@@ -5324,14 +5260,14 @@
     },
     "/operations/System/Role/BindMenus": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($data: [main_menu_roleCreateManyInput]!) {\n  data: main_createManymenu_role(data: $data) {\n    count\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($data: [main_admin_menu_roleCreateManyInput]!) {\n  data: main_createManyadmin_menu_role(data: $data) {\n    count\n  }\n}\n```",
         "operationId": "/operations/System/Role/BindMenus",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "definitions": {
-                  "main_menu_roleCreateManyInput": {
+                  "main_admin_menu_roleCreateManyInput": {
                     "properties": {
                       "id": {
                         "type": [
@@ -5355,7 +5291,7 @@
                 "properties": {
                   "data": {
                     "items": {
-                      "$ref": "#/components/schemas/main_menu_roleCreateManyInput"
+                      "$ref": "#/components/schemas/main_admin_menu_roleCreateManyInput"
                     },
                     "type": "array"
                   }
@@ -5482,7 +5418,7 @@
     },
     "/operations/System/Role/DeleteMany": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($ids: [Int]) {\n  data: main_deleteManyrole(where: {id: {in: $ids}}) {\n    count\n  }\n  main_deleteManyrole_user(where: {role_id: {in: $ids}}) {\n    count\n  }\n  main_deleteManymenu_role(where: {role_id: {in: $ids}}) {\n    count\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($ids: [Int]) {\n  data: main_deleteManyadmin_role(where: {id: {in: $ids}}) {\n    count\n  }\n  data1:main_deleteManyadmin_role_user(where: {role_id: {in: $ids}}) {\n    count\n  }\n  data2:main_deleteManyadmin_menu_role(where: {role_id: {in: $ids}}) {\n    count\n  }\n}\n```",
         "operationId": "/operations/System/Role/DeleteMany",
         "requestBody": {
           "content": {
@@ -5520,7 +5456,7 @@
                           ],
                           "type": "object"
                         },
-                        "main_deleteManymenu_role": {
+                        "data1": {
                           "properties": {
                             "count": {
                               "type": "integer"
@@ -5531,7 +5467,7 @@
                           ],
                           "type": "object"
                         },
-                        "main_deleteManyrole_user": {
+                        "data2": {
                           "properties": {
                             "count": {
                               "type": "integer"
@@ -5565,7 +5501,7 @@
     },
     "/operations/System/Role/DeleteOne": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($code: String!) @rbac(requireMatchAny: [user, eeee, admin, b1a23, a231, abc1]) {\n  data: main_deleteOnerole(where: {code: $code}) {\n    id @export(as: \"role_id\")\n  }\n  \n}\n```",
+        "description": "```graphql\nmutation MyQuery($code: String!) @rbac(requireMatchAny: [user, eeee, admin, b1a23, a231, abc1]) {\n  data: main_deleteOneadmin_role(where: {code: $code}) {\n    id @export(as: \"role_id\")\n  }\n  \n}\n```",
         "operationId": "/operations/System/Role/DeleteOne",
         "requestBody": {
           "content": {
@@ -5644,24 +5580,14 @@
     },
     "/operations/System/Role/GetList": {
       "get": {
-        "description": "```graphql\nquery GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_roleOrderByWithRelationInput], $query: main_roleWhereInput) @rbac(requireMatchAny: [user,admin,b1a23,a231,abc1]) {\n\tdata: main_findManyrole(skip: $skip, take: $take, orderBy: $orderBy, where: {AND:$query}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n\ttotal: main_aggregaterole(where: {AND:$query}) @transform(get: \"_count.id\") {\n\t\t_count {\n\t\t\tid\n\t\t}\n\t}\n}\n\n```",
+        "description": "```graphql\nquery GetRoleList ($take: Int = 10, $skip: Int = 0, $orderBy: [main_admin_roleOrderByWithRelationInput], $query: main_admin_roleWhereInput) @rbac(requireMatchAny: [user,admin,b1a23,a231,abc1]) {\n\tdata: main_findManyadmin_role(skip: $skip, take: $take, orderBy: $orderBy, where: {AND:$query}) {\n\t\tid\n\t\tcode\n\t\tremark\n\t}\n\ttotal: main_aggregateadmin_role(where: {AND:$query}) @transform(get: \"_count.id\") {\n\t\t_count {\n\t\t\tid\n\t\t}\n\t}\n}\n\n```",
         "operationId": "/operations/System/Role/GetList",
         "parameters": [
           {
             "in": "query",
-            "name": "orderBy",
-            "schema": {
-              "items": {
-                "$ref": "#/components/schemas/main_roleOrderByWithRelationInput"
-              },
-              "type": "array"
-            }
-          },
-          {
-            "in": "query",
             "name": "query",
             "schema": {
-              "$ref": "#/components/schemas/main_roleWhereInput"
+              "$ref": "#/components/schemas/main_admin_roleWhereInput"
             }
           },
           {
@@ -5676,6 +5602,16 @@
             "name": "take",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/main_admin_roleOrderByWithRelationInput"
+              },
+              "type": "array"
             }
           }
         ],
@@ -5756,7 +5692,7 @@
     },
     "/operations/System/Role/GetMany": {
       "get": {
-        "description": "```graphql\nquery MyQuery {\n  data: main_findManyrole {\n    code\n    remark\n    id\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery {\n  data: main_findManyadmin_role {\n    code\n    remark\n    id\n  }\n}\n```",
         "operationId": "/operations/System/Role/GetMany",
         "responses": {
           "200": {
@@ -5814,7 +5750,7 @@
     },
     "/operations/System/Role/GetOne": {
       "get": {
-        "description": "```graphql\nquery MyQuery ($id: Int!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_findFirstrole(where: {id:{equals:$id}}) {\n\t\tcode\n\t}\n}\n\n```",
+        "description": "```graphql\nquery MyQuery ($id: Int!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_findFirstadmin_role(where: {id:{equals:$id}}) {\n\t\tcode\n\t}\n}\n\n```",
         "operationId": "/operations/System/Role/GetOne",
         "parameters": [
           {
@@ -5886,7 +5822,7 @@
     },
     "/operations/System/Role/GetRoleMenuId": {
       "get": {
-        "description": "```graphql\nquery MyQuery($roleId: Int!) {\n  data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[].menu_id\") {\n    menu_id\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($roleId: Int!) {\n  data: main_findManyadmin_menu_role(where: {role_id: {equals: $roleId}}) @transform(get: \"[].menu_id\") {\n    menu_id\n  }\n}\n```",
         "operationId": "/operations/System/Role/GetRoleMenuId",
         "parameters": [
           {
@@ -5935,7 +5871,7 @@
     },
     "/operations/System/Role/UnBindMenus": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($roleId: Int!, $menuIds: [Int]!) {\n  main_deleteManymenu_role(\n    where: {role_id: {equals: $roleId}, menu_id: {in: $menuIds}}\n  ) {\n    count\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($roleId: Int!, $menuIds: [Int]!) {\n  main_deleteManyadmin_menu_role(\n    where: {role_id: {equals: $roleId}, menu_id: {in: $menuIds}}\n  ) {\n    count\n  }\n}\n```",
         "operationId": "/operations/System/Role/UnBindMenus",
         "requestBody": {
           "content": {
@@ -5969,7 +5905,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_deleteManymenu_role": {
+                        "main_deleteManyadmin_menu_role": {
                           "properties": {
                             "count": {
                               "type": "integer"
@@ -6068,7 +6004,7 @@
     },
     "/operations/System/Role/UpdateOne": {
       "post": {
-        "description": "```graphql\nmutation MyQuery ($remark: String, $id: Int!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_updateOnerole(data: {remark:{set:$remark}}, where: {id:$id}) {\n\t\tcode\n\t\tid\n\t\tremark\n\t}\n}\n\n```",
+        "description": "```graphql\nmutation MyQuery ($remark: String, $id: Int!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {\n\tdata: main_updateOneadmin_role(data: {remark:{set:$remark}}, where: {id:$id}) {\n\t\tcode\n\t\tid\n\t\tremark\n\t}\n}\n\n```",
         "operationId": "/operations/System/Role/UpdateOne",
         "requestBody": {
           "content": {
@@ -6158,7 +6094,7 @@
     },
     "/operations/System/Sub/SSE": {
       "get": {
-        "description": "```graphql\nquery MyQuery($roles: String!) {\n  data: main_findManyadmin_sub(where: {target_role: {equals: $roles}}) {\n    message\n    updatedAt\n    target_role\n    create_role\n    id\n    type\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($roles: String!) {\n  data: main_findManycase_sub(where: {target_role: {equals: $roles}}) {\n    message\n    updatedAt\n    target_role\n    create_role\n    id\n    type\n  }\n}\n```",
         "operationId": "/operations/System/Sub/SSE",
         "parameters": [
           {
@@ -6238,7 +6174,7 @@
     },
     "/operations/System/User/ConnectRole": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($userId: Int!, $roleId: Int!) {\n  data: main_createOnerole_user(data: {role_id: $roleId, user_id: $userId}) {\n    id\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($userId: Int!, $roleId: Int!) {\n  data: main_createOneadmin_role_user(data: {role_id: $roleId, user_id: $userId}) {\n    id\n  }\n}\n```",
         "operationId": "/operations/System/User/ConnectRole",
         "requestBody": {
           "content": {
@@ -6303,7 +6239,7 @@
     },
     "/operations/System/User/CountUsers": {
       "get": {
-        "description": "```graphql\nquery MyQuery @rbac(requireMatchAny: [admin]) {\n\tdata: main_aggregateuser {\n\t\tcount: _count {\n\t\t\tid\n\t\t}\n\t}\n}\n\n```",
+        "description": "```graphql\nquery MyQuery @rbac(requireMatchAny: [admin]) {\n\tdata: main_aggregateadmin_user {\n\t\tcount: _count {\n\t\t\tid\n\t\t}\n\t}\n}\n\n```",
         "operationId": "/operations/System/User/CountUsers",
         "responses": {
           "200": {
@@ -6465,7 +6401,7 @@
     },
     "/operations/System/User/DeleteOne": {
       "post": {
-        "description": "```graphql\nmutation MyQuery ($id: Int = 10) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {\n\tmain_deleteOneuser(where: {id:$id}) {\n\t\tid\n\t\tname\n\t\tpassword\n\t\tpassword_salt\n\t\tpassword_type\n\t\tphone\n\t\tuser_id\n\t}\n}\n\n```",
+        "description": "```graphql\nmutation MyQuery ($id: Int = 10) @rbac(requireMatchAny: [admin,b1a23,a231,abc1]) {\n\tmain_deleteOneadmin_user(where: {id:$id}) {\n\t\tid\n\t\tname\n\t\tpassword\n\t\tpassword_salt\n\t\tpassword_type\n\t\tphone\n\t\tuser_id\n\t}\n}\n\n```",
         "operationId": "/operations/System/User/DeleteOne",
         "requestBody": {
           "content": {
@@ -6489,7 +6425,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_deleteOneuser": {
+                        "main_deleteOneadmin_user": {
                           "properties": {
                             "id": {
                               "type": "integer"
@@ -6560,7 +6496,7 @@
     },
     "/operations/System/User/DisconnectRole": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($roleId: Int!, $userId: Int = 10) {\n  data: main_deleteOnerole_user(\n    where: {role_id_user_id: {role_id: $roleId, user_id: $userId}}\n  ) {\n    id\n  }\n} \n```",
+        "description": "```graphql\nmutation MyQuery($roleId: Int!, $userId: Int = 10) {\n  data: main_deleteOneadmin_role_user(\n    where: {role_id_user_id: {role_id: $roleId, user_id: $userId}}\n  ) {\n    id\n  }\n} \n```",
         "operationId": "/operations/System/User/DisconnectRole",
         "requestBody": {
           "content": {
@@ -6624,7 +6560,7 @@
     },
     "/operations/System/User/GetAllList": {
       "get": {
-        "description": "```graphql\nquery MyQuery() @rbac(requireMatchAny: [admin]) {\n  main_aggregateuser {\n    _count {\n      id\n    \n    }\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery() @rbac(requireMatchAny: [admin]) {\n  data:main_aggregateadmin_user {\n    _count {\n      id\n    \n    }\n  }\n}\n```",
         "operationId": "/operations/System/User/GetAllList",
         "responses": {
           "200": {
@@ -6634,7 +6570,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_aggregateuser": {
+                        "data": {
                           "properties": {
                             "_count": {
                               "properties": {
@@ -6652,7 +6588,7 @@
                         }
                       },
                       "required": [
-                        "main_aggregateuser"
+                        "data"
                       ],
                       "type": "object"
                     }
@@ -6694,9 +6630,16 @@
     },
     "/operations/System/User/GetLikeUser": {
       "get": {
-        "description": "```graphql\nquery MyQuery($name: String = \"\", $phone: String = \"\", $id: Int = 10, $userId: Int @internal, $roleId: Int @internal) {\n  main_findManyuser(\n    where: {name: {contains: $name, endsWith: \"\"}, phone: {endsWith: \"\", contains: $phone}}\n  ) {\n    id @export(as: \"userId\")\n    name\n    phone\n    createdAt: created_at\n    avatar\n    user_role: _join {\n      data:main_findManyrole_user(where: {user_id: {equals: $userId}}) {\n        role_id @export(as: \"roleId\")\n        role: _join {\n          main_findManyrole(where: {id: {equals: $roleId}}) {\n            code\n            id\n            remark\n          }\n        }\n      }\n    }\n  }\n  main_findUniqueuser(where: {id: $id}) {\n    id\n    name\n    phone\n   createdAt: created_at\n    avatar\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($name: String = \"\", $phone: String = \"\", $id: Int = 10, $userId: Int @internal, $roleId: Int @internal) {\n  data:main_findManyadmin_user(\n    where: {name: {contains: $name, endsWith: \"\"}, phone: {endsWith: \"\", contains: $phone}}\n  ) {\n    id @export(as: \"userId\")\n    name\n    phone\n    createdAt: created_at\n    avatar\n    user_role: _join {\n      data:main_findManyadmin_role_user(where: {user_id: {equals: $userId}}) {\n        role_id @export(as: \"roleId\")\n        role: _join {\n          main_findManyadmin_role(where: {id: {equals: $roleId}}) {\n            code\n            id\n            remark\n          }\n        }\n      }\n    }\n  }\n  data1:main_findUniqueadmin_user(where: {id: $id}) {\n    id\n    name\n    phone\n   createdAt: created_at\n    avatar\n  }\n}\n```",
         "operationId": "/operations/System/User/GetLikeUser",
         "parameters": [
+          {
+            "in": "query",
+            "name": "phone",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "in": "query",
             "name": "id",
@@ -6710,13 +6653,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "in": "query",
-            "name": "phone",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -6727,7 +6663,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_findManyuser": {
+                        "data": {
                           "items": {
                             "properties": {
                               "avatar": {
@@ -6752,7 +6688,7 @@
                                       "properties": {
                                         "role": {
                                           "properties": {
-                                            "main_findManyrole": {
+                                            "main_findManyadmin_role": {
                                               "items": {
                                                 "properties": {
                                                   "code": {
@@ -6776,7 +6712,7 @@
                                             }
                                           },
                                           "required": [
-                                            "main_findManyrole"
+                                            "main_findManyadmin_role"
                                           ],
                                           "type": "object"
                                         },
@@ -6808,7 +6744,7 @@
                           },
                           "type": "array"
                         },
-                        "main_findUniqueuser": {
+                        "data1": {
                           "properties": {
                             "avatar": {
                               "type": "string"
@@ -6834,7 +6770,7 @@
                         }
                       },
                       "required": [
-                        "main_findManyuser"
+                        "data"
                       ],
                       "type": "object"
                     }
@@ -6858,16 +6794,9 @@
     },
     "/operations/System/User/GetList": {
       "get": {
-        "description": "```graphql\nquery MyQuery($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput], $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, admin, b1a23, a231, abc1]) {\n  data: main_findManyuser(\n    skip: $skip\n    take: $take\n    where: {AND: $query}\n    orderBy: $orderBy\n  ) {\n    id @export(as: \"userId\")\n    name\n    avatar\n    createdAt: created_at\n    _join {\n      main_findManyrole_user(where: {user_id: {equals: $userId}}) {\n        role_id @export(as: \"roleId\")\n        user_id\n        _join {\n          main_findManyrole(where: {id: {equals: $roleId}}) {\n            id\n            remark\n            code\n          }\n        }\n      }\n    }\n    phone\n    user_id\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($skip: Int!, $take: Int!, $query: main_admin_userWhereInput = {}, $orderBy: [main_admin_userOrderByWithRelationInput], $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, admin, b1a23, a231, abc1]) {\n  data: main_findManyadmin_user(\n    skip: $skip\n    take: $take\n    where: {AND: $query}\n    orderBy: $orderBy\n  ) {\n    id @export(as: \"userId\")\n    name\n    avatar\n    createdAt: created_at\n    _join {\n      main_findManyadmin_role_user(where: {user_id: {equals: $userId}}) {\n        role_id @export(as: \"roleId\")\n        user_id\n        _join {\n          main_findManyadmin_role(where: {id: {equals: $roleId}}) {\n            id\n            remark\n            code\n          }\n        }\n      }\n    }\n    phone\n    user_id\n  }\n}\n```",
         "operationId": "/operations/System/User/GetList",
         "parameters": [
-          {
-            "in": "query",
-            "name": "query",
-            "schema": {
-              "$ref": "#/components/schemas/main_userWhereInput"
-            }
-          },
           {
             "in": "query",
             "name": "roleId",
@@ -6903,9 +6832,16 @@
             "name": "orderBy",
             "schema": {
               "items": {
-                "$ref": "#/components/schemas/main_userOrderByWithRelationInput"
+                "$ref": "#/components/schemas/main_admin_userOrderByWithRelationInput"
               },
               "type": "array"
+            }
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "$ref": "#/components/schemas/main_admin_userWhereInput"
             }
           }
         ],
@@ -6922,12 +6858,12 @@
                             "properties": {
                               "_join": {
                                 "properties": {
-                                  "main_findManyrole_user": {
+                                  "main_findManyadmin_role_user": {
                                     "items": {
                                       "properties": {
                                         "_join": {
                                           "properties": {
-                                            "main_findManyrole": {
+                                            "main_findManyadmin_role": {
                                               "items": {
                                                 "properties": {
                                                   "code": {
@@ -6951,7 +6887,7 @@
                                             }
                                           },
                                           "required": [
-                                            "main_findManyrole"
+                                            "main_findManyadmin_role"
                                           ],
                                           "type": "object"
                                         },
@@ -6973,7 +6909,7 @@
                                   }
                                 },
                                 "required": [
-                                  "main_findManyrole_user"
+                                  "main_findManyadmin_role_user"
                                 ],
                                 "type": "object"
                               },
@@ -7049,23 +6985,9 @@
     },
     "/operations/System/User/GetOne": {
       "get": {
-        "description": "```graphql\nquery MyQuery($name: String, $phone: String, $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, eeee, admin, b1a23, a231, abc1]) {\n  data: main_findFirstuser(\n    where: {OR: [{name: {equals: $name}}, {phone: {equals: $phone}}]}\n  ) {\n    id @export(as: \"userId\")\n    avatar\n    roles: _join @transform(get: \"main_findManyrole_user\") {\n      main_findManyrole_user(where: {user_id: {equals: $userId}}) @transform(get: \"[]._join.main_findFirstrole.code\") {\n        role_id @export(as: \"roleId\")\n        _join {\n          main_findFirstrole(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n    name\n    phone\n    user_id\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($name: String, $phone: String, $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, eeee, admin, b1a23, a231, abc1]) {\n  data: main_findFirstadmin_user(\n    where: {OR: [{name: {equals: $name}}, {phone: {equals: $phone}}]}\n  ) {\n    id @export(as: \"userId\")\n    avatar\n    roles: _join @transform(get: \"main_findManyadmin_role_user\") {\n      main_findManyadmin_role_user(where: {user_id: {equals: $userId}}) @transform(get: \"[]._join.main_findFirstadmin_role.code\") {\n        role_id @export(as: \"roleId\")\n        _join {\n          main_findFirstadmin_role(where: {id: {equals: $roleId}}) {\n            code\n          }\n        }\n      }\n    }\n    name\n    phone\n    user_id\n  }\n}\n```",
         "operationId": "/operations/System/User/GetOne",
         "parameters": [
-          {
-            "in": "query",
-            "name": "phone",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "roleId",
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "in": "query",
             "name": "userId",
@@ -7078,6 +7000,20 @@
             "name": "name",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "phone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "roleId",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -7160,7 +7096,7 @@
     },
     "/operations/System/User/GetRoleUsers": {
       "get": {
-        "description": "```graphql\nquery MyQuery($roleId: Int @internal, $userId: Int @internal, $code: String!) {\n  data:main_findManyrole(where: {code: {equals: $code}}) {\n    id @export(as: \"roleId\")\n    remark\n    code\n    role:_join {\n      main_findManyrole_user(where: {role_id: {equals: $roleId}}) {\n        role_id\n        user_id @export(as: \"userId\")\n        _join {\n          user:main_findManyuser(where: {id: {equals: $userId}}) {\n            id\n            name\n            avatar\n            created_at\n          }\n        }\n      }\n    }\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($roleId: Int @internal, $userId: Int @internal, $code: String!) {\n  data:main_findManyadmin_role(where: {code: {equals: $code}}) {\n    id @export(as: \"roleId\")\n    remark\n    code\n    role:_join {\n      main_findManyadmin_role_user(where: {role_id: {equals: $roleId}}) {\n        role_id\n        user_id @export(as: \"userId\")\n        _join {\n          user:main_findManyadmin_user(where: {id: {equals: $userId}}) {\n            id\n            name\n            avatar\n            created_at\n          }\n        }\n      }\n    }\n  }\n}\n```",
         "operationId": "/operations/System/User/GetRoleUsers",
         "parameters": [
           {
@@ -7194,7 +7130,7 @@
                               },
                               "role": {
                                 "properties": {
-                                  "main_findManyrole_user": {
+                                  "main_findManyadmin_role_user": {
                                     "items": {
                                       "properties": {
                                         "_join": {
@@ -7247,7 +7183,7 @@
                                   }
                                 },
                                 "required": [
-                                  "main_findManyrole_user"
+                                  "main_findManyadmin_role_user"
                                 ],
                                 "type": "object"
                               }
@@ -7288,7 +7224,7 @@
     },
     "/operations/System/User/GetUserByUserId": {
       "get": {
-        "description": "```graphql\nquery MyQuery($userId: String = \"\") @rbac(requireMatchAny: [admin, user]) {\n  main_findManyuser(where: {user_id: {equals: $userId}}) {\n    id\n    name\n    phone\n    avatar\n    user_id\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($userId: String = \"\") @rbac(requireMatchAny: [admin, user]) {\n  data:main_findManyadmin_user(where: {user_id: {equals: $userId}}) {\n    id\n    name\n    phone\n    avatar\n    user_id\n  }\n}\n```",
         "operationId": "/operations/System/User/GetUserByUserId",
         "parameters": [
           {
@@ -7307,7 +7243,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_findManyuser": {
+                        "data": {
                           "items": {
                             "properties": {
                               "avatar": {
@@ -7336,7 +7272,7 @@
                         }
                       },
                       "required": [
-                        "main_findManyuser"
+                        "data"
                       ],
                       "type": "object"
                     }
@@ -7378,7 +7314,7 @@
     },
     "/operations/System/User/GetUserInfo": {
       "get": {
-        "description": "```graphql\nquery MyQuery($equals: String = \"\") {\n  main_findManyuser(where: {name: {equals: $equals}}) {\n    avatar\n    country_code\n    created_at\n    id\n    name\n    phone\n    user_id\n  }\n} \n```",
+        "description": "```graphql\nquery MyQuery($equals: String = \"\") {\n  data:main_findManyadmin_user(where: {name: {equals: $equals}}) {\n    avatar\n    country_code\n    created_at\n    id\n    name\n    phone\n    user_id\n  }\n} \n```",
         "operationId": "/operations/System/User/GetUserInfo",
         "parameters": [
           {
@@ -7397,7 +7333,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "main_findManyuser": {
+                        "data": {
                           "items": {
                             "properties": {
                               "avatar": {
@@ -7432,7 +7368,7 @@
                         }
                       },
                       "required": [
-                        "main_findManyuser"
+                        "data"
                       ],
                       "type": "object"
                     }
@@ -7456,7 +7392,7 @@
     },
     "/operations/System/User/GetUserRole": {
       "get": {
-        "description": "```graphql\nquery MyQuery($userId: Int!, $roleId: Int @internal) {\n  data: main_findManyrole_user(where: {user_id: {equals: $userId}}) @transform(get: \"[].data\") {\n    role_id @export(as: \"roleId\")\n    data: _join @transform(get: \"main_findFirstrole\") {\n      main_findFirstrole(where: {id: {equals: $roleId}}) {\n        remark\n        code\n        id\n      }\n    }\n  }\n}\n```",
+        "description": "```graphql\nquery MyQuery($userId: Int!, $roleId: Int @internal) {\n  data: main_findManyadmin_role_user(where: {user_id: {equals: $userId}}) @transform(get: \"[].data\") {\n    role_id @export(as: \"roleId\")\n    data: _join @transform(get: \"main_findFirstadmin_role\") {\n      main_findFirstadmin_role(where: {id: {equals: $roleId}}) {\n        remark\n        code\n        id\n      }\n    }\n  }\n}\n```",
         "operationId": "/operations/System/User/GetUserRole",
         "parameters": [
           {
@@ -7521,7 +7457,7 @@
     },
     "/operations/System/User/UpdateOne": {
       "post": {
-        "description": "```graphql\nmutation MyQuery($avatar: String = \"\", $id: Int = 10, $password: String!, $phone: String = \"\", $name: String = \"\", $userId: String!) {\n  casdoor_apiUpdateUser(\n    POSTApiUpdate_userInput: {password: $password, name: $name, phone: $phone, userId: $userId}\n  ) {\n    msg\n    status\n  }\n  main_updateOneuser(\n    data: {avatar: {set: $avatar}, name: {set: $name}, phone: {set: $phone}}\n    where: {id: $id}\n  ) {\n    avatar\n  }\n}\n```",
+        "description": "```graphql\nmutation MyQuery($avatar: String = \"\", $id: Int = 10, $password: String!, $phone: String = \"\", $name: String = \"\", $userId: String!) {\n  casdoor:casdoor_apiUpdateUser(\n    POSTApiUpdate_userInput: {password: $password, name: $name, phone: $phone, userId: $userId}\n  ) {\n    msg\n    status\n  }\n  data:main_updateOneadmin_user(\n    data: {avatar: {set: $avatar}, name: {set: $name}, phone: {set: $phone}}\n    where: {id: $id}\n  ) {\n    avatar\n  }\n}\n```",
         "operationId": "/operations/System/User/UpdateOne",
         "requestBody": {
           "content": {
@@ -7564,7 +7500,7 @@
                   "properties": {
                     "data": {
                       "properties": {
-                        "casdoor_apiUpdateUser": {
+                        "casdoor": {
                           "properties": {
                             "msg": {
                               "type": "string"
@@ -7575,7 +7511,7 @@
                           },
                           "type": "object"
                         },
-                        "main_updateOneuser": {
+                        "data": {
                           "properties": {
                             "avatar": {
                               "type": "string"
@@ -7691,7 +7627,7 @@
   ],
   "servers": [
     {
-      "url": "http://47.101.68.119:9991"
+      "url": "http://47.101.69.119:9991"
     }
   ]
 }

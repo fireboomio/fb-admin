@@ -1,5 +1,5 @@
 query MyQuery($userId: String = "") @rbac(requireMatchAny: [admin, user]) {
-  main_findManyuser(where: {user_id: {equals: $userId}}) {
+  data:main_findManyadmin_user(where: {user_id: {equals: $userId}}) {
     id
     name
     phone

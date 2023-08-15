@@ -1,16 +1,16 @@
 query GetOnePost($id: Int!) @rbac(requireMatchAny: [user, eeee, admin, abc, abc32]) {
-  data: main_findFirstadmin_post(where: {id: {equals: $id}}) {
+  data: main_findFirstcase_post(where: {id: {equals: $id}}) {
     id
     title
     poster
     published_at
     author
     content
-    admin_category {
+    case_category {
       id
       name
     }
-    user {
+    admin_user {
       id
       name
     }

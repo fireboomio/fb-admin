@@ -1,5 +1,5 @@
 query MyQuery @rbac(requireMatchAny: [admin]) {
-  main_findManyprovider {
+  data:main_findManyadmin_provider {
     client_id
     client_secret
     created_time

@@ -1,11 +1,11 @@
 query MyQuery($userId: String!, $id: Int @internal, $roleId: Int @internal) {
-  data: main_findFirstuser(where: {user_id: {equals: $userId}}) @transform(get: "_join.main_findManyrole_user") {
+  data: main_findFirstadmin_user(where: {user_id: {equals: $userId}}) @transform(get: "_join.main_findManyadmin_role_user") {
     id @export(as: "id")
     _join {
-      main_findManyrole_user(where: {user_id: {equals: $id}}) @transform(get: "[]._join") {
+      main_findManyadmin_role_user(where: {user_id: {equals: $id}}) @transform(get: "[]._join") {
         role_id @export(as: "roleId")
-        _join @transform(get: "main_findFirstrole.code") {
-          main_findFirstrole(where: {id: {equals: $roleId}}) {
+        _join @transform(get: "main_findFirstadmin_role.code") {
+          main_findFirstadmin_role(where: {id: {equals: $roleId}}) {
             code
           }
         }

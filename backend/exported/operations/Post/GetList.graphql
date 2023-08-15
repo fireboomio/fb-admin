@@ -1,5 +1,5 @@
-query GetPostList($take: Int = 10, $skip: Int = 0, $query: main_admin_postWhereInput) @rbac(requireMatchAny: [eeee, admin, abc, abc32]) {
-  data: main_findManyadmin_post(
+query GetPostList($take: Int = 10, $skip: Int = 0, $query: main_case_postWhereInput) @rbac(requireMatchAny: [eeee, admin, abc, abc32]) {
+  data: main_findManycase_post(
     skip: $skip
     take: $take
     where: {AND: $query}
@@ -11,12 +11,12 @@ query GetPostList($take: Int = 10, $skip: Int = 0, $query: main_admin_postWhereI
     published_at
     author
     content
-    admin_category {
+    case_category {
       id
       name
     }
   }
-  total: main_aggregateadmin_post(where: {AND: $query}) @transform(get: "_count.id") {
+  total: main_aggregatecase_post(where: {AND: $query}) @transform(get: "_count.id") {
     _count {
       id
     }

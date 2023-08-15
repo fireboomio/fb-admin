@@ -1,1 +1,1 @@
-{"projects":{"app":{"name":"app","schemaPath":"exported/generated/fireboom.app.schema.graphql","extensions":{"endpoints":{"app":{"url":"http://47.101.68.119:9991/app/main/graphql","headers":{"user-agent":"WunderGraph Client"},"introspect":false}}}}}}
+{"projects":{"app":{"name":"app","schemaPath":"exported/generated/fireboom.app.schema.graphql","extensions":{"endpoints":{"app":{"url":"http://47.101.69.119:9991/app/main/graphql","headers":{"user-agent":"WunderGraph Client"},"introspect":false}}}}}}

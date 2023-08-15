@@ -1,5 +1,5 @@
 query MyQuery($roleId: Int!) {
-  data: main_findManymenu_role(where: {role_id: {equals: $roleId}}) @transform(get: "[].menu_id") {
+  data: main_findManyadmin_menu_role(where: {role_id: {equals: $roleId}}) @transform(get: "[].menu_id") {
     menu_id
   }
 }

@@ -1,5 +1,5 @@
-query MyQuery($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $orderBy: [main_userOrderByWithRelationInput], $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, admin, b1a23, a231, abc1]) {
-  data: main_findManyuser(
+query MyQuery($skip: Int!, $take: Int!, $query: main_admin_userWhereInput = {}, $orderBy: [main_admin_userOrderByWithRelationInput], $userId: Int, $roleId: Int) @rbac(requireMatchAny: [user, admin, b1a23, a231, abc1]) {
+  data: main_findManyadmin_user(
     skip: $skip
     take: $take
     where: {AND: $query}
@@ -10,11 +10,11 @@ query MyQuery($skip: Int!, $take: Int!, $query: main_userWhereInput = {}, $order
     avatar
     createdAt: created_at
     _join {
-      main_findManyrole_user(where: {user_id: {equals: $userId}}) {
+      main_findManyadmin_role_user(where: {user_id: {equals: $userId}}) {
         role_id @export(as: "roleId")
         user_id
         _join {
-          main_findManyrole(where: {id: {equals: $roleId}}) {
+          main_findManyadmin_role(where: {id: {equals: $roleId}}) {
             id
             remark
             code

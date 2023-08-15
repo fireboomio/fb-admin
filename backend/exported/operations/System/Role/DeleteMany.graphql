@@ -1,11 +1,11 @@
 mutation MyQuery($ids: [Int]) {
-  data: main_deleteManyrole(where: {id: {in: $ids}}) {
+  data: main_deleteManyadmin_role(where: {id: {in: $ids}}) {
     count
   }
-  main_deleteManyrole_user(where: {role_id: {in: $ids}}) {
+  data1:main_deleteManyadmin_role_user(where: {role_id: {in: $ids}}) {
     count
   }
-  main_deleteManymenu_role(where: {role_id: {in: $ids}}) {
+  data2:main_deleteManyadmin_menu_role(where: {role_id: {in: $ids}}) {
     count
   }
 }
