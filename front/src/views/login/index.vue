@@ -26,6 +26,7 @@ import User from "@iconify-icons/ri/user-3-fill";
 import { usePermissionStoreHook } from "@/store/modules/permission";
 import { setInterval } from "timers";
 import { removeToken } from "@/utils/auth";
+import { Md5 } from "ts-md5"
 
 defineOptions({
   name: "Login"
@@ -49,6 +50,9 @@ const ruleForm = reactive({
   username: "zql",
   password: "abc1234"
 });
+// const salt = "afagdgdsgs"
+
+// pwd = md5.encode(password + salt.charAt(1));
 
 
 const onLogin = async (formEl: FormInstance | undefined) => {

@@ -68,7 +68,6 @@ onMounted(() => {
   emitter.on("logoChange", key => {
     showLogo.value = key;
   });
-  menuData.value[3].children[1].children.pop();
 });
 
 onBeforeUnmount(() => {

@@ -41,7 +41,6 @@ export const getLogin = (data?: object) => {
 
 /** 刷新token */
 export const refreshTokenApi = (data?: object) => {
-  console.log(data);
   return axios.post<RefreshTokenResult>("/operations/Casdoor/RefreshToken", {
     data
   });
@@ -88,4 +87,14 @@ export const getUserLike = (data: object) => {
  */
 export const getUserByUserId = (userId) => {
   return axios.get<any>(`/operations/System/User/GetUserByUserId?userId=${userId}`)
+}
+/**
+ * 根据用户名查询角色信息
+ */
+export const getUserInfoByName = (equals: string) => {
+  return axios.get<any>("/operations/System/User/GetUserInfo", {
+    params: {
+      equals
+    }
+  })
 }

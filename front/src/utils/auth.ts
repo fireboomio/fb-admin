@@ -1,7 +1,6 @@
 import Cookies from "js-cookie";
 import { storageSession } from "@pureadmin/utils";
 import { useUserStoreHook } from "@/store/modules/user";
-import { da } from "element-plus/es/locale";
 
 export interface DataInfo<T> {
   /** token */
@@ -38,9 +37,7 @@ export function getToken(): DataInfo<number> {
  */
 export function setToken(data) {
   const { accessToken, refreshToken, expires } = data;
-  console.log(data);
   const cookieString = JSON.stringify({ accessToken, expires });
-
   expires
     ? Cookies.set(TokenKey, cookieString, { expires })
     : Cookies.set(TokenKey, cookieString);

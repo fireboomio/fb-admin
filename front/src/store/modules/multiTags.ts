@@ -13,8 +13,8 @@ export const useMultiTagsStore = defineStore({
       `${responsiveStorageNameSpace()}configure`
     )?.multiTagsCache
       ? storageLocal().getItem<StorageConfigs>(
-          `${responsiveStorageNameSpace()}tags`
-        )
+        `${responsiveStorageNameSpace()}tags`
+      )
       : [...routerArrays],
     multiTagsCache: storageLocal().getItem<StorageConfigs>(
       `${responsiveStorageNameSpace()}configure`
