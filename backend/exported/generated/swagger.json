@@ -427,88 +427,88 @@
         "properties": {
           "code": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "createdAt": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "deletedAt": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "id": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "ip": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "method": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "path": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "ua": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "updatedAt": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "userId": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "userName": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
@@ -557,24 +557,24 @@
         "properties": {
           "code": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "id": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "remark": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
@@ -612,8 +612,8 @@
         "properties": {
           "avatar": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
@@ -623,72 +623,72 @@
           },
           "country_code": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "created_at": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "id": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "name": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "password": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "password_salt": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "password_type": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "phone": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "user_id": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
@@ -776,104 +776,104 @@
         "properties": {
           "api_id": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "create_time": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "icon": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "id": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "is_bottom": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "label": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "level": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "menu_type": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "name": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "parentId": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "path": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "perms": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
           },
           "sort": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
@@ -941,8 +941,8 @@
         "properties": {
           "_count": {
             "enum": [
-              "asc",
-              "desc"
+              "desc",
+              "asc"
             ],
             "title": "main_SortOrder",
             "type": "string"
@@ -1959,14 +1959,14 @@
         "parameters": [
           {
             "in": "query",
-            "name": "skip",
+            "name": "take",
             "schema": {
               "type": "integer"
             }
           },
           {
             "in": "query",
-            "name": "take",
+            "name": "skip",
             "schema": {
               "type": "integer"
             }
@@ -2060,6 +2060,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
             "name": "author",
             "schema": {
               "type": "string"
@@ -2077,13 +2084,6 @@
             "name": "id",
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "title",
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -2215,6 +2215,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "take",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "query",
             "schema": {
               "$ref": "#/components/schemas/main_case_postWhereInput"
@@ -2223,13 +2230,6 @@
           {
             "in": "query",
             "name": "skip",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "take",
             "schema": {
               "type": "integer"
             }
@@ -3546,20 +3546,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "ip",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "method",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "name": "name",
             "schema": {
               "type": "string"
@@ -3577,6 +3563,20 @@
             "name": "id",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "ip",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "method",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -4286,13 +4286,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "skip",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
             "name": "take",
             "schema": {
               "type": "integer"
@@ -4313,6 +4306,13 @@
             "name": "query",
             "schema": {
               "$ref": "#/components/schemas/main_case_menuWhereInput"
+            }
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -4516,14 +4516,14 @@
         "parameters": [
           {
             "in": "query",
-            "name": "level",
+            "name": "pid",
             "schema": {
               "type": "integer"
             }
           },
           {
             "in": "query",
-            "name": "pid",
+            "name": "level",
             "schema": {
               "type": "integer"
             }
@@ -5585,20 +5585,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "query",
-            "schema": {
-              "$ref": "#/components/schemas/main_admin_roleWhereInput"
-            }
-          },
-          {
-            "in": "query",
-            "name": "skip",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
             "name": "take",
             "schema": {
               "type": "integer"
@@ -5612,6 +5598,20 @@
                 "$ref": "#/components/schemas/main_admin_roleOrderByWithRelationInput"
               },
               "type": "array"
+            }
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "$ref": "#/components/schemas/main_admin_roleWhereInput"
+            }
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -6635,13 +6635,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "phone",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "name": "id",
             "schema": {
               "type": "integer"
@@ -6650,6 +6643,13 @@
           {
             "in": "query",
             "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "phone",
             "schema": {
               "type": "string"
             }
@@ -6799,6 +6799,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "query",
+            "schema": {
+              "$ref": "#/components/schemas/main_admin_userWhereInput"
+            }
+          },
+          {
+            "in": "query",
             "name": "roleId",
             "schema": {
               "type": "integer"
@@ -6835,13 +6842,6 @@
                 "$ref": "#/components/schemas/main_admin_userOrderByWithRelationInput"
               },
               "type": "array"
-            }
-          },
-          {
-            "in": "query",
-            "name": "query",
-            "schema": {
-              "$ref": "#/components/schemas/main_admin_userWhereInput"
             }
           }
         ],
@@ -6990,6 +6990,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "roleId",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "userId",
             "schema": {
               "type": "integer"
@@ -7007,13 +7014,6 @@
             "name": "phone",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "roleId",
-            "schema": {
-              "type": "integer"
             }
           }
         ],
