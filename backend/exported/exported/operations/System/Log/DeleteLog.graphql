@@ -1,5 +1,0 @@
-mutation MyQuery($equals: [Int] = 10) @rbac(requireMatchAny: [admin, user]) {
-  main_deleteManyadmin_apilog(where: {id: {in: $equals}}) {
-    count
-  }
-}

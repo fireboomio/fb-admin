@@ -1,7 +1,7 @@
 type Query {
+  system_getAllRoles: [system_QueryGetAllRoles]
   system_getRoleBindApis(code: String!, roleType: system_Query_getRoleBindApis_roleType): [system_QueryGetRoleBindApis]
   system_getAllApis: [system_QueryGetAllApis]
-  system_getAllRoles: [system_QueryGetAllRoles]
   statistics_GetMonthlySales: [statistics_GetMonthlySales]
   statistics_GetSaleTypePercent: [statistics_GetSaleTypePercent]
   statistics_GetSalesTop10: [statistics_GetSalesTop10]
@@ -119,17 +119,24 @@ type Query {
   main_groupBycase_visitlog(where: main_case_visitlogWhereInput, orderBy: [main_case_visitlogOrderByWithAggregationInput], by: [main_Case_visitlogScalarFieldEnum]!, having: main_case_visitlogScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_Case_visitlogGroupByOutputType]!
   main_findUniquecase_visitlog(where: main_case_visitlogWhereUniqueInput!): main_case_visitlog
   main_findUniquecase_visitlogOrThrow(where: main_case_visitlogWhereUniqueInput!): main_case_visitlog
+  main_findFirstmytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int, distinct: [main_MytestScalarFieldEnum]): main_mytest
+  main_findFirstmytestOrThrow(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int, distinct: [main_MytestScalarFieldEnum]): main_mytest
+  main_findManymytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int, distinct: [main_MytestScalarFieldEnum]): [main_mytest]!
+  main_aggregatemytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int): main_AggregateMytest!
+  main_groupBymytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithAggregationInput], by: [main_MytestScalarFieldEnum]!, having: main_mytestScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_MytestGroupByOutputType]!
+  main_findUniquemytest(where: main_mytestWhereUniqueInput!): main_mytest
+  main_findUniquemytestOrThrow(where: main_mytestWhereUniqueInput!): main_mytest
 }
 
 type Mutation {
   system_bindRoleApis(POSTApiV1RoleBindApiInput: system_POSTApiV1RoleBindApiInput): system_MutationBindRoleApis
   system_unBindRoleApis(POSTApiV1RoleUnbindApiInput: system_POSTApiV1RoleUnbindApiInput): system_MutationUnBindRoleApis
-  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
-  casdoor_apiAddUser(POSTApiAdd_userInput: casdoor_POSTApiAdd_userInput): casdoor_objectResponse
-  casdoor_apiUpdateUser(POSTApiUpdate_userInput: casdoor_POSTApiUpdate_userInput): casdoor_objectResponse
   casdoor_apiLogin(POSTApiLoginInput: casdoor_POSTApiLoginInput): casdoor_apiUserResponse
   casdoor_apiRefreshToken(POSTApiRefresh_tokenInput: casdoor_POSTApiRefresh_tokenInput): casdoor_apiUserResponse
   casdoor_apiSendVerificationCode(POSTApiSend_verification_codeInput: casdoor_POSTApiSend_verification_codeInput): casdoor_objectResponse
+  casdoor_apiUpdateProvider(POSTApiUpdate_providerInput: casdoor_POSTApiUpdate_providerInput): casdoor_objectResponse
+  casdoor_apiAddUser(POSTApiAdd_userInput: casdoor_POSTApiAdd_userInput): casdoor_objectResponse
+  casdoor_apiUpdateUser(POSTApiUpdate_userInput: casdoor_POSTApiUpdate_userInput): casdoor_objectResponse
   main_createOneadmin_apilog(data: main_admin_apilogCreateInput!): main_admin_apilog
   main_upsertOneadmin_apilog(where: main_admin_apilogWhereUniqueInput!, create: main_admin_apilogCreateInput!, update: main_admin_apilogUpdateInput!): main_admin_apilog
   main_createManyadmin_apilog(data: [main_admin_apilogCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
@@ -242,27 +249,40 @@ type Mutation {
   main_updateOnecase_visitlog(data: main_case_visitlogUpdateInput!, where: main_case_visitlogWhereUniqueInput!): main_case_visitlog
   main_updateManycase_visitlog(data: main_case_visitlogUpdateManyMutationInput!, where: main_case_visitlogWhereInput): main_AffectedRowsOutput
   main_deleteManycase_visitlog(where: main_case_visitlogWhereInput): main_AffectedRowsOutput
+  main_createOnemytest(data: main_mytestCreateInput!): main_mytest
+  main_upsertOnemytest(where: main_mytestWhereUniqueInput!, create: main_mytestCreateInput!, update: main_mytestUpdateInput!): main_mytest
+  main_createManymytest(data: [main_mytestCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+  main_deleteOnemytest(where: main_mytestWhereUniqueInput!): main_mytest
+  main_updateOnemytest(data: main_mytestUpdateInput!, where: main_mytestWhereUniqueInput!): main_mytest
+  main_updateManymytest(data: main_mytestUpdateManyMutationInput!, where: main_mytestWhereInput): main_AffectedRowsOutput
+  main_deleteManymytest(where: main_mytestWhereInput): main_AffectedRowsOutput
   main_executeRaw(query: String!, parameters: main_Json): main_Json
   main_queryRaw(query: String!, parameters: main_Json): main_Json
 }
 
+type system_QueryGetAllRoles {
+  code: String
+  remark: String
+  _join: Query!
+}
+
 type system_QueryGetRoleBindApis {
-  deleteTime: String
-  id: Int
-  operationType: String
   updateTime: String
+  enabled: Boolean
+  operationType: String
+  roles: String
+  title: String
+  content: String
+  createTime: String
+  deleteTime: String
+  method: String
   remark: String
   restUrl: String
-  content: String
-  enabled: Boolean
-  method: String
   roleType: String
-  roles: String
-  createTime: String
+  id: Int
   illegal: Boolean
   isPublic: Boolean
   liveQuery: Boolean
-  title: String
   _join: Query!
 }
 
@@ -275,21 +295,21 @@ enum system_Query_getRoleBindApis_roleType {
 
 type system_QueryGetAllApis {
   roles: String
-  updateTime: String
-  createTime: String
-  enabled: Boolean
-  operationType: String
-  liveQuery: Boolean
-  remark: String
-  title: String
-  content: String
-  deleteTime: String
   isPublic: Boolean
   method: String
-  restUrl: String
   roleType: String
+  enabled: Boolean
+  content: String
+  createTime: String
+  deleteTime: String
   id: Int
   illegal: Boolean
+  operationType: String
+  title: String
+  updateTime: String
+  liveQuery: Boolean
+  remark: String
+  restUrl: String
   _join: Query!
 }
 
@@ -299,10 +319,10 @@ type system_MutationBindRoleApis {
 }
 
 input system_POSTApiV1RoleBindApiInput {
-  apis: [Int]!
-  allRoles: [String]!
   roleType: system_POSTApiV1RoleBindApiInput_roleType
   roleCode: String!
+  apis: [Int]!
+  allRoles: [String]!
 }
 
 enum system_POSTApiV1RoleBindApiInput_roleType {
@@ -330,9 +350,9 @@ enum system_POSTApiV1RoleUnbindApiInput_roleType {
   denyMatchAny
 }
 
-type system_QueryGetAllRoles {
-  remark: String
-  code: String
+type statistics_GetVisitTrending {
+  count: Int
+  days: String
   _join: Query!
 }
 
@@ -343,9 +363,9 @@ type statistics_GetSaleTypePercent {
   _join: Query!
 }
 
-type statistics_GetVisitTrending {
-  count: Int
-  days: String
+type statistics_GetSalesTop10 {
+  shopName: String
+  totalSales: Float
   _join: Query!
 }
 
@@ -353,48 +373,6 @@ type statistics_GetMonthlySales {
   months: String
   totalSales: Float
   _join: Query!
-}
-
-type statistics_GetSalesTop10 {
-  shopName: String
-  totalSales: Float
-  _join: Query!
-}
-
-type casdoor_objectResponse {
-  msg: String
-  status: Int
-  _join: Query!
-}
-
-input casdoor_POSTApiUpdate_providerInput {
-  clientId: String!
-  clientSecret: String!
-  signName: String!
-  templateCode: String!
-}
-
-type casdoor_objectUserinfo {
-  phone: String
-  preferred_username: String
-  _join: Query!
-}
-
-input casdoor_POSTApiAdd_userInput {
-  passwordType: String
-  phone: String!
-  countryCode: String
-  name: String!
-  password: String!
-}
-
-input casdoor_POSTApiUpdate_userInput {
-  name: String!
-  password: String!
-  passwordType: String
-  phone: String!
-  countryCode: String
-  userId: String!
 }
 
 type casdoor_apiUserResponse {
@@ -405,19 +383,19 @@ type casdoor_apiUserResponse {
 }
 
 type casdoor_objectTokenRes {
+  refreshToken: String
   accessToken: String
   expireIn: Int
-  refreshToken: String
   _join: Query!
 }
 
 input casdoor_POSTApiLoginInput {
+  code: String!
+  password: String!
   loginType: String!
   username: String!
   phone: String!
   countryCode: String
-  code: String!
-  password: String!
 }
 
 input casdoor_POSTApiRefresh_tokenInput {
@@ -426,8 +404,44 @@ input casdoor_POSTApiRefresh_tokenInput {
   refresh_token: String!
 }
 
+type casdoor_objectResponse {
+  msg: String
+  status: Int
+  _join: Query!
+}
+
 input casdoor_POSTApiSend_verification_codeInput {
+  countryCode: String
   dest: String!
+}
+
+input casdoor_POSTApiUpdate_providerInput {
+  signName: String!
+  templateCode: String!
+  clientId: String!
+  clientSecret: String!
+}
+
+type casdoor_objectUserinfo {
+  phone: String
+  preferred_username: String
+  _join: Query!
+}
+
+input casdoor_POSTApiAdd_userInput {
+  name: String!
+  password: String!
+  passwordType: String
+  phone: String!
+  countryCode: String
+}
+
+input casdoor_POSTApiUpdate_userInput {
+  userId: String!
+  name: String!
+  password: String!
+  passwordType: String
+  phone: String!
   countryCode: String
 }
 
@@ -3845,6 +3859,163 @@ type main_Case_visitlogGroupByOutputType {
   _join: Query!
 }
 
+input main_mytestWhereInput {
+  AND: main_mytestWhereInput
+  OR: [main_mytestWhereInput]
+  NOT: main_mytestWhereInput
+  id: main_IntFilter
+  createdAt: main_DateTimeFilter
+  updatedAt: main_DateTimeFilter
+  deletedAt: main_DateTimeNullableFilter
+  myAttr: main_StringFilter
+}
+
+input main_mytestOrderByWithRelationInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  deletedAt: main_SortOrder
+  myAttr: main_SortOrder
+}
+
+input main_mytestWhereUniqueInput {
+  id: Int
+}
+
+enum main_MytestScalarFieldEnum {
+  id
+  createdAt
+  updatedAt
+  deletedAt
+  myAttr
+}
+
+type main_mytest {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  myAttr: String!
+  _join: Query!
+}
+
+type main_MytestCountAggregateOutputType {
+  id: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  deletedAt: Int!
+  myAttr: Int!
+  _all: Int!
+  _join: Query!
+}
+
+type main_MytestAvgAggregateOutputType {
+  id: Float
+  _join: Query!
+}
+
+type main_MytestSumAggregateOutputType {
+  id: Int
+  _join: Query!
+}
+
+type main_MytestMinAggregateOutputType {
+  id: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+  myAttr: String
+  _join: Query!
+}
+
+type main_MytestMaxAggregateOutputType {
+  id: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+  myAttr: String
+  _join: Query!
+}
+
+type main_AggregateMytest {
+  _count: main_MytestCountAggregateOutputType
+  _avg: main_MytestAvgAggregateOutputType
+  _sum: main_MytestSumAggregateOutputType
+  _min: main_MytestMinAggregateOutputType
+  _max: main_MytestMaxAggregateOutputType
+  _join: Query!
+}
+
+input main_mytestCountOrderByAggregateInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  deletedAt: main_SortOrder
+  myAttr: main_SortOrder
+}
+
+input main_mytestAvgOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_mytestMaxOrderByAggregateInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  deletedAt: main_SortOrder
+  myAttr: main_SortOrder
+}
+
+input main_mytestMinOrderByAggregateInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  deletedAt: main_SortOrder
+  myAttr: main_SortOrder
+}
+
+input main_mytestSumOrderByAggregateInput {
+  id: main_SortOrder
+}
+
+input main_mytestOrderByWithAggregationInput {
+  id: main_SortOrder
+  createdAt: main_SortOrder
+  updatedAt: main_SortOrder
+  deletedAt: main_SortOrder
+  myAttr: main_SortOrder
+  _count: main_mytestCountOrderByAggregateInput
+  _avg: main_mytestAvgOrderByAggregateInput
+  _max: main_mytestMaxOrderByAggregateInput
+  _min: main_mytestMinOrderByAggregateInput
+  _sum: main_mytestSumOrderByAggregateInput
+}
+
+input main_mytestScalarWhereWithAggregatesInput {
+  AND: main_mytestScalarWhereWithAggregatesInput
+  OR: [main_mytestScalarWhereWithAggregatesInput]
+  NOT: main_mytestScalarWhereWithAggregatesInput
+  id: main_IntWithAggregatesFilter
+  createdAt: main_DateTimeWithAggregatesFilter
+  updatedAt: main_DateTimeWithAggregatesFilter
+  deletedAt: main_DateTimeNullableWithAggregatesFilter
+  myAttr: main_StringWithAggregatesFilter
+}
+
+type main_MytestGroupByOutputType {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  myAttr: String!
+  _count: main_MytestCountAggregateOutputType
+  _avg: main_MytestAvgAggregateOutputType
+  _sum: main_MytestSumAggregateOutputType
+  _min: main_MytestMinAggregateOutputType
+  _max: main_MytestMaxAggregateOutputType
+  _join: Query!
+}
+
 input main_admin_apilogCreateInput {
   createdAt: DateTime
   updatedAt: DateTime!
@@ -4823,6 +4994,35 @@ input main_case_visitlogUpdateManyMutationInput {
   ip: main_StringFieldUpdateOperationsInput
   ua: main_StringFieldUpdateOperationsInput
   visitedAt: main_StringFieldUpdateOperationsInput
+}
+
+input main_mytestCreateInput {
+  createdAt: DateTime
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  myAttr: String!
+}
+
+input main_mytestUpdateInput {
+  createdAt: main_DateTimeFieldUpdateOperationsInput
+  updatedAt: main_DateTimeFieldUpdateOperationsInput
+  deletedAt: main_NullableDateTimeFieldUpdateOperationsInput
+  myAttr: main_StringFieldUpdateOperationsInput
+}
+
+input main_mytestCreateManyInput {
+  id: Int
+  createdAt: DateTime
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  myAttr: String!
+}
+
+input main_mytestUpdateManyMutationInput {
+  createdAt: main_DateTimeFieldUpdateOperationsInput
+  updatedAt: main_DateTimeFieldUpdateOperationsInput
+  deletedAt: main_NullableDateTimeFieldUpdateOperationsInput
+  myAttr: main_StringFieldUpdateOperationsInput
 }
 
 scalar DateTime

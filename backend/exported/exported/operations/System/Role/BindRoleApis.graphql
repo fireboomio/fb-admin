@@ -1,5 +1,0 @@
-mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) {
-  system_bindRoleApis(POSTApiV1RoleBindApiInput: {apis: $apis, allRoles: $allRoles, roleCode: $roleCode}) {
-    count
-  }
-}

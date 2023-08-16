@@ -1,6 +1,0 @@
-mutation MyQuery($id: Int = 10, $name: String = "") {
-  main_updateOneadmin_category(data: {name: {set: $name}}, where: {id: $id}) {
-    id
-    name
-  }
-}

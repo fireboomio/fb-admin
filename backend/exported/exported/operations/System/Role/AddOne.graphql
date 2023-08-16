@@ -1,7 +1,0 @@
-mutation MyQuery ($code: String!, $remark: String!) @rbac(requireMatchAny: [user,eeee,admin,b1a23,a231,abc1]) {
-	data: main_createOnerole(data: {code:$code,remark:$remark}) {
-		id
-		code
-		remark
-	}
-}

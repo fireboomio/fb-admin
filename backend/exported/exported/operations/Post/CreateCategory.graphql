@@ -1,6 +1,0 @@
-mutation MyQuery($name: String = "",) {
-  main_createOneadmin_category(data: {name: $name}) {
-    id
-    name
-  }
-}

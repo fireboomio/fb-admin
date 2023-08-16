@@ -1,104 +1,117 @@
-2023-08-15 10:06:47Z INFO Web server started on "http://localhost:9123"
-2023-08-15 10:06:48Z DEBUG @fireboom/node http.Client.Transport {"enableDebugMode": true}
-2023-08-15 10:06:48Z DEBUG @fireboom/node configureCache {"primaryHost": "0.0.0.0:9991", "deploymentID": "", "cacheKind": "IN_MEMORY_CACHE", "cacheSize": 128000000}
-2023-08-15 10:06:48Z DEBUG @fireboom/node create sub router
-2023-08-15 10:06:48Z DEBUG @fireboom/node configuring API {"numOfOperations": 76}
-2023-08-15 10:06:49Z DEBUG @fireboom/node register S3 provider {"provider": "tengxunyun"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node register S3 endpoint {"path": "/s3/tengxunyun/upload"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Casdoor/GetRolesById", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Casdoor/GetSMSProvider", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/Login", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/RefreshToken", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/SendCode", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/UpdateSMSProvider", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/CreateCategory", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/CreateOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteCategory", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteMany", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetCategory", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetLikeList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/GetPostByAuthor", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetPostByCate", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/UpdateCategory", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/UpdateOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/MonthlySales", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Statistics/QueryRaw", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/SaleTypePercent", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/SalesTop10", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/VisitTrending", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/GetMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/ChangeOpen", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/CreateLog", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/DeleteLog", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/DeleteOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetAllLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetLikeLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/CreateOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/DeleteMany", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/DeleteOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetApiList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetApisByMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetChildrenMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetMany", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetMenuByLevelOrPid", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/UpdateOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Operation/GetMany", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Perm/CreateMany", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Perm/GetBindPerms", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Perm/GetRolePerms", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/AddOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/BindMenus", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/BindRoleApis", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/DeleteMany", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/DeleteOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetMany", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetRoleMenuId", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UnBindMenus", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UnBindRoleApis", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UpdateOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Sub/SSE", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/ConnectRole", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/CountUsers", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/CreateOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/DeleteOne", "mock": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/DisconnectRole", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetAllList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetLikeUser", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetRoleUsers", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetUserByUserId", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetUserInfo", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetUserRole", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/UpdateOne", "mock": false, "authRequired": false}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/bindmenu"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/login"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/menuTree"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/perm"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/unBindMenu"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered GraphQLHandler {"method": "POST", "path": "/graphql"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node registered GraphQLPlaygroundHandler {"method": "GET", "path": "/graphql"}
-2023-08-15 10:06:49Z DEBUG @fireboom/node configuring API {"numOfOperations": 76}
-2023-08-15 10:06:49Z DEBUG @fireboom/node configuring CORS {"allowedOrigins": ["*"]}
-2023-08-15 10:06:49Z DEBUG @fireboom/node public node url {"publicNodeUrl": "http://47.101.69.119:9991"}
-2023-08-15 10:06:49Z INFO @fireboom/node listening on {"addr": "0.0.0.0:9991"}
-2023-08-15 10:06:55Z INFO ::1 GET /api/v1/setting/system 200 <nil> 737µs
-2023-08-15 10:06:55Z INFO ::1 GET /api/v1/storageBucket 200 <nil> 620.334µs
-2023-08-15 10:06:55Z INFO ::1 GET /api/v1/dataSource 200 <nil> 1.792875ms
-2023-08-15 10:06:55Z INFO ::1 GET /api/v1/auth 200 <nil> 1.437334ms
-2023-08-15 10:06:55Z INFO ::1 GET /api/v1/operateApi 200 <nil> 13.194ms
-2023-08-15 10:06:55Z INFO ::1 GET /api/v1/hook/option 200 <nil> 113.375µs
-2023-08-15 10:06:55Z INFO ::1 GET /api/v1/sdk 200 <nil> 1.381667ms
-2023-08-15 10:06:55Z INFO ::1 GET /api/v1/operateApi 200 <nil> 7.187041ms
-2023-08-15 10:06:56Z INFO ::1 GET /api/v1/home 200 <nil> 14.786708ms
-2023-08-15 10:06:56Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Ffireboom.oss-cn-hangzhou.aliyuncs.com%2Ffb-service-discovery.json 200 <nil> 134.425375ms
-2023-08-15 10:06:56Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Fcode.100ai.com.cn%2Ffireboomio%2Ffiles%2Fraw%2Fbranch%2Fmain%2Fnews.json 200 <nil> 146.502458ms
-2023-08-15 10:06:59Z INFO ::1 GET /api/v1/setting/getTime 200 <nil> 386.25µs
+2023-08-16 08:08:57Z INFO Web server started on "http://localhost:9123"
+2023-08-16 08:08:58Z DEBUG @fireboom/node http.Client.Transport {"enableDebugMode": true}
+2023-08-16 08:08:58Z DEBUG @fireboom/node configureCache {"primaryHost": "0.0.0.0:9991", "deploymentID": "", "cacheKind": "IN_MEMORY_CACHE", "cacheSize": 128000000}
+2023-08-16 08:08:58Z DEBUG @fireboom/node create sub router
+2023-08-16 08:08:58Z DEBUG @fireboom/node configuring API {"numOfOperations": 76}
+2023-08-16 08:08:59Z DEBUG @fireboom/node register S3 provider {"provider": "tengxunyun"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node register S3 endpoint {"path": "/s3/tengxunyun/upload"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Casdoor/GetRolesById", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Casdoor/GetSMSProvider", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/Login", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/RefreshToken", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/SendCode", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Casdoor/UpdateSMSProvider", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/CreateCategory", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/CreateOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteCategory", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteMany", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/DeleteOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetCategory", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetLikeList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Post/GetPostByAuthor", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/GetPostByCate", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/UpdateCategory", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Post/UpdateOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/MonthlySales", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/Statistics/QueryRaw", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/SaleTypePercent", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/SalesTop10", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/Statistics/VisitTrending", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/GetMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/ChangeOpen", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/CreateLog", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/DeleteLog", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Log/DeleteOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetAllLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetLikeLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Log/GetLog", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/CreateOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/DeleteMany", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/DeleteOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetApiList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetApisByMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetChildrenMenus", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetMany", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetMenuByLevelOrPid", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Menu/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Menu/UpdateOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Operation/GetMany", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Perm/CreateMany", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Perm/GetBindPerms", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Perm/GetRolePerms", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/AddOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/BindMenus", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/BindRoleApis", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/DeleteMany", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/DeleteOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetMany", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Role/GetRoleMenuId", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UnBindMenus", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UnBindRoleApis", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/Role/UpdateOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/Sub/SSE", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/ConnectRole", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/CountUsers", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/CreateOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/DeleteOne", "mock": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/DisconnectRole", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetAllList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetLikeUser", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetList", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetOne", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetRoleUsers", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetUserByUserId", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": true}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetUserInfo", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered QueryHandler {"method": "GET", "path": "/operations/System/User/GetUserRole", "mock": false, "cacheEnabled": false, "cacheMaxAge": 0, "cacheStaleWhileRevalidate": 0, "cachePublic": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered MutationHandler {"method": "POST", "path": "/operations/System/User/UpdateOne", "mock": false, "authRequired": false}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/bindmenu"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/login"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/menuTree"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/perm"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered ProxyHandler {"path": "/proxy/unBindMenu"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered GraphQLHandler {"method": "POST", "path": "/graphql"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node registered GraphQLPlaygroundHandler {"method": "GET", "path": "/graphql"}
+2023-08-16 08:08:59Z DEBUG @fireboom/node configuring API {"numOfOperations": 76}
+2023-08-16 08:08:59Z DEBUG @fireboom/node configuring CORS {"allowedOrigins": ["*"]}
+2023-08-16 08:08:59Z DEBUG @fireboom/node public node url {"publicNodeUrl": "http://47.101.69.119:9991"}
+2023-08-16 08:08:59Z INFO @fireboom/node listening on {"addr": "0.0.0.0:9991"}
+2023-08-16 08:08:59Z INFO ::1 GET /api/v1/operateApi 200 <nil> 248.075833ms
+2023-08-16 08:09:03Z INFO ::1 GET /api/v1/storageBucket 200 <nil> 251.417µs
+2023-08-16 08:09:03Z INFO ::1 GET /api/v1/auth 200 <nil> 285.417µs
+2023-08-16 08:09:03Z INFO ::1 GET /api/v1/dataSource 200 <nil> 1.153709ms
+2023-08-16 08:09:03Z INFO ::1 GET /api/v1/setting/system 200 <nil> 909.083µs
+2023-08-16 08:09:04Z INFO ::1 GET /api/v1/hook/option 200 <nil> 656.375µs
+2023-08-16 08:09:04Z INFO ::1 GET /api/v1/sdk 200 <nil> 1.287083ms
+2023-08-16 08:09:04Z INFO ::1 GET /api/v1/home 200 <nil> 4.920709ms
+2023-08-16 08:09:04Z INFO ::1 GET /api/v1/operateApi 200 <nil> 330.561708ms
+2023-08-16 08:09:04Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Ffireboom.oss-cn-hangzhou.aliyuncs.com%2Ffb-service-discovery.json 200 <nil> 129.150375ms
+2023-08-16 08:09:04Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Fcode.100ai.com.cn%2Ffireboomio%2Ffiles%2Fraw%2Fbranch%2Fmain%2Fnews.json 200 <nil> 110.33825ms
+2023-08-16 08:09:04Z INFO ::1 GET /api/v1/operateApi 200 <nil> 228.113042ms
+2023-08-16 08:09:04Z INFO ::1 GET /api/v1/operateApi 200 <nil> 225.425459ms
+2023-08-16 08:09:06Z INFO ::1 GET /api/v1/storageBucket 200 <nil> 347.333µs
+2023-08-16 08:09:06Z INFO ::1 GET /api/v1/setting/system 200 <nil> 157.667µs
+2023-08-16 08:09:06Z INFO ::1 GET /api/v1/auth 200 <nil> 483.333µs
+2023-08-16 08:09:06Z INFO ::1 GET /api/v1/dataSource 200 <nil> 830.5µs
+2023-08-16 08:09:07Z INFO ::1 GET /api/v1/hook/option 200 <nil> 113.041µs
+2023-08-16 08:09:07Z INFO ::1 GET /api/v1/sdk 200 <nil> 19.263625ms
+2023-08-16 08:09:07Z INFO ::1 GET /api/v1/home 200 <nil> 30.758833ms
+2023-08-16 08:09:07Z INFO ::1 GET /api/v1/operateApi 200 <nil> 321.38175ms
+2023-08-16 08:09:07Z INFO ::1 GET /api/v1/operateApi 200 <nil> 215.405334ms
+2023-08-16 08:09:07Z INFO ::1 GET /api/v1/operateApi 200 <nil> 226.70175ms
+2023-08-16 08:09:12Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Ffireboom.oss-cn-hangzhou.aliyuncs.com%2Ffb-service-discovery.json 200 <nil> 5.119931125s
+2023-08-16 08:09:12Z INFO ::1 GET /api/v1/common/proxy?url=https%3A%2F%2Fcode.100ai.com.cn%2Ffireboomio%2Ffiles%2Fraw%2Fbranch%2Fmain%2Fnews.json 200 <nil> 77.536166ms

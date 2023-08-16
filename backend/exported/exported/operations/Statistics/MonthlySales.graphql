@@ -1,7 +1,0 @@
-query MyQuery {
-	data: statistics_GetMonthlySales {
-		months
-		totalSales
-	}
-}
- 
