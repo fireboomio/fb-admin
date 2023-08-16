@@ -1,7 +1,8 @@
 export default {
   path: "/dashboard",
   meta: {
-    title: "仪表盘"
+    title: "仪表盘",
+    icon: "pieChart"
   },
   children: [
     {

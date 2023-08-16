@@ -26,6 +26,7 @@ function reverseTime(updatedAt) {
   const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
   return formattedTime;
 }
+
 async function createEventSource(role: string) {
   const resp = await fetch(`/operations/System/Sub/SSE?roles=${role}&wg_live=true`);
   if (resp.ok) {
@@ -45,7 +46,6 @@ async function createEventSource(role: string) {
           notices.value.forEach(item => {
             item.list.length = 0;
           })
-          console.log(currentInfo);
           // 将currentInfo放入到消息通知里
           currentInfo.forEach(item => {
             if (item.type === "notice") {
@@ -83,12 +83,13 @@ async function createEventSource(role: string) {
     }
   }
 }
-
+function clearNoticeNum() {
+  noticesNum.value = 0;
+}
 onMounted(() => {
   notices.value.forEach(item => {
     item.list.length = 0;
   })
-  console.log(notices.value);
   store.roles.forEach(item => {
     createEventSource(item);
   })
@@ -102,7 +103,7 @@ onUnmounted(() => {
 
 <template>
   <el-dropdown trigger="click" placement="bottom-end">
-    <span class="dropdown-badge navbar-bg-hover select-none">
+    <span class="dropdown-badge navbar-bg-hover select-none" @click.native="clearNoticeNum">
       <el-badge :value="noticesNum" :max="99">
         <span class="header-notice-icon">
           <IconifyIconOffline :icon="Bell" />

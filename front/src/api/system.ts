@@ -37,7 +37,7 @@ export const getMenuRoles = (data: string) => {
 /**
  *  根据角色查询用户信息
  */
-export const getRoleUsers = (code: string) => {
+export const getRoleUsers = (code) => {
   return axios.get<any>(`/operations/System/User/GetRoleUsers?code=${code}`);
 }
 
@@ -121,9 +121,12 @@ export const getAllLogNumber = () => {
 /**
  * 根据日志id删除日志
  */
-export const deleteLog = (data: object) => {
-  console.log(data);
-  return axios.post("/operations/System/Log/DeleteLog", data);
+export const deleteLog = (equals) => {
+  return axios.post("/operations/System/Log/DeleteLog", {
+    data: {
+      equals
+    }
+  });
 }
 
 /**
@@ -132,5 +135,15 @@ export const deleteLog = (data: object) => {
 export const getLikeLog = (data: object) => {
   return axios.get<any>("/operations/System/Log/GetLikeLog", {
     params: data
+  });
+}
+/**
+ * 根据日志id删除单条日志
+ */
+export const deleteOneLog = (id: number) => {
+  return axios.post("/operations/System/Log/DeleteOne", {
+    data: {
+      id
+    }
   });
 }

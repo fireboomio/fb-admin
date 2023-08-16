@@ -154,7 +154,7 @@ export interface Casdoor__UpdateSMSProviderResponseData {
     publishedAt?: string
     title: string
     username: string
-
+    cateId: number
 }
 export interface InternalPost__CreateOneInput {
     content?: string

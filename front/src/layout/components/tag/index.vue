@@ -94,15 +94,15 @@ const moveToView = async (index: number): Promise<void> => {
   } else if (
     tabItemElOffsetLeft > -translateX.value &&
     tabItemElOffsetLeft + tabItemOffsetWidth <
-      -translateX.value + scrollbarDomWidth
+    -translateX.value + scrollbarDomWidth
   ) {
     // 标签在可视区域
     translateX.value = Math.min(
       0,
       scrollbarDomWidth -
-        tabItemOffsetWidth -
-        tabItemElOffsetLeft -
-        tabNavPadding
+      tabItemOffsetWidth -
+      tabItemElOffsetLeft -
+      tabNavPadding
     );
   } else {
     // 标签在可视区域右侧
@@ -170,6 +170,9 @@ function onFresh() {
 }
 
 function deleteDynamicTag(obj: any, current: any, tag?: string) {
+  console.log(multiTags.value);
+  // multiTags.value为当前所有显示标签页的数组
+  // valueIndex 为 当前标签页的索引值
   const valueIndex: number = multiTags.value.findIndex((item: any) => {
     if (item.query) {
       if (item.path === obj.path) {
@@ -183,7 +186,7 @@ function deleteDynamicTag(obj: any, current: any, tag?: string) {
       return item.path === obj.path;
     }
   });
-
+  // spliceRoute函数
   const spliceRoute = (
     startIndex?: number,
     length?: number,
@@ -214,6 +217,7 @@ function deleteDynamicTag(obj: any, current: any, tag?: string) {
     spliceRoute(valueIndex, 1);
   }
   const newRoute = useMultiTagsStoreHook().handleTags("slice");
+  console.log(newRoute);
   if (current === route.path) {
     // 如果删除当前激活tag就自动切换到最后一个tag
     if (tag === "left") return;
@@ -243,8 +247,7 @@ function deleteMenu(item, tag?: string) {
 }
 
 function onClickDrop(key, item, selectRoute?: RouteConfigs) {
-  if (item && item.disabled) return;
-
+  if (item && item.disabled) return;    // 按钮禁用
   let selectTagRoute;
   if (selectRoute) {
     selectTagRoute = {
@@ -266,8 +269,11 @@ function onClickDrop(key, item, selectRoute?: RouteConfigs) {
       break;
     case 1:
       // 关闭当前标签页
-      deleteMenu(selectTagRoute);
-      break;
+      {
+        deleteMenu(selectTagRoute);
+        break;
+      }
+
     case 2:
       // 关闭左侧标签页
       deleteMenu(selectTagRoute, "left");
@@ -518,43 +524,23 @@ onBeforeUnmount(() => {
     </span>
     <div ref="scrollbarDom" class="scroll-container">
       <div class="tab select-none" ref="tabDom" :style="getTabStyle">
-        <div
-          :ref="'dynamic' + index"
-          v-for="(item, index) in multiTags"
-          :key="index"
-          :class="[
-            'scroll-item is-closable',
-            linkIsActive(item),
-            route.path === item.path && showModel === 'card'
-              ? 'card-active'
-              : ''
-          ]"
-          @contextmenu.prevent="openMenu(item, $event)"
-          @mouseenter.prevent="onMouseenter(index)"
-          @mouseleave.prevent="onMouseleave(index)"
-          @click="tagOnClick(item)"
-        >
-          <router-link
-            :to="item.path"
-            class="dark:!text-text_color_primary dark:hover:!text-primary"
-          >
+        <div :ref="'dynamic' + index" v-for="(item, index) in multiTags" :key="index" :class="[
+          'scroll-item is-closable',
+          linkIsActive(item),
+          route.path === item.path && showModel === 'card'
+            ? 'card-active'
+            : ''
+        ]" @contextmenu.prevent="openMenu(item, $event)" @mouseenter.prevent="onMouseenter(index)"
+          @mouseleave.prevent="onMouseleave(index)" @click="tagOnClick(item)">
+          <router-link :to="item.path" class="dark:!text-text_color_primary dark:hover:!text-primary">
             {{ transformI18n(item.meta.title) }}
           </router-link>
-          <span
-            v-if="
-              iconIsActive(item, index) ||
-              (index === activeIndex && index !== 0)
-            "
-            class="el-icon-close"
-            @click.stop="deleteMenu(item)"
-          >
+          <span v-if="iconIsActive(item, index) ||
+            (index === activeIndex && index !== 0)
+            " class="el-icon-close" @click.stop="deleteMenu(item)">
             <IconifyIconOffline :icon="CloseBold" />
           </span>
-          <div
-            :ref="'schedule' + index"
-            v-if="showModel !== 'card'"
-            :class="[scheduleIsActive(item)]"
-          />
+          <div :ref="'schedule' + index" v-if="showModel !== 'card'" :class="[scheduleIsActive(item)]" />
         </div>
       </div>
     </div>
@@ -563,17 +549,8 @@ onBeforeUnmount(() => {
     </span>
     <!-- 右键菜单按钮 -->
     <transition name="el-zoom-in-top">
-      <ul
-        v-show="visible"
-        :key="Math.random()"
-        :style="getContextMenuStyle"
-        class="contextmenu"
-      >
-        <div
-          v-for="(item, key) in tagsViews.slice(0, 6)"
-          :key="key"
-          style="display: flex; align-items: center"
-        >
+      <ul v-show="visible" :key="Math.random()" :style="getContextMenuStyle" class="contextmenu">
+        <div v-for="(item, key) in tagsViews.slice(0, 6)" :key="key" style="display: flex; align-items: center">
           <li v-if="item.show" @click="selectTag(key, item)">
             <IconifyIconOffline :icon="item.icon" />
             {{ transformI18n(item.text) }}
@@ -582,23 +559,14 @@ onBeforeUnmount(() => {
       </ul>
     </transition>
     <!-- 右侧功能按钮 -->
-    <el-dropdown
-      trigger="click"
-      placement="bottom-end"
-      @command="handleCommand"
-    >
+    <el-dropdown trigger="click" placement="bottom-end" @command="handleCommand">
       <span class="arrow-down">
         <IconifyIconOffline :icon="ArrowDown" class="dark:text-white" />
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item
-            v-for="(item, key) in tagsViews"
-            :key="key"
-            :command="{ key, item }"
-            :divided="item.divided"
-            :disabled="item.disabled"
-          >
+          <el-dropdown-item v-for="(item, key) in tagsViews" :key="key" :command="{ key, item }" :divided="item.divided"
+            :disabled="item.disabled">
             <IconifyIconOffline :icon="item.icon" />
             {{ transformI18n(item.text) }}
           </el-dropdown-item>

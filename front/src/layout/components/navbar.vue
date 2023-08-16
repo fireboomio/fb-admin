@@ -10,7 +10,12 @@ import globalization from "@/assets/svg/globalization.svg?component";
 import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
 import Setting from "@iconify-icons/ri/settings-3-line";
 import Check from "@iconify-icons/ep/check";
-
+import User from "@iconify-icons/ep/user";
+import { func } from "vue-types";
+import router from "@/router";
+import { getUserInfoByName } from "@/api/user";
+import { useUserStoreHook } from "@/store/modules/user";
+const store = useUserStoreHook();
 const {
   layout,
   device,
@@ -26,6 +31,18 @@ const {
 } = useNav();
 
 const { t, locale, translationCh, translationEn } = useTranslationLang();
+async function searchCurrentInfo() {
+  // 从session中提取当前登录用户的name
+  const equals = store.username;
+  let userId = "";
+  await getUserInfoByName(equals).then(res => {
+    userId = res.data.data.main_findManyuser[0].user_id;
+  })
+  router.push({
+    name: "UserUpdateManage",
+    query: { userId }
+  })
+}
 </script>
 
 <template>
@@ -70,14 +87,9 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
         </span>
         <template #dropdown>
           <el-dropdown-menu class="logout">
-            <el-dropdown-item>
-              个人信息
-            </el-dropdown-item>
-            <el-dropdown-item>
-              用户名:
-            </el-dropdown-item>
-            <el-dropdown-item>
-              角色:
+            <el-dropdown-item @click="searchCurrentInfo">
+              <IconifyIconOffline :icon="User" style="margin: 5px" />
+              个人中心
             </el-dropdown-item>
             <el-dropdown-item @click="logout">
               <IconifyIconOffline :icon="LogoutCircleRLine" style="margin: 5px" />
@@ -133,6 +145,10 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
         border-radius: 50%;
       }
     }
+  }
+
+  .transparent-border-button .el-button {
+    border-color: transparent;
   }
 
   .breadcrumb-container {

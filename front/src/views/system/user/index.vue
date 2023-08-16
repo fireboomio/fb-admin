@@ -10,7 +10,7 @@
           <el-input v-model="searchUserData.phone" placeholder="请输入电话:" clearable style="width: 200px"
             @keyup.enter="handleQuery" />
         </el-form-item>
-        <el-form-item label="用户名" prop="name">
+        <el-form-item label="用户ID" prop="name">
           <el-input v-model="searchUserData.id" placeholder="请输入用户ID:" clearable style="width: 200px"
             @keyup.enter="handleQuery" />
         </el-form-item>
@@ -26,6 +26,19 @@
               重置
             </el-button>
           </Auth>
+        </el-form-item>
+        <el-form-item>
+          <el-dropdown trigger="click" @command="searchUserByRole">
+            <el-button type="primary">
+              {{ currentSelectRole }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item v-for="role in roleList" :key="role.id" :command="role">{{
+                  role.remark }}</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </el-form-item>
       </el-form>
     </div>
@@ -47,7 +60,6 @@
         </el-table-column>
         <el-table-column label="角色" width="260" align="center" prop="roles">
           <template #default="scope">
-            <!-- <el-button type="success" round v-if="scope.row.roles.indexOf('admin')">admin</el-button> -->
             <el-button type="primary" round v-for="item in scope.row.roles">{{ item }}</el-button>
           </template>
         </el-table-column>
@@ -68,8 +80,8 @@
       <el-pagination :total="total" v-model:current-page="queryParams.pageNum" v-model:page-size="queryParams.pageSize"
         @current-change="handleQuery" />
     </el-card>
-    <role-bind v-model="bindVisible" :user="bindingUser" />
-    <!-- 新增用户与修改用户信息 -->
+    <role-bind v-model="bindVisible" :user="bindingUser" @update:modelValue="getBindSuccess" />
+    <!-- 新增用户 -->
     <el-dialog :title="dialog.title" v-model="dialog.visible" width="500px" @close="closeDialog">
       <el-form ref="roleFormRef" :model="formData" :rules="rules" label-width="100px">
         <el-form-item label="国 籍" prop="countruCode">
@@ -116,10 +128,13 @@ import { ref, reactive, onMounted } from "vue";
 import { ElForm, ElMessage, ElPagination, FormRules, ElMessageBox } from "element-plus";
 import RoleBind from /* @vite-ignore */ "./role.bind.vue";
 import { Icon } from '@iconify/vue';
-import { createUser, deleteUserById, getAllUserNumber, getRoleUsers, getUserLike, UserInfo } from "@/api/user";
+import { createUser, deleteUserById, getAllUserNumber, getUserLike, UserInfo } from "@/api/user";
+import { getRoleUsers } from "@/api/system";
 import { country } from "./utils/country"
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { Role } from "../types";
 
+const route = useRoute();
 const queryFormRef = ref(ElForm); // 查询表单
 const roleFormRef = ref(ElForm);
 const loading = ref(false);
@@ -128,6 +143,9 @@ const bindVisible = ref(false);
 const bindingUser = ref<User>();
 const isDisabled = ref(false);
 const router = useRouter();
+const userInfoById = ref([]);  // 用来接收角色对应用户的数组
+const roleList = ref<Role[]>([]);  // 用来接收所有的角色信息在下拉菜单处展示
+const currentSelectRole = ref("选择角色");   // 当前选择的角色名称
 const dialog = reactive<DialogOption>({
   visible: false
 });
@@ -153,8 +171,20 @@ const formData = reactive<UserInfo>({
 const rules = reactive<FormRules>({
   countryCode: [{ required: true, message: "请选择您的国籍" }],
   name: [{ required: true, message: "请输入用户名", trigger: ["blur"] }],
-  password: [{ required: true, message: "请输入密码", trigger: ["blur"] }],
-  passwordType: [{ required: true, message: "请再次输入密码", trigger: ["blur"] }, {
+  password: [{ required: true, message: "请输入密码", trigger: ["blur"] }, {
+    validator: function (rule, value, callback) {
+      if (!/^[a-zA-Z]\w{5,17}$/.test(value)) {
+        callback(new Error("密码格式应以字母开头，长度在6~18之间，只能包含字母，数字和下划线"));
+      } else {
+        if (formData.passwordType !== "") {
+          roleFormRef.value.validateField('passwordType');
+
+        }
+        callback();
+      }
+    }
+  }],
+  passwordType: [{ required: true, message: "请再次输入密码", trigger: ["change"] }, {
     validator: function (rule, value, callback) {
       if (value !== formData.password) {
         callback(new Error("两次密码不一致!"));
@@ -163,7 +193,7 @@ const rules = reactive<FormRules>({
       }
     }
   }],
-  phone: [{ required: true, message: "请输入您的电话号码", trigger: ["blur"] }, {
+  phone: [{ required: true, message: "请输入您的电话号码", trigger: "blur" }, {
     validator: function (rule, value, callback) {
       if (! /^\d{11}$/.test(value)) {
         callback(new Error("电话号码格式错误!"));
@@ -173,7 +203,11 @@ const rules = reactive<FormRules>({
     }
   }],
 });
-
+function getBindSuccess(val) {
+  if (!val) {
+    handleQuery();
+  }
+}
 /** 
  * 打开对话框 
  */
@@ -182,56 +216,121 @@ function openDialog(id?: number) {
   dialog.title = "新增用户";
 }
 
+function resetformData() {
+  formData.countryCode = ""
+  formData.name = ""
+  formData.password = ""
+  formData.passwordType = ""
+  formData.phone = ""
+  roleFormRef.value.resetFields();
+}
 /**  
  * 关闭对话框
 */
 function closeDialog() {
+  resetformData();
   dialog.visible = false;
 }
-
-
+/**
+ * 根据角色查用户
+ */
+async function searchUserByRole(role: Role) {
+  currentSelectRole.value = role.remark;
+  await getRoleUsers(role.code).then(res => {
+    userInfoById.value = res.data.data.data[0].role.main_findManyadmin_role_user.map(item => {
+      return {
+        id: item._join.user[0].id,
+        name: item._join.user[0].name,
+        avatar: item._join.user[0].avatar,
+        createdAt: item._join.user[0].created_at,
+      };
+    })
+    userInfoById.value.forEach(item => {
+      item.roles = [res.data.data.data[0].code];
+    })
+    total.value = userInfoById.value.length;
+  })
+  userList.value = userInfoById.value.slice((queryParams.pageNum - 1) * queryParams.pageSize, queryParams.pageNum * queryParams.pageSize);
+}
 /**
  * 查询
  */
 async function handleQuery() {
   loading.value = true;
-  if (searchUserData.name || searchUserData.phone || searchUserData.id) {   //查询数据非空
-    const params = {};
-    for (let key in searchUserData) {
-      if (searchUserData[key])
-        params[key] = searchUserData[key];
-    }
-    getUserLike(params).then(res => {
-      if (res.data.data.main_findUniqueuser) {
-        const accute = res.data.data.main_findUniqueuser;
-        searchUser.value = res.data.data.main_findManyuser.filter(item => {
-          return item.id !== accute.id;
-        });
-        searchUser.value.unshift(accute);
-      } else {
-        searchUser.value = res.data.data.main_findManyuser;
-      }
-      total.value = searchUser.value.length;
-      userList.value = searchUser.value.slice((queryParams.pageNum - 1) * queryParams.pageSize, queryParams.pageNum * queryParams.pageSize);
-    }).catch(err => {
-      ElMessage.error("查询失败");
+  const { error, data } = await api.query({
+    operationName: "System/Role/GetList",
+    input: convertPageQuery(queryParams, { containsFields: ["code", "remark"] })
+  });
+  if (!error) {
+    roleList.value = data!.data!;
+  }
+  if (route.query?.code) {    // 判断是否由角色管理跳转，若是则只展示相应角色的数据给用户
+    currentSelectRole.value = String(route.query?.code);
+
+    await getRoleUsers(route.query?.code).then(res => {
+      const userInfo = res.data.data.data[0].role.main_findManyadmin_role_user.filter(item => {
+        return item._join.user.length;
+      })
+      userInfoById.value = userInfo.map(item => {
+        return {
+          id: item._join.user[0].id,
+          name: item._join.user[0].name,
+          avatar: item._join.user[0].avatar,
+          createdAt: item._join.user[0].created_at,
+        };
+      })
+
+      userInfoById.value.forEach(item => {
+        item.roles = [res.data.data.data[0].code];
+      })
+      total.value = userInfoById.value.length;
     })
+    userList.value = userInfoById.value.slice((queryParams.pageNum - 1) * queryParams.pageSize, queryParams.pageNum * queryParams.pageSize);
+  } else if (currentSelectRole.value !== "选择角色") {
+    userList.value = userInfoById.value.slice((queryParams.pageNum - 1) * queryParams.pageSize, queryParams.pageNum * queryParams.pageSize);
   } else {
-    const { error, data } = await api.query({
-      operationName: "System/User/GetList",
-      input: convertPageQuery(queryParams, { containsFields: ["name"] })
-    });
-    if (!error) {
-      userList.value = data!.data!;
-      userList.value.forEach(item => {
-        item.roles = item._join.main_findManyrole_user.map(item1 => {
-          return item1._join.main_findManyrole[0].code;
+    if (searchUserData.name || searchUserData.phone || searchUserData.id) {   //查询数据非空
+      const params = {};
+      for (let key in searchUserData) {
+        if (searchUserData[key])
+          params[key] = searchUserData[key];
+      }
+      getUserLike(params).then(res => {
+        if (res.data.data.data1) {
+          const accute = res.data.data.data1;
+          searchUser.value = res.data.data.data.filter(item => {
+            return item.id !== accute.id;
+          });
+          searchUser.value.unshift(accute);
+          if (!searchUserData.name && !searchUserData.phone) {
+            searchUser.value.length = 0;
+            searchUser.value.unshift(accute);
+          }
+        } else {
+          searchUser.value = res.data.data.data;
+        }
+        total.value = searchUser.value.length;
+        userList.value = searchUser.value.slice((queryParams.pageNum - 1) * queryParams.pageSize, queryParams.pageNum * queryParams.pageSize);
+      }).catch(err => {
+        ElMessage.error("查询失败");
+      })
+    } else {
+      const { error, data } = await api.query({
+        operationName: "System/User/GetList",
+        input: convertPageQuery(queryParams, { containsFields: ["name"] })
+      });
+      if (!error) {
+        userList.value = data!.data!;
+        userList.value.forEach(item => {
+          item.roles = item._join.main_findManyadmin_role_user.map(item1 => {
+            return item1._join.main_findManyadmin_role[0].code;
+          })
         })
+      }
+      await getAllUserNumber().then(res => {
+        total.value = res.data.data.data._count.id;
       })
     }
-    await getAllUserNumber().then(res => {
-      total.value = res.data.data.main_aggregateuser._count.id;
-    })
   }
   loading.value = false;
 }
@@ -275,7 +374,6 @@ function handleDelete(Id: number) {
     }
   ).then(() => {
     // 查看该用户是否为超级管理员,如果是超级管理员，则禁止删除。
-
     const obj = {
       id: Id
     }
@@ -317,6 +415,7 @@ async function addUser() {
         closeDialog();
         clearFormData();
         handleQuery();
+        resetformData();
       }).catch(err => {
         ElMessage.error("新增失败");
         closeDialog();
@@ -328,6 +427,7 @@ async function addUser() {
 function bindUser(user: User) {
   bindVisible.value = true;
   bindingUser.value = user;
+
 }
 
 onMounted(() => {

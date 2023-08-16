@@ -1,6 +1,7 @@
 export default {
   path: "/post",
   meta: {
+    icon: "document",
     title: "文章管理",
     rank: 2
   },
@@ -10,6 +11,7 @@ export default {
       name: "PostManage",
       component: () => import("@/views/post/index.vue"),
       meta: {
+
         title: "文章管理"
       }
     }

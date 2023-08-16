@@ -10,15 +10,20 @@ import api, { convertPageQuery } from "@/api";
 import { Post__CreateOneInput, Post__GetListResponse } from "@/api/models";
 import { merge } from "@/utils";
 import WangEditor from "@/components/WangEditor/index.vue";
-import { FormItemRule, ElForm, ElMessage, ElMessageBox, ElPagination, ElUpload, ElIcon } from "element-plus";
+import { FormItemRule, ElForm, ElMessage, ElMessageBox, ElPagination, ElUpload, ElIcon, FormRules } from "element-plus";
 import type { Arrayable } from "element-plus/es/utils";
 import { ref, reactive, onMounted } from "vue";
 import { Icon } from '@iconify/vue';
-import { createOne } from "@/api/post";
-import { useUserStoreHook } from "@/store/modules/user";
+import { createOne, getPostLike, getCategory, getPostByCategory } from "@/api/post";
 import { message } from '@/utils/message';
 import axios from 'axios';
 import { formatToken, getToken } from '@/utils/auth';
+import router from "@/router";
+import { getUserInfoByName } from "@/api/user";
+import { useUserStoreHook } from "@/store/modules/user";
+
+
+const store = useUserStoreHook();
 const queryFormRef = ref(ElForm);
 const dataFormRef = ref(ElForm);
 const hackReset = ref(false)
@@ -28,34 +33,52 @@ const total = ref(0);
 const imageUrl = ref('');
 const fileList = ref([]);
 const published_at = ref("");
+const currentPostCategory = ref("文章类别"); // 文章类别初始值
+const currentSelectCategory = ref("文章类别"); // 新增文章时所选择的文章类别
+const category = ref([]);  //存储所有文章类别
 const queryParams = reactive<PageQuery>({
   title: "",
   pageNum: 1,
   pageSize: 10
 });
-
-const dataSource = ref<
-  NonNullable<NonNullable<Post__GetListResponse["data"]>["data"]>
->([]);
+const postInfoSearch = reactive({
+  author: "",
+  content: "",
+  title: "",
+  id: "",
+})
+const dataSource = ref([]);
 
 const dialog = reactive<DialogOption>({
   visible: false
 });
 
+
 const formData = reactive({
   title: "",
+  title1: "",
   poster: "",
   content: "",
   publishedAt: "",
+  userId: 1,
+  cateId: null,
 });
-const editingId = ref<number>();
-
-const rules = reactive<
-  Partial<Record<keyof Post__CreateOneInput, Arrayable<FormItemRule>>>
->({
+const rules = ref({
   title: [{ required: true, message: "请输入文章标题", trigger: "blur" }],
   poster: [{ required: false, message: "请上传文章封面", trigger: "blur" }],
-  content: [{ required: true, message: "请输入文章内容", trigger: "blur" }]
+  content: [{ required: true, message: "请输入文章内容", trigger: "blur" }],
+  cateId: [{ required: true, message: "请选择文章类别", trigger: "change" }, {
+    validator: function (rule, value, callback) {
+      console.log(value);
+      if (!formData.cateId) {
+        callback(new Error("请选择文章类别"));
+      } else {
+        callback();
+
+      }
+    }
+  }],
+  publishedAt: [{ required: true, message: "请选择发布时间", trigger: "change" }],
 });
 
 /**
@@ -63,13 +86,42 @@ const rules = reactive<
  */
 async function handleQuery() {
   loading.value = true;
-  const { error, data } = await api.query({
-    operationName: "Post/GetList",
-    input: convertPageQuery(queryParams, { containsFields: ["title"] })
-  });
-  if (!error) {
-    dataSource.value = data!.data!;
-    total.value = data!.total!;
+  if (postInfoSearch.author || postInfoSearch.content || postInfoSearch.title || postInfoSearch.id) {
+    const params = {}
+    for (const key in postInfoSearch) {
+      if (postInfoSearch[key]) {
+        params[key] = postInfoSearch[key];
+      }
+    }
+    await getPostLike(params).then(res => {
+      ElMessage.success("查询成功");
+      dataSource.value = res.data.data.data;
+    }).catch(error => {
+      ElMessage.error("查询失败");
+    })
+  } else {
+    const { error, data } = await api.query({
+      operationName: "Post/GetList",
+      input: convertPageQuery(queryParams, { containsFields: ["title"] })
+    });
+    if (!error) {
+      dataSource.value = data!.data!;
+      dataSource.value
+      total.value = data!.total!;
+      loading.value = false;
+      // 加载文章类别以及Id
+      await getCategory().then(res => {
+        category.value = res.data.data.data.map(item => {
+          return {
+            id: item.id,
+            name: item.name,
+          }
+        })
+        category.value = category.value.filter(item => {
+          return item.name;
+        })
+      })
+    }
   }
   loading.value = false;
 }
@@ -81,6 +133,11 @@ function resetQuery() {
   queryFormRef.value.resetFields();
   queryParams.pageNum = 1;
   handleQuery();
+  postInfoSearch.author = "";
+  postInfoSearch.content = "";
+  postInfoSearch.title = "";
+  postInfoSearch.id = "";
+  currentPostCategory.value = "文章类别";
 }
 
 /**
@@ -115,46 +172,25 @@ function reverse(dateStr: string) {
   return formattedDate;
 }
 /**
- * 新增/编辑
- *
- * @param id 数据ID
+ * 新增
  */
-async function openDialog(post) {
-  if (post) {
-    editingId.value = post.id;
-    if (editingId.value) {
-      dialog.title = "修改文章";
-      imageUrl.value = post.poster;
-      const { error, data } = await api.query({
-        operationName: "Post/GetOne",
-        input: { id: editingId.value }
-      });
-      if (!error) {
-        merge(formData, data!.data!);
-        formData.publishedAt = data!.data!.published_at;
-        published_at.value = data!.data!.published_at;
-        if (formData.publishedAt) {
-          formData.publishedAt = reverse(formData.publishedAt);
-        }
-        hackReset.value = true;
-        dialog.visible = true;
-      } else {
-        ElMessage.error("获取数据失败");
-      }
-    }
-  } else {
-    hackReset.value = true;
-    dialog.visible = true;
-    dialog.title = "新增文章";
-  }
+async function openDialog() {
+  // 查询当前用户的userId
+  const equals = store.username;
+  await getUserInfoByName(equals).then(res => {
+    formData.userId = res.data.data.data[0].id;
 
+  })
+  hackReset.value = true;
+  dialog.visible = true;
+  dialog.title = "新增文章";
 }
 
 /**
- * 表单提交
+ * 新增文章表单提交
  */
 async function handleSubmit() {
-  loading.value = false;
+  loading.value = true;
   const data = getToken();
   if (File) {
     await axios.post("/s3/tengxunyun/upload?directory=/admin", File, {
@@ -170,38 +206,20 @@ async function handleSubmit() {
   }
   dataFormRef.value.validate(async (isValid: boolean) => {
     if (isValid) {
-      if (editingId.value) {
-        formData.publishedAt = published_at.value;
-        const { error } = await api.mutate({
-          operationName: "Post/UpdateOne",
-          input: {
-            id: editingId.value,
-            ...formData
-          }
-        });
-        if (!error) {
-          ElMessage.success("修改成功");
+      const username = useUserStoreHook().username;
+      createOne(formData.title, username, formData.content, formData.poster, formData.publishedAt, formData.userId, formData.cateId).then(res => {
+        if (res.data.data.data) {
+          ElMessage.success("新增成功");
           closeDialog();
           handleQuery();
         } else {
-          ElMessage.error("修改失败");
+          ElMessage.error("新增失败");
         }
         loading.value = false;
-      } else {
-        const username = useUserStoreHook().username;
-        createOne(formData.title, username, formData.content, formData.poster, formData.publishedAt).then(res => {
-          if (res.data.data.data) {
-            ElMessage.success("新增成功");
-            closeDialog();
-            handleQuery();
-          } else {
-            ElMessage.error("新增失败");
-          }
-          loading.value = false;
-        });
-      }
+      });
     }
   });
+  loading.value = false;
 }
 
 /**
@@ -219,11 +237,14 @@ function closeDialog() {
 function resetForm() {
   dataFormRef.value.resetFields();
   dataFormRef.value.clearValidate();
-
   formData.title = "";
   formData.poster = "";
   formData.content = "";
   formData.publishedAt = "";
+  formData.userId = 0;
+  formData.cateId = null;
+  imageUrl.value = "";
+  currentSelectCategory.value = "文章类别"; // 新增文章时所选择的文章类别
 }
 
 /**
@@ -271,9 +292,35 @@ function changeImage(file) {
   File = file;
   imageUrl.value = URL.createObjectURL(file.raw!)
 }
-function UploadImage(param) {
-}
 
+/**
+ * 下拉菜单选择回调函数
+ */
+function searchPostByCategory(cate) {
+  currentPostCategory.value = cate.name;
+  getPostByCategory(cate.name).then(res => {
+    dataSource.value = res.data.data.data[0].case_post;
+    total.value = dataSource.value.length;
+  })
+}
+/**
+ * 编辑文章
+ */
+function updatePost(post) {
+  router.push({
+    name: "PostUpdate",
+    query: {
+      id: post.id
+    }
+  })
+}
+/**
+ * 选择新增文章的类别
+ */
+function selectPostCategory(cate) {
+  currentSelectCategory.value = cate.name;
+  formData.cateId = cate.id;
+}
 onMounted(() => {
   handleQuery();
 });
@@ -283,66 +330,91 @@ onMounted(() => {
 <template>
   <div class="app-container">
     <div class="search">
-      <el-form ref="queryFormRef" :model="queryParams" :inline="true">
-        <el-form-item label="标题" prop="title">
-          <el-input v-model="queryParams.title" placeholder="标题" clearable @keyup.enter="handleQuery" />
+      <el-form ref="queryFormRef" :model="postInfoSearch" :inline="true">
+        <el-form-item label="作者: " prop="author">
+          <el-input v-model="postInfoSearch.author" placeholder="作者信息" clearable @keyup.enter="handleQuery" />
+        </el-form-item>
+        <el-form-item label="文章内容: " prop="content">
+          <el-input v-model="postInfoSearch.content" placeholder="文章内容" clearable @keyup.enter="handleQuery" />
+        </el-form-item>
+        <el-form-item label="标题: " prop="title">
+          <el-input v-model="postInfoSearch.title" placeholder="标题" clearable @keyup.enter="handleQuery" />
+        </el-form-item>
+        <el-form-item label="Id: " prop="id">
+          <el-input v-model="postInfoSearch.id" placeholder="id" clearable @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item>
-          <Auth value="post:query">
-            <el-button type="primary" @click="handleQuery()">
-              <Icon icon="ep:search" />搜索
-            </el-button>
-          </Auth>
+          <!-- <Auth value="post:query"> -->
+          <el-button type="primary" @click="handleQuery()">
+            <Icon icon="ep:search" />搜索
+          </el-button>
+          <!-- </Auth> -->
           <el-button @click="resetQuery()">
             <Icon icon="ep:refresh" />重置
           </el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-dropdown trigger="click" @command="searchPostByCategory">
+            <el-button type="primary">
+              {{ currentPostCategory }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item v-for="cate in category" :command="cate">{{
+                  cate.name }}</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </el-form-item>
       </el-form>
     </div>
 
     <el-card shadow="never">
       <template #header>
-        <Auth value="post:edit">
-          <el-button type="success" @click="openDialog()">
-            <Icon icon="ep:plus" />新增
-          </el-button>
-        </Auth>
+        <!-- <Auth value="post:edit"> -->
+        <el-button type="success" @click="openDialog()">
+          <Icon icon="ep:plus" />新增
+        </el-button>
+        <!-- </Auth> -->
 
-        <Auth value="post:remove">
-          <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
-            <Icon icon="ep:delete" />删除
-          </el-button>
-        </Auth>
+        <!-- <Auth value="post:remove"> -->
+        <el-button type="danger" :disabled="ids.length === 0" @click="handleDelete()">
+          <Icon icon="ep:delete" />删除
+        </el-button>
+        <!-- </Auth> -->
 
       </template>
       <el-table highlight-current-row :data="dataSource" v-loading="loading" @selection-change="handleSelectionChange"
         border>
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column label="标题" prop="title" width="200" ellipsis />
+        <el-table-column label="Id" prop="id" width="60" align="center" ellipsis />
+        <el-table-column label="标题" prop="title" width="200" align="center" ellipsis />
         <el-table-column label="封面" prop="poster" width="200">
           <template #default="scope">
-            <el-image v-if="scope.row.poster.startsWith('https')" :src="scope.row.poster" fit="fill"
-              :preview-src-list="[scope.row.poster]" :preview-teleported="true" :hide-on-click-modal="true" />
-            <el-image v-else src="https://pic4.zhimg.com/80/v2-15a8561ac8de1d9c8a8bbbb502d4e873_720w.webp"
-              :preview-src-list="['https://pic4.zhimg.com/80/v2-15a8561ac8de1d9c8a8bbbb502d4e873_720w.webp']" fit="fill"
+            <el-image v-if="scope.row.poster ? scope.row.poster.startsWith('https') : scope.row.poster"
+              :src="scope.row.poster" fit="fill" :preview-src-list="[scope.row.poster]" :preview-teleported="true"
+              :hide-on-click-modal="true" />
+            <el-image v-else src="https://pic4.zhimg.com/v2-4a2f3b0e60d47285f60e6cbd4482edbb_r.jpg"
+              :preview-src-list="['https://pic4.zhimg.com/v2-4a2f3b0e60d47285f60e6cbd4482edbb_r.jpg']" fit="fill"
               :preview-teleported="true" :hide-on-click-modal="true" />
           </template>
         </el-table-column>
         <el-table-column label="作者" prop="author" width="200" ellipsis align="center" />
+        <el-table-column label="文章类型" prop="case_category.name" width="200" ellipsis align="center" />
         <el-table-column label="发布时间" prop="published_at" align="center" :formatter="(row, col, v) => (v ? new Date(v).toLocaleDateString() : '')
-          " />
-        <el-table-column fixed="right" label="操作" align="center" width="220">
+          " width="300" />
+        <el-table-column fixed="right" label="操作" align="center" min-width="220">
           <template #default="scope">
-            <Auth value="post:edit">
-              <el-button type="primary" link size="small" @click.stop="openDialog(scope.row)">
-                <Icon icon="ep:edit" />编辑
-              </el-button>
-            </Auth>
-            <Auth value="post:remove">
-              <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
-                <Icon icon="ep:delete" />删除
-              </el-button>
-            </Auth>
+            <!-- <Auth value="post:edit"> -->
+            <el-button type="primary" link size="small" @click.stop="updatePost(scope.row)">
+              <Icon icon="ep:edit" />编辑
+            </el-button>
+            <!-- </Auth> -->
+            <!-- <Auth value="post:remove"> -->
+            <el-button type="primary" link size="small" @click.stop="handleDelete(scope.row.id)">
+              <Icon icon="ep:delete" />删除
+            </el-button>
+            <!-- </Auth> -->
           </template>
         </el-table-column>
       </el-table>
@@ -356,11 +428,12 @@ onMounted(() => {
         <el-form-item label="标题" prop="title">
           <el-input v-model="formData.title" placeholder="请输入文章标题" />
         </el-form-item>
+
         <!-- 后端接收文件的URL -->
         <el-form-item label="封面" prop="poster">
           <el-upload class="avatar-uploader" action="#" :show-file-list="false" accept="image/jpg,image/jpeg,image/png"
             :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-change="changeImage"
-            :http-request="UploadImage" :file-list="fileList">
+            :file-list="fileList">
             <img v-if="imageUrl" :src="imageUrl" class="avatar" title="点击重新上传" />
             <!-- <i class="el-icon-plus avatar-uploader-icon"></i> -->
             <el-icon v-else class="avatar-uploader-icon">
@@ -368,9 +441,22 @@ onMounted(() => {
             </el-icon>
           </el-upload>
         </el-form-item>
+        <el-form-item label="文章类别" prop="cateId">
+          <el-dropdown trigger="click" @command="selectPostCategory">
+            <el-button type="primary">
+              {{ currentSelectCategory }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item v-for="cate in category" :command="cate">{{
+                  cate.name }}</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </el-form-item>
         <el-form-item label="内容" prop="content">
-          <WangEditor v-if="hackReset" v-model="formData.content" />
-          <!-- <el-input type="textarea" :rows="5" v-model="formData.content" placeholder="请输入文章内容" /> -->
+          <!-- <WangEditor v-if="hackReset" v-model="formData.content" /> -->
+          <el-input type="textarea" :rows="5" v-model="formData.content" placeholder="请输入文章内容" />
         </el-form-item>
         <el-form-item label="发布时间" prop="publishedAt">
           <el-date-picker v-model="formData.publishedAt" type="date" placeholder="请选择发布时间" />

@@ -1,6 +1,7 @@
 export default {
   path: "/system",
   meta: {
+    icon: "setting",
     title: "系统管理",
     rank: 3
   },
@@ -22,18 +23,6 @@ export default {
         title: "用户管理",
         roles: ["admin"]
       },
-      children: [
-        {
-          path: "/system/user/updateUser",
-          name: "UserUpdateManage",
-          component: () => import("@/views/system/user/updateUser/index.vue"),
-          meta: {
-            title: "用户修改",
-            roles: ["admin"],
-            rank: 0
-          },
-        },
-      ],
     },
     {
       path: "/system/role",

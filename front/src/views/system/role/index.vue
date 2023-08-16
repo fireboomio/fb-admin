@@ -263,27 +263,13 @@ function handleDelete(roleId?: number) {
  * 根据角色id查看用户信息
  */
 function getRoleUser(code: string) {
-  getRoleUsers(code).then(res => {
-    userInfoById.value = res.data.data.main_findManyrole[0]._join.main_findManyrole_user.map(item => {
-      return { Id: item._join.main_findManyuser[0].id, userName: item._join.main_findManyuser[0].name };
-    })
-  })
-}
-
-function clearRoleUser() {
-  userInfoById.value.length = 0;
-}
-/**
- * 权限配置
- */
-function openApiBindDialog(role: Role) {
-  apiBindVisible.value = true;
-  bindingRole.value = role;
-}
-
-function openMenuBindDialog(role: Role) {
-  menuBindVisible.value = true;
-  bindingRole.value = role;
+  // 打开用户管理的页面，并展示当前角色下的用户
+  router.push({
+    name: "UserManage",
+    query: {
+      code
+    }
+  });
 }
 
 onMounted(() => {
@@ -344,6 +330,8 @@ function currentChecked(nodeObj, SelectedObj) {
           <el-button type="primary" @click="handleQuery">
             <Icon icon="ep:search" />搜索
           </el-button>
+        </el-form-item>
+        <el-form-item>
           <el-button @click="resetQuery">
             <Icon icon="ep:refresh" />重置
           </el-button>
@@ -381,18 +369,9 @@ function currentChecked(nodeObj, SelectedObj) {
                 <Icon icon="ep:delete" />删除
               </el-button>
             </Auth>
-            <el-popover placement="bottom" trigger="click" :width="300" title="用户信息"
-              @before-enter="getRoleUser(scope.row.code)" @after-leave="clearRoleUser">
-              <template #reference>
-                <el-button type="primary" size="small" link>
-                  查看用户
-                </el-button>
-              </template>
-              <el-table :data="userInfoById">
-                <el-table-column width="100" property="Id" label="编号" align="center" />
-                <el-table-column width="200" property="userName" label="用户名" align="center" />
-              </el-table>
-            </el-popover>
+            <el-button type="primary" size="small" link @click="getRoleUser(scope.row.code)">
+              <Icon icon="ep:search" />查看用户
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -427,10 +406,6 @@ function currentChecked(nodeObj, SelectedObj) {
         </div>
       </template>
     </el-dialog>
-    <!-- 分配API弹窗  -->
-    <!-- <role-bind-api v-model="apiBindVisible" :role="bindingRole" :roles="roleList" /> -->
-    <!-- 分配菜单弹窗  -->
-    <!-- <role-bind-menu v-model="menuBindVisible" :role="bindingRole" /> -->
   </div>
 </template>
 
