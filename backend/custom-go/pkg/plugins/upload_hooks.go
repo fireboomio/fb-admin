@@ -11,8 +11,12 @@ import (
 type UploadHooks = base.Record[string, UploadHooksProfile]
 
 type UploadBody[M any] struct {
-	File base.WunderGraphFile `json:"file"`
-	Meta M                    `json:"meta"`
+	File  base.WunderGraphFile `json:"file"`
+	Meta  M                    `json:"meta"`
+	Error struct {
+		Name    string `json:"name"`
+		Message string `json:"message"`
+	} `json:"error"`
 }
 
 type UploadFunction func(request *base.UploadHookRequest, body *UploadBody[any]) (*base.UploadHookResponse, error)

@@ -1,0 +1,26 @@
+{
+    "enabled": true,
+    "title": "",
+    "remark": "",
+    "createTime": "2023-08-04 10:20:00Z",
+    "updateTime": "2023-08-04 10:23:04Z",
+    "deleteTime": "",
+    "path": "System/Log/DeleteLog",
+    "engine": 0,
+    "operationType": 1,
+    "hooksConfiguration": null,
+    "configCustomized": false,
+    "cacheConfig": {
+        "enabled": false,
+        "maxAge": 600,
+        "public": false,
+        "staleWhileRevalidate": 30
+    },
+    "liveQueryConfig": {
+        "enabled": false,
+        "pollingIntervalSeconds": 0
+    },
+    "authenticationConfig": {
+        "authRequired": false
+    }
+}

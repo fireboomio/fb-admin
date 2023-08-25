@@ -1,0 +1,353 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Fireboom open-api doc",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9123/api"
+    }
+  ],
+  "paths": {
+    "/role": {
+      "get": {
+        "description": "查询角色列表",
+        "operationId": "getAllRoles",
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Role"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/batch": {
+      "post": {
+        "description": "批量新增角色",
+        "operationId": "batchInsertRoles",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "dataName": {
+                        "type": "string"
+                      },
+                      "succeed": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "successful response"
+          }
+        }
+      },
+      "delete": {
+        "description": "批量删除角色",
+        "operationId": "batchDeleteRoles",
+        "parameters": [
+          {
+            "name": "dataNames",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "删除成功"
+          }
+        }
+      }
+    },
+    "/operation/listByRole": {
+      "post": {
+        "description": "获取角色绑定的api",
+        "operationId": "getRoleBindApis",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["roleCode"],
+                "type": "object",
+                "properties": {
+                  "rbacType": {
+                    "type": "string",
+                    "default": "requireMatchAny",
+                    "enum": ["requireMatchAny", "requireMatchAll", "denyMatchAll", "denyMatchAny"]
+                  },
+                  "roleCode": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Operation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operation/listPublic": {
+      "get": {
+        "description": "获取开放API列表",
+        "operationId": "getAllPublicApis",
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Operation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operation/bindRoles": {
+      "post": {
+        "description": "绑定角色和API",
+        "operationId": "bindRoleApis",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["roleCodes", "operationPaths"],
+                "type": "object",
+                "properties": {
+                  "rbacType": {
+                    "type": "string",
+                    "default": "requireMatchAny",
+                    "enum": ["requireMatchAll", "requireMatchAny", "denyMatchAll", "denyMatchAny"]
+                  },
+                  "roleCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "operationPaths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Role": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string"
+          },
+          "deleteTime" : {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string"
+          }
+        }
+      },
+      "Operation": {
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string"
+          },
+          "deleteTime": {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string"
+          },
+          "enabled": {
+            "description": "开关 true开 false关",
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          },
+          "liveQueryConfig": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              },
+              "pollingIntervalSeconds": {
+                "type": "integer"
+              }
+            }
+          },
+          "operationType": {
+            "description": "请求类型 0 queries, 1 mutations, 2subscriptions",
+            "type": "integer"
+          },
+          "remark": {
+            "description": "说明",
+            "type": "string"
+          },
+          "title": {
+            "description": "路径",
+            "type": "string"
+          },
+          "engine": {
+            "description": "0-graphql 1-function 2-proxy",
+            "type": "integer"
+          },
+          "configCustomized": {
+            "type": "boolean"
+          },
+          "cacheConfig": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              },
+              "maxAge": {
+                "type": "integer"
+              },
+              "public": {
+                "type": "boolean"
+              },
+              "staleWhileRevalidate": {
+                "type": "integer"
+              }
+            }
+          },
+          "authenticationConfig": {
+            "type": "object",
+            "properties": {
+              "authRequired": {
+                "type": "boolean"
+              }
+            }
+          },
+          "hooksConfiguration": {
+            "type": "object",
+            "properties": {
+              "customResolve": {
+                "type": "boolean"
+              },
+              "httpTransportBeforeRequest": {
+                "type": "boolean"
+              },
+              "httpTransportOnRequest": {
+                "type": "boolean"
+              },
+              "httpTransportOnResponse": {
+                "type": "boolean"
+              },
+              "mockResolve": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "subscriptionPollingIntervalMillis": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "mutatingPostResolve": {
+                "type": "boolean"
+              },
+              "mutatingPreResolve": {
+                "type": "boolean"
+              },
+              "onConnectionInit": {
+                "type": "boolean"
+              },
+              "postResolve": {
+                "type": "boolean"
+              },
+              "preResolve": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

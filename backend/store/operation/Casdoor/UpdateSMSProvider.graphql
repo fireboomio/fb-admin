@@ -1,0 +1,8 @@
+mutation MyQuery($clientId: String!, $clientSecret: String!, $signName: String!, $templateCode: String!) @rbac(requireMatchAny: [admin, user]) {
+  data: casdoor_updateProvider_post(
+    updateProvider_post_input_object: {clientId: $clientId, clientSecret: $clientSecret, signName: $signName, templateCode: $templateCode}
+  ) {
+    msg
+    status
+  }
+}

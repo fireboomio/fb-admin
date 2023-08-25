@@ -1,44 +1,109 @@
 {
 	"nodeOptions": {
-		"nodeUrl": null,
-		"publicNodeUrl": null,
-		"listen": null,
-		"logger": {
-			"level": {
-				"kind": 0,
-				"staticVariableContent": "DEBUG"
+		"nodeUrl": {
+			"kind": 1,
+			"environmentVariableName": "FB_API_INTERNAL_URL"
+		},
+		"publicNodeUrl": {
+			"kind": 1,
+			"environmentVariableName": "FB_API_PUBLIC_URL"
+		},
+		"listen": {
+			"host": {
+				"kind": 1,
+				"environmentVariableName": "FB_API_LISTEN_HOST"
+			},
+			"port": {
+				"kind": 1,
+				"environmentVariableName": "FB_API_LISTEN_PORT"
 			}
 		},
-		"defaultRequestTimeoutSeconds": 0,
-		"osEnvFilePath": ""
+		"logger": {
+			"level": {
+				"kind": 1,
+				"environmentVariableName": "FB_LOG_LEVEL"
+			}
+		},
+		"defaultRequestTimeoutSeconds": 0
 	},
 	"serverOptions": {
 		"serverUrl": {
-			"kind": 0,
-			"staticVariableContent": "http://localhost:9992"
+			"kind": 1,
+			"environmentVariableName": "FB_SERVER_URL"
 		},
-		"listen": null,
+		"listen": {
+			"host": {
+				"kind": 1,
+				"environmentVariableName": "FB_SERVER_LISTEN_HOST"
+			},
+			"port": {
+				"kind": 1,
+				"environmentVariableName": "FB_SERVER_LISTEN_PORT"
+			}
+		},
 		"logger": null
 	},
-	"corsConfiguration": null,
-	"enableGraphqlEndpoint": false,
-	"allowedHostNames": null,
-	"AuthorizedRedirectUris": null,
-	"enableCSRFProtect": false,
+	"corsConfiguration": {
+		"allowedOrigins": [
+			{
+				"kind": 0,
+				"staticVariableContent": "*"
+			}
+		],
+		"allowedMethods": [
+			"GET",
+			"POST"
+		],
+		"allowedHeaders": [
+			"*"
+		],
+		"exposedHeaders": [
+			"*"
+		],
+		"maxAge": 120,
+		"allowCredentials": true
+	},
+	"allowedHostNames": [
+		{
+			"kind": 0,
+			"staticVariableContent": "*"
+		}
+	],
+	"authorizedRedirectUris": [
+		null,
+		null,
+		{
+			"kind": 0,
+			"staticVariableContent": "http://localhost:9123/#/workbench/userInfo"
+		},
+		{
+			"kind": 0,
+			"staticVariableContent": "http://localhost:9123/#/workbench/rapi/loginBack"
+		}
+	],
+	"allowedReport": true,
+	"enableCSRFProtect": true,
 	"forceHttpsRedirects": false,
 	"globalRateLimit": {
 		"enabled": false,
 		"requests": 0,
 		"perDuration": 0
 	},
-	"appearance": null,
-	"logger": {
-		"filename": "log/fireboom-cloud.log",
-		"maxsize": 0,
-		"maxage": 0,
+	"appearance": {
+		"language": ""
+	},
+	"consoleLogger": {
+		"filename": "log/fireboom.log",
+		"maxsize": 10,
+		"maxage": 7,
 		"maxbackups": 0,
 		"localtime": false,
-		"compress": false
+		"compress": true
 	},
-	"buildInfo": null
+	"buildInfo": {
+		"Version": "",
+		"Commit": "",
+		"Date": "",
+		"BuiltBy": "Fireboom"
+	}
 }

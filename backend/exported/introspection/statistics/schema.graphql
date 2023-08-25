@@ -1,0 +1,26 @@
+schema {
+	query: Query
+}
+type GetMonthlySales {
+	months: String
+	totalSales: Float
+}
+type GetSaleTypePercent {
+	totalSales: Float
+	typeId: Int
+	typeName: String
+}
+type GetSalesTop10 {
+	shopName: String
+	totalSales: Float
+}
+type GetVisitTrending {
+	count: Int
+	days: String
+}
+type Query {
+	GetMonthlySales: [GetMonthlySales]
+	GetSaleTypePercent: [GetSaleTypePercent]
+	GetSalesTop10: [GetSalesTop10]
+	GetVisitTrending: [GetVisitTrending]
+}

@@ -1,0 +1,5 @@
+mutation MyQuery($roleCodes: [String]!, $operationPaths: [String]!) {
+  system_bindRoleApis_post(
+    bindRoleApis_post_input_object: {roleCodes: $roleCodes, operationPaths: $operationPaths}
+  )
+}

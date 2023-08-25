@@ -3,14 +3,17 @@ package server
 import (
 	"github.com/joho/godotenv"
 
-	"custom-go/auth"
+	"custom-go/generated"
+
+	operation_System__Role__AddOne "custom-go/operation/System/Role/AddOne"
+
+	operation_System__Role__DeleteMany "custom-go/operation/System/Role/DeleteMany"
+
+	operation_System__Role__DeleteOne "custom-go/operation/System/Role/DeleteOne"
 
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
 	"custom-go/pkg/types"
-
-	"custom-go/customize"
-	_ "custom-go/proxys"
 )
 
 const nodeEnvFilepath = "../.env"
@@ -20,30 +23,21 @@ func init() {
 
 	types.WdgHooksAndServerConfig = types.WunderGraphHooksAndServerConfig{
 		Hooks: types.HooksConfiguration{
-			Global: plugins.GlobalConfiguration{
-				HttpTransport: plugins.HttpTransportHooks{},
-				WsTransport:   plugins.WsTransportHooks{},
+			Global:         plugins.GlobalConfiguration{},
+			Authentication: plugins.AuthenticationConfiguration{},
+			Queries:        base.OperationHooks{},
+			Mutations: base.OperationHooks{
+				"System/Role/AddOne": {
+					MutatingPostResolve: plugins.ConvertBodyFunc[generated.System__Role__AddOneInternalInput, generated.System__Role__AddOneResponseData](operation_System__Role__AddOne.MutatingPostResolve),
+				},
+				"System/Role/DeleteMany": {
+					MutatingPostResolve: plugins.ConvertBodyFunc[generated.System__Role__DeleteManyInternalInput, generated.System__Role__DeleteManyResponseData](operation_System__Role__DeleteMany.MutatingPostResolve),
+				},
+				"System/Role/DeleteOne": {
+					MutatingPostResolve: plugins.ConvertBodyFunc[generated.System__Role__DeleteOneInternalInput, generated.System__Role__DeleteOneResponseData](operation_System__Role__DeleteOne.MutatingPostResolve),
+				},
 			},
-
-			Authentication: plugins.AuthenticationConfiguration{
-				MutatingPostAuthentication: auth.MutatingPostAuthentication,
-			},
-
-			Queries: base.OperationHooks{},
-
-			Mutations: base.OperationHooks{},
-
-			Subscriptions: base.OperationHooks{},
-
 			Uploads: map[string]plugins.UploadHooks{},
-		},
-		GraphqlServers: []plugins.GraphQLServerConfig{
-			{
-				ApiNamespace:          "statistics",
-				ServerName:            "statistics",
-				EnableGraphQLEndpoint: true,
-				Schema:                customize.Statistics_schema,
-			},
 		},
 	}
 }

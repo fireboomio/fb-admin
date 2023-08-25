@@ -1,0 +1,6 @@
+mutation MyQuery($data: [system_Role_input_object]!) {
+  data: system_batchInsertRoles_post(Role_input_object: $data) {
+    dataName
+    succeed
+  }
+}

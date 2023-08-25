@@ -3,17 +3,16 @@ package types
 import (
 	"custom-go/pkg/utils"
 	"custom-go/pkg/wgpb"
-	"github.com/joho/godotenv"
 	"golang.org/x/exp/slices"
 	"path/filepath"
 )
 
 var WdgGraphConfig WunderGraphConfiguration
+
 var configJsonPath = filepath.Join("generated", "fireboom.config.json")
 
 func init() {
 	_ = utils.ReadStructAndCacheFile(configJsonPath, &WdgGraphConfig)
-	_ = godotenv.Overload(WdgGraphConfig.Api.NodeOptions.OsEnvFilePath)
 }
 
 type WunderGraphConfiguration struct {

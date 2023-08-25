@@ -1,0 +1,191 @@
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:1qaz2wsx@localhost:3310/main"
+}
+
+model admin_apilog {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  deletedAt DateTime?
+  ip        String
+  method    String
+  path      String
+  code      String
+  ua        String
+  userId    String
+  userName  String
+}
+
+model admin_dic {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  deletedAt DateTime?
+  isOpen    Boolean
+}
+
+model admin_menu_role {
+  id      Int @id @default(autoincrement())
+  menu_id Int
+  role_id Int
+
+  @@unique([role_id, menu_id], map: "roleId")
+}
+
+model admin_permission {
+  id        BigInt    @id
+  createdAt DateTime? @db.Date
+  updatedAt DateTime? @db.Date
+  method    String    @db.Char(10)
+  path      String    @unique(map: "pathKey") @db.VarChar(50)
+  enabled   Int       @default(1) @db.UnsignedTinyInt
+}
+
+model admin_provider {
+  owner         String  @db.VarChar(100)
+  name          String  @unique(map: "UQE_provider_name") @db.VarChar(100)
+  created_time  String? @db.VarChar(100)
+  type          String? @db.VarChar(100)
+  client_id     String? @db.VarChar(100)
+  client_secret String? @db.VarChar(2000)
+  sign_name     String? @db.VarChar(100)
+  template_code String? @db.VarChar(100)
+
+  @@id([owner, name])
+}
+
+model admin_role {
+  id     Int    @id @default(autoincrement())
+  code   String @unique(map: "uniqueKey") @db.VarChar(20)
+  remark String @db.VarChar(40)
+}
+
+model admin_role_user {
+  id      Int @id @default(autoincrement())
+  role_id Int
+  user_id Int
+
+  @@unique([role_id, user_id], map: "role_user")
+}
+
+model admin_user {
+  id            Int         @id @default(autoincrement())
+  created_at    DateTime?   @db.DateTime(0)
+  name          String      @db.VarChar(32)
+  avatar        String?     @db.VarChar(255)
+  phone         String?     @db.Char(13)
+  password_salt String?     @db.VarChar(100)
+  password      String?     @db.VarChar(100)
+  country_code  String?     @db.VarChar(6)
+  password_type String?     @db.VarChar(100)
+  user_id       String?     @db.VarChar(255)
+  case_post     case_post[]
+  mytest        mytest[]
+}
+
+model admin_verification_record {
+  name         String   @id @db.VarChar(100)
+  created_time String?  @db.VarChar(100)
+  type         String?  @db.VarChar(10)
+  user         String   @db.VarChar(100)
+  provider     String   @db.VarChar(100)
+  receiver     String   @db.VarChar(100)
+  code         String   @db.VarChar(10)
+  time         BigInt
+  is_used      Boolean?
+}
+
+model car {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  deletedAt DateTime?
+  title     String    @unique
+}
+
+model case_category {
+  id        Int         @id @default(autoincrement())
+  name      String
+  case_post case_post[]
+}
+
+model case_menu {
+  id          Int       @id @default(autoincrement())
+  parentId    Int?
+  label       String    @db.VarChar(32)
+  path        String?   @db.VarChar(100)
+  icon        String?   @db.LongText
+  sort        Int
+  level       Int
+  name        String?   @db.VarChar(32)
+  is_bottom   Int       @default(1) @db.UnsignedTinyInt
+  create_time DateTime? @db.DateTime(0)
+  perms       String?   @db.VarChar(100)
+  menu_type   String?   @default("") @db.Char(1)
+  api_id      String?   @default("") @db.VarChar(255)
+}
+
+model case_post {
+  id            Int            @id @default(autoincrement())
+  title         String         @db.VarChar(32)
+  poster        String?        @db.VarChar(255)
+  published_at  DateTime?      @db.Date
+  author        String         @db.VarChar(50)
+  content       String?        @db.LongText
+  cate          Int?
+  auth          Int?
+  admin_user    admin_user?    @relation(fields: [auth], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "authorConn")
+  case_category case_category? @relation(fields: [cate], references: [id], onDelete: Restrict, map: "post_id_fkey")
+
+  @@index([auth], map: "authorConn")
+  @@index([cate], map: "post_id_fkey")
+}
+
+model case_salelog {
+  id            Int           @id @default(autoincrement())
+  shopName      String        @db.VarChar(50)
+  day           DateTime      @db.DateTime(0)
+  sales         Float
+  typeId        Int
+  case_saletype case_saletype @relation(fields: [typeId], references: [id], map: "SaleLog_typeId_fkey")
+
+  @@index([typeId], map: "SaleLog_typeId_fkey")
+}
+
+model case_saletype {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.LongText
+  createdAt    String         @db.LongText
+  case_salelog case_salelog[]
+}
+
+model case_sub {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  deletedAt   DateTime?
+  message     String
+  create_role String
+  target_role String
+  type        String
+}
+
+model case_visitlog {
+  id        Int    @id @default(autoincrement())
+  ip        String @db.LongText
+  ua        String @db.LongText
+  visitedAt String @db.LongText
+}
+
+model mytest {
+  id         Int        @id @default(autoincrement())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime
+  deletedAt  DateTime?
+  myAttr     String     @unique
+  userid     Int
+  admin_user admin_user @relation(fields: [userid], references: [id])
+
+  @@index([userid], map: "mytest_userid_fkey")
+}

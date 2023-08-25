@@ -1,0 +1,26 @@
+{
+	"enabled": true,
+	"title": "",
+	"remark": "",
+	"createTime": "2023-08-22T14:38:44+08:00",
+	"updateTime": "2023-08-22T17:12:11+08:00",
+	"deleteTime": "",
+	"path": "System/Role/SyncDeleteRole",
+	"engine": 0,
+	"hooksConfiguration": {
+		"preResolve": false,
+		"postResolve": false,
+		"mutatingPreResolve": false,
+		"mutatingPostResolve": false,
+		"customResolve": false,
+		"mockResolve": null,
+		"httpTransportBeforeRequest": false,
+		"httpTransportOnRequest": false,
+		"httpTransportOnResponse": false,
+		"onConnectionInit": false
+	},
+	"configCustomized": false,
+	"cacheConfig": null,
+	"liveQueryConfig": null,
+	"authenticationConfig": null
+}

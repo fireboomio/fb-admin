@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Casdoor API",
     "description": "Documentation of Casdoor API",
@@ -11,321 +11,350 @@
   "paths": {
     "/api/add-user": {
       "post": {
-        "description": "add user",
-        "parameters": [
-          {
-            "description": "名称",
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "密码",
-            "name": "password",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "密码类型",
-            "name": "passwordType",
-            "in": "formData",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "电话号码",
-            "name": "phone",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "国际区号（默认CN）",
-            "name": "countryCode",
-            "in": "formData",
-            "required": false,
-            "type": "string"
+        "tags": ["User Operations"],
+        "operationId": "addUser",
+        "summary": "Add a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "User name"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Password"
+                  },
+                  "passwordType": {
+                    "type": "string",
+                    "description": "Password type"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "Phone number"
+                  },
+                  "countryCode": {
+                    "type": "string",
+                    "description": "Country code, default CN"
+                  }
+                },
+                "required": ["name", "password", "phone"]
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/objectResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse"
+                }
+              }
             }
           }
         }
       }
     },
+
     "/api/update-user": {
       "post": {
-        "description": "update user",
-        "parameters": [
-          {
-            "description": "名称",
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "密码",
-            "name": "password",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "密码类型",
-            "name": "passwordType",
-            "in": "formData",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "电话号码",
-            "name": "phone",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "国际区号（默认CN）",
-            "name": "countryCode",
-            "in": "formData",
-            "type": "string"
-          },
-          {
-            "description": "用户id",
-            "name": "userId",
-            "in": "formData",
-            "required": true,
-            "type": "string"
+        "operationId": "updateUser",
+        "tags": ["User Operations"],
+        "summary": "Update an existing user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "passwordType": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "User ID"
+                  }
+                },
+                "required": ["name", "password", "phone", "userId"]
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/objectResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse"
+                }
+              }
             }
           }
         }
       }
     },
+
     "/api/login": {
       "post": {
-        "description": "login",
-        "parameters": [
-          {
-            "description": "用户名",
-            "name": "username",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "号码",
-            "name": "phone",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "国际区号（默认CN）",
-            "name": "countryCode",
-            "in": "formData",
-            "type": "string"
-          },
-          {
-            "description": "验证码",
-            "name": "code",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "密码",
-            "name": "password",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "登录类型",
-            "name": "loginType",
-            "in": "formData",
-            "required": true,
-            "type": "string"
+        "operationId": "login",
+        "tags": ["Authentication"],
+        "summary": "Login user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "loginType": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "phone", "code", "password", "loginType"]
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/apiUserResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
             }
           }
         }
       }
     },
+
     "/api/refresh-token": {
       "post": {
-        "description": "刷新token",
-        "parameters": [
-          {
-            "description": "refresh-token",
-            "name": "refresh-token",
-            "in": "formData",
-            "required": true,
-            "type": "string"
+        "operationId": "refreshToken",
+        "tags": ["Authentication"],
+        "summary": "Refresh auth token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refresh-token": {
+                    "type": "string"
+                  }
+                },
+                "required": ["refresh-token"]
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/apiUserResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
             }
           }
         }
       }
     },
+
     "/api/send-verification-code": {
       "post": {
-        "description": "发送验证码",
-        "parameters": [
-          {
-            "description": "发送手机号",
-            "name": "dest",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "国际区号（默认CN）",
-            "name": "countryCode",
-            "in": "formData",
-            "type": "string"
+        "tags": ["Authentication"],
+        "operationId": "sendCode",
+        "summary": "Send verification code",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dest": {
+                    "type": "string",
+                    "description": "Destination phone number"
+                  },
+                  "countryCode": {
+                    "type": "string",
+                    "description": "Country code, default CN"
+                  }
+                },
+                "required": ["dest"]
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/objectResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse"
+                }
+              }
             }
           }
         }
       }
     },
+
     "/api/update-provider": {
       "post": {
-        "description": "update provider",
-        "parameters": [
-          {
-            "description": "clientId",
-            "name": "clientId",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "clientSecret",
-            "name": "clientSecret",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "签名",
-            "name": "signName",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "模板代码",
-            "name": "templateCode",
-            "in": "formData",
-            "required": true,
-            "type": "string"
+        "tags": ["Provider Operations"],
+        "operationId": "updateProvider",
+        "summary": "Update provider",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientId": {
+                    "type": "string"
+                  },
+                  "clientSecret": {
+                    "type": "string"
+                  },
+                  "signName": {
+                    "type": "string"
+                  },
+                  "templateCode": {
+                    "type": "string"
+                  }
+                },
+                "required": ["clientId", "clientSecret", "signName", "templateCode"]
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/objectResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse"
+                }
+              }
             }
           }
         }
       }
     },
+
     "/api/user-info": {
       "get": {
-        "description": "Get User Info",
+        "operationId": "userInfo",
+        "tags": ["User Operations"],
+        "summary": "Get user info",
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/objectUserinfo"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfo"
+                }
+              }
             }
           }
         }
       }
     }
   },
-  "definitions": {
-    "apiUserResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/objectTokenRes"
-        },
-        "msg": {
-          "type": "string"
-        },
-        "success": {
-          "type": "boolean"
+
+  "components": {
+    "schemas": {
+      "APIResponse": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          }
         }
-      }
-    },
-    "objectResponse": {
-      "type": "object",
-      "properties": {
-        "msg": {
-          "type": "string"
-        },
-        "status": {
-          "type": "integer"
+      },
+
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/TokenResponse"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          }
         }
-      }
-    },
-    "objectTokenRes": {
-      "type": "object",
-      "properties": {
-        "accessToken": {
-          "type": "string"
-        },
-        "expireIn": {
-          "type": "integer"
-        },
-        "refreshToken": {
-          "type": "string"
+      },
+
+      "TokenResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "expireIn": {
+            "type": "integer"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
         }
-      }
-    },
-    "objectUserinfo": {
-      "type": "object",
-      "properties": {
-        "phone": {
-          "type": "string"
-        },
-        "preferred_username": {
-          "type": "string"
+      },
+
+      "UserInfo": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string"
+          },
+          "preferred_username": {
+            "type": "string"
+          }
         }
       }
     }

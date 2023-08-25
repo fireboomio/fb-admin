@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"runtime"
 	"strings"
 )
 
@@ -70,4 +71,18 @@ func ConvertType[S, T any](s *S) (t *T) {
 	sBytes, _ := json.Marshal(s)
 	_ = json.Unmarshal(sBytes, &t)
 	return
+}
+
+func GetCallerName(prefix string) string {
+	if !strings.HasSuffix(prefix, "/") {
+		prefix += "/"
+	}
+
+	_, callerFilename, _, _ := runtime.Caller(2)
+	_, callerName, ok := strings.Cut(callerFilename, prefix)
+	if !ok {
+		return ""
+	}
+
+	return strings.TrimSuffix(callerName, filepath.Ext(callerName))
 }

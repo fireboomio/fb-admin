@@ -1,0 +1,26 @@
+{
+    "enabled": true,
+    "title": "",
+    "remark": "",
+    "createTime": "2023-07-20 03:33:59Z",
+    "updateTime": "2023-07-25 09:13:50Z",
+    "deleteTime": "",
+    "path": "System/Menu/GetApiList",
+    "engine": 0,
+    "operationType": 0,
+    "hooksConfiguration": null,
+    "configCustomized": false,
+    "cacheConfig": {
+        "enabled": false,
+        "maxAge": 600,
+        "public": false,
+        "staleWhileRevalidate": 30
+    },
+    "liveQueryConfig": {
+        "enabled": false,
+        "pollingIntervalSeconds": 0
+    },
+    "authenticationConfig": {
+        "authRequired": false
+    }
+}

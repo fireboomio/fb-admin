@@ -1,0 +1,103 @@
+schema {
+	query: Query
+	mutation: Mutation
+}
+type Mutation {
+	batchInsertRoles_post(Role_input_object: [Role_input_object]!): [batchInsertRoles_post_object]
+	batchDeleteRoles_delete(dataNames: [String]!): Boolean
+	getRoleBindApis_post(getRoleBindApis_post_input_object: getRoleBindApis_post_input_object!): [Operation_object]
+	bindRoleApis_post(bindRoleApis_post_input_object: bindRoleApis_post_input_object!): [String]
+}
+type Operation_authenticationConfig_object {
+	authRequired: Boolean
+}
+type Operation_cacheConfig_object {
+	enabled: Boolean
+	maxAge: Int
+	public: Boolean
+	staleWhileRevalidate: Int
+}
+type Operation_hooksConfiguration_mockResolve_object {
+	enabled: Boolean
+	subscriptionPollingIntervalMillis: Int
+}
+type Operation_hooksConfiguration_object {
+	mutatingPreResolve: Boolean
+	onConnectionInit: Boolean
+	postResolve: Boolean
+	httpTransportBeforeRequest: Boolean
+	httpTransportOnRequest: Boolean
+	mockResolve: Operation_hooksConfiguration_mockResolve_object
+	mutatingPostResolve: Boolean
+	customResolve: Boolean
+	httpTransportOnResponse: Boolean
+	preResolve: Boolean
+}
+type Operation_liveQueryConfig_object {
+	enabled: Boolean
+	pollingIntervalSeconds: Int
+}
+type Operation_object {
+	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
+	operationType: Int
+	updateTime: String
+	"""开关 true开 false关"""
+	enabled: Boolean
+	createTime: String
+	deleteTime: String
+	"""路径"""
+	title: String
+	"""0-graphql 1-function 2-proxy"""
+	engine: Int
+	cacheConfig: Operation_cacheConfig_object
+	hooksConfiguration: Operation_hooksConfiguration_object
+	path: String
+	liveQueryConfig: Operation_liveQueryConfig_object
+	"""说明"""
+	remark: String
+	configCustomized: Boolean
+	authenticationConfig: Operation_authenticationConfig_object
+}
+type Query {
+	getAllPublicApis_get: [Operation_object]
+	getAllRoles_get: [Role_object]
+}
+type Role_object {
+	code: String
+	remark: String
+	createTime: String
+	deleteTime: String
+	updateTime: String
+}
+type batchInsertRoles_post_object {
+	dataName: String
+	succeed: Boolean
+}
+input Role_input_object {
+	createTime: String
+	deleteTime: String
+	updateTime: String
+	code: String
+	remark: String
+}
+input bindRoleApis_post_input_object {
+	rbacType: bindRoleApis_post_rbacType_enum = requireMatchAny
+	roleCodes: [String]!
+	operationPaths: [String]!
+}
+input getRoleBindApis_post_input_object {
+	rbacType: getRoleBindApis_post_rbacType_enum = requireMatchAny
+	roleCode: String!
+}
+enum bindRoleApis_post_rbacType_enum {
+	requireMatchAll
+	requireMatchAny
+	denyMatchAll
+	denyMatchAny
+}
+enum getRoleBindApis_post_rbacType_enum {
+	requireMatchAny
+	requireMatchAll
+	denyMatchAll
+	denyMatchAny
+}

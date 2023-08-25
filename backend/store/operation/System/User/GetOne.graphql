@@ -1,0 +1,21 @@
+query MyQuery($name: String, $phone: String, $userId: Int@internal, $roleId: Int@internal) @rbac(requireMatchAny: [user, eeee, admin, b1a23, a231, abc1]) {
+  data: main_findFirstadmin_user(
+    where: {OR: [{name: {equals: $name}}, {phone: {equals: $phone}}]}
+  ) {
+    id @export(as: "userId")
+    avatar
+  	roles: _join @transform(get: "main_findManyadmin_role_user") {
+      main_findManyadmin_role_user(where: {user_id: {equals: $userId}}) @transform(get: "[]._join.main_findFirstadmin_role.code") {
+        role_id @export(as: "roleId")
+        _join {
+          main_findFirstadmin_role(where: {id: {equals: $roleId}}) {
+            code
+          }
+        }
+      }
+    }
+    name
+    phone
+    user_id
+  }
+}

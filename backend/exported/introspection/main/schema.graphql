@@ -1,0 +1,5068 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+input NestedIntFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntFilter
+}
+
+input IntFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntFilter
+}
+
+input NestedDateTimeFilter {
+    equals: DateTime
+    in: [DateTime]
+    notIn: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeFilter
+}
+
+input DateTimeFilter {
+    equals: DateTime
+    in: [DateTime]
+    notIn: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeFilter
+}
+
+input NestedDateTimeNullableFilter {
+    equals: DateTime
+    in: [DateTime]
+    notIn: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeNullableFilter
+}
+
+input DateTimeNullableFilter {
+    equals: DateTime
+    in: [DateTime]
+    notIn: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeNullableFilter
+}
+
+input NestedStringFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringFilter
+}
+
+input StringFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringFilter
+}
+
+input admin_apilogWhereInput {
+    AND: admin_apilogWhereInput
+    OR: [admin_apilogWhereInput]
+    NOT: admin_apilogWhereInput
+    id: IntFilter
+    createdAt: DateTimeFilter
+    updatedAt: DateTimeFilter
+    deletedAt: DateTimeNullableFilter
+    ip: StringFilter
+    method: StringFilter
+    path: StringFilter
+    code: StringFilter
+    ua: StringFilter
+    userId: StringFilter
+    userName: StringFilter
+}
+
+enum SortOrder {
+    asc
+    desc
+}
+
+input admin_apilogOrderByWithRelationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    ip: SortOrder
+    method: SortOrder
+    path: SortOrder
+    code: SortOrder
+    ua: SortOrder
+    userId: SortOrder
+    userName: SortOrder
+}
+
+input admin_apilogWhereUniqueInput {
+    id: Int
+}
+
+enum Admin_apilogScalarFieldEnum {
+    id
+    createdAt
+    updatedAt
+    deletedAt
+    ip
+    method
+    path
+    code
+    ua
+    userId
+    userName
+}
+
+type admin_apilog {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    ip: String!
+    method: String!
+    path: String!
+    code: String!
+    ua: String!
+    userId: String!
+    userName: String!
+}
+
+type Admin_apilogCountAggregateOutputType {
+    id: Int!
+    createdAt: Int!
+    updatedAt: Int!
+    deletedAt: Int!
+    ip: Int!
+    method: Int!
+    path: Int!
+    code: Int!
+    ua: Int!
+    userId: Int!
+    userName: Int!
+    _all: Int!
+}
+
+type Admin_apilogAvgAggregateOutputType {
+    id: Float
+}
+
+type Admin_apilogSumAggregateOutputType {
+    id: Int
+}
+
+type Admin_apilogMinAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    ip: String
+    method: String
+    path: String
+    code: String
+    ua: String
+    userId: String
+    userName: String
+}
+
+type Admin_apilogMaxAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    ip: String
+    method: String
+    path: String
+    code: String
+    ua: String
+    userId: String
+    userName: String
+}
+
+type AggregateAdmin_apilog {
+    _count: Admin_apilogCountAggregateOutputType
+    _avg: Admin_apilogAvgAggregateOutputType
+    _sum: Admin_apilogSumAggregateOutputType
+    _min: Admin_apilogMinAggregateOutputType
+    _max: Admin_apilogMaxAggregateOutputType
+}
+
+input admin_apilogCountOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    ip: SortOrder
+    method: SortOrder
+    path: SortOrder
+    code: SortOrder
+    ua: SortOrder
+    userId: SortOrder
+    userName: SortOrder
+}
+
+input admin_apilogAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input admin_apilogMaxOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    ip: SortOrder
+    method: SortOrder
+    path: SortOrder
+    code: SortOrder
+    ua: SortOrder
+    userId: SortOrder
+    userName: SortOrder
+}
+
+input admin_apilogMinOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    ip: SortOrder
+    method: SortOrder
+    path: SortOrder
+    code: SortOrder
+    ua: SortOrder
+    userId: SortOrder
+    userName: SortOrder
+}
+
+input admin_apilogSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input admin_apilogOrderByWithAggregationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    ip: SortOrder
+    method: SortOrder
+    path: SortOrder
+    code: SortOrder
+    ua: SortOrder
+    userId: SortOrder
+    userName: SortOrder
+    _count: admin_apilogCountOrderByAggregateInput
+    _avg: admin_apilogAvgOrderByAggregateInput
+    _max: admin_apilogMaxOrderByAggregateInput
+    _min: admin_apilogMinOrderByAggregateInput
+    _sum: admin_apilogSumOrderByAggregateInput
+}
+
+input NestedFloatFilter {
+    equals: Float
+    in: [Float]
+    notIn: [Float]
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    not: NestedFloatFilter
+}
+
+input NestedIntWithAggregatesFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntWithAggregatesFilter
+    _count: NestedIntFilter
+    _avg: NestedFloatFilter
+    _sum: NestedIntFilter
+    _min: NestedIntFilter
+    _max: NestedIntFilter
+}
+
+input IntWithAggregatesFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntWithAggregatesFilter
+    _count: NestedIntFilter
+    _avg: NestedFloatFilter
+    _sum: NestedIntFilter
+    _min: NestedIntFilter
+    _max: NestedIntFilter
+}
+
+input NestedDateTimeWithAggregatesFilter {
+    equals: DateTime
+    in: [DateTime]
+    notIn: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedDateTimeFilter
+    _max: NestedDateTimeFilter
+}
+
+input DateTimeWithAggregatesFilter {
+    equals: DateTime
+    in: [DateTime]
+    notIn: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedDateTimeFilter
+    _max: NestedDateTimeFilter
+}
+
+input NestedIntNullableFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableFilter
+}
+
+input NestedDateTimeNullableWithAggregatesFilter {
+    equals: DateTime
+    in: [DateTime]
+    notIn: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedDateTimeNullableFilter
+    _max: NestedDateTimeNullableFilter
+}
+
+input DateTimeNullableWithAggregatesFilter {
+    equals: DateTime
+    in: [DateTime]
+    notIn: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedDateTimeNullableFilter
+    _max: NestedDateTimeNullableFilter
+}
+
+input NestedStringWithAggregatesFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedStringFilter
+    _max: NestedStringFilter
+}
+
+input StringWithAggregatesFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedStringFilter
+    _max: NestedStringFilter
+}
+
+input admin_apilogScalarWhereWithAggregatesInput {
+    AND: admin_apilogScalarWhereWithAggregatesInput
+    OR: [admin_apilogScalarWhereWithAggregatesInput]
+    NOT: admin_apilogScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    createdAt: DateTimeWithAggregatesFilter
+    updatedAt: DateTimeWithAggregatesFilter
+    deletedAt: DateTimeNullableWithAggregatesFilter
+    ip: StringWithAggregatesFilter
+    method: StringWithAggregatesFilter
+    path: StringWithAggregatesFilter
+    code: StringWithAggregatesFilter
+    ua: StringWithAggregatesFilter
+    userId: StringWithAggregatesFilter
+    userName: StringWithAggregatesFilter
+}
+
+type Admin_apilogGroupByOutputType {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    ip: String!
+    method: String!
+    path: String!
+    code: String!
+    ua: String!
+    userId: String!
+    userName: String!
+    _count: Admin_apilogCountAggregateOutputType
+    _avg: Admin_apilogAvgAggregateOutputType
+    _sum: Admin_apilogSumAggregateOutputType
+    _min: Admin_apilogMinAggregateOutputType
+    _max: Admin_apilogMaxAggregateOutputType
+}
+
+input NestedBoolFilter {
+    equals: Boolean
+    not: NestedBoolFilter
+}
+
+input BoolFilter {
+    equals: Boolean
+    not: NestedBoolFilter
+}
+
+input admin_dicWhereInput {
+    AND: admin_dicWhereInput
+    OR: [admin_dicWhereInput]
+    NOT: admin_dicWhereInput
+    id: IntFilter
+    createdAt: DateTimeFilter
+    updatedAt: DateTimeFilter
+    deletedAt: DateTimeNullableFilter
+    isOpen: BoolFilter
+}
+
+input admin_dicOrderByWithRelationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    isOpen: SortOrder
+}
+
+input admin_dicWhereUniqueInput {
+    id: Int
+}
+
+enum Admin_dicScalarFieldEnum {
+    id
+    createdAt
+    updatedAt
+    deletedAt
+    isOpen
+}
+
+type admin_dic {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    isOpen: Boolean!
+}
+
+type Admin_dicCountAggregateOutputType {
+    id: Int!
+    createdAt: Int!
+    updatedAt: Int!
+    deletedAt: Int!
+    isOpen: Int!
+    _all: Int!
+}
+
+type Admin_dicAvgAggregateOutputType {
+    id: Float
+}
+
+type Admin_dicSumAggregateOutputType {
+    id: Int
+}
+
+type Admin_dicMinAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    isOpen: Boolean
+}
+
+type Admin_dicMaxAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    isOpen: Boolean
+}
+
+type AggregateAdmin_dic {
+    _count: Admin_dicCountAggregateOutputType
+    _avg: Admin_dicAvgAggregateOutputType
+    _sum: Admin_dicSumAggregateOutputType
+    _min: Admin_dicMinAggregateOutputType
+    _max: Admin_dicMaxAggregateOutputType
+}
+
+input admin_dicCountOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    isOpen: SortOrder
+}
+
+input admin_dicAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input admin_dicMaxOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    isOpen: SortOrder
+}
+
+input admin_dicMinOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    isOpen: SortOrder
+}
+
+input admin_dicSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input admin_dicOrderByWithAggregationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    isOpen: SortOrder
+    _count: admin_dicCountOrderByAggregateInput
+    _avg: admin_dicAvgOrderByAggregateInput
+    _max: admin_dicMaxOrderByAggregateInput
+    _min: admin_dicMinOrderByAggregateInput
+    _sum: admin_dicSumOrderByAggregateInput
+}
+
+input NestedBoolWithAggregatesFilter {
+    equals: Boolean
+    not: NestedBoolWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedBoolFilter
+    _max: NestedBoolFilter
+}
+
+input BoolWithAggregatesFilter {
+    equals: Boolean
+    not: NestedBoolWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedBoolFilter
+    _max: NestedBoolFilter
+}
+
+input admin_dicScalarWhereWithAggregatesInput {
+    AND: admin_dicScalarWhereWithAggregatesInput
+    OR: [admin_dicScalarWhereWithAggregatesInput]
+    NOT: admin_dicScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    createdAt: DateTimeWithAggregatesFilter
+    updatedAt: DateTimeWithAggregatesFilter
+    deletedAt: DateTimeNullableWithAggregatesFilter
+    isOpen: BoolWithAggregatesFilter
+}
+
+type Admin_dicGroupByOutputType {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    isOpen: Boolean!
+    _count: Admin_dicCountAggregateOutputType
+    _avg: Admin_dicAvgAggregateOutputType
+    _sum: Admin_dicSumAggregateOutputType
+    _min: Admin_dicMinAggregateOutputType
+    _max: Admin_dicMaxAggregateOutputType
+}
+
+input admin_menu_roleWhereInput {
+    AND: admin_menu_roleWhereInput
+    OR: [admin_menu_roleWhereInput]
+    NOT: admin_menu_roleWhereInput
+    id: IntFilter
+    menu_id: IntFilter
+    role_id: IntFilter
+}
+
+input admin_menu_roleOrderByWithRelationInput {
+    id: SortOrder
+    menu_id: SortOrder
+    role_id: SortOrder
+}
+
+input admin_menu_roleRole_idMenu_idCompoundUniqueInput {
+    role_id: Int!
+    menu_id: Int!
+}
+
+input admin_menu_roleWhereUniqueInput {
+    id: Int
+    role_id_menu_id: admin_menu_roleRole_idMenu_idCompoundUniqueInput
+}
+
+enum Admin_menu_roleScalarFieldEnum {
+    id
+    menu_id
+    role_id
+}
+
+type admin_menu_role {
+    id: Int!
+    menu_id: Int!
+    role_id: Int!
+}
+
+type Admin_menu_roleCountAggregateOutputType {
+    id: Int!
+    menu_id: Int!
+    role_id: Int!
+    _all: Int!
+}
+
+type Admin_menu_roleAvgAggregateOutputType {
+    id: Float
+    menu_id: Float
+    role_id: Float
+}
+
+type Admin_menu_roleSumAggregateOutputType {
+    id: Int
+    menu_id: Int
+    role_id: Int
+}
+
+type Admin_menu_roleMinAggregateOutputType {
+    id: Int
+    menu_id: Int
+    role_id: Int
+}
+
+type Admin_menu_roleMaxAggregateOutputType {
+    id: Int
+    menu_id: Int
+    role_id: Int
+}
+
+type AggregateAdmin_menu_role {
+    _count: Admin_menu_roleCountAggregateOutputType
+    _avg: Admin_menu_roleAvgAggregateOutputType
+    _sum: Admin_menu_roleSumAggregateOutputType
+    _min: Admin_menu_roleMinAggregateOutputType
+    _max: Admin_menu_roleMaxAggregateOutputType
+}
+
+input admin_menu_roleCountOrderByAggregateInput {
+    id: SortOrder
+    menu_id: SortOrder
+    role_id: SortOrder
+}
+
+input admin_menu_roleAvgOrderByAggregateInput {
+    id: SortOrder
+    menu_id: SortOrder
+    role_id: SortOrder
+}
+
+input admin_menu_roleMaxOrderByAggregateInput {
+    id: SortOrder
+    menu_id: SortOrder
+    role_id: SortOrder
+}
+
+input admin_menu_roleMinOrderByAggregateInput {
+    id: SortOrder
+    menu_id: SortOrder
+    role_id: SortOrder
+}
+
+input admin_menu_roleSumOrderByAggregateInput {
+    id: SortOrder
+    menu_id: SortOrder
+    role_id: SortOrder
+}
+
+input admin_menu_roleOrderByWithAggregationInput {
+    id: SortOrder
+    menu_id: SortOrder
+    role_id: SortOrder
+    _count: admin_menu_roleCountOrderByAggregateInput
+    _avg: admin_menu_roleAvgOrderByAggregateInput
+    _max: admin_menu_roleMaxOrderByAggregateInput
+    _min: admin_menu_roleMinOrderByAggregateInput
+    _sum: admin_menu_roleSumOrderByAggregateInput
+}
+
+input admin_menu_roleScalarWhereWithAggregatesInput {
+    AND: admin_menu_roleScalarWhereWithAggregatesInput
+    OR: [admin_menu_roleScalarWhereWithAggregatesInput]
+    NOT: admin_menu_roleScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    menu_id: IntWithAggregatesFilter
+    role_id: IntWithAggregatesFilter
+}
+
+type Admin_menu_roleGroupByOutputType {
+    id: Int!
+    menu_id: Int!
+    role_id: Int!
+    _count: Admin_menu_roleCountAggregateOutputType
+    _avg: Admin_menu_roleAvgAggregateOutputType
+    _sum: Admin_menu_roleSumAggregateOutputType
+    _min: Admin_menu_roleMinAggregateOutputType
+    _max: Admin_menu_roleMaxAggregateOutputType
+}
+
+input NestedBigIntFilter {
+    equals: BigInt
+    in: [BigInt]
+    notIn: [BigInt]
+    lt: BigInt
+    lte: BigInt
+    gt: BigInt
+    gte: BigInt
+    not: NestedBigIntFilter
+}
+
+input BigIntFilter {
+    equals: BigInt
+    in: [BigInt]
+    notIn: [BigInt]
+    lt: BigInt
+    lte: BigInt
+    gt: BigInt
+    gte: BigInt
+    not: NestedBigIntFilter
+}
+
+input admin_permissionWhereInput {
+    AND: admin_permissionWhereInput
+    OR: [admin_permissionWhereInput]
+    NOT: admin_permissionWhereInput
+    id: BigIntFilter
+    createdAt: DateTimeNullableFilter
+    updatedAt: DateTimeNullableFilter
+    method: StringFilter
+    path: StringFilter
+    enabled: IntFilter
+}
+
+input admin_permissionOrderByWithRelationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    method: SortOrder
+    path: SortOrder
+    enabled: SortOrder
+}
+
+input admin_permissionWhereUniqueInput {
+    id: BigInt
+    path: String
+}
+
+enum Admin_permissionScalarFieldEnum {
+    id
+    createdAt
+    updatedAt
+    method
+    path
+    enabled
+}
+
+type admin_permission {
+    id: BigInt!
+    createdAt: DateTime
+    updatedAt: DateTime
+    method: String!
+    path: String!
+    enabled: Int!
+}
+
+type Admin_permissionCountAggregateOutputType {
+    id: Int!
+    createdAt: Int!
+    updatedAt: Int!
+    method: Int!
+    path: Int!
+    enabled: Int!
+    _all: Int!
+}
+
+type Admin_permissionAvgAggregateOutputType {
+    id: Float
+    enabled: Float
+}
+
+type Admin_permissionSumAggregateOutputType {
+    id: BigInt
+    enabled: Int
+}
+
+type Admin_permissionMinAggregateOutputType {
+    id: BigInt
+    createdAt: DateTime
+    updatedAt: DateTime
+    method: String
+    path: String
+    enabled: Int
+}
+
+type Admin_permissionMaxAggregateOutputType {
+    id: BigInt
+    createdAt: DateTime
+    updatedAt: DateTime
+    method: String
+    path: String
+    enabled: Int
+}
+
+type AggregateAdmin_permission {
+    _count: Admin_permissionCountAggregateOutputType
+    _avg: Admin_permissionAvgAggregateOutputType
+    _sum: Admin_permissionSumAggregateOutputType
+    _min: Admin_permissionMinAggregateOutputType
+    _max: Admin_permissionMaxAggregateOutputType
+}
+
+input admin_permissionCountOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    method: SortOrder
+    path: SortOrder
+    enabled: SortOrder
+}
+
+input admin_permissionAvgOrderByAggregateInput {
+    id: SortOrder
+    enabled: SortOrder
+}
+
+input admin_permissionMaxOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    method: SortOrder
+    path: SortOrder
+    enabled: SortOrder
+}
+
+input admin_permissionMinOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    method: SortOrder
+    path: SortOrder
+    enabled: SortOrder
+}
+
+input admin_permissionSumOrderByAggregateInput {
+    id: SortOrder
+    enabled: SortOrder
+}
+
+input admin_permissionOrderByWithAggregationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    method: SortOrder
+    path: SortOrder
+    enabled: SortOrder
+    _count: admin_permissionCountOrderByAggregateInput
+    _avg: admin_permissionAvgOrderByAggregateInput
+    _max: admin_permissionMaxOrderByAggregateInput
+    _min: admin_permissionMinOrderByAggregateInput
+    _sum: admin_permissionSumOrderByAggregateInput
+}
+
+input NestedBigIntWithAggregatesFilter {
+    equals: BigInt
+    in: [BigInt]
+    notIn: [BigInt]
+    lt: BigInt
+    lte: BigInt
+    gt: BigInt
+    gte: BigInt
+    not: NestedBigIntWithAggregatesFilter
+    _count: NestedIntFilter
+    _avg: NestedFloatFilter
+    _sum: NestedBigIntFilter
+    _min: NestedBigIntFilter
+    _max: NestedBigIntFilter
+}
+
+input BigIntWithAggregatesFilter {
+    equals: BigInt
+    in: [BigInt]
+    notIn: [BigInt]
+    lt: BigInt
+    lte: BigInt
+    gt: BigInt
+    gte: BigInt
+    not: NestedBigIntWithAggregatesFilter
+    _count: NestedIntFilter
+    _avg: NestedFloatFilter
+    _sum: NestedBigIntFilter
+    _min: NestedBigIntFilter
+    _max: NestedBigIntFilter
+}
+
+input admin_permissionScalarWhereWithAggregatesInput {
+    AND: admin_permissionScalarWhereWithAggregatesInput
+    OR: [admin_permissionScalarWhereWithAggregatesInput]
+    NOT: admin_permissionScalarWhereWithAggregatesInput
+    id: BigIntWithAggregatesFilter
+    createdAt: DateTimeNullableWithAggregatesFilter
+    updatedAt: DateTimeNullableWithAggregatesFilter
+    method: StringWithAggregatesFilter
+    path: StringWithAggregatesFilter
+    enabled: IntWithAggregatesFilter
+}
+
+type Admin_permissionGroupByOutputType {
+    id: BigInt!
+    createdAt: DateTime
+    updatedAt: DateTime
+    method: String!
+    path: String!
+    enabled: Int!
+    _count: Admin_permissionCountAggregateOutputType
+    _avg: Admin_permissionAvgAggregateOutputType
+    _sum: Admin_permissionSumAggregateOutputType
+    _min: Admin_permissionMinAggregateOutputType
+    _max: Admin_permissionMaxAggregateOutputType
+}
+
+input NestedStringNullableFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringNullableFilter
+}
+
+input StringNullableFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringNullableFilter
+}
+
+input admin_providerWhereInput {
+    AND: admin_providerWhereInput
+    OR: [admin_providerWhereInput]
+    NOT: admin_providerWhereInput
+    owner: StringFilter
+    name: StringFilter
+    created_time: StringNullableFilter
+    type: StringNullableFilter
+    client_id: StringNullableFilter
+    client_secret: StringNullableFilter
+    sign_name: StringNullableFilter
+    template_code: StringNullableFilter
+}
+
+input admin_providerOrderByWithRelationInput {
+    owner: SortOrder
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    client_id: SortOrder
+    client_secret: SortOrder
+    sign_name: SortOrder
+    template_code: SortOrder
+}
+
+input admin_providerOwnerNameCompoundUniqueInput {
+    owner: String!
+    name: String!
+}
+
+input admin_providerWhereUniqueInput {
+    name: String
+    owner_name: admin_providerOwnerNameCompoundUniqueInput
+}
+
+enum Admin_providerScalarFieldEnum {
+    owner
+    name
+    created_time
+    type
+    client_id
+    client_secret
+    sign_name
+    template_code
+}
+
+type admin_provider {
+    owner: String!
+    name: String!
+    created_time: String
+    type: String
+    client_id: String
+    client_secret: String
+    sign_name: String
+    template_code: String
+}
+
+type Admin_providerCountAggregateOutputType {
+    owner: Int!
+    name: Int!
+    created_time: Int!
+    type: Int!
+    client_id: Int!
+    client_secret: Int!
+    sign_name: Int!
+    template_code: Int!
+    _all: Int!
+}
+
+type Admin_providerMinAggregateOutputType {
+    owner: String
+    name: String
+    created_time: String
+    type: String
+    client_id: String
+    client_secret: String
+    sign_name: String
+    template_code: String
+}
+
+type Admin_providerMaxAggregateOutputType {
+    owner: String
+    name: String
+    created_time: String
+    type: String
+    client_id: String
+    client_secret: String
+    sign_name: String
+    template_code: String
+}
+
+type AggregateAdmin_provider {
+    _count: Admin_providerCountAggregateOutputType
+    _min: Admin_providerMinAggregateOutputType
+    _max: Admin_providerMaxAggregateOutputType
+}
+
+input admin_providerCountOrderByAggregateInput {
+    owner: SortOrder
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    client_id: SortOrder
+    client_secret: SortOrder
+    sign_name: SortOrder
+    template_code: SortOrder
+}
+
+input admin_providerMaxOrderByAggregateInput {
+    owner: SortOrder
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    client_id: SortOrder
+    client_secret: SortOrder
+    sign_name: SortOrder
+    template_code: SortOrder
+}
+
+input admin_providerMinOrderByAggregateInput {
+    owner: SortOrder
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    client_id: SortOrder
+    client_secret: SortOrder
+    sign_name: SortOrder
+    template_code: SortOrder
+}
+
+input admin_providerOrderByWithAggregationInput {
+    owner: SortOrder
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    client_id: SortOrder
+    client_secret: SortOrder
+    sign_name: SortOrder
+    template_code: SortOrder
+    _count: admin_providerCountOrderByAggregateInput
+    _max: admin_providerMaxOrderByAggregateInput
+    _min: admin_providerMinOrderByAggregateInput
+}
+
+input NestedStringNullableWithAggregatesFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedStringNullableFilter
+    _max: NestedStringNullableFilter
+}
+
+input StringNullableWithAggregatesFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedStringNullableFilter
+    _max: NestedStringNullableFilter
+}
+
+input admin_providerScalarWhereWithAggregatesInput {
+    AND: admin_providerScalarWhereWithAggregatesInput
+    OR: [admin_providerScalarWhereWithAggregatesInput]
+    NOT: admin_providerScalarWhereWithAggregatesInput
+    owner: StringWithAggregatesFilter
+    name: StringWithAggregatesFilter
+    created_time: StringNullableWithAggregatesFilter
+    type: StringNullableWithAggregatesFilter
+    client_id: StringNullableWithAggregatesFilter
+    client_secret: StringNullableWithAggregatesFilter
+    sign_name: StringNullableWithAggregatesFilter
+    template_code: StringNullableWithAggregatesFilter
+}
+
+type Admin_providerGroupByOutputType {
+    owner: String!
+    name: String!
+    created_time: String
+    type: String
+    client_id: String
+    client_secret: String
+    sign_name: String
+    template_code: String
+    _count: Admin_providerCountAggregateOutputType
+    _min: Admin_providerMinAggregateOutputType
+    _max: Admin_providerMaxAggregateOutputType
+}
+
+input admin_roleWhereInput {
+    AND: admin_roleWhereInput
+    OR: [admin_roleWhereInput]
+    NOT: admin_roleWhereInput
+    id: IntFilter
+    code: StringFilter
+    remark: StringFilter
+}
+
+input admin_roleOrderByWithRelationInput {
+    id: SortOrder
+    code: SortOrder
+    remark: SortOrder
+}
+
+input admin_roleWhereUniqueInput {
+    id: Int
+    code: String
+}
+
+enum Admin_roleScalarFieldEnum {
+    id
+    code
+    remark
+}
+
+type admin_role {
+    id: Int!
+    code: String!
+    remark: String!
+}
+
+type Admin_roleCountAggregateOutputType {
+    id: Int!
+    code: Int!
+    remark: Int!
+    _all: Int!
+}
+
+type Admin_roleAvgAggregateOutputType {
+    id: Float
+}
+
+type Admin_roleSumAggregateOutputType {
+    id: Int
+}
+
+type Admin_roleMinAggregateOutputType {
+    id: Int
+    code: String
+    remark: String
+}
+
+type Admin_roleMaxAggregateOutputType {
+    id: Int
+    code: String
+    remark: String
+}
+
+type AggregateAdmin_role {
+    _count: Admin_roleCountAggregateOutputType
+    _avg: Admin_roleAvgAggregateOutputType
+    _sum: Admin_roleSumAggregateOutputType
+    _min: Admin_roleMinAggregateOutputType
+    _max: Admin_roleMaxAggregateOutputType
+}
+
+input admin_roleCountOrderByAggregateInput {
+    id: SortOrder
+    code: SortOrder
+    remark: SortOrder
+}
+
+input admin_roleAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input admin_roleMaxOrderByAggregateInput {
+    id: SortOrder
+    code: SortOrder
+    remark: SortOrder
+}
+
+input admin_roleMinOrderByAggregateInput {
+    id: SortOrder
+    code: SortOrder
+    remark: SortOrder
+}
+
+input admin_roleSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input admin_roleOrderByWithAggregationInput {
+    id: SortOrder
+    code: SortOrder
+    remark: SortOrder
+    _count: admin_roleCountOrderByAggregateInput
+    _avg: admin_roleAvgOrderByAggregateInput
+    _max: admin_roleMaxOrderByAggregateInput
+    _min: admin_roleMinOrderByAggregateInput
+    _sum: admin_roleSumOrderByAggregateInput
+}
+
+input admin_roleScalarWhereWithAggregatesInput {
+    AND: admin_roleScalarWhereWithAggregatesInput
+    OR: [admin_roleScalarWhereWithAggregatesInput]
+    NOT: admin_roleScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    code: StringWithAggregatesFilter
+    remark: StringWithAggregatesFilter
+}
+
+type Admin_roleGroupByOutputType {
+    id: Int!
+    code: String!
+    remark: String!
+    _count: Admin_roleCountAggregateOutputType
+    _avg: Admin_roleAvgAggregateOutputType
+    _sum: Admin_roleSumAggregateOutputType
+    _min: Admin_roleMinAggregateOutputType
+    _max: Admin_roleMaxAggregateOutputType
+}
+
+input admin_role_userWhereInput {
+    AND: admin_role_userWhereInput
+    OR: [admin_role_userWhereInput]
+    NOT: admin_role_userWhereInput
+    id: IntFilter
+    role_id: IntFilter
+    user_id: IntFilter
+}
+
+input admin_role_userOrderByWithRelationInput {
+    id: SortOrder
+    role_id: SortOrder
+    user_id: SortOrder
+}
+
+input admin_role_userRole_idUser_idCompoundUniqueInput {
+    role_id: Int!
+    user_id: Int!
+}
+
+input admin_role_userWhereUniqueInput {
+    id: Int
+    role_id_user_id: admin_role_userRole_idUser_idCompoundUniqueInput
+}
+
+enum Admin_role_userScalarFieldEnum {
+    id
+    role_id
+    user_id
+}
+
+type admin_role_user {
+    id: Int!
+    role_id: Int!
+    user_id: Int!
+}
+
+type Admin_role_userCountAggregateOutputType {
+    id: Int!
+    role_id: Int!
+    user_id: Int!
+    _all: Int!
+}
+
+type Admin_role_userAvgAggregateOutputType {
+    id: Float
+    role_id: Float
+    user_id: Float
+}
+
+type Admin_role_userSumAggregateOutputType {
+    id: Int
+    role_id: Int
+    user_id: Int
+}
+
+type Admin_role_userMinAggregateOutputType {
+    id: Int
+    role_id: Int
+    user_id: Int
+}
+
+type Admin_role_userMaxAggregateOutputType {
+    id: Int
+    role_id: Int
+    user_id: Int
+}
+
+type AggregateAdmin_role_user {
+    _count: Admin_role_userCountAggregateOutputType
+    _avg: Admin_role_userAvgAggregateOutputType
+    _sum: Admin_role_userSumAggregateOutputType
+    _min: Admin_role_userMinAggregateOutputType
+    _max: Admin_role_userMaxAggregateOutputType
+}
+
+input admin_role_userCountOrderByAggregateInput {
+    id: SortOrder
+    role_id: SortOrder
+    user_id: SortOrder
+}
+
+input admin_role_userAvgOrderByAggregateInput {
+    id: SortOrder
+    role_id: SortOrder
+    user_id: SortOrder
+}
+
+input admin_role_userMaxOrderByAggregateInput {
+    id: SortOrder
+    role_id: SortOrder
+    user_id: SortOrder
+}
+
+input admin_role_userMinOrderByAggregateInput {
+    id: SortOrder
+    role_id: SortOrder
+    user_id: SortOrder
+}
+
+input admin_role_userSumOrderByAggregateInput {
+    id: SortOrder
+    role_id: SortOrder
+    user_id: SortOrder
+}
+
+input admin_role_userOrderByWithAggregationInput {
+    id: SortOrder
+    role_id: SortOrder
+    user_id: SortOrder
+    _count: admin_role_userCountOrderByAggregateInput
+    _avg: admin_role_userAvgOrderByAggregateInput
+    _max: admin_role_userMaxOrderByAggregateInput
+    _min: admin_role_userMinOrderByAggregateInput
+    _sum: admin_role_userSumOrderByAggregateInput
+}
+
+input admin_role_userScalarWhereWithAggregatesInput {
+    AND: admin_role_userScalarWhereWithAggregatesInput
+    OR: [admin_role_userScalarWhereWithAggregatesInput]
+    NOT: admin_role_userScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    role_id: IntWithAggregatesFilter
+    user_id: IntWithAggregatesFilter
+}
+
+type Admin_role_userGroupByOutputType {
+    id: Int!
+    role_id: Int!
+    user_id: Int!
+    _count: Admin_role_userCountAggregateOutputType
+    _avg: Admin_role_userAvgAggregateOutputType
+    _sum: Admin_role_userSumAggregateOutputType
+    _min: Admin_role_userMinAggregateOutputType
+    _max: Admin_role_userMaxAggregateOutputType
+}
+
+input IntNullableFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableFilter
+}
+
+input Admin_userRelationFilter {
+    is: admin_userWhereInput
+    isNot: admin_userWhereInput
+}
+
+input case_categoryWhereInput {
+    AND: case_categoryWhereInput
+    OR: [case_categoryWhereInput]
+    NOT: case_categoryWhereInput
+    id: IntFilter
+    name: StringFilter
+    case_post: Case_postListRelationFilter
+}
+
+input Case_categoryRelationFilter {
+    is: case_categoryWhereInput
+    isNot: case_categoryWhereInput
+}
+
+input case_postWhereInput {
+    AND: case_postWhereInput
+    OR: [case_postWhereInput]
+    NOT: case_postWhereInput
+    id: IntFilter
+    title: StringFilter
+    poster: StringNullableFilter
+    published_at: DateTimeNullableFilter
+    author: StringFilter
+    content: StringNullableFilter
+    cate: IntNullableFilter
+    auth: IntNullableFilter
+    admin_user: Admin_userRelationFilter
+    case_category: Case_categoryRelationFilter
+}
+
+input Case_postListRelationFilter {
+    every: case_postWhereInput
+    some: case_postWhereInput
+    none: case_postWhereInput
+}
+
+input mytestWhereInput {
+    AND: mytestWhereInput
+    OR: [mytestWhereInput]
+    NOT: mytestWhereInput
+    id: IntFilter
+    createdAt: DateTimeFilter
+    updatedAt: DateTimeFilter
+    deletedAt: DateTimeNullableFilter
+    myAttr: StringFilter
+    userid: IntFilter
+    admin_user: Admin_userRelationFilter
+}
+
+input MytestListRelationFilter {
+    every: mytestWhereInput
+    some: mytestWhereInput
+    none: mytestWhereInput
+}
+
+input admin_userWhereInput {
+    AND: admin_userWhereInput
+    OR: [admin_userWhereInput]
+    NOT: admin_userWhereInput
+    id: IntFilter
+    created_at: DateTimeNullableFilter
+    name: StringFilter
+    avatar: StringNullableFilter
+    phone: StringNullableFilter
+    password_salt: StringNullableFilter
+    password: StringNullableFilter
+    country_code: StringNullableFilter
+    password_type: StringNullableFilter
+    user_id: StringNullableFilter
+    case_post: Case_postListRelationFilter
+    mytest: MytestListRelationFilter
+}
+
+input case_postOrderByRelationAggregateInput {
+    _count: SortOrder
+}
+
+input mytestOrderByRelationAggregateInput {
+    _count: SortOrder
+}
+
+input admin_userOrderByWithRelationInput {
+    id: SortOrder
+    created_at: SortOrder
+    name: SortOrder
+    avatar: SortOrder
+    phone: SortOrder
+    password_salt: SortOrder
+    password: SortOrder
+    country_code: SortOrder
+    password_type: SortOrder
+    user_id: SortOrder
+    case_post: case_postOrderByRelationAggregateInput
+    mytest: mytestOrderByRelationAggregateInput
+}
+
+input admin_userWhereUniqueInput {
+    id: Int
+}
+
+enum Admin_userScalarFieldEnum {
+    id
+    created_at
+    name
+    avatar
+    phone
+    password_salt
+    password
+    country_code
+    password_type
+    user_id
+}
+
+input case_categoryOrderByWithRelationInput {
+    id: SortOrder
+    name: SortOrder
+    case_post: case_postOrderByRelationAggregateInput
+}
+
+input case_postOrderByWithRelationInput {
+    id: SortOrder
+    title: SortOrder
+    poster: SortOrder
+    published_at: SortOrder
+    author: SortOrder
+    content: SortOrder
+    cate: SortOrder
+    auth: SortOrder
+    admin_user: admin_userOrderByWithRelationInput
+    case_category: case_categoryOrderByWithRelationInput
+}
+
+input case_postWhereUniqueInput {
+    id: Int
+}
+
+enum Case_postScalarFieldEnum {
+    id
+    title
+    poster
+    published_at
+    author
+    content
+    cate
+    auth
+}
+
+type Case_categoryCountOutputType {
+    case_post: Int!
+}
+
+type case_category {
+    id: Int!
+    name: String!
+    case_post(where: case_postWhereInput, orderBy: [case_postOrderByWithRelationInput], cursor: case_postWhereUniqueInput, take: Int, skip: Int, distinct: [Case_postScalarFieldEnum]): [case_post]
+    _count: Case_categoryCountOutputType!
+}
+
+type case_post {
+    id: Int!
+    title: String!
+    poster: String
+    published_at: DateTime
+    author: String!
+    content: String
+    cate: Int
+    auth: Int
+    admin_user: admin_user
+    case_category: case_category
+}
+
+input mytestOrderByWithRelationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    myAttr: SortOrder
+    userid: SortOrder
+    admin_user: admin_userOrderByWithRelationInput
+}
+
+input mytestWhereUniqueInput {
+    id: Int
+    myAttr: String
+}
+
+enum MytestScalarFieldEnum {
+    id
+    createdAt
+    updatedAt
+    deletedAt
+    myAttr
+    userid
+}
+
+type mytest {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    myAttr: String!
+    userid: Int!
+    admin_user: admin_user!
+}
+
+type Admin_userCountOutputType {
+    case_post: Int!
+    mytest: Int!
+}
+
+type admin_user {
+    id: Int!
+    created_at: DateTime
+    name: String!
+    avatar: String
+    phone: String
+    password_salt: String
+    password: String
+    country_code: String
+    password_type: String
+    user_id: String
+    case_post(where: case_postWhereInput, orderBy: [case_postOrderByWithRelationInput], cursor: case_postWhereUniqueInput, take: Int, skip: Int, distinct: [Case_postScalarFieldEnum]): [case_post]
+    mytest(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int, distinct: [MytestScalarFieldEnum]): [mytest]
+    _count: Admin_userCountOutputType!
+}
+
+type Admin_userCountAggregateOutputType {
+    id: Int!
+    created_at: Int!
+    name: Int!
+    avatar: Int!
+    phone: Int!
+    password_salt: Int!
+    password: Int!
+    country_code: Int!
+    password_type: Int!
+    user_id: Int!
+    _all: Int!
+}
+
+type Admin_userAvgAggregateOutputType {
+    id: Float
+}
+
+type Admin_userSumAggregateOutputType {
+    id: Int
+}
+
+type Admin_userMinAggregateOutputType {
+    id: Int
+    created_at: DateTime
+    name: String
+    avatar: String
+    phone: String
+    password_salt: String
+    password: String
+    country_code: String
+    password_type: String
+    user_id: String
+}
+
+type Admin_userMaxAggregateOutputType {
+    id: Int
+    created_at: DateTime
+    name: String
+    avatar: String
+    phone: String
+    password_salt: String
+    password: String
+    country_code: String
+    password_type: String
+    user_id: String
+}
+
+type AggregateAdmin_user {
+    _count: Admin_userCountAggregateOutputType
+    _avg: Admin_userAvgAggregateOutputType
+    _sum: Admin_userSumAggregateOutputType
+    _min: Admin_userMinAggregateOutputType
+    _max: Admin_userMaxAggregateOutputType
+}
+
+input admin_userCountOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    name: SortOrder
+    avatar: SortOrder
+    phone: SortOrder
+    password_salt: SortOrder
+    password: SortOrder
+    country_code: SortOrder
+    password_type: SortOrder
+    user_id: SortOrder
+}
+
+input admin_userAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input admin_userMaxOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    name: SortOrder
+    avatar: SortOrder
+    phone: SortOrder
+    password_salt: SortOrder
+    password: SortOrder
+    country_code: SortOrder
+    password_type: SortOrder
+    user_id: SortOrder
+}
+
+input admin_userMinOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    name: SortOrder
+    avatar: SortOrder
+    phone: SortOrder
+    password_salt: SortOrder
+    password: SortOrder
+    country_code: SortOrder
+    password_type: SortOrder
+    user_id: SortOrder
+}
+
+input admin_userSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input admin_userOrderByWithAggregationInput {
+    id: SortOrder
+    created_at: SortOrder
+    name: SortOrder
+    avatar: SortOrder
+    phone: SortOrder
+    password_salt: SortOrder
+    password: SortOrder
+    country_code: SortOrder
+    password_type: SortOrder
+    user_id: SortOrder
+    _count: admin_userCountOrderByAggregateInput
+    _avg: admin_userAvgOrderByAggregateInput
+    _max: admin_userMaxOrderByAggregateInput
+    _min: admin_userMinOrderByAggregateInput
+    _sum: admin_userSumOrderByAggregateInput
+}
+
+input admin_userScalarWhereWithAggregatesInput {
+    AND: admin_userScalarWhereWithAggregatesInput
+    OR: [admin_userScalarWhereWithAggregatesInput]
+    NOT: admin_userScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    created_at: DateTimeNullableWithAggregatesFilter
+    name: StringWithAggregatesFilter
+    avatar: StringNullableWithAggregatesFilter
+    phone: StringNullableWithAggregatesFilter
+    password_salt: StringNullableWithAggregatesFilter
+    password: StringNullableWithAggregatesFilter
+    country_code: StringNullableWithAggregatesFilter
+    password_type: StringNullableWithAggregatesFilter
+    user_id: StringNullableWithAggregatesFilter
+}
+
+type Admin_userGroupByOutputType {
+    id: Int!
+    created_at: DateTime
+    name: String!
+    avatar: String
+    phone: String
+    password_salt: String
+    password: String
+    country_code: String
+    password_type: String
+    user_id: String
+    _count: Admin_userCountAggregateOutputType
+    _avg: Admin_userAvgAggregateOutputType
+    _sum: Admin_userSumAggregateOutputType
+    _min: Admin_userMinAggregateOutputType
+    _max: Admin_userMaxAggregateOutputType
+}
+
+input NestedBoolNullableFilter {
+    equals: Boolean
+    not: NestedBoolNullableFilter
+}
+
+input BoolNullableFilter {
+    equals: Boolean
+    not: NestedBoolNullableFilter
+}
+
+input admin_verification_recordWhereInput {
+    AND: admin_verification_recordWhereInput
+    OR: [admin_verification_recordWhereInput]
+    NOT: admin_verification_recordWhereInput
+    name: StringFilter
+    created_time: StringNullableFilter
+    type: StringNullableFilter
+    user: StringFilter
+    provider: StringFilter
+    receiver: StringFilter
+    code: StringFilter
+    time: BigIntFilter
+    is_used: BoolNullableFilter
+}
+
+input admin_verification_recordOrderByWithRelationInput {
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    user: SortOrder
+    provider: SortOrder
+    receiver: SortOrder
+    code: SortOrder
+    time: SortOrder
+    is_used: SortOrder
+}
+
+input admin_verification_recordWhereUniqueInput {
+    name: String
+}
+
+enum Admin_verification_recordScalarFieldEnum {
+    name
+    created_time
+    type
+    user
+    provider
+    receiver
+    code
+    time
+    is_used
+}
+
+type admin_verification_record {
+    name: String!
+    created_time: String
+    type: String
+    user: String!
+    provider: String!
+    receiver: String!
+    code: String!
+    time: BigInt!
+    is_used: Boolean
+}
+
+type Admin_verification_recordCountAggregateOutputType {
+    name: Int!
+    created_time: Int!
+    type: Int!
+    user: Int!
+    provider: Int!
+    receiver: Int!
+    code: Int!
+    time: Int!
+    is_used: Int!
+    _all: Int!
+}
+
+type Admin_verification_recordAvgAggregateOutputType {
+    time: Float
+}
+
+type Admin_verification_recordSumAggregateOutputType {
+    time: BigInt
+}
+
+type Admin_verification_recordMinAggregateOutputType {
+    name: String
+    created_time: String
+    type: String
+    user: String
+    provider: String
+    receiver: String
+    code: String
+    time: BigInt
+    is_used: Boolean
+}
+
+type Admin_verification_recordMaxAggregateOutputType {
+    name: String
+    created_time: String
+    type: String
+    user: String
+    provider: String
+    receiver: String
+    code: String
+    time: BigInt
+    is_used: Boolean
+}
+
+type AggregateAdmin_verification_record {
+    _count: Admin_verification_recordCountAggregateOutputType
+    _avg: Admin_verification_recordAvgAggregateOutputType
+    _sum: Admin_verification_recordSumAggregateOutputType
+    _min: Admin_verification_recordMinAggregateOutputType
+    _max: Admin_verification_recordMaxAggregateOutputType
+}
+
+input admin_verification_recordCountOrderByAggregateInput {
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    user: SortOrder
+    provider: SortOrder
+    receiver: SortOrder
+    code: SortOrder
+    time: SortOrder
+    is_used: SortOrder
+}
+
+input admin_verification_recordAvgOrderByAggregateInput {
+    time: SortOrder
+}
+
+input admin_verification_recordMaxOrderByAggregateInput {
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    user: SortOrder
+    provider: SortOrder
+    receiver: SortOrder
+    code: SortOrder
+    time: SortOrder
+    is_used: SortOrder
+}
+
+input admin_verification_recordMinOrderByAggregateInput {
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    user: SortOrder
+    provider: SortOrder
+    receiver: SortOrder
+    code: SortOrder
+    time: SortOrder
+    is_used: SortOrder
+}
+
+input admin_verification_recordSumOrderByAggregateInput {
+    time: SortOrder
+}
+
+input admin_verification_recordOrderByWithAggregationInput {
+    name: SortOrder
+    created_time: SortOrder
+    type: SortOrder
+    user: SortOrder
+    provider: SortOrder
+    receiver: SortOrder
+    code: SortOrder
+    time: SortOrder
+    is_used: SortOrder
+    _count: admin_verification_recordCountOrderByAggregateInput
+    _avg: admin_verification_recordAvgOrderByAggregateInput
+    _max: admin_verification_recordMaxOrderByAggregateInput
+    _min: admin_verification_recordMinOrderByAggregateInput
+    _sum: admin_verification_recordSumOrderByAggregateInput
+}
+
+input NestedBoolNullableWithAggregatesFilter {
+    equals: Boolean
+    not: NestedBoolNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedBoolNullableFilter
+    _max: NestedBoolNullableFilter
+}
+
+input BoolNullableWithAggregatesFilter {
+    equals: Boolean
+    not: NestedBoolNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedBoolNullableFilter
+    _max: NestedBoolNullableFilter
+}
+
+input admin_verification_recordScalarWhereWithAggregatesInput {
+    AND: admin_verification_recordScalarWhereWithAggregatesInput
+    OR: [admin_verification_recordScalarWhereWithAggregatesInput]
+    NOT: admin_verification_recordScalarWhereWithAggregatesInput
+    name: StringWithAggregatesFilter
+    created_time: StringNullableWithAggregatesFilter
+    type: StringNullableWithAggregatesFilter
+    user: StringWithAggregatesFilter
+    provider: StringWithAggregatesFilter
+    receiver: StringWithAggregatesFilter
+    code: StringWithAggregatesFilter
+    time: BigIntWithAggregatesFilter
+    is_used: BoolNullableWithAggregatesFilter
+}
+
+type Admin_verification_recordGroupByOutputType {
+    name: String!
+    created_time: String
+    type: String
+    user: String!
+    provider: String!
+    receiver: String!
+    code: String!
+    time: BigInt!
+    is_used: Boolean
+    _count: Admin_verification_recordCountAggregateOutputType
+    _avg: Admin_verification_recordAvgAggregateOutputType
+    _sum: Admin_verification_recordSumAggregateOutputType
+    _min: Admin_verification_recordMinAggregateOutputType
+    _max: Admin_verification_recordMaxAggregateOutputType
+}
+
+input carWhereInput {
+    AND: carWhereInput
+    OR: [carWhereInput]
+    NOT: carWhereInput
+    id: IntFilter
+    createdAt: DateTimeFilter
+    updatedAt: DateTimeFilter
+    deletedAt: DateTimeNullableFilter
+    title: StringFilter
+}
+
+input carOrderByWithRelationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    title: SortOrder
+}
+
+input carWhereUniqueInput {
+    id: Int
+    title: String
+}
+
+enum CarScalarFieldEnum {
+    id
+    createdAt
+    updatedAt
+    deletedAt
+    title
+}
+
+type car {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    title: String!
+}
+
+type CarCountAggregateOutputType {
+    id: Int!
+    createdAt: Int!
+    updatedAt: Int!
+    deletedAt: Int!
+    title: Int!
+    _all: Int!
+}
+
+type CarAvgAggregateOutputType {
+    id: Float
+}
+
+type CarSumAggregateOutputType {
+    id: Int
+}
+
+type CarMinAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    title: String
+}
+
+type CarMaxAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    title: String
+}
+
+type AggregateCar {
+    _count: CarCountAggregateOutputType
+    _avg: CarAvgAggregateOutputType
+    _sum: CarSumAggregateOutputType
+    _min: CarMinAggregateOutputType
+    _max: CarMaxAggregateOutputType
+}
+
+input carCountOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    title: SortOrder
+}
+
+input carAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input carMaxOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    title: SortOrder
+}
+
+input carMinOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    title: SortOrder
+}
+
+input carSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input carOrderByWithAggregationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    title: SortOrder
+    _count: carCountOrderByAggregateInput
+    _avg: carAvgOrderByAggregateInput
+    _max: carMaxOrderByAggregateInput
+    _min: carMinOrderByAggregateInput
+    _sum: carSumOrderByAggregateInput
+}
+
+input carScalarWhereWithAggregatesInput {
+    AND: carScalarWhereWithAggregatesInput
+    OR: [carScalarWhereWithAggregatesInput]
+    NOT: carScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    createdAt: DateTimeWithAggregatesFilter
+    updatedAt: DateTimeWithAggregatesFilter
+    deletedAt: DateTimeNullableWithAggregatesFilter
+    title: StringWithAggregatesFilter
+}
+
+type CarGroupByOutputType {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    title: String!
+    _count: CarCountAggregateOutputType
+    _avg: CarAvgAggregateOutputType
+    _sum: CarSumAggregateOutputType
+    _min: CarMinAggregateOutputType
+    _max: CarMaxAggregateOutputType
+}
+
+input case_categoryWhereUniqueInput {
+    id: Int
+}
+
+enum Case_categoryScalarFieldEnum {
+    id
+    name
+}
+
+type Case_categoryCountAggregateOutputType {
+    id: Int!
+    name: Int!
+    _all: Int!
+}
+
+type Case_categoryAvgAggregateOutputType {
+    id: Float
+}
+
+type Case_categorySumAggregateOutputType {
+    id: Int
+}
+
+type Case_categoryMinAggregateOutputType {
+    id: Int
+    name: String
+}
+
+type Case_categoryMaxAggregateOutputType {
+    id: Int
+    name: String
+}
+
+type AggregateCase_category {
+    _count: Case_categoryCountAggregateOutputType
+    _avg: Case_categoryAvgAggregateOutputType
+    _sum: Case_categorySumAggregateOutputType
+    _min: Case_categoryMinAggregateOutputType
+    _max: Case_categoryMaxAggregateOutputType
+}
+
+input case_categoryCountOrderByAggregateInput {
+    id: SortOrder
+    name: SortOrder
+}
+
+input case_categoryAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input case_categoryMaxOrderByAggregateInput {
+    id: SortOrder
+    name: SortOrder
+}
+
+input case_categoryMinOrderByAggregateInput {
+    id: SortOrder
+    name: SortOrder
+}
+
+input case_categorySumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input case_categoryOrderByWithAggregationInput {
+    id: SortOrder
+    name: SortOrder
+    _count: case_categoryCountOrderByAggregateInput
+    _avg: case_categoryAvgOrderByAggregateInput
+    _max: case_categoryMaxOrderByAggregateInput
+    _min: case_categoryMinOrderByAggregateInput
+    _sum: case_categorySumOrderByAggregateInput
+}
+
+input case_categoryScalarWhereWithAggregatesInput {
+    AND: case_categoryScalarWhereWithAggregatesInput
+    OR: [case_categoryScalarWhereWithAggregatesInput]
+    NOT: case_categoryScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    name: StringWithAggregatesFilter
+}
+
+type Case_categoryGroupByOutputType {
+    id: Int!
+    name: String!
+    _count: Case_categoryCountAggregateOutputType
+    _avg: Case_categoryAvgAggregateOutputType
+    _sum: Case_categorySumAggregateOutputType
+    _min: Case_categoryMinAggregateOutputType
+    _max: Case_categoryMaxAggregateOutputType
+}
+
+input case_menuWhereInput {
+    AND: case_menuWhereInput
+    OR: [case_menuWhereInput]
+    NOT: case_menuWhereInput
+    id: IntFilter
+    parentId: IntNullableFilter
+    label: StringFilter
+    path: StringNullableFilter
+    icon: StringNullableFilter
+    sort: IntFilter
+    level: IntFilter
+    name: StringNullableFilter
+    is_bottom: IntFilter
+    create_time: DateTimeNullableFilter
+    perms: StringNullableFilter
+    menu_type: StringNullableFilter
+    api_id: StringNullableFilter
+}
+
+input case_menuOrderByWithRelationInput {
+    id: SortOrder
+    parentId: SortOrder
+    label: SortOrder
+    path: SortOrder
+    icon: SortOrder
+    sort: SortOrder
+    level: SortOrder
+    name: SortOrder
+    is_bottom: SortOrder
+    create_time: SortOrder
+    perms: SortOrder
+    menu_type: SortOrder
+    api_id: SortOrder
+}
+
+input case_menuWhereUniqueInput {
+    id: Int
+}
+
+enum Case_menuScalarFieldEnum {
+    id
+    parentId
+    label
+    path
+    icon
+    sort
+    level
+    name
+    is_bottom
+    create_time
+    perms
+    menu_type
+    api_id
+}
+
+type case_menu {
+    id: Int!
+    parentId: Int
+    label: String!
+    path: String
+    icon: String
+    sort: Int!
+    level: Int!
+    name: String
+    is_bottom: Int!
+    create_time: DateTime
+    perms: String
+    menu_type: String
+    api_id: String
+}
+
+type Case_menuCountAggregateOutputType {
+    id: Int!
+    parentId: Int!
+    label: Int!
+    path: Int!
+    icon: Int!
+    sort: Int!
+    level: Int!
+    name: Int!
+    is_bottom: Int!
+    create_time: Int!
+    perms: Int!
+    menu_type: Int!
+    api_id: Int!
+    _all: Int!
+}
+
+type Case_menuAvgAggregateOutputType {
+    id: Float
+    parentId: Float
+    sort: Float
+    level: Float
+    is_bottom: Float
+}
+
+type Case_menuSumAggregateOutputType {
+    id: Int
+    parentId: Int
+    sort: Int
+    level: Int
+    is_bottom: Int
+}
+
+type Case_menuMinAggregateOutputType {
+    id: Int
+    parentId: Int
+    label: String
+    path: String
+    icon: String
+    sort: Int
+    level: Int
+    name: String
+    is_bottom: Int
+    create_time: DateTime
+    perms: String
+    menu_type: String
+    api_id: String
+}
+
+type Case_menuMaxAggregateOutputType {
+    id: Int
+    parentId: Int
+    label: String
+    path: String
+    icon: String
+    sort: Int
+    level: Int
+    name: String
+    is_bottom: Int
+    create_time: DateTime
+    perms: String
+    menu_type: String
+    api_id: String
+}
+
+type AggregateCase_menu {
+    _count: Case_menuCountAggregateOutputType
+    _avg: Case_menuAvgAggregateOutputType
+    _sum: Case_menuSumAggregateOutputType
+    _min: Case_menuMinAggregateOutputType
+    _max: Case_menuMaxAggregateOutputType
+}
+
+input case_menuCountOrderByAggregateInput {
+    id: SortOrder
+    parentId: SortOrder
+    label: SortOrder
+    path: SortOrder
+    icon: SortOrder
+    sort: SortOrder
+    level: SortOrder
+    name: SortOrder
+    is_bottom: SortOrder
+    create_time: SortOrder
+    perms: SortOrder
+    menu_type: SortOrder
+    api_id: SortOrder
+}
+
+input case_menuAvgOrderByAggregateInput {
+    id: SortOrder
+    parentId: SortOrder
+    sort: SortOrder
+    level: SortOrder
+    is_bottom: SortOrder
+}
+
+input case_menuMaxOrderByAggregateInput {
+    id: SortOrder
+    parentId: SortOrder
+    label: SortOrder
+    path: SortOrder
+    icon: SortOrder
+    sort: SortOrder
+    level: SortOrder
+    name: SortOrder
+    is_bottom: SortOrder
+    create_time: SortOrder
+    perms: SortOrder
+    menu_type: SortOrder
+    api_id: SortOrder
+}
+
+input case_menuMinOrderByAggregateInput {
+    id: SortOrder
+    parentId: SortOrder
+    label: SortOrder
+    path: SortOrder
+    icon: SortOrder
+    sort: SortOrder
+    level: SortOrder
+    name: SortOrder
+    is_bottom: SortOrder
+    create_time: SortOrder
+    perms: SortOrder
+    menu_type: SortOrder
+    api_id: SortOrder
+}
+
+input case_menuSumOrderByAggregateInput {
+    id: SortOrder
+    parentId: SortOrder
+    sort: SortOrder
+    level: SortOrder
+    is_bottom: SortOrder
+}
+
+input case_menuOrderByWithAggregationInput {
+    id: SortOrder
+    parentId: SortOrder
+    label: SortOrder
+    path: SortOrder
+    icon: SortOrder
+    sort: SortOrder
+    level: SortOrder
+    name: SortOrder
+    is_bottom: SortOrder
+    create_time: SortOrder
+    perms: SortOrder
+    menu_type: SortOrder
+    api_id: SortOrder
+    _count: case_menuCountOrderByAggregateInput
+    _avg: case_menuAvgOrderByAggregateInput
+    _max: case_menuMaxOrderByAggregateInput
+    _min: case_menuMinOrderByAggregateInput
+    _sum: case_menuSumOrderByAggregateInput
+}
+
+input NestedFloatNullableFilter {
+    equals: Float
+    in: [Float]
+    notIn: [Float]
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    not: NestedFloatNullableFilter
+}
+
+input NestedIntNullableWithAggregatesFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _avg: NestedFloatNullableFilter
+    _sum: NestedIntNullableFilter
+    _min: NestedIntNullableFilter
+    _max: NestedIntNullableFilter
+}
+
+input IntNullableWithAggregatesFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _avg: NestedFloatNullableFilter
+    _sum: NestedIntNullableFilter
+    _min: NestedIntNullableFilter
+    _max: NestedIntNullableFilter
+}
+
+input case_menuScalarWhereWithAggregatesInput {
+    AND: case_menuScalarWhereWithAggregatesInput
+    OR: [case_menuScalarWhereWithAggregatesInput]
+    NOT: case_menuScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    parentId: IntNullableWithAggregatesFilter
+    label: StringWithAggregatesFilter
+    path: StringNullableWithAggregatesFilter
+    icon: StringNullableWithAggregatesFilter
+    sort: IntWithAggregatesFilter
+    level: IntWithAggregatesFilter
+    name: StringNullableWithAggregatesFilter
+    is_bottom: IntWithAggregatesFilter
+    create_time: DateTimeNullableWithAggregatesFilter
+    perms: StringNullableWithAggregatesFilter
+    menu_type: StringNullableWithAggregatesFilter
+    api_id: StringNullableWithAggregatesFilter
+}
+
+type Case_menuGroupByOutputType {
+    id: Int!
+    parentId: Int
+    label: String!
+    path: String
+    icon: String
+    sort: Int!
+    level: Int!
+    name: String
+    is_bottom: Int!
+    create_time: DateTime
+    perms: String
+    menu_type: String
+    api_id: String
+    _count: Case_menuCountAggregateOutputType
+    _avg: Case_menuAvgAggregateOutputType
+    _sum: Case_menuSumAggregateOutputType
+    _min: Case_menuMinAggregateOutputType
+    _max: Case_menuMaxAggregateOutputType
+}
+
+type Case_postCountAggregateOutputType {
+    id: Int!
+    title: Int!
+    poster: Int!
+    published_at: Int!
+    author: Int!
+    content: Int!
+    cate: Int!
+    auth: Int!
+    _all: Int!
+}
+
+type Case_postAvgAggregateOutputType {
+    id: Float
+    cate: Float
+    auth: Float
+}
+
+type Case_postSumAggregateOutputType {
+    id: Int
+    cate: Int
+    auth: Int
+}
+
+type Case_postMinAggregateOutputType {
+    id: Int
+    title: String
+    poster: String
+    published_at: DateTime
+    author: String
+    content: String
+    cate: Int
+    auth: Int
+}
+
+type Case_postMaxAggregateOutputType {
+    id: Int
+    title: String
+    poster: String
+    published_at: DateTime
+    author: String
+    content: String
+    cate: Int
+    auth: Int
+}
+
+type AggregateCase_post {
+    _count: Case_postCountAggregateOutputType
+    _avg: Case_postAvgAggregateOutputType
+    _sum: Case_postSumAggregateOutputType
+    _min: Case_postMinAggregateOutputType
+    _max: Case_postMaxAggregateOutputType
+}
+
+input case_postCountOrderByAggregateInput {
+    id: SortOrder
+    title: SortOrder
+    poster: SortOrder
+    published_at: SortOrder
+    author: SortOrder
+    content: SortOrder
+    cate: SortOrder
+    auth: SortOrder
+}
+
+input case_postAvgOrderByAggregateInput {
+    id: SortOrder
+    cate: SortOrder
+    auth: SortOrder
+}
+
+input case_postMaxOrderByAggregateInput {
+    id: SortOrder
+    title: SortOrder
+    poster: SortOrder
+    published_at: SortOrder
+    author: SortOrder
+    content: SortOrder
+    cate: SortOrder
+    auth: SortOrder
+}
+
+input case_postMinOrderByAggregateInput {
+    id: SortOrder
+    title: SortOrder
+    poster: SortOrder
+    published_at: SortOrder
+    author: SortOrder
+    content: SortOrder
+    cate: SortOrder
+    auth: SortOrder
+}
+
+input case_postSumOrderByAggregateInput {
+    id: SortOrder
+    cate: SortOrder
+    auth: SortOrder
+}
+
+input case_postOrderByWithAggregationInput {
+    id: SortOrder
+    title: SortOrder
+    poster: SortOrder
+    published_at: SortOrder
+    author: SortOrder
+    content: SortOrder
+    cate: SortOrder
+    auth: SortOrder
+    _count: case_postCountOrderByAggregateInput
+    _avg: case_postAvgOrderByAggregateInput
+    _max: case_postMaxOrderByAggregateInput
+    _min: case_postMinOrderByAggregateInput
+    _sum: case_postSumOrderByAggregateInput
+}
+
+input case_postScalarWhereWithAggregatesInput {
+    AND: case_postScalarWhereWithAggregatesInput
+    OR: [case_postScalarWhereWithAggregatesInput]
+    NOT: case_postScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    title: StringWithAggregatesFilter
+    poster: StringNullableWithAggregatesFilter
+    published_at: DateTimeNullableWithAggregatesFilter
+    author: StringWithAggregatesFilter
+    content: StringNullableWithAggregatesFilter
+    cate: IntNullableWithAggregatesFilter
+    auth: IntNullableWithAggregatesFilter
+}
+
+type Case_postGroupByOutputType {
+    id: Int!
+    title: String!
+    poster: String
+    published_at: DateTime
+    author: String!
+    content: String
+    cate: Int
+    auth: Int
+    _count: Case_postCountAggregateOutputType
+    _avg: Case_postAvgAggregateOutputType
+    _sum: Case_postSumAggregateOutputType
+    _min: Case_postMinAggregateOutputType
+    _max: Case_postMaxAggregateOutputType
+}
+
+input FloatFilter {
+    equals: Float
+    in: [Float]
+    notIn: [Float]
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    not: NestedFloatFilter
+}
+
+input Case_salelogListRelationFilter {
+    every: case_salelogWhereInput
+    some: case_salelogWhereInput
+    none: case_salelogWhereInput
+}
+
+input case_saletypeWhereInput {
+    AND: case_saletypeWhereInput
+    OR: [case_saletypeWhereInput]
+    NOT: case_saletypeWhereInput
+    id: IntFilter
+    name: StringFilter
+    createdAt: StringFilter
+    case_salelog: Case_salelogListRelationFilter
+}
+
+input Case_saletypeRelationFilter {
+    is: case_saletypeWhereInput
+    isNot: case_saletypeWhereInput
+}
+
+input case_salelogWhereInput {
+    AND: case_salelogWhereInput
+    OR: [case_salelogWhereInput]
+    NOT: case_salelogWhereInput
+    id: IntFilter
+    shopName: StringFilter
+    day: DateTimeFilter
+    sales: FloatFilter
+    typeId: IntFilter
+    case_saletype: Case_saletypeRelationFilter
+}
+
+input case_salelogOrderByRelationAggregateInput {
+    _count: SortOrder
+}
+
+input case_saletypeOrderByWithRelationInput {
+    id: SortOrder
+    name: SortOrder
+    createdAt: SortOrder
+    case_salelog: case_salelogOrderByRelationAggregateInput
+}
+
+input case_salelogOrderByWithRelationInput {
+    id: SortOrder
+    shopName: SortOrder
+    day: SortOrder
+    sales: SortOrder
+    typeId: SortOrder
+    case_saletype: case_saletypeOrderByWithRelationInput
+}
+
+input case_salelogWhereUniqueInput {
+    id: Int
+}
+
+enum Case_salelogScalarFieldEnum {
+    id
+    shopName
+    day
+    sales
+    typeId
+}
+
+type Case_saletypeCountOutputType {
+    case_salelog: Int!
+}
+
+type case_saletype {
+    id: Int!
+    name: String!
+    createdAt: String!
+    case_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_salelogScalarFieldEnum]): [case_salelog]
+    _count: Case_saletypeCountOutputType!
+}
+
+type case_salelog {
+    id: Int!
+    shopName: String!
+    day: DateTime!
+    sales: Float!
+    typeId: Int!
+    case_saletype: case_saletype!
+}
+
+type Case_salelogCountAggregateOutputType {
+    id: Int!
+    shopName: Int!
+    day: Int!
+    sales: Int!
+    typeId: Int!
+    _all: Int!
+}
+
+type Case_salelogAvgAggregateOutputType {
+    id: Float
+    sales: Float
+    typeId: Float
+}
+
+type Case_salelogSumAggregateOutputType {
+    id: Int
+    sales: Float
+    typeId: Int
+}
+
+type Case_salelogMinAggregateOutputType {
+    id: Int
+    shopName: String
+    day: DateTime
+    sales: Float
+    typeId: Int
+}
+
+type Case_salelogMaxAggregateOutputType {
+    id: Int
+    shopName: String
+    day: DateTime
+    sales: Float
+    typeId: Int
+}
+
+type AggregateCase_salelog {
+    _count: Case_salelogCountAggregateOutputType
+    _avg: Case_salelogAvgAggregateOutputType
+    _sum: Case_salelogSumAggregateOutputType
+    _min: Case_salelogMinAggregateOutputType
+    _max: Case_salelogMaxAggregateOutputType
+}
+
+input case_salelogCountOrderByAggregateInput {
+    id: SortOrder
+    shopName: SortOrder
+    day: SortOrder
+    sales: SortOrder
+    typeId: SortOrder
+}
+
+input case_salelogAvgOrderByAggregateInput {
+    id: SortOrder
+    sales: SortOrder
+    typeId: SortOrder
+}
+
+input case_salelogMaxOrderByAggregateInput {
+    id: SortOrder
+    shopName: SortOrder
+    day: SortOrder
+    sales: SortOrder
+    typeId: SortOrder
+}
+
+input case_salelogMinOrderByAggregateInput {
+    id: SortOrder
+    shopName: SortOrder
+    day: SortOrder
+    sales: SortOrder
+    typeId: SortOrder
+}
+
+input case_salelogSumOrderByAggregateInput {
+    id: SortOrder
+    sales: SortOrder
+    typeId: SortOrder
+}
+
+input case_salelogOrderByWithAggregationInput {
+    id: SortOrder
+    shopName: SortOrder
+    day: SortOrder
+    sales: SortOrder
+    typeId: SortOrder
+    _count: case_salelogCountOrderByAggregateInput
+    _avg: case_salelogAvgOrderByAggregateInput
+    _max: case_salelogMaxOrderByAggregateInput
+    _min: case_salelogMinOrderByAggregateInput
+    _sum: case_salelogSumOrderByAggregateInput
+}
+
+input NestedFloatWithAggregatesFilter {
+    equals: Float
+    in: [Float]
+    notIn: [Float]
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    not: NestedFloatWithAggregatesFilter
+    _count: NestedIntFilter
+    _avg: NestedFloatFilter
+    _sum: NestedFloatFilter
+    _min: NestedFloatFilter
+    _max: NestedFloatFilter
+}
+
+input FloatWithAggregatesFilter {
+    equals: Float
+    in: [Float]
+    notIn: [Float]
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    not: NestedFloatWithAggregatesFilter
+    _count: NestedIntFilter
+    _avg: NestedFloatFilter
+    _sum: NestedFloatFilter
+    _min: NestedFloatFilter
+    _max: NestedFloatFilter
+}
+
+input case_salelogScalarWhereWithAggregatesInput {
+    AND: case_salelogScalarWhereWithAggregatesInput
+    OR: [case_salelogScalarWhereWithAggregatesInput]
+    NOT: case_salelogScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    shopName: StringWithAggregatesFilter
+    day: DateTimeWithAggregatesFilter
+    sales: FloatWithAggregatesFilter
+    typeId: IntWithAggregatesFilter
+}
+
+type Case_salelogGroupByOutputType {
+    id: Int!
+    shopName: String!
+    day: DateTime!
+    sales: Float!
+    typeId: Int!
+    _count: Case_salelogCountAggregateOutputType
+    _avg: Case_salelogAvgAggregateOutputType
+    _sum: Case_salelogSumAggregateOutputType
+    _min: Case_salelogMinAggregateOutputType
+    _max: Case_salelogMaxAggregateOutputType
+}
+
+input case_saletypeWhereUniqueInput {
+    id: Int
+}
+
+enum Case_saletypeScalarFieldEnum {
+    id
+    name
+    createdAt
+}
+
+type Case_saletypeCountAggregateOutputType {
+    id: Int!
+    name: Int!
+    createdAt: Int!
+    _all: Int!
+}
+
+type Case_saletypeAvgAggregateOutputType {
+    id: Float
+}
+
+type Case_saletypeSumAggregateOutputType {
+    id: Int
+}
+
+type Case_saletypeMinAggregateOutputType {
+    id: Int
+    name: String
+    createdAt: String
+}
+
+type Case_saletypeMaxAggregateOutputType {
+    id: Int
+    name: String
+    createdAt: String
+}
+
+type AggregateCase_saletype {
+    _count: Case_saletypeCountAggregateOutputType
+    _avg: Case_saletypeAvgAggregateOutputType
+    _sum: Case_saletypeSumAggregateOutputType
+    _min: Case_saletypeMinAggregateOutputType
+    _max: Case_saletypeMaxAggregateOutputType
+}
+
+input case_saletypeCountOrderByAggregateInput {
+    id: SortOrder
+    name: SortOrder
+    createdAt: SortOrder
+}
+
+input case_saletypeAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input case_saletypeMaxOrderByAggregateInput {
+    id: SortOrder
+    name: SortOrder
+    createdAt: SortOrder
+}
+
+input case_saletypeMinOrderByAggregateInput {
+    id: SortOrder
+    name: SortOrder
+    createdAt: SortOrder
+}
+
+input case_saletypeSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input case_saletypeOrderByWithAggregationInput {
+    id: SortOrder
+    name: SortOrder
+    createdAt: SortOrder
+    _count: case_saletypeCountOrderByAggregateInput
+    _avg: case_saletypeAvgOrderByAggregateInput
+    _max: case_saletypeMaxOrderByAggregateInput
+    _min: case_saletypeMinOrderByAggregateInput
+    _sum: case_saletypeSumOrderByAggregateInput
+}
+
+input case_saletypeScalarWhereWithAggregatesInput {
+    AND: case_saletypeScalarWhereWithAggregatesInput
+    OR: [case_saletypeScalarWhereWithAggregatesInput]
+    NOT: case_saletypeScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    name: StringWithAggregatesFilter
+    createdAt: StringWithAggregatesFilter
+}
+
+type Case_saletypeGroupByOutputType {
+    id: Int!
+    name: String!
+    createdAt: String!
+    _count: Case_saletypeCountAggregateOutputType
+    _avg: Case_saletypeAvgAggregateOutputType
+    _sum: Case_saletypeSumAggregateOutputType
+    _min: Case_saletypeMinAggregateOutputType
+    _max: Case_saletypeMaxAggregateOutputType
+}
+
+input case_subWhereInput {
+    AND: case_subWhereInput
+    OR: [case_subWhereInput]
+    NOT: case_subWhereInput
+    id: IntFilter
+    createdAt: DateTimeFilter
+    updatedAt: DateTimeFilter
+    deletedAt: DateTimeNullableFilter
+    message: StringFilter
+    create_role: StringFilter
+    target_role: StringFilter
+    type: StringFilter
+}
+
+input case_subOrderByWithRelationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    message: SortOrder
+    create_role: SortOrder
+    target_role: SortOrder
+    type: SortOrder
+}
+
+input case_subWhereUniqueInput {
+    id: Int
+}
+
+enum Case_subScalarFieldEnum {
+    id
+    createdAt
+    updatedAt
+    deletedAt
+    message
+    create_role
+    target_role
+    type
+}
+
+type case_sub {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    message: String!
+    create_role: String!
+    target_role: String!
+    type: String!
+}
+
+type Case_subCountAggregateOutputType {
+    id: Int!
+    createdAt: Int!
+    updatedAt: Int!
+    deletedAt: Int!
+    message: Int!
+    create_role: Int!
+    target_role: Int!
+    type: Int!
+    _all: Int!
+}
+
+type Case_subAvgAggregateOutputType {
+    id: Float
+}
+
+type Case_subSumAggregateOutputType {
+    id: Int
+}
+
+type Case_subMinAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    message: String
+    create_role: String
+    target_role: String
+    type: String
+}
+
+type Case_subMaxAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    message: String
+    create_role: String
+    target_role: String
+    type: String
+}
+
+type AggregateCase_sub {
+    _count: Case_subCountAggregateOutputType
+    _avg: Case_subAvgAggregateOutputType
+    _sum: Case_subSumAggregateOutputType
+    _min: Case_subMinAggregateOutputType
+    _max: Case_subMaxAggregateOutputType
+}
+
+input case_subCountOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    message: SortOrder
+    create_role: SortOrder
+    target_role: SortOrder
+    type: SortOrder
+}
+
+input case_subAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input case_subMaxOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    message: SortOrder
+    create_role: SortOrder
+    target_role: SortOrder
+    type: SortOrder
+}
+
+input case_subMinOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    message: SortOrder
+    create_role: SortOrder
+    target_role: SortOrder
+    type: SortOrder
+}
+
+input case_subSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input case_subOrderByWithAggregationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    message: SortOrder
+    create_role: SortOrder
+    target_role: SortOrder
+    type: SortOrder
+    _count: case_subCountOrderByAggregateInput
+    _avg: case_subAvgOrderByAggregateInput
+    _max: case_subMaxOrderByAggregateInput
+    _min: case_subMinOrderByAggregateInput
+    _sum: case_subSumOrderByAggregateInput
+}
+
+input case_subScalarWhereWithAggregatesInput {
+    AND: case_subScalarWhereWithAggregatesInput
+    OR: [case_subScalarWhereWithAggregatesInput]
+    NOT: case_subScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    createdAt: DateTimeWithAggregatesFilter
+    updatedAt: DateTimeWithAggregatesFilter
+    deletedAt: DateTimeNullableWithAggregatesFilter
+    message: StringWithAggregatesFilter
+    create_role: StringWithAggregatesFilter
+    target_role: StringWithAggregatesFilter
+    type: StringWithAggregatesFilter
+}
+
+type Case_subGroupByOutputType {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    message: String!
+    create_role: String!
+    target_role: String!
+    type: String!
+    _count: Case_subCountAggregateOutputType
+    _avg: Case_subAvgAggregateOutputType
+    _sum: Case_subSumAggregateOutputType
+    _min: Case_subMinAggregateOutputType
+    _max: Case_subMaxAggregateOutputType
+}
+
+input case_visitlogWhereInput {
+    AND: case_visitlogWhereInput
+    OR: [case_visitlogWhereInput]
+    NOT: case_visitlogWhereInput
+    id: IntFilter
+    ip: StringFilter
+    ua: StringFilter
+    visitedAt: StringFilter
+}
+
+input case_visitlogOrderByWithRelationInput {
+    id: SortOrder
+    ip: SortOrder
+    ua: SortOrder
+    visitedAt: SortOrder
+}
+
+input case_visitlogWhereUniqueInput {
+    id: Int
+}
+
+enum Case_visitlogScalarFieldEnum {
+    id
+    ip
+    ua
+    visitedAt
+}
+
+type case_visitlog {
+    id: Int!
+    ip: String!
+    ua: String!
+    visitedAt: String!
+}
+
+type Case_visitlogCountAggregateOutputType {
+    id: Int!
+    ip: Int!
+    ua: Int!
+    visitedAt: Int!
+    _all: Int!
+}
+
+type Case_visitlogAvgAggregateOutputType {
+    id: Float
+}
+
+type Case_visitlogSumAggregateOutputType {
+    id: Int
+}
+
+type Case_visitlogMinAggregateOutputType {
+    id: Int
+    ip: String
+    ua: String
+    visitedAt: String
+}
+
+type Case_visitlogMaxAggregateOutputType {
+    id: Int
+    ip: String
+    ua: String
+    visitedAt: String
+}
+
+type AggregateCase_visitlog {
+    _count: Case_visitlogCountAggregateOutputType
+    _avg: Case_visitlogAvgAggregateOutputType
+    _sum: Case_visitlogSumAggregateOutputType
+    _min: Case_visitlogMinAggregateOutputType
+    _max: Case_visitlogMaxAggregateOutputType
+}
+
+input case_visitlogCountOrderByAggregateInput {
+    id: SortOrder
+    ip: SortOrder
+    ua: SortOrder
+    visitedAt: SortOrder
+}
+
+input case_visitlogAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input case_visitlogMaxOrderByAggregateInput {
+    id: SortOrder
+    ip: SortOrder
+    ua: SortOrder
+    visitedAt: SortOrder
+}
+
+input case_visitlogMinOrderByAggregateInput {
+    id: SortOrder
+    ip: SortOrder
+    ua: SortOrder
+    visitedAt: SortOrder
+}
+
+input case_visitlogSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input case_visitlogOrderByWithAggregationInput {
+    id: SortOrder
+    ip: SortOrder
+    ua: SortOrder
+    visitedAt: SortOrder
+    _count: case_visitlogCountOrderByAggregateInput
+    _avg: case_visitlogAvgOrderByAggregateInput
+    _max: case_visitlogMaxOrderByAggregateInput
+    _min: case_visitlogMinOrderByAggregateInput
+    _sum: case_visitlogSumOrderByAggregateInput
+}
+
+input case_visitlogScalarWhereWithAggregatesInput {
+    AND: case_visitlogScalarWhereWithAggregatesInput
+    OR: [case_visitlogScalarWhereWithAggregatesInput]
+    NOT: case_visitlogScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    ip: StringWithAggregatesFilter
+    ua: StringWithAggregatesFilter
+    visitedAt: StringWithAggregatesFilter
+}
+
+type Case_visitlogGroupByOutputType {
+    id: Int!
+    ip: String!
+    ua: String!
+    visitedAt: String!
+    _count: Case_visitlogCountAggregateOutputType
+    _avg: Case_visitlogAvgAggregateOutputType
+    _sum: Case_visitlogSumAggregateOutputType
+    _min: Case_visitlogMinAggregateOutputType
+    _max: Case_visitlogMaxAggregateOutputType
+}
+
+type MytestCountAggregateOutputType {
+    id: Int!
+    createdAt: Int!
+    updatedAt: Int!
+    deletedAt: Int!
+    myAttr: Int!
+    userid: Int!
+    _all: Int!
+}
+
+type MytestAvgAggregateOutputType {
+    id: Float
+    userid: Float
+}
+
+type MytestSumAggregateOutputType {
+    id: Int
+    userid: Int
+}
+
+type MytestMinAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    myAttr: String
+    userid: Int
+}
+
+type MytestMaxAggregateOutputType {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+    deletedAt: DateTime
+    myAttr: String
+    userid: Int
+}
+
+type AggregateMytest {
+    _count: MytestCountAggregateOutputType
+    _avg: MytestAvgAggregateOutputType
+    _sum: MytestSumAggregateOutputType
+    _min: MytestMinAggregateOutputType
+    _max: MytestMaxAggregateOutputType
+}
+
+input mytestCountOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    myAttr: SortOrder
+    userid: SortOrder
+}
+
+input mytestAvgOrderByAggregateInput {
+    id: SortOrder
+    userid: SortOrder
+}
+
+input mytestMaxOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    myAttr: SortOrder
+    userid: SortOrder
+}
+
+input mytestMinOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    myAttr: SortOrder
+    userid: SortOrder
+}
+
+input mytestSumOrderByAggregateInput {
+    id: SortOrder
+    userid: SortOrder
+}
+
+input mytestOrderByWithAggregationInput {
+    id: SortOrder
+    createdAt: SortOrder
+    updatedAt: SortOrder
+    deletedAt: SortOrder
+    myAttr: SortOrder
+    userid: SortOrder
+    _count: mytestCountOrderByAggregateInput
+    _avg: mytestAvgOrderByAggregateInput
+    _max: mytestMaxOrderByAggregateInput
+    _min: mytestMinOrderByAggregateInput
+    _sum: mytestSumOrderByAggregateInput
+}
+
+input mytestScalarWhereWithAggregatesInput {
+    AND: mytestScalarWhereWithAggregatesInput
+    OR: [mytestScalarWhereWithAggregatesInput]
+    NOT: mytestScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    createdAt: DateTimeWithAggregatesFilter
+    updatedAt: DateTimeWithAggregatesFilter
+    deletedAt: DateTimeNullableWithAggregatesFilter
+    myAttr: StringWithAggregatesFilter
+    userid: IntWithAggregatesFilter
+}
+
+type MytestGroupByOutputType {
+    id: Int!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    myAttr: String!
+    userid: Int!
+    _count: MytestCountAggregateOutputType
+    _avg: MytestAvgAggregateOutputType
+    _sum: MytestSumAggregateOutputType
+    _min: MytestMinAggregateOutputType
+    _max: MytestMaxAggregateOutputType
+}
+
+type Query {
+    findFirstadmin_apilog(where: admin_apilogWhereInput, orderBy: [admin_apilogOrderByWithRelationInput], cursor: admin_apilogWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_apilogScalarFieldEnum]): admin_apilog
+    findFirstadmin_apilogOrThrow(where: admin_apilogWhereInput, orderBy: [admin_apilogOrderByWithRelationInput], cursor: admin_apilogWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_apilogScalarFieldEnum]): admin_apilog
+    findManyadmin_apilog(where: admin_apilogWhereInput, orderBy: [admin_apilogOrderByWithRelationInput], cursor: admin_apilogWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_apilogScalarFieldEnum]): [admin_apilog]!
+    aggregateadmin_apilog(where: admin_apilogWhereInput, orderBy: [admin_apilogOrderByWithRelationInput], cursor: admin_apilogWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_apilog!
+    groupByadmin_apilog(where: admin_apilogWhereInput, orderBy: [admin_apilogOrderByWithAggregationInput], by: [Admin_apilogScalarFieldEnum]!, having: admin_apilogScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_apilogGroupByOutputType]!
+    findUniqueadmin_apilog(where: admin_apilogWhereUniqueInput!): admin_apilog
+    findUniqueadmin_apilogOrThrow(where: admin_apilogWhereUniqueInput!): admin_apilog
+    findFirstadmin_dic(where: admin_dicWhereInput, orderBy: [admin_dicOrderByWithRelationInput], cursor: admin_dicWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_dicScalarFieldEnum]): admin_dic
+    findFirstadmin_dicOrThrow(where: admin_dicWhereInput, orderBy: [admin_dicOrderByWithRelationInput], cursor: admin_dicWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_dicScalarFieldEnum]): admin_dic
+    findManyadmin_dic(where: admin_dicWhereInput, orderBy: [admin_dicOrderByWithRelationInput], cursor: admin_dicWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_dicScalarFieldEnum]): [admin_dic]!
+    aggregateadmin_dic(where: admin_dicWhereInput, orderBy: [admin_dicOrderByWithRelationInput], cursor: admin_dicWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_dic!
+    groupByadmin_dic(where: admin_dicWhereInput, orderBy: [admin_dicOrderByWithAggregationInput], by: [Admin_dicScalarFieldEnum]!, having: admin_dicScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_dicGroupByOutputType]!
+    findUniqueadmin_dic(where: admin_dicWhereUniqueInput!): admin_dic
+    findUniqueadmin_dicOrThrow(where: admin_dicWhereUniqueInput!): admin_dic
+    findFirstadmin_menu_role(where: admin_menu_roleWhereInput, orderBy: [admin_menu_roleOrderByWithRelationInput], cursor: admin_menu_roleWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_menu_roleScalarFieldEnum]): admin_menu_role
+    findFirstadmin_menu_roleOrThrow(where: admin_menu_roleWhereInput, orderBy: [admin_menu_roleOrderByWithRelationInput], cursor: admin_menu_roleWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_menu_roleScalarFieldEnum]): admin_menu_role
+    findManyadmin_menu_role(where: admin_menu_roleWhereInput, orderBy: [admin_menu_roleOrderByWithRelationInput], cursor: admin_menu_roleWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_menu_roleScalarFieldEnum]): [admin_menu_role]!
+    aggregateadmin_menu_role(where: admin_menu_roleWhereInput, orderBy: [admin_menu_roleOrderByWithRelationInput], cursor: admin_menu_roleWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_menu_role!
+    groupByadmin_menu_role(where: admin_menu_roleWhereInput, orderBy: [admin_menu_roleOrderByWithAggregationInput], by: [Admin_menu_roleScalarFieldEnum]!, having: admin_menu_roleScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_menu_roleGroupByOutputType]!
+    findUniqueadmin_menu_role(where: admin_menu_roleWhereUniqueInput!): admin_menu_role
+    findUniqueadmin_menu_roleOrThrow(where: admin_menu_roleWhereUniqueInput!): admin_menu_role
+    findFirstadmin_permission(where: admin_permissionWhereInput, orderBy: [admin_permissionOrderByWithRelationInput], cursor: admin_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_permissionScalarFieldEnum]): admin_permission
+    findFirstadmin_permissionOrThrow(where: admin_permissionWhereInput, orderBy: [admin_permissionOrderByWithRelationInput], cursor: admin_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_permissionScalarFieldEnum]): admin_permission
+    findManyadmin_permission(where: admin_permissionWhereInput, orderBy: [admin_permissionOrderByWithRelationInput], cursor: admin_permissionWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_permissionScalarFieldEnum]): [admin_permission]!
+    aggregateadmin_permission(where: admin_permissionWhereInput, orderBy: [admin_permissionOrderByWithRelationInput], cursor: admin_permissionWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_permission!
+    groupByadmin_permission(where: admin_permissionWhereInput, orderBy: [admin_permissionOrderByWithAggregationInput], by: [Admin_permissionScalarFieldEnum]!, having: admin_permissionScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_permissionGroupByOutputType]!
+    findUniqueadmin_permission(where: admin_permissionWhereUniqueInput!): admin_permission
+    findUniqueadmin_permissionOrThrow(where: admin_permissionWhereUniqueInput!): admin_permission
+    findFirstadmin_provider(where: admin_providerWhereInput, orderBy: [admin_providerOrderByWithRelationInput], cursor: admin_providerWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_providerScalarFieldEnum]): admin_provider
+    findFirstadmin_providerOrThrow(where: admin_providerWhereInput, orderBy: [admin_providerOrderByWithRelationInput], cursor: admin_providerWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_providerScalarFieldEnum]): admin_provider
+    findManyadmin_provider(where: admin_providerWhereInput, orderBy: [admin_providerOrderByWithRelationInput], cursor: admin_providerWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_providerScalarFieldEnum]): [admin_provider]!
+    aggregateadmin_provider(where: admin_providerWhereInput, orderBy: [admin_providerOrderByWithRelationInput], cursor: admin_providerWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_provider!
+    groupByadmin_provider(where: admin_providerWhereInput, orderBy: [admin_providerOrderByWithAggregationInput], by: [Admin_providerScalarFieldEnum]!, having: admin_providerScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_providerGroupByOutputType]!
+    findUniqueadmin_provider(where: admin_providerWhereUniqueInput!): admin_provider
+    findUniqueadmin_providerOrThrow(where: admin_providerWhereUniqueInput!): admin_provider
+    findFirstadmin_role(where: admin_roleWhereInput, orderBy: [admin_roleOrderByWithRelationInput], cursor: admin_roleWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_roleScalarFieldEnum]): admin_role
+    findFirstadmin_roleOrThrow(where: admin_roleWhereInput, orderBy: [admin_roleOrderByWithRelationInput], cursor: admin_roleWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_roleScalarFieldEnum]): admin_role
+    findManyadmin_role(where: admin_roleWhereInput, orderBy: [admin_roleOrderByWithRelationInput], cursor: admin_roleWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_roleScalarFieldEnum]): [admin_role]!
+    aggregateadmin_role(where: admin_roleWhereInput, orderBy: [admin_roleOrderByWithRelationInput], cursor: admin_roleWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_role!
+    groupByadmin_role(where: admin_roleWhereInput, orderBy: [admin_roleOrderByWithAggregationInput], by: [Admin_roleScalarFieldEnum]!, having: admin_roleScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_roleGroupByOutputType]!
+    findUniqueadmin_role(where: admin_roleWhereUniqueInput!): admin_role
+    findUniqueadmin_roleOrThrow(where: admin_roleWhereUniqueInput!): admin_role
+    findFirstadmin_role_user(where: admin_role_userWhereInput, orderBy: [admin_role_userOrderByWithRelationInput], cursor: admin_role_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_role_userScalarFieldEnum]): admin_role_user
+    findFirstadmin_role_userOrThrow(where: admin_role_userWhereInput, orderBy: [admin_role_userOrderByWithRelationInput], cursor: admin_role_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_role_userScalarFieldEnum]): admin_role_user
+    findManyadmin_role_user(where: admin_role_userWhereInput, orderBy: [admin_role_userOrderByWithRelationInput], cursor: admin_role_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_role_userScalarFieldEnum]): [admin_role_user]!
+    aggregateadmin_role_user(where: admin_role_userWhereInput, orderBy: [admin_role_userOrderByWithRelationInput], cursor: admin_role_userWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_role_user!
+    groupByadmin_role_user(where: admin_role_userWhereInput, orderBy: [admin_role_userOrderByWithAggregationInput], by: [Admin_role_userScalarFieldEnum]!, having: admin_role_userScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_role_userGroupByOutputType]!
+    findUniqueadmin_role_user(where: admin_role_userWhereUniqueInput!): admin_role_user
+    findUniqueadmin_role_userOrThrow(where: admin_role_userWhereUniqueInput!): admin_role_user
+    findFirstadmin_user(where: admin_userWhereInput, orderBy: [admin_userOrderByWithRelationInput], cursor: admin_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_userScalarFieldEnum]): admin_user
+    findFirstadmin_userOrThrow(where: admin_userWhereInput, orderBy: [admin_userOrderByWithRelationInput], cursor: admin_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_userScalarFieldEnum]): admin_user
+    findManyadmin_user(where: admin_userWhereInput, orderBy: [admin_userOrderByWithRelationInput], cursor: admin_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_userScalarFieldEnum]): [admin_user]!
+    aggregateadmin_user(where: admin_userWhereInput, orderBy: [admin_userOrderByWithRelationInput], cursor: admin_userWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_user!
+    groupByadmin_user(where: admin_userWhereInput, orderBy: [admin_userOrderByWithAggregationInput], by: [Admin_userScalarFieldEnum]!, having: admin_userScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_userGroupByOutputType]!
+    findUniqueadmin_user(where: admin_userWhereUniqueInput!): admin_user
+    findUniqueadmin_userOrThrow(where: admin_userWhereUniqueInput!): admin_user
+    findFirstadmin_verification_record(where: admin_verification_recordWhereInput, orderBy: [admin_verification_recordOrderByWithRelationInput], cursor: admin_verification_recordWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_verification_recordScalarFieldEnum]): admin_verification_record
+    findFirstadmin_verification_recordOrThrow(where: admin_verification_recordWhereInput, orderBy: [admin_verification_recordOrderByWithRelationInput], cursor: admin_verification_recordWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_verification_recordScalarFieldEnum]): admin_verification_record
+    findManyadmin_verification_record(where: admin_verification_recordWhereInput, orderBy: [admin_verification_recordOrderByWithRelationInput], cursor: admin_verification_recordWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_verification_recordScalarFieldEnum]): [admin_verification_record]!
+    aggregateadmin_verification_record(where: admin_verification_recordWhereInput, orderBy: [admin_verification_recordOrderByWithRelationInput], cursor: admin_verification_recordWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_verification_record!
+    groupByadmin_verification_record(where: admin_verification_recordWhereInput, orderBy: [admin_verification_recordOrderByWithAggregationInput], by: [Admin_verification_recordScalarFieldEnum]!, having: admin_verification_recordScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_verification_recordGroupByOutputType]!
+    findUniqueadmin_verification_record(where: admin_verification_recordWhereUniqueInput!): admin_verification_record
+    findUniqueadmin_verification_recordOrThrow(where: admin_verification_recordWhereUniqueInput!): admin_verification_record
+    findFirstcar(where: carWhereInput, orderBy: [carOrderByWithRelationInput], cursor: carWhereUniqueInput, take: Int, skip: Int, distinct: [CarScalarFieldEnum]): car
+    findFirstcarOrThrow(where: carWhereInput, orderBy: [carOrderByWithRelationInput], cursor: carWhereUniqueInput, take: Int, skip: Int, distinct: [CarScalarFieldEnum]): car
+    findManycar(where: carWhereInput, orderBy: [carOrderByWithRelationInput], cursor: carWhereUniqueInput, take: Int, skip: Int, distinct: [CarScalarFieldEnum]): [car]!
+    aggregatecar(where: carWhereInput, orderBy: [carOrderByWithRelationInput], cursor: carWhereUniqueInput, take: Int, skip: Int): AggregateCar!
+    groupBycar(where: carWhereInput, orderBy: [carOrderByWithAggregationInput], by: [CarScalarFieldEnum]!, having: carScalarWhereWithAggregatesInput, take: Int, skip: Int): [CarGroupByOutputType]!
+    findUniquecar(where: carWhereUniqueInput!): car
+    findUniquecarOrThrow(where: carWhereUniqueInput!): car
+    findFirstcase_category(where: case_categoryWhereInput, orderBy: [case_categoryOrderByWithRelationInput], cursor: case_categoryWhereUniqueInput, take: Int, skip: Int, distinct: [Case_categoryScalarFieldEnum]): case_category
+    findFirstcase_categoryOrThrow(where: case_categoryWhereInput, orderBy: [case_categoryOrderByWithRelationInput], cursor: case_categoryWhereUniqueInput, take: Int, skip: Int, distinct: [Case_categoryScalarFieldEnum]): case_category
+    findManycase_category(where: case_categoryWhereInput, orderBy: [case_categoryOrderByWithRelationInput], cursor: case_categoryWhereUniqueInput, take: Int, skip: Int, distinct: [Case_categoryScalarFieldEnum]): [case_category]!
+    aggregatecase_category(where: case_categoryWhereInput, orderBy: [case_categoryOrderByWithRelationInput], cursor: case_categoryWhereUniqueInput, take: Int, skip: Int): AggregateCase_category!
+    groupBycase_category(where: case_categoryWhereInput, orderBy: [case_categoryOrderByWithAggregationInput], by: [Case_categoryScalarFieldEnum]!, having: case_categoryScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_categoryGroupByOutputType]!
+    findUniquecase_category(where: case_categoryWhereUniqueInput!): case_category
+    findUniquecase_categoryOrThrow(where: case_categoryWhereUniqueInput!): case_category
+    findFirstcase_menu(where: case_menuWhereInput, orderBy: [case_menuOrderByWithRelationInput], cursor: case_menuWhereUniqueInput, take: Int, skip: Int, distinct: [Case_menuScalarFieldEnum]): case_menu
+    findFirstcase_menuOrThrow(where: case_menuWhereInput, orderBy: [case_menuOrderByWithRelationInput], cursor: case_menuWhereUniqueInput, take: Int, skip: Int, distinct: [Case_menuScalarFieldEnum]): case_menu
+    findManycase_menu(where: case_menuWhereInput, orderBy: [case_menuOrderByWithRelationInput], cursor: case_menuWhereUniqueInput, take: Int, skip: Int, distinct: [Case_menuScalarFieldEnum]): [case_menu]!
+    aggregatecase_menu(where: case_menuWhereInput, orderBy: [case_menuOrderByWithRelationInput], cursor: case_menuWhereUniqueInput, take: Int, skip: Int): AggregateCase_menu!
+    groupBycase_menu(where: case_menuWhereInput, orderBy: [case_menuOrderByWithAggregationInput], by: [Case_menuScalarFieldEnum]!, having: case_menuScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_menuGroupByOutputType]!
+    findUniquecase_menu(where: case_menuWhereUniqueInput!): case_menu
+    findUniquecase_menuOrThrow(where: case_menuWhereUniqueInput!): case_menu
+    findFirstcase_post(where: case_postWhereInput, orderBy: [case_postOrderByWithRelationInput], cursor: case_postWhereUniqueInput, take: Int, skip: Int, distinct: [Case_postScalarFieldEnum]): case_post
+    findFirstcase_postOrThrow(where: case_postWhereInput, orderBy: [case_postOrderByWithRelationInput], cursor: case_postWhereUniqueInput, take: Int, skip: Int, distinct: [Case_postScalarFieldEnum]): case_post
+    findManycase_post(where: case_postWhereInput, orderBy: [case_postOrderByWithRelationInput], cursor: case_postWhereUniqueInput, take: Int, skip: Int, distinct: [Case_postScalarFieldEnum]): [case_post]!
+    aggregatecase_post(where: case_postWhereInput, orderBy: [case_postOrderByWithRelationInput], cursor: case_postWhereUniqueInput, take: Int, skip: Int): AggregateCase_post!
+    groupBycase_post(where: case_postWhereInput, orderBy: [case_postOrderByWithAggregationInput], by: [Case_postScalarFieldEnum]!, having: case_postScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_postGroupByOutputType]!
+    findUniquecase_post(where: case_postWhereUniqueInput!): case_post
+    findUniquecase_postOrThrow(where: case_postWhereUniqueInput!): case_post
+    findFirstcase_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_salelogScalarFieldEnum]): case_salelog
+    findFirstcase_salelogOrThrow(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_salelogScalarFieldEnum]): case_salelog
+    findManycase_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_salelogScalarFieldEnum]): [case_salelog]!
+    aggregatecase_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int): AggregateCase_salelog!
+    groupBycase_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithAggregationInput], by: [Case_salelogScalarFieldEnum]!, having: case_salelogScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_salelogGroupByOutputType]!
+    findUniquecase_salelog(where: case_salelogWhereUniqueInput!): case_salelog
+    findUniquecase_salelogOrThrow(where: case_salelogWhereUniqueInput!): case_salelog
+    findFirstcase_saletype(where: case_saletypeWhereInput, orderBy: [case_saletypeOrderByWithRelationInput], cursor: case_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [Case_saletypeScalarFieldEnum]): case_saletype
+    findFirstcase_saletypeOrThrow(where: case_saletypeWhereInput, orderBy: [case_saletypeOrderByWithRelationInput], cursor: case_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [Case_saletypeScalarFieldEnum]): case_saletype
+    findManycase_saletype(where: case_saletypeWhereInput, orderBy: [case_saletypeOrderByWithRelationInput], cursor: case_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [Case_saletypeScalarFieldEnum]): [case_saletype]!
+    aggregatecase_saletype(where: case_saletypeWhereInput, orderBy: [case_saletypeOrderByWithRelationInput], cursor: case_saletypeWhereUniqueInput, take: Int, skip: Int): AggregateCase_saletype!
+    groupBycase_saletype(where: case_saletypeWhereInput, orderBy: [case_saletypeOrderByWithAggregationInput], by: [Case_saletypeScalarFieldEnum]!, having: case_saletypeScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_saletypeGroupByOutputType]!
+    findUniquecase_saletype(where: case_saletypeWhereUniqueInput!): case_saletype
+    findUniquecase_saletypeOrThrow(where: case_saletypeWhereUniqueInput!): case_saletype
+    findFirstcase_sub(where: case_subWhereInput, orderBy: [case_subOrderByWithRelationInput], cursor: case_subWhereUniqueInput, take: Int, skip: Int, distinct: [Case_subScalarFieldEnum]): case_sub
+    findFirstcase_subOrThrow(where: case_subWhereInput, orderBy: [case_subOrderByWithRelationInput], cursor: case_subWhereUniqueInput, take: Int, skip: Int, distinct: [Case_subScalarFieldEnum]): case_sub
+    findManycase_sub(where: case_subWhereInput, orderBy: [case_subOrderByWithRelationInput], cursor: case_subWhereUniqueInput, take: Int, skip: Int, distinct: [Case_subScalarFieldEnum]): [case_sub]!
+    aggregatecase_sub(where: case_subWhereInput, orderBy: [case_subOrderByWithRelationInput], cursor: case_subWhereUniqueInput, take: Int, skip: Int): AggregateCase_sub!
+    groupBycase_sub(where: case_subWhereInput, orderBy: [case_subOrderByWithAggregationInput], by: [Case_subScalarFieldEnum]!, having: case_subScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_subGroupByOutputType]!
+    findUniquecase_sub(where: case_subWhereUniqueInput!): case_sub
+    findUniquecase_subOrThrow(where: case_subWhereUniqueInput!): case_sub
+    findFirstcase_visitlog(where: case_visitlogWhereInput, orderBy: [case_visitlogOrderByWithRelationInput], cursor: case_visitlogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_visitlogScalarFieldEnum]): case_visitlog
+    findFirstcase_visitlogOrThrow(where: case_visitlogWhereInput, orderBy: [case_visitlogOrderByWithRelationInput], cursor: case_visitlogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_visitlogScalarFieldEnum]): case_visitlog
+    findManycase_visitlog(where: case_visitlogWhereInput, orderBy: [case_visitlogOrderByWithRelationInput], cursor: case_visitlogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_visitlogScalarFieldEnum]): [case_visitlog]!
+    aggregatecase_visitlog(where: case_visitlogWhereInput, orderBy: [case_visitlogOrderByWithRelationInput], cursor: case_visitlogWhereUniqueInput, take: Int, skip: Int): AggregateCase_visitlog!
+    groupBycase_visitlog(where: case_visitlogWhereInput, orderBy: [case_visitlogOrderByWithAggregationInput], by: [Case_visitlogScalarFieldEnum]!, having: case_visitlogScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_visitlogGroupByOutputType]!
+    findUniquecase_visitlog(where: case_visitlogWhereUniqueInput!): case_visitlog
+    findUniquecase_visitlogOrThrow(where: case_visitlogWhereUniqueInput!): case_visitlog
+    findFirstmytest(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int, distinct: [MytestScalarFieldEnum]): mytest
+    findFirstmytestOrThrow(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int, distinct: [MytestScalarFieldEnum]): mytest
+    findManymytest(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int, distinct: [MytestScalarFieldEnum]): [mytest]!
+    aggregatemytest(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int): AggregateMytest!
+    groupBymytest(where: mytestWhereInput, orderBy: [mytestOrderByWithAggregationInput], by: [MytestScalarFieldEnum]!, having: mytestScalarWhereWithAggregatesInput, take: Int, skip: Int): [MytestGroupByOutputType]!
+    findUniquemytest(where: mytestWhereUniqueInput!): mytest
+    findUniquemytestOrThrow(where: mytestWhereUniqueInput!): mytest
+}
+
+input admin_apilogCreateInput {
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    ip: String!
+    method: String!
+    path: String!
+    code: String!
+    ua: String!
+    userId: String!
+    userName: String!
+}
+
+input DateTimeFieldUpdateOperationsInput {
+    set: DateTime
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+    set: DateTime
+}
+
+input StringFieldUpdateOperationsInput {
+    set: String
+}
+
+input admin_apilogUpdateInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    ip: StringFieldUpdateOperationsInput
+    method: StringFieldUpdateOperationsInput
+    path: StringFieldUpdateOperationsInput
+    code: StringFieldUpdateOperationsInput
+    ua: StringFieldUpdateOperationsInput
+    userId: StringFieldUpdateOperationsInput
+    userName: StringFieldUpdateOperationsInput
+}
+
+input admin_apilogCreateManyInput {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    ip: String!
+    method: String!
+    path: String!
+    code: String!
+    ua: String!
+    userId: String!
+    userName: String!
+}
+
+type AffectedRowsOutput {
+    count: Int!
+}
+
+input admin_apilogUpdateManyMutationInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    ip: StringFieldUpdateOperationsInput
+    method: StringFieldUpdateOperationsInput
+    path: StringFieldUpdateOperationsInput
+    code: StringFieldUpdateOperationsInput
+    ua: StringFieldUpdateOperationsInput
+    userId: StringFieldUpdateOperationsInput
+    userName: StringFieldUpdateOperationsInput
+}
+
+input admin_dicCreateInput {
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    isOpen: Boolean!
+}
+
+input BoolFieldUpdateOperationsInput {
+    set: Boolean
+}
+
+input admin_dicUpdateInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    isOpen: BoolFieldUpdateOperationsInput
+}
+
+input admin_dicCreateManyInput {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    isOpen: Boolean!
+}
+
+input admin_dicUpdateManyMutationInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    isOpen: BoolFieldUpdateOperationsInput
+}
+
+input admin_menu_roleCreateInput {
+    menu_id: Int!
+    role_id: Int!
+}
+
+input IntFieldUpdateOperationsInput {
+    set: Int
+    increment: Int
+    decrement: Int
+    multiply: Int
+    divide: Int
+}
+
+input admin_menu_roleUpdateInput {
+    menu_id: IntFieldUpdateOperationsInput
+    role_id: IntFieldUpdateOperationsInput
+}
+
+input admin_menu_roleCreateManyInput {
+    id: Int
+    menu_id: Int!
+    role_id: Int!
+}
+
+input admin_menu_roleUpdateManyMutationInput {
+    menu_id: IntFieldUpdateOperationsInput
+    role_id: IntFieldUpdateOperationsInput
+}
+
+input admin_permissionCreateInput {
+    id: BigInt!
+    createdAt: DateTime
+    updatedAt: DateTime
+    method: String!
+    path: String!
+    enabled: Int
+}
+
+input BigIntFieldUpdateOperationsInput {
+    set: BigInt
+    increment: BigInt
+    decrement: BigInt
+    multiply: BigInt
+    divide: BigInt
+}
+
+input admin_permissionUpdateInput {
+    id: BigIntFieldUpdateOperationsInput
+    createdAt: NullableDateTimeFieldUpdateOperationsInput
+    updatedAt: NullableDateTimeFieldUpdateOperationsInput
+    method: StringFieldUpdateOperationsInput
+    path: StringFieldUpdateOperationsInput
+    enabled: IntFieldUpdateOperationsInput
+}
+
+input admin_permissionCreateManyInput {
+    id: BigInt!
+    createdAt: DateTime
+    updatedAt: DateTime
+    method: String!
+    path: String!
+    enabled: Int
+}
+
+input admin_permissionUpdateManyMutationInput {
+    id: BigIntFieldUpdateOperationsInput
+    createdAt: NullableDateTimeFieldUpdateOperationsInput
+    updatedAt: NullableDateTimeFieldUpdateOperationsInput
+    method: StringFieldUpdateOperationsInput
+    path: StringFieldUpdateOperationsInput
+    enabled: IntFieldUpdateOperationsInput
+}
+
+input admin_providerCreateInput {
+    owner: String!
+    name: String!
+    created_time: String
+    type: String
+    client_id: String
+    client_secret: String
+    sign_name: String
+    template_code: String
+}
+
+input NullableStringFieldUpdateOperationsInput {
+    set: String
+}
+
+input admin_providerUpdateInput {
+    owner: StringFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    created_time: NullableStringFieldUpdateOperationsInput
+    type: NullableStringFieldUpdateOperationsInput
+    client_id: NullableStringFieldUpdateOperationsInput
+    client_secret: NullableStringFieldUpdateOperationsInput
+    sign_name: NullableStringFieldUpdateOperationsInput
+    template_code: NullableStringFieldUpdateOperationsInput
+}
+
+input admin_providerCreateManyInput {
+    owner: String!
+    name: String!
+    created_time: String
+    type: String
+    client_id: String
+    client_secret: String
+    sign_name: String
+    template_code: String
+}
+
+input admin_providerUpdateManyMutationInput {
+    owner: StringFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    created_time: NullableStringFieldUpdateOperationsInput
+    type: NullableStringFieldUpdateOperationsInput
+    client_id: NullableStringFieldUpdateOperationsInput
+    client_secret: NullableStringFieldUpdateOperationsInput
+    sign_name: NullableStringFieldUpdateOperationsInput
+    template_code: NullableStringFieldUpdateOperationsInput
+}
+
+input admin_roleCreateInput {
+    code: String!
+    remark: String!
+}
+
+input admin_roleUpdateInput {
+    code: StringFieldUpdateOperationsInput
+    remark: StringFieldUpdateOperationsInput
+}
+
+input admin_roleCreateManyInput {
+    id: Int
+    code: String!
+    remark: String!
+}
+
+input admin_roleUpdateManyMutationInput {
+    code: StringFieldUpdateOperationsInput
+    remark: StringFieldUpdateOperationsInput
+}
+
+input admin_role_userCreateInput {
+    role_id: Int!
+    user_id: Int!
+}
+
+input admin_role_userUpdateInput {
+    role_id: IntFieldUpdateOperationsInput
+    user_id: IntFieldUpdateOperationsInput
+}
+
+input admin_role_userCreateManyInput {
+    id: Int
+    role_id: Int!
+    user_id: Int!
+}
+
+input admin_role_userUpdateManyMutationInput {
+    role_id: IntFieldUpdateOperationsInput
+    user_id: IntFieldUpdateOperationsInput
+}
+
+input case_categoryCreateWithoutCase_postInput {
+    name: String!
+}
+
+input case_categoryCreateOrConnectWithoutCase_postInput {
+    where: case_categoryWhereUniqueInput!
+    create: case_categoryCreateWithoutCase_postInput!
+}
+
+input case_categoryCreateNestedOneWithoutCase_postInput {
+    create: case_categoryCreateWithoutCase_postInput
+    connectOrCreate: case_categoryCreateOrConnectWithoutCase_postInput
+    connect: case_categoryWhereUniqueInput
+}
+
+input case_postCreateWithoutAdmin_userInput {
+    title: String!
+    poster: String
+    published_at: DateTime
+    author: String!
+    content: String
+    case_category: case_categoryCreateNestedOneWithoutCase_postInput
+}
+
+input case_postCreateOrConnectWithoutAdmin_userInput {
+    where: case_postWhereUniqueInput!
+    create: case_postCreateWithoutAdmin_userInput!
+}
+
+input case_postCreateManyAdmin_userInput {
+    id: Int
+    title: String!
+    poster: String
+    published_at: DateTime
+    author: String!
+    content: String
+    cate: Int
+}
+
+input case_postCreateManyAdmin_userInputEnvelope {
+    data: [case_postCreateManyAdmin_userInput]!
+    skipDuplicates: Boolean
+}
+
+input case_postCreateNestedManyWithoutAdmin_userInput {
+    create: case_postCreateWithoutAdmin_userInput
+    connectOrCreate: case_postCreateOrConnectWithoutAdmin_userInput
+    createMany: case_postCreateManyAdmin_userInputEnvelope
+    connect: case_postWhereUniqueInput
+}
+
+input mytestCreateWithoutAdmin_userInput {
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    myAttr: String!
+}
+
+input mytestCreateOrConnectWithoutAdmin_userInput {
+    where: mytestWhereUniqueInput!
+    create: mytestCreateWithoutAdmin_userInput!
+}
+
+input mytestCreateManyAdmin_userInput {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    myAttr: String!
+}
+
+input mytestCreateManyAdmin_userInputEnvelope {
+    data: [mytestCreateManyAdmin_userInput]!
+    skipDuplicates: Boolean
+}
+
+input mytestCreateNestedManyWithoutAdmin_userInput {
+    create: mytestCreateWithoutAdmin_userInput
+    connectOrCreate: mytestCreateOrConnectWithoutAdmin_userInput
+    createMany: mytestCreateManyAdmin_userInputEnvelope
+    connect: mytestWhereUniqueInput
+}
+
+input admin_userCreateInput {
+    created_at: DateTime
+    name: String!
+    avatar: String
+    phone: String
+    password_salt: String
+    password: String
+    country_code: String
+    password_type: String
+    user_id: String
+    case_post: case_postCreateNestedManyWithoutAdmin_userInput
+    mytest: mytestCreateNestedManyWithoutAdmin_userInput
+}
+
+input case_categoryUpdateWithoutCase_postInput {
+    name: StringFieldUpdateOperationsInput
+}
+
+input case_categoryUpsertWithoutCase_postInput {
+    update: case_categoryUpdateWithoutCase_postInput!
+    create: case_categoryCreateWithoutCase_postInput!
+}
+
+input case_categoryUpdateOneWithoutCase_postNestedInput {
+    create: case_categoryCreateWithoutCase_postInput
+    connectOrCreate: case_categoryCreateOrConnectWithoutCase_postInput
+    upsert: case_categoryUpsertWithoutCase_postInput
+    disconnect: Boolean
+    delete: Boolean
+    connect: case_categoryWhereUniqueInput
+    update: case_categoryUpdateWithoutCase_postInput
+}
+
+input case_postUpdateWithoutAdmin_userInput {
+    title: StringFieldUpdateOperationsInput
+    poster: NullableStringFieldUpdateOperationsInput
+    published_at: NullableDateTimeFieldUpdateOperationsInput
+    author: StringFieldUpdateOperationsInput
+    content: NullableStringFieldUpdateOperationsInput
+    case_category: case_categoryUpdateOneWithoutCase_postNestedInput
+}
+
+input case_postUpsertWithWhereUniqueWithoutAdmin_userInput {
+    where: case_postWhereUniqueInput!
+    update: case_postUpdateWithoutAdmin_userInput!
+    create: case_postCreateWithoutAdmin_userInput!
+}
+
+input case_postUpdateWithWhereUniqueWithoutAdmin_userInput {
+    where: case_postWhereUniqueInput!
+    data: case_postUpdateWithoutAdmin_userInput!
+}
+
+input case_postScalarWhereInput {
+    AND: case_postScalarWhereInput
+    OR: [case_postScalarWhereInput]
+    NOT: case_postScalarWhereInput
+    id: IntFilter
+    title: StringFilter
+    poster: StringNullableFilter
+    published_at: DateTimeNullableFilter
+    author: StringFilter
+    content: StringNullableFilter
+    cate: IntNullableFilter
+    auth: IntNullableFilter
+}
+
+input case_postUpdateManyMutationInput {
+    title: StringFieldUpdateOperationsInput
+    poster: NullableStringFieldUpdateOperationsInput
+    published_at: NullableDateTimeFieldUpdateOperationsInput
+    author: StringFieldUpdateOperationsInput
+    content: NullableStringFieldUpdateOperationsInput
+}
+
+input case_postUpdateManyWithWhereWithoutAdmin_userInput {
+    where: case_postScalarWhereInput!
+    data: case_postUpdateManyMutationInput!
+}
+
+input case_postUpdateManyWithoutAdmin_userNestedInput {
+    create: case_postCreateWithoutAdmin_userInput
+    connectOrCreate: case_postCreateOrConnectWithoutAdmin_userInput
+    upsert: case_postUpsertWithWhereUniqueWithoutAdmin_userInput
+    createMany: case_postCreateManyAdmin_userInputEnvelope
+    set: case_postWhereUniqueInput
+    disconnect: case_postWhereUniqueInput
+    delete: case_postWhereUniqueInput
+    connect: case_postWhereUniqueInput
+    update: case_postUpdateWithWhereUniqueWithoutAdmin_userInput
+    updateMany: case_postUpdateManyWithWhereWithoutAdmin_userInput
+    deleteMany: case_postScalarWhereInput
+}
+
+input mytestUpdateWithoutAdmin_userInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    myAttr: StringFieldUpdateOperationsInput
+}
+
+input mytestUpsertWithWhereUniqueWithoutAdmin_userInput {
+    where: mytestWhereUniqueInput!
+    update: mytestUpdateWithoutAdmin_userInput!
+    create: mytestCreateWithoutAdmin_userInput!
+}
+
+input mytestUpdateWithWhereUniqueWithoutAdmin_userInput {
+    where: mytestWhereUniqueInput!
+    data: mytestUpdateWithoutAdmin_userInput!
+}
+
+input mytestScalarWhereInput {
+    AND: mytestScalarWhereInput
+    OR: [mytestScalarWhereInput]
+    NOT: mytestScalarWhereInput
+    id: IntFilter
+    createdAt: DateTimeFilter
+    updatedAt: DateTimeFilter
+    deletedAt: DateTimeNullableFilter
+    myAttr: StringFilter
+    userid: IntFilter
+}
+
+input mytestUpdateManyMutationInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    myAttr: StringFieldUpdateOperationsInput
+}
+
+input mytestUpdateManyWithWhereWithoutAdmin_userInput {
+    where: mytestScalarWhereInput!
+    data: mytestUpdateManyMutationInput!
+}
+
+input mytestUpdateManyWithoutAdmin_userNestedInput {
+    create: mytestCreateWithoutAdmin_userInput
+    connectOrCreate: mytestCreateOrConnectWithoutAdmin_userInput
+    upsert: mytestUpsertWithWhereUniqueWithoutAdmin_userInput
+    createMany: mytestCreateManyAdmin_userInputEnvelope
+    set: mytestWhereUniqueInput
+    disconnect: mytestWhereUniqueInput
+    delete: mytestWhereUniqueInput
+    connect: mytestWhereUniqueInput
+    update: mytestUpdateWithWhereUniqueWithoutAdmin_userInput
+    updateMany: mytestUpdateManyWithWhereWithoutAdmin_userInput
+    deleteMany: mytestScalarWhereInput
+}
+
+input admin_userUpdateInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    avatar: NullableStringFieldUpdateOperationsInput
+    phone: NullableStringFieldUpdateOperationsInput
+    password_salt: NullableStringFieldUpdateOperationsInput
+    password: NullableStringFieldUpdateOperationsInput
+    country_code: NullableStringFieldUpdateOperationsInput
+    password_type: NullableStringFieldUpdateOperationsInput
+    user_id: NullableStringFieldUpdateOperationsInput
+    case_post: case_postUpdateManyWithoutAdmin_userNestedInput
+    mytest: mytestUpdateManyWithoutAdmin_userNestedInput
+}
+
+input admin_userCreateManyInput {
+    id: Int
+    created_at: DateTime
+    name: String!
+    avatar: String
+    phone: String
+    password_salt: String
+    password: String
+    country_code: String
+    password_type: String
+    user_id: String
+}
+
+input admin_userUpdateManyMutationInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    avatar: NullableStringFieldUpdateOperationsInput
+    phone: NullableStringFieldUpdateOperationsInput
+    password_salt: NullableStringFieldUpdateOperationsInput
+    password: NullableStringFieldUpdateOperationsInput
+    country_code: NullableStringFieldUpdateOperationsInput
+    password_type: NullableStringFieldUpdateOperationsInput
+    user_id: NullableStringFieldUpdateOperationsInput
+}
+
+input admin_verification_recordCreateInput {
+    name: String!
+    created_time: String
+    type: String
+    user: String!
+    provider: String!
+    receiver: String!
+    code: String!
+    time: BigInt!
+    is_used: Boolean
+}
+
+input NullableBoolFieldUpdateOperationsInput {
+    set: Boolean
+}
+
+input admin_verification_recordUpdateInput {
+    name: StringFieldUpdateOperationsInput
+    created_time: NullableStringFieldUpdateOperationsInput
+    type: NullableStringFieldUpdateOperationsInput
+    user: StringFieldUpdateOperationsInput
+    provider: StringFieldUpdateOperationsInput
+    receiver: StringFieldUpdateOperationsInput
+    code: StringFieldUpdateOperationsInput
+    time: BigIntFieldUpdateOperationsInput
+    is_used: NullableBoolFieldUpdateOperationsInput
+}
+
+input admin_verification_recordCreateManyInput {
+    name: String!
+    created_time: String
+    type: String
+    user: String!
+    provider: String!
+    receiver: String!
+    code: String!
+    time: BigInt!
+    is_used: Boolean
+}
+
+input admin_verification_recordUpdateManyMutationInput {
+    name: StringFieldUpdateOperationsInput
+    created_time: NullableStringFieldUpdateOperationsInput
+    type: NullableStringFieldUpdateOperationsInput
+    user: StringFieldUpdateOperationsInput
+    provider: StringFieldUpdateOperationsInput
+    receiver: StringFieldUpdateOperationsInput
+    code: StringFieldUpdateOperationsInput
+    time: BigIntFieldUpdateOperationsInput
+    is_used: NullableBoolFieldUpdateOperationsInput
+}
+
+input carCreateInput {
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    title: String!
+}
+
+input carUpdateInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    title: StringFieldUpdateOperationsInput
+}
+
+input carCreateManyInput {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    title: String!
+}
+
+input carUpdateManyMutationInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    title: StringFieldUpdateOperationsInput
+}
+
+input admin_userCreateWithoutCase_postInput {
+    created_at: DateTime
+    name: String!
+    avatar: String
+    phone: String
+    password_salt: String
+    password: String
+    country_code: String
+    password_type: String
+    user_id: String
+    mytest: mytestCreateNestedManyWithoutAdmin_userInput
+}
+
+input admin_userCreateOrConnectWithoutCase_postInput {
+    where: admin_userWhereUniqueInput!
+    create: admin_userCreateWithoutCase_postInput!
+}
+
+input admin_userCreateNestedOneWithoutCase_postInput {
+    create: admin_userCreateWithoutCase_postInput
+    connectOrCreate: admin_userCreateOrConnectWithoutCase_postInput
+    connect: admin_userWhereUniqueInput
+}
+
+input case_postCreateWithoutCase_categoryInput {
+    title: String!
+    poster: String
+    published_at: DateTime
+    author: String!
+    content: String
+    admin_user: admin_userCreateNestedOneWithoutCase_postInput
+}
+
+input case_postCreateOrConnectWithoutCase_categoryInput {
+    where: case_postWhereUniqueInput!
+    create: case_postCreateWithoutCase_categoryInput!
+}
+
+input case_postCreateManyCase_categoryInput {
+    id: Int
+    title: String!
+    poster: String
+    published_at: DateTime
+    author: String!
+    content: String
+    auth: Int
+}
+
+input case_postCreateManyCase_categoryInputEnvelope {
+    data: [case_postCreateManyCase_categoryInput]!
+    skipDuplicates: Boolean
+}
+
+input case_postCreateNestedManyWithoutCase_categoryInput {
+    create: case_postCreateWithoutCase_categoryInput
+    connectOrCreate: case_postCreateOrConnectWithoutCase_categoryInput
+    createMany: case_postCreateManyCase_categoryInputEnvelope
+    connect: case_postWhereUniqueInput
+}
+
+input case_categoryCreateInput {
+    name: String!
+    case_post: case_postCreateNestedManyWithoutCase_categoryInput
+}
+
+input admin_userUpdateWithoutCase_postInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    avatar: NullableStringFieldUpdateOperationsInput
+    phone: NullableStringFieldUpdateOperationsInput
+    password_salt: NullableStringFieldUpdateOperationsInput
+    password: NullableStringFieldUpdateOperationsInput
+    country_code: NullableStringFieldUpdateOperationsInput
+    password_type: NullableStringFieldUpdateOperationsInput
+    user_id: NullableStringFieldUpdateOperationsInput
+    mytest: mytestUpdateManyWithoutAdmin_userNestedInput
+}
+
+input admin_userUpsertWithoutCase_postInput {
+    update: admin_userUpdateWithoutCase_postInput!
+    create: admin_userCreateWithoutCase_postInput!
+}
+
+input admin_userUpdateOneWithoutCase_postNestedInput {
+    create: admin_userCreateWithoutCase_postInput
+    connectOrCreate: admin_userCreateOrConnectWithoutCase_postInput
+    upsert: admin_userUpsertWithoutCase_postInput
+    disconnect: Boolean
+    delete: Boolean
+    connect: admin_userWhereUniqueInput
+    update: admin_userUpdateWithoutCase_postInput
+}
+
+input case_postUpdateWithoutCase_categoryInput {
+    title: StringFieldUpdateOperationsInput
+    poster: NullableStringFieldUpdateOperationsInput
+    published_at: NullableDateTimeFieldUpdateOperationsInput
+    author: StringFieldUpdateOperationsInput
+    content: NullableStringFieldUpdateOperationsInput
+    admin_user: admin_userUpdateOneWithoutCase_postNestedInput
+}
+
+input case_postUpsertWithWhereUniqueWithoutCase_categoryInput {
+    where: case_postWhereUniqueInput!
+    update: case_postUpdateWithoutCase_categoryInput!
+    create: case_postCreateWithoutCase_categoryInput!
+}
+
+input case_postUpdateWithWhereUniqueWithoutCase_categoryInput {
+    where: case_postWhereUniqueInput!
+    data: case_postUpdateWithoutCase_categoryInput!
+}
+
+input case_postUpdateManyWithWhereWithoutCase_categoryInput {
+    where: case_postScalarWhereInput!
+    data: case_postUpdateManyMutationInput!
+}
+
+input case_postUpdateManyWithoutCase_categoryNestedInput {
+    create: case_postCreateWithoutCase_categoryInput
+    connectOrCreate: case_postCreateOrConnectWithoutCase_categoryInput
+    upsert: case_postUpsertWithWhereUniqueWithoutCase_categoryInput
+    createMany: case_postCreateManyCase_categoryInputEnvelope
+    set: case_postWhereUniqueInput
+    disconnect: case_postWhereUniqueInput
+    delete: case_postWhereUniqueInput
+    connect: case_postWhereUniqueInput
+    update: case_postUpdateWithWhereUniqueWithoutCase_categoryInput
+    updateMany: case_postUpdateManyWithWhereWithoutCase_categoryInput
+    deleteMany: case_postScalarWhereInput
+}
+
+input case_categoryUpdateInput {
+    name: StringFieldUpdateOperationsInput
+    case_post: case_postUpdateManyWithoutCase_categoryNestedInput
+}
+
+input case_categoryCreateManyInput {
+    id: Int
+    name: String!
+}
+
+input case_categoryUpdateManyMutationInput {
+    name: StringFieldUpdateOperationsInput
+}
+
+input case_menuCreateInput {
+    parentId: Int
+    label: String!
+    path: String
+    icon: String
+    sort: Int!
+    level: Int!
+    name: String
+    is_bottom: Int
+    create_time: DateTime
+    perms: String
+    menu_type: String
+    api_id: String
+}
+
+input NullableIntFieldUpdateOperationsInput {
+    set: Int
+    increment: Int
+    decrement: Int
+    multiply: Int
+    divide: Int
+}
+
+input case_menuUpdateInput {
+    parentId: NullableIntFieldUpdateOperationsInput
+    label: StringFieldUpdateOperationsInput
+    path: NullableStringFieldUpdateOperationsInput
+    icon: NullableStringFieldUpdateOperationsInput
+    sort: IntFieldUpdateOperationsInput
+    level: IntFieldUpdateOperationsInput
+    name: NullableStringFieldUpdateOperationsInput
+    is_bottom: IntFieldUpdateOperationsInput
+    create_time: NullableDateTimeFieldUpdateOperationsInput
+    perms: NullableStringFieldUpdateOperationsInput
+    menu_type: NullableStringFieldUpdateOperationsInput
+    api_id: NullableStringFieldUpdateOperationsInput
+}
+
+input case_menuCreateManyInput {
+    id: Int
+    parentId: Int
+    label: String!
+    path: String
+    icon: String
+    sort: Int!
+    level: Int!
+    name: String
+    is_bottom: Int
+    create_time: DateTime
+    perms: String
+    menu_type: String
+    api_id: String
+}
+
+input case_menuUpdateManyMutationInput {
+    parentId: NullableIntFieldUpdateOperationsInput
+    label: StringFieldUpdateOperationsInput
+    path: NullableStringFieldUpdateOperationsInput
+    icon: NullableStringFieldUpdateOperationsInput
+    sort: IntFieldUpdateOperationsInput
+    level: IntFieldUpdateOperationsInput
+    name: NullableStringFieldUpdateOperationsInput
+    is_bottom: IntFieldUpdateOperationsInput
+    create_time: NullableDateTimeFieldUpdateOperationsInput
+    perms: NullableStringFieldUpdateOperationsInput
+    menu_type: NullableStringFieldUpdateOperationsInput
+    api_id: NullableStringFieldUpdateOperationsInput
+}
+
+input case_postCreateInput {
+    title: String!
+    poster: String
+    published_at: DateTime
+    author: String!
+    content: String
+    admin_user: admin_userCreateNestedOneWithoutCase_postInput
+    case_category: case_categoryCreateNestedOneWithoutCase_postInput
+}
+
+input case_postUpdateInput {
+    title: StringFieldUpdateOperationsInput
+    poster: NullableStringFieldUpdateOperationsInput
+    published_at: NullableDateTimeFieldUpdateOperationsInput
+    author: StringFieldUpdateOperationsInput
+    content: NullableStringFieldUpdateOperationsInput
+    admin_user: admin_userUpdateOneWithoutCase_postNestedInput
+    case_category: case_categoryUpdateOneWithoutCase_postNestedInput
+}
+
+input case_postCreateManyInput {
+    id: Int
+    title: String!
+    poster: String
+    published_at: DateTime
+    author: String!
+    content: String
+    cate: Int
+    auth: Int
+}
+
+input case_saletypeCreateWithoutCase_salelogInput {
+    name: String!
+    createdAt: String!
+}
+
+input case_saletypeCreateOrConnectWithoutCase_salelogInput {
+    where: case_saletypeWhereUniqueInput!
+    create: case_saletypeCreateWithoutCase_salelogInput!
+}
+
+input case_saletypeCreateNestedOneWithoutCase_salelogInput {
+    create: case_saletypeCreateWithoutCase_salelogInput
+    connectOrCreate: case_saletypeCreateOrConnectWithoutCase_salelogInput
+    connect: case_saletypeWhereUniqueInput
+}
+
+input case_salelogCreateInput {
+    shopName: String!
+    day: DateTime!
+    sales: Float!
+    case_saletype: case_saletypeCreateNestedOneWithoutCase_salelogInput!
+}
+
+input FloatFieldUpdateOperationsInput {
+    set: Float
+    increment: Float
+    decrement: Float
+    multiply: Float
+    divide: Float
+}
+
+input case_saletypeUpdateWithoutCase_salelogInput {
+    name: StringFieldUpdateOperationsInput
+    createdAt: StringFieldUpdateOperationsInput
+}
+
+input case_saletypeUpsertWithoutCase_salelogInput {
+    update: case_saletypeUpdateWithoutCase_salelogInput!
+    create: case_saletypeCreateWithoutCase_salelogInput!
+}
+
+input case_saletypeUpdateOneRequiredWithoutCase_salelogNestedInput {
+    create: case_saletypeCreateWithoutCase_salelogInput
+    connectOrCreate: case_saletypeCreateOrConnectWithoutCase_salelogInput
+    upsert: case_saletypeUpsertWithoutCase_salelogInput
+    connect: case_saletypeWhereUniqueInput
+    update: case_saletypeUpdateWithoutCase_salelogInput
+}
+
+input case_salelogUpdateInput {
+    shopName: StringFieldUpdateOperationsInput
+    day: DateTimeFieldUpdateOperationsInput
+    sales: FloatFieldUpdateOperationsInput
+    case_saletype: case_saletypeUpdateOneRequiredWithoutCase_salelogNestedInput
+}
+
+input case_salelogCreateManyInput {
+    id: Int
+    shopName: String!
+    day: DateTime!
+    sales: Float!
+    typeId: Int!
+}
+
+input case_salelogUpdateManyMutationInput {
+    shopName: StringFieldUpdateOperationsInput
+    day: DateTimeFieldUpdateOperationsInput
+    sales: FloatFieldUpdateOperationsInput
+}
+
+input case_salelogCreateWithoutCase_saletypeInput {
+    shopName: String!
+    day: DateTime!
+    sales: Float!
+}
+
+input case_salelogCreateOrConnectWithoutCase_saletypeInput {
+    where: case_salelogWhereUniqueInput!
+    create: case_salelogCreateWithoutCase_saletypeInput!
+}
+
+input case_salelogCreateManyCase_saletypeInput {
+    id: Int
+    shopName: String!
+    day: DateTime!
+    sales: Float!
+}
+
+input case_salelogCreateManyCase_saletypeInputEnvelope {
+    data: [case_salelogCreateManyCase_saletypeInput]!
+    skipDuplicates: Boolean
+}
+
+input case_salelogCreateNestedManyWithoutCase_saletypeInput {
+    create: case_salelogCreateWithoutCase_saletypeInput
+    connectOrCreate: case_salelogCreateOrConnectWithoutCase_saletypeInput
+    createMany: case_salelogCreateManyCase_saletypeInputEnvelope
+    connect: case_salelogWhereUniqueInput
+}
+
+input case_saletypeCreateInput {
+    name: String!
+    createdAt: String!
+    case_salelog: case_salelogCreateNestedManyWithoutCase_saletypeInput
+}
+
+input case_salelogUpdateWithoutCase_saletypeInput {
+    shopName: StringFieldUpdateOperationsInput
+    day: DateTimeFieldUpdateOperationsInput
+    sales: FloatFieldUpdateOperationsInput
+}
+
+input case_salelogUpsertWithWhereUniqueWithoutCase_saletypeInput {
+    where: case_salelogWhereUniqueInput!
+    update: case_salelogUpdateWithoutCase_saletypeInput!
+    create: case_salelogCreateWithoutCase_saletypeInput!
+}
+
+input case_salelogUpdateWithWhereUniqueWithoutCase_saletypeInput {
+    where: case_salelogWhereUniqueInput!
+    data: case_salelogUpdateWithoutCase_saletypeInput!
+}
+
+input case_salelogScalarWhereInput {
+    AND: case_salelogScalarWhereInput
+    OR: [case_salelogScalarWhereInput]
+    NOT: case_salelogScalarWhereInput
+    id: IntFilter
+    shopName: StringFilter
+    day: DateTimeFilter
+    sales: FloatFilter
+    typeId: IntFilter
+}
+
+input case_salelogUpdateManyWithWhereWithoutCase_saletypeInput {
+    where: case_salelogScalarWhereInput!
+    data: case_salelogUpdateManyMutationInput!
+}
+
+input case_salelogUpdateManyWithoutCase_saletypeNestedInput {
+    create: case_salelogCreateWithoutCase_saletypeInput
+    connectOrCreate: case_salelogCreateOrConnectWithoutCase_saletypeInput
+    upsert: case_salelogUpsertWithWhereUniqueWithoutCase_saletypeInput
+    createMany: case_salelogCreateManyCase_saletypeInputEnvelope
+    set: case_salelogWhereUniqueInput
+    disconnect: case_salelogWhereUniqueInput
+    delete: case_salelogWhereUniqueInput
+    connect: case_salelogWhereUniqueInput
+    update: case_salelogUpdateWithWhereUniqueWithoutCase_saletypeInput
+    updateMany: case_salelogUpdateManyWithWhereWithoutCase_saletypeInput
+    deleteMany: case_salelogScalarWhereInput
+}
+
+input case_saletypeUpdateInput {
+    name: StringFieldUpdateOperationsInput
+    createdAt: StringFieldUpdateOperationsInput
+    case_salelog: case_salelogUpdateManyWithoutCase_saletypeNestedInput
+}
+
+input case_saletypeCreateManyInput {
+    id: Int
+    name: String!
+    createdAt: String!
+}
+
+input case_saletypeUpdateManyMutationInput {
+    name: StringFieldUpdateOperationsInput
+    createdAt: StringFieldUpdateOperationsInput
+}
+
+input case_subCreateInput {
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    message: String!
+    create_role: String!
+    target_role: String!
+    type: String!
+}
+
+input case_subUpdateInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    message: StringFieldUpdateOperationsInput
+    create_role: StringFieldUpdateOperationsInput
+    target_role: StringFieldUpdateOperationsInput
+    type: StringFieldUpdateOperationsInput
+}
+
+input case_subCreateManyInput {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    message: String!
+    create_role: String!
+    target_role: String!
+    type: String!
+}
+
+input case_subUpdateManyMutationInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    message: StringFieldUpdateOperationsInput
+    create_role: StringFieldUpdateOperationsInput
+    target_role: StringFieldUpdateOperationsInput
+    type: StringFieldUpdateOperationsInput
+}
+
+input case_visitlogCreateInput {
+    ip: String!
+    ua: String!
+    visitedAt: String!
+}
+
+input case_visitlogUpdateInput {
+    ip: StringFieldUpdateOperationsInput
+    ua: StringFieldUpdateOperationsInput
+    visitedAt: StringFieldUpdateOperationsInput
+}
+
+input case_visitlogCreateManyInput {
+    id: Int
+    ip: String!
+    ua: String!
+    visitedAt: String!
+}
+
+input case_visitlogUpdateManyMutationInput {
+    ip: StringFieldUpdateOperationsInput
+    ua: StringFieldUpdateOperationsInput
+    visitedAt: StringFieldUpdateOperationsInput
+}
+
+input admin_userCreateWithoutMytestInput {
+    created_at: DateTime
+    name: String!
+    avatar: String
+    phone: String
+    password_salt: String
+    password: String
+    country_code: String
+    password_type: String
+    user_id: String
+    case_post: case_postCreateNestedManyWithoutAdmin_userInput
+}
+
+input admin_userCreateOrConnectWithoutMytestInput {
+    where: admin_userWhereUniqueInput!
+    create: admin_userCreateWithoutMytestInput!
+}
+
+input admin_userCreateNestedOneWithoutMytestInput {
+    create: admin_userCreateWithoutMytestInput
+    connectOrCreate: admin_userCreateOrConnectWithoutMytestInput
+    connect: admin_userWhereUniqueInput
+}
+
+input mytestCreateInput {
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    myAttr: String!
+    admin_user: admin_userCreateNestedOneWithoutMytestInput!
+}
+
+input admin_userUpdateWithoutMytestInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    avatar: NullableStringFieldUpdateOperationsInput
+    phone: NullableStringFieldUpdateOperationsInput
+    password_salt: NullableStringFieldUpdateOperationsInput
+    password: NullableStringFieldUpdateOperationsInput
+    country_code: NullableStringFieldUpdateOperationsInput
+    password_type: NullableStringFieldUpdateOperationsInput
+    user_id: NullableStringFieldUpdateOperationsInput
+    case_post: case_postUpdateManyWithoutAdmin_userNestedInput
+}
+
+input admin_userUpsertWithoutMytestInput {
+    update: admin_userUpdateWithoutMytestInput!
+    create: admin_userCreateWithoutMytestInput!
+}
+
+input admin_userUpdateOneRequiredWithoutMytestNestedInput {
+    create: admin_userCreateWithoutMytestInput
+    connectOrCreate: admin_userCreateOrConnectWithoutMytestInput
+    upsert: admin_userUpsertWithoutMytestInput
+    connect: admin_userWhereUniqueInput
+    update: admin_userUpdateWithoutMytestInput
+}
+
+input mytestUpdateInput {
+    createdAt: DateTimeFieldUpdateOperationsInput
+    updatedAt: DateTimeFieldUpdateOperationsInput
+    deletedAt: NullableDateTimeFieldUpdateOperationsInput
+    myAttr: StringFieldUpdateOperationsInput
+    admin_user: admin_userUpdateOneRequiredWithoutMytestNestedInput
+}
+
+input mytestCreateManyInput {
+    id: Int
+    createdAt: DateTime
+    updatedAt: DateTime!
+    deletedAt: DateTime
+    myAttr: String!
+    userid: Int!
+}
+
+type Mutation {
+    createOneadmin_apilog(data: admin_apilogCreateInput!): admin_apilog
+    upsertOneadmin_apilog(where: admin_apilogWhereUniqueInput!, create: admin_apilogCreateInput!, update: admin_apilogUpdateInput!): admin_apilog
+    createManyadmin_apilog(data: [admin_apilogCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_apilog(where: admin_apilogWhereUniqueInput!): admin_apilog
+    updateOneadmin_apilog(data: admin_apilogUpdateInput!, where: admin_apilogWhereUniqueInput!): admin_apilog
+    updateManyadmin_apilog(data: admin_apilogUpdateManyMutationInput!, where: admin_apilogWhereInput): AffectedRowsOutput
+    deleteManyadmin_apilog(where: admin_apilogWhereInput): AffectedRowsOutput
+    createOneadmin_dic(data: admin_dicCreateInput!): admin_dic
+    upsertOneadmin_dic(where: admin_dicWhereUniqueInput!, create: admin_dicCreateInput!, update: admin_dicUpdateInput!): admin_dic
+    createManyadmin_dic(data: [admin_dicCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_dic(where: admin_dicWhereUniqueInput!): admin_dic
+    updateOneadmin_dic(data: admin_dicUpdateInput!, where: admin_dicWhereUniqueInput!): admin_dic
+    updateManyadmin_dic(data: admin_dicUpdateManyMutationInput!, where: admin_dicWhereInput): AffectedRowsOutput
+    deleteManyadmin_dic(where: admin_dicWhereInput): AffectedRowsOutput
+    createOneadmin_menu_role(data: admin_menu_roleCreateInput!): admin_menu_role
+    upsertOneadmin_menu_role(where: admin_menu_roleWhereUniqueInput!, create: admin_menu_roleCreateInput!, update: admin_menu_roleUpdateInput!): admin_menu_role
+    createManyadmin_menu_role(data: [admin_menu_roleCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_menu_role(where: admin_menu_roleWhereUniqueInput!): admin_menu_role
+    updateOneadmin_menu_role(data: admin_menu_roleUpdateInput!, where: admin_menu_roleWhereUniqueInput!): admin_menu_role
+    updateManyadmin_menu_role(data: admin_menu_roleUpdateManyMutationInput!, where: admin_menu_roleWhereInput): AffectedRowsOutput
+    deleteManyadmin_menu_role(where: admin_menu_roleWhereInput): AffectedRowsOutput
+    createOneadmin_permission(data: admin_permissionCreateInput!): admin_permission
+    upsertOneadmin_permission(where: admin_permissionWhereUniqueInput!, create: admin_permissionCreateInput!, update: admin_permissionUpdateInput!): admin_permission
+    createManyadmin_permission(data: [admin_permissionCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_permission(where: admin_permissionWhereUniqueInput!): admin_permission
+    updateOneadmin_permission(data: admin_permissionUpdateInput!, where: admin_permissionWhereUniqueInput!): admin_permission
+    updateManyadmin_permission(data: admin_permissionUpdateManyMutationInput!, where: admin_permissionWhereInput): AffectedRowsOutput
+    deleteManyadmin_permission(where: admin_permissionWhereInput): AffectedRowsOutput
+    createOneadmin_provider(data: admin_providerCreateInput!): admin_provider
+    upsertOneadmin_provider(where: admin_providerWhereUniqueInput!, create: admin_providerCreateInput!, update: admin_providerUpdateInput!): admin_provider
+    createManyadmin_provider(data: [admin_providerCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_provider(where: admin_providerWhereUniqueInput!): admin_provider
+    updateOneadmin_provider(data: admin_providerUpdateInput!, where: admin_providerWhereUniqueInput!): admin_provider
+    updateManyadmin_provider(data: admin_providerUpdateManyMutationInput!, where: admin_providerWhereInput): AffectedRowsOutput
+    deleteManyadmin_provider(where: admin_providerWhereInput): AffectedRowsOutput
+    createOneadmin_role(data: admin_roleCreateInput!): admin_role
+    upsertOneadmin_role(where: admin_roleWhereUniqueInput!, create: admin_roleCreateInput!, update: admin_roleUpdateInput!): admin_role
+    createManyadmin_role(data: [admin_roleCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_role(where: admin_roleWhereUniqueInput!): admin_role
+    updateOneadmin_role(data: admin_roleUpdateInput!, where: admin_roleWhereUniqueInput!): admin_role
+    updateManyadmin_role(data: admin_roleUpdateManyMutationInput!, where: admin_roleWhereInput): AffectedRowsOutput
+    deleteManyadmin_role(where: admin_roleWhereInput): AffectedRowsOutput
+    createOneadmin_role_user(data: admin_role_userCreateInput!): admin_role_user
+    upsertOneadmin_role_user(where: admin_role_userWhereUniqueInput!, create: admin_role_userCreateInput!, update: admin_role_userUpdateInput!): admin_role_user
+    createManyadmin_role_user(data: [admin_role_userCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_role_user(where: admin_role_userWhereUniqueInput!): admin_role_user
+    updateOneadmin_role_user(data: admin_role_userUpdateInput!, where: admin_role_userWhereUniqueInput!): admin_role_user
+    updateManyadmin_role_user(data: admin_role_userUpdateManyMutationInput!, where: admin_role_userWhereInput): AffectedRowsOutput
+    deleteManyadmin_role_user(where: admin_role_userWhereInput): AffectedRowsOutput
+    createOneadmin_user(data: admin_userCreateInput!): admin_user
+    upsertOneadmin_user(where: admin_userWhereUniqueInput!, create: admin_userCreateInput!, update: admin_userUpdateInput!): admin_user
+    createManyadmin_user(data: [admin_userCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_user(where: admin_userWhereUniqueInput!): admin_user
+    updateOneadmin_user(data: admin_userUpdateInput!, where: admin_userWhereUniqueInput!): admin_user
+    updateManyadmin_user(data: admin_userUpdateManyMutationInput!, where: admin_userWhereInput): AffectedRowsOutput
+    deleteManyadmin_user(where: admin_userWhereInput): AffectedRowsOutput
+    createOneadmin_verification_record(data: admin_verification_recordCreateInput!): admin_verification_record
+    upsertOneadmin_verification_record(where: admin_verification_recordWhereUniqueInput!, create: admin_verification_recordCreateInput!, update: admin_verification_recordUpdateInput!): admin_verification_record
+    createManyadmin_verification_record(data: [admin_verification_recordCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_verification_record(where: admin_verification_recordWhereUniqueInput!): admin_verification_record
+    updateOneadmin_verification_record(data: admin_verification_recordUpdateInput!, where: admin_verification_recordWhereUniqueInput!): admin_verification_record
+    updateManyadmin_verification_record(data: admin_verification_recordUpdateManyMutationInput!, where: admin_verification_recordWhereInput): AffectedRowsOutput
+    deleteManyadmin_verification_record(where: admin_verification_recordWhereInput): AffectedRowsOutput
+    createOnecar(data: carCreateInput!): car
+    upsertOnecar(where: carWhereUniqueInput!, create: carCreateInput!, update: carUpdateInput!): car
+    createManycar(data: [carCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnecar(where: carWhereUniqueInput!): car
+    updateOnecar(data: carUpdateInput!, where: carWhereUniqueInput!): car
+    updateManycar(data: carUpdateManyMutationInput!, where: carWhereInput): AffectedRowsOutput
+    deleteManycar(where: carWhereInput): AffectedRowsOutput
+    createOnecase_category(data: case_categoryCreateInput!): case_category
+    upsertOnecase_category(where: case_categoryWhereUniqueInput!, create: case_categoryCreateInput!, update: case_categoryUpdateInput!): case_category
+    createManycase_category(data: [case_categoryCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnecase_category(where: case_categoryWhereUniqueInput!): case_category
+    updateOnecase_category(data: case_categoryUpdateInput!, where: case_categoryWhereUniqueInput!): case_category
+    updateManycase_category(data: case_categoryUpdateManyMutationInput!, where: case_categoryWhereInput): AffectedRowsOutput
+    deleteManycase_category(where: case_categoryWhereInput): AffectedRowsOutput
+    createOnecase_menu(data: case_menuCreateInput!): case_menu
+    upsertOnecase_menu(where: case_menuWhereUniqueInput!, create: case_menuCreateInput!, update: case_menuUpdateInput!): case_menu
+    createManycase_menu(data: [case_menuCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnecase_menu(where: case_menuWhereUniqueInput!): case_menu
+    updateOnecase_menu(data: case_menuUpdateInput!, where: case_menuWhereUniqueInput!): case_menu
+    updateManycase_menu(data: case_menuUpdateManyMutationInput!, where: case_menuWhereInput): AffectedRowsOutput
+    deleteManycase_menu(where: case_menuWhereInput): AffectedRowsOutput
+    createOnecase_post(data: case_postCreateInput!): case_post
+    upsertOnecase_post(where: case_postWhereUniqueInput!, create: case_postCreateInput!, update: case_postUpdateInput!): case_post
+    createManycase_post(data: [case_postCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnecase_post(where: case_postWhereUniqueInput!): case_post
+    updateOnecase_post(data: case_postUpdateInput!, where: case_postWhereUniqueInput!): case_post
+    updateManycase_post(data: case_postUpdateManyMutationInput!, where: case_postWhereInput): AffectedRowsOutput
+    deleteManycase_post(where: case_postWhereInput): AffectedRowsOutput
+    createOnecase_salelog(data: case_salelogCreateInput!): case_salelog
+    upsertOnecase_salelog(where: case_salelogWhereUniqueInput!, create: case_salelogCreateInput!, update: case_salelogUpdateInput!): case_salelog
+    createManycase_salelog(data: [case_salelogCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnecase_salelog(where: case_salelogWhereUniqueInput!): case_salelog
+    updateOnecase_salelog(data: case_salelogUpdateInput!, where: case_salelogWhereUniqueInput!): case_salelog
+    updateManycase_salelog(data: case_salelogUpdateManyMutationInput!, where: case_salelogWhereInput): AffectedRowsOutput
+    deleteManycase_salelog(where: case_salelogWhereInput): AffectedRowsOutput
+    createOnecase_saletype(data: case_saletypeCreateInput!): case_saletype
+    upsertOnecase_saletype(where: case_saletypeWhereUniqueInput!, create: case_saletypeCreateInput!, update: case_saletypeUpdateInput!): case_saletype
+    createManycase_saletype(data: [case_saletypeCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnecase_saletype(where: case_saletypeWhereUniqueInput!): case_saletype
+    updateOnecase_saletype(data: case_saletypeUpdateInput!, where: case_saletypeWhereUniqueInput!): case_saletype
+    updateManycase_saletype(data: case_saletypeUpdateManyMutationInput!, where: case_saletypeWhereInput): AffectedRowsOutput
+    deleteManycase_saletype(where: case_saletypeWhereInput): AffectedRowsOutput
+    createOnecase_sub(data: case_subCreateInput!): case_sub
+    upsertOnecase_sub(where: case_subWhereUniqueInput!, create: case_subCreateInput!, update: case_subUpdateInput!): case_sub
+    createManycase_sub(data: [case_subCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnecase_sub(where: case_subWhereUniqueInput!): case_sub
+    updateOnecase_sub(data: case_subUpdateInput!, where: case_subWhereUniqueInput!): case_sub
+    updateManycase_sub(data: case_subUpdateManyMutationInput!, where: case_subWhereInput): AffectedRowsOutput
+    deleteManycase_sub(where: case_subWhereInput): AffectedRowsOutput
+    createOnecase_visitlog(data: case_visitlogCreateInput!): case_visitlog
+    upsertOnecase_visitlog(where: case_visitlogWhereUniqueInput!, create: case_visitlogCreateInput!, update: case_visitlogUpdateInput!): case_visitlog
+    createManycase_visitlog(data: [case_visitlogCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnecase_visitlog(where: case_visitlogWhereUniqueInput!): case_visitlog
+    updateOnecase_visitlog(data: case_visitlogUpdateInput!, where: case_visitlogWhereUniqueInput!): case_visitlog
+    updateManycase_visitlog(data: case_visitlogUpdateManyMutationInput!, where: case_visitlogWhereInput): AffectedRowsOutput
+    deleteManycase_visitlog(where: case_visitlogWhereInput): AffectedRowsOutput
+    createOnemytest(data: mytestCreateInput!): mytest
+    upsertOnemytest(where: mytestWhereUniqueInput!, create: mytestCreateInput!, update: mytestUpdateInput!): mytest
+    createManymytest(data: [mytestCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOnemytest(where: mytestWhereUniqueInput!): mytest
+    updateOnemytest(data: mytestUpdateInput!, where: mytestWhereUniqueInput!): mytest
+    updateManymytest(data: mytestUpdateManyMutationInput!, where: mytestWhereInput): AffectedRowsOutput
+    deleteManymytest(where: mytestWhereInput): AffectedRowsOutput
+    executeRaw(query: String!, parameters: Json): Json
+    queryRaw(query: String!, parameters: Json): Json
+}
+
+scalar DateTime
+
+scalar Json
+
+scalar UUID
+
+scalar BigInt
+
+scalar Decimal
+
+scalar Bytes

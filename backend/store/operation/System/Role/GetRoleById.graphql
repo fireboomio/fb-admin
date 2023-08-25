@@ -1,0 +1,5 @@
+query MyQuery( $id: Int!) {
+  data:main_findUniqueadmin_role(where: {id: $id}) {
+    code
+  }
+}

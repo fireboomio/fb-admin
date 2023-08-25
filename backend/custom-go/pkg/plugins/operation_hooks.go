@@ -151,6 +151,10 @@ func buildOperationHook(operationName, hookName string, hookFunction base.Operat
 		in.Hook = hookName
 		in.SetClientRequestHeaders = headersToObject(c.Request().Header)
 		out, err := hookFunction(hookRequest, &in)
+		if err != nil {
+			return err
+		}
+
 		if out != nil {
 			action(&in, out)
 		}

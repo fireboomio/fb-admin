@@ -15,6 +15,10 @@ const (
 	queryRawPath = generated.Statistics__QueryRaw
 )
 
+func init() {
+	plugins.RegisterGraphql(&Statistics_schema)
+}
+
 var Statistics_schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 	Query: graphql.NewObject(graphql.ObjectConfig{
 		Name: "query",

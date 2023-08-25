@@ -9,6 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
@@ -26,6 +27,11 @@ func Execute() {
 	}
 }
 
+var (
+	address      string
+	healthReport *base.HealthReport
+)
+
 func configureWunderGraphServer() *echo.Echo {
 	// 初始化 Echo 实例
 	e := echo.New()
@@ -42,7 +48,6 @@ func configureWunderGraphServer() *echo.Echo {
 	}
 	e.Use(middleware.CORSWithConfig(corsCfg))
 
-	plugins.RegisterProxyHooks(e)
 	plugins.RegisterGlobalHooks(e, types.WdgHooksAndServerConfig.Hooks.Global)
 	plugins.RegisterAuthHooks(e, types.WdgHooksAndServerConfig.Hooks.Authentication)
 	plugins.RegisterUploadsHooks(e, types.WdgHooksAndServerConfig.Hooks.Uploads)
@@ -108,13 +113,23 @@ func configureWunderGraphServer() *echo.Echo {
 		}
 	})
 
-	for _, gqlServer := range types.WdgHooksAndServerConfig.GraphqlServers {
-		plugins.RegisterGraphql(e, gqlServer)
+	for _, routerFunc := range base.GetEchoRouterFuncArr() {
+		routerFunc(e)
 	}
 
+	e.Server.BaseContext = func(_ net.Listener) context.Context {
+		healthReport = &base.HealthReport{Time: time.Now()}
+		for _, healthFunc := range base.GetHealthFuncArr() {
+			go healthFunc(e, address, healthReport)
+		}
+		return context.Background()
+	}
 	// 健康检查
 	e.GET("/health", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, map[string]string{"status": "ok"})
+		return c.JSON(http.StatusOK, map[string]interface{}{
+			"status": "ok",
+			"report": healthReport,
+		})
 	})
 
 	return e
@@ -127,7 +142,7 @@ func startServer() error {
 	// 启动服务器
 	go func() {
 		serverListen := types.WdgGraphConfig.Api.ServerOptions.Listen
-		address := utils.GetConfigurationVal(serverListen.Host) + ":" + utils.GetConfigurationVal(serverListen.Port)
+		address = utils.GetConfigurationVal(serverListen.Host) + ":" + utils.GetConfigurationVal(serverListen.Port)
 		if err := wdgServer.Start(address); err != nil {
 			panic(err)
 		}

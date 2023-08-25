@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/labstack/echo/v4"
 	"net/http"
+	"time"
 )
 
 type (
@@ -77,14 +78,44 @@ type WsTransportHookRequest = BaseRequestContext
 
 type UploadHookRequest = BaseRequestContext
 
-type registeredHook func(echo.Logger)
+type (
+	registeredHook func(echo.Logger)
+	healthFunc     func(*echo.Echo, string, *HealthReport)
+	HealthReport   struct {
+		Customizes []string  `json:"customizes"`
+		Functions  []string  `json:"functions"`
+		Proxys     []string  `json:"proxys"`
+		Time       time.Time `json:"time"`
+	}
+	routerFunc func(e *echo.Echo)
+)
 
-var registeredHookArr []registeredHook
+var (
+	registeredHookArr []registeredHook
+	healthFuncArr     []healthFunc
+	routerFuncArr     []routerFunc
+)
 
 func GetRegisteredHookArr() []registeredHook {
 	return registeredHookArr
 }
 
+func GetHealthFuncArr() []healthFunc {
+	return healthFuncArr
+}
+
+func GetEchoRouterFuncArr() []routerFunc {
+	return routerFuncArr
+}
+
 func AddRegisteredHook(hook registeredHook) {
 	registeredHookArr = append(registeredHookArr, hook)
+}
+
+func AddHealthFunc(f healthFunc) {
+	healthFuncArr = append(healthFuncArr, f)
+}
+
+func AddEchoRouterFunc(f routerFunc) {
+	routerFuncArr = append(routerFuncArr, f)
 }

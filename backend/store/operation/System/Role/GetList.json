@@ -1,0 +1,26 @@
+{
+    "enabled": true,
+    "title": "",
+    "remark": "",
+    "createTime": "2023-04-04 02:37:20Z",
+    "updateTime": "2023-08-15 02:58:04Z",
+    "deleteTime": "",
+    "path": "System/Role/GetList",
+    "engine": 0,
+    "operationType": 0,
+    "hooksConfiguration": null,
+    "configCustomized": false,
+    "cacheConfig": {
+        "enabled": false,
+        "maxAge": 600,
+        "public": false,
+        "staleWhileRevalidate": 30
+    },
+    "liveQueryConfig": {
+        "enabled": false,
+        "pollingIntervalSeconds": 0
+    },
+    "authenticationConfig": {
+        "authRequired": false
+    }
+}

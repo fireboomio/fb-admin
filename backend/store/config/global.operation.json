@@ -1,7 +1,32 @@
 {
-	"hooksConfiguration": null,
-	"cacheConfig": null,
-	"authenticationConfig": null,
-	"liveQueryConfig": null,
-	"apiAuthenticationHooks": null
+    "cacheConfig": {
+        "enabled": false,
+        "maxAge": 600,
+        "public": false,
+        "staleWhileRevalidate": 30
+    },
+    "liveQueryConfig": {
+        "enabled": false,
+        "pollingIntervalSeconds": 3
+    },
+    "authenticationConfigs": {
+        "0": {
+            "authRequired": false
+        },
+        "1": {
+            "authRequired": false
+        },
+        "2": {
+            "authRequired": false
+        }
+    },
+    "apiAuthenticationHooks": {
+        "mutatingPostAuthentication": true,
+        "postAuthentication": false
+    },
+    "globalHttpTransportHooks": {
+        "beforeRequest": false,
+        "onRequest": false,
+        "onResponse": false
+    }
 }

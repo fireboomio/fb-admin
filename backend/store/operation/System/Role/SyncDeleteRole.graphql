@@ -1,0 +1,3 @@
+mutation MyQuery($dataNames: [String]!) {
+  system_batchDeleteRoles_delete(dataNames: $dataNames)
+}

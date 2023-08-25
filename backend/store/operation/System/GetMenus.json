@@ -1,0 +1,37 @@
+{
+    "enabled": true,
+    "title": "",
+    "remark": "",
+    "createTime": "2023-07-04 05:02:57Z",
+    "updateTime": "2023-08-15 03:22:51Z",
+    "deleteTime": "",
+    "path": "System/GetMenus",
+    "engine": 0,
+    "operationType": 0,
+    "hooksConfiguration": {
+        "preResolve": false,
+        "postResolve": false,
+        "mutatingPreResolve": false,
+        "mutatingPostResolve": false,
+        "customResolve": false,
+        "mockResolve": null,
+        "httpTransportBeforeRequest": false,
+        "httpTransportOnRequest": false,
+        "httpTransportOnResponse": false,
+        "onConnectionInit": false
+    },
+    "configCustomized": false,
+    "cacheConfig": {
+        "enabled": false,
+        "maxAge": 600,
+        "public": false,
+        "staleWhileRevalidate": 30
+    },
+    "liveQueryConfig": {
+        "enabled": false,
+        "pollingIntervalSeconds": 0
+    },
+    "authenticationConfig": {
+        "authRequired": false
+    }
+}

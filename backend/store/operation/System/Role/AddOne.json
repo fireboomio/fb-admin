@@ -1,0 +1,36 @@
+{
+	"enabled": true,
+	"title": "",
+	"remark": "",
+	"createTime": "2023-04-04 01:18:27Z",
+	"updateTime": "2023-08-22T09:24:16+08:00",
+	"deleteTime": "",
+	"path": "System/Role/AddOne",
+	"engine": 0,
+	"hooksConfiguration": {
+		"preResolve": false,
+		"postResolve": false,
+		"mutatingPreResolve": false,
+		"mutatingPostResolve": true,
+		"customResolve": false,
+		"mockResolve": null,
+		"httpTransportBeforeRequest": false,
+		"httpTransportOnRequest": false,
+		"httpTransportOnResponse": false,
+		"onConnectionInit": false
+	},
+	"configCustomized": false,
+	"cacheConfig": {
+		"enabled": false,
+		"maxAge": 600,
+		"public": false,
+		"staleWhileRevalidate": 30
+	},
+	"liveQueryConfig": {
+		"enabled": false,
+		"pollingIntervalSeconds": 0
+	},
+	"authenticationConfig": {
+		"authRequired": false
+	}
+}

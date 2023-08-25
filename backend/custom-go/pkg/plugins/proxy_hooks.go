@@ -2,174 +2,51 @@ package plugins
 
 import (
 	"custom-go/pkg/base"
+	"custom-go/pkg/consts"
+	"custom-go/pkg/utils"
+	"custom-go/pkg/wgpb"
+	"encoding/json"
 	"github.com/labstack/echo/v4"
-	"net/http"
+	"os"
 	"path"
 	"path/filepath"
-	"runtime"
-	"strings"
 )
 
-type (
-	httpProxyHookFunction func(*base.HttpTransportHookRequest, *HttpTransportBody) (*base.ClientResponse, error)
-	httpProxyHook         struct {
-		rbacEnforcer *RBACEnforcer
-		hookFunction httpProxyHookFunction
-	}
-)
+type httpProxyHookFunction func(*base.HttpTransportHookRequest, *HttpTransportBody) (*base.ClientResponse, error)
 
-var httpProxyHookMap map[string]*httpProxyHook
+func RegisterProxyHook(hookFunc httpProxyHookFunction, conf ...*HookConfig) {
 
-func init() {
-	httpProxyHookMap = make(map[string]*httpProxyHook, 0)
-}
+	callerName := utils.GetCallerName(consts.PROXY)
+	apiPrefixPath := "/" + consts.PROXY
+	apiPath := path.Join(apiPrefixPath, callerName)
 
-func AddProxyHook(hookFunc httpProxyHookFunction, rbacEnforcer *RBACEnforcer) {
-	_, file, _, ok := runtime.Caller(1)
-	if !ok {
-		return
-	}
+	base.AddEchoRouterFunc(func(e *echo.Echo) {
+		e.Logger.Debugf(`Registered hookFunction [%s]`, apiPath)
+		e.POST(apiPath, BuildHookFunc(hookFunc))
+	})
 
-	file = filepath.ToSlash(file)
-	_, after, found := strings.Cut(file, "/proxys/")
-	if !found {
-		return
-	}
-
-	if nil == rbacEnforcer {
-		rbacEnforcer = &RBACEnforcer{}
-	}
-
-	after = strings.TrimSuffix(after, ".go")
-	httpProxyHookMap[after] = &httpProxyHook{
-		rbacEnforcer: rbacEnforcer,
-		hookFunction: hookFunc,
-	}
-}
-
-type RBACEnforcer struct {
-	AuthRequired bool
-
-	RequireMatchAll []string
-	RequireMatchAny []string
-	DenyMatchAll    []string
-	DenyMatchAny    []string
-}
-
-func (e *RBACEnforcer) Enforce(r *base.HttpTransportHookRequest) (proceed bool) {
-	if !e.AuthRequired {
-		return true
-	}
-	user := r.User
-	if user == nil {
-		return false
-	}
-	if ok := e.enforceRequireMatchAll(user); !ok {
-		return false
-	}
-	if ok := e.enforceRequireMatchAny(user); !ok {
-		return false
-	}
-	if ok := e.enforceDenyMatchAll(user); !ok {
-		return false
-	}
-	if ok := e.enforceDenyMatchAny(user); !ok {
-		return false
-	}
-	return true
-}
-
-func (e *RBACEnforcer) enforceRequireMatchAll(user *base.WunderGraphUser[string]) bool {
-	if len(e.RequireMatchAll) == 0 {
-		return true
-	}
-	for _, match := range e.RequireMatchAll {
-		if contains := e.containsOne(user.Roles, match); !contains {
-			return false
+	base.AddHealthFunc(func(e *echo.Echo, s string, report *base.HealthReport) {
+		// 生成 operation 声明文件  proxy/xxx.json
+		operation := &wgpb.Operation{
+			Name: callerName,
+			Path: apiPath,
 		}
-	}
-	return true
-}
-
-func (e *RBACEnforcer) enforceRequireMatchAny(user *base.WunderGraphUser[string]) bool {
-	if len(e.RequireMatchAny) == 0 {
-		return true
-	}
-	for _, match := range e.RequireMatchAny {
-		if contains := e.containsOne(user.Roles, match); contains {
-			return true
-		}
-	}
-	return false
-}
-
-func (e *RBACEnforcer) enforceDenyMatchAll(user *base.WunderGraphUser[string]) bool {
-	if len(e.DenyMatchAll) == 0 {
-		return true
-	}
-	for _, match := range e.DenyMatchAll {
-		if contains := e.containsOne(user.Roles, match); !contains {
-			return true
-		}
-	}
-	return false
-}
-
-func (e *RBACEnforcer) enforceDenyMatchAny(user *base.WunderGraphUser[string]) bool {
-	if len(e.DenyMatchAny) == 0 {
-		return true
-	}
-	for _, match := range e.DenyMatchAny {
-		if contains := e.containsOne(user.Roles, match); contains {
-			return false
-		}
-	}
-	return true
-}
-
-func (e *RBACEnforcer) containsOne(slice []string, one string) bool {
-	for i := range slice {
-		if slice[i] == one {
-			return true
-		}
-	}
-	return false
-}
-
-func RegisterProxyHooks(e *echo.Echo) {
-	apiPrefixPath := "/proxy"
-	for name, proxyHook := range httpProxyHookMap {
-		apiPath := path.Join(apiPrefixPath, name)
-		e.Logger.Debugf(`Registered proxyHook [%s]`, apiPath)
-		e.POST(apiPath, buildProxyHook(proxyHook))
-	}
-}
-
-func buildProxyHook(proxyHook *httpProxyHook) echo.HandlerFunc {
-	return func(c echo.Context) (err error) {
-		brc := c.(*base.HttpTransportHookRequest)
-		if proceed := proxyHook.rbacEnforcer.Enforce(brc); !proceed {
-			return echo.NewHTTPError(http.StatusUnauthorized, "unauthorized")
+		if len(conf) > 0 && conf[0] != nil {
+			operation.AuthenticationConfig = &wgpb.OperationAuthenticationConfig{AuthRequired: conf[0].AuthRequired}
+			operation.AuthorizationConfig = conf[0].AuthorizationConfig
 		}
 
-		var reqBody HttpTransportBody
-		err = c.Bind(&reqBody)
+		operationBytes, err := json.Marshal(operation)
 		if err != nil {
-			return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+			e.Logger.Errorf("json marshal failed, err: %v", err.Error())
+			return
+		}
+		err = os.WriteFile(filepath.Join(consts.PROXY, callerName)+consts.JSON_EXT, operationBytes, 0644)
+		if err != nil {
+			e.Logger.Errorf("write file failed, err: %v", err.Error())
+			return
 		}
 
-		newResp, err := proxyHook.hookFunction(brc, &reqBody)
-		if err != nil {
-			return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-		}
-		resp := map[string]interface{}{
-			"op":       reqBody.Name,
-			"hook":     "proxyHook",
-			"response": map[string]interface{}{},
-		}
-		if newResp != nil {
-			resp["response"].(map[string]interface{})["response"] = newResp
-		}
-		return c.JSON(http.StatusOK, resp)
-	}
+		report.Proxys = append(report.Proxys, callerName)
+	})
 }

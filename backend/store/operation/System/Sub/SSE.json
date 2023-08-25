@@ -1,0 +1,26 @@
+{
+    "enabled": true,
+    "title": "",
+    "remark": "",
+    "createTime": "2023-07-25 08:59:35Z",
+    "updateTime": "2023-08-15 09:53:38Z",
+    "deleteTime": "",
+    "path": "System/Sub/SSE",
+    "engine": 0,
+    "operationType": 0,
+    "hooksConfiguration": null,
+    "configCustomized": false,
+    "cacheConfig": {
+        "enabled": false,
+        "maxAge": 600,
+        "public": false,
+        "staleWhileRevalidate": 30
+    },
+    "liveQueryConfig": {
+        "enabled": true,
+        "pollingIntervalSeconds": 60
+    },
+    "authenticationConfig": {
+        "authRequired": false
+    }
+}

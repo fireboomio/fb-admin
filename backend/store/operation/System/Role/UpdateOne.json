@@ -1,0 +1,26 @@
+{
+    "enabled": true,
+    "title": "",
+    "remark": "",
+    "createTime": "2023-04-04 01:19:50Z",
+    "updateTime": "2023-08-15 02:58:37Z",
+    "deleteTime": "",
+    "path": "System/Role/UpdateOne",
+    "engine": 0,
+    "operationType": 1,
+    "hooksConfiguration": null,
+    "configCustomized": false,
+    "cacheConfig": {
+        "enabled": false,
+        "maxAge": 600,
+        "public": false,
+        "staleWhileRevalidate": 30
+    },
+    "liveQueryConfig": {
+        "enabled": false,
+        "pollingIntervalSeconds": 0
+    },
+    "authenticationConfig": {
+        "authRequired": false
+    }
+}

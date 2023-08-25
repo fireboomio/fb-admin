@@ -3,6 +3,7 @@ package plugins
 import (
 	"custom-go/pkg/base"
 	"github.com/labstack/echo/v4"
+	"github.com/spf13/cast"
 	"net/http"
 )
 
@@ -138,7 +139,7 @@ func RegisterGlobalHooks(e *echo.Echo, globalHooks GlobalConfiguration) {
 	// handle not found routes
 	e.HTTPErrorHandler = func(err error, c echo.Context) {
 		if he, ok := err.(*echo.HTTPError); ok {
-			_ = c.JSON(he.Code, map[string]string{"error": he.Message.(string)})
+			_ = c.JSON(he.Code, map[string]string{"error": cast.ToString(he.Message)})
 		} else {
 			_ = c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		}

@@ -3,15 +3,22 @@ package plugins
 import (
 	"bytes"
 	"custom-go/pkg/base"
+	"custom-go/pkg/consts"
+	"custom-go/pkg/embeds"
 	"custom-go/pkg/utils"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/graphql-go/graphql/language/ast"
+	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 	"io"
 	"math"
 	"net/http"
 	"os"
+	"path/filepath"
+	"runtime"
+	"strings"
 
 	"github.com/buger/jsonparser"
 	graphql "github.com/graphql-go/graphql"
@@ -42,6 +49,11 @@ var (
 	eventTypeNext     = []byte("next")
 )
 
+const (
+	graphqlResultErrorsPath = "errors.0.message"
+	graphqlResultDataPath   = "data.__schema"
+)
+
 type GraphQLServerConfig struct {
 	ServerName            string
 	Schema                graphql.Schema
@@ -60,61 +72,152 @@ type graphqlBody struct {
 	Extensions    map[string]any         `json:"extensions"`
 }
 
-var htmlBytesMap = make(map[string][]byte, 0)
-
-func RegisterGraphql(e *echo.Echo, gqlServer GraphQLServerConfig) {
-	if !gqlServer.EnableGraphQLEndpoint {
-		return
+func GetCallerName(prefix string) string {
+	if !strings.HasSuffix(prefix, "/") {
+		prefix += "/"
 	}
 
-	routeUrl := fmt.Sprintf(`/gqls/%s/graphql`, gqlServer.ServerName)
-	e.Logger.Debugf(`Registered gqlServer (%s)`, routeUrl)
-	e.GET(routeUrl, echo.WrapHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var htmlBytes []byte
-		if val, ok := htmlBytesMap[routeUrl]; ok {
-			htmlBytes = val
-		} else {
-			filePath := "helix.html"
-			fileBytes, err := os.ReadFile(filePath)
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-				return
+	_, callerFilename, _, _ := runtime.Caller(2)
+	_, callerName, ok := strings.Cut(callerFilename, prefix)
+	if !ok {
+		return ""
+	}
+
+	return strings.TrimSuffix(callerName, filepath.Ext(callerName))
+}
+
+var htmlBytesMap = make(map[string][]byte, 0)
+
+func RegisterGraphql(schema *graphql.Schema) {
+	// eg. customize/test
+	callerName := GetCallerName(consts.CUSTOMIZE)
+	routeUrl := fmt.Sprintf(`/gqls/%s/graphql`, callerName)
+	base.AddEchoRouterFunc(func(e *echo.Echo) {
+		e.Logger.Debugf(`Registered gqlServer (%s)`, routeUrl)
+		e.GET(routeUrl, echo.WrapHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			var htmlBytes []byte
+			if val, ok := htmlBytesMap[routeUrl]; ok {
+				htmlBytes = val
+			} else {
+				filePath := "helix.html"
+				fileBytes, err := os.ReadFile(filePath)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
+				htmlBytes = bytes.ReplaceAll(fileBytes, []byte("${graphqlEndpoint}"), []byte(routeUrl))
+				htmlBytesMap[routeUrl] = htmlBytes
 			}
-			htmlBytes = bytes.ReplaceAll(fileBytes, []byte("${graphqlEndpoint}"), []byte(routeUrl))
-			htmlBytesMap[routeUrl] = htmlBytes
-		}
-		_, _ = w.Write(htmlBytes)
-	})))
+			_, _ = w.Write(htmlBytes)
+		})))
 
-	e.POST(routeUrl, func(c echo.Context) error {
-		var body graphqlBody
-		err := utils.CopyAndBindRequestBody(c.Request(), &body)
-		if err != nil {
-			return buildEchoGraphqlError(c, err)
-		}
+		e.POST(routeUrl, func(c echo.Context) error {
+			var body graphqlBody
+			err := utils.CopyAndBindRequestBody(c.Request(), &body)
+			if err != nil {
+				return buildEchoGraphqlError(c, err)
+			}
 
-		brc := c.(*base.BaseRequestContext)
-		grc := &base.GraphqlRequestContext{
-			Request:        c.Request(),
-			Context:        c.Request().Context(),
-			User:           brc.User,
-			InternalClient: brc.InternalClient,
-			Logger:         brc.Logger(),
-		}
-		param := graphql.Params{
-			Schema:         gqlServer.Schema,
-			OperationName:  body.OperationName,
-			RequestString:  body.Query,
-			VariableValues: body.Variables,
-			Context:        grc,
-		}
-		result := graphql.Do(param)
-		if grc.Result != nil {
-			return handleSSE(brc, grc.Result)
-		}
+			brc := c.(*base.BaseRequestContext)
+			grc := &base.GraphqlRequestContext{
+				Request:        c.Request(),
+				Context:        c.Request().Context(),
+				User:           brc.User,
+				InternalClient: brc.InternalClient,
+				Logger:         brc.Logger(),
+			}
+			param := graphql.Params{
+				Schema:         *schema,
+				OperationName:  body.OperationName,
+				RequestString:  body.Query,
+				VariableValues: body.Variables,
+				Context:        grc,
+			}
 
-		return c.JSON(http.StatusOK, result)
+			if strings.HasPrefix(body.Query, "subscription") {
+				result := graphql.Subscribe(param)
+				return handleSSEFromChan(brc, result)
+			}
+
+			result := graphql.Do(param)
+			if len(result.Errors) > 0 {
+				return echo.NewHTTPError(http.StatusInternalServerError, fmt.Errorf("调用graphql异常！"))
+			}
+
+			return c.JSON(http.StatusOK, result)
+		})
 	})
+
+	// 注册 healthFunc
+	base.AddHealthFunc(func(e *echo.Echo, address string, report *base.HealthReport) {
+		// 内省自身并输出到文件
+		introspectBytes, err := embeds.EmbedIntrospect.ReadFile(consts.INTROSPECT_FILE)
+		if err != nil {
+			e.Logger.Errorf("get embed introspect.json failed, err: %v", err.Error())
+			return
+		}
+		headers := map[string]string{echo.HeaderContentType: echo.MIMEApplicationJSON}
+		respBody, err := utils.HttpPost(consts.HTTP_PREFIX+address+routeUrl, introspectBytes, headers, 5)
+		if err != nil {
+			e.Logger.Errorf("post req failed, uri: %s, err: %v", routeUrl, err.Error())
+			return
+		}
+
+		if errorMsg := gjson.GetBytes(respBody, graphqlResultErrorsPath); errorMsg.Exists() {
+			e.Logger.Error(err.Error())
+			return
+		}
+		res := gjson.GetBytes(respBody, graphqlResultDataPath).String()
+
+		// 写入文件--eg. custom-go/customize/test.go  --> custom-go/customize/test.json
+		err = os.WriteFile(filepath.Join(consts.CUSTOMIZE, callerName)+consts.JSON_EXT, []byte(res), 0644)
+		if err != nil {
+			e.Logger.Errorf("write file failed, err: %v", err.Error())
+			return
+		}
+
+		report.Customizes = append(report.Customizes, callerName)
+	})
+}
+
+func handleSSEFromChan(c *base.BaseRequestContext, resultChan chan *graphql.Result) error {
+	flusher, ok := c.Response().Writer.(http.Flusher)
+	if !ok {
+		return fmt.Errorf("streaming unsupported")
+	}
+
+	c.Response().Header().Set("Content-Type", "text/event-stream")
+	c.Response().Header().Set("Cache-Control", "no-cache")
+	c.Response().Header().Set("Connection", "keep-alive")
+	c.Response().WriteHeader(http.StatusOK)
+	for {
+		select {
+		case result, isOpen := <-resultChan:
+			if !isOpen {
+				return nil
+			}
+			_, done := result.Extensions["DONE"]
+			if done {
+				return nil
+			}
+
+			if len(result.Errors) > 0 {
+				return result.Errors[0]
+			}
+
+			bytes, err := json.Marshal(result.Data)
+			if err != nil {
+				fmt.Println("JSON 序列化失败：", err)
+				close(resultChan)
+				return err
+			}
+			buf := pool.BytesBuffer.Get()
+			buf.Reset()
+			_ = writeGraphqlResponse(bytes, nil, buf)
+			_, _ = fmt.Fprintf(c.Response().Writer, "data: %s\n\n", buf.String())
+			flusher.Flush()
+		}
+	}
 }
 
 func handleSSE(c *base.BaseRequestContext, sseChan *base.ResultChan) error {
@@ -300,6 +403,110 @@ func HandleSSEReader(eventStream io.ReadCloser, grc *base.GraphqlRequestContext,
 			}
 		}
 	}()
+}
+
+func HandleSSEReader2(eventStream io.ReadCloser, handle func([]byte) ([]byte, bool)) chan graphql.Result {
+	sseChan := make(chan graphql.Result)
+
+	go func() {
+		defer eventStream.Close()
+		reader := sse.NewEventStreamReader(eventStream, math.MaxInt)
+		for {
+			msg, err := reader.ReadEvent()
+			if err != nil {
+				if err == io.EOF {
+					return
+				}
+
+				sseChan <- graphql.Result{Errors: []gqlerrors.FormattedError{{Message: internalError}}}
+				return
+			}
+
+			if len(msg) == 0 {
+				continue
+			}
+
+			// normalize the crlf to lf to make it easier to split the lines.
+			// split the line by "\n" or "\r", per the spec.
+			lines := bytes.FieldsFunc(msg, func(r rune) bool { return r == '\n' || r == '\r' })
+			for _, line := range lines {
+				switch {
+				case bytes.HasPrefix(line, headerData):
+					data := trim(line[len(headerData):])
+
+					if len(data) == 0 {
+						continue
+					}
+
+					if nil != handle {
+						afterData, done := handle(data)
+						if done {
+							return
+						}
+						if len(afterData) == 0 {
+							continue
+						}
+						data = afterData
+					}
+					sseChan <- graphql.Result{Data: data}
+				case bytes.HasPrefix(line, headerEvent):
+					event := trim(line[len(headerEvent):])
+
+					switch {
+					case bytes.Equal(event, eventTypeComplete):
+						return
+					case bytes.Equal(event, eventTypeNext):
+						continue
+					}
+				case bytes.HasPrefix(msg, []byte(":")):
+					// according to the spec, we ignore messages starting with a colon
+					continue
+				default:
+					// ideally we should not get here, or if we do, we should ignore it
+					// but some providers send a json object with the error messages, without the event header
+
+					// check for errors which came without event header
+					data := trim(line)
+
+					val, valueType, _, err := jsonparser.Get(data, "errors")
+					switch {
+					case errors.Is(err, jsonparser.KeyPathNotFoundError):
+						continue
+					case errors.Is(err, jsonparser.MalformedJsonError):
+						// ignore garbage
+						continue
+					case err == nil:
+						if valueType == jsonparser.Array {
+							response := []byte(`{}`)
+							response, err = jsonparser.Set(response, val, "errors")
+							if err != nil {
+								sseChan <- graphql.Result{Errors: []gqlerrors.FormattedError{{Message: err.Error()}}}
+								return
+							}
+
+							sseChan <- graphql.Result{Errors: []gqlerrors.FormattedError{{Message: string(response)}}}
+							return
+						} else if valueType == jsonparser.Object {
+							response := []byte(`{"errors":[]}`)
+							response, err = jsonparser.Set(response, val, "errors", "[0]")
+							if err != nil {
+								sseChan <- graphql.Result{Errors: []gqlerrors.FormattedError{{Message: err.Error()}}}
+								return
+							}
+
+							sseChan <- graphql.Result{Errors: []gqlerrors.FormattedError{{Message: string(response)}}}
+							return
+						}
+					default:
+						sseChan <- graphql.Result{Errors: []gqlerrors.FormattedError{{Message: internalError}}}
+						return
+					}
+				}
+			}
+		}
+	}()
+
+	return sseChan
 }
 
 func trim(data []byte) []byte {

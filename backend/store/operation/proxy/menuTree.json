@@ -1,0 +1,15 @@
+{
+	"enabled": false,
+	"title": "",
+	"remark": "",
+	"createTime": "2023-08-22T16:46:12+08:00",
+	"updateTime": "2023-08-25T10:17:00.181756+08:00",
+	"deleteTime": "",
+	"path": "proxy/menuTree",
+	"engine": 2,
+	"hooksConfiguration": null,
+	"configCustomized": false,
+	"cacheConfig": null,
+	"liveQueryConfig": null,
+	"authenticationConfig": null
+}

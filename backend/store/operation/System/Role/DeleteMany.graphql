@@ -1,0 +1,11 @@
+mutation MyQuery($ids: [Int]) {
+  data: main_deleteManyadmin_role(where: {id: {in: $ids}}) {
+    count
+  }
+  data1: main_deleteManyadmin_role_user(where: {role_id: {in: $ids}}) {
+    count
+  }
+  data2: main_deleteManyadmin_menu_role(where: {role_id: {in: $ids}}) {
+    count
+  }
+}

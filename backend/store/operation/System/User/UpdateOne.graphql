@@ -1,0 +1,14 @@
+mutation MyQuery($avatar: String = "", $id: Int = 10, $password: String!, $phone: String = "", $name: String = "", $userId: String!) {
+  casdoor:casdoor_updateUser_post(
+    updateUser_post_input_object: {password: $password, name: $name, phone: $phone, userId: $userId}
+  ) {
+    msg
+    status
+  }
+  data:main_updateOneadmin_user(
+    data: {avatar: {set: $avatar}, name: {set: $name}, phone: {set: $phone}}
+    where: {id: $id}
+  ) {
+    avatar
+  }
+}

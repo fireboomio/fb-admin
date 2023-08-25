@@ -1,0 +1,13 @@
+mutation MyQuery($refreshToken: String!) {
+  data: casdoor_refreshToken_post(
+    refreshToken_post_input_object: {refresh_token: $refreshToken}
+  ) {
+    msg
+    success
+    data {
+      refreshToken
+      accessToken
+      expireIn
+    }
+  }
+}
