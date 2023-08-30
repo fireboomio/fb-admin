@@ -51,7 +51,7 @@ export const getBindAPI = () => {
 
 // 根据角色获取权限列表
 export const getRolePerms = (data: string[]) => {
-  return axios.post<string[]>(`/proxy/perm`, {
+  return axios.post<string[]>(`operations/proxy/perm`, {
     data
   });
 };
@@ -63,13 +63,13 @@ export const deleteRoles = (ids: number[] | number) => {
 };
 
 export const roleMenuTreeselect = (id: number) => {
-  return axios.post<any>("/proxy/menuTree", {
+  return axios.post<any>("operations/proxy/menuTree", {
     data: id
   });
 }
 
 export const updateRolePermAdd = (rolecode: string, roleId: number, menuIds: number[]) => {
-  return axios.post<any>("/proxy/bindmenu", {
+  return axios.post<any>("operations/proxy/bindmenu", {
     data: {
       rolecode,
       roleId,

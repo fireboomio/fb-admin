@@ -65,9 +65,21 @@ async function handleQuery() {
     operationName: "System/Menu/GetMany"
   });
   if (!error) {
-    menuTree[0].children = handleTree(data!.data!, "id");
-    menuData.value = data!.data!;
+    let datasource = data!.data!;
+    const menu_type = ["目录", "菜单", "按钮"];
+    datasource.forEach(item => {
+      if (item.menu_type === "M") {
+        item.menu_type = menu_type[0];
+      } else if (item.menu_type === "C") {
+        item.menu_type = menu_type[1];
+      } else {
+        item.menu_type = menu_type[2];
+      }
+    })
+    menuTree[0].children = handleTree(datasource, "id");
+    menuData.value = datasource;
     menuList.value = menuTree[0].children;
+
   }
   loading.value = false;
 }
@@ -255,8 +267,9 @@ function toggleExpandAll() {
       <el-table v-if="refreshTable" v-loading="loading" :data="menuList" row-key="id" :default-expand-all="isExpandAll"
         :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
         <el-table-column prop="label" label="菜单名称" :show-overflow-tooltip="true" width="160"></el-table-column>
-        <el-table-column prop="icon" label="图标" align="center" width="100">
-        </el-table-column>
+        <el-table-column prop="menu_type" label="菜单类型" align="center" :show-overflow-tooltip="true"
+          width="160"></el-table-column>
+        <el-table-column prop="icon" label="图标" align="center" width="100"></el-table-column>
         <el-table-column prop="sort" label="排序" width="60" align="center"></el-table-column>
         <!-- <el-table-column prop="level" label="层级" width="60" align="center"></el-table-column> -->
         <el-table-column prop="perms" label="权限标识" :show-overflow-tooltip="true"></el-table-column>

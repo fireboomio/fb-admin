@@ -34,7 +34,7 @@ export type RefreshTokenResult = {
 
 /** 登录 */
 export const getLogin = (data?: object) => {
-  return axios.post<LoginResult>("/proxy/login", {
+  return axios.post<LoginResult>("operations/proxy/login", {
     data
   });
 };

@@ -2,11 +2,7 @@
 <template>
   <el-card>
     <template #header>门店销售额排名</template>
-    <div
-      v-for="(item, index) in dataSource"
-      :key="index"
-      className="flex py-1.5 items-center"
-    >
+    <div v-for="(item, index) in dataSource" :key="index" className="flex py-1.5 items-center">
       <div class="order" :class="{ highlight: index < 3 }">{{ index + 1 }}</div>
       <div class="ml-4">{{ item.shopName }}</div>
       <div class="ml-auto">{{ Math.round(item.totalSales! * 100) / 100 }}</div>
@@ -46,6 +42,7 @@ onMounted(async () => {
   color: #fff;
   font-size: 12px;
 }
+
 .highlight {
   background-color: #314659;
   color: #fafafa;

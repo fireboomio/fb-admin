@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import Motion from "./utils/motion";
-import phone from "./phone.vue";
 import { useRouter } from "vue-router";
 import { message } from "@/utils/message";
 import { loginRules } from "./utils/rule";
@@ -16,7 +14,8 @@ import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import { ref, reactive, toRaw, onMounted, onBeforeUnmount, computed } from "vue";
 import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
 import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
-
+import Motion from "./utils/motion";
+import phone from "./phone.vue";
 import dayIcon from "@/assets/svg/day.svg?component";
 import darkIcon from "@/assets/svg/dark.svg?component";
 import globalization from "@/assets/svg/globalization.svg?component";
@@ -27,7 +26,7 @@ import { usePermissionStoreHook } from "@/store/modules/permission";
 import { setInterval } from "timers";
 import { removeToken } from "@/utils/auth";
 import { Md5 } from "ts-md5"
-
+const salt = "qwertyuiop";
 defineOptions({
   name: "Login"
 });
@@ -50,13 +49,14 @@ const ruleForm = reactive({
   username: "zql",
   password: "abc1234"
 });
-// const salt = "afagdgdsgs"
-
-// pwd = md5.encode(password + salt.charAt(1));
 
 
 const onLogin = async (formEl: FormInstance | undefined) => {
   loading.value = true;
+  // 对用户登录的密码进行MD5加密
+  const md5: any = new Md5();
+  md5.appendAsciiStr(ruleForm.password[0] + salt[5] + ruleForm.password.slice(1, ruleForm.password.length));
+  const password = md5.end();
   // 清除token
   removeToken();
   if (!formEl) return;
@@ -65,7 +65,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       useUserStoreHook()
         .loginByUsername({
           username: ruleForm.username,
-          password: ruleForm.password,
+          password: password,
           loginType: loginType.value
         })
         .then(res => {
