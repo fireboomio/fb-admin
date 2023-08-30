@@ -1,18 +1,19 @@
 {
-    "name": "main",
-    "enabled": true,
-    "createTime": "2023-08-15 09:47:29Z",
-    "updateTime": "2023-08-15 09:47:34Z",
-    "deleteTime": "",
-    "kind": 4,
-    "customRest": null,
-    "customGraphql": null,
-    "customDatabase": {
-        "kind": 0,
-        "databaseUrl": {
-            "kind": 1,
-            "environmentVariableName": "url"
-        },
-        "databaseAlone": null
-    }
+  "name": "main",
+  "enabled": true,
+  "createTime": "2023-08-29T14:40:22.3026+08:00",
+  "updateTime": "2023-08-30T09:11:35.37327+08:00",
+  "deleteTime": "",
+  "cached": false,
+  "kind": 4,
+  "customRest": null,
+  "customGraphql": null,
+  "customDatabase": {
+    "kind": 0,
+    "databaseUrl": {
+      "kind": 1,
+      "environmentVariableName": "url"
+    },
+    "databaseAlone": null
+  }
 }

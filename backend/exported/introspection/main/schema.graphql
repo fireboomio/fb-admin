@@ -1553,25 +1553,6 @@ input Case_postListRelationFilter {
     none: case_postWhereInput
 }
 
-input mytestWhereInput {
-    AND: mytestWhereInput
-    OR: [mytestWhereInput]
-    NOT: mytestWhereInput
-    id: IntFilter
-    createdAt: DateTimeFilter
-    updatedAt: DateTimeFilter
-    deletedAt: DateTimeNullableFilter
-    myAttr: StringFilter
-    userid: IntFilter
-    admin_user: Admin_userRelationFilter
-}
-
-input MytestListRelationFilter {
-    every: mytestWhereInput
-    some: mytestWhereInput
-    none: mytestWhereInput
-}
-
 input admin_userWhereInput {
     AND: admin_userWhereInput
     OR: [admin_userWhereInput]
@@ -1586,15 +1567,11 @@ input admin_userWhereInput {
     country_code: StringNullableFilter
     password_type: StringNullableFilter
     user_id: StringNullableFilter
+    wx_resp: StringNullableFilter
     case_post: Case_postListRelationFilter
-    mytest: MytestListRelationFilter
 }
 
 input case_postOrderByRelationAggregateInput {
-    _count: SortOrder
-}
-
-input mytestOrderByRelationAggregateInput {
     _count: SortOrder
 }
 
@@ -1609,8 +1586,8 @@ input admin_userOrderByWithRelationInput {
     country_code: SortOrder
     password_type: SortOrder
     user_id: SortOrder
+    wx_resp: SortOrder
     case_post: case_postOrderByRelationAggregateInput
-    mytest: mytestOrderByRelationAggregateInput
 }
 
 input admin_userWhereUniqueInput {
@@ -1628,6 +1605,7 @@ enum Admin_userScalarFieldEnum {
     country_code
     password_type
     user_id
+    wx_resp
 }
 
 input case_categoryOrderByWithRelationInput {
@@ -1688,43 +1666,8 @@ type case_post {
     case_category: case_category
 }
 
-input mytestOrderByWithRelationInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    myAttr: SortOrder
-    userid: SortOrder
-    admin_user: admin_userOrderByWithRelationInput
-}
-
-input mytestWhereUniqueInput {
-    id: Int
-    myAttr: String
-}
-
-enum MytestScalarFieldEnum {
-    id
-    createdAt
-    updatedAt
-    deletedAt
-    myAttr
-    userid
-}
-
-type mytest {
-    id: Int!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    myAttr: String!
-    userid: Int!
-    admin_user: admin_user!
-}
-
 type Admin_userCountOutputType {
     case_post: Int!
-    mytest: Int!
 }
 
 type admin_user {
@@ -1738,8 +1681,8 @@ type admin_user {
     country_code: String
     password_type: String
     user_id: String
+    wx_resp: String
     case_post(where: case_postWhereInput, orderBy: [case_postOrderByWithRelationInput], cursor: case_postWhereUniqueInput, take: Int, skip: Int, distinct: [Case_postScalarFieldEnum]): [case_post]
-    mytest(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int, distinct: [MytestScalarFieldEnum]): [mytest]
     _count: Admin_userCountOutputType!
 }
 
@@ -1754,6 +1697,7 @@ type Admin_userCountAggregateOutputType {
     country_code: Int!
     password_type: Int!
     user_id: Int!
+    wx_resp: Int!
     _all: Int!
 }
 
@@ -1776,6 +1720,7 @@ type Admin_userMinAggregateOutputType {
     country_code: String
     password_type: String
     user_id: String
+    wx_resp: String
 }
 
 type Admin_userMaxAggregateOutputType {
@@ -1789,6 +1734,7 @@ type Admin_userMaxAggregateOutputType {
     country_code: String
     password_type: String
     user_id: String
+    wx_resp: String
 }
 
 type AggregateAdmin_user {
@@ -1810,6 +1756,7 @@ input admin_userCountOrderByAggregateInput {
     country_code: SortOrder
     password_type: SortOrder
     user_id: SortOrder
+    wx_resp: SortOrder
 }
 
 input admin_userAvgOrderByAggregateInput {
@@ -1827,6 +1774,7 @@ input admin_userMaxOrderByAggregateInput {
     country_code: SortOrder
     password_type: SortOrder
     user_id: SortOrder
+    wx_resp: SortOrder
 }
 
 input admin_userMinOrderByAggregateInput {
@@ -1840,6 +1788,7 @@ input admin_userMinOrderByAggregateInput {
     country_code: SortOrder
     password_type: SortOrder
     user_id: SortOrder
+    wx_resp: SortOrder
 }
 
 input admin_userSumOrderByAggregateInput {
@@ -1857,6 +1806,7 @@ input admin_userOrderByWithAggregationInput {
     country_code: SortOrder
     password_type: SortOrder
     user_id: SortOrder
+    wx_resp: SortOrder
     _count: admin_userCountOrderByAggregateInput
     _avg: admin_userAvgOrderByAggregateInput
     _max: admin_userMaxOrderByAggregateInput
@@ -1878,6 +1828,7 @@ input admin_userScalarWhereWithAggregatesInput {
     country_code: StringNullableWithAggregatesFilter
     password_type: StringNullableWithAggregatesFilter
     user_id: StringNullableWithAggregatesFilter
+    wx_resp: StringNullableWithAggregatesFilter
 }
 
 type Admin_userGroupByOutputType {
@@ -1891,6 +1842,7 @@ type Admin_userGroupByOutputType {
     country_code: String
     password_type: String
     user_id: String
+    wx_resp: String
     _count: Admin_userCountAggregateOutputType
     _avg: Admin_userAvgAggregateOutputType
     _sum: Admin_userSumAggregateOutputType
@@ -2123,156 +2075,6 @@ type Admin_verification_recordGroupByOutputType {
     _sum: Admin_verification_recordSumAggregateOutputType
     _min: Admin_verification_recordMinAggregateOutputType
     _max: Admin_verification_recordMaxAggregateOutputType
-}
-
-input carWhereInput {
-    AND: carWhereInput
-    OR: [carWhereInput]
-    NOT: carWhereInput
-    id: IntFilter
-    createdAt: DateTimeFilter
-    updatedAt: DateTimeFilter
-    deletedAt: DateTimeNullableFilter
-    title: StringFilter
-}
-
-input carOrderByWithRelationInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    title: SortOrder
-}
-
-input carWhereUniqueInput {
-    id: Int
-    title: String
-}
-
-enum CarScalarFieldEnum {
-    id
-    createdAt
-    updatedAt
-    deletedAt
-    title
-}
-
-type car {
-    id: Int!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    title: String!
-}
-
-type CarCountAggregateOutputType {
-    id: Int!
-    createdAt: Int!
-    updatedAt: Int!
-    deletedAt: Int!
-    title: Int!
-    _all: Int!
-}
-
-type CarAvgAggregateOutputType {
-    id: Float
-}
-
-type CarSumAggregateOutputType {
-    id: Int
-}
-
-type CarMinAggregateOutputType {
-    id: Int
-    createdAt: DateTime
-    updatedAt: DateTime
-    deletedAt: DateTime
-    title: String
-}
-
-type CarMaxAggregateOutputType {
-    id: Int
-    createdAt: DateTime
-    updatedAt: DateTime
-    deletedAt: DateTime
-    title: String
-}
-
-type AggregateCar {
-    _count: CarCountAggregateOutputType
-    _avg: CarAvgAggregateOutputType
-    _sum: CarSumAggregateOutputType
-    _min: CarMinAggregateOutputType
-    _max: CarMaxAggregateOutputType
-}
-
-input carCountOrderByAggregateInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    title: SortOrder
-}
-
-input carAvgOrderByAggregateInput {
-    id: SortOrder
-}
-
-input carMaxOrderByAggregateInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    title: SortOrder
-}
-
-input carMinOrderByAggregateInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    title: SortOrder
-}
-
-input carSumOrderByAggregateInput {
-    id: SortOrder
-}
-
-input carOrderByWithAggregationInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    title: SortOrder
-    _count: carCountOrderByAggregateInput
-    _avg: carAvgOrderByAggregateInput
-    _max: carMaxOrderByAggregateInput
-    _min: carMinOrderByAggregateInput
-    _sum: carSumOrderByAggregateInput
-}
-
-input carScalarWhereWithAggregatesInput {
-    AND: carScalarWhereWithAggregatesInput
-    OR: [carScalarWhereWithAggregatesInput]
-    NOT: carScalarWhereWithAggregatesInput
-    id: IntWithAggregatesFilter
-    createdAt: DateTimeWithAggregatesFilter
-    updatedAt: DateTimeWithAggregatesFilter
-    deletedAt: DateTimeNullableWithAggregatesFilter
-    title: StringWithAggregatesFilter
-}
-
-type CarGroupByOutputType {
-    id: Int!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    title: String!
-    _count: CarCountAggregateOutputType
-    _avg: CarAvgAggregateOutputType
-    _sum: CarSumAggregateOutputType
-    _min: CarMinAggregateOutputType
-    _max: CarMaxAggregateOutputType
 }
 
 input case_categoryWhereUniqueInput {
@@ -3497,129 +3299,6 @@ type Case_visitlogGroupByOutputType {
     _max: Case_visitlogMaxAggregateOutputType
 }
 
-type MytestCountAggregateOutputType {
-    id: Int!
-    createdAt: Int!
-    updatedAt: Int!
-    deletedAt: Int!
-    myAttr: Int!
-    userid: Int!
-    _all: Int!
-}
-
-type MytestAvgAggregateOutputType {
-    id: Float
-    userid: Float
-}
-
-type MytestSumAggregateOutputType {
-    id: Int
-    userid: Int
-}
-
-type MytestMinAggregateOutputType {
-    id: Int
-    createdAt: DateTime
-    updatedAt: DateTime
-    deletedAt: DateTime
-    myAttr: String
-    userid: Int
-}
-
-type MytestMaxAggregateOutputType {
-    id: Int
-    createdAt: DateTime
-    updatedAt: DateTime
-    deletedAt: DateTime
-    myAttr: String
-    userid: Int
-}
-
-type AggregateMytest {
-    _count: MytestCountAggregateOutputType
-    _avg: MytestAvgAggregateOutputType
-    _sum: MytestSumAggregateOutputType
-    _min: MytestMinAggregateOutputType
-    _max: MytestMaxAggregateOutputType
-}
-
-input mytestCountOrderByAggregateInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    myAttr: SortOrder
-    userid: SortOrder
-}
-
-input mytestAvgOrderByAggregateInput {
-    id: SortOrder
-    userid: SortOrder
-}
-
-input mytestMaxOrderByAggregateInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    myAttr: SortOrder
-    userid: SortOrder
-}
-
-input mytestMinOrderByAggregateInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    myAttr: SortOrder
-    userid: SortOrder
-}
-
-input mytestSumOrderByAggregateInput {
-    id: SortOrder
-    userid: SortOrder
-}
-
-input mytestOrderByWithAggregationInput {
-    id: SortOrder
-    createdAt: SortOrder
-    updatedAt: SortOrder
-    deletedAt: SortOrder
-    myAttr: SortOrder
-    userid: SortOrder
-    _count: mytestCountOrderByAggregateInput
-    _avg: mytestAvgOrderByAggregateInput
-    _max: mytestMaxOrderByAggregateInput
-    _min: mytestMinOrderByAggregateInput
-    _sum: mytestSumOrderByAggregateInput
-}
-
-input mytestScalarWhereWithAggregatesInput {
-    AND: mytestScalarWhereWithAggregatesInput
-    OR: [mytestScalarWhereWithAggregatesInput]
-    NOT: mytestScalarWhereWithAggregatesInput
-    id: IntWithAggregatesFilter
-    createdAt: DateTimeWithAggregatesFilter
-    updatedAt: DateTimeWithAggregatesFilter
-    deletedAt: DateTimeNullableWithAggregatesFilter
-    myAttr: StringWithAggregatesFilter
-    userid: IntWithAggregatesFilter
-}
-
-type MytestGroupByOutputType {
-    id: Int!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    myAttr: String!
-    userid: Int!
-    _count: MytestCountAggregateOutputType
-    _avg: MytestAvgAggregateOutputType
-    _sum: MytestSumAggregateOutputType
-    _min: MytestMinAggregateOutputType
-    _max: MytestMaxAggregateOutputType
-}
-
 type Query {
     findFirstadmin_apilog(where: admin_apilogWhereInput, orderBy: [admin_apilogOrderByWithRelationInput], cursor: admin_apilogWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_apilogScalarFieldEnum]): admin_apilog
     findFirstadmin_apilogOrThrow(where: admin_apilogWhereInput, orderBy: [admin_apilogOrderByWithRelationInput], cursor: admin_apilogWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_apilogScalarFieldEnum]): admin_apilog
@@ -3684,13 +3363,6 @@ type Query {
     groupByadmin_verification_record(where: admin_verification_recordWhereInput, orderBy: [admin_verification_recordOrderByWithAggregationInput], by: [Admin_verification_recordScalarFieldEnum]!, having: admin_verification_recordScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_verification_recordGroupByOutputType]!
     findUniqueadmin_verification_record(where: admin_verification_recordWhereUniqueInput!): admin_verification_record
     findUniqueadmin_verification_recordOrThrow(where: admin_verification_recordWhereUniqueInput!): admin_verification_record
-    findFirstcar(where: carWhereInput, orderBy: [carOrderByWithRelationInput], cursor: carWhereUniqueInput, take: Int, skip: Int, distinct: [CarScalarFieldEnum]): car
-    findFirstcarOrThrow(where: carWhereInput, orderBy: [carOrderByWithRelationInput], cursor: carWhereUniqueInput, take: Int, skip: Int, distinct: [CarScalarFieldEnum]): car
-    findManycar(where: carWhereInput, orderBy: [carOrderByWithRelationInput], cursor: carWhereUniqueInput, take: Int, skip: Int, distinct: [CarScalarFieldEnum]): [car]!
-    aggregatecar(where: carWhereInput, orderBy: [carOrderByWithRelationInput], cursor: carWhereUniqueInput, take: Int, skip: Int): AggregateCar!
-    groupBycar(where: carWhereInput, orderBy: [carOrderByWithAggregationInput], by: [CarScalarFieldEnum]!, having: carScalarWhereWithAggregatesInput, take: Int, skip: Int): [CarGroupByOutputType]!
-    findUniquecar(where: carWhereUniqueInput!): car
-    findUniquecarOrThrow(where: carWhereUniqueInput!): car
     findFirstcase_category(where: case_categoryWhereInput, orderBy: [case_categoryOrderByWithRelationInput], cursor: case_categoryWhereUniqueInput, take: Int, skip: Int, distinct: [Case_categoryScalarFieldEnum]): case_category
     findFirstcase_categoryOrThrow(where: case_categoryWhereInput, orderBy: [case_categoryOrderByWithRelationInput], cursor: case_categoryWhereUniqueInput, take: Int, skip: Int, distinct: [Case_categoryScalarFieldEnum]): case_category
     findManycase_category(where: case_categoryWhereInput, orderBy: [case_categoryOrderByWithRelationInput], cursor: case_categoryWhereUniqueInput, take: Int, skip: Int, distinct: [Case_categoryScalarFieldEnum]): [case_category]!
@@ -3740,13 +3412,6 @@ type Query {
     groupBycase_visitlog(where: case_visitlogWhereInput, orderBy: [case_visitlogOrderByWithAggregationInput], by: [Case_visitlogScalarFieldEnum]!, having: case_visitlogScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_visitlogGroupByOutputType]!
     findUniquecase_visitlog(where: case_visitlogWhereUniqueInput!): case_visitlog
     findUniquecase_visitlogOrThrow(where: case_visitlogWhereUniqueInput!): case_visitlog
-    findFirstmytest(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int, distinct: [MytestScalarFieldEnum]): mytest
-    findFirstmytestOrThrow(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int, distinct: [MytestScalarFieldEnum]): mytest
-    findManymytest(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int, distinct: [MytestScalarFieldEnum]): [mytest]!
-    aggregatemytest(where: mytestWhereInput, orderBy: [mytestOrderByWithRelationInput], cursor: mytestWhereUniqueInput, take: Int, skip: Int): AggregateMytest!
-    groupBymytest(where: mytestWhereInput, orderBy: [mytestOrderByWithAggregationInput], by: [MytestScalarFieldEnum]!, having: mytestScalarWhereWithAggregatesInput, take: Int, skip: Int): [MytestGroupByOutputType]!
-    findUniquemytest(where: mytestWhereUniqueInput!): mytest
-    findUniquemytestOrThrow(where: mytestWhereUniqueInput!): mytest
 }
 
 input admin_apilogCreateInput {
@@ -4065,38 +3730,6 @@ input case_postCreateNestedManyWithoutAdmin_userInput {
     connect: case_postWhereUniqueInput
 }
 
-input mytestCreateWithoutAdmin_userInput {
-    createdAt: DateTime
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    myAttr: String!
-}
-
-input mytestCreateOrConnectWithoutAdmin_userInput {
-    where: mytestWhereUniqueInput!
-    create: mytestCreateWithoutAdmin_userInput!
-}
-
-input mytestCreateManyAdmin_userInput {
-    id: Int
-    createdAt: DateTime
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    myAttr: String!
-}
-
-input mytestCreateManyAdmin_userInputEnvelope {
-    data: [mytestCreateManyAdmin_userInput]!
-    skipDuplicates: Boolean
-}
-
-input mytestCreateNestedManyWithoutAdmin_userInput {
-    create: mytestCreateWithoutAdmin_userInput
-    connectOrCreate: mytestCreateOrConnectWithoutAdmin_userInput
-    createMany: mytestCreateManyAdmin_userInputEnvelope
-    connect: mytestWhereUniqueInput
-}
-
 input admin_userCreateInput {
     created_at: DateTime
     name: String!
@@ -4107,8 +3740,8 @@ input admin_userCreateInput {
     country_code: String
     password_type: String
     user_id: String
+    wx_resp: String
     case_post: case_postCreateNestedManyWithoutAdmin_userInput
-    mytest: mytestCreateNestedManyWithoutAdmin_userInput
 }
 
 input case_categoryUpdateWithoutCase_postInput {
@@ -4191,62 +3824,6 @@ input case_postUpdateManyWithoutAdmin_userNestedInput {
     deleteMany: case_postScalarWhereInput
 }
 
-input mytestUpdateWithoutAdmin_userInput {
-    createdAt: DateTimeFieldUpdateOperationsInput
-    updatedAt: DateTimeFieldUpdateOperationsInput
-    deletedAt: NullableDateTimeFieldUpdateOperationsInput
-    myAttr: StringFieldUpdateOperationsInput
-}
-
-input mytestUpsertWithWhereUniqueWithoutAdmin_userInput {
-    where: mytestWhereUniqueInput!
-    update: mytestUpdateWithoutAdmin_userInput!
-    create: mytestCreateWithoutAdmin_userInput!
-}
-
-input mytestUpdateWithWhereUniqueWithoutAdmin_userInput {
-    where: mytestWhereUniqueInput!
-    data: mytestUpdateWithoutAdmin_userInput!
-}
-
-input mytestScalarWhereInput {
-    AND: mytestScalarWhereInput
-    OR: [mytestScalarWhereInput]
-    NOT: mytestScalarWhereInput
-    id: IntFilter
-    createdAt: DateTimeFilter
-    updatedAt: DateTimeFilter
-    deletedAt: DateTimeNullableFilter
-    myAttr: StringFilter
-    userid: IntFilter
-}
-
-input mytestUpdateManyMutationInput {
-    createdAt: DateTimeFieldUpdateOperationsInput
-    updatedAt: DateTimeFieldUpdateOperationsInput
-    deletedAt: NullableDateTimeFieldUpdateOperationsInput
-    myAttr: StringFieldUpdateOperationsInput
-}
-
-input mytestUpdateManyWithWhereWithoutAdmin_userInput {
-    where: mytestScalarWhereInput!
-    data: mytestUpdateManyMutationInput!
-}
-
-input mytestUpdateManyWithoutAdmin_userNestedInput {
-    create: mytestCreateWithoutAdmin_userInput
-    connectOrCreate: mytestCreateOrConnectWithoutAdmin_userInput
-    upsert: mytestUpsertWithWhereUniqueWithoutAdmin_userInput
-    createMany: mytestCreateManyAdmin_userInputEnvelope
-    set: mytestWhereUniqueInput
-    disconnect: mytestWhereUniqueInput
-    delete: mytestWhereUniqueInput
-    connect: mytestWhereUniqueInput
-    update: mytestUpdateWithWhereUniqueWithoutAdmin_userInput
-    updateMany: mytestUpdateManyWithWhereWithoutAdmin_userInput
-    deleteMany: mytestScalarWhereInput
-}
-
 input admin_userUpdateInput {
     created_at: NullableDateTimeFieldUpdateOperationsInput
     name: StringFieldUpdateOperationsInput
@@ -4257,8 +3834,8 @@ input admin_userUpdateInput {
     country_code: NullableStringFieldUpdateOperationsInput
     password_type: NullableStringFieldUpdateOperationsInput
     user_id: NullableStringFieldUpdateOperationsInput
+    wx_resp: NullableStringFieldUpdateOperationsInput
     case_post: case_postUpdateManyWithoutAdmin_userNestedInput
-    mytest: mytestUpdateManyWithoutAdmin_userNestedInput
 }
 
 input admin_userCreateManyInput {
@@ -4272,6 +3849,7 @@ input admin_userCreateManyInput {
     country_code: String
     password_type: String
     user_id: String
+    wx_resp: String
 }
 
 input admin_userUpdateManyMutationInput {
@@ -4284,6 +3862,7 @@ input admin_userUpdateManyMutationInput {
     country_code: NullableStringFieldUpdateOperationsInput
     password_type: NullableStringFieldUpdateOperationsInput
     user_id: NullableStringFieldUpdateOperationsInput
+    wx_resp: NullableStringFieldUpdateOperationsInput
 }
 
 input admin_verification_recordCreateInput {
@@ -4338,35 +3917,6 @@ input admin_verification_recordUpdateManyMutationInput {
     is_used: NullableBoolFieldUpdateOperationsInput
 }
 
-input carCreateInput {
-    createdAt: DateTime
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    title: String!
-}
-
-input carUpdateInput {
-    createdAt: DateTimeFieldUpdateOperationsInput
-    updatedAt: DateTimeFieldUpdateOperationsInput
-    deletedAt: NullableDateTimeFieldUpdateOperationsInput
-    title: StringFieldUpdateOperationsInput
-}
-
-input carCreateManyInput {
-    id: Int
-    createdAt: DateTime
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    title: String!
-}
-
-input carUpdateManyMutationInput {
-    createdAt: DateTimeFieldUpdateOperationsInput
-    updatedAt: DateTimeFieldUpdateOperationsInput
-    deletedAt: NullableDateTimeFieldUpdateOperationsInput
-    title: StringFieldUpdateOperationsInput
-}
-
 input admin_userCreateWithoutCase_postInput {
     created_at: DateTime
     name: String!
@@ -4377,7 +3927,7 @@ input admin_userCreateWithoutCase_postInput {
     country_code: String
     password_type: String
     user_id: String
-    mytest: mytestCreateNestedManyWithoutAdmin_userInput
+    wx_resp: String
 }
 
 input admin_userCreateOrConnectWithoutCase_postInput {
@@ -4442,7 +3992,7 @@ input admin_userUpdateWithoutCase_postInput {
     country_code: NullableStringFieldUpdateOperationsInput
     password_type: NullableStringFieldUpdateOperationsInput
     user_id: NullableStringFieldUpdateOperationsInput
-    mytest: mytestUpdateManyWithoutAdmin_userNestedInput
+    wx_resp: NullableStringFieldUpdateOperationsInput
 }
 
 input admin_userUpsertWithoutCase_postInput {
@@ -4849,81 +4399,6 @@ input case_visitlogUpdateManyMutationInput {
     visitedAt: StringFieldUpdateOperationsInput
 }
 
-input admin_userCreateWithoutMytestInput {
-    created_at: DateTime
-    name: String!
-    avatar: String
-    phone: String
-    password_salt: String
-    password: String
-    country_code: String
-    password_type: String
-    user_id: String
-    case_post: case_postCreateNestedManyWithoutAdmin_userInput
-}
-
-input admin_userCreateOrConnectWithoutMytestInput {
-    where: admin_userWhereUniqueInput!
-    create: admin_userCreateWithoutMytestInput!
-}
-
-input admin_userCreateNestedOneWithoutMytestInput {
-    create: admin_userCreateWithoutMytestInput
-    connectOrCreate: admin_userCreateOrConnectWithoutMytestInput
-    connect: admin_userWhereUniqueInput
-}
-
-input mytestCreateInput {
-    createdAt: DateTime
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    myAttr: String!
-    admin_user: admin_userCreateNestedOneWithoutMytestInput!
-}
-
-input admin_userUpdateWithoutMytestInput {
-    created_at: NullableDateTimeFieldUpdateOperationsInput
-    name: StringFieldUpdateOperationsInput
-    avatar: NullableStringFieldUpdateOperationsInput
-    phone: NullableStringFieldUpdateOperationsInput
-    password_salt: NullableStringFieldUpdateOperationsInput
-    password: NullableStringFieldUpdateOperationsInput
-    country_code: NullableStringFieldUpdateOperationsInput
-    password_type: NullableStringFieldUpdateOperationsInput
-    user_id: NullableStringFieldUpdateOperationsInput
-    case_post: case_postUpdateManyWithoutAdmin_userNestedInput
-}
-
-input admin_userUpsertWithoutMytestInput {
-    update: admin_userUpdateWithoutMytestInput!
-    create: admin_userCreateWithoutMytestInput!
-}
-
-input admin_userUpdateOneRequiredWithoutMytestNestedInput {
-    create: admin_userCreateWithoutMytestInput
-    connectOrCreate: admin_userCreateOrConnectWithoutMytestInput
-    upsert: admin_userUpsertWithoutMytestInput
-    connect: admin_userWhereUniqueInput
-    update: admin_userUpdateWithoutMytestInput
-}
-
-input mytestUpdateInput {
-    createdAt: DateTimeFieldUpdateOperationsInput
-    updatedAt: DateTimeFieldUpdateOperationsInput
-    deletedAt: NullableDateTimeFieldUpdateOperationsInput
-    myAttr: StringFieldUpdateOperationsInput
-    admin_user: admin_userUpdateOneRequiredWithoutMytestNestedInput
-}
-
-input mytestCreateManyInput {
-    id: Int
-    createdAt: DateTime
-    updatedAt: DateTime!
-    deletedAt: DateTime
-    myAttr: String!
-    userid: Int!
-}
-
 type Mutation {
     createOneadmin_apilog(data: admin_apilogCreateInput!): admin_apilog
     upsertOneadmin_apilog(where: admin_apilogWhereUniqueInput!, create: admin_apilogCreateInput!, update: admin_apilogUpdateInput!): admin_apilog
@@ -4988,13 +4463,6 @@ type Mutation {
     updateOneadmin_verification_record(data: admin_verification_recordUpdateInput!, where: admin_verification_recordWhereUniqueInput!): admin_verification_record
     updateManyadmin_verification_record(data: admin_verification_recordUpdateManyMutationInput!, where: admin_verification_recordWhereInput): AffectedRowsOutput
     deleteManyadmin_verification_record(where: admin_verification_recordWhereInput): AffectedRowsOutput
-    createOnecar(data: carCreateInput!): car
-    upsertOnecar(where: carWhereUniqueInput!, create: carCreateInput!, update: carUpdateInput!): car
-    createManycar(data: [carCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
-    deleteOnecar(where: carWhereUniqueInput!): car
-    updateOnecar(data: carUpdateInput!, where: carWhereUniqueInput!): car
-    updateManycar(data: carUpdateManyMutationInput!, where: carWhereInput): AffectedRowsOutput
-    deleteManycar(where: carWhereInput): AffectedRowsOutput
     createOnecase_category(data: case_categoryCreateInput!): case_category
     upsertOnecase_category(where: case_categoryWhereUniqueInput!, create: case_categoryCreateInput!, update: case_categoryUpdateInput!): case_category
     createManycase_category(data: [case_categoryCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
@@ -5044,13 +4512,6 @@ type Mutation {
     updateOnecase_visitlog(data: case_visitlogUpdateInput!, where: case_visitlogWhereUniqueInput!): case_visitlog
     updateManycase_visitlog(data: case_visitlogUpdateManyMutationInput!, where: case_visitlogWhereInput): AffectedRowsOutput
     deleteManycase_visitlog(where: case_visitlogWhereInput): AffectedRowsOutput
-    createOnemytest(data: mytestCreateInput!): mytest
-    upsertOnemytest(where: mytestWhereUniqueInput!, create: mytestCreateInput!, update: mytestUpdateInput!): mytest
-    createManymytest(data: [mytestCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
-    deleteOnemytest(where: mytestWhereUniqueInput!): mytest
-    updateOnemytest(data: mytestUpdateInput!, where: mytestWhereUniqueInput!): mytest
-    updateManymytest(data: mytestUpdateManyMutationInput!, where: mytestWhereInput): AffectedRowsOutput
-    deleteManymytest(where: mytestWhereInput): AffectedRowsOutput
     executeRaw(query: String!, parameters: Json): Json
     queryRaw(query: String!, parameters: Json): Json
 }

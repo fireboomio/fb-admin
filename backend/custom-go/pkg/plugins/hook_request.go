@@ -2,18 +2,8 @@ package plugins
 
 import (
 	"custom-go/pkg/base"
-	"custom-go/pkg/wgpb"
 	"github.com/labstack/echo/v4"
 	"net/http"
-)
-
-type (
-	HookConfig struct {
-		AuthRequired        bool
-		AuthorizationConfig *wgpb.OperationAuthorizationConfig
-		EnableLiveQuery     bool
-		OperationType       wgpb.OperationType
-	}
 )
 
 func BuildHookFunc(proxyHook httpProxyHookFunction) echo.HandlerFunc {

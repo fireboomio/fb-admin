@@ -22,7 +22,7 @@ const (
 	DefinitionRefProperty = "$defs"
 )
 
-func RegisterFunction[I, O any](hookFunc func(*base.HookRequest, *base.OperationBody[I, O]) (*base.OperationBody[I, O], error), conf ...*HookConfig) {
+func RegisterFunction[I, O any](hookFunc func(*base.HookRequest, *base.OperationBody[I, O]) (*base.OperationBody[I, O], error), operationType *wgpb.OperationType) {
 	callerName := utils.GetCallerName(consts.FUNCTIONS)
 	apiPrefixPath := "/" + consts.FUNCTIONS
 	apiPath := path.Join(apiPrefixPath, callerName)
@@ -40,11 +40,9 @@ func RegisterFunction[I, O any](hookFunc func(*base.HookRequest, *base.Operation
 			Path:          apiPath,
 			OperationType: wgpb.OperationType_MUTATION,
 		}
-		if len(conf) > 0 {
-			operation.AuthenticationConfig = &wgpb.OperationAuthenticationConfig{AuthRequired: conf[0].AuthRequired}
-			operation.LiveQueryConfig = &wgpb.OperationLiveQueryConfig{Enabled: conf[0].EnableLiveQuery}
-			operation.AuthorizationConfig = conf[0].AuthorizationConfig
-			operation.OperationType = conf[0].OperationType
+
+		if operationType != nil {
+			operation.OperationType = *operationType
 		}
 
 		var i I

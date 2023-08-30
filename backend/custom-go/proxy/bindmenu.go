@@ -4,6 +4,7 @@ import (
 	"custom-go/generated"
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
+	"custom-go/pkg/wgpb"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -28,7 +29,7 @@ type (
 )
 
 func init() {
-	plugins.RegisterProxyHook(bindMenu, nil)
+	plugins.RegisterProxyHook(bindMenu, wgpb.OperationType_MUTATION)
 }
 
 func bindMenu(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) (*base.ClientResponse, error) {

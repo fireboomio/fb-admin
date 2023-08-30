@@ -4,6 +4,7 @@ import (
 	"custom-go/generated"
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
+	"custom-go/pkg/wgpb"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -19,7 +20,7 @@ type (
 )
 
 func init() {
-	plugins.RegisterProxyHook(unBind, nil)
+	plugins.RegisterProxyHook(unBind, wgpb.OperationType_MUTATION)
 }
 
 func unBind(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) (*base.ClientResponse, error) {

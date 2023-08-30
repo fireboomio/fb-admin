@@ -69,6 +69,18 @@ model admin_role_user {
   @@unique([role_id, user_id], map: "role_user")
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model admin_token {
+  id          Int?
+  user_id     Int?
+  token       String?   @db.VarChar(255)
+  expire_time DateTime? @db.DateTime(0)
+  flush_time  DateTime? @db.DateTime(0)
+  banned      Boolean?  @db.Bit(1)
+
+  @@ignore
+}
+
 model admin_user {
   id            Int         @id @default(autoincrement())
   created_at    DateTime?   @db.DateTime(0)
@@ -80,8 +92,8 @@ model admin_user {
   country_code  String?     @db.VarChar(6)
   password_type String?     @db.VarChar(100)
   user_id       String?     @db.VarChar(255)
+  wx_resp       String?     @db.VarChar(100)
   case_post     case_post[]
-  mytest        mytest[]
 }
 
 model admin_verification_record {
@@ -94,14 +106,6 @@ model admin_verification_record {
   code         String   @db.VarChar(10)
   time         BigInt
   is_used      Boolean?
-}
-
-model car {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime
-  deletedAt DateTime?
-  title     String    @unique
 }
 
 model case_category {
@@ -176,16 +180,4 @@ model case_visitlog {
   ip        String @db.LongText
   ua        String @db.LongText
   visitedAt String @db.LongText
-}
-
-model mytest {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime
-  deletedAt  DateTime?
-  myAttr     String     @unique
-  userid     Int
-  admin_user admin_user @relation(fields: [userid], references: [id])
-
-  @@index([userid], map: "mytest_userid_fkey")
 }

@@ -1,0 +1,10 @@
+query MyQuery($take: Int = 10, $skip: Int = 0) {
+  main_findManyadmin_token(skip: $skip, take: $take) {
+    banned
+    expire_time
+    flush_time
+    id
+    user_id
+    token
+  }
+}

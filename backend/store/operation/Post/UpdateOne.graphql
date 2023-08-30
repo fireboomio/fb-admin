@@ -1,12 +1,14 @@
-query MyQuery($id: Int = 10) {
-  data:main_findManyadmin_user(where: {id: {equals: $id}}) {
-    case_post {
-      cate
-      content
-      id
-      poster
-      published_at
-      title
-    }
+mutation MyQuery($id: Int = 10, $author: String = "", $content: String = "", $poster: String = "", $published_at: DateTime @injectCurrentDateTime(format: ISO8601), $title: String = "", $userId: Int = 10, $cate: Int = 10) {
+  main_updateOnecase_post(
+    data: {author: {set: $author}, content: {set: $content}, poster: {set: $poster}, published_at: {set: $published_at}, title: {set: $title}, admin_user: {connect: {id: $userId}}, case_category: {connect: {id: $cate}}}
+    where: {id: $id}
+  ) {
+    auth
+    author
+    cate
+    content
+    id
+    poster
+    title
   }
-} 
+}

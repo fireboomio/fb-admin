@@ -1,6 +1,6 @@
-query MyQuery  @internalOperation{
-  data:main_findFirstadmin_dic(where: {id: {equals: 1}}) {
+query MyQuery {
+  data: main_findFirstadmin_dic(where: {id: {equals: 1}}) {
     id
     isOpen
   }
-} 
+}

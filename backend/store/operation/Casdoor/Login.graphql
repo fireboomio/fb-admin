@@ -1,4 +1,4 @@
-mutation Login($code: String = "", $password: String = "", $countryCode: String = "CN", $loginType: String = "", $phone: String = "", $username: String = "") {
+mutation Login($code: String = "", $password: String = "", $countryCode: String = "CN", $loginType: String = "", $phone: String = "", $username: String = "") @internalOperation{
   data: casdoor_login_post(
     login_post_input_object: {code: $code, password: $password, loginType: $loginType, username: $username, phone: $phone, countryCode: $countryCode}
   ) {

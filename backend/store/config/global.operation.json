@@ -1,32 +1,34 @@
 {
-    "cacheConfig": {
-        "enabled": false,
-        "maxAge": 600,
-        "public": false,
-        "staleWhileRevalidate": 30
+  "cacheConfig": {
+    "enabled": false,
+    "maxAge": 600,
+    "public": false,
+    "staleWhileRevalidate": 30
+  },
+  "liveQueryConfig": {
+    "enabled": false,
+    "pollingIntervalSeconds": 3
+  },
+  "authenticationConfigs": {
+    "2": {
+      "authRequired": false
     },
-    "liveQueryConfig": {
-        "enabled": false,
-        "pollingIntervalSeconds": 3
+    "0": {
+      "authRequired": false
     },
-    "authenticationConfigs": {
-        "0": {
-            "authRequired": false
-        },
-        "1": {
-            "authRequired": false
-        },
-        "2": {
-            "authRequired": false
-        }
-    },
-    "apiAuthenticationHooks": {
-        "mutatingPostAuthentication": true,
-        "postAuthentication": false
-    },
-    "globalHttpTransportHooks": {
-        "beforeRequest": false,
-        "onRequest": false,
-        "onResponse": false
+    "1": {
+      "authRequired": false
     }
+  },
+  "apiAuthenticationHooks": {
+    "postAuthentication": false,
+    "mutatingPostAuthentication": true
+  },
+  "globalHttpTransportHooks": {
+    "onResponse": false,
+    "beforeRequest": false,
+    "beforeOriginRequest": false,
+    "onOriginResponse": false,
+    "onRequest": false
+  }
 }

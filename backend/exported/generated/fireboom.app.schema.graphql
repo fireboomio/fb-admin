@@ -2,18 +2,186 @@ schema {
 	query: Query
 	mutation: Mutation
 }
+directive @jsonSchema(
+	"""
+	
+	The value of both of these keywords MUST be a string.
+	
+	Both of these keywords can be used to decorate a user interface with
+	information about the data produced by this user interface.  A title
+	will preferably be short, whereas a description will provide
+	explanation about the purpose of the instance described by this
+	schema.
+	
+	"""
+	title: String
+
+	"""
+	
+	The value of both of these keywords MUST be a string.
+	
+	Both of these keywords can be used to decorate a user interface with
+	information about the data produced by this user interface.  A title
+	will preferably be short, whereas a description will provide
+	explanation about the purpose of the instance described by this
+	schema.
+	
+	"""
+	description: String
+
+	"""
+	
+	The value of "minimum" MUST be a number, representing an inclusive
+	lower limit for a numeric instance.
+	
+	If the instance is a number, then this keyword validates only if the
+	instance is greater than or exactly equal to "minimum".
+	
+	"""
+	minimum: Float
+
+	"""
+	
+	The value of "maximum" MUST be a number, representing an inclusive
+	upper limit for a numeric instance.
+	
+	If the instance is a number, then this keyword validates only if the
+	instance is less than or exactly equal to "maximum".
+	
+	"""
+	maximum: Float
+
+	"""
+	
+	The value of "exclusiveMinimum" MUST be number, representing an
+	exclusive lower limit for a numeric instance.
+	
+	If the instance is a number, then the instance is valid only if it
+	has a value strictly greater than (not equal to) "exclusiveMinimum".
+	
+	"""
+	exclusiveMinimum: Int
+
+	"""
+	
+	The value of this keyword MUST be a non-negative integer.
+	
+	A string instance is valid against this keyword if its length is
+	greater than, or equal to, the value of this keyword.
+	
+	The length of a string instance is defined as the number of its
+	characters as defined by RFC 7159 [RFC7159].
+	
+	Omitting this keyword has the same behavior as a value of 0.
+	
+	"""
+	minLength: Int
+
+	"""
+	
+	The value of this keyword MUST be a non-negative integer.
+	
+	An array instance is valid against "minItems" if its size is greater
+	than, or equal to, the value of this keyword.
+	
+	Omitting this keyword has the same behavior as a value of 0.
+	
+	"""
+	minItems: Int
+
+	"""
+	
+	The value of this keyword MUST be a boolean.
+	
+	If this keyword has boolean value false, the instance validates
+	successfully.  If it has boolean value true, the instance validates
+	successfully if all of its elements are unique.
+	
+	Omitting this keyword has the same behavior as a value of false.
+	
+	"""
+	uniqueItems: Boolean
+
+	"""
+	
+	The value of this keyword MUST be a string.  This string SHOULD be a
+	valid regular expression, according to the ECMA 262 regular
+	expression dialect.
+	
+	A string instance is considered valid if the regular expression
+	matches the instance successfully.  Recall: regular expressions are
+	not implicitly anchored.
+	
+	"""
+	pattern: String
+
+	"""
+	
+	The value of "multipleOf" MUST be a number, strictly greater than 0.
+	
+	A numeric instance is valid only if division by this keyword's value
+	results in an integer.
+	
+	"""
+	multipleOf: Float
+
+	"""
+	
+	The value of "exclusiveMaximum" MUST be number, representing an
+	exclusive upper limit for a numeric instance.
+	
+	If the instance is a number, then the instance is valid only if it
+	has a value strictly less than (not equal to) "exclusiveMaximum".
+	
+	"""
+	exclusiveMaximum: Boolean
+commonPattern: COMMON_REGEX_PATTERN,
+	"""
+	
+	The value of this keyword MUST be a non-negative integer.
+	
+	A string instance is valid against this keyword if its length is less
+	than, or equal to, the value of this keyword.
+	
+	The length of a string instance is defined as the number of its
+	characters as defined by RFC 7159 [RFC7159].
+	
+	"""
+	maxLength: Int
+
+	"""
+	
+	The value of this keyword MUST be a non-negative integer.
+	
+	An array instance is valid against "maxItems" if its size is less
+	than, or equal to, the value of this keyword.
+	
+	"""
+	maxItems: Int
+) on VARIABLE_DEFINITION
+"""
+
+The directive @injectGeneratedUUID injects a generated UUID into the variable.
+This variable MUST be a string.
+At the same time, it removes the variable from the input definition,
+disallowing the user to supply it.
+
+This means, the UUID is 100% generated server-side and can be considered untempered.
+
+"""
+directive @injectGeneratedUUID on VARIABLE_DEFINITION
 directive @rbac(
-	"""the user must match all roles"""
-	requireMatchAll: [WG_ROLE]
-
-	"""the user must match at least one of the roles"""
-	requireMatchAny: [WG_ROLE]
-
 	"""the user must not match all of the roles"""
 	denyMatchAll: [WG_ROLE]
 
 	"""the user must not match any of the roles"""
 	denyMatchAny: [WG_ROLE]
+
+	"""the user must match all roles"""
+	requireMatchAll: [WG_ROLE]
+
+	"""the user must match at least one of the roles"""
+	requireMatchAny: [WG_ROLE]
 ) on QUERY | MUTATION | SUBSCRIPTION
 """
 
@@ -56,6 +224,14 @@ directive @transform(
 	"""
 	get: String!
 ) on FIELD
+directive @fromClaim(name: Claim! = ISSUER, custom: CustomConfig) on VARIABLE_DEFINITION
+directive @hookVariable on VARIABLE_DEFINITION
+directive @formatDateTime(format: EngineDateTimeFormat = ISO8601,
+	"""customFormat must conform to the Golang specification for specifying a date time format"""
+	customFormat: String
+) on FIELD
+"""The directive @injectEnvironmentVariable allows you to inject an environment variable into the variable definition."""
+directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
 """
 
 The directive @injectCurrentDateTime injects a DateTime string of the current date and time into the variable.
@@ -72,6 +248,12 @@ directive @injectCurrentDateTime(format: EngineDateTimeFormat = ISO8601,
 ) on VARIABLE_DEFINITION
 """
 
+The @transaction Directive marks an Operation execute with transaction.
+
+"""
+directive @transaction on MUTATION
+"""
+
 The @export directive instructs the Execution Planner to export the field during the execution into the variable of the 'as' argument.
 As the execution is depth first, a field can only be used after it has been exported.
 Additionally, a field can only be used after using the '_join' field or on a different data source.
@@ -82,20 +264,6 @@ It's not possible to export a list or object field.
 
 """
 directive @export(as: String!) on FIELD
-directive @hookVariable on VARIABLE_DEFINITION
-"""The directive @injectFromHeader injects a http.header into the variable."""
-directive @fromHeader(name: String!) on VARIABLE_DEFINITION
-"""
-
-The directive @injectGeneratedUUID injects a generated UUID into the variable.
-This variable MUST be a string.
-At the same time, it removes the variable from the input definition,
-disallowing the user to supply it.
-
-This means, the UUID is 100% generated server-side and can be considered untempered.
-
-"""
-directive @injectGeneratedUUID on VARIABLE_DEFINITION
 """
 
 The directive @internal marks a variable definition as internal so that clients can't access it.
@@ -104,163 +272,8 @@ It's only being used as an internal variable to export fields into.
 
 """
 directive @internal on VARIABLE_DEFINITION
-directive @jsonSchema(
-	"""
-	
-	The value of this keyword MUST be a boolean.
-	
-	If this keyword has boolean value false, the instance validates
-	successfully.  If it has boolean value true, the instance validates
-	successfully if all of its elements are unique.
-	
-	Omitting this keyword has the same behavior as a value of false.
-	
-	"""
-	uniqueItems: Boolean
-
-	"""
-	
-	The value of this keyword MUST be a string.  This string SHOULD be a
-	valid regular expression, according to the ECMA 262 regular
-	expression dialect.
-	
-	A string instance is considered valid if the regular expression
-	matches the instance successfully.  Recall: regular expressions are
-	not implicitly anchored.
-	
-	"""
-	pattern: String
-
-	"""
-	
-	The value of both of these keywords MUST be a string.
-	
-	Both of these keywords can be used to decorate a user interface with
-	information about the data produced by this user interface.  A title
-	will preferably be short, whereas a description will provide
-	explanation about the purpose of the instance described by this
-	schema.
-	
-	"""
-	description: String
-
-	"""
-	
-	The value of "minimum" MUST be a number, representing an inclusive
-	lower limit for a numeric instance.
-	
-	If the instance is a number, then this keyword validates only if the
-	instance is greater than or exactly equal to "minimum".
-	
-	"""
-	minimum: Float
-
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	An array instance is valid against "maxItems" if its size is less
-	than, or equal to, the value of this keyword.
-	
-	"""
-	maxItems: Int
-
-	"""
-	
-	The value of "exclusiveMaximum" MUST be number, representing an
-	exclusive upper limit for a numeric instance.
-	
-	If the instance is a number, then the instance is valid only if it
-	has a value strictly less than (not equal to) "exclusiveMaximum".
-	
-	"""
-	exclusiveMaximum: Boolean
-
-	"""
-	
-	The value of "exclusiveMinimum" MUST be number, representing an
-	exclusive lower limit for a numeric instance.
-	
-	If the instance is a number, then the instance is valid only if it
-	has a value strictly greater than (not equal to) "exclusiveMinimum".
-	
-	"""
-	exclusiveMinimum: Int
-
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	A string instance is valid against this keyword if its length is less
-	than, or equal to, the value of this keyword.
-	
-	The length of a string instance is defined as the number of its
-	characters as defined by RFC 7159 [RFC7159].
-	
-	"""
-	maxLength: Int
-
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	A string instance is valid against this keyword if its length is
-	greater than, or equal to, the value of this keyword.
-	
-	The length of a string instance is defined as the number of its
-	characters as defined by RFC 7159 [RFC7159].
-	
-	Omitting this keyword has the same behavior as a value of 0.
-	
-	"""
-	minLength: Int
-
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	An array instance is valid against "minItems" if its size is greater
-	than, or equal to, the value of this keyword.
-	
-	Omitting this keyword has the same behavior as a value of 0.
-	
-	"""
-	minItems: Int
-
-	"""
-	
-	The value of both of these keywords MUST be a string.
-	
-	Both of these keywords can be used to decorate a user interface with
-	information about the data produced by this user interface.  A title
-	will preferably be short, whereas a description will provide
-	explanation about the purpose of the instance described by this
-	schema.
-	
-	"""
-	title: String
-
-	"""
-	
-	The value of "multipleOf" MUST be a number, strictly greater than 0.
-	
-	A numeric instance is valid only if division by this keyword's value
-	results in an integer.
-	
-	"""
-	multipleOf: Float
-
-	"""
-	
-	The value of "maximum" MUST be a number, representing an inclusive
-	upper limit for a numeric instance.
-	
-	If the instance is a number, then this keyword validates only if the
-	instance is less than or exactly equal to "maximum".
-	
-	"""
-	maximum: Float
-commonPattern: COMMON_REGEX_PATTERN) on VARIABLE_DEFINITION
+"""The directive @injectFromHeader injects a http.header into the variable."""
+directive @fromHeader(name: String!) on VARIABLE_DEFINITION
 """
 
 The @internalOperation Directive marks an Operation as internal.
@@ -269,19 +282,6 @@ It can only be accessed by internal services, like hooks.
 
 """
 directive @internalOperation on QUERY | MUTATION | SUBSCRIPTION
-"""
-
-The @transaction Directive marks an Operation execute with transaction.
-
-"""
-directive @transaction on MUTATION
-directive @formatDateTime(format: EngineDateTimeFormat = ISO8601,
-	"""customFormat must conform to the Golang specification for specifying a date time format"""
-	customFormat: String
-) on FIELD
-directive @fromClaim(name: Claim! = ISSUER, custom: CustomConfig) on VARIABLE_DEFINITION
-"""The directive @injectEnvironmentVariable allows you to inject an environment variable into the variable definition."""
-directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
 type Query {
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_userInfo_get: casdoor_UserInfo_object
@@ -412,20 +412,6 @@ type Query {
 	"""<#datasource#>main<#datasource#>"""
 	main_findUniqueadmin_verification_recordOrThrow(where: main_admin_verification_recordWhereUniqueInput!): main_admin_verification_record
 	"""<#datasource#>main<#datasource#>"""
-	main_findFirstcar(where: main_carWhereInput, orderBy: [main_carOrderByWithRelationInput], cursor: main_carWhereUniqueInput, take: Int, skip: Int, distinct: [main_CarScalarFieldEnum]): main_car
-	"""<#datasource#>main<#datasource#>"""
-	main_findFirstcarOrThrow(where: main_carWhereInput, orderBy: [main_carOrderByWithRelationInput], cursor: main_carWhereUniqueInput, take: Int, skip: Int, distinct: [main_CarScalarFieldEnum]): main_car
-	"""<#datasource#>main<#datasource#>"""
-	main_findManycar(where: main_carWhereInput, orderBy: [main_carOrderByWithRelationInput], cursor: main_carWhereUniqueInput, take: Int, skip: Int, distinct: [main_CarScalarFieldEnum]): [main_car]!
-	"""<#datasource#>main<#datasource#>"""
-	main_aggregatecar(where: main_carWhereInput, orderBy: [main_carOrderByWithRelationInput], cursor: main_carWhereUniqueInput, take: Int, skip: Int): main_AggregateCar!
-	"""<#datasource#>main<#datasource#>"""
-	main_groupBycar(where: main_carWhereInput, orderBy: [main_carOrderByWithAggregationInput], by: [main_CarScalarFieldEnum]!, having: main_carScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_CarGroupByOutputType]!
-	"""<#datasource#>main<#datasource#>"""
-	main_findUniquecar(where: main_carWhereUniqueInput!): main_car
-	"""<#datasource#>main<#datasource#>"""
-	main_findUniquecarOrThrow(where: main_carWhereUniqueInput!): main_car
-	"""<#datasource#>main<#datasource#>"""
 	main_findFirstcase_category(where: main_case_categoryWhereInput, orderBy: [main_case_categoryOrderByWithRelationInput], cursor: main_case_categoryWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_categoryScalarFieldEnum]): main_case_category
 	"""<#datasource#>main<#datasource#>"""
 	main_findFirstcase_categoryOrThrow(where: main_case_categoryWhereInput, orderBy: [main_case_categoryOrderByWithRelationInput], cursor: main_case_categoryWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_categoryScalarFieldEnum]): main_case_category
@@ -523,20 +509,6 @@ type Query {
 	main_findUniquecase_visitlog(where: main_case_visitlogWhereUniqueInput!): main_case_visitlog
 	"""<#datasource#>main<#datasource#>"""
 	main_findUniquecase_visitlogOrThrow(where: main_case_visitlogWhereUniqueInput!): main_case_visitlog
-	"""<#datasource#>main<#datasource#>"""
-	main_findFirstmytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int, distinct: [main_MytestScalarFieldEnum]): main_mytest
-	"""<#datasource#>main<#datasource#>"""
-	main_findFirstmytestOrThrow(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int, distinct: [main_MytestScalarFieldEnum]): main_mytest
-	"""<#datasource#>main<#datasource#>"""
-	main_findManymytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int, distinct: [main_MytestScalarFieldEnum]): [main_mytest]!
-	"""<#datasource#>main<#datasource#>"""
-	main_aggregatemytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int): main_AggregateMytest!
-	"""<#datasource#>main<#datasource#>"""
-	main_groupBymytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithAggregationInput], by: [main_MytestScalarFieldEnum]!, having: main_mytestScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_MytestGroupByOutputType]!
-	"""<#datasource#>main<#datasource#>"""
-	main_findUniquemytest(where: main_mytestWhereUniqueInput!): main_mytest
-	"""<#datasource#>main<#datasource#>"""
-	main_findUniquemytestOrThrow(where: main_mytestWhereUniqueInput!): main_mytest
 	"""<#datasource#>statistics<#datasource#>"""
 	statistics_GetMonthlySales: [statistics_GetMonthlySales]
 	"""<#datasource#>statistics<#datasource#>"""
@@ -546,11 +518,13 @@ type Query {
 	"""<#datasource#>statistics<#datasource#>"""
 	statistics_GetVisitTrending: [statistics_GetVisitTrending]
 	"""<#datasource#>system<#datasource#>"""
-	system_getAllPublicApis_get: [system_Operation_object]
-	"""<#datasource#>system<#datasource#>"""
 	system_getAllRoles_get: [system_Role_object]
+	"""<#datasource#>system<#datasource#>"""
+	system_getAllPublicApis_get: [system_Operation_object]
 }
 type Mutation {
+	"""<#datasource#>casdoor<#datasource#>"""
+	casdoor_refreshToken_post(refreshToken_post_input_object: casdoor_refreshToken_post_input_object!): casdoor_UserResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_sendCode_post(sendCode_post_input_object: casdoor_sendCode_post_input_object!): casdoor_APIResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
@@ -561,8 +535,6 @@ type Mutation {
 	casdoor_updateUser_post(updateUser_post_input_object: casdoor_updateUser_post_input_object!): casdoor_APIResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_login_post(login_post_input_object: casdoor_login_post_input_object!): casdoor_UserResponse_object
-	"""<#datasource#>casdoor<#datasource#>"""
-	casdoor_refreshToken_post(refreshToken_post_input_object: casdoor_refreshToken_post_input_object!): casdoor_UserResponse_object
 	"""<#datasource#>main<#datasource#>"""
 	main_createOneadmin_apilog(data: main_admin_apilogCreateInput!): main_admin_apilog
 	"""<#datasource#>main<#datasource#>"""
@@ -690,20 +662,6 @@ type Mutation {
 	"""<#datasource#>main<#datasource#>"""
 	main_deleteManyadmin_verification_record(where: main_admin_verification_recordWhereInput): main_AffectedRowsOutput
 	"""<#datasource#>main<#datasource#>"""
-	main_createOnecar(data: main_carCreateInput!): main_car
-	"""<#datasource#>main<#datasource#>"""
-	main_upsertOnecar(where: main_carWhereUniqueInput!, create: main_carCreateInput!, update: main_carUpdateInput!): main_car
-	"""<#datasource#>main<#datasource#>"""
-	main_createManycar(data: [main_carCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
-	main_deleteOnecar(where: main_carWhereUniqueInput!): main_car
-	"""<#datasource#>main<#datasource#>"""
-	main_updateOnecar(data: main_carUpdateInput!, where: main_carWhereUniqueInput!): main_car
-	"""<#datasource#>main<#datasource#>"""
-	main_updateManycar(data: main_carUpdateManyMutationInput!, where: main_carWhereInput): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
-	main_deleteManycar(where: main_carWhereInput): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
 	main_createOnecase_category(data: main_case_categoryCreateInput!): main_case_category
 	"""<#datasource#>main<#datasource#>"""
 	main_upsertOnecase_category(where: main_case_categoryWhereUniqueInput!, create: main_case_categoryCreateInput!, update: main_case_categoryUpdateInput!): main_case_category
@@ -802,20 +760,6 @@ type Mutation {
 	"""<#datasource#>main<#datasource#>"""
 	main_deleteManycase_visitlog(where: main_case_visitlogWhereInput): main_AffectedRowsOutput
 	"""<#datasource#>main<#datasource#>"""
-	main_createOnemytest(data: main_mytestCreateInput!): main_mytest
-	"""<#datasource#>main<#datasource#>"""
-	main_upsertOnemytest(where: main_mytestWhereUniqueInput!, create: main_mytestCreateInput!, update: main_mytestUpdateInput!): main_mytest
-	"""<#datasource#>main<#datasource#>"""
-	main_createManymytest(data: [main_mytestCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
-	main_deleteOnemytest(where: main_mytestWhereUniqueInput!): main_mytest
-	"""<#datasource#>main<#datasource#>"""
-	main_updateOnemytest(data: main_mytestUpdateInput!, where: main_mytestWhereUniqueInput!): main_mytest
-	"""<#datasource#>main<#datasource#>"""
-	main_updateManymytest(data: main_mytestUpdateManyMutationInput!, where: main_mytestWhereInput): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
-	main_deleteManymytest(where: main_mytestWhereInput): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
 	main_executeRaw(query: String!, parameters: JSON): JSON
 	"""<#datasource#>main<#datasource#>"""
 	main_queryRaw(query: String!, parameters: JSON): JSON
@@ -829,19 +773,19 @@ type Mutation {
 	system_bindRoleApis_post(bindRoleApis_post_input_object: system_bindRoleApis_post_input_object!): [String]
 }
 type casdoor_APIResponse_object {
-	status: Int
 	msg: String
+	status: Int
 	_join: Query!
 }
 type casdoor_TokenResponse_object {
-	refreshToken: String
 	accessToken: String
 	expireIn: Int
+	refreshToken: String
 	_join: Query!
 }
 type casdoor_UserInfo_object {
-	phone: String
 	preferred_username: String
+	phone: String
 	_join: Query!
 }
 type casdoor_UserResponse_object {
@@ -1203,12 +1147,12 @@ type main_Admin_userCountAggregateOutputType {
 	country_code: Int!
 	password_type: Int!
 	user_id: Int!
+	wx_resp: Int!
 	_all: Int!
 	_join: Query!
 }
 type main_Admin_userCountOutputType {
 	case_post: Int!
-	mytest: Int!
 	_join: Query!
 }
 type main_Admin_userGroupByOutputType {
@@ -1222,6 +1166,7 @@ type main_Admin_userGroupByOutputType {
 	country_code: String
 	password_type: String
 	user_id: String
+	wx_resp: String
 	_count: main_Admin_userCountAggregateOutputType
 	_avg: main_Admin_userAvgAggregateOutputType
 	_sum: main_Admin_userSumAggregateOutputType
@@ -1240,6 +1185,7 @@ type main_Admin_userMaxAggregateOutputType {
 	country_code: String
 	password_type: String
 	user_id: String
+	wx_resp: String
 	_join: Query!
 }
 type main_Admin_userMinAggregateOutputType {
@@ -1253,6 +1199,7 @@ type main_Admin_userMinAggregateOutputType {
 	country_code: String
 	password_type: String
 	user_id: String
+	wx_resp: String
 	_join: Query!
 }
 type main_Admin_userSumAggregateOutputType {
@@ -1395,14 +1342,6 @@ type main_AggregateAdmin_verification_record {
 	_max: main_Admin_verification_recordMaxAggregateOutputType
 	_join: Query!
 }
-type main_AggregateCar {
-	_count: main_CarCountAggregateOutputType
-	_avg: main_CarAvgAggregateOutputType
-	_sum: main_CarSumAggregateOutputType
-	_min: main_CarMinAggregateOutputType
-	_max: main_CarMaxAggregateOutputType
-	_join: Query!
-}
 type main_AggregateCase_category {
 	_count: main_Case_categoryCountAggregateOutputType
 	_avg: main_Case_categoryAvgAggregateOutputType
@@ -1457,60 +1396,6 @@ type main_AggregateCase_visitlog {
 	_sum: main_Case_visitlogSumAggregateOutputType
 	_min: main_Case_visitlogMinAggregateOutputType
 	_max: main_Case_visitlogMaxAggregateOutputType
-	_join: Query!
-}
-type main_AggregateMytest {
-	_count: main_MytestCountAggregateOutputType
-	_avg: main_MytestAvgAggregateOutputType
-	_sum: main_MytestSumAggregateOutputType
-	_min: main_MytestMinAggregateOutputType
-	_max: main_MytestMaxAggregateOutputType
-	_join: Query!
-}
-type main_CarAvgAggregateOutputType {
-	id: Float
-	_join: Query!
-}
-type main_CarCountAggregateOutputType {
-	id: Int!
-	createdAt: Int!
-	updatedAt: Int!
-	deletedAt: Int!
-	title: Int!
-	_all: Int!
-	_join: Query!
-}
-type main_CarGroupByOutputType {
-	id: Int!
-	createdAt: DateTime!
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	title: String!
-	_count: main_CarCountAggregateOutputType
-	_avg: main_CarAvgAggregateOutputType
-	_sum: main_CarSumAggregateOutputType
-	_min: main_CarMinAggregateOutputType
-	_max: main_CarMaxAggregateOutputType
-	_join: Query!
-}
-type main_CarMaxAggregateOutputType {
-	id: Int
-	createdAt: DateTime
-	updatedAt: DateTime
-	deletedAt: DateTime
-	title: String
-	_join: Query!
-}
-type main_CarMinAggregateOutputType {
-	id: Int
-	createdAt: DateTime
-	updatedAt: DateTime
-	deletedAt: DateTime
-	title: String
-	_join: Query!
-}
-type main_CarSumAggregateOutputType {
-	id: Int
 	_join: Query!
 }
 type main_Case_categoryAvgAggregateOutputType {
@@ -1891,58 +1776,6 @@ type main_Case_visitlogSumAggregateOutputType {
 	id: Int
 	_join: Query!
 }
-type main_MytestAvgAggregateOutputType {
-	id: Float
-	userid: Float
-	_join: Query!
-}
-type main_MytestCountAggregateOutputType {
-	id: Int!
-	createdAt: Int!
-	updatedAt: Int!
-	deletedAt: Int!
-	myAttr: Int!
-	userid: Int!
-	_all: Int!
-	_join: Query!
-}
-type main_MytestGroupByOutputType {
-	id: Int!
-	createdAt: DateTime!
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	myAttr: String!
-	userid: Int!
-	_count: main_MytestCountAggregateOutputType
-	_avg: main_MytestAvgAggregateOutputType
-	_sum: main_MytestSumAggregateOutputType
-	_min: main_MytestMinAggregateOutputType
-	_max: main_MytestMaxAggregateOutputType
-	_join: Query!
-}
-type main_MytestMaxAggregateOutputType {
-	id: Int
-	createdAt: DateTime
-	updatedAt: DateTime
-	deletedAt: DateTime
-	myAttr: String
-	userid: Int
-	_join: Query!
-}
-type main_MytestMinAggregateOutputType {
-	id: Int
-	createdAt: DateTime
-	updatedAt: DateTime
-	deletedAt: DateTime
-	myAttr: String
-	userid: Int
-	_join: Query!
-}
-type main_MytestSumAggregateOutputType {
-	id: Int
-	userid: Int
-	_join: Query!
-}
 type main_admin_apilog {
 	id: Int!
 	createdAt: DateTime!
@@ -2014,8 +1847,8 @@ type main_admin_user {
 	country_code: String
 	password_type: String
 	user_id: String
+	wx_resp: String
 	case_post(where: main_case_postWhereInput, orderBy: [main_case_postOrderByWithRelationInput], cursor: main_case_postWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_postScalarFieldEnum]): [main_case_post]
-	mytest(where: main_mytestWhereInput, orderBy: [main_mytestOrderByWithRelationInput], cursor: main_mytestWhereUniqueInput, take: Int, skip: Int, distinct: [main_MytestScalarFieldEnum]): [main_mytest]
 	_count: main_Admin_userCountOutputType!
 	_join: Query!
 }
@@ -2029,14 +1862,6 @@ type main_admin_verification_record {
 	code: String!
 	time: BigInt!
 	is_used: Boolean
-	_join: Query!
-}
-type main_car {
-	id: Int!
-	createdAt: DateTime!
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	title: String!
 	_join: Query!
 }
 type main_case_category {
@@ -2110,16 +1935,6 @@ type main_case_visitlog {
 	visitedAt: String!
 	_join: Query!
 }
-type main_mytest {
-	id: Int!
-	createdAt: DateTime!
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	myAttr: String!
-	userid: Int!
-	admin_user: main_admin_user!
-	_join: Query!
-}
 type statistics_GetMonthlySales {
 	months: String
 	totalSales: Float
@@ -2158,16 +1973,16 @@ type system_Operation_hooksConfiguration_mockResolve_object {
 	_join: Query!
 }
 type system_Operation_hooksConfiguration_object {
+	preResolve: Boolean
+	customResolve: Boolean
+	httpTransportOnResponse: Boolean
+	mutatingPostResolve: Boolean
 	mutatingPreResolve: Boolean
 	onConnectionInit: Boolean
 	postResolve: Boolean
 	httpTransportBeforeRequest: Boolean
 	httpTransportOnRequest: Boolean
 	mockResolve: system_Operation_hooksConfiguration_mockResolve_object
-	mutatingPostResolve: Boolean
-	customResolve: Boolean
-	httpTransportOnResponse: Boolean
-	preResolve: Boolean
 	_join: Query!
 }
 type system_Operation_liveQueryConfig_object {
@@ -2176,25 +1991,25 @@ type system_Operation_liveQueryConfig_object {
 	_join: Query!
 }
 type system_Operation_object {
-	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
-	operationType: Int
-	updateTime: String
-	"""开关 true开 false关"""
-	enabled: Boolean
-	createTime: String
-	deleteTime: String
-	"""路径"""
-	title: String
 	"""0-graphql 1-function 2-proxy"""
 	engine: Int
+	"""说明"""
+	remark: String
 	cacheConfig: system_Operation_cacheConfig_object
 	hooksConfiguration: system_Operation_hooksConfiguration_object
 	path: String
+	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
+	operationType: Int
 	liveQueryConfig: system_Operation_liveQueryConfig_object
-	"""说明"""
-	remark: String
+	"""路径"""
+	title: String
+	createTime: String
+	"""开关 true开 false关"""
+	enabled: Boolean
 	configCustomized: Boolean
 	authenticationConfig: system_Operation_authenticationConfig_object
+	deleteTime: String
+	updateTime: String
 	_join: Query!
 }
 type system_Role_object {
@@ -2214,24 +2029,24 @@ input CustomConfig {
 	jsonPathComponents: [String]!
 }
 input casdoor_addUser_post_input_object {
+	"""Password"""
+	password: String!
+	"""Password type"""
+	passwordType: String!
 	"""Phone number"""
 	phone: String!
 	"""Country code, default CN"""
 	countryCode: String
 	"""User name"""
 	name: String!
-	"""Password"""
-	password: String!
-	"""Password type"""
-	passwordType: String
 }
 input casdoor_login_post_input_object {
-	loginType: String!
 	username: String!
 	phone: String!
 	countryCode: String
 	code: String!
 	password: String!
+	loginType: String!
 }
 input casdoor_refreshToken_post_input_object {
 	"""<#originName#>refresh-token<#originName#>"""
@@ -2250,13 +2065,13 @@ input casdoor_updateProvider_post_input_object {
 	templateCode: String!
 }
 input casdoor_updateUser_post_input_object {
-	countryCode: String
-	"""User ID"""
-	userId: String!
 	name: String!
 	password: String!
 	passwordType: String
 	phone: String!
+	countryCode: String
+	"""User ID"""
+	userId: String!
 }
 input main_Admin_userRelationFilter {
 	is: main_admin_userWhereInput
@@ -2474,11 +2289,6 @@ input main_IntWithAggregatesFilter {
 	_sum: main_NestedIntFilter
 	_min: main_NestedIntFilter
 	_max: main_NestedIntFilter
-}
-input main_MytestListRelationFilter {
-	every: main_mytestWhereInput
-	some: main_mytestWhereInput
-	none: main_mytestWhereInput
 }
 input main_NestedBigIntFilter {
 	equals: BigInt
@@ -3534,6 +3344,7 @@ input main_admin_userCountOrderByAggregateInput {
 	country_code: main_SortOrder
 	password_type: main_SortOrder
 	user_id: main_SortOrder
+	wx_resp: main_SortOrder
 }
 input main_admin_userCreateInput {
 	created_at: DateTime
@@ -3545,8 +3356,8 @@ input main_admin_userCreateInput {
 	country_code: String
 	password_type: String
 	user_id: String
+	wx_resp: String
 	case_post: main_case_postCreateNestedManyWithoutAdmin_userInput
-	mytest: main_mytestCreateNestedManyWithoutAdmin_userInput
 }
 input main_admin_userCreateManyInput {
 	id: Int
@@ -3559,24 +3370,16 @@ input main_admin_userCreateManyInput {
 	country_code: String
 	password_type: String
 	user_id: String
+	wx_resp: String
 }
 input main_admin_userCreateNestedOneWithoutCase_postInput {
 	create: main_admin_userCreateWithoutCase_postInput
 	connectOrCreate: main_admin_userCreateOrConnectWithoutCase_postInput
 	connect: main_admin_userWhereUniqueInput
 }
-input main_admin_userCreateNestedOneWithoutMytestInput {
-	create: main_admin_userCreateWithoutMytestInput
-	connectOrCreate: main_admin_userCreateOrConnectWithoutMytestInput
-	connect: main_admin_userWhereUniqueInput
-}
 input main_admin_userCreateOrConnectWithoutCase_postInput {
 	where: main_admin_userWhereUniqueInput!
 	create: main_admin_userCreateWithoutCase_postInput!
-}
-input main_admin_userCreateOrConnectWithoutMytestInput {
-	where: main_admin_userWhereUniqueInput!
-	create: main_admin_userCreateWithoutMytestInput!
 }
 input main_admin_userCreateWithoutCase_postInput {
 	created_at: DateTime
@@ -3588,19 +3391,7 @@ input main_admin_userCreateWithoutCase_postInput {
 	country_code: String
 	password_type: String
 	user_id: String
-	mytest: main_mytestCreateNestedManyWithoutAdmin_userInput
-}
-input main_admin_userCreateWithoutMytestInput {
-	created_at: DateTime
-	name: String!
-	avatar: String
-	phone: String
-	password_salt: String
-	password: String
-	country_code: String
-	password_type: String
-	user_id: String
-	case_post: main_case_postCreateNestedManyWithoutAdmin_userInput
+	wx_resp: String
 }
 input main_admin_userMaxOrderByAggregateInput {
 	id: main_SortOrder
@@ -3613,6 +3404,7 @@ input main_admin_userMaxOrderByAggregateInput {
 	country_code: main_SortOrder
 	password_type: main_SortOrder
 	user_id: main_SortOrder
+	wx_resp: main_SortOrder
 }
 input main_admin_userMinOrderByAggregateInput {
 	id: main_SortOrder
@@ -3625,6 +3417,7 @@ input main_admin_userMinOrderByAggregateInput {
 	country_code: main_SortOrder
 	password_type: main_SortOrder
 	user_id: main_SortOrder
+	wx_resp: main_SortOrder
 }
 input main_admin_userOrderByWithAggregationInput {
 	id: main_SortOrder
@@ -3637,6 +3430,7 @@ input main_admin_userOrderByWithAggregationInput {
 	country_code: main_SortOrder
 	password_type: main_SortOrder
 	user_id: main_SortOrder
+	wx_resp: main_SortOrder
 	_count: main_admin_userCountOrderByAggregateInput
 	_avg: main_admin_userAvgOrderByAggregateInput
 	_max: main_admin_userMaxOrderByAggregateInput
@@ -3654,8 +3448,8 @@ input main_admin_userOrderByWithRelationInput {
 	country_code: main_SortOrder
 	password_type: main_SortOrder
 	user_id: main_SortOrder
+	wx_resp: main_SortOrder
 	case_post: main_case_postOrderByRelationAggregateInput
-	mytest: main_mytestOrderByRelationAggregateInput
 }
 input main_admin_userScalarWhereWithAggregatesInput {
 	AND: main_admin_userScalarWhereWithAggregatesInput
@@ -3671,6 +3465,7 @@ input main_admin_userScalarWhereWithAggregatesInput {
 	country_code: main_StringNullableWithAggregatesFilter
 	password_type: main_StringNullableWithAggregatesFilter
 	user_id: main_StringNullableWithAggregatesFilter
+	wx_resp: main_StringNullableWithAggregatesFilter
 }
 input main_admin_userSumOrderByAggregateInput {
 	id: main_SortOrder
@@ -3685,8 +3480,8 @@ input main_admin_userUpdateInput {
 	country_code: main_NullableStringFieldUpdateOperationsInput
 	password_type: main_NullableStringFieldUpdateOperationsInput
 	user_id: main_NullableStringFieldUpdateOperationsInput
+	wx_resp: main_NullableStringFieldUpdateOperationsInput
 	case_post: main_case_postUpdateManyWithoutAdmin_userNestedInput
-	mytest: main_mytestUpdateManyWithoutAdmin_userNestedInput
 }
 input main_admin_userUpdateManyMutationInput {
 	created_at: main_NullableDateTimeFieldUpdateOperationsInput
@@ -3698,13 +3493,7 @@ input main_admin_userUpdateManyMutationInput {
 	country_code: main_NullableStringFieldUpdateOperationsInput
 	password_type: main_NullableStringFieldUpdateOperationsInput
 	user_id: main_NullableStringFieldUpdateOperationsInput
-}
-input main_admin_userUpdateOneRequiredWithoutMytestNestedInput {
-	create: main_admin_userCreateWithoutMytestInput
-	connectOrCreate: main_admin_userCreateOrConnectWithoutMytestInput
-	upsert: main_admin_userUpsertWithoutMytestInput
-	connect: main_admin_userWhereUniqueInput
-	update: main_admin_userUpdateWithoutMytestInput
+	wx_resp: main_NullableStringFieldUpdateOperationsInput
 }
 input main_admin_userUpdateOneWithoutCase_postNestedInput {
 	create: main_admin_userCreateWithoutCase_postInput
@@ -3725,27 +3514,11 @@ input main_admin_userUpdateWithoutCase_postInput {
 	country_code: main_NullableStringFieldUpdateOperationsInput
 	password_type: main_NullableStringFieldUpdateOperationsInput
 	user_id: main_NullableStringFieldUpdateOperationsInput
-	mytest: main_mytestUpdateManyWithoutAdmin_userNestedInput
-}
-input main_admin_userUpdateWithoutMytestInput {
-	created_at: main_NullableDateTimeFieldUpdateOperationsInput
-	name: main_StringFieldUpdateOperationsInput
-	avatar: main_NullableStringFieldUpdateOperationsInput
-	phone: main_NullableStringFieldUpdateOperationsInput
-	password_salt: main_NullableStringFieldUpdateOperationsInput
-	password: main_NullableStringFieldUpdateOperationsInput
-	country_code: main_NullableStringFieldUpdateOperationsInput
-	password_type: main_NullableStringFieldUpdateOperationsInput
-	user_id: main_NullableStringFieldUpdateOperationsInput
-	case_post: main_case_postUpdateManyWithoutAdmin_userNestedInput
+	wx_resp: main_NullableStringFieldUpdateOperationsInput
 }
 input main_admin_userUpsertWithoutCase_postInput {
 	update: main_admin_userUpdateWithoutCase_postInput!
 	create: main_admin_userCreateWithoutCase_postInput!
-}
-input main_admin_userUpsertWithoutMytestInput {
-	update: main_admin_userUpdateWithoutMytestInput!
-	create: main_admin_userCreateWithoutMytestInput!
 }
 input main_admin_userWhereInput {
 	AND: main_admin_userWhereInput
@@ -3761,8 +3534,8 @@ input main_admin_userWhereInput {
 	country_code: main_StringNullableFilter
 	password_type: main_StringNullableFilter
 	user_id: main_StringNullableFilter
+	wx_resp: main_StringNullableFilter
 	case_post: main_Case_postListRelationFilter
-	mytest: main_MytestListRelationFilter
 }
 input main_admin_userWhereUniqueInput {
 	id: Int
@@ -3907,101 +3680,6 @@ input main_admin_verification_recordWhereInput {
 }
 input main_admin_verification_recordWhereUniqueInput {
 	name: String
-}
-input main_carAvgOrderByAggregateInput {
-	id: main_SortOrder
-}
-input main_carCountOrderByAggregateInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	title: main_SortOrder
-}
-input main_carCreateInput {
-	createdAt: DateTime
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	title: String!
-}
-input main_carCreateManyInput {
-	id: Int
-	createdAt: DateTime
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	title: String!
-}
-input main_carMaxOrderByAggregateInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	title: main_SortOrder
-}
-input main_carMinOrderByAggregateInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	title: main_SortOrder
-}
-input main_carOrderByWithAggregationInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	title: main_SortOrder
-	_count: main_carCountOrderByAggregateInput
-	_avg: main_carAvgOrderByAggregateInput
-	_max: main_carMaxOrderByAggregateInput
-	_min: main_carMinOrderByAggregateInput
-	_sum: main_carSumOrderByAggregateInput
-}
-input main_carOrderByWithRelationInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	title: main_SortOrder
-}
-input main_carScalarWhereWithAggregatesInput {
-	AND: main_carScalarWhereWithAggregatesInput
-	OR: [main_carScalarWhereWithAggregatesInput]
-	NOT: main_carScalarWhereWithAggregatesInput
-	id: main_IntWithAggregatesFilter
-	createdAt: main_DateTimeWithAggregatesFilter
-	updatedAt: main_DateTimeWithAggregatesFilter
-	deletedAt: main_DateTimeNullableWithAggregatesFilter
-	title: main_StringWithAggregatesFilter
-}
-input main_carSumOrderByAggregateInput {
-	id: main_SortOrder
-}
-input main_carUpdateInput {
-	createdAt: main_DateTimeFieldUpdateOperationsInput
-	updatedAt: main_DateTimeFieldUpdateOperationsInput
-	deletedAt: main_NullableDateTimeFieldUpdateOperationsInput
-	title: main_StringFieldUpdateOperationsInput
-}
-input main_carUpdateManyMutationInput {
-	createdAt: main_DateTimeFieldUpdateOperationsInput
-	updatedAt: main_DateTimeFieldUpdateOperationsInput
-	deletedAt: main_NullableDateTimeFieldUpdateOperationsInput
-	title: main_StringFieldUpdateOperationsInput
-}
-input main_carWhereInput {
-	AND: main_carWhereInput
-	OR: [main_carWhereInput]
-	NOT: main_carWhereInput
-	id: main_IntFilter
-	createdAt: main_DateTimeFilter
-	updatedAt: main_DateTimeFilter
-	deletedAt: main_DateTimeNullableFilter
-	title: main_StringFilter
-}
-input main_carWhereUniqueInput {
-	id: Int
-	title: String
 }
 input main_case_categoryAvgOrderByAggregateInput {
 	id: main_SortOrder
@@ -5047,188 +4725,6 @@ input main_case_visitlogWhereInput {
 input main_case_visitlogWhereUniqueInput {
 	id: Int
 }
-input main_mytestAvgOrderByAggregateInput {
-	id: main_SortOrder
-	userid: main_SortOrder
-}
-input main_mytestCountOrderByAggregateInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	myAttr: main_SortOrder
-	userid: main_SortOrder
-}
-input main_mytestCreateInput {
-	createdAt: DateTime
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	myAttr: String!
-	admin_user: main_admin_userCreateNestedOneWithoutMytestInput!
-}
-input main_mytestCreateManyAdmin_userInput {
-	id: Int
-	createdAt: DateTime
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	myAttr: String!
-}
-input main_mytestCreateManyAdmin_userInputEnvelope {
-	data: [main_mytestCreateManyAdmin_userInput]!
-	skipDuplicates: Boolean
-}
-input main_mytestCreateManyInput {
-	id: Int
-	createdAt: DateTime
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	myAttr: String!
-	userid: Int!
-}
-input main_mytestCreateNestedManyWithoutAdmin_userInput {
-	create: main_mytestCreateWithoutAdmin_userInput
-	connectOrCreate: main_mytestCreateOrConnectWithoutAdmin_userInput
-	createMany: main_mytestCreateManyAdmin_userInputEnvelope
-	connect: main_mytestWhereUniqueInput
-}
-input main_mytestCreateOrConnectWithoutAdmin_userInput {
-	where: main_mytestWhereUniqueInput!
-	create: main_mytestCreateWithoutAdmin_userInput!
-}
-input main_mytestCreateWithoutAdmin_userInput {
-	createdAt: DateTime
-	updatedAt: DateTime!
-	deletedAt: DateTime
-	myAttr: String!
-}
-input main_mytestMaxOrderByAggregateInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	myAttr: main_SortOrder
-	userid: main_SortOrder
-}
-input main_mytestMinOrderByAggregateInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	myAttr: main_SortOrder
-	userid: main_SortOrder
-}
-input main_mytestOrderByRelationAggregateInput {
-	_count: main_SortOrder
-}
-input main_mytestOrderByWithAggregationInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	myAttr: main_SortOrder
-	userid: main_SortOrder
-	_count: main_mytestCountOrderByAggregateInput
-	_avg: main_mytestAvgOrderByAggregateInput
-	_max: main_mytestMaxOrderByAggregateInput
-	_min: main_mytestMinOrderByAggregateInput
-	_sum: main_mytestSumOrderByAggregateInput
-}
-input main_mytestOrderByWithRelationInput {
-	id: main_SortOrder
-	createdAt: main_SortOrder
-	updatedAt: main_SortOrder
-	deletedAt: main_SortOrder
-	myAttr: main_SortOrder
-	userid: main_SortOrder
-	admin_user: main_admin_userOrderByWithRelationInput
-}
-input main_mytestScalarWhereInput {
-	AND: main_mytestScalarWhereInput
-	OR: [main_mytestScalarWhereInput]
-	NOT: main_mytestScalarWhereInput
-	id: main_IntFilter
-	createdAt: main_DateTimeFilter
-	updatedAt: main_DateTimeFilter
-	deletedAt: main_DateTimeNullableFilter
-	myAttr: main_StringFilter
-	userid: main_IntFilter
-}
-input main_mytestScalarWhereWithAggregatesInput {
-	AND: main_mytestScalarWhereWithAggregatesInput
-	OR: [main_mytestScalarWhereWithAggregatesInput]
-	NOT: main_mytestScalarWhereWithAggregatesInput
-	id: main_IntWithAggregatesFilter
-	createdAt: main_DateTimeWithAggregatesFilter
-	updatedAt: main_DateTimeWithAggregatesFilter
-	deletedAt: main_DateTimeNullableWithAggregatesFilter
-	myAttr: main_StringWithAggregatesFilter
-	userid: main_IntWithAggregatesFilter
-}
-input main_mytestSumOrderByAggregateInput {
-	id: main_SortOrder
-	userid: main_SortOrder
-}
-input main_mytestUpdateInput {
-	createdAt: main_DateTimeFieldUpdateOperationsInput
-	updatedAt: main_DateTimeFieldUpdateOperationsInput
-	deletedAt: main_NullableDateTimeFieldUpdateOperationsInput
-	myAttr: main_StringFieldUpdateOperationsInput
-	admin_user: main_admin_userUpdateOneRequiredWithoutMytestNestedInput
-}
-input main_mytestUpdateManyMutationInput {
-	createdAt: main_DateTimeFieldUpdateOperationsInput
-	updatedAt: main_DateTimeFieldUpdateOperationsInput
-	deletedAt: main_NullableDateTimeFieldUpdateOperationsInput
-	myAttr: main_StringFieldUpdateOperationsInput
-}
-input main_mytestUpdateManyWithWhereWithoutAdmin_userInput {
-	where: main_mytestScalarWhereInput!
-	data: main_mytestUpdateManyMutationInput!
-}
-input main_mytestUpdateManyWithoutAdmin_userNestedInput {
-	create: main_mytestCreateWithoutAdmin_userInput
-	connectOrCreate: main_mytestCreateOrConnectWithoutAdmin_userInput
-	upsert: main_mytestUpsertWithWhereUniqueWithoutAdmin_userInput
-	createMany: main_mytestCreateManyAdmin_userInputEnvelope
-	set: main_mytestWhereUniqueInput
-	disconnect: main_mytestWhereUniqueInput
-	delete: main_mytestWhereUniqueInput
-	connect: main_mytestWhereUniqueInput
-	update: main_mytestUpdateWithWhereUniqueWithoutAdmin_userInput
-	updateMany: main_mytestUpdateManyWithWhereWithoutAdmin_userInput
-	deleteMany: main_mytestScalarWhereInput
-}
-input main_mytestUpdateWithWhereUniqueWithoutAdmin_userInput {
-	where: main_mytestWhereUniqueInput!
-	data: main_mytestUpdateWithoutAdmin_userInput!
-}
-input main_mytestUpdateWithoutAdmin_userInput {
-	createdAt: main_DateTimeFieldUpdateOperationsInput
-	updatedAt: main_DateTimeFieldUpdateOperationsInput
-	deletedAt: main_NullableDateTimeFieldUpdateOperationsInput
-	myAttr: main_StringFieldUpdateOperationsInput
-}
-input main_mytestUpsertWithWhereUniqueWithoutAdmin_userInput {
-	where: main_mytestWhereUniqueInput!
-	update: main_mytestUpdateWithoutAdmin_userInput!
-	create: main_mytestCreateWithoutAdmin_userInput!
-}
-input main_mytestWhereInput {
-	AND: main_mytestWhereInput
-	OR: [main_mytestWhereInput]
-	NOT: main_mytestWhereInput
-	id: main_IntFilter
-	createdAt: main_DateTimeFilter
-	updatedAt: main_DateTimeFilter
-	deletedAt: main_DateTimeNullableFilter
-	myAttr: main_StringFilter
-	userid: main_IntFilter
-	admin_user: main_Admin_userRelationFilter
-}
-input main_mytestWhereUniqueInput {
-	id: Int
-	myAttr: String
-}
 input system_Role_input_object {
 	createTime: String
 	deleteTime: String
@@ -5251,47 +4747,47 @@ enum COMMON_REGEX_PATTERN {
 	DOMAIN
 }
 enum Claim {
-	"""ROLES is string array, Please use in [in, notIn]."""
-	ROLES
-	ISSUER
-	PROVIDER
-	SUBJECT
-	NICKNAME
-	PREFERRED_USERNAME
-	EMAIL_VERIFIED
-	LOCATION
-	CUSTOM
-	NAME
-	GIVEN_NAME
-	MIDDLE_NAME
-	PICTURE
-	EMAIL
 	ZONE_INFO
 	LOCALE
+	"""ROLES is string array, Please use in [in, notIn]."""
+	ROLES
+	CUSTOM
+	ISSUER
+	NAME
+	GIVEN_NAME
 	FAMILY_NAME
-	PROFILE
+	MIDDLE_NAME
+	NICKNAME
+	LOCATION
 	USERID
+	PREFERRED_USERNAME
+	PROFILE
+	PICTURE
 	WEBSITE
-	GENDER
+	EMAIL_VERIFIED
 	BIRTH_DATE
+	SUBJECT
+	EMAIL
+	GENDER
+	PROVIDER
 }
 enum EngineDateTimeFormat {
-	ANSIC
-	RFC3339
-	RFC3339Nano
-	Kitchen
-	UnixDate
-	RFC822
+	RFC822Z
 	RFC850
-	RFC1123
-	StampMicro
-	RubyDate
-	RFC1123Z
 	Stamp
 	StampMilli
+	UnixDate
+	RFC1123
+	RFC3339
+	Kitchen
+	StampMicro
 	ISO8601
-	RFC822Z
+	ANSIC
+	RubyDate
+	RFC3339Nano
 	StampNano
+	RFC822
+	RFC1123Z
 }
 enum ValueType {
 	STRING
@@ -5301,16 +4797,19 @@ enum ValueType {
 	ARRAY
 }
 enum WG_ROLE {
+	a
 	a231
 	aa
 	aaaa
 	abc
 	abc1
+	abc123
 	abc32
 	ac
 	admin
 	admin1
 	b1a23
+	dqdw
 	editer
 	eeee
 	user
@@ -5379,6 +4878,7 @@ enum main_Admin_userScalarFieldEnum {
 	country_code
 	password_type
 	user_id
+	wx_resp
 }
 enum main_Admin_verification_recordScalarFieldEnum {
 	name
@@ -5390,13 +4890,6 @@ enum main_Admin_verification_recordScalarFieldEnum {
 	code
 	time
 	is_used
-}
-enum main_CarScalarFieldEnum {
-	id
-	createdAt
-	updatedAt
-	deletedAt
-	title
 }
 enum main_Case_categoryScalarFieldEnum {
 	id
@@ -5454,14 +4947,6 @@ enum main_Case_visitlogScalarFieldEnum {
 	ip
 	ua
 	visitedAt
-}
-enum main_MytestScalarFieldEnum {
-	id
-	createdAt
-	updatedAt
-	deletedAt
-	myAttr
-	userid
 }
 enum main_SortOrder {
 	asc

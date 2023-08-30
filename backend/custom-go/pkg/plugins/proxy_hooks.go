@@ -14,7 +14,7 @@ import (
 
 type httpProxyHookFunction func(*base.HttpTransportHookRequest, *HttpTransportBody) (*base.ClientResponse, error)
 
-func RegisterProxyHook(hookFunc httpProxyHookFunction, conf ...*HookConfig) {
+func RegisterProxyHook(hookFunc httpProxyHookFunction, operationType ...wgpb.OperationType) {
 
 	callerName := utils.GetCallerName(consts.PROXY)
 	apiPrefixPath := "/" + consts.PROXY
@@ -28,12 +28,13 @@ func RegisterProxyHook(hookFunc httpProxyHookFunction, conf ...*HookConfig) {
 	base.AddHealthFunc(func(e *echo.Echo, s string, report *base.HealthReport) {
 		// 生成 operation 声明文件  proxy/xxx.json
 		operation := &wgpb.Operation{
-			Name: callerName,
-			Path: apiPath,
+			Name:          callerName,
+			Path:          apiPath,
+			OperationType: wgpb.OperationType_MUTATION,
 		}
-		if len(conf) > 0 && conf[0] != nil {
-			operation.AuthenticationConfig = &wgpb.OperationAuthenticationConfig{AuthRequired: conf[0].AuthRequired}
-			operation.AuthorizationConfig = conf[0].AuthorizationConfig
+
+		if operationType != nil && len(operationType) > 0 {
+			operation.OperationType = operationType[0]
 		}
 
 		operationBytes, err := json.Marshal(operation)

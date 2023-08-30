@@ -41,7 +41,7 @@
                     "description": "Country code, default CN"
                   }
                 },
-                "required": ["name", "password", "phone"]
+                "required": ["name", "password", "phone","passwordType"]
               }
             }
           }

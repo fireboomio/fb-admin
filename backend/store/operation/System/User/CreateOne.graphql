@@ -1,4 +1,4 @@
-mutation MyQuery($countryCode: String = "CN", $name: String!, $password: String = "", $passwordType: String = "plain", $phone: String!) @rbac(requireMatchAny: [user, eeee, admin, b1a23, a231, abc1]) {
+mutation MyQuery($countryCode: String = "CN", $name: String!, $password: String!, $passwordType: String = "plain", $phone: String!) @rbac(requireMatchAny: [user, eeee, admin, b1a23, a231, abc1]) {
   data: casdoor_addUser_post(
     addUser_post_input_object: {phone: $phone, name: $name, password: $password, passwordType: $passwordType, countryCode: $countryCode}
   ) {

@@ -1,16 +1,17 @@
 {
-	"name": "statistics",
-	"enabled": true,
-	"createTime": "2023-06-25 15:22:17Z",
-	"updateTime": "2023-08-25T13:56:56.072556+08:00",
-	"deleteTime": "",
-	"kind": 2,
-	"customRest": null,
-	"customGraphql": {
-		"customized": true,
-		"headers": null,
-		"endpoint": "",
-		"schemaFilepath": ""
-	},
-	"customDatabase": null
+  "name": "statistics",
+  "enabled": true,
+  "createTime": "2023-06-25 15:22:17Z",
+  "updateTime": "2023-08-30T17:36:12.963177+08:00",
+  "deleteTime": "",
+  "cached": false,
+  "kind": 2,
+  "customRest": null,
+  "customGraphql": {
+    "customized": true,
+    "headers": null,
+    "endpoint": "",
+    "schemaFilepath": ""
+  },
+  "customDatabase": null
 }

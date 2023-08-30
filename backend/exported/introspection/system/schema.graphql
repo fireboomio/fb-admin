@@ -22,45 +22,45 @@ type Operation_hooksConfiguration_mockResolve_object {
 	subscriptionPollingIntervalMillis: Int
 }
 type Operation_hooksConfiguration_object {
+	preResolve: Boolean
+	customResolve: Boolean
+	httpTransportOnResponse: Boolean
+	mutatingPostResolve: Boolean
 	mutatingPreResolve: Boolean
 	onConnectionInit: Boolean
 	postResolve: Boolean
 	httpTransportBeforeRequest: Boolean
 	httpTransportOnRequest: Boolean
 	mockResolve: Operation_hooksConfiguration_mockResolve_object
-	mutatingPostResolve: Boolean
-	customResolve: Boolean
-	httpTransportOnResponse: Boolean
-	preResolve: Boolean
 }
 type Operation_liveQueryConfig_object {
 	enabled: Boolean
 	pollingIntervalSeconds: Int
 }
 type Operation_object {
-	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
-	operationType: Int
-	updateTime: String
-	"""开关 true开 false关"""
-	enabled: Boolean
-	createTime: String
-	deleteTime: String
-	"""路径"""
-	title: String
 	"""0-graphql 1-function 2-proxy"""
 	engine: Int
+	"""说明"""
+	remark: String
 	cacheConfig: Operation_cacheConfig_object
 	hooksConfiguration: Operation_hooksConfiguration_object
 	path: String
+	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
+	operationType: Int
 	liveQueryConfig: Operation_liveQueryConfig_object
-	"""说明"""
-	remark: String
+	"""路径"""
+	title: String
+	createTime: String
+	"""开关 true开 false关"""
+	enabled: Boolean
 	configCustomized: Boolean
 	authenticationConfig: Operation_authenticationConfig_object
+	deleteTime: String
+	updateTime: String
 }
 type Query {
-	getAllPublicApis_get: [Operation_object]
 	getAllRoles_get: [Role_object]
+	getAllPublicApis_get: [Operation_object]
 }
 type Role_object {
 	code: String

@@ -1,0 +1,8 @@
+mutation MyQuery($banned: String = "", $expire_time: DateTime = "", $flush_time: DateTime = "", $token: String = "", $user_id: Int = 10, $equals: Int !) {
+  main_updateManyadmin_token(
+    data: {banned: {set: $banned}, expire_time: {set: $expire_time}, flush_time: {set: $flush_time},  token: {set: $token}, user_id: {set: $user_id}}
+    where: {user_id: {equals: $equals}}
+  ) {
+    count
+  }
+}

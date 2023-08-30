@@ -4,13 +4,14 @@ import (
 	"custom-go/generated"
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
+	"custom-go/pkg/wgpb"
 	"encoding/json"
 	"net/http"
 	"sync"
 )
 
 func init() {
-	plugins.RegisterProxyHook(login, nil)
+	plugins.RegisterProxyHook(login, wgpb.OperationType_MUTATION)
 }
 
 type (

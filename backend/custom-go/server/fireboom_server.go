@@ -1,6 +1,7 @@
 package server
 
 import (
+	authentication "custom-go/authentication"
 	"github.com/joho/godotenv"
 
 	"custom-go/generated"
@@ -23,9 +24,11 @@ func init() {
 
 	types.WdgHooksAndServerConfig = types.WunderGraphHooksAndServerConfig{
 		Hooks: types.HooksConfiguration{
-			Global:         plugins.GlobalConfiguration{},
-			Authentication: plugins.AuthenticationConfiguration{},
-			Queries:        base.OperationHooks{},
+			Global: plugins.GlobalConfiguration{},
+			Authentication: plugins.AuthenticationConfiguration{
+				MutatingPostAuthentication: authentication.MutatingPostAuthentication,
+			},
+			Queries: base.OperationHooks{},
 			Mutations: base.OperationHooks{
 				"System/Role/AddOne": {
 					MutatingPostResolve: plugins.ConvertBodyFunc[generated.System__Role__AddOneInternalInput, generated.System__Role__AddOneResponseData](operation_System__Role__AddOne.MutatingPostResolve),

@@ -1,0 +1,10 @@
+mutation MyQuery($id: Int = 1) {
+  data: main_deleteOneadmin_token(where: {id: $id}) {
+    banned
+    expire_time
+    flush_time
+    id
+    user_id
+    token
+  }
+}
