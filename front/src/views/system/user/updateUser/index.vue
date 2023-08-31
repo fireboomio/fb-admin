@@ -174,11 +174,11 @@ function close() {
 }
 onMounted(() => {
   getUserByUserId(route.query?.userId).then(res => {
-    formData.name = res.data.data.main_findManyuser[0].name;
-    formData.id = res.data.data.main_findManyuser[0].id;
-    formData.phone = res.data.data.main_findManyuser[0].phone;
-    formData.userId = res.data.data.main_findManyuser[0].user_id;
-    formData.avatar = res.data.data.main_findManyuser[0].avatar;
+    formData.name = res.data.data.data[0].name;
+    formData.id = res.data.data.data[0].id;
+    formData.phone = res.data.data.data[0].phone;
+    formData.userId = res.data.data.data[0].user_id;
+    formData.avatar = res.data.data.data[0].avatar;
     if (formData.avatar) {
       imageUrl.value = formData.avatar;
     }

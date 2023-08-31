@@ -299,7 +299,7 @@ function changeImage(file) {
 function searchPostByCategory(cate) {
   currentPostCategory.value = cate.name;
   getPostByCategory(cate.name).then(res => {
-    dataSource.value = res.data.data.data[0].case_post;
+    dataSource.value = res.data.data.data[0];
     total.value = dataSource.value.length;
   })
 }
