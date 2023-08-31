@@ -1,0 +1,10 @@
+query MyQuery($token: String="") {
+  data:main_findManyadmin_token(where: {token: {equals: $token}}) {
+    banned
+    expire_time
+    flush_time
+    id
+    token
+    user_id
+  }
+}

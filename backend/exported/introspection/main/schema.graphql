@@ -1512,6 +1512,241 @@ input IntNullableFilter {
     not: NestedIntNullableFilter
 }
 
+input NestedBoolNullableFilter {
+    equals: Boolean
+    not: NestedBoolNullableFilter
+}
+
+input BoolNullableFilter {
+    equals: Boolean
+    not: NestedBoolNullableFilter
+}
+
+input admin_tokenWhereInput {
+    AND: admin_tokenWhereInput
+    OR: [admin_tokenWhereInput]
+    NOT: admin_tokenWhereInput
+    id: IntFilter
+    user_id: IntNullableFilter
+    token: StringNullableFilter
+    expire_time: DateTimeNullableFilter
+    flush_time: DateTimeNullableFilter
+    banned: BoolNullableFilter
+}
+
+input admin_tokenOrderByWithRelationInput {
+    id: SortOrder
+    user_id: SortOrder
+    token: SortOrder
+    expire_time: SortOrder
+    flush_time: SortOrder
+    banned: SortOrder
+}
+
+input admin_tokenWhereUniqueInput {
+    id: Int
+}
+
+enum Admin_tokenScalarFieldEnum {
+    id
+    user_id
+    token
+    expire_time
+    flush_time
+    banned
+}
+
+type admin_token {
+    id: Int!
+    user_id: Int
+    token: String
+    expire_time: DateTime
+    flush_time: DateTime
+    banned: Boolean
+}
+
+type Admin_tokenCountAggregateOutputType {
+    id: Int!
+    user_id: Int!
+    token: Int!
+    expire_time: Int!
+    flush_time: Int!
+    banned: Int!
+    _all: Int!
+}
+
+type Admin_tokenAvgAggregateOutputType {
+    id: Float
+    user_id: Float
+}
+
+type Admin_tokenSumAggregateOutputType {
+    id: Int
+    user_id: Int
+}
+
+type Admin_tokenMinAggregateOutputType {
+    id: Int
+    user_id: Int
+    token: String
+    expire_time: DateTime
+    flush_time: DateTime
+    banned: Boolean
+}
+
+type Admin_tokenMaxAggregateOutputType {
+    id: Int
+    user_id: Int
+    token: String
+    expire_time: DateTime
+    flush_time: DateTime
+    banned: Boolean
+}
+
+type AggregateAdmin_token {
+    _count: Admin_tokenCountAggregateOutputType
+    _avg: Admin_tokenAvgAggregateOutputType
+    _sum: Admin_tokenSumAggregateOutputType
+    _min: Admin_tokenMinAggregateOutputType
+    _max: Admin_tokenMaxAggregateOutputType
+}
+
+input admin_tokenCountOrderByAggregateInput {
+    id: SortOrder
+    user_id: SortOrder
+    token: SortOrder
+    expire_time: SortOrder
+    flush_time: SortOrder
+    banned: SortOrder
+}
+
+input admin_tokenAvgOrderByAggregateInput {
+    id: SortOrder
+    user_id: SortOrder
+}
+
+input admin_tokenMaxOrderByAggregateInput {
+    id: SortOrder
+    user_id: SortOrder
+    token: SortOrder
+    expire_time: SortOrder
+    flush_time: SortOrder
+    banned: SortOrder
+}
+
+input admin_tokenMinOrderByAggregateInput {
+    id: SortOrder
+    user_id: SortOrder
+    token: SortOrder
+    expire_time: SortOrder
+    flush_time: SortOrder
+    banned: SortOrder
+}
+
+input admin_tokenSumOrderByAggregateInput {
+    id: SortOrder
+    user_id: SortOrder
+}
+
+input admin_tokenOrderByWithAggregationInput {
+    id: SortOrder
+    user_id: SortOrder
+    token: SortOrder
+    expire_time: SortOrder
+    flush_time: SortOrder
+    banned: SortOrder
+    _count: admin_tokenCountOrderByAggregateInput
+    _avg: admin_tokenAvgOrderByAggregateInput
+    _max: admin_tokenMaxOrderByAggregateInput
+    _min: admin_tokenMinOrderByAggregateInput
+    _sum: admin_tokenSumOrderByAggregateInput
+}
+
+input NestedFloatNullableFilter {
+    equals: Float
+    in: [Float]
+    notIn: [Float]
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    not: NestedFloatNullableFilter
+}
+
+input NestedIntNullableWithAggregatesFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _avg: NestedFloatNullableFilter
+    _sum: NestedIntNullableFilter
+    _min: NestedIntNullableFilter
+    _max: NestedIntNullableFilter
+}
+
+input IntNullableWithAggregatesFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _avg: NestedFloatNullableFilter
+    _sum: NestedIntNullableFilter
+    _min: NestedIntNullableFilter
+    _max: NestedIntNullableFilter
+}
+
+input NestedBoolNullableWithAggregatesFilter {
+    equals: Boolean
+    not: NestedBoolNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedBoolNullableFilter
+    _max: NestedBoolNullableFilter
+}
+
+input BoolNullableWithAggregatesFilter {
+    equals: Boolean
+    not: NestedBoolNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedBoolNullableFilter
+    _max: NestedBoolNullableFilter
+}
+
+input admin_tokenScalarWhereWithAggregatesInput {
+    AND: admin_tokenScalarWhereWithAggregatesInput
+    OR: [admin_tokenScalarWhereWithAggregatesInput]
+    NOT: admin_tokenScalarWhereWithAggregatesInput
+    id: IntWithAggregatesFilter
+    user_id: IntNullableWithAggregatesFilter
+    token: StringNullableWithAggregatesFilter
+    expire_time: DateTimeNullableWithAggregatesFilter
+    flush_time: DateTimeNullableWithAggregatesFilter
+    banned: BoolNullableWithAggregatesFilter
+}
+
+type Admin_tokenGroupByOutputType {
+    id: Int!
+    user_id: Int
+    token: String
+    expire_time: DateTime
+    flush_time: DateTime
+    banned: Boolean
+    _count: Admin_tokenCountAggregateOutputType
+    _avg: Admin_tokenAvgAggregateOutputType
+    _sum: Admin_tokenSumAggregateOutputType
+    _min: Admin_tokenMinAggregateOutputType
+    _max: Admin_tokenMaxAggregateOutputType
+}
+
 input Admin_userRelationFilter {
     is: admin_userWhereInput
     isNot: admin_userWhereInput
@@ -1850,16 +2085,6 @@ type Admin_userGroupByOutputType {
     _max: Admin_userMaxAggregateOutputType
 }
 
-input NestedBoolNullableFilter {
-    equals: Boolean
-    not: NestedBoolNullableFilter
-}
-
-input BoolNullableFilter {
-    equals: Boolean
-    not: NestedBoolNullableFilter
-}
-
 input admin_verification_recordWhereInput {
     AND: admin_verification_recordWhereInput
     OR: [admin_verification_recordWhereInput]
@@ -2027,22 +2252,6 @@ input admin_verification_recordOrderByWithAggregationInput {
     _max: admin_verification_recordMaxOrderByAggregateInput
     _min: admin_verification_recordMinOrderByAggregateInput
     _sum: admin_verification_recordSumOrderByAggregateInput
-}
-
-input NestedBoolNullableWithAggregatesFilter {
-    equals: Boolean
-    not: NestedBoolNullableWithAggregatesFilter
-    _count: NestedIntNullableFilter
-    _min: NestedBoolNullableFilter
-    _max: NestedBoolNullableFilter
-}
-
-input BoolNullableWithAggregatesFilter {
-    equals: Boolean
-    not: NestedBoolNullableWithAggregatesFilter
-    _count: NestedIntNullableFilter
-    _min: NestedBoolNullableFilter
-    _max: NestedBoolNullableFilter
 }
 
 input admin_verification_recordScalarWhereWithAggregatesInput {
@@ -2396,49 +2605,6 @@ input case_menuOrderByWithAggregationInput {
     _max: case_menuMaxOrderByAggregateInput
     _min: case_menuMinOrderByAggregateInput
     _sum: case_menuSumOrderByAggregateInput
-}
-
-input NestedFloatNullableFilter {
-    equals: Float
-    in: [Float]
-    notIn: [Float]
-    lt: Float
-    lte: Float
-    gt: Float
-    gte: Float
-    not: NestedFloatNullableFilter
-}
-
-input NestedIntNullableWithAggregatesFilter {
-    equals: Int
-    in: [Int]
-    notIn: [Int]
-    lt: Int
-    lte: Int
-    gt: Int
-    gte: Int
-    not: NestedIntNullableWithAggregatesFilter
-    _count: NestedIntNullableFilter
-    _avg: NestedFloatNullableFilter
-    _sum: NestedIntNullableFilter
-    _min: NestedIntNullableFilter
-    _max: NestedIntNullableFilter
-}
-
-input IntNullableWithAggregatesFilter {
-    equals: Int
-    in: [Int]
-    notIn: [Int]
-    lt: Int
-    lte: Int
-    gt: Int
-    gte: Int
-    not: NestedIntNullableWithAggregatesFilter
-    _count: NestedIntNullableFilter
-    _avg: NestedFloatNullableFilter
-    _sum: NestedIntNullableFilter
-    _min: NestedIntNullableFilter
-    _max: NestedIntNullableFilter
 }
 
 input case_menuScalarWhereWithAggregatesInput {
@@ -3349,6 +3515,13 @@ type Query {
     groupByadmin_role_user(where: admin_role_userWhereInput, orderBy: [admin_role_userOrderByWithAggregationInput], by: [Admin_role_userScalarFieldEnum]!, having: admin_role_userScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_role_userGroupByOutputType]!
     findUniqueadmin_role_user(where: admin_role_userWhereUniqueInput!): admin_role_user
     findUniqueadmin_role_userOrThrow(where: admin_role_userWhereUniqueInput!): admin_role_user
+    findFirstadmin_token(where: admin_tokenWhereInput, orderBy: [admin_tokenOrderByWithRelationInput], cursor: admin_tokenWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_tokenScalarFieldEnum]): admin_token
+    findFirstadmin_tokenOrThrow(where: admin_tokenWhereInput, orderBy: [admin_tokenOrderByWithRelationInput], cursor: admin_tokenWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_tokenScalarFieldEnum]): admin_token
+    findManyadmin_token(where: admin_tokenWhereInput, orderBy: [admin_tokenOrderByWithRelationInput], cursor: admin_tokenWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_tokenScalarFieldEnum]): [admin_token]!
+    aggregateadmin_token(where: admin_tokenWhereInput, orderBy: [admin_tokenOrderByWithRelationInput], cursor: admin_tokenWhereUniqueInput, take: Int, skip: Int): AggregateAdmin_token!
+    groupByadmin_token(where: admin_tokenWhereInput, orderBy: [admin_tokenOrderByWithAggregationInput], by: [Admin_tokenScalarFieldEnum]!, having: admin_tokenScalarWhereWithAggregatesInput, take: Int, skip: Int): [Admin_tokenGroupByOutputType]!
+    findUniqueadmin_token(where: admin_tokenWhereUniqueInput!): admin_token
+    findUniqueadmin_tokenOrThrow(where: admin_tokenWhereUniqueInput!): admin_token
     findFirstadmin_user(where: admin_userWhereInput, orderBy: [admin_userOrderByWithRelationInput], cursor: admin_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_userScalarFieldEnum]): admin_user
     findFirstadmin_userOrThrow(where: admin_userWhereInput, orderBy: [admin_userOrderByWithRelationInput], cursor: admin_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_userScalarFieldEnum]): admin_user
     findManyadmin_user(where: admin_userWhereInput, orderBy: [admin_userOrderByWithRelationInput], cursor: admin_userWhereUniqueInput, take: Int, skip: Int, distinct: [Admin_userScalarFieldEnum]): [admin_user]!
@@ -3679,6 +3852,51 @@ input admin_role_userUpdateManyMutationInput {
     user_id: IntFieldUpdateOperationsInput
 }
 
+input admin_tokenCreateInput {
+    user_id: Int
+    token: String
+    expire_time: DateTime
+    flush_time: DateTime
+    banned: Boolean
+}
+
+input NullableIntFieldUpdateOperationsInput {
+    set: Int
+    increment: Int
+    decrement: Int
+    multiply: Int
+    divide: Int
+}
+
+input NullableBoolFieldUpdateOperationsInput {
+    set: Boolean
+}
+
+input admin_tokenUpdateInput {
+    user_id: NullableIntFieldUpdateOperationsInput
+    token: NullableStringFieldUpdateOperationsInput
+    expire_time: NullableDateTimeFieldUpdateOperationsInput
+    flush_time: NullableDateTimeFieldUpdateOperationsInput
+    banned: NullableBoolFieldUpdateOperationsInput
+}
+
+input admin_tokenCreateManyInput {
+    id: Int
+    user_id: Int
+    token: String
+    expire_time: DateTime
+    flush_time: DateTime
+    banned: Boolean
+}
+
+input admin_tokenUpdateManyMutationInput {
+    user_id: NullableIntFieldUpdateOperationsInput
+    token: NullableStringFieldUpdateOperationsInput
+    expire_time: NullableDateTimeFieldUpdateOperationsInput
+    flush_time: NullableDateTimeFieldUpdateOperationsInput
+    banned: NullableBoolFieldUpdateOperationsInput
+}
+
 input case_categoryCreateWithoutCase_postInput {
     name: String!
 }
@@ -3877,10 +4095,6 @@ input admin_verification_recordCreateInput {
     is_used: Boolean
 }
 
-input NullableBoolFieldUpdateOperationsInput {
-    set: Boolean
-}
-
 input admin_verification_recordUpdateInput {
     name: StringFieldUpdateOperationsInput
     created_time: NullableStringFieldUpdateOperationsInput
@@ -4076,14 +4290,6 @@ input case_menuCreateInput {
     perms: String
     menu_type: String
     api_id: String
-}
-
-input NullableIntFieldUpdateOperationsInput {
-    set: Int
-    increment: Int
-    decrement: Int
-    multiply: Int
-    divide: Int
 }
 
 input case_menuUpdateInput {
@@ -4449,6 +4655,13 @@ type Mutation {
     updateOneadmin_role_user(data: admin_role_userUpdateInput!, where: admin_role_userWhereUniqueInput!): admin_role_user
     updateManyadmin_role_user(data: admin_role_userUpdateManyMutationInput!, where: admin_role_userWhereInput): AffectedRowsOutput
     deleteManyadmin_role_user(where: admin_role_userWhereInput): AffectedRowsOutput
+    createOneadmin_token(data: admin_tokenCreateInput!): admin_token
+    upsertOneadmin_token(where: admin_tokenWhereUniqueInput!, create: admin_tokenCreateInput!, update: admin_tokenUpdateInput!): admin_token
+    createManyadmin_token(data: [admin_tokenCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
+    deleteOneadmin_token(where: admin_tokenWhereUniqueInput!): admin_token
+    updateOneadmin_token(data: admin_tokenUpdateInput!, where: admin_tokenWhereUniqueInput!): admin_token
+    updateManyadmin_token(data: admin_tokenUpdateManyMutationInput!, where: admin_tokenWhereInput): AffectedRowsOutput
+    deleteManyadmin_token(where: admin_tokenWhereInput): AffectedRowsOutput
     createOneadmin_user(data: admin_userCreateInput!): admin_user
     upsertOneadmin_user(where: admin_userWhereUniqueInput!, create: admin_userCreateInput!, update: admin_userUpdateInput!): admin_user
     createManyadmin_user(data: [admin_userCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput

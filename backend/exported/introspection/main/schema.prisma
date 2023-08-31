@@ -69,16 +69,13 @@ model admin_role_user {
   @@unique([role_id, user_id], map: "role_user")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model admin_token {
-  id          Int?
+  id          Int       @id @default(autoincrement())
   user_id     Int?
-  token       String?   @db.VarChar(255)
+  token       String?   @db.LongText
   expire_time DateTime? @db.DateTime(0)
   flush_time  DateTime? @db.DateTime(0)
-  banned      Boolean?  @db.Bit(1)
-
-  @@ignore
+  banned      Boolean?
 }
 
 model admin_user {

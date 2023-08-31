@@ -2,7 +2,96 @@ schema {
 	query: Query
 	mutation: Mutation
 }
+"""
+
+The @export directive instructs the Execution Planner to export the field during the execution into the variable of the 'as' argument.
+As the execution is depth first, a field can only be used after it has been exported.
+Additionally, a field can only be used after using the '_join' field or on a different data source.
+It's not possible to export a field and use it in for the same data source.
+
+Note that the @export directive only works on fields that return a single value.
+It's not possible to export a list or object field.
+
+"""
+directive @export(as: String!) on FIELD
+"""
+
+The directive @internal marks a variable definition as internal so that clients can't access it.
+The field is also not visible in the public API.
+It's only being used as an internal variable to export fields into.
+
+"""
+directive @internal on VARIABLE_DEFINITION
+directive @formatDateTime(format: EngineDateTimeFormat = ISO8601,
+	"""customFormat must conform to the Golang specification for specifying a date time format"""
+	customFormat: String
+) on FIELD
+"""The directive @injectEnvironmentVariable allows you to inject an environment variable into the variable definition."""
+directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
+"""
+
+The @internalOperation Directive marks an Operation as internal.
+By doing so, the Operation is no longer accessible from the public API.
+It can only be accessed by internal services, like hooks.
+
+"""
+directive @internalOperation on QUERY | MUTATION | SUBSCRIPTION
+"""
+
+The @transaction Directive marks an Operation execute with transaction.
+
+"""
+directive @transaction on MUTATION
+directive @hookVariable on VARIABLE_DEFINITION
+"""
+
+The directive @injectGeneratedUUID injects a generated UUID into the variable.
+This variable MUST be a string.
+At the same time, it removes the variable from the input definition,
+disallowing the user to supply it.
+
+This means, the UUID is 100% generated server-side and can be considered untempered.
+
+"""
+directive @injectGeneratedUUID on VARIABLE_DEFINITION
 directive @jsonSchema(
+	"""
+	
+	The value of this keyword MUST be a non-negative integer.
+	
+	An array instance is valid against "minItems" if its size is greater
+	than, or equal to, the value of this keyword.
+	
+	Omitting this keyword has the same behavior as a value of 0.
+	
+	"""
+	minItems: Int
+commonPattern: COMMON_REGEX_PATTERN,
+	"""
+	
+	The value of "multipleOf" MUST be a number, strictly greater than 0.
+	
+	A numeric instance is valid only if division by this keyword's value
+	results in an integer.
+	
+	"""
+	multipleOf: Float
+
+	"""
+	
+	The value of this keyword MUST be a non-negative integer.
+	
+	A string instance is valid against this keyword if its length is
+	greater than, or equal to, the value of this keyword.
+	
+	The length of a string instance is defined as the number of its
+	characters as defined by RFC 7159 [RFC7159].
+	
+	Omitting this keyword has the same behavior as a value of 0.
+	
+	"""
+	minLength: Int
+
 	"""
 	
 	The value of both of these keywords MUST be a string.
@@ -31,17 +120,6 @@ directive @jsonSchema(
 
 	"""
 	
-	The value of "minimum" MUST be a number, representing an inclusive
-	lower limit for a numeric instance.
-	
-	If the instance is a number, then this keyword validates only if the
-	instance is greater than or exactly equal to "minimum".
-	
-	"""
-	minimum: Float
-
-	"""
-	
 	The value of "maximum" MUST be a number, representing an inclusive
 	upper limit for a numeric instance.
 	
@@ -50,6 +128,28 @@ directive @jsonSchema(
 	
 	"""
 	maximum: Float
+
+	"""
+	
+	The value of "exclusiveMaximum" MUST be number, representing an
+	exclusive upper limit for a numeric instance.
+	
+	If the instance is a number, then the instance is valid only if it
+	has a value strictly less than (not equal to) "exclusiveMaximum".
+	
+	"""
+	exclusiveMaximum: Boolean
+
+	"""
+	
+	The value of "minimum" MUST be a number, representing an inclusive
+	lower limit for a numeric instance.
+	
+	If the instance is a number, then this keyword validates only if the
+	instance is greater than or exactly equal to "minimum".
+	
+	"""
+	minimum: Float
 
 	"""
 	
@@ -66,28 +166,24 @@ directive @jsonSchema(
 	
 	The value of this keyword MUST be a non-negative integer.
 	
-	A string instance is valid against this keyword if its length is
-	greater than, or equal to, the value of this keyword.
+	A string instance is valid against this keyword if its length is less
+	than, or equal to, the value of this keyword.
 	
 	The length of a string instance is defined as the number of its
 	characters as defined by RFC 7159 [RFC7159].
 	
-	Omitting this keyword has the same behavior as a value of 0.
-	
 	"""
-	minLength: Int
+	maxLength: Int
 
 	"""
 	
 	The value of this keyword MUST be a non-negative integer.
 	
-	An array instance is valid against "minItems" if its size is greater
+	An array instance is valid against "maxItems" if its size is less
 	than, or equal to, the value of this keyword.
 	
-	Omitting this keyword has the same behavior as a value of 0.
-	
 	"""
-	minItems: Int
+	maxItems: Int
 
 	"""
 	
@@ -114,75 +210,7 @@ directive @jsonSchema(
 	
 	"""
 	pattern: String
-
-	"""
-	
-	The value of "multipleOf" MUST be a number, strictly greater than 0.
-	
-	A numeric instance is valid only if division by this keyword's value
-	results in an integer.
-	
-	"""
-	multipleOf: Float
-
-	"""
-	
-	The value of "exclusiveMaximum" MUST be number, representing an
-	exclusive upper limit for a numeric instance.
-	
-	If the instance is a number, then the instance is valid only if it
-	has a value strictly less than (not equal to) "exclusiveMaximum".
-	
-	"""
-	exclusiveMaximum: Boolean
-commonPattern: COMMON_REGEX_PATTERN,
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	A string instance is valid against this keyword if its length is less
-	than, or equal to, the value of this keyword.
-	
-	The length of a string instance is defined as the number of its
-	characters as defined by RFC 7159 [RFC7159].
-	
-	"""
-	maxLength: Int
-
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	An array instance is valid against "maxItems" if its size is less
-	than, or equal to, the value of this keyword.
-	
-	"""
-	maxItems: Int
 ) on VARIABLE_DEFINITION
-"""
-
-The directive @injectGeneratedUUID injects a generated UUID into the variable.
-This variable MUST be a string.
-At the same time, it removes the variable from the input definition,
-disallowing the user to supply it.
-
-This means, the UUID is 100% generated server-side and can be considered untempered.
-
-"""
-directive @injectGeneratedUUID on VARIABLE_DEFINITION
-directive @rbac(
-	"""the user must not match all of the roles"""
-	denyMatchAll: [WG_ROLE]
-
-	"""the user must not match any of the roles"""
-	denyMatchAny: [WG_ROLE]
-
-	"""the user must match all roles"""
-	requireMatchAll: [WG_ROLE]
-
-	"""the user must match at least one of the roles"""
-	requireMatchAny: [WG_ROLE]
-) on QUERY | MUTATION | SUBSCRIPTION
 """
 
 The @transform directive allows to apply transformations to the response.
@@ -225,13 +253,6 @@ directive @transform(
 	get: String!
 ) on FIELD
 directive @fromClaim(name: Claim! = ISSUER, custom: CustomConfig) on VARIABLE_DEFINITION
-directive @hookVariable on VARIABLE_DEFINITION
-directive @formatDateTime(format: EngineDateTimeFormat = ISO8601,
-	"""customFormat must conform to the Golang specification for specifying a date time format"""
-	customFormat: String
-) on FIELD
-"""The directive @injectEnvironmentVariable allows you to inject an environment variable into the variable definition."""
-directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
 """
 
 The directive @injectCurrentDateTime injects a DateTime string of the current date and time into the variable.
@@ -246,42 +267,21 @@ directive @injectCurrentDateTime(format: EngineDateTimeFormat = ISO8601,
 	"""customFormat must conform to the Golang specification for specifying a date time format"""
 	customFormat: String
 ) on VARIABLE_DEFINITION
-"""
+directive @rbac(
+	"""the user must not match any of the roles"""
+	denyMatchAny: [WG_ROLE]
 
-The @transaction Directive marks an Operation execute with transaction.
+	"""the user must match all roles"""
+	requireMatchAll: [WG_ROLE]
 
-"""
-directive @transaction on MUTATION
-"""
+	"""the user must match at least one of the roles"""
+	requireMatchAny: [WG_ROLE]
 
-The @export directive instructs the Execution Planner to export the field during the execution into the variable of the 'as' argument.
-As the execution is depth first, a field can only be used after it has been exported.
-Additionally, a field can only be used after using the '_join' field or on a different data source.
-It's not possible to export a field and use it in for the same data source.
-
-Note that the @export directive only works on fields that return a single value.
-It's not possible to export a list or object field.
-
-"""
-directive @export(as: String!) on FIELD
-"""
-
-The directive @internal marks a variable definition as internal so that clients can't access it.
-The field is also not visible in the public API.
-It's only being used as an internal variable to export fields into.
-
-"""
-directive @internal on VARIABLE_DEFINITION
+	"""the user must not match all of the roles"""
+	denyMatchAll: [WG_ROLE]
+) on QUERY | MUTATION | SUBSCRIPTION
 """The directive @injectFromHeader injects a http.header into the variable."""
 directive @fromHeader(name: String!) on VARIABLE_DEFINITION
-"""
-
-The @internalOperation Directive marks an Operation as internal.
-By doing so, the Operation is no longer accessible from the public API.
-It can only be accessed by internal services, like hooks.
-
-"""
-directive @internalOperation on QUERY | MUTATION | SUBSCRIPTION
 type Query {
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_userInfo_get: casdoor_UserInfo_object
@@ -383,6 +383,20 @@ type Query {
 	main_findUniqueadmin_role_user(where: main_admin_role_userWhereUniqueInput!): main_admin_role_user
 	"""<#datasource#>main<#datasource#>"""
 	main_findUniqueadmin_role_userOrThrow(where: main_admin_role_userWhereUniqueInput!): main_admin_role_user
+	"""<#datasource#>main<#datasource#>"""
+	main_findFirstadmin_token(where: main_admin_tokenWhereInput, orderBy: [main_admin_tokenOrderByWithRelationInput], cursor: main_admin_tokenWhereUniqueInput, take: Int, skip: Int, distinct: [main_Admin_tokenScalarFieldEnum]): main_admin_token
+	"""<#datasource#>main<#datasource#>"""
+	main_findFirstadmin_tokenOrThrow(where: main_admin_tokenWhereInput, orderBy: [main_admin_tokenOrderByWithRelationInput], cursor: main_admin_tokenWhereUniqueInput, take: Int, skip: Int, distinct: [main_Admin_tokenScalarFieldEnum]): main_admin_token
+	"""<#datasource#>main<#datasource#>"""
+	main_findManyadmin_token(where: main_admin_tokenWhereInput, orderBy: [main_admin_tokenOrderByWithRelationInput], cursor: main_admin_tokenWhereUniqueInput, take: Int, skip: Int, distinct: [main_Admin_tokenScalarFieldEnum]): [main_admin_token]!
+	"""<#datasource#>main<#datasource#>"""
+	main_aggregateadmin_token(where: main_admin_tokenWhereInput, orderBy: [main_admin_tokenOrderByWithRelationInput], cursor: main_admin_tokenWhereUniqueInput, take: Int, skip: Int): main_AggregateAdmin_token!
+	"""<#datasource#>main<#datasource#>"""
+	main_groupByadmin_token(where: main_admin_tokenWhereInput, orderBy: [main_admin_tokenOrderByWithAggregationInput], by: [main_Admin_tokenScalarFieldEnum]!, having: main_admin_tokenScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_Admin_tokenGroupByOutputType]!
+	"""<#datasource#>main<#datasource#>"""
+	main_findUniqueadmin_token(where: main_admin_tokenWhereUniqueInput!): main_admin_token
+	"""<#datasource#>main<#datasource#>"""
+	main_findUniqueadmin_tokenOrThrow(where: main_admin_tokenWhereUniqueInput!): main_admin_token
 	"""<#datasource#>main<#datasource#>"""
 	main_findFirstadmin_user(where: main_admin_userWhereInput, orderBy: [main_admin_userOrderByWithRelationInput], cursor: main_admin_userWhereUniqueInput, take: Int, skip: Int, distinct: [main_Admin_userScalarFieldEnum]): main_admin_user
 	"""<#datasource#>main<#datasource#>"""
@@ -524,6 +538,8 @@ type Query {
 }
 type Mutation {
 	"""<#datasource#>casdoor<#datasource#>"""
+	casdoor_login_post(login_post_input_object: casdoor_login_post_input_object!): casdoor_UserResponse_object
+	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_refreshToken_post(refreshToken_post_input_object: casdoor_refreshToken_post_input_object!): casdoor_UserResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_sendCode_post(sendCode_post_input_object: casdoor_sendCode_post_input_object!): casdoor_APIResponse_object
@@ -533,8 +549,6 @@ type Mutation {
 	casdoor_addUser_post(addUser_post_input_object: casdoor_addUser_post_input_object!): casdoor_APIResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_updateUser_post(updateUser_post_input_object: casdoor_updateUser_post_input_object!): casdoor_APIResponse_object
-	"""<#datasource#>casdoor<#datasource#>"""
-	casdoor_login_post(login_post_input_object: casdoor_login_post_input_object!): casdoor_UserResponse_object
 	"""<#datasource#>main<#datasource#>"""
 	main_createOneadmin_apilog(data: main_admin_apilogCreateInput!): main_admin_apilog
 	"""<#datasource#>main<#datasource#>"""
@@ -633,6 +647,20 @@ type Mutation {
 	main_updateManyadmin_role_user(data: main_admin_role_userUpdateManyMutationInput!, where: main_admin_role_userWhereInput): main_AffectedRowsOutput
 	"""<#datasource#>main<#datasource#>"""
 	main_deleteManyadmin_role_user(where: main_admin_role_userWhereInput): main_AffectedRowsOutput
+	"""<#datasource#>main<#datasource#>"""
+	main_createOneadmin_token(data: main_admin_tokenCreateInput!): main_admin_token
+	"""<#datasource#>main<#datasource#>"""
+	main_upsertOneadmin_token(where: main_admin_tokenWhereUniqueInput!, create: main_admin_tokenCreateInput!, update: main_admin_tokenUpdateInput!): main_admin_token
+	"""<#datasource#>main<#datasource#>"""
+	main_createManyadmin_token(data: [main_admin_tokenCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
+	"""<#datasource#>main<#datasource#>"""
+	main_deleteOneadmin_token(where: main_admin_tokenWhereUniqueInput!): main_admin_token
+	"""<#datasource#>main<#datasource#>"""
+	main_updateOneadmin_token(data: main_admin_tokenUpdateInput!, where: main_admin_tokenWhereUniqueInput!): main_admin_token
+	"""<#datasource#>main<#datasource#>"""
+	main_updateManyadmin_token(data: main_admin_tokenUpdateManyMutationInput!, where: main_admin_tokenWhereInput): main_AffectedRowsOutput
+	"""<#datasource#>main<#datasource#>"""
+	main_deleteManyadmin_token(where: main_admin_tokenWhereInput): main_AffectedRowsOutput
 	"""<#datasource#>main<#datasource#>"""
 	main_createOneadmin_user(data: main_admin_userCreateInput!): main_admin_user
 	"""<#datasource#>main<#datasource#>"""
@@ -778,9 +806,9 @@ type casdoor_APIResponse_object {
 	_join: Query!
 }
 type casdoor_TokenResponse_object {
+	refreshToken: String
 	accessToken: String
 	expireIn: Int
-	refreshToken: String
 	_join: Query!
 }
 type casdoor_UserInfo_object {
@@ -789,9 +817,9 @@ type casdoor_UserInfo_object {
 	_join: Query!
 }
 type casdoor_UserResponse_object {
+	success: Boolean
 	data: casdoor_TokenResponse_object
 	msg: String
-	success: Boolean
 	_join: Query!
 }
 type main_Admin_apilogAvgAggregateOutputType {
@@ -1132,6 +1160,58 @@ type main_Admin_role_userSumAggregateOutputType {
 	user_id: Int
 	_join: Query!
 }
+type main_Admin_tokenAvgAggregateOutputType {
+	id: Float
+	user_id: Float
+	_join: Query!
+}
+type main_Admin_tokenCountAggregateOutputType {
+	id: Int!
+	user_id: Int!
+	token: Int!
+	expire_time: Int!
+	flush_time: Int!
+	banned: Int!
+	_all: Int!
+	_join: Query!
+}
+type main_Admin_tokenGroupByOutputType {
+	id: Int!
+	user_id: Int
+	token: String
+	expire_time: DateTime
+	flush_time: DateTime
+	banned: Boolean
+	_count: main_Admin_tokenCountAggregateOutputType
+	_avg: main_Admin_tokenAvgAggregateOutputType
+	_sum: main_Admin_tokenSumAggregateOutputType
+	_min: main_Admin_tokenMinAggregateOutputType
+	_max: main_Admin_tokenMaxAggregateOutputType
+	_join: Query!
+}
+type main_Admin_tokenMaxAggregateOutputType {
+	id: Int
+	user_id: Int
+	token: String
+	expire_time: DateTime
+	flush_time: DateTime
+	banned: Boolean
+	_join: Query!
+}
+type main_Admin_tokenMinAggregateOutputType {
+	id: Int
+	user_id: Int
+	token: String
+	expire_time: DateTime
+	flush_time: DateTime
+	banned: Boolean
+	_join: Query!
+}
+type main_Admin_tokenSumAggregateOutputType {
+	id: Int
+	user_id: Int
+	_join: Query!
+}
 type main_Admin_userAvgAggregateOutputType {
 	id: Float
 	_join: Query!
@@ -1324,6 +1404,14 @@ type main_AggregateAdmin_role_user {
 	_sum: main_Admin_role_userSumAggregateOutputType
 	_min: main_Admin_role_userMinAggregateOutputType
 	_max: main_Admin_role_userMaxAggregateOutputType
+	_join: Query!
+}
+type main_AggregateAdmin_token {
+	_count: main_Admin_tokenCountAggregateOutputType
+	_avg: main_Admin_tokenAvgAggregateOutputType
+	_sum: main_Admin_tokenSumAggregateOutputType
+	_min: main_Admin_tokenMinAggregateOutputType
+	_max: main_Admin_tokenMaxAggregateOutputType
 	_join: Query!
 }
 type main_AggregateAdmin_user {
@@ -1836,6 +1924,15 @@ type main_admin_role_user {
 	user_id: Int!
 	_join: Query!
 }
+type main_admin_token {
+	id: Int!
+	user_id: Int
+	token: String
+	expire_time: DateTime
+	flush_time: DateTime
+	banned: Boolean
+	_join: Query!
+}
 type main_admin_user {
 	id: Int!
 	created_at: DateTime
@@ -1973,16 +2070,16 @@ type system_Operation_hooksConfiguration_mockResolve_object {
 	_join: Query!
 }
 type system_Operation_hooksConfiguration_object {
-	preResolve: Boolean
 	customResolve: Boolean
-	httpTransportOnResponse: Boolean
-	mutatingPostResolve: Boolean
-	mutatingPreResolve: Boolean
-	onConnectionInit: Boolean
-	postResolve: Boolean
 	httpTransportBeforeRequest: Boolean
 	httpTransportOnRequest: Boolean
+	mutatingPostResolve: Boolean
+	onConnectionInit: Boolean
+	httpTransportOnResponse: Boolean
 	mockResolve: system_Operation_hooksConfiguration_mockResolve_object
+	mutatingPreResolve: Boolean
+	postResolve: Boolean
+	preResolve: Boolean
 	_join: Query!
 }
 type system_Operation_liveQueryConfig_object {
@@ -1991,33 +2088,33 @@ type system_Operation_liveQueryConfig_object {
 	_join: Query!
 }
 type system_Operation_object {
-	"""0-graphql 1-function 2-proxy"""
-	engine: Int
-	"""说明"""
-	remark: String
-	cacheConfig: system_Operation_cacheConfig_object
-	hooksConfiguration: system_Operation_hooksConfiguration_object
+	updateTime: String
+	"""开关 true开 false关"""
+	enabled: Boolean
+	authenticationConfig: system_Operation_authenticationConfig_object
+	deleteTime: String
 	path: String
 	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
 	operationType: Int
-	liveQueryConfig: system_Operation_liveQueryConfig_object
+	"""说明"""
+	remark: String
+	configCustomized: Boolean
+	hooksConfiguration: system_Operation_hooksConfiguration_object
 	"""路径"""
 	title: String
+	"""0-graphql 1-function 2-proxy"""
+	engine: Int
 	createTime: String
-	"""开关 true开 false关"""
-	enabled: Boolean
-	configCustomized: Boolean
-	authenticationConfig: system_Operation_authenticationConfig_object
-	deleteTime: String
-	updateTime: String
+	liveQueryConfig: system_Operation_liveQueryConfig_object
+	cacheConfig: system_Operation_cacheConfig_object
 	_join: Query!
 }
 type system_Role_object {
+	deleteTime: String
+	updateTime: String
 	code: String
 	remark: String
 	createTime: String
-	deleteTime: String
-	updateTime: String
 	_join: Query!
 }
 type system_batchInsertRoles_post_object {
@@ -2029,24 +2126,24 @@ input CustomConfig {
 	jsonPathComponents: [String]!
 }
 input casdoor_addUser_post_input_object {
+	"""Country code, default CN"""
+	countryCode: String
+	"""User name"""
+	name: String!
 	"""Password"""
 	password: String!
 	"""Password type"""
 	passwordType: String!
 	"""Phone number"""
 	phone: String!
-	"""Country code, default CN"""
-	countryCode: String
-	"""User name"""
-	name: String!
 }
 input casdoor_login_post_input_object {
+	loginType: String!
 	username: String!
 	phone: String!
 	countryCode: String
 	code: String!
 	password: String!
-	loginType: String!
 }
 input casdoor_refreshToken_post_input_object {
 	"""<#originName#>refresh-token<#originName#>"""
@@ -2059,19 +2156,19 @@ input casdoor_sendCode_post_input_object {
 	countryCode: String
 }
 input casdoor_updateProvider_post_input_object {
-	clientId: String!
 	clientSecret: String!
 	signName: String!
 	templateCode: String!
+	clientId: String!
 }
 input casdoor_updateUser_post_input_object {
-	name: String!
-	password: String!
 	passwordType: String
 	phone: String!
 	countryCode: String
 	"""User ID"""
 	userId: String!
+	name: String!
+	password: String!
 }
 input main_Admin_userRelationFilter {
 	is: main_admin_userWhereInput
@@ -3329,6 +3426,113 @@ input main_admin_role_userWhereInput {
 input main_admin_role_userWhereUniqueInput {
 	id: Int
 	role_id_user_id: main_admin_role_userRole_idUser_idCompoundUniqueInput
+}
+input main_admin_tokenAvgOrderByAggregateInput {
+	id: main_SortOrder
+	user_id: main_SortOrder
+}
+input main_admin_tokenCountOrderByAggregateInput {
+	id: main_SortOrder
+	user_id: main_SortOrder
+	token: main_SortOrder
+	expire_time: main_SortOrder
+	flush_time: main_SortOrder
+	banned: main_SortOrder
+}
+input main_admin_tokenCreateInput {
+	user_id: Int
+	token: String
+	expire_time: DateTime
+	flush_time: DateTime
+	banned: Boolean
+}
+input main_admin_tokenCreateManyInput {
+	id: Int
+	user_id: Int
+	token: String
+	expire_time: DateTime
+	flush_time: DateTime
+	banned: Boolean
+}
+input main_admin_tokenMaxOrderByAggregateInput {
+	id: main_SortOrder
+	user_id: main_SortOrder
+	token: main_SortOrder
+	expire_time: main_SortOrder
+	flush_time: main_SortOrder
+	banned: main_SortOrder
+}
+input main_admin_tokenMinOrderByAggregateInput {
+	id: main_SortOrder
+	user_id: main_SortOrder
+	token: main_SortOrder
+	expire_time: main_SortOrder
+	flush_time: main_SortOrder
+	banned: main_SortOrder
+}
+input main_admin_tokenOrderByWithAggregationInput {
+	id: main_SortOrder
+	user_id: main_SortOrder
+	token: main_SortOrder
+	expire_time: main_SortOrder
+	flush_time: main_SortOrder
+	banned: main_SortOrder
+	_count: main_admin_tokenCountOrderByAggregateInput
+	_avg: main_admin_tokenAvgOrderByAggregateInput
+	_max: main_admin_tokenMaxOrderByAggregateInput
+	_min: main_admin_tokenMinOrderByAggregateInput
+	_sum: main_admin_tokenSumOrderByAggregateInput
+}
+input main_admin_tokenOrderByWithRelationInput {
+	id: main_SortOrder
+	user_id: main_SortOrder
+	token: main_SortOrder
+	expire_time: main_SortOrder
+	flush_time: main_SortOrder
+	banned: main_SortOrder
+}
+input main_admin_tokenScalarWhereWithAggregatesInput {
+	AND: main_admin_tokenScalarWhereWithAggregatesInput
+	OR: [main_admin_tokenScalarWhereWithAggregatesInput]
+	NOT: main_admin_tokenScalarWhereWithAggregatesInput
+	id: main_IntWithAggregatesFilter
+	user_id: main_IntNullableWithAggregatesFilter
+	token: main_StringNullableWithAggregatesFilter
+	expire_time: main_DateTimeNullableWithAggregatesFilter
+	flush_time: main_DateTimeNullableWithAggregatesFilter
+	banned: main_BoolNullableWithAggregatesFilter
+}
+input main_admin_tokenSumOrderByAggregateInput {
+	id: main_SortOrder
+	user_id: main_SortOrder
+}
+input main_admin_tokenUpdateInput {
+	user_id: main_NullableIntFieldUpdateOperationsInput
+	token: main_NullableStringFieldUpdateOperationsInput
+	expire_time: main_NullableDateTimeFieldUpdateOperationsInput
+	flush_time: main_NullableDateTimeFieldUpdateOperationsInput
+	banned: main_NullableBoolFieldUpdateOperationsInput
+}
+input main_admin_tokenUpdateManyMutationInput {
+	user_id: main_NullableIntFieldUpdateOperationsInput
+	token: main_NullableStringFieldUpdateOperationsInput
+	expire_time: main_NullableDateTimeFieldUpdateOperationsInput
+	flush_time: main_NullableDateTimeFieldUpdateOperationsInput
+	banned: main_NullableBoolFieldUpdateOperationsInput
+}
+input main_admin_tokenWhereInput {
+	AND: main_admin_tokenWhereInput
+	OR: [main_admin_tokenWhereInput]
+	NOT: main_admin_tokenWhereInput
+	id: main_IntFilter
+	user_id: main_IntNullableFilter
+	token: main_StringNullableFilter
+	expire_time: main_DateTimeNullableFilter
+	flush_time: main_DateTimeNullableFilter
+	banned: main_BoolNullableFilter
+}
+input main_admin_tokenWhereUniqueInput {
+	id: Int
 }
 input main_admin_userAvgOrderByAggregateInput {
 	id: main_SortOrder
@@ -4726,11 +4930,11 @@ input main_case_visitlogWhereUniqueInput {
 	id: Int
 }
 input system_Role_input_object {
+	code: String
+	remark: String
 	createTime: String
 	deleteTime: String
 	updateTime: String
-	code: String
-	remark: String
 }
 input system_bindRoleApis_post_input_object {
 	rbacType: system_bindRoleApis_post_rbacType_enum = requireMatchAny
@@ -4742,52 +4946,52 @@ input system_getRoleBindApis_post_input_object {
 	roleCode: String!
 }
 enum COMMON_REGEX_PATTERN {
+	DOMAIN
 	URL
 	EMAIL
-	DOMAIN
 }
 enum Claim {
-	ZONE_INFO
-	LOCALE
-	"""ROLES is string array, Please use in [in, notIn]."""
-	ROLES
-	CUSTOM
-	ISSUER
+	SUBJECT
 	NAME
-	GIVEN_NAME
 	FAMILY_NAME
 	MIDDLE_NAME
-	NICKNAME
-	LOCATION
-	USERID
 	PREFERRED_USERNAME
-	PROFILE
-	PICTURE
+	GENDER
+	LOCALE
+	PROVIDER
+	"""ROLES is string array, Please use in [in, notIn]."""
+	ROLES
+	USERID
 	WEBSITE
 	EMAIL_VERIFIED
 	BIRTH_DATE
-	SUBJECT
+	ISSUER
+	LOCATION
+	CUSTOM
+	ZONE_INFO
+	NICKNAME
+	PROFILE
+	PICTURE
 	EMAIL
-	GENDER
-	PROVIDER
+	GIVEN_NAME
 }
 enum EngineDateTimeFormat {
-	RFC822Z
-	RFC850
-	Stamp
-	StampMilli
-	UnixDate
-	RFC1123
-	RFC3339
+	RFC3339Nano
 	Kitchen
+	UnixDate
+	RFC822Z
 	StampMicro
+	RFC1123
+	Stamp
+	RFC1123Z
+	RFC3339
 	ISO8601
+	RFC850
+	RFC822
+	StampMilli
+	StampNano
 	ANSIC
 	RubyDate
-	RFC3339Nano
-	StampNano
-	RFC822
-	RFC1123Z
 }
 enum ValueType {
 	STRING
@@ -4866,6 +5070,14 @@ enum main_Admin_role_userScalarFieldEnum {
 	id
 	role_id
 	user_id
+}
+enum main_Admin_tokenScalarFieldEnum {
+	id
+	user_id
+	token
+	expire_time
+	flush_time
+	banned
 }
 enum main_Admin_userScalarFieldEnum {
 	id
