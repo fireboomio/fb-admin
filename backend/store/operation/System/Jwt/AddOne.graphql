@@ -1,6 +1,6 @@
-mutation MyQuery($banned: String = "", $expire_time: DateTime = "", $flush_time: DateTime = "", $id: Int = 10, $token: String = "", $user_id: Int = 10) {
+mutation MyQuery($banned: Boolean , $expire_time: DateTime = "", $flush_time: DateTime = "", $id: Int = 10, $token: String = "", $user_id: Int = 10) {
   main_createManyadmin_token(
-    data: {banned: $banned, expire_time: $expire_time, flush_time: $flush_time, id: $id, token: $token, user_id: $user_id}
+    data: {expire_time: $expire_time, flush_time: $flush_time, id: $id, token: $token, user_id: $user_id, banned: $banned}
   ) {
     count
   }

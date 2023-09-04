@@ -10,13 +10,13 @@
     "pollingIntervalSeconds": 3
   },
   "authenticationConfigs": {
+    "1": {
+      "authRequired": false
+    },
     "2": {
       "authRequired": false
     },
     "0": {
-      "authRequired": false
-    },
-    "1": {
       "authRequired": false
     }
   },
@@ -25,10 +25,10 @@
     "mutatingPostAuthentication": true
   },
   "globalHttpTransportHooks": {
+    "onRequest": false,
     "onResponse": false,
     "beforeRequest": false,
-    "beforeOriginRequest": false,
-    "onOriginResponse": false,
-    "onRequest": false
+    "beforeOriginRequest": true,
+    "onOriginResponse": true
   }
 }

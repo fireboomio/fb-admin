@@ -5,6 +5,7 @@ import (
 	"custom-go/pkg/base"
 	"custom-go/pkg/plugins"
 	"custom-go/pkg/utils"
+	"errors"
 	"net/http"
 	"strings"
 	"time"
@@ -16,11 +17,23 @@ type (
 
 	getIsOpenI generated.System__Log__GetIsOpenInput
 	getIsOpenO generated.System__Log__GetIsOpenResponseData
+
+	checkTokenI generated.System__Jwt__CheckBannedInput
+	checkTokenO generated.System__Jwt__CheckBannedResponseData
 )
 
 func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody) (*base.ClientRequest, error) {
 	hook.Logger().Info()
 	result, _ := plugins.ExecuteInternalRequestQueries[getIsOpenI, getIsOpenO](hook.InternalClient, generated.System__Log__GetIsOpen, getIsOpenI{})
+
+	bearerToken := body.Request.Headers["Authorization"]
+
+	TokenIsbanned, _ := plugins.ExecuteInternalRequestQueries[checkTokenI, checkTokenO](hook.InternalClient, generated.System__Jwt__CheckBanned, checkTokenI{Token: strings.Split(bearerToken, " ")[1]})
+	if len(TokenIsbanned.Data) != 0 {
+		if TokenIsbanned.Data[0].Banned {
+			return nil, errors.New("token has been banned")
+		}
+	}
 
 	if result.Data.IsOpen {
 
@@ -28,6 +41,7 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 			//获取请求的是哪个api
 			api := body.Request.RequestURI
 			path := strings.Split(api, "?")[0]
+
 			bearerToken := body.Request.Headers["Authorization"]
 			if bearerToken != "" {
 				token := strings.Split(bearerToken, " ")[1]
@@ -56,6 +70,7 @@ func BeforeOriginRequest(hook *base.HttpTransportHookRequest, body *plugins.Http
 
 		}()
 	}
+
 	statusCode := http.StatusOK
 
 	body.Response = &base.ClientResponse{}

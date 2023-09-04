@@ -2,9 +2,9 @@
   "name": "statistics",
   "enabled": true,
   "createTime": "2023-06-25 15:22:17Z",
-  "updateTime": "2023-08-30T17:36:12.963177+08:00",
+  "updateTime": "2023-08-31T14:44:53.862503+08:00",
   "deleteTime": "",
-  "cached": false,
+  "cacheEnabled": false,
   "kind": 2,
   "customRest": null,
   "customGraphql": {

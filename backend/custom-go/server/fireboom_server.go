@@ -4,6 +4,8 @@ import (
 	authentication "custom-go/authentication"
 	"github.com/joho/godotenv"
 
+	"custom-go/global"
+
 	"custom-go/generated"
 
 	operation_System__Role__AddOne "custom-go/operation/System/Role/AddOne"
@@ -24,7 +26,12 @@ func init() {
 
 	types.WdgHooksAndServerConfig = types.WunderGraphHooksAndServerConfig{
 		Hooks: types.HooksConfiguration{
-			Global: plugins.GlobalConfiguration{},
+			Global: plugins.GlobalConfiguration{
+				HttpTransport: plugins.HttpTransportHooks{
+					BeforeOriginRequest: global.BeforeOriginRequest,
+					OnOriginResponse:    global.OnOriginResponse,
+				},
+			},
 			Authentication: plugins.AuthenticationConfiguration{
 				MutatingPostAuthentication: authentication.MutatingPostAuthentication,
 			},
