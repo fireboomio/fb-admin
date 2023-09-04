@@ -133,6 +133,9 @@ import { getRoleUsers } from "@/api/system";
 import { country } from "./utils/country"
 import { useRouter, useRoute } from 'vue-router';
 import { Role } from "../types";
+import { Md5 } from 'ts-md5';
+
+const salt = "qwertyuiop";
 
 const route = useRoute();
 const queryFormRef = ref(ElForm); // 查询表单
@@ -407,6 +410,9 @@ async function addUser() {
   roleFormRef.value.validate((valid: any) => {
     if (valid) {
       isDisabled.value = true;
+      const md5: any = new Md5();
+      md5.appendAsciiStr(formData.password[0] + salt[5] + formData.password.slice(1, formData.password.length));
+      formData.password = md5.end();
       window.setTimeout(() => {
         isDisabled.value = false;
       }, 1000);
