@@ -9,14 +9,26 @@
             {
               "typeName": "Mutation",
               "fieldNames": [
+                "casdoor_updateUser_post",
                 "casdoor_login_post",
                 "casdoor_refreshToken_post",
                 "casdoor_sendCode_post",
                 "casdoor_updateProvider_post",
-                "casdoor_addUser_post",
-                "casdoor_updateUser_post"
+                "casdoor_addUser_post"
               ],
               "quotes": {
+                "1": {
+                  "indexes": [
+                    3,
+                    1
+                  ]
+                },
+                "2": {
+                  "indexes": [
+                    3,
+                    1
+                  ]
+                },
                 "3": {
                   "indexes": [
                     0
@@ -33,18 +45,6 @@
                   ]
                 },
                 "0": {
-                  "indexes": [
-                    3,
-                    1
-                  ]
-                },
-                "1": {
-                  "indexes": [
-                    3,
-                    1
-                  ]
-                },
-                "2": {
                   "indexes": [
                     0
                   ]
@@ -77,17 +77,17 @@
             {
               "typeName": "casdoor_TokenResponse_object",
               "fieldNames": [
-                "refreshToken",
                 "accessToken",
                 "expireIn",
+                "refreshToken",
                 "_join"
               ]
             },
             {
               "typeName": "casdoor_UserInfo_object",
               "fieldNames": [
-                "preferred_username",
                 "phone",
+                "preferred_username",
                 "_join"
               ]
             },
@@ -103,162 +103,6 @@
           ],
           "overrideFieldPathFromAlias": false,
           "customRestMap": {
-            "Mutation.casdoor_login_post": {
-              "fetch": {
-                "url": null,
-                "method": 1,
-                "header": {
-                  "Authorization": {
-                    "values": [
-                      {
-                        "kind": 2,
-                        "placeholderVariableName": "{{ request.headers.Authorization }}"
-                      }
-                    ]
-                  }
-                },
-                "body": {
-                  "kind": 2,
-                  "placeholderVariableName": "{{ .arguments.login_post_input_object }}"
-                },
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://127.0.0.1:9825"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/api/login"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
-            "Mutation.casdoor_refreshToken_post": {
-              "fetch": {
-                "url": null,
-                "method": 1,
-                "header": {
-                  "Authorization": {
-                    "values": [
-                      {
-                        "kind": 2,
-                        "placeholderVariableName": "{{ request.headers.Authorization }}"
-                      }
-                    ]
-                  }
-                },
-                "body": {
-                  "kind": 2,
-                  "placeholderVariableName": "{{ .arguments.refreshToken_post_input_object }}"
-                },
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://127.0.0.1:9825"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/api/refresh-token"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
-            "Mutation.casdoor_sendCode_post": {
-              "fetch": {
-                "url": null,
-                "method": 1,
-                "header": {
-                  "Authorization": {
-                    "values": [
-                      {
-                        "kind": 2,
-                        "placeholderVariableName": "{{ request.headers.Authorization }}"
-                      }
-                    ]
-                  }
-                },
-                "body": {
-                  "kind": 2,
-                  "placeholderVariableName": "{{ .arguments.sendCode_post_input_object }}"
-                },
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://127.0.0.1:9825"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/api/send-verification-code"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
-            "Mutation.casdoor_updateProvider_post": {
-              "fetch": {
-                "url": null,
-                "method": 1,
-                "header": {
-                  "Authorization": {
-                    "values": [
-                      {
-                        "kind": 2,
-                        "placeholderVariableName": "{{ request.headers.Authorization }}"
-                      }
-                    ]
-                  }
-                },
-                "body": {
-                  "kind": 2,
-                  "placeholderVariableName": "{{ .arguments.updateProvider_post_input_object }}"
-                },
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://127.0.0.1:9825"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/api/update-provider"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
             "Query.casdoor_userInfo_get": {
               "fetch": {
                 "url": null,
@@ -268,7 +112,7 @@
                     "values": [
                       {
                         "kind": 2,
-                        "placeholderVariableName": "{{ request.headers.Authorization }}"
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
                       }
                     ]
                   }
@@ -304,7 +148,7 @@
                     "values": [
                       {
                         "kind": 2,
-                        "placeholderVariableName": "{{ request.headers.Authorization }}"
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
                       }
                     ]
                   }
@@ -343,7 +187,7 @@
                     "values": [
                       {
                         "kind": 2,
-                        "placeholderVariableName": "{{ request.headers.Authorization }}"
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
                       }
                     ]
                   }
@@ -363,6 +207,162 @@
                 "path": {
                   "kind": 0,
                   "staticVariableContent": "/api/update-user"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
+            "Mutation.casdoor_login_post": {
+              "fetch": {
+                "url": null,
+                "method": 1,
+                "header": {
+                  "Authorization": {
+                    "values": [
+                      {
+                        "kind": 2,
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
+                      }
+                    ]
+                  }
+                },
+                "body": {
+                  "kind": 2,
+                  "placeholderVariableName": "{{ .arguments.login_post_input_object }}"
+                },
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://127.0.0.1:9825"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/api/login"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
+            "Mutation.casdoor_refreshToken_post": {
+              "fetch": {
+                "url": null,
+                "method": 1,
+                "header": {
+                  "Authorization": {
+                    "values": [
+                      {
+                        "kind": 2,
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
+                      }
+                    ]
+                  }
+                },
+                "body": {
+                  "kind": 2,
+                  "placeholderVariableName": "{{ .arguments.refreshToken_post_input_object }}"
+                },
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://127.0.0.1:9825"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/api/refresh-token"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
+            "Mutation.casdoor_sendCode_post": {
+              "fetch": {
+                "url": null,
+                "method": 1,
+                "header": {
+                  "Authorization": {
+                    "values": [
+                      {
+                        "kind": 2,
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
+                      }
+                    ]
+                  }
+                },
+                "body": {
+                  "kind": 2,
+                  "placeholderVariableName": "{{ .arguments.sendCode_post_input_object }}"
+                },
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://127.0.0.1:9825"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/api/send-verification-code"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
+            "Mutation.casdoor_updateProvider_post": {
+              "fetch": {
+                "url": null,
+                "method": 1,
+                "header": {
+                  "Authorization": {
+                    "values": [
+                      {
+                        "kind": 2,
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
+                      }
+                    ]
+                  }
+                },
+                "body": {
+                  "kind": 2,
+                  "placeholderVariableName": "{{ .arguments.updateProvider_post_input_object }}"
+                },
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://127.0.0.1:9825"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/api/update-provider"
                 }
               },
               "subscription": {
@@ -479,13 +479,6 @@
                 "main_groupBycase_post",
                 "main_findUniquecase_post",
                 "main_findUniquecase_postOrThrow",
-                "main_findFirstcase_salelog",
-                "main_findFirstcase_salelogOrThrow",
-                "main_findManycase_salelog",
-                "main_aggregatecase_salelog",
-                "main_groupBycase_salelog",
-                "main_findUniquecase_salelog",
-                "main_findUniquecase_salelogOrThrow",
                 "main_findFirstcase_saletype",
                 "main_findFirstcase_saletypeOrThrow",
                 "main_findManycase_saletype",
@@ -509,19 +502,32 @@
                 "main_findUniquecase_visitlogOrThrow"
               ],
               "quotes": {
-                "4": {
+                "89": {
                   "indexes": [
-                    7,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
                   ]
                 },
-                "68": {
+                "2": {
                   "indexes": [
-                    74
+                    0
+                  ]
+                },
+                "8": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "61": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
                   ]
                 },
                 "72": {
@@ -533,47 +539,52 @@
                     62
                   ]
                 },
-                "31": {
+                "9": {
                   "indexes": [
-                    36,
-                    33,
-                    34,
-                    35
+                    8
                   ]
                 },
-                "63": {
+                "52": {
                   "indexes": [
-                    74
+                    60,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59
                   ]
                 },
-                "77": {
+                "96": {
                   "indexes": [
-                    89
-                  ]
-                },
-                "93": {
-                  "indexes": [
-                    106,
-                    105,
                     104
                   ]
                 },
-                "107": {
+                "36": {
                   "indexes": [
-                    121
+                    38
                   ]
                 },
-                "10": {
+                "55": {
                   "indexes": [
-                    14,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13
+                    54
                   ]
                 },
-                "57": {
+                "45": {
+                  "indexes": [
+                    52,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51
+                  ]
+                },
+                "50": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "62": {
                   "indexes": [
                     66,
                     64,
@@ -582,12 +593,125 @@
                     65
                   ]
                 },
-                "32": {
+                "73": {
                   "indexes": [
-                    37,
+                    87,
+                    82,
+                    83,
+                    84,
+                    85,
+                    86
+                  ]
+                },
+                "84": {
+                  "indexes": [
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "107": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "6": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "23": {
+                  "indexes": [
+                    24
+                  ]
+                },
+                "29": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "43": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "30": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "34": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "95": {
+                  "indexes": [
+                    111,
+                    105,
+                    106,
+                    107,
+                    108,
+                    109
+                  ]
+                },
+                "13": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "31": {
+                  "indexes": [
+                    36,
                     33,
                     34,
                     35
+                  ]
+                },
+                "68": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "17": {
+                  "indexes": [
+                    22,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
+                },
+                "54": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "100": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "59": {
+                  "indexes": [
+                    72,
+                    67,
+                    68,
+                    69,
+                    70,
+                    71
+                  ]
+                },
+                "75": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
                   ]
                 },
                 "70": {
@@ -599,31 +723,69 @@
                     62
                   ]
                 },
-                "1": {
+                "79": {
                   "indexes": [
-                    0
+                    89
                   ]
                 },
-                "9": {
+                "39": {
                   "indexes": [
-                    8
+                    45,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43
                   ]
                 },
-                "103": {
+                "91": {
                   "indexes": [
-                    105,
-                    106,
                     104
                   ]
                 },
-                "105": {
+                "93": {
                   "indexes": [
-                    121
+                    104
                   ]
                 },
-                "41": {
+                "46": {
                   "indexes": [
-                    38
+                    53,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51
+                  ]
+                },
+                "63": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "83": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "110": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "66": {
+                  "indexes": [
+                    80,
+                    75,
+                    76,
+                    77,
+                    78,
+                    79
+                  ]
+                },
+                "69": {
+                  "indexes": [
+                    74
                   ]
                 },
                 "76": {
@@ -635,9 +797,163 @@
                     62
                   ]
                 },
-                "113": {
+                "86": {
                   "indexes": [
-                    129
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "7": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "14": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "82": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "94": {
+                  "indexes": [
+                    110,
+                    105,
+                    106,
+                    107,
+                    108,
+                    109
+                  ]
+                },
+                "32": {
+                  "indexes": [
+                    37,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                "65": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "97": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "38": {
+                  "indexes": [
+                    44,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43
+                  ]
+                },
+                "41": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "16": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "33": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "48": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "20": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "35": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "71": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
+                  ]
+                },
+                "80": {
+                  "indexes": [
+                    95,
+                    90,
+                    91,
+                    92,
+                    93,
+                    94
+                  ]
+                },
+                "56": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "92": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "67": {
+                  "indexes": [
+                    81,
+                    75,
+                    76,
+                    77,
+                    78,
+                    79
+                  ]
+                },
+                "81": {
+                  "indexes": [
+                    96,
+                    90,
+                    91,
+                    92,
+                    93,
+                    94
+                  ]
+                },
+                "90": {
+                  "indexes": [
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "27": {
+                  "indexes": [
+                    24
                   ]
                 },
                 "44": {
@@ -645,32 +961,72 @@
                     46
                   ]
                 },
-                "94": {
+                "99": {
                   "indexes": [
-                    112,
-                    107,
-                    108,
-                    109,
-                    110,
-                    111
+                    112
                   ]
                 },
-                "74": {
+                "104": {
                   "indexes": [
-                    88,
-                    82,
-                    83,
-                    84,
-                    85,
-                    86
+                    112
                   ]
                 },
-                "13": {
+                "0": {
                   "indexes": [
-                    8
+                    0
                   ]
                 },
-                "54": {
+                "3": {
+                  "indexes": [
+                    6,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ]
+                },
+                "5": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "53": {
+                  "indexes": [
+                    61,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59
+                  ]
+                },
+                "15": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "28": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "111": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "4": {
+                  "indexes": [
+                    7,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ]
+                },
+                "49": {
                   "indexes": [
                     54
                   ]
@@ -684,538 +1040,14 @@
                     62
                   ]
                 },
-                "115": {
-                  "indexes": [
-                    135,
-                    130,
-                    131,
-                    132,
-                    133,
-                    134
-                  ]
-                },
-                "34": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "73": {
-                  "indexes": [
-                    87,
-                    82,
-                    83,
-                    84,
-                    85,
-                    86
-                  ]
-                },
-                "66": {
-                  "indexes": [
-                    80,
-                    75,
-                    76,
-                    77,
-                    78,
-                    79
-                  ]
-                },
-                "90": {
-                  "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
-                  ]
-                },
-                "20": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "25": {
-                  "indexes": [
-                    31,
-                    25,
-                    26,
-                    27,
-                    28,
-                    29
-                  ]
-                },
-                "104": {
-                  "indexes": [
-                    105,
-                    106,
-                    104
-                  ]
-                },
-                "110": {
-                  "indexes": [
-                    121
-                  ]
-                },
-                "53": {
-                  "indexes": [
-                    61,
-                    55,
-                    56,
-                    57,
-                    58,
-                    59
-                  ]
-                },
-                "67": {
-                  "indexes": [
-                    81,
-                    75,
-                    76,
-                    77,
-                    78,
-                    79
-                  ]
-                },
-                "46": {
-                  "indexes": [
-                    53,
-                    47,
-                    48,
-                    49,
-                    50,
-                    51
-                  ]
-                },
-                "114": {
-                  "indexes": [
-                    129
-                  ]
-                },
-                "3": {
-                  "indexes": [
-                    6,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                  ]
-                },
-                "36": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "80": {
-                  "indexes": [
-                    95,
-                    90,
-                    91,
-                    92,
-                    93,
-                    94
-                  ]
-                },
-                "97": {
-                  "indexes": [
-                    106,
-                    105,
-                    104
-                  ]
-                },
-                "116": {
-                  "indexes": [
-                    136,
-                    130,
-                    131,
-                    132,
-                    133,
-                    134
-                  ]
-                },
-                "24": {
-                  "indexes": [
-                    30,
-                    25,
-                    26,
-                    27,
-                    28,
-                    29
-                  ]
-                },
-                "61": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "18": {
-                  "indexes": [
-                    23,
-                    17,
-                    18,
-                    19,
-                    20,
-                    21
-                  ]
-                },
-                "33": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "40": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "27": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "29": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "87": {
-                  "indexes": [
-                    102,
-                    97,
-                    98,
-                    99,
-                    100,
-                    101
-                  ]
-                },
-                "65": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "82": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "59": {
-                  "indexes": [
-                    72,
-                    67,
-                    68,
-                    69,
-                    70,
-                    71
-                  ]
-                },
-                "5": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "30": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "118": {
-                  "indexes": [
-                    129
-                  ]
-                },
-                "0": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "51": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "43": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "75": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
-                  ]
-                },
-                "12": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "15": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "112": {
-                  "indexes": [
-                    129
-                  ]
-                },
-                "58": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "83": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "106": {
-                  "indexes": [
-                    121
-                  ]
-                },
-                "6": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "100": {
-                  "indexes": [
-                    105,
-                    106,
-                    104
-                  ]
-                },
-                "60": {
-                  "indexes": [
-                    73,
-                    67,
-                    68,
-                    69,
-                    70,
-                    71
-                  ]
-                },
-                "81": {
-                  "indexes": [
-                    96,
-                    90,
-                    91,
-                    92,
-                    93,
-                    94
-                  ]
-                },
-                "91": {
-                  "indexes": [
-                    106,
-                    105,
-                    104
-                  ]
-                },
-                "96": {
-                  "indexes": [
-                    106,
-                    105,
-                    104
-                  ]
-                },
-                "17": {
-                  "indexes": [
-                    22,
-                    17,
-                    18,
-                    19,
-                    20,
-                    21
-                  ]
-                },
-                "50": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "55": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "117": {
-                  "indexes": [
-                    129
-                  ]
-                },
-                "16": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "28": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "99": {
-                  "indexes": [
-                    105,
-                    106,
-                    104
-                  ]
-                },
-                "109": {
-                  "indexes": [
-                    128,
-                    122,
-                    123,
-                    124,
-                    125,
-                    126
-                  ]
-                },
-                "78": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "92": {
-                  "indexes": [
-                    106,
-                    105,
-                    104
-                  ]
-                },
-                "45": {
-                  "indexes": [
-                    52,
-                    47,
-                    48,
-                    49,
-                    50,
-                    51
-                  ]
-                },
-                "47": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "101": {
-                  "indexes": [
-                    119,
-                    114,
-                    115,
-                    116,
-                    117,
-                    118
-                  ]
-                },
-                "8": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "39": {
-                  "indexes": [
-                    45,
-                    39,
-                    40,
-                    41,
-                    42,
-                    43
-                  ]
-                },
-                "38": {
-                  "indexes": [
-                    44,
-                    39,
-                    40,
-                    41,
-                    42,
-                    43
-                  ]
-                },
-                "71": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
-                  ]
-                },
-                "95": {
-                  "indexes": [
-                    113,
-                    107,
-                    108,
-                    109,
-                    110,
-                    111
-                  ]
-                },
                 "22": {
                   "indexes": [
                     24
                   ]
                 },
-                "35": {
+                "103": {
                   "indexes": [
-                    38
-                  ]
-                },
-                "64": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "14": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "19": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "26": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "42": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "52": {
-                  "indexes": [
-                    60,
-                    55,
-                    56,
-                    57,
-                    58,
-                    59
-                  ]
-                },
-                "2": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "7": {
-                  "indexes": [
-                    8
+                    112
                   ]
                 },
                 "21": {
@@ -1223,9 +1055,23 @@
                     24
                   ]
                 },
-                "79": {
+                "101": {
                   "indexes": [
-                    89
+                    118,
+                    113,
+                    114,
+                    115,
+                    116,
+                    117
+                  ]
+                },
+                "57": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
                   ]
                 },
                 "88": {
@@ -1238,51 +1084,64 @@
                     101
                   ]
                 },
-                "102": {
+                "1": {
                   "indexes": [
-                    120,
-                    114,
-                    115,
-                    116,
-                    117,
-                    118
+                    0
+                  ]
+                },
+                "25": {
+                  "indexes": [
+                    31,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
+                  ]
+                },
+                "51": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "19": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "40": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "74": {
+                  "indexes": [
+                    88,
+                    82,
+                    83,
+                    84,
+                    85,
+                    86
                   ]
                 },
                 "108": {
                   "indexes": [
-                    127,
+                    126,
+                    121,
                     122,
                     123,
                     124,
-                    125,
-                    126
+                    125
                   ]
                 },
-                "56": {
+                "10": {
                   "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "62": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "89": {
-                  "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
+                    14,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13
                   ]
                 },
                 "11": {
@@ -1295,59 +1154,128 @@
                     13
                   ]
                 },
+                "26": {
+                  "indexes": [
+                    24
+                  ]
+                },
                 "37": {
                   "indexes": [
                     38
                   ]
                 },
-                "69": {
+                "98": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "109": {
+                  "indexes": [
+                    127,
+                    121,
+                    122,
+                    123,
+                    124,
+                    125
+                  ]
+                },
+                "12": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "18": {
+                  "indexes": [
+                    23,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
+                },
+                "77": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "105": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "60": {
+                  "indexes": [
+                    73,
+                    67,
+                    68,
+                    69,
+                    70,
+                    71
+                  ]
+                },
+                "78": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "87": {
+                  "indexes": [
+                    102,
+                    97,
+                    98,
+                    99,
+                    100,
+                    101
+                  ]
+                },
+                "102": {
+                  "indexes": [
+                    119,
+                    113,
+                    114,
+                    115,
+                    116,
+                    117
+                  ]
+                },
+                "64": {
                   "indexes": [
                     74
                   ]
                 },
-                "86": {
+                "106": {
                   "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
+                    120
                   ]
                 },
-                "23": {
+                "24": {
                   "indexes": [
-                    24
+                    30,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
                   ]
                 },
-                "49": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "98": {
-                  "indexes": [
-                    105,
-                    106,
-                    104
-                  ]
-                },
-                "111": {
-                  "indexes": [
-                    121
-                  ]
-                },
-                "48": {
+                "42": {
                   "indexes": [
                     46
                   ]
                 },
-                "84": {
+                "47": {
                   "indexes": [
-                    64,
+                    46
+                  ]
+                },
+                "58": {
+                  "indexes": [
                     66,
-                    65,
+                    64,
                     63,
-                    62
+                    62,
+                    65
                   ]
                 }
               }
@@ -1446,13 +1374,6 @@
                 "main_updateOnecase_post",
                 "main_updateManycase_post",
                 "main_deleteManycase_post",
-                "main_createOnecase_salelog",
-                "main_upsertOnecase_salelog",
-                "main_createManycase_salelog",
-                "main_deleteOnecase_salelog",
-                "main_updateOnecase_salelog",
-                "main_updateManycase_salelog",
-                "main_deleteManycase_salelog",
                 "main_createOnecase_saletype",
                 "main_upsertOnecase_saletype",
                 "main_createManycase_saletype",
@@ -1478,340 +1399,9 @@
                 "main_queryRaw"
               ],
               "quotes": {
-                "47": {
+                "111": {
                   "indexes": [
-                    137
-                  ]
-                },
-                "61": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "88": {
-                  "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
-                  ]
-                },
-                "83": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "17": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "65": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "66": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "23": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "69": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "101": {
-                  "indexes": [
-                    105,
-                    106,
-                    104
-                  ]
-                },
-                "44": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "84": {
-                  "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
-                  ]
-                },
-                "95": {
-                  "indexes": [
-                    106,
-                    105,
-                    104
-                  ]
-                },
-                "105": {
-                  "indexes": [
-                    121
-                  ]
-                },
-                "10": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "24": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "48": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "79": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "102": {
-                  "indexes": [
-                    105,
-                    106,
-                    104
-                  ]
-                },
-                "87": {
-                  "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
-                  ]
-                },
-                "96": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "104": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "3": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "7": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "15": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "114": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "4": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "9": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "68": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "35": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "70": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
-                  ]
-                },
-                "76": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "91": {
-                  "indexes": [
-                    106,
-                    105,
-                    104
-                  ]
-                },
-                "99": {
-                  "indexes": [
-                    105,
-                    106,
-                    104
-                  ]
-                },
-                "113": {
-                  "indexes": [
-                    129
-                  ]
-                },
-                "11": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "32": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "45": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "39": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "55": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "13": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "18": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "31": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "93": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "103": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "16": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "51": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "53": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "42": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "67": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "116": {
-                  "indexes": [
-                    129
-                  ]
-                },
-                "5": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "21": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "115": {
-                  "indexes": [
-                    129
-                  ]
-                },
-                "117": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "14": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "33": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "34": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "30": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "72": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "81": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "108": {
-                  "indexes": [
-                    121
+                    128
                   ]
                 },
                 "0": {
@@ -1819,48 +1409,14 @@
                     0
                   ]
                 },
-                "63": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "78": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "25": {
-                  "indexes": [
-                    24
-                  ]
-                },
                 "36": {
                   "indexes": [
                     38
                   ]
                 },
-                "58": {
+                "64": {
                   "indexes": [
-                    137
-                  ]
-                },
-                "52": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "56": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "19": {
-                  "indexes": [
-                    137
+                    74
                   ]
                 },
                 "74": {
@@ -1872,151 +1428,39 @@
                     62
                   ]
                 },
-                "100": {
+                "49": {
                   "indexes": [
-                    137
-                  ]
-                },
-                "112": {
-                  "indexes": [
-                    129
-                  ]
-                },
-                "6": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "8": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "57": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "89": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "98": {
-                  "indexes": [
-                    105,
-                    106,
-                    104
-                  ]
-                },
-                "26": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "43": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "80": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "111": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "2": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "64": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "92": {
-                  "indexes": [
-                    106,
-                    105,
-                    104
-                  ]
-                },
-                "54": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "1": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "20": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "106": {
-                  "indexes": [
-                    121
-                  ]
-                },
-                "38": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "41": {
-                  "indexes": [
-                    137
-                  ]
-                },
-                "59": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "22": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "75": {
-                  "indexes": [
-                    137
+                    54
                   ]
                 },
                 "109": {
                   "indexes": [
-                    121
+                    120
                   ]
                 },
-                "118": {
+                "105": {
                   "indexes": [
-                    137
+                    120
                   ]
                 },
-                "29": {
+                "20": {
                   "indexes": [
-                    32
+                    128
                   ]
                 },
-                "46": {
+                "48": {
                   "indexes": [
-                    46
+                    128
+                  ]
+                },
+                "52": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "100": {
+                  "indexes": [
+                    128
                   ]
                 },
                 "73": {
@@ -2028,57 +1472,329 @@
                     62
                   ]
                 },
+                "80": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "87": {
+                  "indexes": [
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "98": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "16": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "18": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "34": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "46": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "1": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "3": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "47": {
+                  "indexes": [
+                    128
+                  ]
+                },
                 "86": {
                   "indexes": [
-                    137
+                    128
                   ]
                 },
-                "90": {
+                "4": {
                   "indexes": [
-                    137
+                    0
                   ]
                 },
-                "107": {
+                "9": {
                   "indexes": [
-                    137
+                    128
                   ]
                 },
-                "110": {
+                "35": {
                   "indexes": [
-                    137
+                    38
+                  ]
+                },
+                "97": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "5": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "33": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "59": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "92": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "24": {
+                  "indexes": [
+                    24
+                  ]
+                },
+                "67": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "79": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "101": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "13": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "26": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "41": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "82": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "76": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "11": {
+                  "indexes": [
+                    8
                   ]
                 },
                 "37": {
                   "indexes": [
-                    137
+                    128
                   ]
                 },
-                "49": {
+                "32": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "39": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "69": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "6": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "50": {
                   "indexes": [
                     54
                   ]
                 },
-                "71": {
+                "25": {
                   "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
+                    24
                   ]
                 },
-                "85": {
+                "2": {
                   "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
+                    128
+                  ]
+                },
+                "10": {
+                  "indexes": [
+                    8
                   ]
                 },
                 "12": {
                   "indexes": [
-                    137
+                    128
+                  ]
+                },
+                "14": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "58": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "91": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "94": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "106": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "72": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "84": {
+                  "indexes": [
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "7": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "43": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "53": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "103": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "30": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "51": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "63": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "27": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "40": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "42": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "70": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
+                  ]
+                },
+                "23": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "28": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "56": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "75": {
+                  "indexes": [
+                    128
                   ]
                 },
                 "60": {
@@ -2090,51 +1806,205 @@
                     65
                   ]
                 },
-                "82": {
+                "68": {
                   "indexes": [
-                    137
+                    128
                   ]
                 },
-                "27": {
+                "22": {
                   "indexes": [
-                    137
+                    24
                   ]
                 },
-                "28": {
+                "57": {
                   "indexes": [
-                    32
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
                   ]
                 },
-                "50": {
+                "99": {
                   "indexes": [
-                    54
+                    112
                   ]
                 },
-                "94": {
+                "108": {
                   "indexes": [
-                    106,
-                    105,
-                    104
+                    120
                   ]
                 },
-                "97": {
+                "17": {
                   "indexes": [
-                    137
+                    16
                   ]
                 },
-                "40": {
+                "38": {
                   "indexes": [
-                    137
-                  ]
-                },
-                "62": {
-                  "indexes": [
-                    137
+                    38
                   ]
                 },
                 "77": {
                   "indexes": [
                     89
+                  ]
+                },
+                "89": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "110": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "55": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "78": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "95": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "102": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "31": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "107": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "93": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "8": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "66": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "71": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
+                  ]
+                },
+                "83": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "90": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "15": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "29": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "65": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "19": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "54": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "44": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "61": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "85": {
+                  "indexes": [
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "81": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "88": {
+                  "indexes": [
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "104": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "21": {
+                  "indexes": [
+                    24
+                  ]
+                },
+                "45": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "62": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "96": {
+                  "indexes": [
+                    128
                   ]
                 }
               }
@@ -2784,7 +2654,6 @@
               "typeName": "main_Admin_tokenAvgAggregateOutputType",
               "fieldNames": [
                 "id",
-                "user_id",
                 "_join"
               ]
             },
@@ -2792,7 +2661,6 @@
               "typeName": "main_Admin_tokenSumAggregateOutputType",
               "fieldNames": [
                 "id",
-                "user_id",
                 "_join"
               ]
             },
@@ -3401,111 +3269,11 @@
               ]
             },
             {
-              "typeName": "main_Case_saletypeCountOutputType",
-              "fieldNames": [
-                "case_salelog",
-                "_join"
-              ]
-            },
-            {
               "typeName": "main_case_saletype",
               "fieldNames": [
                 "id",
                 "name",
                 "createdAt",
-                "case_salelog",
-                "_count",
-                "_join"
-              ]
-            },
-            {
-              "typeName": "main_case_salelog",
-              "fieldNames": [
-                "id",
-                "shopName",
-                "day",
-                "sales",
-                "typeId",
-                "case_saletype",
-                "_join"
-              ]
-            },
-            {
-              "typeName": "main_Case_salelogCountAggregateOutputType",
-              "fieldNames": [
-                "id",
-                "shopName",
-                "day",
-                "sales",
-                "typeId",
-                "_all",
-                "_join"
-              ]
-            },
-            {
-              "typeName": "main_Case_salelogAvgAggregateOutputType",
-              "fieldNames": [
-                "id",
-                "sales",
-                "typeId",
-                "_join"
-              ]
-            },
-            {
-              "typeName": "main_Case_salelogSumAggregateOutputType",
-              "fieldNames": [
-                "id",
-                "sales",
-                "typeId",
-                "_join"
-              ]
-            },
-            {
-              "typeName": "main_Case_salelogMinAggregateOutputType",
-              "fieldNames": [
-                "id",
-                "shopName",
-                "day",
-                "sales",
-                "typeId",
-                "_join"
-              ]
-            },
-            {
-              "typeName": "main_Case_salelogMaxAggregateOutputType",
-              "fieldNames": [
-                "id",
-                "shopName",
-                "day",
-                "sales",
-                "typeId",
-                "_join"
-              ]
-            },
-            {
-              "typeName": "main_AggregateCase_salelog",
-              "fieldNames": [
-                "_count",
-                "_avg",
-                "_sum",
-                "_min",
-                "_max",
-                "_join"
-              ]
-            },
-            {
-              "typeName": "main_Case_salelogGroupByOutputType",
-              "fieldNames": [
-                "id",
-                "shopName",
-                "day",
-                "sales",
-                "typeId",
-                "_count",
-                "_avg",
-                "_sum",
-                "_min",
-                "_max",
                 "_join"
               ]
             },
@@ -3774,7 +3542,7 @@
           "customDatabase": {
             "databaseURL": {
               "kind": 2,
-              "placeholderVariableName": "mysql://root:1qaz2wsx@localhost:3310/main"
+              "placeholderVariableName": "mysql://root:123456@localhost:3306/main"
             },
             "prismaSchema": "",
             "graphqlSchema": "",
@@ -3911,19 +3679,19 @@
                 "system_bindRoleApis_post"
               ],
               "quotes": {
-                "0": {
-                  "indexes": [
-                    7
-                  ]
-                },
                 "2": {
                   "indexes": [
                     5,
                     0,
-                    3,
-                    2,
+                    1,
                     4,
-                    1
+                    3,
+                    2
+                  ]
+                },
+                "0": {
+                  "indexes": [
+                    7
                   ]
                 }
               }
@@ -3944,10 +3712,10 @@
                   "indexes": [
                     5,
                     0,
-                    3,
-                    2,
+                    1,
                     4,
-                    1
+                    3,
+                    2
                   ]
                 }
               }
@@ -3964,10 +3732,10 @@
             {
               "typeName": "system_Operation_cacheConfig_object",
               "fieldNames": [
-                "enabled",
                 "maxAge",
                 "public",
                 "staleWhileRevalidate",
+                "enabled",
                 "_join"
               ]
             },
@@ -3982,130 +3750,69 @@
             {
               "typeName": "system_Operation_hooksConfiguration_object",
               "fieldNames": [
+                "httpTransportOnResponse",
+                "mutatingPostResolve",
+                "mutatingPreResolve",
+                "preResolve",
                 "customResolve",
                 "httpTransportBeforeRequest",
-                "httpTransportOnRequest",
-                "mutatingPostResolve",
                 "onConnectionInit",
-                "httpTransportOnResponse",
-                "mockResolve",
-                "mutatingPreResolve",
                 "postResolve",
-                "preResolve",
+                "httpTransportOnRequest",
+                "mockResolve",
                 "_join"
               ]
             },
             {
               "typeName": "system_Operation_liveQueryConfig_object",
               "fieldNames": [
-                "enabled",
                 "pollingIntervalSeconds",
+                "enabled",
                 "_join"
               ]
             },
             {
               "typeName": "system_Operation_object",
               "fieldNames": [
+                "createTime",
                 "updateTime",
                 "enabled",
+                "remark",
                 "authenticationConfig",
                 "deleteTime",
-                "path",
-                "operationType",
-                "remark",
-                "configCustomized",
-                "hooksConfiguration",
-                "title",
-                "engine",
-                "createTime",
-                "liveQueryConfig",
                 "cacheConfig",
+                "path",
+                "liveQueryConfig",
+                "title",
+                "hooksConfiguration",
+                "operationType",
+                "engine",
+                "configCustomized",
                 "_join"
               ]
             },
             {
               "typeName": "system_Role_object",
               "fieldNames": [
+                "createTime",
                 "deleteTime",
                 "updateTime",
                 "code",
                 "remark",
-                "createTime",
                 "_join"
               ]
             },
             {
               "typeName": "system_batchInsertRoles_post_object",
               "fieldNames": [
-                "dataName",
                 "succeed",
+                "dataName",
                 "_join"
               ]
             }
           ],
           "overrideFieldPathFromAlias": false,
           "customRestMap": {
-            "Query.system_getAllRoles_get": {
-              "fetch": {
-                "url": null,
-                "method": 0,
-                "header": {
-                  
-                },
-                "body": null,
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://localhost:9123/api"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/role"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
-            "Mutation.system_batchInsertRoles_post": {
-              "fetch": {
-                "url": null,
-                "method": 1,
-                "header": {
-                  
-                },
-                "body": {
-                  "kind": 2,
-                  "placeholderVariableName": "{{ .arguments.Role_input_object }}"
-                },
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://localhost:9123/api"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/role/batch"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
             "Mutation.system_batchDeleteRoles_delete": {
               "fetch": {
                 "url": null,
@@ -4232,6 +3939,67 @@
               },
               "statusCodeTypeMappings": null,
               "defaultTypeName": ""
+            },
+            "Query.system_getAllRoles_get": {
+              "fetch": {
+                "url": null,
+                "method": 0,
+                "header": {
+                  
+                },
+                "body": null,
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://localhost:9123/api"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/role"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
+            "Mutation.system_batchInsertRoles_post": {
+              "fetch": {
+                "url": null,
+                "method": 1,
+                "header": {
+                  
+                },
+                "body": {
+                  "kind": 2,
+                  "placeholderVariableName": "{{ .arguments.Role_input_object }}"
+                },
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://localhost:9123/api"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/role/batch"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
             }
           },
           "customRest": null,
@@ -4244,6 +4012,15 @@
         }
       ],
       "fieldConfigurations": [
+        {
+          "typeName": "Mutation",
+          "fieldName": "casdoor_updateUser_post",
+          "disableDefaultFieldMapping": true,
+          "path": null,
+          "argumentsConfiguration": null,
+          "requiresFields": null,
+          "unescapeResponseJson": false
+        },
         {
           "typeName": "Mutation",
           "fieldName": "casdoor_login_post",
@@ -4283,15 +4060,6 @@
         {
           "typeName": "Mutation",
           "fieldName": "casdoor_addUser_post",
-          "disableDefaultFieldMapping": true,
-          "path": null,
-          "argumentsConfiguration": null,
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
-          "fieldName": "casdoor_updateUser_post",
           "disableDefaultFieldMapping": true,
           "path": null,
           "argumentsConfiguration": null,
@@ -8222,307 +7990,6 @@
         },
         {
           "typeName": "Query",
-          "fieldName": "main_findFirstcase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "findFirstcase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "orderBy",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "cursor",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "take",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "skip",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "distinct",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Query",
-          "fieldName": "main_findFirstcase_salelogOrThrow",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "findFirstcase_salelogOrThrow"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "orderBy",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "cursor",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "take",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "skip",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "distinct",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Query",
-          "fieldName": "main_findManycase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "findManycase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "orderBy",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "cursor",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "take",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "skip",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "distinct",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Query",
-          "fieldName": "main_aggregatecase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "aggregatecase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "orderBy",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "cursor",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "take",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "skip",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Query",
-          "fieldName": "main_groupBycase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "groupBycase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "orderBy",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "by",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "having",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "take",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "skip",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Query",
-          "fieldName": "main_findUniquecase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "findUniquecase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Query",
-          "fieldName": "main_findUniquecase_salelogOrThrow",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "findUniquecase_salelogOrThrow"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Query",
           "fieldName": "main_findFirstcase_saletype",
           "disableDefaultFieldMapping": false,
           "path": [
@@ -11610,174 +11077,6 @@
         },
         {
           "typeName": "Mutation",
-          "fieldName": "main_createOnecase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "createOnecase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "data",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
-          "fieldName": "main_upsertOnecase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "upsertOnecase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "create",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "update",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
-          "fieldName": "main_createManycase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "createManycase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "data",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "skipDuplicates",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
-          "fieldName": "main_deleteOnecase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "deleteOnecase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
-          "fieldName": "main_updateOnecase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "updateOnecase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "data",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
-          "fieldName": "main_updateManycase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "updateManycase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "data",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            },
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
-          "fieldName": "main_deleteManycase_salelog",
-          "disableDefaultFieldMapping": false,
-          "path": [
-            "deleteManycase_salelog"
-          ],
-          "argumentsConfiguration": [
-            {
-              "name": "where",
-              "sourceType": 1,
-              "sourcePath": [],
-              "renderConfiguration": 0,
-              "renameTypeTo": ""
-            }
-          ],
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
           "fieldName": "main_createOnecase_saletype",
           "disableDefaultFieldMapping": false,
           "path": [
@@ -13126,10 +12425,6 @@
           "renameTo": "Admin_role_userGroupByOutputType"
         },
         {
-          "typeName": "main_IntNullableFilter",
-          "renameTo": "IntNullableFilter"
-        },
-        {
           "typeName": "main_NestedBoolNullableFilter",
           "renameTo": "NestedBoolNullableFilter"
         },
@@ -13206,18 +12501,6 @@
           "renameTo": "admin_tokenOrderByWithAggregationInput"
         },
         {
-          "typeName": "main_NestedFloatNullableFilter",
-          "renameTo": "NestedFloatNullableFilter"
-        },
-        {
-          "typeName": "main_NestedIntNullableWithAggregatesFilter",
-          "renameTo": "NestedIntNullableWithAggregatesFilter"
-        },
-        {
-          "typeName": "main_IntNullableWithAggregatesFilter",
-          "renameTo": "IntNullableWithAggregatesFilter"
-        },
-        {
           "typeName": "main_NestedBoolNullableWithAggregatesFilter",
           "renameTo": "NestedBoolNullableWithAggregatesFilter"
         },
@@ -13232,6 +12515,10 @@
         {
           "typeName": "main_Admin_tokenGroupByOutputType",
           "renameTo": "Admin_tokenGroupByOutputType"
+        },
+        {
+          "typeName": "main_IntNullableFilter",
+          "renameTo": "IntNullableFilter"
         },
         {
           "typeName": "main_Admin_userRelationFilter",
@@ -13574,6 +12861,18 @@
           "renameTo": "case_menuOrderByWithAggregationInput"
         },
         {
+          "typeName": "main_NestedFloatNullableFilter",
+          "renameTo": "NestedFloatNullableFilter"
+        },
+        {
+          "typeName": "main_NestedIntNullableWithAggregatesFilter",
+          "renameTo": "NestedIntNullableWithAggregatesFilter"
+        },
+        {
+          "typeName": "main_IntNullableWithAggregatesFilter",
+          "renameTo": "IntNullableWithAggregatesFilter"
+        },
+        {
           "typeName": "main_case_menuScalarWhereWithAggregatesInput",
           "renameTo": "case_menuScalarWhereWithAggregatesInput"
         },
@@ -13638,120 +12937,12 @@
           "renameTo": "Case_postGroupByOutputType"
         },
         {
-          "typeName": "main_FloatFilter",
-          "renameTo": "FloatFilter"
-        },
-        {
-          "typeName": "main_Case_salelogListRelationFilter",
-          "renameTo": "Case_salelogListRelationFilter"
-        },
-        {
           "typeName": "main_case_saletypeWhereInput",
           "renameTo": "case_saletypeWhereInput"
         },
         {
-          "typeName": "main_Case_saletypeRelationFilter",
-          "renameTo": "Case_saletypeRelationFilter"
-        },
-        {
-          "typeName": "main_case_salelogWhereInput",
-          "renameTo": "case_salelogWhereInput"
-        },
-        {
-          "typeName": "main_case_salelogOrderByRelationAggregateInput",
-          "renameTo": "case_salelogOrderByRelationAggregateInput"
-        },
-        {
           "typeName": "main_case_saletypeOrderByWithRelationInput",
           "renameTo": "case_saletypeOrderByWithRelationInput"
-        },
-        {
-          "typeName": "main_case_salelogOrderByWithRelationInput",
-          "renameTo": "case_salelogOrderByWithRelationInput"
-        },
-        {
-          "typeName": "main_case_salelogWhereUniqueInput",
-          "renameTo": "case_salelogWhereUniqueInput"
-        },
-        {
-          "typeName": "main_Case_salelogScalarFieldEnum",
-          "renameTo": "Case_salelogScalarFieldEnum"
-        },
-        {
-          "typeName": "main_Case_saletypeCountOutputType",
-          "renameTo": "Case_saletypeCountOutputType"
-        },
-        {
-          "typeName": "main_case_saletype",
-          "renameTo": "case_saletype"
-        },
-        {
-          "typeName": "main_case_salelog",
-          "renameTo": "case_salelog"
-        },
-        {
-          "typeName": "main_Case_salelogCountAggregateOutputType",
-          "renameTo": "Case_salelogCountAggregateOutputType"
-        },
-        {
-          "typeName": "main_Case_salelogAvgAggregateOutputType",
-          "renameTo": "Case_salelogAvgAggregateOutputType"
-        },
-        {
-          "typeName": "main_Case_salelogSumAggregateOutputType",
-          "renameTo": "Case_salelogSumAggregateOutputType"
-        },
-        {
-          "typeName": "main_Case_salelogMinAggregateOutputType",
-          "renameTo": "Case_salelogMinAggregateOutputType"
-        },
-        {
-          "typeName": "main_Case_salelogMaxAggregateOutputType",
-          "renameTo": "Case_salelogMaxAggregateOutputType"
-        },
-        {
-          "typeName": "main_AggregateCase_salelog",
-          "renameTo": "AggregateCase_salelog"
-        },
-        {
-          "typeName": "main_case_salelogCountOrderByAggregateInput",
-          "renameTo": "case_salelogCountOrderByAggregateInput"
-        },
-        {
-          "typeName": "main_case_salelogAvgOrderByAggregateInput",
-          "renameTo": "case_salelogAvgOrderByAggregateInput"
-        },
-        {
-          "typeName": "main_case_salelogMaxOrderByAggregateInput",
-          "renameTo": "case_salelogMaxOrderByAggregateInput"
-        },
-        {
-          "typeName": "main_case_salelogMinOrderByAggregateInput",
-          "renameTo": "case_salelogMinOrderByAggregateInput"
-        },
-        {
-          "typeName": "main_case_salelogSumOrderByAggregateInput",
-          "renameTo": "case_salelogSumOrderByAggregateInput"
-        },
-        {
-          "typeName": "main_case_salelogOrderByWithAggregationInput",
-          "renameTo": "case_salelogOrderByWithAggregationInput"
-        },
-        {
-          "typeName": "main_NestedFloatWithAggregatesFilter",
-          "renameTo": "NestedFloatWithAggregatesFilter"
-        },
-        {
-          "typeName": "main_FloatWithAggregatesFilter",
-          "renameTo": "FloatWithAggregatesFilter"
-        },
-        {
-          "typeName": "main_case_salelogScalarWhereWithAggregatesInput",
-          "renameTo": "case_salelogScalarWhereWithAggregatesInput"
-        },
-        {
-          "typeName": "main_Case_salelogGroupByOutputType",
-          "renameTo": "Case_salelogGroupByOutputType"
         },
         {
           "typeName": "main_case_saletypeWhereUniqueInput",
@@ -13760,6 +12951,10 @@
         {
           "typeName": "main_Case_saletypeScalarFieldEnum",
           "renameTo": "Case_saletypeScalarFieldEnum"
+        },
+        {
+          "typeName": "main_case_saletype",
+          "renameTo": "case_saletype"
         },
         {
           "typeName": "main_Case_saletypeCountAggregateOutputType",
@@ -14118,10 +13313,6 @@
           "renameTo": "admin_tokenCreateInput"
         },
         {
-          "typeName": "main_NullableIntFieldUpdateOperationsInput",
-          "renameTo": "NullableIntFieldUpdateOperationsInput"
-        },
-        {
           "typeName": "main_NullableBoolFieldUpdateOperationsInput",
           "renameTo": "NullableBoolFieldUpdateOperationsInput"
         },
@@ -14326,6 +13517,10 @@
           "renameTo": "case_menuCreateInput"
         },
         {
+          "typeName": "main_NullableIntFieldUpdateOperationsInput",
+          "renameTo": "NullableIntFieldUpdateOperationsInput"
+        },
+        {
           "typeName": "main_case_menuUpdateInput",
           "renameTo": "case_menuUpdateInput"
         },
@@ -14350,96 +13545,8 @@
           "renameTo": "case_postCreateManyInput"
         },
         {
-          "typeName": "main_case_saletypeCreateWithoutCase_salelogInput",
-          "renameTo": "case_saletypeCreateWithoutCase_salelogInput"
-        },
-        {
-          "typeName": "main_case_saletypeCreateOrConnectWithoutCase_salelogInput",
-          "renameTo": "case_saletypeCreateOrConnectWithoutCase_salelogInput"
-        },
-        {
-          "typeName": "main_case_saletypeCreateNestedOneWithoutCase_salelogInput",
-          "renameTo": "case_saletypeCreateNestedOneWithoutCase_salelogInput"
-        },
-        {
-          "typeName": "main_case_salelogCreateInput",
-          "renameTo": "case_salelogCreateInput"
-        },
-        {
-          "typeName": "main_FloatFieldUpdateOperationsInput",
-          "renameTo": "FloatFieldUpdateOperationsInput"
-        },
-        {
-          "typeName": "main_case_saletypeUpdateWithoutCase_salelogInput",
-          "renameTo": "case_saletypeUpdateWithoutCase_salelogInput"
-        },
-        {
-          "typeName": "main_case_saletypeUpsertWithoutCase_salelogInput",
-          "renameTo": "case_saletypeUpsertWithoutCase_salelogInput"
-        },
-        {
-          "typeName": "main_case_saletypeUpdateOneRequiredWithoutCase_salelogNestedInput",
-          "renameTo": "case_saletypeUpdateOneRequiredWithoutCase_salelogNestedInput"
-        },
-        {
-          "typeName": "main_case_salelogUpdateInput",
-          "renameTo": "case_salelogUpdateInput"
-        },
-        {
-          "typeName": "main_case_salelogCreateManyInput",
-          "renameTo": "case_salelogCreateManyInput"
-        },
-        {
-          "typeName": "main_case_salelogUpdateManyMutationInput",
-          "renameTo": "case_salelogUpdateManyMutationInput"
-        },
-        {
-          "typeName": "main_case_salelogCreateWithoutCase_saletypeInput",
-          "renameTo": "case_salelogCreateWithoutCase_saletypeInput"
-        },
-        {
-          "typeName": "main_case_salelogCreateOrConnectWithoutCase_saletypeInput",
-          "renameTo": "case_salelogCreateOrConnectWithoutCase_saletypeInput"
-        },
-        {
-          "typeName": "main_case_salelogCreateManyCase_saletypeInput",
-          "renameTo": "case_salelogCreateManyCase_saletypeInput"
-        },
-        {
-          "typeName": "main_case_salelogCreateManyCase_saletypeInputEnvelope",
-          "renameTo": "case_salelogCreateManyCase_saletypeInputEnvelope"
-        },
-        {
-          "typeName": "main_case_salelogCreateNestedManyWithoutCase_saletypeInput",
-          "renameTo": "case_salelogCreateNestedManyWithoutCase_saletypeInput"
-        },
-        {
           "typeName": "main_case_saletypeCreateInput",
           "renameTo": "case_saletypeCreateInput"
-        },
-        {
-          "typeName": "main_case_salelogUpdateWithoutCase_saletypeInput",
-          "renameTo": "case_salelogUpdateWithoutCase_saletypeInput"
-        },
-        {
-          "typeName": "main_case_salelogUpsertWithWhereUniqueWithoutCase_saletypeInput",
-          "renameTo": "case_salelogUpsertWithWhereUniqueWithoutCase_saletypeInput"
-        },
-        {
-          "typeName": "main_case_salelogUpdateWithWhereUniqueWithoutCase_saletypeInput",
-          "renameTo": "case_salelogUpdateWithWhereUniqueWithoutCase_saletypeInput"
-        },
-        {
-          "typeName": "main_case_salelogScalarWhereInput",
-          "renameTo": "case_salelogScalarWhereInput"
-        },
-        {
-          "typeName": "main_case_salelogUpdateManyWithWhereWithoutCase_saletypeInput",
-          "renameTo": "case_salelogUpdateManyWithWhereWithoutCase_saletypeInput"
-        },
-        {
-          "typeName": "main_case_salelogUpdateManyWithoutCase_saletypeNestedInput",
-          "renameTo": "case_salelogUpdateManyWithoutCase_saletypeNestedInput"
         },
         {
           "typeName": "main_case_saletypeUpdateInput",
@@ -14599,9 +13706,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -14733,9 +13840,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -14789,9 +13896,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -14845,9 +13952,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -14917,9 +14024,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -14981,9 +14088,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15037,9 +14144,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15101,9 +14208,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15157,9 +14264,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15224,9 +14331,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15288,9 +14395,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15344,9 +14451,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15400,9 +14507,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15466,9 +14573,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15553,9 +14660,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15609,9 +14716,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15635,9 +14742,9 @@
         "operationType": 0,
         "engine": 0,
         "internal": false,
-        "responseSchema": "{\"properties\":{\"data\":{\"items\":{\"properties\":{\"author\":{\"type\":\"string\"},\"cate\":{\"type\":\"integer\"},\"content\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"poster\":{\"type\":\"string\"},\"published_at\":{\"format\":\"DateTime\",\"type\":\"string\"},\"title\":{\"type\":\"string\"}},\"required\":[\"author\",\"id\",\"title\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"data\"],\"type\":\"object\"}",
-        "variablesSchema": "{\"properties\":{\"equals\":{\"type\":\"string\"}},\"required\":[\"equals\"],\"type\":\"object\"}",
-        "interpolationVariablesSchema": "{\"properties\":{\"equals\":{\"type\":\"string\"}},\"required\":[\"equals\"],\"type\":\"object\"}",
+        "responseSchema": "{\"properties\":{\"data\":{\"items\":{\"properties\":{\"case_post\":{\"items\":{\"properties\":{\"author\":{\"type\":\"string\"},\"cate\":{\"type\":\"integer\"},\"content\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"poster\":{\"type\":\"string\"},\"published_at\":{\"format\":\"DateTime\",\"type\":\"string\"},\"title\":{\"type\":\"string\"}},\"required\":[\"author\",\"id\",\"title\"],\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"data\"],\"type\":\"object\"}",
+        "variablesSchema": "{\"properties\":{\"equals\":{\"type\":\"integer\"}},\"required\":[\"equals\"],\"type\":\"object\"}",
+        "interpolationVariablesSchema": "{\"properties\":{\"equals\":{\"type\":\"integer\"}},\"required\":[\"equals\"],\"type\":\"object\"}",
         "cacheConfig": {
           "enabled": false,
           "maxAge": 600,
@@ -15672,9 +14779,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15682,29 +14789,7 @@
           "keyReplaces": null,
           "valReplaces": null
         },
-        "postResolveTransformations": [
-          {
-            "kind": 0,
-            "depth": 5,
-            "get": {
-              "from": [
-                "data",
-                "data",
-                "[]",
-                "case_post",
-                "[]"
-              ],
-              "to": [
-                "data",
-                "data",
-                "[]"
-              ],
-              "deleteFrom": false,
-              "convertMap": null,
-              "dateTimeFormat": ""
-            }
-          }
-        ],
+        "postResolveTransformations": null,
         "datasourceQuotes": [
           "main"
         ],
@@ -15750,9 +14835,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15806,9 +14891,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15872,9 +14957,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15928,9 +15013,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -15984,9 +15069,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16040,9 +15125,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16096,9 +15181,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16159,9 +15244,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16209,8 +15294,8 @@
         "engine": 0,
         "internal": false,
         "responseSchema": "{\"properties\":{\"main_createManyadmin_token\":{\"properties\":{\"count\":{\"type\":\"integer\"}},\"required\":[\"count\"],\"type\":\"object\"}},\"type\":\"object\"}",
-        "variablesSchema": "{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"default\":\"10\",\"type\":\"integer\"},\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"},\"user_id\":{\"default\":\"10\",\"type\":\"integer\"}},\"type\":\"object\"}",
-        "interpolationVariablesSchema": "{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"default\":\"10\",\"type\":\"integer\"},\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"},\"user_id\":{\"default\":\"10\",\"type\":\"integer\"}},\"type\":\"object\"}",
+        "variablesSchema": "{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"default\":\"10\",\"type\":\"integer\"},\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"},\"user_id\":{\"type\":\"string\"}},\"type\":\"object\"}",
+        "interpolationVariablesSchema": "{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"default\":\"10\",\"type\":\"integer\"},\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"},\"user_id\":{\"type\":\"string\"}},\"type\":\"object\"}",
         "cacheConfig": {
           "enabled": false,
           "maxAge": 600,
@@ -16238,9 +15323,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16264,7 +15349,7 @@
         "operationType": 0,
         "engine": 0,
         "internal": false,
-        "responseSchema": "{\"properties\":{\"data\":{\"items\":{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"token\":{\"type\":\"string\"},\"user_id\":{\"type\":\"integer\"}},\"required\":[\"id\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"data\"],\"type\":\"object\"}",
+        "responseSchema": "{\"properties\":{\"data\":{\"items\":{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"token\":{\"type\":\"string\"},\"user_id\":{\"type\":\"string\"}},\"required\":[\"id\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"data\"],\"type\":\"object\"}",
         "variablesSchema": "{\"properties\":{\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"}},\"type\":\"object\"}",
         "interpolationVariablesSchema": "{\"properties\":{\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"}},\"type\":\"object\"}",
         "cacheConfig": {
@@ -16294,9 +15379,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16320,7 +15405,7 @@
         "operationType": 1,
         "engine": 0,
         "internal": false,
-        "responseSchema": "{\"properties\":{\"data\":{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"token\":{\"type\":\"string\"},\"user_id\":{\"type\":\"integer\"}},\"required\":[\"id\"],\"type\":\"object\"}},\"type\":\"object\"}",
+        "responseSchema": "{\"properties\":{\"data\":{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"token\":{\"type\":\"string\"},\"user_id\":{\"type\":\"string\"}},\"required\":[\"id\"],\"type\":\"object\"}},\"type\":\"object\"}",
         "variablesSchema": "{\"properties\":{\"id\":{\"default\":\"1\",\"type\":\"integer\"}},\"type\":\"object\"}",
         "interpolationVariablesSchema": "{\"properties\":{\"id\":{\"default\":\"1\",\"type\":\"integer\"}},\"type\":\"object\"}",
         "cacheConfig": {
@@ -16350,9 +15435,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16376,7 +15461,7 @@
         "operationType": 0,
         "engine": 0,
         "internal": false,
-        "responseSchema": "{\"properties\":{\"main_findManyadmin_token\":{\"items\":{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"token\":{\"type\":\"string\"},\"user_id\":{\"type\":\"integer\"}},\"required\":[\"id\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"main_findManyadmin_token\"],\"type\":\"object\"}",
+        "responseSchema": "{\"properties\":{\"main_findManyadmin_token\":{\"items\":{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"expire_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"format\":\"DateTime\",\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"token\":{\"type\":\"string\"},\"user_id\":{\"type\":\"string\"}},\"required\":[\"id\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"main_findManyadmin_token\"],\"type\":\"object\"}",
         "variablesSchema": "{\"properties\":{\"skip\":{\"default\":\"0\",\"type\":\"integer\"},\"take\":{\"default\":\"10\",\"type\":\"integer\"}},\"type\":\"object\"}",
         "interpolationVariablesSchema": "{\"properties\":{\"skip\":{\"default\":\"0\",\"type\":\"integer\"},\"take\":{\"default\":\"10\",\"type\":\"integer\"}},\"type\":\"object\"}",
         "cacheConfig": {
@@ -16406,9 +15491,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16433,8 +15518,8 @@
         "engine": 0,
         "internal": false,
         "responseSchema": "{\"properties\":{\"main_updateManyadmin_token\":{\"properties\":{\"count\":{\"type\":\"integer\"}},\"required\":[\"count\"],\"type\":\"object\"}},\"type\":\"object\"}",
-        "variablesSchema": "{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"equals\":{\"type\":\"integer\"},\"expire_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"},\"user_id\":{\"default\":\"10\",\"type\":\"integer\"}},\"required\":[\"equals\"],\"type\":\"object\"}",
-        "interpolationVariablesSchema": "{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"equals\":{\"type\":\"integer\"},\"expire_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"},\"user_id\":{\"default\":\"10\",\"type\":\"integer\"}},\"required\":[\"equals\"],\"type\":\"object\"}",
+        "variablesSchema": "{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"equals\":{\"type\":\"string\"},\"expire_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"},\"user_id\":{\"type\":\"string\"}},\"required\":[\"equals\"],\"type\":\"object\"}",
+        "interpolationVariablesSchema": "{\"properties\":{\"banned\":{\"type\":\"boolean\"},\"equals\":{\"type\":\"string\"},\"expire_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"flush_time\":{\"default\":\"\\\"\\\"\",\"format\":\"DateTime\",\"type\":\"string\"},\"token\":{\"default\":\"\\\"\\\"\",\"type\":\"string\"},\"user_id\":{\"type\":\"string\"}},\"required\":[\"equals\"],\"type\":\"object\"}",
         "cacheConfig": {
           "enabled": false,
           "maxAge": 600,
@@ -16462,9 +15547,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16526,9 +15611,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16582,9 +15667,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16646,9 +15731,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16709,9 +15794,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16765,9 +15850,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16821,9 +15906,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16877,9 +15962,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16933,9 +16018,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -16999,9 +16084,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17072,9 +16157,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17135,9 +16220,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17198,9 +16283,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17261,9 +16346,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17345,9 +16430,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17408,9 +16493,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17491,9 +16576,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17547,9 +16632,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17613,9 +16698,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17680,9 +16765,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17747,9 +16832,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17810,9 +16895,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17866,9 +16951,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -17922,9 +17007,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18019,9 +17104,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18075,9 +17160,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18131,9 +17216,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18187,9 +17272,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18255,9 +17340,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18322,9 +17407,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18398,9 +17483,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18466,9 +17551,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18522,9 +17607,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18578,9 +17663,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18655,9 +17740,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18711,9 +17796,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18767,9 +17852,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18835,9 +17920,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18898,9 +17983,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -18954,9 +18039,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19010,9 +18095,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19073,9 +18158,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19129,9 +18214,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19195,9 +18280,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19251,9 +18336,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19314,9 +18399,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19370,9 +18455,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19437,9 +18522,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19505,9 +18590,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19608,9 +18693,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19672,9 +18757,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19728,9 +18813,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19784,9 +18869,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {
@@ -19883,9 +18968,9 @@
             "enabled": false,
             "subscriptionPollingIntervalMillis": 0
           },
-          "httpTransportBeforeRequest": true,
+          "httpTransportBeforeRequest": false,
           "httpTransportOnRequest": false,
-          "httpTransportOnResponse": true,
+          "httpTransportOnResponse": false,
           "onConnectionInit": false
         },
         "variablesConfiguration": {

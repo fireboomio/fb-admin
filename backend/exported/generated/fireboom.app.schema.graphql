@@ -2,22 +2,47 @@ schema {
 	query: Query
 	mutation: Mutation
 }
+"""作用于变量上，用于注入用户信息"""
+directive @fromClaim(
+	"""用于String变量，注入OIDC Claim对象声明的值，如USERID等"""
+	name: Claim! = ISSUER
+
+	"""用于任意变量，name=CUSTOM时生效，以数组形式指定json path，从CustomClaims中提取数据"""
+	custom: CustomConfig
+) on VARIABLE_DEFINITION
+"""作用于OPERATION上，声明API的RBAC权限"""
+directive @rbac(
+	"""全部匹配，用户角色包含API角色时，可访问"""
+	requireMatchAll: [WG_ROLE]
+
+	"""任意匹配，用户角色与API角色有交集时，可访问（常用）"""
+	requireMatchAny: [WG_ROLE]
+
+	"""非全部匹配，当任意匹配或互斥匹配时，可访问"""
+	denyMatchAll: [WG_ROLE]
+
+	"""互斥匹配，用户角色与API角色互斥时，可访问"""
+	denyMatchAny: [WG_ROLE]
+) on QUERY | MUTATION | SUBSCRIPTION
 """作用于变量上，用于声明变量，和_join和export一起使用"""
 directive @internal on VARIABLE_DEFINITION
-"""作用于MUTATION OPERATION上，指定当前变更为事务操作"""
-directive @transaction on MUTATION
-"""作用在字段上，用于格式化日期"""
-directive @formatDateTime(
-	"""枚举值，系统内置的标准格式，如 ISO8601"""
-	format: EngineDateTimeFormat = ISO8601
-
-	"""自定义格式，需遵循Golang规范，例如 2006-01-02 15:04:05"""
-	customFormat: String
-) on FIELD
-"""作用于标量选择集上，将字段赋值给@internal声明的变量"""
-directive @injectGeneratedUUID on VARIABLE_DEFINITION
 """作用于变量上，用于入参校验"""
-directive @jsonSchema(
+directive @jsonSchema(title: String, description: String, multipleOf: Float,
+	"""用于数字类型变量，变量>minimum"""
+	minimum: Float
+
+	"""用于数组变量，len(变量) ≤ maxItems"""
+	minLength: Int
+
+	"""用于数组变量，为true时每项值不能重复"""
+	uniqueItems: Boolean
+
+	"""同pattern，声明了几种特殊正则枚举"""
+	commonPattern: COMMON_REGEX_PATTERN
+
+	"""用于String变量，len(变量)≤maxLength"""
+	maxLength: Int
+
 	"""用于数组变量，len(变量)≥minItems"""
 	minItems: Int
 
@@ -27,47 +52,35 @@ directive @jsonSchema(
 	"""用于数字类型变量，变量<maximum"""
 	maximum: Float
 
-	"""用于数字类型变量，变量>minimum"""
-	minimum: Float
-
-	"""用于String变量，len(变量)≤maxLength"""
-	maxLength: Int
-
-	"""用于数组变量，len(变量) ≤ maxItems"""
-	minLength: Int
-description: String, multipleOf: Float,
 	"""用于数组变量，len(变量)≤maxItems"""
 	maxItems: Int
-
-	"""同pattern，声明了几种特殊正则枚举"""
-	commonPattern: COMMON_REGEX_PATTERN
-title: String, exclusiveMaximum: Boolean,
-	"""用于数组变量，为true时每项值不能重复"""
-	uniqueItems: Boolean
-exclusiveMinimum: Boolean) on VARIABLE_DEFINITION
+exclusiveMaximum: Boolean, exclusiveMinimum: Boolean) on VARIABLE_DEFINITION
 """作用于标量选择集上，将字段赋值给@internal声明的变量"""
-directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
-"""作用于OPERATION上，声明API的RBAC权限"""
-directive @rbac(
-	"""任意匹配，用户角色与API角色有交集时，可访问（常用）"""
-	requireMatchAny: [WG_ROLE]
-
-	"""非全部匹配，当任意匹配或互斥匹配时，可访问"""
-	denyMatchAll: [WG_ROLE]
-
-	"""互斥匹配，用户角色与API角色互斥时，可访问"""
-	denyMatchAny: [WG_ROLE]
-
-	"""全部匹配，用户角色包含API角色时，可访问"""
-	requireMatchAll: [WG_ROLE]
-) on QUERY | MUTATION | SUBSCRIPTION
+directive @injectGeneratedUUID on VARIABLE_DEFINITION
 """作用于MUTATION OPERATION上，指定当前变更为事务操作"""
 directive @transform(
 	"""示例用法：info.name"""
 	get: String!
 ) on FIELD
+"""作用于String变量上，用于注入请求头中的字段"""
+directive @fromHeader(name: String!) on VARIABLE_DEFINITION
+"""作用于标量选择集上，将字段赋值给@internal声明的变量"""
+directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
 """作用于标量选择集上，将字段赋值给@internal声明的变量"""
 directive @export(as: String!) on FIELD
+"""作用在字段上，用于格式化日期"""
+directive @formatDateTime(
+	"""枚举值，系统内置的标准格式，如 ISO8601"""
+	format: EngineDateTimeFormat = ISO8601
+
+	"""自定义格式，需遵循Golang规范，例如 2006-01-02 15:04:05"""
+	customFormat: String
+) on FIELD
+directive @hookVariable on VARIABLE_DEFINITION
+"""作用于OPERATION上，将其声明为内部函数，不对外暴露"""
+directive @internalOperation on QUERY | MUTATION | SUBSCRIPTION
+"""作用于MUTATION OPERATION上，指定当前变更为事务操作"""
+directive @transaction on MUTATION
 """作用于标量选择集上，将字段赋值给@internal声明的变量"""
 directive @injectCurrentDateTime(
 	"""枚举值，系统内置的标准格式，如 ISO8601"""
@@ -75,19 +88,6 @@ directive @injectCurrentDateTime(
 
 	"""自定义格式，需遵循Golang规范，例如 2006-01-02 15:04:05"""
 	customFormat: String
-) on VARIABLE_DEFINITION
-"""作用于OPERATION上，将其声明为内部函数，不对外暴露"""
-directive @internalOperation on QUERY | MUTATION | SUBSCRIPTION
-"""作用于String变量上，用于注入请求头中的字段"""
-directive @fromHeader(name: String!) on VARIABLE_DEFINITION
-directive @hookVariable on VARIABLE_DEFINITION
-"""作用于变量上，用于注入用户信息"""
-directive @fromClaim(
-	"""用于String变量，注入OIDC Claim对象声明的值，如USERID等"""
-	name: Claim! = ISSUER
-
-	"""用于任意变量，name=CUSTOM时生效，以数组形式指定json path，从CustomClaims中提取数据"""
-	custom: CustomConfig
 ) on VARIABLE_DEFINITION
 type Query {
 	"""<#datasource#>casdoor<#datasource#>"""
@@ -331,8 +331,6 @@ type Query {
 }
 type Mutation {
 	"""<#datasource#>casdoor<#datasource#>"""
-	casdoor_addUser_post(addUser_post_input_object: casdoor_addUser_post_input_object!): casdoor_APIResponse_object
-	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_updateUser_post(updateUser_post_input_object: casdoor_updateUser_post_input_object!): casdoor_APIResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_login_post(login_post_input_object: casdoor_login_post_input_object!): casdoor_UserResponse_object
@@ -342,6 +340,8 @@ type Mutation {
 	casdoor_sendCode_post(sendCode_post_input_object: casdoor_sendCode_post_input_object!): casdoor_APIResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_updateProvider_post(updateProvider_post_input_object: casdoor_updateProvider_post_input_object!): casdoor_APIResponse_object
+	"""<#datasource#>casdoor<#datasource#>"""
+	casdoor_addUser_post(addUser_post_input_object: casdoor_addUser_post_input_object!): casdoor_APIResponse_object
 	"""<#datasource#>main<#datasource#>"""
 	main_createOneadmin_apilog(data: main_admin_apilogCreateInput!): main_admin_apilog
 	"""<#datasource#>main<#datasource#>"""
@@ -571,13 +571,13 @@ type Mutation {
 	"""<#datasource#>main<#datasource#>"""
 	main_queryRaw(query: String!, parameters: JSON): JSON
 	"""<#datasource#>system<#datasource#>"""
-	system_bindRoleApis_post(bindRoleApis_post_input_object: system_bindRoleApis_post_input_object!): [String]
-	"""<#datasource#>system<#datasource#>"""
 	system_batchInsertRoles_post(Role_input_object: [system_Role_input_object]!): [system_batchInsertRoles_post_object]
 	"""<#datasource#>system<#datasource#>"""
 	system_batchDeleteRoles_delete(dataNames: [String]!): Boolean
 	"""<#datasource#>system<#datasource#>"""
 	system_getRoleBindApis_post(getRoleBindApis_post_input_object: system_getRoleBindApis_post_input_object!): [system_Operation_object]
+	"""<#datasource#>system<#datasource#>"""
+	system_bindRoleApis_post(bindRoleApis_post_input_object: system_bindRoleApis_post_input_object!): [String]
 }
 type casdoor_APIResponse_object {
 	msg: String
@@ -585,9 +585,9 @@ type casdoor_APIResponse_object {
 	_join: Query!
 }
 type casdoor_TokenResponse_object {
+	accessToken: String
 	expireIn: Int
 	refreshToken: String
-	accessToken: String
 	_join: Query!
 }
 type casdoor_UserInfo_object {
@@ -596,9 +596,9 @@ type casdoor_UserInfo_object {
 	_join: Query!
 }
 type casdoor_UserResponse_object {
-	msg: String
 	success: Boolean
 	data: casdoor_TokenResponse_object
+	msg: String
 	_join: Query!
 }
 type main_Admin_apilogAvgAggregateOutputType {
@@ -1762,10 +1762,10 @@ type system_Operation_authenticationConfig_object {
 	_join: Query!
 }
 type system_Operation_cacheConfig_object {
-	enabled: Boolean
 	maxAge: Int
 	public: Boolean
 	staleWhileRevalidate: Int
+	enabled: Boolean
 	_join: Query!
 }
 type system_Operation_hooksConfiguration_mockResolve_object {
@@ -1774,56 +1774,56 @@ type system_Operation_hooksConfiguration_mockResolve_object {
 	_join: Query!
 }
 type system_Operation_hooksConfiguration_object {
-	mockResolve: system_Operation_hooksConfiguration_mockResolve_object
-	onConnectionInit: Boolean
-	preResolve: Boolean
 	httpTransportOnResponse: Boolean
-	httpTransportBeforeRequest: Boolean
-	httpTransportOnRequest: Boolean
 	mutatingPostResolve: Boolean
 	mutatingPreResolve: Boolean
-	postResolve: Boolean
+	preResolve: Boolean
 	customResolve: Boolean
+	httpTransportBeforeRequest: Boolean
+	onConnectionInit: Boolean
+	postResolve: Boolean
+	httpTransportOnRequest: Boolean
+	mockResolve: system_Operation_hooksConfiguration_mockResolve_object
 	_join: Query!
 }
 type system_Operation_liveQueryConfig_object {
-	enabled: Boolean
 	pollingIntervalSeconds: Int
+	enabled: Boolean
 	_join: Query!
 }
 type system_Operation_object {
-	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
-	operationType: Int
-	"""路径"""
-	title: String
-	"""0-graphql 1-function 2-proxy"""
-	engine: Int
-	cacheConfig: system_Operation_cacheConfig_object
+	createTime: String
 	updateTime: String
 	"""开关 true开 false关"""
 	enabled: Boolean
-	deleteTime: String
-	path: String
-	hooksConfiguration: system_Operation_hooksConfiguration_object
 	"""说明"""
 	remark: String
 	authenticationConfig: system_Operation_authenticationConfig_object
-	configCustomized: Boolean
-	createTime: String
+	deleteTime: String
+	cacheConfig: system_Operation_cacheConfig_object
+	path: String
 	liveQueryConfig: system_Operation_liveQueryConfig_object
+	"""路径"""
+	title: String
+	hooksConfiguration: system_Operation_hooksConfiguration_object
+	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
+	operationType: Int
+	"""0-graphql 1-function 2-proxy"""
+	engine: Int
+	configCustomized: Boolean
 	_join: Query!
 }
 type system_Role_object {
-	remark: String
 	createTime: String
 	deleteTime: String
 	updateTime: String
 	code: String
+	remark: String
 	_join: Query!
 }
 type system_batchInsertRoles_post_object {
-	dataName: String
 	succeed: Boolean
+	dataName: String
 	_join: Query!
 }
 input CustomConfig {
@@ -1842,12 +1842,12 @@ input casdoor_addUser_post_input_object {
 	countryCode: String
 }
 input casdoor_login_post_input_object {
+	loginType: String!
+	username: String!
 	phone: String!
 	countryCode: String
 	code: String!
 	password: String!
-	loginType: String!
-	username: String!
 }
 input casdoor_refreshToken_post_input_object {
 	"""<#originName#>refresh-token<#originName#>"""
@@ -1866,13 +1866,13 @@ input casdoor_updateProvider_post_input_object {
 	templateCode: String!
 }
 input casdoor_updateUser_post_input_object {
+	passwordType: String
 	phone: String!
 	countryCode: String
 	"""User ID"""
 	userId: String!
 	name: String!
 	password: String!
-	passwordType: String
 }
 input main_Admin_userRelationFilter {
 	is: main_admin_userWhereInput
@@ -4376,75 +4376,75 @@ input main_case_visitlogWhereUniqueInput {
 	id: Int
 }
 input system_Role_input_object {
+	deleteTime: String
 	updateTime: String
 	code: String
 	remark: String
 	createTime: String
-	deleteTime: String
 }
 input system_bindRoleApis_post_input_object {
-	operationPaths: [String]!
 	rbacType: system_bindRoleApis_post_rbacType_enum = requireMatchAny
 	roleCodes: [String]!
+	operationPaths: [String]!
 }
 input system_getRoleBindApis_post_input_object {
 	rbacType: system_getRoleBindApis_post_rbacType_enum = requireMatchAny
 	roleCode: String!
 }
 enum COMMON_REGEX_PATTERN {
-	EMAIL
 	DOMAIN
 	URL
+	EMAIL
 }
 enum Claim {
-	NAME
-	NICKNAME
-	GENDER
-	ZONE_INFO
-	LOCATION
-	PICTURE
-	WEBSITE
-	LOCALE
-	"""ROLES is string array, Please use in [in, notIn]."""
-	ROLES
-	CUSTOM
 	PROVIDER
 	SUBJECT
 	FAMILY_NAME
-	PROFILE
-	EMAIL
-	EMAIL_VERIFIED
+	PREFERRED_USERNAME
+	ZONE_INFO
 	ISSUER
+	NICKNAME
+	WEBSITE
+	EMAIL
+	GENDER
+	NAME
+	PROFILE
+	EMAIL_VERIFIED
+	BIRTH_DATE
+	"""ROLES is string array, Please use in [in, notIn]."""
+	ROLES
 	USERID
 	GIVEN_NAME
 	MIDDLE_NAME
-	PREFERRED_USERNAME
-	BIRTH_DATE
+	PICTURE
+	LOCALE
+	LOCATION
+	CUSTOM
 }
 enum EngineDateTimeFormat {
 	UnixDate
 	RubyDate
-	StampMilli
-	ISO8601
-	ANSIC
-	Stamp
-	Kitchen
-	StampMicro
 	RFC850
 	RFC1123
 	RFC1123Z
-	RFC3339
-	RFC3339Nano
-	StampNano
+	Stamp
+	Kitchen
+	ISO8601
 	RFC822
 	RFC822Z
+	ANSIC
+	RFC3339
+	RFC3339Nano
+	StampMilli
+	StampMicro
+	StampNano
 }
 enum ValueType {
+	BOOLEAN
+	ARRAY
 	STRING
 	INT
 	FLOAT
-	BOOLEAN
-	ARRAY
 }
 enum WG_ROLE {
 	a

@@ -7,29 +7,29 @@ type APIResponse_object {
 	status: Int
 }
 type Mutation {
-	addUser_post(addUser_post_input_object: addUser_post_input_object!): APIResponse_object
 	updateUser_post(updateUser_post_input_object: updateUser_post_input_object!): APIResponse_object
 	login_post(login_post_input_object: login_post_input_object!): UserResponse_object
 	refreshToken_post(refreshToken_post_input_object: refreshToken_post_input_object!): UserResponse_object
 	sendCode_post(sendCode_post_input_object: sendCode_post_input_object!): APIResponse_object
 	updateProvider_post(updateProvider_post_input_object: updateProvider_post_input_object!): APIResponse_object
+	addUser_post(addUser_post_input_object: addUser_post_input_object!): APIResponse_object
 }
 type Query {
 	userInfo_get: UserInfo_object
 }
 type TokenResponse_object {
+	accessToken: String
 	expireIn: Int
 	refreshToken: String
-	accessToken: String
 }
 type UserInfo_object {
 	phone: String
 	preferred_username: String
 }
 type UserResponse_object {
-	msg: String
 	success: Boolean
 	data: TokenResponse_object
+	msg: String
 }
 input addUser_post_input_object {
 	"""User name"""
@@ -44,12 +44,12 @@ input addUser_post_input_object {
 	countryCode: String
 }
 input login_post_input_object {
+	loginType: String!
+	username: String!
 	phone: String!
 	countryCode: String
 	code: String!
 	password: String!
-	loginType: String!
-	username: String!
 }
 input refreshToken_post_input_object {
 	"""<#originName#>refresh-token<#originName#>"""
@@ -68,11 +68,11 @@ input updateProvider_post_input_object {
 	templateCode: String!
 }
 input updateUser_post_input_object {
+	passwordType: String
 	phone: String!
 	countryCode: String
 	"""User ID"""
 	userId: String!
 	name: String!
 	password: String!
-	passwordType: String
 }

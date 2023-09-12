@@ -1,6 +1,6 @@
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:1qaz2wsx@localhost:3310/main"
+  url      = "mysql://root:123456@localhost:3306/main"
 }
 
 model admin_apilog {
@@ -71,7 +71,7 @@ model admin_role_user {
 
 model admin_token {
   id          Int       @id @default(autoincrement())
-  user_id     Int?
+  user_id     String?   @db.VarChar(255)
   token       String?   @db.LongText
   expire_time DateTime? @db.DateTime(0)
   flush_time  DateTime? @db.DateTime(0)
@@ -143,22 +143,10 @@ model case_post {
   @@index([cate], map: "post_id_fkey")
 }
 
-model case_salelog {
-  id            Int           @id @default(autoincrement())
-  shopName      String        @db.VarChar(50)
-  day           DateTime      @db.DateTime(0)
-  sales         Float
-  typeId        Int
-  case_saletype case_saletype @relation(fields: [typeId], references: [id], map: "SaleLog_typeId_fkey")
-
-  @@index([typeId], map: "SaleLog_typeId_fkey")
-}
-
 model case_saletype {
-  id           Int            @id @default(autoincrement())
-  name         String         @db.LongText
-  createdAt    String         @db.LongText
-  case_salelog case_salelog[]
+  id        Int    @id @default(autoincrement())
+  name      String @db.LongText
+  createdAt String @db.LongText
 }
 
 model case_sub {
