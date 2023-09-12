@@ -83,6 +83,7 @@
       "staticVariableContent": "http://localhost:9123/#/workbench/rapi/loginBack"
     }
   ],
+  "authorizedRedirectUriRegexes": null,
   "allowedReport": true,
   "enableCSRFProtect": false,
   "forceHttpsRedirects": false,

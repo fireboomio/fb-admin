@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/labstack/echo/v4"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -86,6 +87,7 @@ type (
 		Functions  []string  `json:"functions"`
 		Proxys     []string  `json:"proxys"`
 		Time       time.Time `json:"time"`
+		sync.Mutex
 	}
 	routerFunc func(e *echo.Echo)
 )

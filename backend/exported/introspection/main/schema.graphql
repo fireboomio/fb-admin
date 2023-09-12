@@ -1501,17 +1501,6 @@ type Admin_role_userGroupByOutputType {
     _max: Admin_role_userMaxAggregateOutputType
 }
 
-input IntNullableFilter {
-    equals: Int
-    in: [Int]
-    notIn: [Int]
-    lt: Int
-    lte: Int
-    gt: Int
-    gte: Int
-    not: NestedIntNullableFilter
-}
-
 input NestedBoolNullableFilter {
     equals: Boolean
     not: NestedBoolNullableFilter
@@ -1527,7 +1516,7 @@ input admin_tokenWhereInput {
     OR: [admin_tokenWhereInput]
     NOT: admin_tokenWhereInput
     id: IntFilter
-    user_id: IntNullableFilter
+    user_id: StringNullableFilter
     token: StringNullableFilter
     expire_time: DateTimeNullableFilter
     flush_time: DateTimeNullableFilter
@@ -1558,7 +1547,7 @@ enum Admin_tokenScalarFieldEnum {
 
 type admin_token {
     id: Int!
-    user_id: Int
+    user_id: String
     token: String
     expire_time: DateTime
     flush_time: DateTime
@@ -1577,17 +1566,15 @@ type Admin_tokenCountAggregateOutputType {
 
 type Admin_tokenAvgAggregateOutputType {
     id: Float
-    user_id: Float
 }
 
 type Admin_tokenSumAggregateOutputType {
     id: Int
-    user_id: Int
 }
 
 type Admin_tokenMinAggregateOutputType {
     id: Int
-    user_id: Int
+    user_id: String
     token: String
     expire_time: DateTime
     flush_time: DateTime
@@ -1596,7 +1583,7 @@ type Admin_tokenMinAggregateOutputType {
 
 type Admin_tokenMaxAggregateOutputType {
     id: Int
-    user_id: Int
+    user_id: String
     token: String
     expire_time: DateTime
     flush_time: DateTime
@@ -1622,7 +1609,6 @@ input admin_tokenCountOrderByAggregateInput {
 
 input admin_tokenAvgOrderByAggregateInput {
     id: SortOrder
-    user_id: SortOrder
 }
 
 input admin_tokenMaxOrderByAggregateInput {
@@ -1645,7 +1631,6 @@ input admin_tokenMinOrderByAggregateInput {
 
 input admin_tokenSumOrderByAggregateInput {
     id: SortOrder
-    user_id: SortOrder
 }
 
 input admin_tokenOrderByWithAggregationInput {
@@ -1660,49 +1645,6 @@ input admin_tokenOrderByWithAggregationInput {
     _max: admin_tokenMaxOrderByAggregateInput
     _min: admin_tokenMinOrderByAggregateInput
     _sum: admin_tokenSumOrderByAggregateInput
-}
-
-input NestedFloatNullableFilter {
-    equals: Float
-    in: [Float]
-    notIn: [Float]
-    lt: Float
-    lte: Float
-    gt: Float
-    gte: Float
-    not: NestedFloatNullableFilter
-}
-
-input NestedIntNullableWithAggregatesFilter {
-    equals: Int
-    in: [Int]
-    notIn: [Int]
-    lt: Int
-    lte: Int
-    gt: Int
-    gte: Int
-    not: NestedIntNullableWithAggregatesFilter
-    _count: NestedIntNullableFilter
-    _avg: NestedFloatNullableFilter
-    _sum: NestedIntNullableFilter
-    _min: NestedIntNullableFilter
-    _max: NestedIntNullableFilter
-}
-
-input IntNullableWithAggregatesFilter {
-    equals: Int
-    in: [Int]
-    notIn: [Int]
-    lt: Int
-    lte: Int
-    gt: Int
-    gte: Int
-    not: NestedIntNullableWithAggregatesFilter
-    _count: NestedIntNullableFilter
-    _avg: NestedFloatNullableFilter
-    _sum: NestedIntNullableFilter
-    _min: NestedIntNullableFilter
-    _max: NestedIntNullableFilter
 }
 
 input NestedBoolNullableWithAggregatesFilter {
@@ -1726,7 +1668,7 @@ input admin_tokenScalarWhereWithAggregatesInput {
     OR: [admin_tokenScalarWhereWithAggregatesInput]
     NOT: admin_tokenScalarWhereWithAggregatesInput
     id: IntWithAggregatesFilter
-    user_id: IntNullableWithAggregatesFilter
+    user_id: StringNullableWithAggregatesFilter
     token: StringNullableWithAggregatesFilter
     expire_time: DateTimeNullableWithAggregatesFilter
     flush_time: DateTimeNullableWithAggregatesFilter
@@ -1735,7 +1677,7 @@ input admin_tokenScalarWhereWithAggregatesInput {
 
 type Admin_tokenGroupByOutputType {
     id: Int!
-    user_id: Int
+    user_id: String
     token: String
     expire_time: DateTime
     flush_time: DateTime
@@ -1745,6 +1687,17 @@ type Admin_tokenGroupByOutputType {
     _sum: Admin_tokenSumAggregateOutputType
     _min: Admin_tokenMinAggregateOutputType
     _max: Admin_tokenMaxAggregateOutputType
+}
+
+input IntNullableFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableFilter
 }
 
 input Admin_userRelationFilter {
@@ -2607,6 +2560,49 @@ input case_menuOrderByWithAggregationInput {
     _sum: case_menuSumOrderByAggregateInput
 }
 
+input NestedFloatNullableFilter {
+    equals: Float
+    in: [Float]
+    notIn: [Float]
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    not: NestedFloatNullableFilter
+}
+
+input NestedIntNullableWithAggregatesFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _avg: NestedFloatNullableFilter
+    _sum: NestedIntNullableFilter
+    _min: NestedIntNullableFilter
+    _max: NestedIntNullableFilter
+}
+
+input IntNullableWithAggregatesFilter {
+    equals: Int
+    in: [Int]
+    notIn: [Int]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _avg: NestedFloatNullableFilter
+    _sum: NestedIntNullableFilter
+    _min: NestedIntNullableFilter
+    _max: NestedIntNullableFilter
+}
+
 input case_menuScalarWhereWithAggregatesInput {
     AND: case_menuScalarWhereWithAggregatesInput
     OR: [case_menuScalarWhereWithAggregatesInput]
@@ -2792,23 +2788,6 @@ type Case_postGroupByOutputType {
     _max: Case_postMaxAggregateOutputType
 }
 
-input FloatFilter {
-    equals: Float
-    in: [Float]
-    notIn: [Float]
-    lt: Float
-    lte: Float
-    gt: Float
-    gte: Float
-    not: NestedFloatFilter
-}
-
-input Case_salelogListRelationFilter {
-    every: case_salelogWhereInput
-    some: case_salelogWhereInput
-    none: case_salelogWhereInput
-}
-
 input case_saletypeWhereInput {
     AND: case_saletypeWhereInput
     OR: [case_saletypeWhereInput]
@@ -2816,227 +2795,12 @@ input case_saletypeWhereInput {
     id: IntFilter
     name: StringFilter
     createdAt: StringFilter
-    case_salelog: Case_salelogListRelationFilter
-}
-
-input Case_saletypeRelationFilter {
-    is: case_saletypeWhereInput
-    isNot: case_saletypeWhereInput
-}
-
-input case_salelogWhereInput {
-    AND: case_salelogWhereInput
-    OR: [case_salelogWhereInput]
-    NOT: case_salelogWhereInput
-    id: IntFilter
-    shopName: StringFilter
-    day: DateTimeFilter
-    sales: FloatFilter
-    typeId: IntFilter
-    case_saletype: Case_saletypeRelationFilter
-}
-
-input case_salelogOrderByRelationAggregateInput {
-    _count: SortOrder
 }
 
 input case_saletypeOrderByWithRelationInput {
     id: SortOrder
     name: SortOrder
     createdAt: SortOrder
-    case_salelog: case_salelogOrderByRelationAggregateInput
-}
-
-input case_salelogOrderByWithRelationInput {
-    id: SortOrder
-    shopName: SortOrder
-    day: SortOrder
-    sales: SortOrder
-    typeId: SortOrder
-    case_saletype: case_saletypeOrderByWithRelationInput
-}
-
-input case_salelogWhereUniqueInput {
-    id: Int
-}
-
-enum Case_salelogScalarFieldEnum {
-    id
-    shopName
-    day
-    sales
-    typeId
-}
-
-type Case_saletypeCountOutputType {
-    case_salelog: Int!
-}
-
-type case_saletype {
-    id: Int!
-    name: String!
-    createdAt: String!
-    case_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_salelogScalarFieldEnum]): [case_salelog]
-    _count: Case_saletypeCountOutputType!
-}
-
-type case_salelog {
-    id: Int!
-    shopName: String!
-    day: DateTime!
-    sales: Float!
-    typeId: Int!
-    case_saletype: case_saletype!
-}
-
-type Case_salelogCountAggregateOutputType {
-    id: Int!
-    shopName: Int!
-    day: Int!
-    sales: Int!
-    typeId: Int!
-    _all: Int!
-}
-
-type Case_salelogAvgAggregateOutputType {
-    id: Float
-    sales: Float
-    typeId: Float
-}
-
-type Case_salelogSumAggregateOutputType {
-    id: Int
-    sales: Float
-    typeId: Int
-}
-
-type Case_salelogMinAggregateOutputType {
-    id: Int
-    shopName: String
-    day: DateTime
-    sales: Float
-    typeId: Int
-}
-
-type Case_salelogMaxAggregateOutputType {
-    id: Int
-    shopName: String
-    day: DateTime
-    sales: Float
-    typeId: Int
-}
-
-type AggregateCase_salelog {
-    _count: Case_salelogCountAggregateOutputType
-    _avg: Case_salelogAvgAggregateOutputType
-    _sum: Case_salelogSumAggregateOutputType
-    _min: Case_salelogMinAggregateOutputType
-    _max: Case_salelogMaxAggregateOutputType
-}
-
-input case_salelogCountOrderByAggregateInput {
-    id: SortOrder
-    shopName: SortOrder
-    day: SortOrder
-    sales: SortOrder
-    typeId: SortOrder
-}
-
-input case_salelogAvgOrderByAggregateInput {
-    id: SortOrder
-    sales: SortOrder
-    typeId: SortOrder
-}
-
-input case_salelogMaxOrderByAggregateInput {
-    id: SortOrder
-    shopName: SortOrder
-    day: SortOrder
-    sales: SortOrder
-    typeId: SortOrder
-}
-
-input case_salelogMinOrderByAggregateInput {
-    id: SortOrder
-    shopName: SortOrder
-    day: SortOrder
-    sales: SortOrder
-    typeId: SortOrder
-}
-
-input case_salelogSumOrderByAggregateInput {
-    id: SortOrder
-    sales: SortOrder
-    typeId: SortOrder
-}
-
-input case_salelogOrderByWithAggregationInput {
-    id: SortOrder
-    shopName: SortOrder
-    day: SortOrder
-    sales: SortOrder
-    typeId: SortOrder
-    _count: case_salelogCountOrderByAggregateInput
-    _avg: case_salelogAvgOrderByAggregateInput
-    _max: case_salelogMaxOrderByAggregateInput
-    _min: case_salelogMinOrderByAggregateInput
-    _sum: case_salelogSumOrderByAggregateInput
-}
-
-input NestedFloatWithAggregatesFilter {
-    equals: Float
-    in: [Float]
-    notIn: [Float]
-    lt: Float
-    lte: Float
-    gt: Float
-    gte: Float
-    not: NestedFloatWithAggregatesFilter
-    _count: NestedIntFilter
-    _avg: NestedFloatFilter
-    _sum: NestedFloatFilter
-    _min: NestedFloatFilter
-    _max: NestedFloatFilter
-}
-
-input FloatWithAggregatesFilter {
-    equals: Float
-    in: [Float]
-    notIn: [Float]
-    lt: Float
-    lte: Float
-    gt: Float
-    gte: Float
-    not: NestedFloatWithAggregatesFilter
-    _count: NestedIntFilter
-    _avg: NestedFloatFilter
-    _sum: NestedFloatFilter
-    _min: NestedFloatFilter
-    _max: NestedFloatFilter
-}
-
-input case_salelogScalarWhereWithAggregatesInput {
-    AND: case_salelogScalarWhereWithAggregatesInput
-    OR: [case_salelogScalarWhereWithAggregatesInput]
-    NOT: case_salelogScalarWhereWithAggregatesInput
-    id: IntWithAggregatesFilter
-    shopName: StringWithAggregatesFilter
-    day: DateTimeWithAggregatesFilter
-    sales: FloatWithAggregatesFilter
-    typeId: IntWithAggregatesFilter
-}
-
-type Case_salelogGroupByOutputType {
-    id: Int!
-    shopName: String!
-    day: DateTime!
-    sales: Float!
-    typeId: Int!
-    _count: Case_salelogCountAggregateOutputType
-    _avg: Case_salelogAvgAggregateOutputType
-    _sum: Case_salelogSumAggregateOutputType
-    _min: Case_salelogMinAggregateOutputType
-    _max: Case_salelogMaxAggregateOutputType
 }
 
 input case_saletypeWhereUniqueInput {
@@ -3047,6 +2811,12 @@ enum Case_saletypeScalarFieldEnum {
     id
     name
     createdAt
+}
+
+type case_saletype {
+    id: Int!
+    name: String!
+    createdAt: String!
 }
 
 type Case_saletypeCountAggregateOutputType {
@@ -3557,13 +3327,6 @@ type Query {
     groupBycase_post(where: case_postWhereInput, orderBy: [case_postOrderByWithAggregationInput], by: [Case_postScalarFieldEnum]!, having: case_postScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_postGroupByOutputType]!
     findUniquecase_post(where: case_postWhereUniqueInput!): case_post
     findUniquecase_postOrThrow(where: case_postWhereUniqueInput!): case_post
-    findFirstcase_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_salelogScalarFieldEnum]): case_salelog
-    findFirstcase_salelogOrThrow(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_salelogScalarFieldEnum]): case_salelog
-    findManycase_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [Case_salelogScalarFieldEnum]): [case_salelog]!
-    aggregatecase_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithRelationInput], cursor: case_salelogWhereUniqueInput, take: Int, skip: Int): AggregateCase_salelog!
-    groupBycase_salelog(where: case_salelogWhereInput, orderBy: [case_salelogOrderByWithAggregationInput], by: [Case_salelogScalarFieldEnum]!, having: case_salelogScalarWhereWithAggregatesInput, take: Int, skip: Int): [Case_salelogGroupByOutputType]!
-    findUniquecase_salelog(where: case_salelogWhereUniqueInput!): case_salelog
-    findUniquecase_salelogOrThrow(where: case_salelogWhereUniqueInput!): case_salelog
     findFirstcase_saletype(where: case_saletypeWhereInput, orderBy: [case_saletypeOrderByWithRelationInput], cursor: case_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [Case_saletypeScalarFieldEnum]): case_saletype
     findFirstcase_saletypeOrThrow(where: case_saletypeWhereInput, orderBy: [case_saletypeOrderByWithRelationInput], cursor: case_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [Case_saletypeScalarFieldEnum]): case_saletype
     findManycase_saletype(where: case_saletypeWhereInput, orderBy: [case_saletypeOrderByWithRelationInput], cursor: case_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [Case_saletypeScalarFieldEnum]): [case_saletype]!
@@ -3853,19 +3616,11 @@ input admin_role_userUpdateManyMutationInput {
 }
 
 input admin_tokenCreateInput {
-    user_id: Int
+    user_id: String
     token: String
     expire_time: DateTime
     flush_time: DateTime
     banned: Boolean
-}
-
-input NullableIntFieldUpdateOperationsInput {
-    set: Int
-    increment: Int
-    decrement: Int
-    multiply: Int
-    divide: Int
 }
 
 input NullableBoolFieldUpdateOperationsInput {
@@ -3873,7 +3628,7 @@ input NullableBoolFieldUpdateOperationsInput {
 }
 
 input admin_tokenUpdateInput {
-    user_id: NullableIntFieldUpdateOperationsInput
+    user_id: NullableStringFieldUpdateOperationsInput
     token: NullableStringFieldUpdateOperationsInput
     expire_time: NullableDateTimeFieldUpdateOperationsInput
     flush_time: NullableDateTimeFieldUpdateOperationsInput
@@ -3882,7 +3637,7 @@ input admin_tokenUpdateInput {
 
 input admin_tokenCreateManyInput {
     id: Int
-    user_id: Int
+    user_id: String
     token: String
     expire_time: DateTime
     flush_time: DateTime
@@ -3890,7 +3645,7 @@ input admin_tokenCreateManyInput {
 }
 
 input admin_tokenUpdateManyMutationInput {
-    user_id: NullableIntFieldUpdateOperationsInput
+    user_id: NullableStringFieldUpdateOperationsInput
     token: NullableStringFieldUpdateOperationsInput
     expire_time: NullableDateTimeFieldUpdateOperationsInput
     flush_time: NullableDateTimeFieldUpdateOperationsInput
@@ -4292,6 +4047,14 @@ input case_menuCreateInput {
     api_id: String
 }
 
+input NullableIntFieldUpdateOperationsInput {
+    set: Int
+    increment: Int
+    decrement: Int
+    multiply: Int
+    divide: Int
+}
+
 input case_menuUpdateInput {
     parentId: NullableIntFieldUpdateOperationsInput
     label: StringFieldUpdateOperationsInput
@@ -4369,163 +4132,14 @@ input case_postCreateManyInput {
     auth: Int
 }
 
-input case_saletypeCreateWithoutCase_salelogInput {
-    name: String!
-    createdAt: String!
-}
-
-input case_saletypeCreateOrConnectWithoutCase_salelogInput {
-    where: case_saletypeWhereUniqueInput!
-    create: case_saletypeCreateWithoutCase_salelogInput!
-}
-
-input case_saletypeCreateNestedOneWithoutCase_salelogInput {
-    create: case_saletypeCreateWithoutCase_salelogInput
-    connectOrCreate: case_saletypeCreateOrConnectWithoutCase_salelogInput
-    connect: case_saletypeWhereUniqueInput
-}
-
-input case_salelogCreateInput {
-    shopName: String!
-    day: DateTime!
-    sales: Float!
-    case_saletype: case_saletypeCreateNestedOneWithoutCase_salelogInput!
-}
-
-input FloatFieldUpdateOperationsInput {
-    set: Float
-    increment: Float
-    decrement: Float
-    multiply: Float
-    divide: Float
-}
-
-input case_saletypeUpdateWithoutCase_salelogInput {
-    name: StringFieldUpdateOperationsInput
-    createdAt: StringFieldUpdateOperationsInput
-}
-
-input case_saletypeUpsertWithoutCase_salelogInput {
-    update: case_saletypeUpdateWithoutCase_salelogInput!
-    create: case_saletypeCreateWithoutCase_salelogInput!
-}
-
-input case_saletypeUpdateOneRequiredWithoutCase_salelogNestedInput {
-    create: case_saletypeCreateWithoutCase_salelogInput
-    connectOrCreate: case_saletypeCreateOrConnectWithoutCase_salelogInput
-    upsert: case_saletypeUpsertWithoutCase_salelogInput
-    connect: case_saletypeWhereUniqueInput
-    update: case_saletypeUpdateWithoutCase_salelogInput
-}
-
-input case_salelogUpdateInput {
-    shopName: StringFieldUpdateOperationsInput
-    day: DateTimeFieldUpdateOperationsInput
-    sales: FloatFieldUpdateOperationsInput
-    case_saletype: case_saletypeUpdateOneRequiredWithoutCase_salelogNestedInput
-}
-
-input case_salelogCreateManyInput {
-    id: Int
-    shopName: String!
-    day: DateTime!
-    sales: Float!
-    typeId: Int!
-}
-
-input case_salelogUpdateManyMutationInput {
-    shopName: StringFieldUpdateOperationsInput
-    day: DateTimeFieldUpdateOperationsInput
-    sales: FloatFieldUpdateOperationsInput
-}
-
-input case_salelogCreateWithoutCase_saletypeInput {
-    shopName: String!
-    day: DateTime!
-    sales: Float!
-}
-
-input case_salelogCreateOrConnectWithoutCase_saletypeInput {
-    where: case_salelogWhereUniqueInput!
-    create: case_salelogCreateWithoutCase_saletypeInput!
-}
-
-input case_salelogCreateManyCase_saletypeInput {
-    id: Int
-    shopName: String!
-    day: DateTime!
-    sales: Float!
-}
-
-input case_salelogCreateManyCase_saletypeInputEnvelope {
-    data: [case_salelogCreateManyCase_saletypeInput]!
-    skipDuplicates: Boolean
-}
-
-input case_salelogCreateNestedManyWithoutCase_saletypeInput {
-    create: case_salelogCreateWithoutCase_saletypeInput
-    connectOrCreate: case_salelogCreateOrConnectWithoutCase_saletypeInput
-    createMany: case_salelogCreateManyCase_saletypeInputEnvelope
-    connect: case_salelogWhereUniqueInput
-}
-
 input case_saletypeCreateInput {
     name: String!
     createdAt: String!
-    case_salelog: case_salelogCreateNestedManyWithoutCase_saletypeInput
-}
-
-input case_salelogUpdateWithoutCase_saletypeInput {
-    shopName: StringFieldUpdateOperationsInput
-    day: DateTimeFieldUpdateOperationsInput
-    sales: FloatFieldUpdateOperationsInput
-}
-
-input case_salelogUpsertWithWhereUniqueWithoutCase_saletypeInput {
-    where: case_salelogWhereUniqueInput!
-    update: case_salelogUpdateWithoutCase_saletypeInput!
-    create: case_salelogCreateWithoutCase_saletypeInput!
-}
-
-input case_salelogUpdateWithWhereUniqueWithoutCase_saletypeInput {
-    where: case_salelogWhereUniqueInput!
-    data: case_salelogUpdateWithoutCase_saletypeInput!
-}
-
-input case_salelogScalarWhereInput {
-    AND: case_salelogScalarWhereInput
-    OR: [case_salelogScalarWhereInput]
-    NOT: case_salelogScalarWhereInput
-    id: IntFilter
-    shopName: StringFilter
-    day: DateTimeFilter
-    sales: FloatFilter
-    typeId: IntFilter
-}
-
-input case_salelogUpdateManyWithWhereWithoutCase_saletypeInput {
-    where: case_salelogScalarWhereInput!
-    data: case_salelogUpdateManyMutationInput!
-}
-
-input case_salelogUpdateManyWithoutCase_saletypeNestedInput {
-    create: case_salelogCreateWithoutCase_saletypeInput
-    connectOrCreate: case_salelogCreateOrConnectWithoutCase_saletypeInput
-    upsert: case_salelogUpsertWithWhereUniqueWithoutCase_saletypeInput
-    createMany: case_salelogCreateManyCase_saletypeInputEnvelope
-    set: case_salelogWhereUniqueInput
-    disconnect: case_salelogWhereUniqueInput
-    delete: case_salelogWhereUniqueInput
-    connect: case_salelogWhereUniqueInput
-    update: case_salelogUpdateWithWhereUniqueWithoutCase_saletypeInput
-    updateMany: case_salelogUpdateManyWithWhereWithoutCase_saletypeInput
-    deleteMany: case_salelogScalarWhereInput
 }
 
 input case_saletypeUpdateInput {
     name: StringFieldUpdateOperationsInput
     createdAt: StringFieldUpdateOperationsInput
-    case_salelog: case_salelogUpdateManyWithoutCase_saletypeNestedInput
 }
 
 input case_saletypeCreateManyInput {
@@ -4697,13 +4311,6 @@ type Mutation {
     updateOnecase_post(data: case_postUpdateInput!, where: case_postWhereUniqueInput!): case_post
     updateManycase_post(data: case_postUpdateManyMutationInput!, where: case_postWhereInput): AffectedRowsOutput
     deleteManycase_post(where: case_postWhereInput): AffectedRowsOutput
-    createOnecase_salelog(data: case_salelogCreateInput!): case_salelog
-    upsertOnecase_salelog(where: case_salelogWhereUniqueInput!, create: case_salelogCreateInput!, update: case_salelogUpdateInput!): case_salelog
-    createManycase_salelog(data: [case_salelogCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput
-    deleteOnecase_salelog(where: case_salelogWhereUniqueInput!): case_salelog
-    updateOnecase_salelog(data: case_salelogUpdateInput!, where: case_salelogWhereUniqueInput!): case_salelog
-    updateManycase_salelog(data: case_salelogUpdateManyMutationInput!, where: case_salelogWhereInput): AffectedRowsOutput
-    deleteManycase_salelog(where: case_salelogWhereInput): AffectedRowsOutput
     createOnecase_saletype(data: case_saletypeCreateInput!): case_saletype
     upsertOnecase_saletype(where: case_saletypeWhereUniqueInput!, create: case_saletypeCreateInput!, update: case_saletypeUpdateInput!): case_saletype
     createManycase_saletype(data: [case_saletypeCreateManyInput]!, skipDuplicates: Boolean): AffectedRowsOutput

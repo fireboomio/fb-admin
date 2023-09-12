@@ -1,5 +1,7 @@
-query MyQuery($equals: String!) @rbac(requireMatchAny: [admin]) {
-  data: main_findManycase_category(where: {name: {equals: $equals}}) @transform(get: "[].case_post") {
+query MyQuery( $equals: Int!) @rbac(requireMatchAny: [admin]) {
+  data: main_findManycase_category(
+    where: { case_post: {every: {cate: {equals: $equals}}}}
+  )  {
     case_post {
       author
       cate

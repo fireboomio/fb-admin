@@ -92,6 +92,15 @@ func RegisterGraphql(schema *graphql.Schema) {
 	// eg. customize/test
 	callerName := GetCallerName(consts.CUSTOMIZE)
 	routeUrl := fmt.Sprintf(`/gqls/%s/graphql`, callerName)
+	var hasSubscriptionFieldResolveFn bool
+	if subscriptionType := schema.SubscriptionType(); subscriptionType != nil {
+		for _, definition := range subscriptionType.Fields() {
+			if definition.Subscribe != nil {
+				hasSubscriptionFieldResolveFn = true
+				break
+			}
+		}
+	}
 	base.AddEchoRouterFunc(func(e *echo.Echo) {
 		e.Logger.Debugf(`Registered gqlServer (%s)`, routeUrl)
 		e.GET(routeUrl, echo.WrapHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -134,14 +143,14 @@ func RegisterGraphql(schema *graphql.Schema) {
 				Context:        grc,
 			}
 
-			if strings.HasPrefix(body.Query, "subscription") {
+			if hasSubscriptionFieldResolveFn && strings.HasPrefix(body.Query, "subscription") {
 				result := graphql.Subscribe(param)
 				return handleSSEFromChan(brc, result)
 			}
 
 			result := graphql.Do(param)
-			if len(result.Errors) > 0 {
-				return echo.NewHTTPError(http.StatusInternalServerError, fmt.Errorf("调用graphql异常！"))
+			if grc.Result != nil {
+				return handleSSE(brc, grc.Result)
 			}
 
 			return c.JSON(http.StatusOK, result)
@@ -176,6 +185,8 @@ func RegisterGraphql(schema *graphql.Schema) {
 			return
 		}
 
+		report.Lock()
+		defer report.Unlock()
 		report.Customizes = append(report.Customizes, callerName)
 	})
 }

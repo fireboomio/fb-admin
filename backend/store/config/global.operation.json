@@ -28,7 +28,7 @@
     "onRequest": false,
     "onResponse": false,
     "beforeRequest": false,
-    "beforeOriginRequest": true,
-    "onOriginResponse": true
+    "beforeOriginRequest": false,
+    "onOriginResponse": false
   }
 }

@@ -7,7 +7,6 @@ import (
 	"custom-go/pkg/wgpb"
 	"encoding/json"
 	"net/http"
-	"sync"
 )
 
 func init() {
@@ -40,67 +39,66 @@ func login(hook *base.HttpTransportHookRequest, body *plugins.HttpTransportBody)
 		return nil, err
 	}
 
-	wg := &sync.WaitGroup{}
-	wg.Add(3)
+	//wg := &sync.WaitGroup{}
+	//wg.Add(3)
 
-	var cancel bool
+	//var cancel bool
 
 	// 登录获取 token
-	go func() {
-		defer wg.Done()
-		result, _ := plugins.ExecuteInternalRequestMutations[loginI, loginO](hook.InternalClient, generated.Casdoor__Login, loginReq)
-		if !result.Data.Success {
-			hook.Logger().Errorf(result.Data.Msg)
-			cancel = true
-		}
-		loginRes.Casdoor__LoginResponseData_data = result.Data
-	}()
+	//go func() {
+	//	defer wg.Done()
+	result, _ := plugins.ExecuteInternalRequestMutations[loginI, loginO](hook.InternalClient, generated.Casdoor__Login, loginReq)
+	if !result.Data.Success {
+		hook.Logger().Errorf(result.Data.Msg)
+		//cancel = true
+	}
+	loginRes.Casdoor__LoginResponseData_data = result.Data
+	//}()
 
 	// 获取roles
-	go func() {
-		defer wg.Done()
-		for !cancel {
-			if loginRes.Success {
-				userinfo, err := plugins.ExecuteInternalRequestQueries[getUserI, getUserO](hook.InternalClient, generated.System__User__GetOne, getUserI{
-					Name:  loginReq.Username,
-					Phone: loginReq.Phone,
-				})
-				if err != nil {
-					hook.Logger().Errorf(err.Error())
-				}
-
-				loginRes.Roles = userinfo.Data.Roles
-				loginRes.Avatar = userinfo.Data.Avatar
-				loginRes.UserName = userinfo.Data.Name
-				break
-			}
+	//go func() {
+	//	defer wg.Done()
+	//	for !cancel {
+	if loginRes.Success {
+		userinfo, err := plugins.ExecuteInternalRequestQueries[getUserI, getUserO](hook.InternalClient, generated.System__User__GetOne, getUserI{
+			Name:  loginReq.Username,
+			Phone: loginReq.Phone,
+		})
+		if err != nil {
+			hook.Logger().Errorf(err.Error())
 		}
-	}()
+
+		loginRes.Roles = userinfo.Data.Roles
+		loginRes.Avatar = userinfo.Data.Avatar
+		loginRes.UserName = userinfo.Data.Name
+	}
+	//	}
+	//}()
 
 	// 获取perms
-	go func() {
-		defer wg.Done()
-		for !cancel {
-			if len(loginRes.Roles) > 0 {
-				perms, err := plugins.ExecuteInternalRequestQueries[getRolePermsI, getRolePermsO](hook.InternalClient, generated.System__Perm__GetRolePerms, getRolePermsI{
-					Code: loginRes.Roles,
-				})
-				if err != nil {
-					hook.Logger().Errorf(err.Error())
-					break
-				}
-
-				loginRes.Perms = perms.Data[0].Join.Data
-
-				break
-			}
+	//go func() {
+	//	defer wg.Done()
+	//	for !cancel {
+	if len(loginRes.Roles) > 0 {
+		perms, err := plugins.ExecuteInternalRequestQueries[getRolePermsI, getRolePermsO](hook.InternalClient, generated.System__Perm__GetRolePerms, getRolePermsI{
+			Code: loginRes.Roles,
+		})
+		if err != nil {
+			hook.Logger().Errorf(err.Error())
+			//break
 		}
-		// 去重
-		loginRes.Perms = RemoveNull(loginRes.Perms)
-	}()
+
+		loginRes.Perms = perms.Data[0].Join.Data
+
+		//break
+	}
+	//}
+	// 去重
+	loginRes.Perms = RemoveNull(loginRes.Perms)
+	//}()
 
 	// 等待协程执行完毕，返回数据
-	wg.Wait()
+	//wg.Wait()
 
 	statusCode := http.StatusOK
 

@@ -2,286 +2,93 @@ schema {
 	query: Query
 	mutation: Mutation
 }
-"""
-
-The @export directive instructs the Execution Planner to export the field during the execution into the variable of the 'as' argument.
-As the execution is depth first, a field can only be used after it has been exported.
-Additionally, a field can only be used after using the '_join' field or on a different data source.
-It's not possible to export a field and use it in for the same data source.
-
-Note that the @export directive only works on fields that return a single value.
-It's not possible to export a list or object field.
-
-"""
-directive @export(as: String!) on FIELD
-"""
-
-The directive @internal marks a variable definition as internal so that clients can't access it.
-The field is also not visible in the public API.
-It's only being used as an internal variable to export fields into.
-
-"""
+"""作用于变量上，用于声明变量，和_join和export一起使用"""
 directive @internal on VARIABLE_DEFINITION
-directive @formatDateTime(format: EngineDateTimeFormat = ISO8601,
-	"""customFormat must conform to the Golang specification for specifying a date time format"""
+"""作用于MUTATION OPERATION上，指定当前变更为事务操作"""
+directive @transaction on MUTATION
+"""作用在字段上，用于格式化日期"""
+directive @formatDateTime(
+	"""枚举值，系统内置的标准格式，如 ISO8601"""
+	format: EngineDateTimeFormat = ISO8601
+
+	"""自定义格式，需遵循Golang规范，例如 2006-01-02 15:04:05"""
 	customFormat: String
 ) on FIELD
-"""The directive @injectEnvironmentVariable allows you to inject an environment variable into the variable definition."""
-directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
-"""
-
-The @internalOperation Directive marks an Operation as internal.
-By doing so, the Operation is no longer accessible from the public API.
-It can only be accessed by internal services, like hooks.
-
-"""
-directive @internalOperation on QUERY | MUTATION | SUBSCRIPTION
-"""
-
-The @transaction Directive marks an Operation execute with transaction.
-
-"""
-directive @transaction on MUTATION
-directive @hookVariable on VARIABLE_DEFINITION
-"""
-
-The directive @injectGeneratedUUID injects a generated UUID into the variable.
-This variable MUST be a string.
-At the same time, it removes the variable from the input definition,
-disallowing the user to supply it.
-
-This means, the UUID is 100% generated server-side and can be considered untempered.
-
-"""
+"""作用于标量选择集上，将字段赋值给@internal声明的变量"""
 directive @injectGeneratedUUID on VARIABLE_DEFINITION
+"""作用于变量上，用于入参校验"""
 directive @jsonSchema(
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	An array instance is valid against "minItems" if its size is greater
-	than, or equal to, the value of this keyword.
-	
-	Omitting this keyword has the same behavior as a value of 0.
-	
-	"""
+	"""用于数组变量，len(变量)≥minItems"""
 	minItems: Int
-commonPattern: COMMON_REGEX_PATTERN,
-	"""
-	
-	The value of "multipleOf" MUST be a number, strictly greater than 0.
-	
-	A numeric instance is valid only if division by this keyword's value
-	results in an integer.
-	
-	"""
-	multipleOf: Float
 
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	A string instance is valid against this keyword if its length is
-	greater than, or equal to, the value of this keyword.
-	
-	The length of a string instance is defined as the number of its
-	characters as defined by RFC 7159 [RFC7159].
-	
-	Omitting this keyword has the same behavior as a value of 0.
-	
-	"""
-	minLength: Int
+	"""用于String变量，校验字符串是否匹配正则"""
+	pattern: String
 
-	"""
-	
-	The value of both of these keywords MUST be a string.
-	
-	Both of these keywords can be used to decorate a user interface with
-	information about the data produced by this user interface.  A title
-	will preferably be short, whereas a description will provide
-	explanation about the purpose of the instance described by this
-	schema.
-	
-	"""
-	title: String
-
-	"""
-	
-	The value of both of these keywords MUST be a string.
-	
-	Both of these keywords can be used to decorate a user interface with
-	information about the data produced by this user interface.  A title
-	will preferably be short, whereas a description will provide
-	explanation about the purpose of the instance described by this
-	schema.
-	
-	"""
-	description: String
-
-	"""
-	
-	The value of "maximum" MUST be a number, representing an inclusive
-	upper limit for a numeric instance.
-	
-	If the instance is a number, then this keyword validates only if the
-	instance is less than or exactly equal to "maximum".
-	
-	"""
+	"""用于数字类型变量，变量<maximum"""
 	maximum: Float
 
-	"""
-	
-	The value of "exclusiveMaximum" MUST be number, representing an
-	exclusive upper limit for a numeric instance.
-	
-	If the instance is a number, then the instance is valid only if it
-	has a value strictly less than (not equal to) "exclusiveMaximum".
-	
-	"""
-	exclusiveMaximum: Boolean
-
-	"""
-	
-	The value of "minimum" MUST be a number, representing an inclusive
-	lower limit for a numeric instance.
-	
-	If the instance is a number, then this keyword validates only if the
-	instance is greater than or exactly equal to "minimum".
-	
-	"""
+	"""用于数字类型变量，变量>minimum"""
 	minimum: Float
 
-	"""
-	
-	The value of "exclusiveMinimum" MUST be number, representing an
-	exclusive lower limit for a numeric instance.
-	
-	If the instance is a number, then the instance is valid only if it
-	has a value strictly greater than (not equal to) "exclusiveMinimum".
-	
-	"""
-	exclusiveMinimum: Int
-
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	A string instance is valid against this keyword if its length is less
-	than, or equal to, the value of this keyword.
-	
-	The length of a string instance is defined as the number of its
-	characters as defined by RFC 7159 [RFC7159].
-	
-	"""
+	"""用于String变量，len(变量)≤maxLength"""
 	maxLength: Int
 
-	"""
-	
-	The value of this keyword MUST be a non-negative integer.
-	
-	An array instance is valid against "maxItems" if its size is less
-	than, or equal to, the value of this keyword.
-	
-	"""
+	"""用于数组变量，len(变量) ≤ maxItems"""
+	minLength: Int
+description: String, multipleOf: Float,
+	"""用于数组变量，len(变量)≤maxItems"""
 	maxItems: Int
 
-	"""
-	
-	The value of this keyword MUST be a boolean.
-	
-	If this keyword has boolean value false, the instance validates
-	successfully.  If it has boolean value true, the instance validates
-	successfully if all of its elements are unique.
-	
-	Omitting this keyword has the same behavior as a value of false.
-	
-	"""
+	"""同pattern，声明了几种特殊正则枚举"""
+	commonPattern: COMMON_REGEX_PATTERN
+title: String, exclusiveMaximum: Boolean,
+	"""用于数组变量，为true时每项值不能重复"""
 	uniqueItems: Boolean
-
-	"""
-	
-	The value of this keyword MUST be a string.  This string SHOULD be a
-	valid regular expression, according to the ECMA 262 regular
-	expression dialect.
-	
-	A string instance is considered valid if the regular expression
-	matches the instance successfully.  Recall: regular expressions are
-	not implicitly anchored.
-	
-	"""
-	pattern: String
-) on VARIABLE_DEFINITION
-"""
-
-The @transform directive allows to apply transformations to the response.
-By applying the directive, the shape of the response can be altered,
-which will also modify the JSON-Schema of the response.
-That is, you will keep full type safety and code-generation for transformed fields.
-
-"""
-directive @transform(
-	"""
-	
-	Using the 'get' transformation allows you to extract a nested field using a JSON path.
-	    This is useful to unnest data, e.g. when using the '_join' field, which adds an extra layer of nesting.
-	    
-	    Example:
-	    
-	    query GetName {
-	        name: me @transform(get: "info.name") {
-	            info {
-	                name
-	            }
-	        }
-	    }
-	    
-	    Before the transformation, the resolve looks like this:
-	    {
-	        "name": {
-	            "info": {
-	                "name": "John Doe"
-	            }
-	        }
-	    }
-	    
-	    With the transformation applied, the response will be reshaped like this:
-	    {
-	        "name": "John Doe"
-	    }
-	
-	"""
-	get: String!
-) on FIELD
-directive @fromClaim(name: Claim! = ISSUER, custom: CustomConfig) on VARIABLE_DEFINITION
-"""
-
-The directive @injectCurrentDateTime injects a DateTime string of the current date and time into the variable.
-This variable MUST be a string compatible scalar. 
-
-The default format, is: ISO8601
-If no format is chosen, the default format is used.
-Custom formats are allowed by specifying a format conforming to the Golang specification for specifying a date time format.
-
-"""
-directive @injectCurrentDateTime(format: EngineDateTimeFormat = ISO8601,
-	"""customFormat must conform to the Golang specification for specifying a date time format"""
-	customFormat: String
-) on VARIABLE_DEFINITION
+exclusiveMinimum: Boolean) on VARIABLE_DEFINITION
+"""作用于标量选择集上，将字段赋值给@internal声明的变量"""
+directive @injectEnvironmentVariable(name: String!) on VARIABLE_DEFINITION
+"""作用于OPERATION上，声明API的RBAC权限"""
 directive @rbac(
-	"""the user must not match any of the roles"""
-	denyMatchAny: [WG_ROLE]
-
-	"""the user must match all roles"""
-	requireMatchAll: [WG_ROLE]
-
-	"""the user must match at least one of the roles"""
+	"""任意匹配，用户角色与API角色有交集时，可访问（常用）"""
 	requireMatchAny: [WG_ROLE]
 
-	"""the user must not match all of the roles"""
+	"""非全部匹配，当任意匹配或互斥匹配时，可访问"""
 	denyMatchAll: [WG_ROLE]
+
+	"""互斥匹配，用户角色与API角色互斥时，可访问"""
+	denyMatchAny: [WG_ROLE]
+
+	"""全部匹配，用户角色包含API角色时，可访问"""
+	requireMatchAll: [WG_ROLE]
 ) on QUERY | MUTATION | SUBSCRIPTION
-"""The directive @injectFromHeader injects a http.header into the variable."""
+"""作用于MUTATION OPERATION上，指定当前变更为事务操作"""
+directive @transform(
+	"""示例用法：info.name"""
+	get: String!
+) on FIELD
+"""作用于标量选择集上，将字段赋值给@internal声明的变量"""
+directive @export(as: String!) on FIELD
+"""作用于标量选择集上，将字段赋值给@internal声明的变量"""
+directive @injectCurrentDateTime(
+	"""枚举值，系统内置的标准格式，如 ISO8601"""
+	format: EngineDateTimeFormat = ISO8601
+
+	"""自定义格式，需遵循Golang规范，例如 2006-01-02 15:04:05"""
+	customFormat: String
+) on VARIABLE_DEFINITION
+"""作用于OPERATION上，将其声明为内部函数，不对外暴露"""
+directive @internalOperation on QUERY | MUTATION | SUBSCRIPTION
+"""作用于String变量上，用于注入请求头中的字段"""
 directive @fromHeader(name: String!) on VARIABLE_DEFINITION
+directive @hookVariable on VARIABLE_DEFINITION
+"""作用于变量上，用于注入用户信息"""
+directive @fromClaim(
+	"""用于String变量，注入OIDC Claim对象声明的值，如USERID等"""
+	name: Claim! = ISSUER
+
+	"""用于任意变量，name=CUSTOM时生效，以数组形式指定json path，从CustomClaims中提取数据"""
+	custom: CustomConfig
+) on VARIABLE_DEFINITION
 type Query {
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_userInfo_get: casdoor_UserInfo_object
@@ -468,20 +275,6 @@ type Query {
 	"""<#datasource#>main<#datasource#>"""
 	main_findUniquecase_postOrThrow(where: main_case_postWhereUniqueInput!): main_case_post
 	"""<#datasource#>main<#datasource#>"""
-	main_findFirstcase_salelog(where: main_case_salelogWhereInput, orderBy: [main_case_salelogOrderByWithRelationInput], cursor: main_case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_salelogScalarFieldEnum]): main_case_salelog
-	"""<#datasource#>main<#datasource#>"""
-	main_findFirstcase_salelogOrThrow(where: main_case_salelogWhereInput, orderBy: [main_case_salelogOrderByWithRelationInput], cursor: main_case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_salelogScalarFieldEnum]): main_case_salelog
-	"""<#datasource#>main<#datasource#>"""
-	main_findManycase_salelog(where: main_case_salelogWhereInput, orderBy: [main_case_salelogOrderByWithRelationInput], cursor: main_case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_salelogScalarFieldEnum]): [main_case_salelog]!
-	"""<#datasource#>main<#datasource#>"""
-	main_aggregatecase_salelog(where: main_case_salelogWhereInput, orderBy: [main_case_salelogOrderByWithRelationInput], cursor: main_case_salelogWhereUniqueInput, take: Int, skip: Int): main_AggregateCase_salelog!
-	"""<#datasource#>main<#datasource#>"""
-	main_groupBycase_salelog(where: main_case_salelogWhereInput, orderBy: [main_case_salelogOrderByWithAggregationInput], by: [main_Case_salelogScalarFieldEnum]!, having: main_case_salelogScalarWhereWithAggregatesInput, take: Int, skip: Int): [main_Case_salelogGroupByOutputType]!
-	"""<#datasource#>main<#datasource#>"""
-	main_findUniquecase_salelog(where: main_case_salelogWhereUniqueInput!): main_case_salelog
-	"""<#datasource#>main<#datasource#>"""
-	main_findUniquecase_salelogOrThrow(where: main_case_salelogWhereUniqueInput!): main_case_salelog
-	"""<#datasource#>main<#datasource#>"""
 	main_findFirstcase_saletype(where: main_case_saletypeWhereInput, orderBy: [main_case_saletypeOrderByWithRelationInput], cursor: main_case_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_saletypeScalarFieldEnum]): main_case_saletype
 	"""<#datasource#>main<#datasource#>"""
 	main_findFirstcase_saletypeOrThrow(where: main_case_saletypeWhereInput, orderBy: [main_case_saletypeOrderByWithRelationInput], cursor: main_case_saletypeWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_saletypeScalarFieldEnum]): main_case_saletype
@@ -538,6 +331,10 @@ type Query {
 }
 type Mutation {
 	"""<#datasource#>casdoor<#datasource#>"""
+	casdoor_addUser_post(addUser_post_input_object: casdoor_addUser_post_input_object!): casdoor_APIResponse_object
+	"""<#datasource#>casdoor<#datasource#>"""
+	casdoor_updateUser_post(updateUser_post_input_object: casdoor_updateUser_post_input_object!): casdoor_APIResponse_object
+	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_login_post(login_post_input_object: casdoor_login_post_input_object!): casdoor_UserResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_refreshToken_post(refreshToken_post_input_object: casdoor_refreshToken_post_input_object!): casdoor_UserResponse_object
@@ -545,10 +342,6 @@ type Mutation {
 	casdoor_sendCode_post(sendCode_post_input_object: casdoor_sendCode_post_input_object!): casdoor_APIResponse_object
 	"""<#datasource#>casdoor<#datasource#>"""
 	casdoor_updateProvider_post(updateProvider_post_input_object: casdoor_updateProvider_post_input_object!): casdoor_APIResponse_object
-	"""<#datasource#>casdoor<#datasource#>"""
-	casdoor_addUser_post(addUser_post_input_object: casdoor_addUser_post_input_object!): casdoor_APIResponse_object
-	"""<#datasource#>casdoor<#datasource#>"""
-	casdoor_updateUser_post(updateUser_post_input_object: casdoor_updateUser_post_input_object!): casdoor_APIResponse_object
 	"""<#datasource#>main<#datasource#>"""
 	main_createOneadmin_apilog(data: main_admin_apilogCreateInput!): main_admin_apilog
 	"""<#datasource#>main<#datasource#>"""
@@ -732,20 +525,6 @@ type Mutation {
 	"""<#datasource#>main<#datasource#>"""
 	main_deleteManycase_post(where: main_case_postWhereInput): main_AffectedRowsOutput
 	"""<#datasource#>main<#datasource#>"""
-	main_createOnecase_salelog(data: main_case_salelogCreateInput!): main_case_salelog
-	"""<#datasource#>main<#datasource#>"""
-	main_upsertOnecase_salelog(where: main_case_salelogWhereUniqueInput!, create: main_case_salelogCreateInput!, update: main_case_salelogUpdateInput!): main_case_salelog
-	"""<#datasource#>main<#datasource#>"""
-	main_createManycase_salelog(data: [main_case_salelogCreateManyInput]!, skipDuplicates: Boolean): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
-	main_deleteOnecase_salelog(where: main_case_salelogWhereUniqueInput!): main_case_salelog
-	"""<#datasource#>main<#datasource#>"""
-	main_updateOnecase_salelog(data: main_case_salelogUpdateInput!, where: main_case_salelogWhereUniqueInput!): main_case_salelog
-	"""<#datasource#>main<#datasource#>"""
-	main_updateManycase_salelog(data: main_case_salelogUpdateManyMutationInput!, where: main_case_salelogWhereInput): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
-	main_deleteManycase_salelog(where: main_case_salelogWhereInput): main_AffectedRowsOutput
-	"""<#datasource#>main<#datasource#>"""
 	main_createOnecase_saletype(data: main_case_saletypeCreateInput!): main_case_saletype
 	"""<#datasource#>main<#datasource#>"""
 	main_upsertOnecase_saletype(where: main_case_saletypeWhereUniqueInput!, create: main_case_saletypeCreateInput!, update: main_case_saletypeUpdateInput!): main_case_saletype
@@ -792,13 +571,13 @@ type Mutation {
 	"""<#datasource#>main<#datasource#>"""
 	main_queryRaw(query: String!, parameters: JSON): JSON
 	"""<#datasource#>system<#datasource#>"""
+	system_bindRoleApis_post(bindRoleApis_post_input_object: system_bindRoleApis_post_input_object!): [String]
+	"""<#datasource#>system<#datasource#>"""
 	system_batchInsertRoles_post(Role_input_object: [system_Role_input_object]!): [system_batchInsertRoles_post_object]
 	"""<#datasource#>system<#datasource#>"""
 	system_batchDeleteRoles_delete(dataNames: [String]!): Boolean
 	"""<#datasource#>system<#datasource#>"""
 	system_getRoleBindApis_post(getRoleBindApis_post_input_object: system_getRoleBindApis_post_input_object!): [system_Operation_object]
-	"""<#datasource#>system<#datasource#>"""
-	system_bindRoleApis_post(bindRoleApis_post_input_object: system_bindRoleApis_post_input_object!): [String]
 }
 type casdoor_APIResponse_object {
 	msg: String
@@ -806,20 +585,20 @@ type casdoor_APIResponse_object {
 	_join: Query!
 }
 type casdoor_TokenResponse_object {
+	expireIn: Int
 	refreshToken: String
 	accessToken: String
-	expireIn: Int
 	_join: Query!
 }
 type casdoor_UserInfo_object {
-	preferred_username: String
 	phone: String
+	preferred_username: String
 	_join: Query!
 }
 type casdoor_UserResponse_object {
+	msg: String
 	success: Boolean
 	data: casdoor_TokenResponse_object
-	msg: String
 	_join: Query!
 }
 type main_Admin_apilogAvgAggregateOutputType {
@@ -1162,7 +941,6 @@ type main_Admin_role_userSumAggregateOutputType {
 }
 type main_Admin_tokenAvgAggregateOutputType {
 	id: Float
-	user_id: Float
 	_join: Query!
 }
 type main_Admin_tokenCountAggregateOutputType {
@@ -1177,7 +955,7 @@ type main_Admin_tokenCountAggregateOutputType {
 }
 type main_Admin_tokenGroupByOutputType {
 	id: Int!
-	user_id: Int
+	user_id: String
 	token: String
 	expire_time: DateTime
 	flush_time: DateTime
@@ -1191,7 +969,7 @@ type main_Admin_tokenGroupByOutputType {
 }
 type main_Admin_tokenMaxAggregateOutputType {
 	id: Int
-	user_id: Int
+	user_id: String
 	token: String
 	expire_time: DateTime
 	flush_time: DateTime
@@ -1200,7 +978,7 @@ type main_Admin_tokenMaxAggregateOutputType {
 }
 type main_Admin_tokenMinAggregateOutputType {
 	id: Int
-	user_id: Int
+	user_id: String
 	token: String
 	expire_time: DateTime
 	flush_time: DateTime
@@ -1209,7 +987,6 @@ type main_Admin_tokenMinAggregateOutputType {
 }
 type main_Admin_tokenSumAggregateOutputType {
 	id: Int
-	user_id: Int
 	_join: Query!
 }
 type main_Admin_userAvgAggregateOutputType {
@@ -1454,14 +1231,6 @@ type main_AggregateCase_post {
 	_max: main_Case_postMaxAggregateOutputType
 	_join: Query!
 }
-type main_AggregateCase_salelog {
-	_count: main_Case_salelogCountAggregateOutputType
-	_avg: main_Case_salelogAvgAggregateOutputType
-	_sum: main_Case_salelogSumAggregateOutputType
-	_min: main_Case_salelogMinAggregateOutputType
-	_max: main_Case_salelogMaxAggregateOutputType
-	_join: Query!
-}
 type main_AggregateCase_saletype {
 	_count: main_Case_saletypeCountAggregateOutputType
 	_avg: main_Case_saletypeAvgAggregateOutputType
@@ -1672,56 +1441,6 @@ type main_Case_postSumAggregateOutputType {
 	auth: Int
 	_join: Query!
 }
-type main_Case_salelogAvgAggregateOutputType {
-	id: Float
-	sales: Float
-	typeId: Float
-	_join: Query!
-}
-type main_Case_salelogCountAggregateOutputType {
-	id: Int!
-	shopName: Int!
-	day: Int!
-	sales: Int!
-	typeId: Int!
-	_all: Int!
-	_join: Query!
-}
-type main_Case_salelogGroupByOutputType {
-	id: Int!
-	shopName: String!
-	day: DateTime!
-	sales: Float!
-	typeId: Int!
-	_count: main_Case_salelogCountAggregateOutputType
-	_avg: main_Case_salelogAvgAggregateOutputType
-	_sum: main_Case_salelogSumAggregateOutputType
-	_min: main_Case_salelogMinAggregateOutputType
-	_max: main_Case_salelogMaxAggregateOutputType
-	_join: Query!
-}
-type main_Case_salelogMaxAggregateOutputType {
-	id: Int
-	shopName: String
-	day: DateTime
-	sales: Float
-	typeId: Int
-	_join: Query!
-}
-type main_Case_salelogMinAggregateOutputType {
-	id: Int
-	shopName: String
-	day: DateTime
-	sales: Float
-	typeId: Int
-	_join: Query!
-}
-type main_Case_salelogSumAggregateOutputType {
-	id: Int
-	sales: Float
-	typeId: Int
-	_join: Query!
-}
 type main_Case_saletypeAvgAggregateOutputType {
 	id: Float
 	_join: Query!
@@ -1731,10 +1450,6 @@ type main_Case_saletypeCountAggregateOutputType {
 	name: Int!
 	createdAt: Int!
 	_all: Int!
-	_join: Query!
-}
-type main_Case_saletypeCountOutputType {
-	case_salelog: Int!
 	_join: Query!
 }
 type main_Case_saletypeGroupByOutputType {
@@ -1926,7 +1641,7 @@ type main_admin_role_user {
 }
 type main_admin_token {
 	id: Int!
-	user_id: Int
+	user_id: String
 	token: String
 	expire_time: DateTime
 	flush_time: DateTime
@@ -1997,21 +1712,10 @@ type main_case_post {
 	case_category: main_case_category
 	_join: Query!
 }
-type main_case_salelog {
-	id: Int!
-	shopName: String!
-	day: DateTime!
-	sales: Float!
-	typeId: Int!
-	case_saletype: main_case_saletype!
-	_join: Query!
-}
 type main_case_saletype {
 	id: Int!
 	name: String!
 	createdAt: String!
-	case_salelog(where: main_case_salelogWhereInput, orderBy: [main_case_salelogOrderByWithRelationInput], cursor: main_case_salelogWhereUniqueInput, take: Int, skip: Int, distinct: [main_Case_salelogScalarFieldEnum]): [main_case_salelog]
-	_count: main_Case_saletypeCountOutputType!
 	_join: Query!
 }
 type main_case_sub {
@@ -2070,16 +1774,16 @@ type system_Operation_hooksConfiguration_mockResolve_object {
 	_join: Query!
 }
 type system_Operation_hooksConfiguration_object {
-	customResolve: Boolean
+	mockResolve: system_Operation_hooksConfiguration_mockResolve_object
+	onConnectionInit: Boolean
+	preResolve: Boolean
+	httpTransportOnResponse: Boolean
 	httpTransportBeforeRequest: Boolean
 	httpTransportOnRequest: Boolean
 	mutatingPostResolve: Boolean
-	onConnectionInit: Boolean
-	httpTransportOnResponse: Boolean
-	mockResolve: system_Operation_hooksConfiguration_mockResolve_object
 	mutatingPreResolve: Boolean
 	postResolve: Boolean
-	preResolve: Boolean
+	customResolve: Boolean
 	_join: Query!
 }
 type system_Operation_liveQueryConfig_object {
@@ -2088,33 +1792,33 @@ type system_Operation_liveQueryConfig_object {
 	_join: Query!
 }
 type system_Operation_object {
-	updateTime: String
-	"""开关 true开 false关"""
-	enabled: Boolean
-	authenticationConfig: system_Operation_authenticationConfig_object
-	deleteTime: String
-	path: String
 	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
 	operationType: Int
-	"""说明"""
-	remark: String
-	configCustomized: Boolean
-	hooksConfiguration: system_Operation_hooksConfiguration_object
 	"""路径"""
 	title: String
 	"""0-graphql 1-function 2-proxy"""
 	engine: Int
+	cacheConfig: system_Operation_cacheConfig_object
+	updateTime: String
+	"""开关 true开 false关"""
+	enabled: Boolean
+	deleteTime: String
+	path: String
+	hooksConfiguration: system_Operation_hooksConfiguration_object
+	"""说明"""
+	remark: String
+	authenticationConfig: system_Operation_authenticationConfig_object
+	configCustomized: Boolean
 	createTime: String
 	liveQueryConfig: system_Operation_liveQueryConfig_object
-	cacheConfig: system_Operation_cacheConfig_object
 	_join: Query!
 }
 type system_Role_object {
+	remark: String
+	createTime: String
 	deleteTime: String
 	updateTime: String
 	code: String
-	remark: String
-	createTime: String
 	_join: Query!
 }
 type system_batchInsertRoles_post_object {
@@ -2126,8 +1830,6 @@ input CustomConfig {
 	jsonPathComponents: [String]!
 }
 input casdoor_addUser_post_input_object {
-	"""Country code, default CN"""
-	countryCode: String
 	"""User name"""
 	name: String!
 	"""Password"""
@@ -2136,14 +1838,16 @@ input casdoor_addUser_post_input_object {
 	passwordType: String!
 	"""Phone number"""
 	phone: String!
+	"""Country code, default CN"""
+	countryCode: String
 }
 input casdoor_login_post_input_object {
-	loginType: String!
-	username: String!
 	phone: String!
 	countryCode: String
 	code: String!
 	password: String!
+	loginType: String!
+	username: String!
 }
 input casdoor_refreshToken_post_input_object {
 	"""<#originName#>refresh-token<#originName#>"""
@@ -2156,19 +1860,19 @@ input casdoor_sendCode_post_input_object {
 	countryCode: String
 }
 input casdoor_updateProvider_post_input_object {
+	clientId: String!
 	clientSecret: String!
 	signName: String!
 	templateCode: String!
-	clientId: String!
 }
 input casdoor_updateUser_post_input_object {
-	passwordType: String
 	phone: String!
 	countryCode: String
 	"""User ID"""
 	userId: String!
 	name: String!
 	password: String!
+	passwordType: String
 }
 input main_Admin_userRelationFilter {
 	is: main_admin_userWhereInput
@@ -2240,15 +1944,6 @@ input main_Case_postListRelationFilter {
 	some: main_case_postWhereInput
 	none: main_case_postWhereInput
 }
-input main_Case_salelogListRelationFilter {
-	every: main_case_salelogWhereInput
-	some: main_case_salelogWhereInput
-	none: main_case_salelogWhereInput
-}
-input main_Case_saletypeRelationFilter {
-	is: main_case_saletypeWhereInput
-	isNot: main_case_saletypeWhereInput
-}
 input main_DateTimeFieldUpdateOperationsInput {
 	set: DateTime
 }
@@ -2297,38 +1992,6 @@ input main_DateTimeWithAggregatesFilter {
 	_count: main_NestedIntFilter
 	_min: main_NestedDateTimeFilter
 	_max: main_NestedDateTimeFilter
-}
-input main_FloatFieldUpdateOperationsInput {
-	set: Float
-	increment: Float
-	decrement: Float
-	multiply: Float
-	divide: Float
-}
-input main_FloatFilter {
-	equals: Float
-	in: [Float]
-	notIn: [Float]
-	lt: Float
-	lte: Float
-	gt: Float
-	gte: Float
-	not: main_NestedFloatFilter
-}
-input main_FloatWithAggregatesFilter {
-	equals: Float
-	in: [Float]
-	notIn: [Float]
-	lt: Float
-	lte: Float
-	gt: Float
-	gte: Float
-	not: main_NestedFloatWithAggregatesFilter
-	_count: main_NestedIntFilter
-	_avg: main_NestedFloatFilter
-	_sum: main_NestedFloatFilter
-	_min: main_NestedFloatFilter
-	_max: main_NestedFloatFilter
 }
 input main_IntFieldUpdateOperationsInput {
 	set: Int
@@ -2499,21 +2162,6 @@ input main_NestedFloatNullableFilter {
 	gt: Float
 	gte: Float
 	not: main_NestedFloatNullableFilter
-}
-input main_NestedFloatWithAggregatesFilter {
-	equals: Float
-	in: [Float]
-	notIn: [Float]
-	lt: Float
-	lte: Float
-	gt: Float
-	gte: Float
-	not: main_NestedFloatWithAggregatesFilter
-	_count: main_NestedIntFilter
-	_avg: main_NestedFloatFilter
-	_sum: main_NestedFloatFilter
-	_min: main_NestedFloatFilter
-	_max: main_NestedFloatFilter
 }
 input main_NestedIntFilter {
 	equals: Int
@@ -3429,7 +3077,6 @@ input main_admin_role_userWhereUniqueInput {
 }
 input main_admin_tokenAvgOrderByAggregateInput {
 	id: main_SortOrder
-	user_id: main_SortOrder
 }
 input main_admin_tokenCountOrderByAggregateInput {
 	id: main_SortOrder
@@ -3440,7 +3087,7 @@ input main_admin_tokenCountOrderByAggregateInput {
 	banned: main_SortOrder
 }
 input main_admin_tokenCreateInput {
-	user_id: Int
+	user_id: String
 	token: String
 	expire_time: DateTime
 	flush_time: DateTime
@@ -3448,7 +3095,7 @@ input main_admin_tokenCreateInput {
 }
 input main_admin_tokenCreateManyInput {
 	id: Int
-	user_id: Int
+	user_id: String
 	token: String
 	expire_time: DateTime
 	flush_time: DateTime
@@ -3496,7 +3143,7 @@ input main_admin_tokenScalarWhereWithAggregatesInput {
 	OR: [main_admin_tokenScalarWhereWithAggregatesInput]
 	NOT: main_admin_tokenScalarWhereWithAggregatesInput
 	id: main_IntWithAggregatesFilter
-	user_id: main_IntNullableWithAggregatesFilter
+	user_id: main_StringNullableWithAggregatesFilter
 	token: main_StringNullableWithAggregatesFilter
 	expire_time: main_DateTimeNullableWithAggregatesFilter
 	flush_time: main_DateTimeNullableWithAggregatesFilter
@@ -3504,17 +3151,16 @@ input main_admin_tokenScalarWhereWithAggregatesInput {
 }
 input main_admin_tokenSumOrderByAggregateInput {
 	id: main_SortOrder
-	user_id: main_SortOrder
 }
 input main_admin_tokenUpdateInput {
-	user_id: main_NullableIntFieldUpdateOperationsInput
+	user_id: main_NullableStringFieldUpdateOperationsInput
 	token: main_NullableStringFieldUpdateOperationsInput
 	expire_time: main_NullableDateTimeFieldUpdateOperationsInput
 	flush_time: main_NullableDateTimeFieldUpdateOperationsInput
 	banned: main_NullableBoolFieldUpdateOperationsInput
 }
 input main_admin_tokenUpdateManyMutationInput {
-	user_id: main_NullableIntFieldUpdateOperationsInput
+	user_id: main_NullableStringFieldUpdateOperationsInput
 	token: main_NullableStringFieldUpdateOperationsInput
 	expire_time: main_NullableDateTimeFieldUpdateOperationsInput
 	flush_time: main_NullableDateTimeFieldUpdateOperationsInput
@@ -3525,7 +3171,7 @@ input main_admin_tokenWhereInput {
 	OR: [main_admin_tokenWhereInput]
 	NOT: main_admin_tokenWhereInput
 	id: main_IntFilter
-	user_id: main_IntNullableFilter
+	user_id: main_StringNullableFilter
 	token: main_StringNullableFilter
 	expire_time: main_DateTimeNullableFilter
 	flush_time: main_DateTimeNullableFilter
@@ -4447,174 +4093,6 @@ input main_case_postWhereInput {
 input main_case_postWhereUniqueInput {
 	id: Int
 }
-input main_case_salelogAvgOrderByAggregateInput {
-	id: main_SortOrder
-	sales: main_SortOrder
-	typeId: main_SortOrder
-}
-input main_case_salelogCountOrderByAggregateInput {
-	id: main_SortOrder
-	shopName: main_SortOrder
-	day: main_SortOrder
-	sales: main_SortOrder
-	typeId: main_SortOrder
-}
-input main_case_salelogCreateInput {
-	shopName: String!
-	day: DateTime!
-	sales: Float!
-	case_saletype: main_case_saletypeCreateNestedOneWithoutCase_salelogInput!
-}
-input main_case_salelogCreateManyCase_saletypeInput {
-	id: Int
-	shopName: String!
-	day: DateTime!
-	sales: Float!
-}
-input main_case_salelogCreateManyCase_saletypeInputEnvelope {
-	data: [main_case_salelogCreateManyCase_saletypeInput]!
-	skipDuplicates: Boolean
-}
-input main_case_salelogCreateManyInput {
-	id: Int
-	shopName: String!
-	day: DateTime!
-	sales: Float!
-	typeId: Int!
-}
-input main_case_salelogCreateNestedManyWithoutCase_saletypeInput {
-	create: main_case_salelogCreateWithoutCase_saletypeInput
-	connectOrCreate: main_case_salelogCreateOrConnectWithoutCase_saletypeInput
-	createMany: main_case_salelogCreateManyCase_saletypeInputEnvelope
-	connect: main_case_salelogWhereUniqueInput
-}
-input main_case_salelogCreateOrConnectWithoutCase_saletypeInput {
-	where: main_case_salelogWhereUniqueInput!
-	create: main_case_salelogCreateWithoutCase_saletypeInput!
-}
-input main_case_salelogCreateWithoutCase_saletypeInput {
-	shopName: String!
-	day: DateTime!
-	sales: Float!
-}
-input main_case_salelogMaxOrderByAggregateInput {
-	id: main_SortOrder
-	shopName: main_SortOrder
-	day: main_SortOrder
-	sales: main_SortOrder
-	typeId: main_SortOrder
-}
-input main_case_salelogMinOrderByAggregateInput {
-	id: main_SortOrder
-	shopName: main_SortOrder
-	day: main_SortOrder
-	sales: main_SortOrder
-	typeId: main_SortOrder
-}
-input main_case_salelogOrderByRelationAggregateInput {
-	_count: main_SortOrder
-}
-input main_case_salelogOrderByWithAggregationInput {
-	id: main_SortOrder
-	shopName: main_SortOrder
-	day: main_SortOrder
-	sales: main_SortOrder
-	typeId: main_SortOrder
-	_count: main_case_salelogCountOrderByAggregateInput
-	_avg: main_case_salelogAvgOrderByAggregateInput
-	_max: main_case_salelogMaxOrderByAggregateInput
-	_min: main_case_salelogMinOrderByAggregateInput
-	_sum: main_case_salelogSumOrderByAggregateInput
-}
-input main_case_salelogOrderByWithRelationInput {
-	id: main_SortOrder
-	shopName: main_SortOrder
-	day: main_SortOrder
-	sales: main_SortOrder
-	typeId: main_SortOrder
-	case_saletype: main_case_saletypeOrderByWithRelationInput
-}
-input main_case_salelogScalarWhereInput {
-	AND: main_case_salelogScalarWhereInput
-	OR: [main_case_salelogScalarWhereInput]
-	NOT: main_case_salelogScalarWhereInput
-	id: main_IntFilter
-	shopName: main_StringFilter
-	day: main_DateTimeFilter
-	sales: main_FloatFilter
-	typeId: main_IntFilter
-}
-input main_case_salelogScalarWhereWithAggregatesInput {
-	AND: main_case_salelogScalarWhereWithAggregatesInput
-	OR: [main_case_salelogScalarWhereWithAggregatesInput]
-	NOT: main_case_salelogScalarWhereWithAggregatesInput
-	id: main_IntWithAggregatesFilter
-	shopName: main_StringWithAggregatesFilter
-	day: main_DateTimeWithAggregatesFilter
-	sales: main_FloatWithAggregatesFilter
-	typeId: main_IntWithAggregatesFilter
-}
-input main_case_salelogSumOrderByAggregateInput {
-	id: main_SortOrder
-	sales: main_SortOrder
-	typeId: main_SortOrder
-}
-input main_case_salelogUpdateInput {
-	shopName: main_StringFieldUpdateOperationsInput
-	day: main_DateTimeFieldUpdateOperationsInput
-	sales: main_FloatFieldUpdateOperationsInput
-	case_saletype: main_case_saletypeUpdateOneRequiredWithoutCase_salelogNestedInput
-}
-input main_case_salelogUpdateManyMutationInput {
-	shopName: main_StringFieldUpdateOperationsInput
-	day: main_DateTimeFieldUpdateOperationsInput
-	sales: main_FloatFieldUpdateOperationsInput
-}
-input main_case_salelogUpdateManyWithWhereWithoutCase_saletypeInput {
-	where: main_case_salelogScalarWhereInput!
-	data: main_case_salelogUpdateManyMutationInput!
-}
-input main_case_salelogUpdateManyWithoutCase_saletypeNestedInput {
-	create: main_case_salelogCreateWithoutCase_saletypeInput
-	connectOrCreate: main_case_salelogCreateOrConnectWithoutCase_saletypeInput
-	upsert: main_case_salelogUpsertWithWhereUniqueWithoutCase_saletypeInput
-	createMany: main_case_salelogCreateManyCase_saletypeInputEnvelope
-	set: main_case_salelogWhereUniqueInput
-	disconnect: main_case_salelogWhereUniqueInput
-	delete: main_case_salelogWhereUniqueInput
-	connect: main_case_salelogWhereUniqueInput
-	update: main_case_salelogUpdateWithWhereUniqueWithoutCase_saletypeInput
-	updateMany: main_case_salelogUpdateManyWithWhereWithoutCase_saletypeInput
-	deleteMany: main_case_salelogScalarWhereInput
-}
-input main_case_salelogUpdateWithWhereUniqueWithoutCase_saletypeInput {
-	where: main_case_salelogWhereUniqueInput!
-	data: main_case_salelogUpdateWithoutCase_saletypeInput!
-}
-input main_case_salelogUpdateWithoutCase_saletypeInput {
-	shopName: main_StringFieldUpdateOperationsInput
-	day: main_DateTimeFieldUpdateOperationsInput
-	sales: main_FloatFieldUpdateOperationsInput
-}
-input main_case_salelogUpsertWithWhereUniqueWithoutCase_saletypeInput {
-	where: main_case_salelogWhereUniqueInput!
-	update: main_case_salelogUpdateWithoutCase_saletypeInput!
-	create: main_case_salelogCreateWithoutCase_saletypeInput!
-}
-input main_case_salelogWhereInput {
-	AND: main_case_salelogWhereInput
-	OR: [main_case_salelogWhereInput]
-	NOT: main_case_salelogWhereInput
-	id: main_IntFilter
-	shopName: main_StringFilter
-	day: main_DateTimeFilter
-	sales: main_FloatFilter
-	typeId: main_IntFilter
-	case_saletype: main_Case_saletypeRelationFilter
-}
-input main_case_salelogWhereUniqueInput {
-	id: Int
-}
 input main_case_saletypeAvgOrderByAggregateInput {
 	id: main_SortOrder
 }
@@ -4626,23 +4104,9 @@ input main_case_saletypeCountOrderByAggregateInput {
 input main_case_saletypeCreateInput {
 	name: String!
 	createdAt: String!
-	case_salelog: main_case_salelogCreateNestedManyWithoutCase_saletypeInput
 }
 input main_case_saletypeCreateManyInput {
 	id: Int
-	name: String!
-	createdAt: String!
-}
-input main_case_saletypeCreateNestedOneWithoutCase_salelogInput {
-	create: main_case_saletypeCreateWithoutCase_salelogInput
-	connectOrCreate: main_case_saletypeCreateOrConnectWithoutCase_salelogInput
-	connect: main_case_saletypeWhereUniqueInput
-}
-input main_case_saletypeCreateOrConnectWithoutCase_salelogInput {
-	where: main_case_saletypeWhereUniqueInput!
-	create: main_case_saletypeCreateWithoutCase_salelogInput!
-}
-input main_case_saletypeCreateWithoutCase_salelogInput {
 	name: String!
 	createdAt: String!
 }
@@ -4670,7 +4134,6 @@ input main_case_saletypeOrderByWithRelationInput {
 	id: main_SortOrder
 	name: main_SortOrder
 	createdAt: main_SortOrder
-	case_salelog: main_case_salelogOrderByRelationAggregateInput
 }
 input main_case_saletypeScalarWhereWithAggregatesInput {
 	AND: main_case_saletypeScalarWhereWithAggregatesInput
@@ -4686,26 +4149,10 @@ input main_case_saletypeSumOrderByAggregateInput {
 input main_case_saletypeUpdateInput {
 	name: main_StringFieldUpdateOperationsInput
 	createdAt: main_StringFieldUpdateOperationsInput
-	case_salelog: main_case_salelogUpdateManyWithoutCase_saletypeNestedInput
 }
 input main_case_saletypeUpdateManyMutationInput {
 	name: main_StringFieldUpdateOperationsInput
 	createdAt: main_StringFieldUpdateOperationsInput
-}
-input main_case_saletypeUpdateOneRequiredWithoutCase_salelogNestedInput {
-	create: main_case_saletypeCreateWithoutCase_salelogInput
-	connectOrCreate: main_case_saletypeCreateOrConnectWithoutCase_salelogInput
-	upsert: main_case_saletypeUpsertWithoutCase_salelogInput
-	connect: main_case_saletypeWhereUniqueInput
-	update: main_case_saletypeUpdateWithoutCase_salelogInput
-}
-input main_case_saletypeUpdateWithoutCase_salelogInput {
-	name: main_StringFieldUpdateOperationsInput
-	createdAt: main_StringFieldUpdateOperationsInput
-}
-input main_case_saletypeUpsertWithoutCase_salelogInput {
-	update: main_case_saletypeUpdateWithoutCase_salelogInput!
-	create: main_case_saletypeCreateWithoutCase_salelogInput!
 }
 input main_case_saletypeWhereInput {
 	AND: main_case_saletypeWhereInput
@@ -4714,7 +4161,6 @@ input main_case_saletypeWhereInput {
 	id: main_IntFilter
 	name: main_StringFilter
 	createdAt: main_StringFilter
-	case_salelog: main_Case_salelogListRelationFilter
 }
 input main_case_saletypeWhereUniqueInput {
 	id: Int
@@ -4930,68 +4376,68 @@ input main_case_visitlogWhereUniqueInput {
 	id: Int
 }
 input system_Role_input_object {
+	updateTime: String
 	code: String
 	remark: String
 	createTime: String
 	deleteTime: String
-	updateTime: String
 }
 input system_bindRoleApis_post_input_object {
+	operationPaths: [String]!
 	rbacType: system_bindRoleApis_post_rbacType_enum = requireMatchAny
 	roleCodes: [String]!
-	operationPaths: [String]!
 }
 input system_getRoleBindApis_post_input_object {
 	rbacType: system_getRoleBindApis_post_rbacType_enum = requireMatchAny
 	roleCode: String!
 }
 enum COMMON_REGEX_PATTERN {
+	EMAIL
 	DOMAIN
 	URL
-	EMAIL
 }
 enum Claim {
-	SUBJECT
 	NAME
-	FAMILY_NAME
-	MIDDLE_NAME
-	PREFERRED_USERNAME
+	NICKNAME
 	GENDER
+	ZONE_INFO
+	LOCATION
+	PICTURE
+	WEBSITE
 	LOCALE
-	PROVIDER
 	"""ROLES is string array, Please use in [in, notIn]."""
 	ROLES
-	USERID
-	WEBSITE
-	EMAIL_VERIFIED
-	BIRTH_DATE
-	ISSUER
-	LOCATION
 	CUSTOM
-	ZONE_INFO
-	NICKNAME
+	PROVIDER
+	SUBJECT
+	FAMILY_NAME
 	PROFILE
-	PICTURE
 	EMAIL
+	EMAIL_VERIFIED
+	ISSUER
+	USERID
 	GIVEN_NAME
+	MIDDLE_NAME
+	PREFERRED_USERNAME
+	BIRTH_DATE
 }
 enum EngineDateTimeFormat {
-	RFC3339Nano
-	Kitchen
 	UnixDate
-	RFC822Z
-	StampMicro
-	RFC1123
+	RubyDate
+	StampMilli
+	ISO8601
+	ANSIC
 	Stamp
+	Kitchen
+	StampMicro
+	RFC850
+	RFC1123
 	RFC1123Z
 	RFC3339
-	ISO8601
-	RFC850
-	RFC822
-	StampMilli
+	RFC3339Nano
 	StampNano
-	ANSIC
-	RubyDate
+	RFC822
+	RFC822Z
 }
 enum ValueType {
 	STRING
@@ -5131,13 +4577,6 @@ enum main_Case_postScalarFieldEnum {
 	content
 	cate
 	auth
-}
-enum main_Case_salelogScalarFieldEnum {
-	id
-	shopName
-	day
-	sales
-	typeId
 }
 enum main_Case_saletypeScalarFieldEnum {
 	id

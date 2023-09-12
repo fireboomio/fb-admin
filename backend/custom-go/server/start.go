@@ -38,7 +38,11 @@ func configureWunderGraphServer() *echo.Echo {
 	e.Logger.SetLevel(log.DEBUG)
 
 	// 配置日志中间件
-	e.Use(middleware.Logger())
+	loggerConfig := middleware.DefaultLoggerConfig
+	loggerConfig.Skipper = func(c echo.Context) bool {
+		return c.Request().URL.Path == "/health"
+	}
+	e.Use(middleware.LoggerWithConfig(loggerConfig))
 
 	// 配置 CORS 中间件
 	corsCfg := middleware.CORSConfig{

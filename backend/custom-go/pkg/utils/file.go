@@ -86,3 +86,8 @@ func GetCallerName(prefix string) string {
 
 	return strings.TrimSuffix(callerName, filepath.Ext(callerName))
 }
+
+func NotExistFile(path string) bool {
+	_, err := os.Stat(path)
+	return os.IsNotExist(err)
+}
