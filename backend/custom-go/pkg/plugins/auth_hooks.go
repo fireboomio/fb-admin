@@ -19,7 +19,7 @@ type AuthenticationResponse struct {
 type AuthenticationConfiguration struct {
 	PostAuthentication         func(hook *base.AuthenticationHookRequest) error
 	MutatingPostAuthentication func(hook *base.AuthenticationHookRequest) (*AuthenticationResponse, error)
-	Revalidate                 func(hook *base.AuthenticationHookRequest) (*AuthenticationResponse, error)
+	RevalidateAuthentication   func(hook *base.AuthenticationHookRequest) (*AuthenticationResponse, error)
 	PostLogout                 func(hook *base.AuthenticationHookRequest) error
 }
 
@@ -84,12 +84,12 @@ func RegisterAuthHooks(e *echo.Echo, authHooks AuthenticationConfiguration) {
 		})
 	}
 
-	if authHooks.Revalidate != nil {
+	if authHooks.RevalidateAuthentication != nil {
 		apiPath := "/revalidateAuthentication"
 		e.Logger.Debugf(`Registered authHook [%s]`, path.Join(authPrefix, apiPath))
 		auth.POST(apiPath, func(c echo.Context) error {
 			brc := c.(*base.AuthenticationHookRequest)
-			out, err := authHooks.Revalidate(brc)
+			out, err := authHooks.RevalidateAuthentication(brc)
 			if err != nil {
 				return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 			}

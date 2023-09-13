@@ -3,82 +3,82 @@ schema {
 	mutation: Mutation
 }
 type Mutation {
+	bindRoleApis_post(bindRoleApis_post_input_object: bindRoleApis_post_input_object!): [String]
 	batchInsertRoles_post(Role_input_object: [Role_input_object]!): [batchInsertRoles_post_object]
 	batchDeleteRoles_delete(dataNames: [String]!): Boolean
 	getRoleBindApis_post(getRoleBindApis_post_input_object: getRoleBindApis_post_input_object!): [Operation_object]
-	bindRoleApis_post(bindRoleApis_post_input_object: bindRoleApis_post_input_object!): [String]
 }
 type Operation_authenticationConfig_object {
 	authRequired: Boolean
 }
 type Operation_cacheConfig_object {
+	enabled: Boolean
 	maxAge: Int
 	public: Boolean
 	staleWhileRevalidate: Int
-	enabled: Boolean
 }
 type Operation_hooksConfiguration_mockResolve_object {
 	enabled: Boolean
 	subscriptionPollingIntervalMillis: Int
 }
 type Operation_hooksConfiguration_object {
+	httpTransportOnRequest: Boolean
 	httpTransportOnResponse: Boolean
 	mutatingPostResolve: Boolean
 	mutatingPreResolve: Boolean
-	preResolve: Boolean
-	customResolve: Boolean
-	httpTransportBeforeRequest: Boolean
-	onConnectionInit: Boolean
 	postResolve: Boolean
-	httpTransportOnRequest: Boolean
+	customResolve: Boolean
 	mockResolve: Operation_hooksConfiguration_mockResolve_object
+	onConnectionInit: Boolean
+	preResolve: Boolean
+	httpTransportBeforeRequest: Boolean
 }
 type Operation_liveQueryConfig_object {
-	pollingIntervalSeconds: Int
 	enabled: Boolean
+	pollingIntervalSeconds: Int
 }
 type Operation_object {
 	createTime: String
-	updateTime: String
 	"""开关 true开 false关"""
 	enabled: Boolean
-	"""说明"""
-	remark: String
-	authenticationConfig: Operation_authenticationConfig_object
-	deleteTime: String
-	cacheConfig: Operation_cacheConfig_object
 	path: String
-	liveQueryConfig: Operation_liveQueryConfig_object
-	"""路径"""
-	title: String
-	hooksConfiguration: Operation_hooksConfiguration_object
 	"""请求类型 0 queries, 1 mutations, 2subscriptions"""
 	operationType: Int
 	"""0-graphql 1-function 2-proxy"""
 	engine: Int
+	authenticationConfig: Operation_authenticationConfig_object
+	deleteTime: String
+	updateTime: String
+	"""路径"""
+	title: String
+	cacheConfig: Operation_cacheConfig_object
+	liveQueryConfig: Operation_liveQueryConfig_object
+	"""说明"""
+	remark: String
 	configCustomized: Boolean
+	hooksConfiguration: Operation_hooksConfiguration_object
 }
 type Query {
 	getAllRoles_get: [Role_object]
 	getAllPublicApis_get: [Operation_object]
 }
 type Role_object {
+	code: String
+	remark: String
 	createTime: String
 	deleteTime: String
 	updateTime: String
-	code: String
-	remark: String
 }
 type batchInsertRoles_post_object {
-	succeed: Boolean
 	dataName: String
+	succeed: Boolean
 }
 input Role_input_object {
-	deleteTime: String
-	updateTime: String
 	code: String
 	remark: String
 	createTime: String
+	deleteTime: String
+	updateTime: String
 }
 input bindRoleApis_post_input_object {
 	rbacType: bindRoleApis_post_rbacType_enum = requireMatchAny

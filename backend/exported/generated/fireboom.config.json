@@ -17,6 +17,11 @@
                 "casdoor_addUser_post"
               ],
               "quotes": {
+                "0": {
+                  "indexes": [
+                    0
+                  ]
+                },
                 "1": {
                   "indexes": [
                     3,
@@ -43,11 +48,6 @@
                   "indexes": [
                     0
                   ]
-                },
-                "0": {
-                  "indexes": [
-                    0
-                  ]
                 }
               }
             },
@@ -69,8 +69,8 @@
             {
               "typeName": "casdoor_APIResponse_object",
               "fieldNames": [
-                "msg",
                 "status",
+                "msg",
                 "_join"
               ]
             },
@@ -94,90 +94,15 @@
             {
               "typeName": "casdoor_UserResponse_object",
               "fieldNames": [
-                "success",
                 "data",
                 "msg",
+                "success",
                 "_join"
               ]
             }
           ],
           "overrideFieldPathFromAlias": false,
           "customRestMap": {
-            "Query.casdoor_userInfo_get": {
-              "fetch": {
-                "url": null,
-                "method": 0,
-                "header": {
-                  "Authorization": {
-                    "values": [
-                      {
-                        "kind": 2,
-                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
-                      }
-                    ]
-                  }
-                },
-                "body": null,
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://127.0.0.1:9825"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/api/user-info"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
-            "Mutation.casdoor_addUser_post": {
-              "fetch": {
-                "url": null,
-                "method": 1,
-                "header": {
-                  "Authorization": {
-                    "values": [
-                      {
-                        "kind": 2,
-                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
-                      }
-                    ]
-                  }
-                },
-                "body": {
-                  "kind": 2,
-                  "placeholderVariableName": "{{ .arguments.addUser_post_input_object }}"
-                },
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://127.0.0.1:9825"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/api/add-user"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
             "Mutation.casdoor_updateUser_post": {
               "fetch": {
                 "url": null,
@@ -372,6 +297,81 @@
               },
               "statusCodeTypeMappings": null,
               "defaultTypeName": ""
+            },
+            "Query.casdoor_userInfo_get": {
+              "fetch": {
+                "url": null,
+                "method": 0,
+                "header": {
+                  "Authorization": {
+                    "values": [
+                      {
+                        "kind": 2,
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
+                      }
+                    ]
+                  }
+                },
+                "body": null,
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://127.0.0.1:9825"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/api/user-info"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
+            "Mutation.casdoor_addUser_post": {
+              "fetch": {
+                "url": null,
+                "method": 1,
+                "header": {
+                  "Authorization": {
+                    "values": [
+                      {
+                        "kind": 2,
+                        "placeholderVariableName": "{{ .request.headers.Authorization }}"
+                      }
+                    ]
+                  }
+                },
+                "body": {
+                  "kind": 2,
+                  "placeholderVariableName": "{{ .arguments.addUser_post_input_object }}"
+                },
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://127.0.0.1:9825"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/api/add-user"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
             }
           },
           "customRest": null,
@@ -502,23 +502,29 @@
                 "main_findUniquecase_visitlogOrThrow"
               ],
               "quotes": {
-                "89": {
+                "10": {
                   "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
+                    14,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13
                   ]
                 },
-                "2": {
+                "33": {
                   "indexes": [
-                    0
+                    32
                   ]
                 },
-                "8": {
+                "51": {
                   "indexes": [
-                    8
+                    54
+                  ]
+                },
+                "55": {
+                  "indexes": [
+                    54
                   ]
                 },
                 "61": {
@@ -530,188 +536,9 @@
                     65
                   ]
                 },
-                "72": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
-                  ]
-                },
-                "9": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "52": {
-                  "indexes": [
-                    60,
-                    55,
-                    56,
-                    57,
-                    58,
-                    59
-                  ]
-                },
-                "96": {
-                  "indexes": [
-                    104
-                  ]
-                },
-                "36": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "55": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "45": {
-                  "indexes": [
-                    52,
-                    47,
-                    48,
-                    49,
-                    50,
-                    51
-                  ]
-                },
-                "50": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "62": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "73": {
-                  "indexes": [
-                    87,
-                    82,
-                    83,
-                    84,
-                    85,
-                    86
-                  ]
-                },
-                "84": {
-                  "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
-                  ]
-                },
-                "107": {
-                  "indexes": [
-                    120
-                  ]
-                },
-                "6": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "23": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "29": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "43": {
+                "42": {
                   "indexes": [
                     46
-                  ]
-                },
-                "30": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "34": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "95": {
-                  "indexes": [
-                    111,
-                    105,
-                    106,
-                    107,
-                    108,
-                    109
-                  ]
-                },
-                "13": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "31": {
-                  "indexes": [
-                    36,
-                    33,
-                    34,
-                    35
-                  ]
-                },
-                "68": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "17": {
-                  "indexes": [
-                    22,
-                    17,
-                    18,
-                    19,
-                    20,
-                    21
-                  ]
-                },
-                "54": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "100": {
-                  "indexes": [
-                    112
-                  ]
-                },
-                "59": {
-                  "indexes": [
-                    72,
-                    67,
-                    68,
-                    69,
-                    70,
-                    71
-                  ]
-                },
-                "75": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
                   ]
                 },
                 "70": {
@@ -723,81 +550,7 @@
                     62
                   ]
                 },
-                "79": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "39": {
-                  "indexes": [
-                    45,
-                    39,
-                    40,
-                    41,
-                    42,
-                    43
-                  ]
-                },
-                "91": {
-                  "indexes": [
-                    104
-                  ]
-                },
-                "93": {
-                  "indexes": [
-                    104
-                  ]
-                },
-                "46": {
-                  "indexes": [
-                    53,
-                    47,
-                    48,
-                    49,
-                    50,
-                    51
-                  ]
-                },
-                "63": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "83": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "110": {
-                  "indexes": [
-                    120
-                  ]
-                },
-                "66": {
-                  "indexes": [
-                    80,
-                    75,
-                    76,
-                    77,
-                    78,
-                    79
-                  ]
-                },
-                "69": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "76": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
-                  ]
-                },
-                "86": {
+                "85": {
                   "indexes": [
                     64,
                     66,
@@ -806,19 +559,13 @@
                     62
                   ]
                 },
-                "7": {
+                "89": {
                   "indexes": [
-                    8
-                  ]
-                },
-                "14": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "82": {
-                  "indexes": [
-                    89
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
                   ]
                 },
                 "94": {
@@ -831,17 +578,106 @@
                     109
                   ]
                 },
-                "32": {
+                "59": {
                   "indexes": [
-                    37,
-                    33,
-                    34,
-                    35
+                    72,
+                    67,
+                    68,
+                    69,
+                    70,
+                    71
                   ]
                 },
-                "65": {
+                "62": {
                   "indexes": [
-                    74
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "76": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
+                  ]
+                },
+                "110": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "5": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "6": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "104": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "20": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "30": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "47": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "54": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "11": {
+                  "indexes": [
+                    15,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13
+                  ]
+                },
+                "29": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "74": {
+                  "indexes": [
+                    88,
+                    82,
+                    83,
+                    84,
+                    85,
+                    86
+                  ]
+                },
+                "75": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
                   ]
                 },
                 "97": {
@@ -849,37 +685,55 @@
                     104
                   ]
                 },
-                "38": {
+                "1": {
                   "indexes": [
-                    44,
-                    39,
-                    40,
-                    41,
-                    42,
-                    43
+                    0
                   ]
                 },
-                "41": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "16": {
+                "19": {
                   "indexes": [
                     16
                   ]
                 },
-                "33": {
+                "34": {
                   "indexes": [
                     32
                   ]
                 },
-                "48": {
+                "78": {
                   "indexes": [
-                    46
+                    89
                   ]
                 },
-                "20": {
+                "86": {
+                  "indexes": [
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "96": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "58": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "91": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "15": {
                   "indexes": [
                     16
                   ]
@@ -889,47 +743,44 @@
                     38
                   ]
                 },
-                "71": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
-                  ]
-                },
-                "80": {
-                  "indexes": [
-                    95,
-                    90,
-                    91,
-                    92,
-                    93,
-                    94
-                  ]
-                },
-                "56": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "92": {
+                "93": {
                   "indexes": [
                     104
                   ]
                 },
-                "67": {
+                "21": {
                   "indexes": [
-                    81,
-                    75,
-                    76,
-                    77,
-                    78,
-                    79
+                    24
+                  ]
+                },
+                "32": {
+                  "indexes": [
+                    37,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                "84": {
+                  "indexes": [
+                    64,
+                    66,
+                    65,
+                    63,
+                    62
+                  ]
+                },
+                "31": {
+                  "indexes": [
+                    36,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                "14": {
+                  "indexes": [
+                    16
                   ]
                 },
                 "81": {
@@ -951,9 +802,19 @@
                     62
                   ]
                 },
-                "27": {
+                "23": {
                   "indexes": [
                     24
+                  ]
+                },
+                "87": {
+                  "indexes": [
+                    102,
+                    97,
+                    98,
+                    99,
+                    100,
+                    101
                   ]
                 },
                 "44": {
@@ -961,98 +822,49 @@
                     46
                   ]
                 },
-                "99": {
+                "82": {
                   "indexes": [
-                    112
+                    89
                   ]
                 },
-                "104": {
-                  "indexes": [
-                    112
-                  ]
-                },
-                "0": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "3": {
-                  "indexes": [
-                    6,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                  ]
-                },
-                "5": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "53": {
-                  "indexes": [
-                    61,
-                    55,
-                    56,
-                    57,
-                    58,
-                    59
-                  ]
-                },
-                "15": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "28": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "111": {
+                "106": {
                   "indexes": [
                     120
                   ]
                 },
-                "4": {
+                "16": {
                   "indexes": [
-                    7,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
+                    16
                   ]
                 },
-                "49": {
+                "17": {
                   "indexes": [
-                    54
+                    22,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
                   ]
                 },
-                "85": {
+                "36": {
                   "indexes": [
-                    64,
-                    66,
-                    65,
-                    63,
-                    62
+                    38
                   ]
                 },
-                "22": {
+                "39": {
                   "indexes": [
-                    24
+                    45,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43
                   ]
                 },
-                "103": {
+                "92": {
                   "indexes": [
-                    112
-                  ]
-                },
-                "21": {
-                  "indexes": [
-                    24
+                    104
                   ]
                 },
                 "101": {
@@ -1065,30 +877,6 @@
                     117
                   ]
                 },
-                "57": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "88": {
-                  "indexes": [
-                    103,
-                    97,
-                    98,
-                    99,
-                    100,
-                    101
-                  ]
-                },
-                "1": {
-                  "indexes": [
-                    0
-                  ]
-                },
                 "25": {
                   "indexes": [
                     31,
@@ -1099,29 +887,59 @@
                     29
                   ]
                 },
-                "51": {
+                "27": {
                   "indexes": [
-                    54
+                    24
                   ]
                 },
-                "19": {
+                "45": {
                   "indexes": [
-                    16
+                    52,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51
                   ]
                 },
-                "40": {
+                "2": {
                   "indexes": [
-                    38
+                    0
                   ]
                 },
-                "74": {
+                "24": {
                   "indexes": [
-                    88,
-                    82,
-                    83,
-                    84,
-                    85,
-                    86
+                    30,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
+                  ]
+                },
+                "79": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "48": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "100": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "103": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "107": {
+                  "indexes": [
+                    120
                   ]
                 },
                 "108": {
@@ -1134,24 +952,108 @@
                     125
                   ]
                 },
-                "10": {
+                "3": {
                   "indexes": [
-                    14,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13
+                    6,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
                   ]
                 },
-                "11": {
+                "22": {
                   "indexes": [
-                    15,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13
+                    24
+                  ]
+                },
+                "63": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "66": {
+                  "indexes": [
+                    80,
+                    75,
+                    76,
+                    77,
+                    78,
+                    79
+                  ]
+                },
+                "67": {
+                  "indexes": [
+                    81,
+                    75,
+                    76,
+                    77,
+                    78,
+                    79
+                  ]
+                },
+                "53": {
+                  "indexes": [
+                    61,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59
+                  ]
+                },
+                "56": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "65": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "69": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "4": {
+                  "indexes": [
+                    7,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ]
+                },
+                "43": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "28": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "60": {
+                  "indexes": [
+                    73,
+                    67,
+                    68,
+                    69,
+                    70,
+                    71
+                  ]
+                },
+                "68": {
+                  "indexes": [
+                    74
                   ]
                 },
                 "26": {
@@ -1159,14 +1061,39 @@
                     24
                   ]
                 },
-                "37": {
+                "83": {
                   "indexes": [
-                    38
+                    89
                   ]
                 },
-                "98": {
+                "111": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "99": {
                   "indexes": [
                     112
+                  ]
+                },
+                "8": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "13": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "88": {
+                  "indexes": [
+                    103,
+                    97,
+                    98,
+                    99,
+                    100,
+                    101
                   ]
                 },
                 "109": {
@@ -1179,7 +1106,115 @@
                     125
                   ]
                 },
+                "0": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "41": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "46": {
+                  "indexes": [
+                    53,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51
+                  ]
+                },
+                "57": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "95": {
+                  "indexes": [
+                    111,
+                    105,
+                    106,
+                    107,
+                    108,
+                    109
+                  ]
+                },
+                "105": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "102": {
+                  "indexes": [
+                    119,
+                    113,
+                    114,
+                    115,
+                    116,
+                    117
+                  ]
+                },
                 "12": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "49": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "52": {
+                  "indexes": [
+                    60,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59
+                  ]
+                },
+                "38": {
+                  "indexes": [
+                    44,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43
+                  ]
+                },
+                "64": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "71": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
+                  ]
+                },
+                "73": {
+                  "indexes": [
+                    87,
+                    82,
+                    83,
+                    84,
+                    85,
+                    86
+                  ]
+                },
+                "9": {
                   "indexes": [
                     8
                   ]
@@ -1194,88 +1229,53 @@
                     21
                   ]
                 },
+                "37": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "40": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "50": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "98": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "7": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "72": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
+                  ]
+                },
                 "77": {
                   "indexes": [
                     89
                   ]
                 },
-                "105": {
+                "80": {
                   "indexes": [
-                    120
-                  ]
-                },
-                "60": {
-                  "indexes": [
-                    73,
-                    67,
-                    68,
-                    69,
-                    70,
-                    71
-                  ]
-                },
-                "78": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "87": {
-                  "indexes": [
-                    102,
-                    97,
-                    98,
-                    99,
-                    100,
-                    101
-                  ]
-                },
-                "102": {
-                  "indexes": [
-                    119,
-                    113,
-                    114,
-                    115,
-                    116,
-                    117
-                  ]
-                },
-                "64": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "106": {
-                  "indexes": [
-                    120
-                  ]
-                },
-                "24": {
-                  "indexes": [
-                    30,
-                    25,
-                    26,
-                    27,
-                    28,
-                    29
-                  ]
-                },
-                "42": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "47": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "58": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
+                    95,
+                    90,
+                    91,
+                    92,
+                    93,
+                    94
                   ]
                 }
               }
@@ -1399,27 +1399,12 @@
                 "main_queryRaw"
               ],
               "quotes": {
-                "111": {
+                "107": {
                   "indexes": [
                     128
                   ]
                 },
-                "0": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "36": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "64": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "74": {
+                "71": {
                   "indexes": [
                     63,
                     64,
@@ -1428,37 +1413,27 @@
                     62
                   ]
                 },
-                "49": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "109": {
-                  "indexes": [
-                    120
-                  ]
-                },
-                "105": {
-                  "indexes": [
-                    120
-                  ]
-                },
-                "20": {
+                "97": {
                   "indexes": [
                     128
                   ]
                 },
-                "48": {
+                "96": {
                   "indexes": [
                     128
                   ]
                 },
-                "52": {
+                "111": {
                   "indexes": [
-                    54
+                    128
                   ]
                 },
-                "100": {
+                "31": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "72": {
                   "indexes": [
                     128
                   ]
@@ -1472,11 +1447,6 @@
                     62
                   ]
                 },
-                "80": {
-                  "indexes": [
-                    89
-                  ]
-                },
                 "87": {
                   "indexes": [
                     64,
@@ -1486,116 +1456,17 @@
                     62
                   ]
                 },
-                "98": {
+                "109": {
                   "indexes": [
-                    112
+                    120
                   ]
                 },
-                "16": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "18": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "34": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "46": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "1": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "3": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "47": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "86": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "4": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "9": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "35": {
+                "36": {
                   "indexes": [
                     38
                   ]
                 },
-                "97": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "5": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "33": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "59": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "92": {
-                  "indexes": [
-                    104
-                  ]
-                },
-                "24": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "67": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "79": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "101": {
-                  "indexes": [
-                    112
-                  ]
-                },
-                "13": {
+                "68": {
                   "indexes": [
                     128
                   ]
@@ -1605,107 +1476,7 @@
                     128
                   ]
                 },
-                "41": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "82": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "76": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "11": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "37": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "32": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "39": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "69": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "6": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "50": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "25": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "2": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "10": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "12": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "14": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "58": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "91": {
-                  "indexes": [
-                    104
-                  ]
-                },
-                "94": {
-                  "indexes": [
-                    104
-                  ]
-                },
-                "106": {
-                  "indexes": [
-                    120
-                  ]
-                },
-                "72": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "84": {
+                "88": {
                   "indexes": [
                     64,
                     66,
@@ -1714,247 +1485,12 @@
                     62
                   ]
                 },
-                "7": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "43": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "53": {
-                  "indexes": [
-                    54
-                  ]
-                },
-                "103": {
+                "5": {
                   "indexes": [
                     128
                   ]
                 },
-                "30": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "51": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "63": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "27": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "40": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "42": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "70": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
-                  ]
-                },
-                "23": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "28": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "56": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "75": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "60": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "68": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "22": {
-                  "indexes": [
-                    24
-                  ]
-                },
-                "57": {
-                  "indexes": [
-                    66,
-                    64,
-                    63,
-                    62,
-                    65
-                  ]
-                },
-                "99": {
-                  "indexes": [
-                    112
-                  ]
-                },
-                "108": {
-                  "indexes": [
-                    120
-                  ]
-                },
-                "17": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "38": {
-                  "indexes": [
-                    38
-                  ]
-                },
-                "77": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "89": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "110": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "55": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "78": {
-                  "indexes": [
-                    89
-                  ]
-                },
-                "95": {
-                  "indexes": [
-                    104
-                  ]
-                },
-                "102": {
-                  "indexes": [
-                    112
-                  ]
-                },
-                "31": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "107": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "93": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "8": {
-                  "indexes": [
-                    8
-                  ]
-                },
-                "66": {
-                  "indexes": [
-                    74
-                  ]
-                },
-                "71": {
-                  "indexes": [
-                    63,
-                    64,
-                    66,
-                    65,
-                    62
-                  ]
-                },
-                "83": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "90": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "15": {
-                  "indexes": [
-                    16
-                  ]
-                },
-                "29": {
-                  "indexes": [
-                    32
-                  ]
-                },
-                "65": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "19": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "54": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "44": {
-                  "indexes": [
-                    128
-                  ]
-                },
-                "61": {
+                "9": {
                   "indexes": [
                     128
                   ]
@@ -1968,12 +1504,345 @@
                     62
                   ]
                 },
+                "10": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "34": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "67": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "75": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "99": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "108": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "11": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "18": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "51": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "3": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "46": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "55": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "86": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "19": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "37": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "39": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "20": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "32": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "89": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "49": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "80": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "48": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "13": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "29": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "47": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "64": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "1": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "43": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "79": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "45": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "69": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "27": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "101": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "50": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "8": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "12": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "62": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "0": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "54": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "77": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "91": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "95": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "7": {
+                  "indexes": [
+                    8
+                  ]
+                },
+                "33": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "53": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "60": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "35": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "44": {
+                  "indexes": [
+                    128
+                  ]
+                },
                 "81": {
                   "indexes": [
                     89
                   ]
                 },
-                "88": {
+                "102": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "2": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "17": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "4": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "110": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "22": {
+                  "indexes": [
+                    24
+                  ]
+                },
+                "61": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "30": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "92": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "42": {
+                  "indexes": [
+                    46
+                  ]
+                },
+                "52": {
+                  "indexes": [
+                    54
+                  ]
+                },
+                "76": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "104": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "23": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "28": {
+                  "indexes": [
+                    32
+                  ]
+                },
+                "63": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "70": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
+                  ]
+                },
+                "84": {
                   "indexes": [
                     64,
                     66,
@@ -1982,7 +1851,104 @@
                     62
                   ]
                 },
-                "104": {
+                "100": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "65": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "6": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "15": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "94": {
+                  "indexes": [
+                    104
+                  ]
+                },
+                "78": {
+                  "indexes": [
+                    89
+                  ]
+                },
+                "90": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "59": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "93": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "24": {
+                  "indexes": [
+                    24
+                  ]
+                },
+                "57": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "41": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "16": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "38": {
+                  "indexes": [
+                    38
+                  ]
+                },
+                "98": {
+                  "indexes": [
+                    112
+                  ]
+                },
+                "106": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "56": {
+                  "indexes": [
+                    66,
+                    64,
+                    63,
+                    62,
+                    65
+                  ]
+                },
+                "82": {
                   "indexes": [
                     128
                   ]
@@ -1992,19 +1958,53 @@
                     24
                   ]
                 },
-                "45": {
-                  "indexes": [
-                    46
-                  ]
-                },
-                "62": {
+                "83": {
                   "indexes": [
                     128
                   ]
                 },
-                "96": {
+                "103": {
                   "indexes": [
                     128
+                  ]
+                },
+                "105": {
+                  "indexes": [
+                    120
+                  ]
+                },
+                "58": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "74": {
+                  "indexes": [
+                    63,
+                    64,
+                    66,
+                    65,
+                    62
+                  ]
+                },
+                "40": {
+                  "indexes": [
+                    128
+                  ]
+                },
+                "66": {
+                  "indexes": [
+                    74
+                  ]
+                },
+                "14": {
+                  "indexes": [
+                    16
+                  ]
+                },
+                "25": {
+                  "indexes": [
+                    24
                   ]
                 }
               }
@@ -3566,16 +3566,6 @@
                 "statistics_GetVisitTrending"
               ],
               "quotes": {
-                "0": {
-                  "indexes": [
-                    0
-                  ]
-                },
-                "1": {
-                  "indexes": [
-                    1
-                  ]
-                },
                 "2": {
                   "indexes": [
                     2
@@ -3584,6 +3574,16 @@
                 "3": {
                   "indexes": [
                     3
+                  ]
+                },
+                "0": {
+                  "indexes": [
+                    0
+                  ]
+                },
+                "1": {
+                  "indexes": [
+                    1
                   ]
                 }
               }
@@ -3673,13 +3673,18 @@
             {
               "typeName": "Mutation",
               "fieldNames": [
+                "system_bindRoleApis_post",
                 "system_batchInsertRoles_post",
                 "system_batchDeleteRoles_delete",
-                "system_getRoleBindApis_post",
-                "system_bindRoleApis_post"
+                "system_getRoleBindApis_post"
               ],
               "quotes": {
-                "2": {
+                "1": {
+                  "indexes": [
+                    7
+                  ]
+                },
+                "3": {
                   "indexes": [
                     5,
                     0,
@@ -3687,11 +3692,6 @@
                     4,
                     3,
                     2
-                  ]
-                },
-                "0": {
-                  "indexes": [
-                    7
                   ]
                 }
               }
@@ -3732,10 +3732,10 @@
             {
               "typeName": "system_Operation_cacheConfig_object",
               "fieldNames": [
+                "enabled",
                 "maxAge",
                 "public",
                 "staleWhileRevalidate",
-                "enabled",
                 "_join"
               ]
             },
@@ -3750,24 +3750,24 @@
             {
               "typeName": "system_Operation_hooksConfiguration_object",
               "fieldNames": [
+                "httpTransportOnRequest",
                 "httpTransportOnResponse",
                 "mutatingPostResolve",
                 "mutatingPreResolve",
-                "preResolve",
-                "customResolve",
-                "httpTransportBeforeRequest",
-                "onConnectionInit",
                 "postResolve",
-                "httpTransportOnRequest",
+                "customResolve",
                 "mockResolve",
+                "onConnectionInit",
+                "preResolve",
+                "httpTransportBeforeRequest",
                 "_join"
               ]
             },
             {
               "typeName": "system_Operation_liveQueryConfig_object",
               "fieldNames": [
-                "pollingIntervalSeconds",
                 "enabled",
+                "pollingIntervalSeconds",
                 "_join"
               ]
             },
@@ -3775,44 +3775,137 @@
               "typeName": "system_Operation_object",
               "fieldNames": [
                 "createTime",
-                "updateTime",
                 "enabled",
-                "remark",
-                "authenticationConfig",
-                "deleteTime",
-                "cacheConfig",
                 "path",
-                "liveQueryConfig",
-                "title",
-                "hooksConfiguration",
                 "operationType",
                 "engine",
+                "authenticationConfig",
+                "deleteTime",
+                "updateTime",
+                "title",
+                "cacheConfig",
+                "liveQueryConfig",
+                "remark",
                 "configCustomized",
+                "hooksConfiguration",
                 "_join"
               ]
             },
             {
               "typeName": "system_Role_object",
               "fieldNames": [
+                "code",
+                "remark",
                 "createTime",
                 "deleteTime",
                 "updateTime",
-                "code",
-                "remark",
                 "_join"
               ]
             },
             {
               "typeName": "system_batchInsertRoles_post_object",
               "fieldNames": [
-                "succeed",
                 "dataName",
+                "succeed",
                 "_join"
               ]
             }
           ],
           "overrideFieldPathFromAlias": false,
           "customRestMap": {
+            "Mutation.system_bindRoleApis_post": {
+              "fetch": {
+                "url": null,
+                "method": 1,
+                "header": {
+                  
+                },
+                "body": {
+                  "kind": 2,
+                  "placeholderVariableName": "{{ .arguments.bindRoleApis_post_input_object }}"
+                },
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://localhost:9123/api"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/operation/bindRoles"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
+            "Query.system_getAllRoles_get": {
+              "fetch": {
+                "url": null,
+                "method": 0,
+                "header": {
+                  
+                },
+                "body": null,
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://localhost:9123/api"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/role"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
+            "Mutation.system_batchInsertRoles_post": {
+              "fetch": {
+                "url": null,
+                "method": 1,
+                "header": {
+                  
+                },
+                "body": {
+                  "kind": 2,
+                  "placeholderVariableName": "{{ .arguments.Role_input_object }}"
+                },
+                "query": null,
+                "upstreamAuthentication": null,
+                "urlEncodeBody": false,
+                "mTLS": null,
+                "baseUrl": {
+                  "kind": 0,
+                  "staticVariableContent": "http://localhost:9123/api"
+                },
+                "path": {
+                  "kind": 0,
+                  "staticVariableContent": "/role/batch"
+                }
+              },
+              "subscription": {
+                "enabled": false,
+                "pollingIntervalMillis": 0,
+                "skipPublishSameResponse": false
+              },
+              "statusCodeTypeMappings": null,
+              "defaultTypeName": ""
+            },
             "Mutation.system_batchDeleteRoles_delete": {
               "fetch": {
                 "url": null,
@@ -3898,99 +3991,6 @@
                 "path": {
                   "kind": 0,
                   "staticVariableContent": "/operation/listPublic"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
-            "Mutation.system_bindRoleApis_post": {
-              "fetch": {
-                "url": null,
-                "method": 1,
-                "header": {
-                  
-                },
-                "body": {
-                  "kind": 2,
-                  "placeholderVariableName": "{{ .arguments.bindRoleApis_post_input_object }}"
-                },
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://localhost:9123/api"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/operation/bindRoles"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
-            "Query.system_getAllRoles_get": {
-              "fetch": {
-                "url": null,
-                "method": 0,
-                "header": {
-                  
-                },
-                "body": null,
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://localhost:9123/api"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/role"
-                }
-              },
-              "subscription": {
-                "enabled": false,
-                "pollingIntervalMillis": 0,
-                "skipPublishSameResponse": false
-              },
-              "statusCodeTypeMappings": null,
-              "defaultTypeName": ""
-            },
-            "Mutation.system_batchInsertRoles_post": {
-              "fetch": {
-                "url": null,
-                "method": 1,
-                "header": {
-                  
-                },
-                "body": {
-                  "kind": 2,
-                  "placeholderVariableName": "{{ .arguments.Role_input_object }}"
-                },
-                "query": null,
-                "upstreamAuthentication": null,
-                "urlEncodeBody": false,
-                "mTLS": null,
-                "baseUrl": {
-                  "kind": 0,
-                  "staticVariableContent": "http://localhost:9123/api"
-                },
-                "path": {
-                  "kind": 0,
-                  "staticVariableContent": "/role/batch"
                 }
               },
               "subscription": {
@@ -11677,6 +11677,15 @@
         },
         {
           "typeName": "Mutation",
+          "fieldName": "system_bindRoleApis_post",
+          "disableDefaultFieldMapping": true,
+          "path": null,
+          "argumentsConfiguration": null,
+          "requiresFields": null,
+          "unescapeResponseJson": false
+        },
+        {
+          "typeName": "Mutation",
           "fieldName": "system_batchInsertRoles_post",
           "disableDefaultFieldMapping": true,
           "path": null,
@@ -11696,15 +11705,6 @@
         {
           "typeName": "Mutation",
           "fieldName": "system_getRoleBindApis_post",
-          "disableDefaultFieldMapping": true,
-          "path": null,
-          "argumentsConfiguration": null,
-          "requiresFields": null,
-          "unescapeResponseJson": false
-        },
-        {
-          "typeName": "Mutation",
-          "fieldName": "system_bindRoleApis_post",
           "disableDefaultFieldMapping": true,
           "path": null,
           "argumentsConfiguration": null,

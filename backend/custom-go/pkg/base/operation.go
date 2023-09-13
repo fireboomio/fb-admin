@@ -16,8 +16,9 @@ type GraphQLError struct {
 }
 
 type OperationBodyResponse[O any] struct {
-	Data   O              `json:"data"`
-	Errors []GraphQLError `json:"errors"`
+	DataAny any            `json:"dataAny,omitempty"`
+	Data    O              `json:"data"`
+	Errors  []GraphQLError `json:"errors"`
 }
 
 type OperationHookFunction func(hook *HookRequest, body *OperationBody[any, any]) (*OperationBody[any, any], error)

@@ -124,6 +124,10 @@ func mutatingPreResolve(in, out *base.OperationBody[any, any]) {
 func mutatingPostResolve(in, out *base.OperationBody[any, any]) {
 	in.Response = out.Response
 	in.SetClientRequestHeaders = out.SetClientRequestHeaders
+	if in.Response != nil && in.Response.DataAny != nil {
+		in.Response.Data = in.Response.DataAny
+		in.Response.DataAny = nil
+	}
 }
 
 func customResolve(in, out *base.OperationBody[any, any]) {

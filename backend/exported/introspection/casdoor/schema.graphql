@@ -3,8 +3,8 @@ schema {
 	mutation: Mutation
 }
 type APIResponse_object {
-	msg: String
 	status: Int
+	msg: String
 }
 type Mutation {
 	updateUser_post(updateUser_post_input_object: updateUser_post_input_object!): APIResponse_object
@@ -27,9 +27,9 @@ type UserInfo_object {
 	preferred_username: String
 }
 type UserResponse_object {
-	success: Boolean
 	data: TokenResponse_object
 	msg: String
+	success: Boolean
 }
 input addUser_post_input_object {
 	"""User name"""
@@ -44,12 +44,12 @@ input addUser_post_input_object {
 	countryCode: String
 }
 input login_post_input_object {
+	code: String!
+	password: String!
 	loginType: String!
 	username: String!
 	phone: String!
 	countryCode: String
-	code: String!
-	password: String!
 }
 input refreshToken_post_input_object {
 	"""<#originName#>refresh-token<#originName#>"""
