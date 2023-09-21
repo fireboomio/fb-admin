@@ -1,0 +1,350 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Casdoor API",
+    "description": "Documentation of Casdoor API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "admin@casbin.org"
+    }
+  },
+  "paths": {
+    "/api/add-user": {
+      "post": {
+        "description": "add user",
+        "parameters": [
+          {
+            "description": "名称",
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "密码",
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "密码类型",
+            "name": "passwordType",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "电话号码",
+            "name": "phone",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "国际区号（默认CN）",
+            "name": "countryCode",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/objectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/update-user": {
+      "post": {
+        "description": "update user",
+        "parameters": [
+          {
+            "description": "名称",
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "密码",
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "密码类型",
+            "name": "passwordType",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "电话号码",
+            "name": "phone",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "国际区号（默认CN）",
+            "name": "countryCode",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "description": "用户id",
+            "name": "userId",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/objectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "description": "login",
+        "parameters": [
+          {
+            "description": "用户名",
+            "name": "username",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "号码",
+            "name": "phone",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "国际区号（默认CN）",
+            "name": "countryCode",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "description": "验证码",
+            "name": "code",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "密码",
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "登录类型",
+            "name": "loginType",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "小程序Id",
+            "name": "appId",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "description": "secret",
+            "name": "secret",
+            "in": "formData",
+            "type": "string"
+          },
+          {
+            "description": "小程序code",
+            "name": "miniProGramCode",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apiUserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/refresh-token": {
+      "post": {
+        "description": "刷新token",
+        "parameters": [
+          {
+            "description": "refresh-token",
+            "name": "refresh-token",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apiUserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/send-verification-code": {
+      "post": {
+        "description": "发送验证码",
+        "parameters": [
+          {
+            "description": "发送手机号",
+            "name": "dest",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "国际区号（默认CN）",
+            "name": "countryCode",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/objectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/update-provider": {
+      "post": {
+        "description": "update provider",
+        "parameters": [
+          {
+            "description": "clientId",
+            "name": "clientId",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "clientSecret",
+            "name": "clientSecret",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "签名",
+            "name": "signName",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "模板代码",
+            "name": "templateCode",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/objectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/user-info": {
+      "get": {
+        "description": "Get User Info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/objectUserinfo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "apiUserResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/objectTokenRes"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "objectResponse": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        }
+      }
+    },
+    "objectTokenRes": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "expireIn": {
+          "type": "integer"
+        },
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "objectUserinfo": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string"
+        },
+        "preferred_username": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

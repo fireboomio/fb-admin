@@ -1,0 +1,8 @@
+mysql:
+  host: "docker.for.mac.localhost"
+  port: 3306
+  user: "root"
+  password: "123456"
+  dbname: "main"
+  max_open_conns: 200
+  max_idle_conns: 50

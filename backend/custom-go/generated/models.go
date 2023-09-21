@@ -398,17 +398,6 @@ type Post__UpdateOneResponseData_main_updateOnecase_post struct {
 	Poster  string `json:"poster,omitempty"`
 	Title   string `json:"title"`
 }
-type Statistics__MonthlySalesInput struct {
-}
-type Statistics__MonthlySalesInternalInput struct {
-}
-type Statistics__MonthlySalesResponseData struct {
-	Data []Statistics__MonthlySalesResponseData_data `json:"data,omitempty"`
-}
-type Statistics__MonthlySalesResponseData_data struct {
-	Months     string  `json:"months,omitempty"`
-	TotalSales float64 `json:"totalSales,omitempty"`
-}
 type Statistics__QueryRawInput struct {
 	Query string `json:"query"`
 }
@@ -417,40 +406,6 @@ type Statistics__QueryRawInternalInput struct {
 }
 type Statistics__QueryRawResponseData struct {
 	Main_queryRaw any `json:"main_queryRaw,omitempty"`
-}
-type Statistics__SaleTypePercentInput struct {
-}
-type Statistics__SaleTypePercentInternalInput struct {
-}
-type Statistics__SaleTypePercentResponseData struct {
-	Data []Statistics__SaleTypePercentResponseData_data `json:"data,omitempty"`
-}
-type Statistics__SaleTypePercentResponseData_data struct {
-	TotalSales float64 `json:"totalSales,omitempty"`
-	TypeId     int64   `json:"typeId,omitempty"`
-	TypeName   string  `json:"typeName,omitempty"`
-}
-type Statistics__SalesTop10Input struct {
-}
-type Statistics__SalesTop10InternalInput struct {
-}
-type Statistics__SalesTop10ResponseData struct {
-	Data []Statistics__SalesTop10ResponseData_data `json:"data,omitempty"`
-}
-type Statistics__SalesTop10ResponseData_data struct {
-	ShopName   string  `json:"shopName,omitempty"`
-	TotalSales float64 `json:"totalSales,omitempty"`
-}
-type Statistics__VisitTrendingInput struct {
-}
-type Statistics__VisitTrendingInternalInput struct {
-}
-type Statistics__VisitTrendingResponseData struct {
-	Data []Statistics__VisitTrendingResponseData_data `json:"data,omitempty"`
-}
-type Statistics__VisitTrendingResponseData_data struct {
-	Count int64  `json:"count,omitempty"`
-	Days  string `json:"days,omitempty"`
 }
 type System__GetMenusInput struct {
 }

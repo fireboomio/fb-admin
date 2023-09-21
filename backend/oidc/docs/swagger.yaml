@@ -1,0 +1,195 @@
+definitions:
+  api.UserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/object.TokenRes'
+      msg:
+        type: string
+      success:
+        type: boolean
+    type: object
+  object.Response:
+    properties:
+      msg:
+        type: string
+      status:
+        type: integer
+    type: object
+  object.TokenRes:
+    properties:
+      accessToken:
+        type: string
+      expireIn:
+        type: integer
+      refreshToken:
+        type: string
+    type: object
+  object.Userinfo:
+    properties:
+      phone:
+        type: string
+      preferred_username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /add-user:
+    post:
+      description: add user
+      parameters:
+      - description: 名称
+        in: body
+        name: name
+        required: true
+        schema:
+          type: string
+      - description: 密码
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      - description: 密码类型
+        in: body
+        name: passwordType
+        required: true
+        schema:
+          type: string
+      - description: 电话号码
+        in: body
+        name: phone
+        required: true
+        schema:
+          type: string
+      - description: 国际区号（默认CN）
+        in: body
+        name: countryCode
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/object.Response'
+  /login:
+    post:
+      description: login
+      parameters:
+      - description: 用户名
+        in: body
+        name: username
+        required: true
+        schema:
+          type: string
+      - description: 号码
+        in: body
+        name: phone
+        required: true
+        schema:
+          type: string
+      - description: 国际区号（默认CN）
+        in: body
+        name: countryCode
+        schema:
+          type: string
+      - description: 验证码
+        in: body
+        name: code
+        required: true
+        schema:
+          type: string
+      - description: 密码
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      - description: 登录类型
+        in: body
+        name: loginType
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.UserResponse'
+  /refresh-token:
+    post:
+      description: 刷新token
+      parameters:
+      - description: refresh-token
+        in: body
+        name: refresh-token
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.UserResponse'
+  /send-verification-code:
+    post:
+      description: 发送验证码
+      parameters:
+      - description: 发送手机号
+        in: body
+        name: dest
+        required: true
+        schema:
+          type: string
+      - description: 国际区号（默认CN）
+        in: body
+        name: countryCode
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/object.Response'
+  /update-provider:
+    post:
+      description: update provider
+      parameters:
+      - description: clientId
+        in: body
+        name: clientId
+        required: true
+        schema:
+          type: string
+      - description: clientSecret
+        in: body
+        name: clientSecret
+        required: true
+        schema:
+          type: string
+      - description: 签名
+        in: body
+        name: signName
+        required: true
+        schema:
+          type: string
+      - description: 模板代码
+        in: body
+        name: templateCode
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/object.Response'
+  /user-info:
+    get:
+      description: Get User Info
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/object.Userinfo'
+swagger: "2.0"
