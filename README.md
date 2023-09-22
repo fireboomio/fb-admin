@@ -8,6 +8,16 @@
 
 前端项目请移步：https://github.com/Echoidf/fireboom-admin-web.git
 
+## 快速启动
+
+使用docker-compose启动飞布后台管理系统，进入backend目录下面，执行docker-compose up -d 快速启动飞布的前端和后端。
+
+注意⚠️：
+
+1.dokcer-compose.yaml文件规定了启动的前端容器和后端容器的名字，由于需要跨容器进行通信，所以在front目录下存在nginx.conf.template文件，对前端发起的请求进行了转发，proxy_pass的host地址为后端容器的名称，如果需要修改，需先修改docker-compose.yaml中后端容器的名字，在修改nginx.conf.template中proxy_pass的地址。
+
+2.docker-compose.yaml启动已经配置了数据库启动，服务能否正常运行需要等待数据库启动完成之后将所需的数据写入，这可能会花费一些时间，之后重新编译飞布即可。
+
 ## 登录认证
 
 我们的演示服务基于 **Casdoor** 进行了精简，自研部署了一套符合 OIDC 协议的登录认证服务，将其作为 **OpenAPI数据源**注册到飞步，支持手机短信登录和密码登录
