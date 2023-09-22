@@ -10,13 +10,13 @@
 
 ## 快速启动
 
-使用docker-compose启动飞布后台管理系统，进入backend目录下面，执行docker-compose up -d 快速启动飞布的前端和后端。
+使用docker-compose启动飞布后台管理系统。直接执行start.sh或者进入backend目录下面，执行docker-compose up -d 快速启动飞布的前端和后端。
 
 注意⚠️：
 
 1.dokcer-compose.yaml文件规定了启动的前端容器和后端容器的名字，由于需要跨容器进行通信，所以在front目录下存在nginx.conf.template文件，对前端发起的请求进行了转发，proxy_pass的host地址为后端容器的名称，如果需要修改，需先修改docker-compose.yaml中后端容器的名字，在修改nginx.conf.template中proxy_pass的地址。
 
-2.docker-compose.yaml启动已经配置了数据库启动，服务能否正常运行需要等待数据库启动完成之后将所需的数据写入，这可能会花费一些时间，之后重新编译飞布即可。
+2.docker-compose.yaml启动已经配置了数据库启动，服务能否正常运行需要等待数据库启动完成之后将所需的数据写入，这可能会花费一些时间，之后重新编译飞布即可。	
 
 ## 登录认证
 
